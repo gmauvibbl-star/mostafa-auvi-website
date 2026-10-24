@@ -5,8 +5,8 @@
 <section id="login" class="panel hidden"><h2>নিরাপদ লগইন</h2><label for="email">আপনার ইমেইল</label><input id="email" type="email" autocomplete="email" placeholder="আপনার ইমেইল" required><button id="loginBtn">লগইন লিংক পাঠান</button><p class="muted">অনুমোদিত ইমেইলেই লগইন করুন।</p></section>
 <section id="app" class="hidden"><div class="panel"><div class="row"><h2 style="flex:1">লেখা তৈরি / সম্পাদনা</h2><button class="secondary" id="logoutBtn">লগআউট</button></div><input id="postId" type="hidden"><label for="title">শিরোনাম</label><input id="title" maxlength="180" required><label for="slug">স্থায়ী লিংক নাম (ইংরেজি অক্ষর, সংখ্যা, হাইফেন)</label><input id="slug" pattern="[a-z0-9-]+" placeholder="amar-notun-lekha" required><label for="body">লেখা</label><textarea id="body" placeholder="এখানে আপনার লেখা লিখুন…"></textarea><div class="row"><label class="row"><input id="published" type="checkbox"> প্রকাশিত</label><button id="saveBtn">সংরক্ষণ</button><button id="newBtn" class="secondary">নতুন লেখা</button></div></div><div class="panel"><h2>আপনার লেখা</h2><div id="posts">লোড হচ্ছে…</div></div></section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL="YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY";
+const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 const statusEl=document.getElementById('status'), login=document.getElementById('login'), app=document.getElementById('app');
 let sb,session=null;
 const configured=SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&!SUPABASE_ANON_KEY.includes('YOUR_');
