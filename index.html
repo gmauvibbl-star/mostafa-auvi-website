@@ -400,29 +400,10 @@ body { background: #dfd0b1 !important; }
 </div>
 <button aria-label="খুঁজুন" class="nav-search" id="navSearchToggle" title="খুঁজুন" type="button">⌕</button>
 <button aria-label="Switch language" class="language-button" id="languageToggle" type="button">English</button>
-<button id="uploadToggle" type="button" aria-expanded="false">✎ লেখা আপলোড / Upload</button>
+<a href="admin.html" data-bn="লেখক লগইন" data-en="Author login">লেখক লগইন</a>
 </nav>
 </div>
-<section id="uploadPanel" aria-label="লেখা আপলোড / Upload writing">
-<h2>লেখা আপলোড করুন / Upload a Writing</h2>
-<p class="upload-note">একই ফর্মে বাংলা ও ইংরেজি শিরোনাম এবং দুই ভাষার সম্পূর্ণ লেখা একসঙ্গে দিন। ওয়েবসাইটের ভাষা বাংলা থাকলে বাংলা লেখা দেখাবে, English নির্বাচন করলে ইংরেজি লেখা দেখাবে। শুরুতে প্রচ্ছদ/ছবি, লেখার মাঝখানে প্রয়োজনমতো ছবি এবং লেখকের ছবি যোগ করতে পারবেন। এই HTML সংস্করণে লেখা এই ব্রাউজারের Local Storage-এ সংরক্ষিত হবে—অন্য ডিভাইস বা অনলাইন সার্ভারে নিজে থেকে প্রকাশ হবে না।</p>
-<form id="uploadForm">
-<div class="upload-grid">
-<div class="upload-field"><label for="upTitleBn">বাংলা শিরোনাম / Bengali title *</label><input id="upTitleBn" required maxlength="180" placeholder="লেখার বাংলা শিরোনাম"></div>
-<div class="upload-field"><label for="upTitleEn">English title *</label><input id="upTitleEn" required maxlength="180" placeholder="Title in English"></div>
-<div class="upload-field"><label for="upCategory">বিভাগ / Category *</label><select id="upCategory" required><option value="ছোটগল্প / Short story">ছোটগল্প / Short story</option><option value="বড়গল্প / Novella">বড়গল্প / Novella</option><option value="অণুগল্প / Flash fiction">অণুগল্প / Flash fiction</option><option value="উপন্যাস / Novel">উপন্যাস / Novel</option><option value="প্রবন্ধ / Essay">প্রবন্ধ / Essay</option><option value="সাহিত্য আলোচনা / Literary criticism">সাহিত্য আলোচনা / Literary criticism</option><option value="ভ্রমণকাহিনি / Travelogue">ভ্রমণকাহিনি / Travelogue</option><option value="ব্যক্তিগত রচনা / Personal writing">ব্যক্তিগত রচনা / Personal writing</option><option value="আইন-আদালত / Law">আইন-আদালত / Law</option><option value="ব্যাংকিং ও অর্থনীতি / Banking & economics">ব্যাংকিং ও অর্থনীতি / Banking & economics</option></select></div>
-<div class="upload-field"><label for="upAuthor">লেখকের নাম / Author name *</label><input id="upAuthor" required value="মোস্তফা অভি" placeholder="লেখকের নাম / Author name"></div>
-<div class="upload-field"><label for="upHero">শুরুর ছবি / Cover image</label><input id="upHero" type="file" accept="image/*"><img id="upHeroPreview" class="upload-preview" alt="শুরুর ছবির প্রিভিউ"></div>
-<div class="upload-field"><label for="upAuthorPhoto">লেখকের ছবি / Author photo</label><input id="upAuthorPhoto" type="file" accept="image/*"><img id="upAuthorPreview" class="upload-preview" alt="লেখকের ছবির প্রিভিউ"></div>
-</div>
-<h3 class="upload-lang-title">বাংলা লেখা / Bengali text *</h3>
-<div class="upload-field"><label for="upBodyBn">বাংলা লেখার সম্পূর্ণ অংশ</label><textarea id="upBodyBn" required placeholder="এখানে সম্পূর্ণ বাংলা লেখা লিখুন বা পেস্ট করুন..."></textarea><div class="upload-inline-row"><button type="button" id="insertBnImage">＋ লেখার মাঝে ছবি যোগ করুন / Insert image</button><span class="upload-note">ছবি কার্সর অবস্থানে যুক্ত হবে।</span></div><input id="upInlineBn" type="file" accept="image/*" hidden></div>
-<h3 class="upload-lang-title">English version</h3>
-<div class="upload-field"><label for="upBodyEn">Full English text</label><textarea id="upBodyEn" placeholder="Write or paste the complete English version here..."></textarea><div class="upload-inline-row"><button type="button" id="insertEnImage">＋ Insert image in English text</button><span class="upload-note">The image will be inserted at the cursor.</span></div><input id="upInlineEn" type="file" accept="image/*" hidden></div>
-<div class="upload-actions"><button type="submit">লেখা সংরক্ষণ ও প্রকাশ / Save & publish</button><button type="button" class="secondary" id="clearUploadForm">ফর্ম পরিষ্কার / Clear form</button></div>
-<p id="uploadStatus" role="status" class="upload-note"></p>
-</form>
-</section>
+<section id="uploadPanel" aria-label="লেখক ড্যাশবোর্ড" style="display:none"><p>লেখা তৈরি ও সম্পাদনার জন্য লেখক ড্যাশবোর্ডে নিরাপদে লগইন করুন।</p><a href="admin.html">লেখক ড্যাশবোর্ড খুলুন</a></section>
 
 <section class="mag-home" id="magHome">
 <div class="mag-head"><h2>সাহিত্যাঙ্গন</h2><p>গল্প, উপন্যাস, প্রবন্ধ ও ব্যক্তিগত রচনা — মোস্তফা অভি এবং আরও কিছু কাল্পনিক লেখার পাঠঘর।</p></div>
