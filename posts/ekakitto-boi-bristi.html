@@ -33,7 +33,7 @@ img.hero{width:100%;max-height:460px;object-fit:cover;border-radius:8px;margin:1
 <button class="btn" type="button" onclick="shareNative()">শেয়ার করুন</button>
 <button class="btn" type="button" onclick="shareTo('https://www.facebook.com/sharer/sharer.php?u=')">Facebook</button>
 <button class="btn" type="button" onclick="shareTo('https://wa.me/?text=')">WhatsApp</button>
-<button class="btn" type="button" onclick="shareTo('https://www.messenger.com/')">Messenger</button>
+<button class="btn" type="button" onclick="shareMessenger()">Messenger</button>
 <button class="btn" type="button" onclick="copyLink()">লিংক কপি</button>
 </div>
 <a class="back" href="../journal.html">← জার্নালে ফিরে যান</a>
@@ -45,5 +45,6 @@ const pageUrl=location.href;
 function shareTo(base){const value=base+(base.includes('sharer')||base.includes('wa.me')?encodeURIComponent(pageUrl):'');window.open(value,'_blank','noopener,noreferrer')}
 async function copyLink(){try{await navigator.clipboard.writeText(pageUrl);alert('লেখার লিংক কপি হয়েছে।')}catch(e){prompt('লিংকটি কপি করুন:',pageUrl)}}
 async function shareNative(){if(navigator.share){try{await navigator.share({title:document.title,text:'মোস্তফা অভি’র জার্নাল থেকে পড়ুন',url:pageUrl})}catch(e){}}else{await copyLink()}}
+async function shareMessenger(){try{await navigator.clipboard.writeText(pageUrl)}catch(e){}window.open('https://www.messenger.com/','_blank','noopener,noreferrer');alert('লেখার লিংক কপি করার চেষ্টা করা হয়েছে। Messenger-এ গিয়ে বার্তায় পেস্ট করুন।')}
 </script>
 </body></html>
