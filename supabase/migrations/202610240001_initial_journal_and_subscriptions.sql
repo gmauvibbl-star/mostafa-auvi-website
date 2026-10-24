@@ -120,6 +120,7 @@ revoke all on table public.newsletter_subscribers from anon, authenticated;
 revoke all on table public.profiles from anon;
 revoke all on table public.journal_posts from anon, authenticated;
 grant select on table public.journal_posts to anon, authenticated;
+grant insert, update, delete on table public.journal_posts to authenticated;
 grant select on table public.profiles to authenticated;
 
 create or replace function public.set_updated_at()
