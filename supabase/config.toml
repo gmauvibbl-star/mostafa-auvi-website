@@ -1,0 +1,5 @@
+[functions.subscription]
+verify_jwt = false
+
+[functions.publish-notification]
+verify_jwt = true
