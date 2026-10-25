@@ -29,6 +29,19 @@ section{scroll-margin-top:76px;margin:30px 0}.section-head{display:flex;align-it
 .hero{background-image:linear-gradient(90deg,#fffaf0e8 0%,#f7ebdcd9 47%,#f7ebdc40 100%),url('Misty%20Horizons_%20Portrait%20and%20Landscapes-1.png');background-size:100% 100%,100% 300%;background-position:center,center top;background-repeat:no-repeat;border-color:#d8d5cd}
 .site-footer{background:#fffaf5;border-top:1px solid var(--line)}
 @media(max-width:560px){.hero{background-size:100% 100%,100% 300%;background-position:center,center top}}
+
+/* Updated homepage hero: landscape background, author portrait overlay, live HTML text and links. */
+.hero.hero-banner{position:relative;isolation:isolate;min-height:430px;max-width:none;padding:clamp(28px,5vw,64px);overflow:hidden;display:flex;align-items:center;background-color:#164a66;background-image:linear-gradient(90deg,rgba(8,43,62,.68) 0%,rgba(8,43,62,.48) 48%,rgba(8,43,62,.04) 100%),url('Misty%20Horizons_%20Portrait%20and%20Landscapes-1.png');background-size:cover;background-position:center top;border:0;border-radius:0;box-shadow:none;color:#fff}
+.hero-banner .hero-copy{position:relative;z-index:2;width:min(65%,760px);padding:10px 0;color:#fff}
+.hero-banner .eyebrow,.hero-banner p{color:#fff}
+.hero-banner h1{color:#fff4d8;text-shadow:0 2px 12px #082b3c88}
+.hero-banner .hero-portrait{position:absolute;z-index:1;right:1.5%;bottom:0;height:96%;width:auto;max-width:48%;object-fit:contain;object-position:bottom right;filter:drop-shadow(0 4px 18px #082b3c55)}
+.hero-banner .hero-actions{gap:10px}
+.hero-banner .hero-actions .button{background:#a7e8ff;color:#76242d;border-color:#a7e8ff;font-weight:600}
+.hero-banner .hero-actions .button.primary{background:#a7e8ff;color:#76242d}
+@media(max-width:700px){.hero.hero-banner{min-height:530px;padding:24px 18px 230px;background-position:center top}.hero-banner .hero-copy{width:100%;align-self:flex-start}.hero-banner h1{font-size:clamp(26px,7vw,36px)}.hero-banner .hero-portrait{height:270px;max-width:72%;right:0;bottom:0}.hero-banner .hero-actions .button{font-size:13px;padding:7px 11px}}
+@media(max-width:420px){.hero.hero-banner{min-height:560px;padding-bottom:220px}.hero-banner .hero-portrait{height:245px;max-width:78%}}
+
 </style>
 </head>
 <body>
@@ -36,9 +49,9 @@ section{scroll-margin-top:76px;margin:30px 0}.section-head{display:flex;align-it
 <a class="active" href="./">হোম</a><a href="#featured">নির্বাচিত লেখা</a><a href="#categories">বিভাগ</a><a href="#recent">সাম্প্রতিক লেখা</a><a href="#archive">আর্কাইভ</a><a href="journal.html">জার্নাল</a><a href="posts.html">সব লেখা</a><a href="subscribe.html">ইমেইল আপডেট</a>
 </nav>
 <main class="wrap">
-<header class="hero">
-<div class="hero-mark" aria-hidden="true">✒</div>
-<div><div class="eyebrow">লেখক · মোস্তফা অভি</div><h1>সাহিত্য, ইতিহাস ও জীবনের গল্প</h1><p>গল্প, উপন্যাস, প্রবন্ধ ও অন্যান্য লেখা—বাংলার জনপদ, মানুষের জীবন, ইতিহাস এবং কল্পনার নানা পথ ধরে।</p><div class="hero-actions"><a class="button primary" href="#recent">লেখা পড়ুন</a><a class="button" href="#about">লেখক পরিচিতি</a><a class="button" href="journal.html">জার্নাল দেখুন</a></div></div>
+<header class="hero hero-banner">
+<img class="hero-portrait" src="কবির%20ছবি.jpg" alt="লেখক মোস্তফা অভি">
+<div class="hero-copy"><div class="eyebrow">লেখক · মোস্তফা অভি</div><h1>সাহিত্য, ইতিহাস ও জীবনের গল্প</h1><p>গল্প, উপন্যাস, প্রবন্ধ ও অন্যান্য লেখা—বাংলার জনপদ, মানুষের জীবন, ইতিহাস এবং কল্পনার নানা পথ ধরে।</p><div class="hero-actions"><a class="button primary" href="#recent">লেখা পড়ুন</a><a class="button" href="#about">লেখক পরিচিতি</a><a class="button" href="journal.html">জার্নাল দেখুন</a></div></div>
 </header>
 <div class="share-panel" aria-label="হোমপেজ শেয়ার করুন"><strong>এই সাইটটি শেয়ার করুন</strong><a id="homeShareFb" target="_blank" rel="noopener noreferrer">Facebook</a><a id="homeShareWa" target="_blank" rel="noopener noreferrer">WhatsApp</a><a id="homeShareTg" target="_blank" rel="noopener noreferrer">Telegram</a><a id="homeShareX" target="_blank" rel="noopener noreferrer">X</a><a id="homeShareLi" target="_blank" rel="noopener noreferrer">LinkedIn</a><button id="homeCopyLink" type="button">লিংক কপি</button><span id="homeShareStatus" class="status" aria-live="polite"></span></div>
 <section id="featured">
