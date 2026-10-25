@@ -17,6 +17,11 @@ a{color:var(--red)}.topnav{display:flex;gap:8px;justify-content:center;flex-wrap
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}.masthead{margin:28px 0 18px;padding:clamp(28px,5vw,56px);background:linear-gradient(105deg,#fffaf0f2,#f7ebdce8),url('journal_riverside.jpg') center 43%/cover;border:1px solid #e4d6c3;border-radius:10px;box-shadow:0 12px 34px #39251a0c}.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--muted)}h1{font-size:clamp(34px,5vw,56px);line-height:1.3;color:var(--red);margin:5px 0 10px;font-weight:600}.masthead p{font-size:clamp(16px,2vw,20px);max-width:740px;color:#5f5852;margin:0}.layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:22px;align-items:start}.paper{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:clamp(20px,3vw,34px);box-shadow:0 8px 28px #39251a08}.paper h2{font-size:clamp(23px,3vw,29px);color:var(--red);line-height:1.5;margin:0 0 13px}.paper h3{font-size:19px;color:var(--red);margin:22px 0 7px}.paper p{margin:0 0 15px}.paper p:last-child{margin-bottom:0}.sidebar{display:grid;gap:14px}.sidebox{background:#fffaf5;border:1px solid var(--line);border-radius:9px;padding:18px}.sidebox h2{font-size:18px;color:var(--red);margin:0 0 9px}.sidebox ul{margin:0;padding-left:19px}.sidebox li{margin:4px 0}.work-list{display:grid;gap:12px;margin-top:16px}.work{padding:15px 17px;border:1px solid var(--line);border-radius:8px;background:#fffdfa}.work strong{display:block;color:var(--red);font-size:17px}.work span{display:block;color:var(--muted);font-size:13px;margin-top:3px}.rule{border:0;border-top:1px solid var(--line);margin:27px 0}.footer{margin-top:38px;padding:25px 18px;text-align:center;background:#fffaf5;border-top:1px solid var(--line);color:var(--muted);font-size:14px}.footer a{margin:0 7px}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.masthead{margin:14px 0}.wrap{padding:0 12px}}
 @media(max-width:520px){.topnav{padding:10px;gap:5px}.topnav a{font-size:12px;padding:5px 9px}.sidebar{grid-template-columns:1fr}.paper{padding:18px}.masthead{padding:24px 18px}h1{font-size:32px}}
+
+.profile-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,360px);gap:28px;align-items:center;margin:28px 0 22px;padding:clamp(24px,4vw,44px);border:1px solid #d9d0c0;border-radius:12px;overflow:hidden;background:linear-gradient(90deg,rgba(20,37,30,.78),rgba(20,37,30,.22)),url('journal_riverside.jpg') center/cover;box-shadow:0 12px 34px #39251a12;color:#fff}
+.profile-hero .eyebrow,.profile-hero p{color:#fff}.profile-hero h1{color:#fff;text-shadow:0 2px 14px #0006}.profile-photo{width:100%;max-height:460px;object-fit:cover;object-position:center 25%;display:block;border:5px solid #fff;border-radius:10px;box-shadow:0 12px 32px #0005}
+@media(max-width:700px){.profile-hero{grid-template-columns:1fr}.profile-photo{max-height:520px;width:min(100%,380px);margin:0 auto}.profile-hero h1{font-size:36px}}
+
 </style>
 </head>
 <body>
@@ -24,10 +29,11 @@ a{color:var(--red)}.topnav{display:flex;gap:8px;justify-content:center;flex-wrap
 <a href="./">হোম</a><a class="active" href="about.html">লেখক পরিচিতি</a><a href="posts.html">প্রকাশিত লেখা</a><a href="journal.html">জার্নাল</a><a href="mostafaauvi_literary_body_v11%20(1).html">পুরোনো সাহিত্যাঙ্গন</a><a href="subscribe.html">ইমেইল আপডেট</a>
 </nav>
 <main class="wrap">
-<header class="masthead">
-<div class="eyebrow">লেখক · বাংলা সাহিত্য</div>
+<header class="profile-hero">
+<div><div class="eyebrow">লেখক · বাংলা সাহিত্য</div>
 <h1>মোস্তফা অভি</h1>
-<p>বিশ্বসাহিত্য এবং ইতিহাস। বাংলার জনপদ, মানুষের জীবন, স্মৃতি ও কল্পনার ভেতর দিয়ে গল্পের সন্ধান।</p>
+<p>বিশ্বসাহিত্য এবং ইতিহাস। বাংলার জনপদ, মানুষের জীবন, স্মৃতি ও কল্পনার ভেতর দিয়ে গল্পের সন্ধান।</p></div>
+<img class="profile-photo" src="https://raw.githubusercontent.com/gmauvibbl-star/mostafa-auvi-website/main/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%B0%20%E0%A6%9B%E0%A6%AC%E0%A6%BF.jpg" alt="লেখক মোস্তফা অভি" loading="eager">
 </header>
 <div class="layout">
 <article class="paper">
