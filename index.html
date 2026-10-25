@@ -24,11 +24,11 @@ section{scroll-margin-top:76px;margin:30px 0}.section-head{display:flex;align-it
 @media(max-width:560px){.topnav{position:static;padding:10px;gap:5px}.topnav a{font-size:12px;padding:6px 9px}.wrap{padding:0 11px}.hero{margin:13px 0;padding:22px 18px;gap:12px;min-height:0}.hero-mark{font-size:36px}.hero h1{font-size:29px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.category{padding:13px;min-height:86px}.post-grid{grid-template-columns:1fr}.feature-side,.about-grid{grid-template-columns:1fr}.paper{padding:17px}.section-head h2{font-size:24px}}
 .share-panel{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 auto 24px;padding:13px 17px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.share-panel strong{font-size:14px;color:var(--muted);margin-right:3px}.share-panel a,.share-panel button{display:inline-flex;align-items:center;border:1px solid #e3c9c4;border-radius:999px;background:#fffaf7;color:var(--red);padding:6px 12px;text-decoration:none;font:inherit;font-size:13px;cursor:pointer}.share-panel a:hover,.share-panel button:hover{background:#f4e4df}
 
-/* Use the user's supplied Misty Horizons image across the header, hero banner and footer. */
-.topnav{background:linear-gradient(90deg,#fffdf9ee,#f4f1e8d9),url('Misty%20Horizons_%20Portrait%20and%20Landscapes-1.png') center 42%/cover;border-bottom:1px solid #d8d5cd}
-.hero{background:linear-gradient(90deg,#fffaf0f2 0%,#f7ebdce8 47%,#f7ebdc52 100%),url('Misty%20Horizons_%20Portrait%20and%20Landscapes-1.png') center 43%/cover;border-color:#d8d5cd}
-.site-footer{background:linear-gradient(90deg,#fffaf5ef,#f4f1e8e0),url('Misty%20Horizons_%20Portrait%20and%20Landscapes-1.png') center 68%/cover;border-top:1px solid #d8d5cd}
-@media(max-width:560px){.hero{background-position:center;background-size:cover}.topnav{background-position:center 42%}.site-footer{background-position:center 68%}}
+/* The banner uses only the top panel of the three-panel image; existing hero text stays on top. */
+.topnav{background:#fffdf9;border-bottom:1px solid var(--line)}
+.hero{background-image:linear-gradient(90deg,#fffaf0e8 0%,#f7ebdcd9 47%,#f7ebdc40 100%),url('Misty%20Horizons_%20Portrait%20and%20Landscapes-1.png');background-size:100% 100%,100% 300%;background-position:center,center top;background-repeat:no-repeat;border-color:#d8d5cd}
+.site-footer{background:#fffaf5;border-top:1px solid var(--line)}
+@media(max-width:560px){.hero{background-size:100% 100%,100% 300%;background-position:center,center top}}
 </style>
 </head>
 <body>
