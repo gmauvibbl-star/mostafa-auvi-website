@@ -10,6 +10,12 @@ create table if not exists public.posts (
   title text not null check (char_length(title) between 1 and 180),
   slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   body text not null,
+  category text,
+  excerpt text,
+  tags text[] not null default '{}',
+  cover_image text,
+  language text,
+  featured boolean not null default false,
   published boolean not null default false,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
@@ -24,8 +30,18 @@ create table if not exists public.subscribers (
   unsubscribed_at timestamptz,
   created_at timestamptz not null default now()
 );
--- Safe to re-run if this schema was already applied once.
+-- Safe to re-run on existing projects; does not change existing article content.
+alter table public.posts add column if not exists category text;
+alter table public.posts add column if not exists excerpt text;
+alter table public.posts add column if not exists tags text[] not null default '{}';
+alter table public.posts add column if not exists cover_image text;
+alter table public.posts add column if not exists language text;
+alter table public.posts add column if not exists featured boolean not null default false;
 alter table public.subscribers add column if not exists unsubscribe_token_hash text;
+create index if not exists posts_published_at_idx on public.posts (published_at desc) where published = true;
+create index if not exists posts_category_idx on public.posts (category) where published = true;
+create index if not exists posts_language_idx on public.posts (language) where published = true;
+create index if not exists posts_featured_idx on public.posts (featured) where published = true;
 alter table public.admin_users enable row level security;
 alter table public.posts enable row level security;
 alter table public.subscribers enable row level security;
