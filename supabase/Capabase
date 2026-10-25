@@ -1,6 +1,1 @@
-alter table posts add column category text;
-alter table posts add column excerpt text;
-alter table posts add column featured boolean default false;
-alter table posts add column tags text;
-alter table posts add column cover_image text;
-alter table posts add column language text default 'bn';
+
