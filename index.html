@@ -136,6 +136,23 @@ main.wrap>.share-panel{width:100%;max-width:1120px;margin:20px auto 0}
 .homepage-stack>.hero.hero-banner{width:100%;max-width:100%;margin:0;border-radius:0}
 .homepage-stack>section[id]{width:100%;max-width:100%;margin:0}
 
+
+/* User-requested uniform width for all lower sections and footer */
+body>section,main>section,body>footer,main>footer,section[id],.site-section,.archive-section{
+ box-sizing:border-box;
+ width:min(calc(100% - (var(--site-gutter, 20px) * 2)),var(--site-width, 1120px));
+ max-width:var(--site-width, 1120px);
+ margin-left:auto;
+ margin-right:auto;
+ padding-left:0;
+ padding-right:0
+}
+section[id]>*,.site-section>*,.archive-section>*{max-width:100%;box-sizing:border-box}
+/* Keep the homepage's joined stack at the same width as the shared site grid */
+.homepage-stack{width:min(calc(100% - (var(--site-gutter, 20px) * 2)),var(--site-width, 1120px));max-width:var(--site-width, 1120px);margin-left:auto;margin-right:auto}
+.homepage-stack>section[id]{width:100%;max-width:100%;margin-left:0;margin-right:0}
+.homepage-stack>section[id]>*{max-width:100%;box-sizing:border-box}
+
 </style>
 </head>
 <body>
