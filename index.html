@@ -100,6 +100,25 @@ main.wrap .share-panel{width:100%;max-width:1120px;margin:0 auto 22px;box-sizing
  main.wrap .toolbar input,main.wrap .toolbar select{width:100%;flex:1}
 }
 
+
+/* Four primary homepage parts form one continuous, equal-width column */
+main.wrap{width:100%;max-width:none;margin:0;padding:24px clamp(12px,3vw,36px) 34px;background:#71805A}
+.homepage-stack{width:100%;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:0;background:#F5EBDD;border:1px solid #D8D1BF;border-radius:10px;overflow:hidden}
+.homepage-stack>.hero.hero-banner{display:block;width:100%;max-width:none;margin:0;border:0;border-radius:0;border-bottom:1px solid #D8D1BF;background:#F5EBDD;box-shadow:none}
+.homepage-stack>.hero.hero-banner .hero-art{display:block;width:100%;height:auto}
+.homepage-stack>section#categories,.homepage-stack>section#recent,.homepage-stack>section#about{display:block;width:100%;max-width:none;margin:0;padding:clamp(18px,2.8vw,30px);border:0;border-radius:0;box-shadow:none;background:#F5EBDD}
+.homepage-stack>section#categories,.homepage-stack>section#recent{border-bottom:1px solid #D8D1BF}
+.homepage-stack>section .paper{width:100%;box-sizing:border-box}
+.homepage-stack .category-grid{width:100%;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.homepage-stack .category{min-width:0;height:100%;box-sizing:border-box}
+.homepage-stack .toolbar{width:100%}
+.homepage-stack .toolbar input,.homepage-stack .toolbar select{min-width:0}
+.homepage-stack .post-grid{width:100%}
+main.wrap>section#featured,main.wrap>section#archive{width:100%;max-width:1120px;margin:24px auto 0}
+main.wrap>.share-panel{width:100%;max-width:1120px;margin:20px auto 0}
+@media(max-width:900px){.homepage-stack .category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){main.wrap{padding:12px 10px 24px}.homepage-stack>section#categories,.homepage-stack>section#recent,.homepage-stack>section#about{padding:16px}.homepage-stack .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.homepage-stack .toolbar{flex-direction:column}.homepage-stack .toolbar input,.homepage-stack .toolbar select{width:100%;flex:1}}
+
 </style>
 </head>
 <body>
@@ -107,8 +126,8 @@ main.wrap .share-panel{width:100%;max-width:1120px;margin:0 auto 22px;box-sizing
 <a class="active" href="./">হোম</a><a href="#featured">নির্বাচিত লেখা</a><a href="#categories">বিভাগ</a><a href="#recent">সাম্প্রতিক লেখা</a><a href="#archive">আর্কাইভ</a><a href="journal.html">জার্নাল</a><a href="posts.html">সব লেখা</a><a href="subscribe.html">ইমেইল আপডেট</a>
 </nav>
 <main class="wrap">
+<div class="homepage-stack">
 <header class="hero hero-banner" aria-label="মোস্তফা অভি’র ওয়েবসাইট ব্যানার"><img class="hero-art" src="Website%20header.png" alt="মোস্তফা অভি’র লেখক ব্যানার" fetchpriority="high"></header>
-<div style="display:flex;justify-content:center;margin:18px auto 24px"><a class="button primary" href="#recent">লেখা পড়ুন →</a></div>
 <section id="categories">
 <div class="section-head"><div><h2>বিভাগ অনুযায়ী পড়ুন</h2><p>আপনার পছন্দের বিষয় থেকে শুরু করুন</p></div></div>
 <div class="category-grid">
@@ -124,12 +143,15 @@ main.wrap .share-panel{width:100%;max-width:1120px;margin:0 auto 22px;box-sizing
 <a class="category" href="posts.html?category=পিডিএফ"><strong>পিডিএফ</strong><span>ডাউনলোডযোগ্য প্রকাশনা</span></a>
 </div>
 </section>
-
-
-
-<div class="share-panel" aria-label="হোমপেজ শেয়ার করুন"><strong>এই সাইটটি শেয়ার করুন</strong><a id="homeShareFb" target="_blank" rel="noopener noreferrer">Facebook</a><a id="homeShareWa" target="_blank" rel="noopener noreferrer">WhatsApp</a><a id="homeShareTg" target="_blank" rel="noopener noreferrer">Telegram</a><a id="homeShareX" target="_blank" rel="noopener noreferrer">X</a><a id="homeShareLi" target="_blank" rel="noopener noreferrer">LinkedIn</a><button id="homeCopyLink" type="button">লিংক কপি</button><span id="homeShareStatus" class="status" aria-live="polite"></span></div>
-
-
+<section id="recent">
+<div class="section-head"><div><h2>সাম্প্রতিক লেখা</h2><p>ড্যাশবোর্ড থেকে প্রকাশিত লেখাগুলো এখানে দেখানো হবে</p></div><a href="posts.html">সব লেখা ↗</a></div>
+<div class="paper"><div class="toolbar"><input id="searchInput" type="search" placeholder="শিরোনাম বা লেখার শব্দ দিয়ে খুঁজুন…" aria-label="লেখা খুঁজুন"><select id="yearFilter" aria-label="বছর অনুযায়ী বাছাই"><option value="">সব বছর</option></select><select id="languageFilter" aria-label="ভাষা অনুযায়ী বাছাই"><option value="">সব ভাষা</option><option value="bn">বাংলা</option><option value="en">English</option></select></div><div class="post-grid" id="postGrid"><p class="empty">প্রকাশিত লেখা লোড হচ্ছে…</p></div><p class="status" id="loadStatus" aria-live="polite"></p></div>
+</section>
+<section id="about">
+<div class="section-head"><div><h2>লেখক পরিচিতি</h2><p>লেখা, ইতিহাস ও মানুষের জীবনের প্রতি আগ্রহ</p></div></div>
+<div class="paper about-grid"><div><p>মোস্তফা অভি একজন বাংলা ভাষার লেখক। তাঁর লেখায় মানুষের জীবন, বাংলার জনপদ, ইতিহাস ও কল্পনার নানা অনুষঙ্গ ফিরে আসে।</p><p>এই ওয়েবসাইটে গল্প, উপন্যাস, প্রবন্ধ, সাহিত্যালোচনা, ভ্রমণকাহিনি, ব্যক্তিগত রচনা এবং আইন-আদালত ও ব্যাংকিং-অর্থনীতিবিষয়ক লেখা এক জায়গায় সাজানো হচ্ছে।</p></div><div><h3 style="color:var(--red);margin-top:0">আরও পড়ুন</h3><p><a href="journal.html">জার্নাল</a><br><a href="posts.html">প্রকাশিত লেখা</a><br><a href="subscribe.html">নতুন লেখার ইমেইল আপডেট</a></p></div></div>
+</section>
+</div>
 <section id="featured">
 <div class="section-head"><div><h2>নির্বাচিত লেখা</h2><p>পাঠ শুরু করার জন্য কিছু লেখা ও সংগ্রহ</p></div></div>
 <div class="paper featured-grid">
@@ -137,18 +159,11 @@ main.wrap .share-panel{width:100%;max-width:1120px;margin:0 auto 22px;box-sizing
 <div class="feature-side"><div class="mini-note"><h3>প্রকাশিত লেখা</h3><p>প্রকাশিত লেখার তালিকা থেকে আপনার পছন্দের লেখা বেছে নিন।</p><p style="margin-top:10px"><a href="posts.html">সব লেখা দেখুন ↗</a></p></div><div class="mini-note"><h3>নতুন পাঠক?</h3><p>বিভাগ ধরে পড়ুন অথবা শিরোনাম ও লেখার অংশ দিয়ে অনুসন্ধান করুন।</p></div></div>
 </div>
 </section>
-<section id="recent">
-<div class="section-head"><div><h2>সাম্প্রতিক লেখা</h2><p>ড্যাশবোর্ড থেকে প্রকাশিত লেখাগুলো এখানে দেখানো হবে</p></div><a href="posts.html">সব লেখা ↗</a></div>
-<div class="paper"><div class="toolbar"><input id="searchInput" type="search" placeholder="শিরোনাম বা লেখার শব্দ দিয়ে খুঁজুন…" aria-label="লেখা খুঁজুন"><select id="yearFilter" aria-label="বছর অনুযায়ী বাছাই"><option value="">সব বছর</option></select><select id="languageFilter" aria-label="ভাষা অনুযায়ী বাছাই"><option value="">সব ভাষা</option><option value="bn">বাংলা</option><option value="en">English</option></select></div><div class="post-grid" id="postGrid"><p class="empty">প্রকাশিত লেখা লোড হচ্ছে…</p></div><p class="status" id="loadStatus" aria-live="polite"></p></div>
-</section>
 <section id="archive">
 <div class="section-head"><div><h2>আর্কাইভ এক্সপ্লোরার</h2><p>সময় ও বিষয় ধরে লেখা খুঁজে নিন</p></div></div>
 <div class="paper"><div class="archive-tools"><a href="posts.html">সব প্রকাশিত লেখা</a><a href="journal.html#entries">জার্নালের পুরোনো লেখা</a><a href="posts.html?sort=oldest">পুরোনো লেখা থেকে পড়ুন</a></div><p class="status">বছর, ভাষা, বিভাগ ও ট্যাগের পূর্ণাঙ্গ ফিল্টার লেখার তথ্যভান্ডারে সেই তথ্য সংরক্ষিত থাকলে কাজ করবে।</p></div>
 </section>
-<section id="about">
-<div class="section-head"><div><h2>লেখক পরিচিতি</h2><p>লেখা, ইতিহাস ও মানুষের জীবনের প্রতি আগ্রহ</p></div></div>
-<div class="paper about-grid"><div><p>মোস্তফা অভি একজন বাংলা ভাষার লেখক। তাঁর লেখায় মানুষের জীবন, বাংলার জনপদ, ইতিহাস ও কল্পনার নানা অনুষঙ্গ ফিরে আসে।</p><p>এই ওয়েবসাইটে গল্প, উপন্যাস, প্রবন্ধ, সাহিত্যালোচনা, ভ্রমণকাহিনি, ব্যক্তিগত রচনা এবং আইন-আদালত ও ব্যাংকিং-অর্থনীতিবিষয়ক লেখা এক জায়গায় সাজানো হচ্ছে।</p></div><div><h3 style="color:var(--red);margin-top:0">আরও পড়ুন</h3><p><a href="journal.html">জার্নাল</a><br><a href="posts.html">প্রকাশিত লেখা</a><br><a href="subscribe.html">নতুন লেখার ইমেইল আপডেট</a></p></div></div>
-</section>
+<div class="share-panel" aria-label="হোমপেজ শেয়ার করুন"><strong>এই সাইটটি শেয়ার করুন</strong><a id="homeShareFb" target="_blank" rel="noopener noreferrer">Facebook</a><a id="homeShareWa" target="_blank" rel="noopener noreferrer">WhatsApp</a><a id="homeShareTg" target="_blank" rel="noopener noreferrer">Telegram</a><a id="homeShareX" target="_blank" rel="noopener noreferrer">X</a><a id="homeShareLi" target="_blank" rel="noopener noreferrer">LinkedIn</a><button id="homeCopyLink" type="button">লিংক কপি</button><span id="homeShareStatus" class="status" aria-live="polite"></span></div>
 </main>
 <footer class="site-footer">© মোস্তফা অভি · <a href="./">হোম</a><a href="journal.html">জার্নাল</a><a href="posts.html">প্রকাশিত লেখা</a><a href="subscribe.html">ইমেইল আপডেট</a></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
