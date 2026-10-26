@@ -16,6 +16,19 @@ This repository currently uses GitHub Pages, which serves static files only. The
    `insert into public.admin_users(user_id) values ('YOUR_AUTH_USER_UUID');`
    Keep this table restricted; do not add a public insert policy.
 
+## 1A. Upgrade an existing database for the author dashboard
+If the project already has tables or posts, do **not** blindly recreate the schema. Review and run `supabase/migrations/20261027_secure_author_writing.sql` in Supabase **SQL Editor**. This migration adds the dashboard metadata columns and replaces policies on `posts` and `admin_users` with a restrictive author-only policy set. Confirm the SQL Editor reports success before testing the dashboard.
+
+Then open **Authentication → Users** and confirm the intended owner account exists. Copy that account's UUID and check whether it is present in `public.admin_users`. If it is missing, add only that specific UUID from SQL Editor:
+```sql
+insert into public.admin_users (user_id)
+values ('PASTE_THE_OWNER_AUTH_USER_UUID_HERE')
+on conflict (user_id) do nothing;
+```
+Replace the placeholder with the exact UUID from Authentication → Users. Never add a public insert policy to `admin_users`. The dashboard login is configured not to offer public account creation.
+
+Before launch, verify in SQL Editor that RLS is enabled and inspect the policies for `public.posts` and `public.admin_users`. Do not claim author-only management is live until the migration and owner authorization have both been confirmed in the actual Supabase project.
+
 ## 2. Configure server-side email
 1. Create a Resend account, verify a sending domain, and create an API key.
 2. Deploy both Edge Functions in `supabase/functions/subscription` and `supabase/functions/publish-notification`.
