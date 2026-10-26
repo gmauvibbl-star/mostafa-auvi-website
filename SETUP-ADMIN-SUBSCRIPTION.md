@@ -17,7 +17,27 @@ This repository currently uses GitHub Pages, which serves static files only. The
    Keep this table restricted; do not add a public insert policy.
 
 ## 1A. Upgrade an existing database for the author dashboard
-If the project already has tables or posts, do **not** blindly recreate the schema. Review and run `supabase/migrations/20261027_secure_author_writing.sql` in Supabase **SQL Editor**. This migration adds the dashboard metadata columns and replaces policies on `posts` and `admin_users` with a restrictive author-only policy set. Confirm the SQL Editor reports success before testing the dashboard.
+If the project already has tables or posts, do **not** blindly recreate the schema or run the migration before identifying the actual content tables. First run this **read-only** inspection query in Supabase SQL Editor:
+```sql
+select table_name
+from information_schema.tables
+where table_schema = 'public'
+  and table_name in ('posts','journal_posts','admin_users','profiles','subscribers')
+order by table_name;
+
+select table_name, column_name, data_type
+from information_schema.columns
+where table_schema = 'public'
+  and table_name in ('posts','journal_posts','admin_users','profiles')
+order by table_name, ordinal_position;
+
+select tablename, policyname, cmd, roles, qual, with_check
+from pg_policies
+where schemaname = 'public'
+  and tablename in ('posts','journal_posts','admin_users','profiles')
+order by tablename, policyname;
+```
+If `journal_posts` contains existing writing or `profiles.is_admin` is the existing authorization system, **stop before applying the migration** and review a data-preserving migration from that actual schema. The dashboard code in this PR currently targets `posts` and `admin_users`; creating parallel tables without checking would not make existing records manageable. Only run `supabase/migrations/20261027_secure_author_writing.sql` after confirming `posts` is the intended source of truth and reviewing its current policies. Confirm the SQL Editor reports success before testing the dashboard.
 
 Then open **Authentication → Users** and confirm the intended owner account exists. Copy that account's UUID and check whether it is present in `public.admin_users`. If it is missing, add only that specific UUID from SQL Editor:
 ```sql
