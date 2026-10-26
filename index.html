@@ -153,6 +153,47 @@ section[id]>*,.site-section>*,.archive-section>*{max-width:100%;box-sizing:borde
 .homepage-stack>section[id]{width:100%;max-width:100%;margin-left:0;margin-right:0}
 .homepage-stack>section[id]>*{max-width:100%;box-sizing:border-box}
 
+
+/* Featured and archive: align precisely with the joined homepage column and remove excess blank space */
+main.wrap>section#featured,main.wrap>section#archive{
+ width:min(calc(100% - (var(--site-gutter,20px)*2)),var(--site-width,1120px));
+ max-width:var(--site-width,1120px);
+ margin:18px auto 0;
+ padding:0;
+ box-sizing:border-box;
+ background:transparent;
+ border:0;
+}
+main.wrap>section#featured>.section-head,main.wrap>section#archive>.section-head{
+ width:100%;
+ margin:0;
+ padding:13px 22px 12px;
+ box-sizing:border-box;
+ background:#34452F;
+ border:1px solid #34452F;
+ border-radius:9px 9px 0 0;
+}
+main.wrap>section#featured>.section-head h2,main.wrap>section#archive>.section-head h2{color:#FFF8E9}
+main.wrap>section#featured>.section-head p,main.wrap>section#archive>.section-head p{color:#E7E1D3}
+main.wrap>section#featured>.paper,main.wrap>section#archive>.paper{
+ width:100%;
+ max-width:100%;
+ margin:0;
+ padding:18px;
+ box-sizing:border-box;
+ border:1px solid #D8D1BF;
+ border-top:0;
+ border-radius:0 0 9px 9px;
+ background:#F5EBDD;
+ box-shadow:none;
+}
+main.wrap>section#featured .featured-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:16px}
+@media(max-width:560px){
+ main.wrap>section#featured,main.wrap>section#archive{width:calc(100% - (var(--site-gutter,14px)*2));margin-top:14px}
+ main.wrap>section#featured>.section-head,main.wrap>section#archive>.section-head{padding:11px 14px}
+ main.wrap>section#featured>.paper,main.wrap>section#archive>.paper{padding:12px}
+}
+
 </style>
 </head>
 <body>
