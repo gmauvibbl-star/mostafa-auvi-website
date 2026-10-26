@@ -3,3 +3,6 @@ verify_jwt = false
 
 [functions.publish-notification]
 verify_jwt = true
+
+[functions.admin-password-setup]
+verify_jwt = false
