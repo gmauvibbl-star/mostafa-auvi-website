@@ -36,12 +36,11 @@ alter table public.admin_users enable row level security;
 do $$
 declare p record;
 begin
-  for p in select policyname from pg_policies where schemaname='public' and tablename in ('posts','admin_users')
+  for p in select tablename, policyname from pg_policies where schemaname='public' and tablename in ('posts','admin_users')
   loop
-    execute format('drop policy if exists %I on public.%I', p.policyname,
-      case when exists(select 1 from pg_policies where schemaname='public' and tablename='posts' and policyname=p.policyname) then 'posts' else 'admin_users' end);
+    execute format('drop policy if exists %I on public.%I', p.policyname, p.tablename);
   end loop;
-end $$;
+end $;
 
 create policy "admin users can read own authorization" on public.admin_users
   for select to authenticated using (user_id = (select auth.uid()));
