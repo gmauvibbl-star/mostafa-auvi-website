@@ -119,6 +119,23 @@ main.wrap>.share-panel{width:100%;max-width:1120px;margin:20px auto 0}
 @media(max-width:900px){.homepage-stack .category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:560px){main.wrap{padding:12px 10px 24px}.homepage-stack>section#categories,.homepage-stack>section#recent,.homepage-stack>section#about{padding:16px}.homepage-stack .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.homepage-stack .toolbar{flex-direction:column}.homepage-stack .toolbar input,.homepage-stack .toolbar select{width:100%;flex:1}}
 
+
+/* User-requested shared width and centered alignment */
+:root{--site-width:1120px;--site-gutter:20px}
+.banner,section[id]{
+ box-sizing:border-box;
+ width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-width));
+ max-width:var(--site-width);
+ margin-left:auto;
+ margin-right:auto
+}
+.banner{margin-top:26px;margin-bottom:22px}
+@media(max-width:850px){:root{--site-gutter:14px}}
+/* Keep the four joined homepage parts aligned as a single stack */
+.homepage-stack{width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-width));max-width:var(--site-width);margin-left:auto;margin-right:auto}
+.homepage-stack>.hero.hero-banner{width:100%;max-width:100%;margin:0;border-radius:0}
+.homepage-stack>section[id]{width:100%;max-width:100%;margin:0}
+
 </style>
 </head>
 <body>
