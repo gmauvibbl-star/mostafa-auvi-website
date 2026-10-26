@@ -71,6 +71,35 @@ main.wrap>section .section-head p{color:#77716A}
 .topnav a:hover,.topnav a.active{background:transparent;color:#76242d;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:650px){.topnav{justify-content:flex-start;padding:10px 12px;gap:0}.topnav a,.topnav a.active{font-size:13px;padding:5px 9px}.topnav a+a{border-left:0}.topnav a{border-bottom:1px solid #ded4c3;margin:2px}}
 
+
+/* Layout correction: consistent widths, centered sections and connected transitions */
+html,body{width:100%;margin:0}
+body{background:#71805A}
+.topnav{width:100%;margin:0;box-sizing:border-box}
+main.wrap{width:100%;max-width:none;margin:0;padding:22px clamp(12px,3vw,36px) 34px;background:#71805A;box-sizing:border-box}
+main.wrap>.hero.hero-banner{width:100%;max-width:1120px;margin:0 auto 22px;box-sizing:border-box;border-radius:10px;overflow:hidden}
+main.wrap>.hero.hero-banner .hero-art{display:block;width:100%;height:auto}
+main.wrap>section#categories,main.wrap>section#recent,main.wrap>section#about,main.wrap>section#featured,main.wrap>section#archive{width:100%;max-width:1120px;margin:0 auto 22px;padding:clamp(18px,2.8vw,30px);box-sizing:border-box;border-radius:10px}
+main.wrap>section#categories{margin-top:22px}
+main.wrap>section#featured .paper,main.wrap>section#archive .paper,main.wrap>section#recent .paper,main.wrap>section#about .paper{width:100%;box-sizing:border-box}
+main.wrap .category-grid{width:100%;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+main.wrap .category{min-width:0;height:100%;box-sizing:border-box}
+main.wrap .section-head{width:100%}
+main.wrap .toolbar{width:100%}
+main.wrap .toolbar input,main.wrap .toolbar select{min-width:0}
+main.wrap .post-grid{width:100%}
+main.wrap .share-panel{width:100%;max-width:1120px;margin:0 auto 22px;box-sizing:border-box}
+.site-footer{width:100%;margin:0}
+@media(max-width:900px){main.wrap .category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){
+ main.wrap{padding:12px 10px 24px}
+ main.wrap>.hero.hero-banner{margin-bottom:14px}
+ main.wrap>section#categories,main.wrap>section#recent,main.wrap>section#about,main.wrap>section#featured,main.wrap>section#archive{padding:16px;margin:0 auto 14px}
+ main.wrap .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ main.wrap .toolbar{flex-direction:column}
+ main.wrap .toolbar input,main.wrap .toolbar select{width:100%;flex:1}
+}
+
 </style>
 </head>
 <body>
