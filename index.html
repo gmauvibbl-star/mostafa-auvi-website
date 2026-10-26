@@ -203,9 +203,17 @@ main.wrap>section#featured .featured-grid{grid-template-columns:minmax(0,1.5fr) 
 @media(max-width:700px){.author-profile{grid-template-columns:120px minmax(0,1fr);gap:16px}.author-portrait-wrap{max-width:120px}.author-links{grid-column:1/-1}}
 @media(max-width:420px){.author-profile{grid-template-columns:1fr}.author-portrait-wrap{max-width:150px;margin:0 auto}.author-links{grid-column:auto}}
 
+
+/* Minimal literary masthead inspired by Neil Gaiman's simple editorial layout */
+.literary-masthead{width:100%;display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px clamp(16px,4vw,48px) 10px;background:#F5EBDD;color:#17324a;border-bottom:0}
+.masthead-title{font-family:Georgia,"Nirmala UI",serif;font-size:clamp(20px,2.5vw,29px);font-weight:600;line-height:1.35;color:#17324a;text-decoration:none;letter-spacing:.01em}
+.masthead-tagline{font-family:Arial,"Nirmala UI",sans-serif;font-size:12px;color:#6d6a60;white-space:nowrap;letter-spacing:.04em}
+.topnav{border-top:1px solid #e0d6c5}
+@media(max-width:560px){.literary-masthead{padding:12px 12px 8px;align-items:flex-start;flex-direction:column;gap:0}.masthead-title{font-size:21px}.masthead-tagline{font-size:11px}.topnav{padding-top:8px}}
 </style>
 </head>
 <body>
+<div class="literary-masthead" aria-label="সাইট পরিচিতি"><a href="./" class="masthead-title">মোস্তফা অভি’র সাহিত্যাঙ্গন</a><span class="masthead-tagline">লেখা · পাঠ · ভাবনা</span></div>
 <nav class="topnav" aria-label="প্রধান নেভিগেশন">
 <a class="active" href="./">হোম</a><a href="#featured">নির্বাচিত লেখা</a><a href="#categories">বিভাগ</a><a href="#recent">সাম্প্রতিক লেখা</a><a href="#archive">আর্কাইভ</a><a href="journal.html">জার্নাল</a><a href="posts.html">সব লেখা</a><a href="subscribe.html">ইমেইল আপডেট</a>
 </nav>
