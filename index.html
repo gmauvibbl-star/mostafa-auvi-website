@@ -256,6 +256,18 @@ body>.literary-masthead .masthead-tagline{color:#6d6a60;font-size:12px}
 }
 /* The existing hero/banner image is deliberately unchanged. */
 
+
+/* Final full-screen-width layout requested by the author */
+:root{--site-width:100%;--site-gutter:clamp(10px,1.5vw,24px)}
+main.wrap{width:100%;max-width:none;padding:0 clamp(10px,1.5vw,24px) 28px}
+.homepage-stack{width:100%;max-width:none;margin:0 auto;border-radius:0}
+.homepage-stack>.hero.hero-banner{width:100%;max-width:none}
+.homepage-stack>section#categories,.homepage-stack>section#recent,.homepage-stack>section#about{width:100%;max-width:none}
+main.wrap>section#featured,main.wrap>section#archive{width:100%;max-width:none;margin:18px 0 0}
+main.wrap>.share-panel{width:100%;max-width:none}
+body>section,main>section,body>footer,main>footer,section[id],.site-section,.archive-section{width:100%;max-width:none}
+@media(max-width:560px){main.wrap{padding:0 8px 20px}.homepage-stack>section#categories,.homepage-stack>section#recent,.homepage-stack>section#about{padding:14px}}
+
 </style>
 </head>
 <body>
