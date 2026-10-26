@@ -43,6 +43,26 @@ section{scroll-margin-top:76px;margin:30px 0}.section-head{display:flex;align-it
 @media(max-width:700px){.hero.hero-banner{height:auto;min-height:0;padding:0}.hero-banner .hero-art{display:block;width:100%;height:auto;object-fit:contain}}
 @media(max-width:420px){.hero.hero-banner{height:auto;min-height:0;padding:0}.hero-banner .hero-art{width:100%;height:auto}}
 
+
+/* Unified homepage: original header image + three cream panels on continuous olive background */
+:root{--bg:#71805A;--paper:#F5EBDD;--line:#D8D1BF;--red:#34452F;--ink:#34382f;--muted:#77716a}
+body{background:#71805A}
+.topnav{background:#102B46;border-bottom:1px solid #233e56}
+.topnav a{background:transparent;border-color:#7d929f;color:#fff}
+.topnav a.active,.topnav a:hover{background:#F5EBDD;color:#102B46;border-color:#F5EBDD}
+main.wrap{max-width:1280px;padding:18px 22px 30px;background:#71805A}
+.hero.hero-banner{max-width:1000px;margin:0 auto;border:1px solid #d8e2e9;border-radius:12px;overflow:hidden;background:#F5EBDD}
+.hero-banner .hero-art{width:100%;height:auto;max-height:none;object-fit:contain}
+main.wrap>section#categories,main.wrap>section#recent,main.wrap>section#about{background:#F5EBDD;border:1px solid #D8D1BF;border-radius:12px;padding:clamp(18px,3vw,30px);margin:24px auto;max-width:1120px}
+main.wrap>section#categories .category{background:#FFFCF5}
+main.wrap>section#recent .paper{background:transparent;border:0;box-shadow:none;padding:0}
+main.wrap>section#about .paper{background:transparent;border:0;box-shadow:none;padding:0}
+main.wrap>section .section-head h2{color:#34452F}
+main.wrap>section .section-head p{color:#77716A}
+.site-footer{background:#71805A;color:#fff;border-top:0}
+.site-footer a{color:#fff}
+@media(max-width:560px){main.wrap{padding:10px 11px 24px}main.wrap>section#categories,main.wrap>section#recent,main.wrap>section#about{padding:17px;margin:16px auto}}
+
 </style>
 </head>
 <body>
@@ -57,7 +77,7 @@ section{scroll-margin-top:76px;margin:30px 0}.section-head{display:flex;align-it
 <a class="active" href="./">হোম</a><a href="#featured">নির্বাচিত লেখা</a><a href="#categories">বিভাগ</a><a href="#recent">সাম্প্রতিক লেখা</a><a href="#archive">আর্কাইভ</a><a href="journal.html">জার্নাল</a><a href="posts.html">সব লেখা</a><a href="subscribe.html">ইমেইল আপডেট</a>
 </nav>
 <main class="wrap">
-<header class="hero hero-banner" aria-label="মোস্তফা অভি’র ওয়েবসাইট ব্যানার"><img class="hero-art" src="hero-banner-final.png.png" alt="মোস্তফা অভি’র লেখক ব্যানার" fetchpriority="high"></header>
+<header class="hero hero-banner" aria-label="মোস্তফা অভি’র ওয়েবসাইট ব্যানার"><img class="hero-art" src="Website%20header.png" alt="মোস্তফা অভি’র লেখক ব্যানার" fetchpriority="high"></header>
 <div style="display:flex;justify-content:center;margin:18px auto 24px"><a class="button primary" href="#recent">লেখা পড়ুন →</a></div>
 <section id="categories">
 <div class="section-head"><div><h2>বিভাগ অনুযায়ী পড়ুন</h2><p>আপনার পছন্দের বিষয় থেকে শুরু করুন</p></div></div>
