@@ -63,17 +63,18 @@ main.wrap>section .section-head p{color:#77716A}
 .site-footer a{color:#fff}
 @media(max-width:560px){main.wrap{padding:10px 11px 24px}main.wrap>section#categories,main.wrap>section#recent,main.wrap>section#about{padding:17px;margin:16px auto}}
 
+
+/* Classic text-link navigation inspired by Neil Gaiman's site */
+.topnav{position:relative;top:auto;display:flex;justify-content:center;align-items:center;gap:0;flex-wrap:wrap;padding:13px 18px;background:#F5EBDD;border:0;border-bottom:1px solid #d2c8b6;box-shadow:none}
+.topnav a,.topnav a.active{display:inline-block;border:0;border-radius:0;background:transparent;color:#17324a;padding:5px 12px;text-decoration:none;font-family:Arial,"Nirmala UI",sans-serif;font-size:14px;font-weight:500;line-height:1.6;white-space:nowrap}
+.topnav a+a{border-left:1px solid #c8bead}
+.topnav a:hover,.topnav a.active{background:transparent;color:#76242d;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:650px){.topnav{justify-content:flex-start;padding:10px 12px;gap:0}.topnav a,.topnav a.active{font-size:13px;padding:5px 9px}.topnav a+a{border-left:0}.topnav a{border-bottom:1px solid #ded4c3;margin:2px}}
+
 </style>
 </head>
 <body>
-<nav class="topnav" aria-label="প্রধান নেভিগেশন"><header class="banner">
-    <div>
-        <span class="read-badge">✒ পাঠ শুরু করুন</span>
-        <h1>মোস্তফা অভি'র জার্নাল</h1>
-        <p>জার্নালের লেখা পড়ুন, তারপর প্রকাশিত লেখার সংগ্রহ ঘুরে দেখুন।</p>
-        <a href="journal.html" class="btn-journal">জার্নাল দেখুন →</a>
-    </div>
-</header>
+<nav class="topnav" aria-label="প্রধান নেভিগেশন">
 <a class="active" href="./">হোম</a><a href="#featured">নির্বাচিত লেখা</a><a href="#categories">বিভাগ</a><a href="#recent">সাম্প্রতিক লেখা</a><a href="#archive">আর্কাইভ</a><a href="journal.html">জার্নাল</a><a href="posts.html">সব লেখা</a><a href="subscribe.html">ইমেইল আপডেট</a>
 </nav>
 <main class="wrap">
