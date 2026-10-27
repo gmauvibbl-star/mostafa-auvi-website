@@ -517,13 +517,13 @@ body>.literary-masthead{display:none!important}
 <div class="nav-dropdown"><a href="#categories">কথাসাহিত্য <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu"><a href="posts.html?category=গল্প">গল্প</a><a href="posts.html?category=উপন্যাস">উপন্যাস</a><a href="posts.html?category=অনুবাদ%20সাহিত্য">অনুবাদ সাহিত্য</a><a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a></div></div>
 <a href="posts.html?category=প্রবন্ধ">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
 <a href="posts.html?category=আইন-আদালত">আইন ও আদালত</a>
-<a href="journal.html">Journal</a><a href="#about">লেখক পরিচিতি</a><a href="posts.html">সব লেখা</a><label class="language-switch" aria-label="ভাষা নির্বাচন"><span>ভাষা</span><select id="siteLanguage" aria-label="Select language"><option value="bn">বাংলা</option><option value="en">English</option></select></label>
+<a href="journal.html">Journal</a><a href="#about">লেখক পরিচিতি</a><a href="posts.html">সব লেখা</a>
 </nav>
 <header class="hero hero-banner" aria-label="Mostafa Auvi — Fiction Writer and Literary Critic"><img class="hero-art" src="hero-banner-final.png.png?v=20261027" alt="Literary banner for Mostafa Auvi" fetchpriority="high"><div class="banner-title-overlay"><span class="banner-name">Mostafa Auvi</span><span class="banner-en">Fiction Writer &amp; Literary Critic</span></div></header>
 
 
 <section id="categories">
-<div class="section-head"><div><h2>বিভাগ অনুযায়ী পড়ুন</h2><p>আপনার পছন্দের বিষয় থেকে শুরু করুন</p></div></div>
+<div class="section-head"><div><h2>বিভাগ অনুযায়ী পড়ুন</h2><p>আপনার পছন্দের বিষয় থেকে শুরু করুন</p></div><label class="language-switch category-language-switch" aria-label="ভাষা নির্বাচন"><span>ভাষা</span><select id="siteLanguage" aria-label="Select language"><option value="bn">বাংলা</option><option value="en">English</option></select></label></div>
 <div class="category-grid">
 <div class="category fiction-category"><strong>কথাসাহিত্য</strong><span>গল্প, উপন্যাস ও অন্যান্য রচনা</span><div class="fiction-links"><a href="posts.html?category=গল্প">গল্প</a><a href="posts.html?category=উপন্যাস">উপন্যাস</a><a href="posts.html?category=অনুবাদ%20সাহিত্য">অনুবাদ সাহিত্য</a><a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a></div></div>
 <a class="category" href="posts.html?category=প্রবন্ধ"><strong>প্রবন্ধ ও সাহিত্যসমালোচনা</strong><span>ভাবনা, পাঠ ও বিশ্লেষণ</span></a>
@@ -565,3 +565,5 @@ function sampleCards(){const s=[
 <script>const siteLanguage=document.getElementById("siteLanguage");if(siteLanguage){siteLanguage.value=document.documentElement.lang==="en"?"en":"bn";siteLanguage.addEventListener("change",()=>{const selected=siteLanguage.value;document.documentElement.lang=selected;try{localStorage.setItem("siteLanguage",selected)}catch(e){}if(selected==="en"){siteLanguage.setAttribute("aria-label","Select language")}else{siteLanguage.setAttribute("aria-label","ভাষা নির্বাচন")}});try{const saved=localStorage.getItem("siteLanguage");if(saved==="en"||saved==="bn"){siteLanguage.value=saved;document.documentElement.lang=saved}}catch(e){}}</script>
 </body>
 </html>
+
+<style>.category-language-switch{margin-left:auto;align-self:center;color:#17324a}.category-language-switch select{background:#fffdf8;border-color:#8a9aa1;color:#17324a;padding:7px 10px;border-radius:4px;font-size:14px}@media(max-width:560px){.category-language-switch{margin-left:auto}.category-language-switch span{display:inline;font-size:12px}.category-language-switch select{max-width:none;padding:6px 8px}}</style>
