@@ -24,7 +24,7 @@ label{display:block;font-weight:650;margin:12px 0 5px}input,textarea,select{widt
 <div><label for="title">বাংলা শিরোনাম *</label><input id="title" maxlength="180" required></div>
 <div><label for="subtitle">উপশিরোনাম</label><input id="subtitle" maxlength="240"></div>
 <div><label for="slug">স্থায়ী লিংক / slug *</label><input id="slug" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="180" placeholder="amar-notun-lekha" required><p class="help">সম্পাদনার সময় আগের slug অপরিবর্তিত রাখুন; বদলালে পুরোনো লিংক বদলে যাবে।</p></div>
-<div><label for="category">বিভাগ</label><input id="category" maxlength="100" placeholder="গল্প, প্রবন্ধ, ভ্রমণকাহিনি…"></div>
+<div><label for="category">বিভাগ</label><select id="category"><option value="">বিভাগ নির্বাচন করুন</option><option value="গল্প">গল্প</option><option value="উপন্যাস">উপন্যাস</option><option value="প্রবন্ধ">প্রবন্ধ</option><option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option><option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option><option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option><option value="আমার কথা">আমার কথা</option><option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option><option value="আইন-আদালত">আইন-আদালত</option><option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option><option value="পিডিএফ">পিডিএফ</option></select></div>
 <div><label for="language">প্রধান ভাষা</label><select id="language"><option value="bn">বাংলা (bn)</option><option value="en">English (en)</option></select></div>
 <div><label for="tags">ট্যাগ (কমা দিয়ে আলাদা করুন)</label><input id="tags" placeholder="সাহিত্য, স্মৃতি, ভ্রমণ"></div>
 <div class="full"><label for="excerpt">সংক্ষিপ্ত পরিচিতি</label><textarea id="excerpt" style="min-height:90px" maxlength="600"></textarea></div>
