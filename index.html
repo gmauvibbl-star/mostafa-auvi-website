@@ -1187,6 +1187,178 @@
     transition: color .2s;
   }
   .footer-strip .right a:hover { color: var(--cream); }
+  /* ====== AUTHOR LOGIN FLOATING BUTTON + MODAL ====== */
+  .author-login-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
+    color: var(--teal-deep);
+    border: 1.5px solid var(--gold-bright);
+    border-radius: 999px;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.15);
+    transition: all .25s;
+    text-decoration: none;
+  }
+  .author-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.32), 0 3px 6px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, var(--cream) 0%, var(--gold-bright) 100%);
+  }
+  .author-login-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+  /* When user is logged in, show different label + dashboard link */
+  .author-login-btn.logged-in {
+    background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
+    color: var(--gold-bright);
+    border-color: var(--gold-bright);
+  }
+
+  /* Modal overlay */
+  .login-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 15, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 200;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .login-modal-overlay.open { display: flex; }
+  .login-modal {
+    background: var(--paper);
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    max-width: 460px;
+    width: 100%;
+    padding: 36px 38px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .login-modal .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all .2s;
+    line-height: 1;
+  }
+  .login-modal .modal-close:hover {
+    background: var(--paper-dark);
+    color: var(--blood);
+  }
+  .login-modal .eyebrow {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .login-modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--teal-deep);
+    margin-bottom: 6px;
+    font-weight: 800;
+  }
+  .login-modal .modal-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+  .login-modal .form-group { margin-bottom: 16px; }
+  .login-modal .form-group label {
+    display: block;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal-deep);
+    margin-bottom: 5px;
+  }
+  .login-modal .form-group input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--paper-dark);
+    border-radius: 6px;
+    background: #fffefa;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 14px;
+    color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .login-modal .form-group input:focus {
+    outline: none;
+    border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(42,122,126,0.15);
+  }
+  .login-modal .modal-status {
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    display: none;
+  }
+  .login-modal .modal-status.show { display: block; }
+  .login-modal .modal-status.error {
+    background: #fde8e8;
+    color: var(--blood);
+    border-left: 3px solid var(--blood);
+  }
+  .login-modal .modal-status.success {
+    background: #e6f4ea;
+    color: #2D5F52;
+    border-left: 3px solid #2D5F52;
+  }
+  .login-modal .modal-status.warning {
+    background: #fff5e0;
+    color: var(--gold-dim);
+    border-left: 3px solid var(--gold);
+  }
+  .login-modal .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .login-modal .btn {
+    flex: 1;
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    .author-login-btn { bottom: 16px; right: 16px; padding: 10px 16px; font-size: 12px; }
+    .login-modal { padding: 28px 22px 24px; }
+    .login-modal h3 { font-size: 22px; }
+  }
 
   @media (max-width: 1300px) {
     html, body { width: 100%; }
@@ -1774,6 +1946,139 @@
 </div>
 
 </div><!-- /.page-wrap -->
+
+<!-- Author login floating button + modal -->
+<button id="authorLoginBtn" class="author-login-btn" aria-label="লেখক লগইন">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+  <span id="authorLoginLabel">লেখক লগইন</span>
+</button>
+
+<div id="loginModalOverlay" class="login-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+  <div class="login-modal">
+    <button type="button" class="modal-close" aria-label="বন্ধ করুন" onclick="closeLoginModal()">×</button>
+    <div class="eyebrow">Author Access</div>
+    <h3 id="loginModalTitle">লেখক লগইন</h3>
+    <div class="modal-sub">ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন</div>
+    <div id="modalStatus" class="modal-status"></div>
+    <div class="form-group">
+      <label for="modalEmail">ইমেইল</label>
+      <input id="modalEmail" type="email" autocomplete="email" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label for="modalPassword">পাসওয়ার্ড</label>
+      <input id="modalPassword" type="password" autocomplete="current-password" placeholder="আপনার পাসওয়ার্ড">
+    </div>
+    <div class="btn-row">
+      <button type="button" id="modalLoginBtn" class="btn" style="background: var(--gold-bright); color: var(--teal-deep); border-color: var(--gold-bright);">লগইন করুন →</button>
+      <button type="button" class="btn secondary" onclick="closeLoginModal()">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<!-- Author login + dashboard integration -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function() {
+  const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+  const loginBtn = document.getElementById('authorLoginBtn');
+  const loginLabel = document.getElementById('authorLoginLabel');
+  const overlay = document.getElementById('loginModalOverlay');
+  const modalStatus = document.getElementById('modalStatus');
+  const modalEmail = document.getElementById('modalEmail');
+  const modalPassword = document.getElementById('modalPassword');
+  const modalLoginBtn = document.getElementById('modalLoginBtn');
+
+  let sb = null;
+  try {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (e) {
+    console.warn('Supabase init failed:', e);
+  }
+
+  function showStatus(msg, type) {
+    if (!msg) { modalStatus.className = 'modal-status'; modalStatus.textContent = ''; return; }
+    modalStatus.className = 'modal-status show ' + type;
+    modalStatus.textContent = msg;
+  }
+
+  function openLoginModal() {
+    overlay.classList.add('open');
+    setTimeout(() => modalEmail.focus(), 100);
+  }
+  window.closeLoginModal = function() {
+    overlay.classList.remove('open');
+    modalPassword.value = '';
+    showStatus('', '');
+  };
+
+  loginBtn.onclick = () => {
+    // If already logged in, go to dashboard
+    if (loginBtn.classList.contains('logged-in')) {
+      window.location.href = 'dashboard.html';
+      return;
+    }
+    openLoginModal();
+  };
+
+  // Close on overlay click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) window.closeLoginModal();
+  });
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) window.closeLoginModal();
+  });
+
+  // Enter key handlers
+  modalEmail.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalPassword.focus(); } });
+  modalPassword.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
+
+  modalLoginBtn.onclick = async () => {
+    if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
+    const email = modalEmail.value.trim();
+    const password = modalPassword.value;
+    if (!email || !password) { showStatus('ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
+    showStatus('লগইন করা হচ্ছে…', 'warning');
+    modalLoginBtn.disabled = true;
+    try {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { showStatus('লগইন ব্যর্থ: ' + error.message, 'error'); modalLoginBtn.disabled = false; return; }
+      // Check admin
+      const { data: admin, error: adminErr } = await sb.from('admin_users').select('user_id').eq('user_id', data.user.id).maybeSingle();
+      if (adminErr || !admin) {
+        showStatus('অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
+        await sb.auth.signOut();
+        modalLoginBtn.disabled = false;
+        return;
+      }
+      showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+    } catch (e) {
+      showStatus('সমস্যা: ' + e.message, 'error');
+      modalLoginBtn.disabled = false;
+    }
+  };
+
+  // Check existing session on load
+  async function checkSession() {
+    if (!sb) return;
+    try {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        // Verify admin
+        const { data: admin } = await sb.from('admin_users').select('user_id').eq('user_id', session.user.id).maybeSingle();
+        if (admin) {
+          loginBtn.classList.add('logged-in');
+          loginLabel.textContent = 'ড্যাশবোর্ড খুলুন →';
+        }
+      }
+    } catch (e) {}
+  }
+  checkSession();
+})();
+</script>
 
 <!-- Share functionality -->
 <script>
