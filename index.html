@@ -1190,41 +1190,54 @@
   /* ====== AUTHOR LOGIN FLOATING BUTTON + MODAL ====== */
   .author-login-btn {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 100;
+    bottom: 28px;
+    right: 28px;
+    z-index: 99999;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
-    color: var(--teal-deep);
-    border: 1.5px solid var(--gold-bright);
+    gap: 10px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #E5C77A 0%, #B89248 100%);
+    color: #0F3D3E;
+    border: 2px solid #FAF4E8;
     border-radius: 999px;
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2);
     transition: all .25s;
     text-decoration: none;
+    outline: 2px solid rgba(212,180,104,0.4);
+    outline-offset: 2px;
   }
   .author-login-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.32), 0 3px 6px rgba(0,0,0,0.2);
-    background: linear-gradient(135deg, var(--cream) 0%, var(--gold-bright) 100%);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.25);
+    background: linear-gradient(135deg, #FAF4E8 0%, #E5C77A 100%);
   }
+  .author-login-btn:active { transform: translateY(-1px) scale(1.02); }
   .author-login-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     fill: currentColor;
   }
+  /* Pulse animation to draw attention */
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2), 0 0 0 0 rgba(229,199,122,0.6); }
+    50% { box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2), 0 0 0 12px rgba(229,199,122,0); }
+  }
+  .author-login-btn:not(.logged-in) { animation: pulseGlow 2.5s ease-in-out infinite; }
   /* When user is logged in, show different label + dashboard link */
   .author-login-btn.logged-in {
-    background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
-    color: var(--gold-bright);
-    border-color: var(--gold-bright);
+    background: linear-gradient(135deg, #0F3D3E 0%, #1B5E6B 100%);
+    color: #E5C77A;
+    border-color: #E5C77A;
+    animation: none;
+  }
+  .author-login-btn.logged-in:hover {
+    background: linear-gradient(135deg, #1B5E6B 0%, #0F3D3E 100%);
   }
 
   /* Modal overlay */
@@ -1972,6 +1985,22 @@
       <button type="button" id="modalLoginBtn" class="btn" style="background: var(--gold-bright); color: var(--teal-deep); border-color: var(--gold-bright);">লগইন করুন →</button>
       <button type="button" class="btn secondary" onclick="closeLoginModal()">বাতিল</button>
     </div>
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);text-align:center;font-family:'EB Garamond',serif;font-size:13px;">
+      <a href="#" id="forgotPasswordLink" style="color:var(--blood);text-decoration:none;font-style:italic;font-weight:600;">পাসওয়ার্ড ভুলে গেছেন?</a>
+      <span style="color:var(--paper-dark);margin:0 8px;">·</span>
+      <span style="color:var(--ink-soft);">নতুন লেখক? <a href="#" id="signupLink" style="color:var(--teal-deep);text-decoration:none;font-weight:600;font-style:italic;">অ্যাকাউন্ট তৈরি করুন</a></span>
+    </div>
+    <!-- Forgot password form (hidden by default) -->
+    <div id="forgotPasswordForm" style="display:none;margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);">
+      <div class="form-group" style="margin-bottom:10px;">
+        <label for="resetEmail" style="font-size:12px;color:var(--teal-deep);font-weight:700;">পাসওয়ার্ড রিসেটের জন্য ইমেইল দিন</label>
+        <input id="resetEmail" type="email" placeholder="you@example.com" style="font-size:13px;padding:9px 12px;">
+      </div>
+      <div class="btn-row" style="margin-top:8px;">
+        <button type="button" id="sendResetBtn" class="btn" style="background:var(--blood);color:#fff;border-color:var(--blood);font-size:13px;padding:9px 16px;">রিসেট লিংক পাঠান</button>
+        <button type="button" id="cancelResetBtn" class="btn secondary" style="font-size:13px;padding:9px 16px;">বাতিল</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2077,6 +2106,67 @@
     } catch (e) {}
   }
   checkSession();
+
+  // ====== Forgot password ======
+  const forgotLink = document.getElementById('forgotPasswordLink');
+  const forgotForm = document.getElementById('forgotPasswordForm');
+  const resetEmailInput = document.getElementById('resetEmail');
+  const sendResetBtn = document.getElementById('sendResetBtn');
+  const cancelResetBtn = document.getElementById('cancelResetBtn');
+
+  forgotLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Pre-fill reset email with login email if present
+    if (modalEmail.value.trim() && !resetEmailInput.value) {
+      resetEmailInput.value = modalEmail.value.trim();
+    }
+    forgotForm.style.display = 'block';
+    setTimeout(() => resetEmailInput.focus(), 100);
+  });
+
+  cancelResetBtn.addEventListener('click', () => {
+    forgotForm.style.display = 'none';
+    resetEmailInput.value = '';
+    showStatus('', '');
+  });
+
+  sendResetBtn.addEventListener('click', async () => {
+    if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
+    const email = resetEmailInput.value.trim();
+    if (!email) { showStatus('ইমেইল দিন।', 'error'); return; }
+    showStatus('রিসেট লিংক পাঠানো হচ্ছে…', 'warning');
+    sendResetBtn.disabled = true;
+    try {
+      const { error } = await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname.replace(/[^/]*$/, '') + 'dashboard.html'
+      });
+      if (error) {
+        showStatus('ত্রুটি: ' + error.message, 'error');
+        sendResetBtn.disabled = false;
+        return;
+      }
+      showStatus('পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে! ইমেইল চেক করুন।', 'success');
+      setTimeout(() => {
+        forgotForm.style.display = 'none';
+        resetEmailInput.value = '';
+      }, 3000);
+    } catch (e) {
+      showStatus('সমস্যা: ' + e.message, 'error');
+    }
+    sendResetBtn.disabled = false;
+  });
+
+  // Enter key on reset email
+  resetEmailInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); sendResetBtn.click(); }
+  });
+
+  // ====== Signup (create account) ======
+  const signupLink = document.getElementById('signupLink');
+  signupLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন। শুধুমাত্র অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে লগইন করা যাবে।', 'warning');
+  });
 })();
 </script>
 
