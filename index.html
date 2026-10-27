@@ -498,7 +498,7 @@ body>.topnav{padding:8px clamp(12px,3vw,36px);gap:0}
  #about .author-portrait-wrap{max-width:150px;margin:0}
 }
 
-</style>
+.language-switch{display:inline-flex;align-items:center;gap:6px;margin-left:8px;font-size:.82rem;color:inherit}.language-switch select{font:inherit;font-weight:600;color:inherit;background:transparent;border:1px solid currentColor;border-radius:6px;padding:5px 7px;max-width:100px;cursor:pointer}.language-switch:focus-within select{outline:2px solid var(--red);outline-offset:2px}@media(max-width:600px){.language-switch{margin-left:0}.language-switch span{display:none}.language-switch select{padding:4px 5px;max-width:86px}}\n</style>
 </head>
 <body>
 <nav class="topnav" aria-label="প্রধান নেভিগেশন">
@@ -506,16 +506,13 @@ body>.topnav{padding:8px clamp(12px,3vw,36px);gap:0}
 <div class="nav-dropdown"><a href="#categories">কথাসাহিত্য <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu"><a href="posts.html?category=গল্প">গল্প</a><a href="posts.html?category=উপন্যাস">উপন্যাস</a><a href="posts.html?category=অনুবাদ%20সাহিত্য">অনুবাদ সাহিত্য</a><a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a></div></div>
 <a href="posts.html?category=প্রবন্ধ">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
 <a href="posts.html?category=আইন-আদালত">আইন ও আদালত</a>
-<a href="journal.html">Journal</a><a href="#about">লেখক পরিচিতি</a><a href="posts.html">সব লেখা</a>
+<a href="journal.html">Journal</a><a href="#about">লেখক পরিচিতি</a><a href="posts.html">সব লেখা</a><label class="language-switch" aria-label="ভাষা নির্বাচন"><span>ভাষা</span><select id="siteLanguage" aria-label="Select language"><option value="bn">বাংলা</option><option value="en">English</option></select></label>
 </nav>
 <div class="literary-masthead" aria-label="Author identity"><a href="./" class="masthead-brand"><span class="masthead-title">MOSTAFA AUVI</span><span class="masthead-bengali" lang="bn">মোস্তফা অভি</span></a><div class="masthead-right"><span class="masthead-role">FICTION WRITER &amp; LITERARY CRITIC</span><span class="masthead-tagline">Literature Beyond Borders</span></div></div>
 <main class="wrap">
 <div class="homepage-stack">
 <header class="hero hero-banner" aria-label="মোস্তফা অভি’র ওয়েবসাইট ব্যানার"><img class="hero-art" src="hero-banner-final.png.png?v=20261027" alt="মোস্তফা অভি’র সাহিত্যাঙ্গন ব্যানার" fetchpriority="high"></header>
-<section id="recent">
-<div class="section-head"><div><h2>সাম্প্রতিক লেখা</h2><p>ড্যাশবোর্ড থেকে প্রকাশিত লেখাগুলো এখানে দেখানো হবে</p></div><a href="posts.html">সব লেখা ↗</a></div>
-<div class="paper"><div class="toolbar"><input id="searchInput" type="search" placeholder="শিরোনাম বা লেখার শব্দ দিয়ে খুঁজুন…" aria-label="লেখা খুঁজুন"><select id="yearFilter" aria-label="বছর অনুযায়ী বাছাই"><option value="">সব বছর</option></select><select id="languageFilter" aria-label="ভাষা অনুযায়ী বাছাই"><option value="">সব ভাষা</option><option value="bn">বাংলা</option><option value="en">English</option></select></div><div class="post-grid" id="postGrid"><p class="empty">প্রকাশিত লেখা লোড হচ্ছে…</p></div><p class="status" id="loadStatus" aria-live="polite"></p></div>
-</section>
+
 
 <section id="categories">
 <div class="section-head"><div><h2>বিভাগ অনুযায়ী পড়ুন</h2><p>আপনার পছন্দের বিষয় থেকে শুরু করুন</p></div></div>
@@ -542,7 +539,7 @@ body>.topnav{padding:8px clamp(12px,3vw,36px);gap:0}
 <script>
 const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
 const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
-const grid=document.getElementById("postGrid"),statusEl=document.getElementById("loadStatus"),searchInput=document.getElementById("searchInput"),yearFilter=document.getElementById("yearFilter"),languageFilter=document.getElementById("languageFilter");
+
 let allPosts=[];
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function tagsOf(p){if(Array.isArray(p.tags))return p.tags.join(" ");return String(p.tags||"")}
@@ -555,10 +552,7 @@ function sampleCards(){const s=[
 ["সাহিত্যালোচনা","পাঠের আনন্দ ও একাকিত্ব","বইয়ের পাতায় আমরা অন্যের জীবন পড়ি, আর অজান্তেই নিজের অচেনা ঘরগুলোর দরজা খুলে দিই।","https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80"],
 ["ব্যাংকিং ও অর্থনীতি","বাংলাদেশের ব্যাংকিং খাতে নতুন সম্ভাবনা","প্রযুক্তি, আস্থা ও অন্তর্ভুক্তিমূলক অর্থায়ন ক্ষুদ্র উদ্যোগের সামনে খুলে দিতে পারে নতুন দিগন্ত।","https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80"]
 ];return s.map(a=>'<article class="post-card"><div class="cover" style="background-image:url('+a[3]+')"></div><div class="post-content"><div class="post-meta">'+a[0]+' · নমুনা</div><h3>'+a[1]+'</h3><p>'+a[2]+'</p><a class="read" href="posts.html">লেখার সংগ্রহ দেখুন ↗</a></div></article>').join("")}
-function renderPosts(){const term=searchInput.value.trim().toLocaleLowerCase(),year=yearFilter.value,lang=languageFilter.value;const posts=allPosts.filter(p=>{const date=p.published_at||p.created_at||"";const text=[p.title,p.excerpt,p.body,p.category,tagsOf(p),p.language].join(" ").toLocaleLowerCase();return(!term||text.includes(term))&&(!year||date.slice(0,4)===year)&&(!lang||!p.language||p.language===lang||(lang==="bn"&&p.language==="বাংলা")||(lang==="en"&&p.language==="English"))});if(!posts.length){if(!allPosts.length&&!term&&!year&&!lang){grid.innerHTML=sampleCards();return}grid.innerHTML='<p class="empty">এই শর্তে কোনো প্রকাশিত লেখা পাওয়া যায়নি।</p>';return}grid.innerHTML=posts.map(p=>{const date=p.published_at||p.created_at;const meta=[p.category,date?new Date(date).toLocaleDateString("bn-BD",{year:"numeric",month:"short",day:"numeric"}):"",p.language].filter(Boolean).map(esc).join(" · ");const cover=p.cover_image||"https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80";return '<article class="post-card"><div class="cover" style="background-image:url('+JSON.stringify(cover)+')"></div><div class="post-content"><div class="post-meta">'+meta+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(excerptOf(p))+'</p><a class="read" href="read.html?slug='+encodeURIComponent(p.slug)+'">লেখাটি পড়ুন ↗</a></div></article>'}).join("")}
-async function loadPosts(){try{if(!window.supabase){grid.innerHTML='<p class="empty">প্রকাশিত লেখা দেখতে <a href="posts.html">লেখার তালিকা</a> খুলুন।</p>';return}const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);const {data,error}=await sb.from("posts").select("*").eq("published",true).order("published_at",{ascending:false,nullsFirst:false}).limit(60);if(error)throw error;allPosts=data||[];const featured=allPosts.find(p=>p.featured)||allPosts[0];const featuredMain=document.getElementById("featuredMain");if(featured){const ex=String(featured.excerpt||featured.body||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim().slice(0,230);const journalImage=featuredMain.querySelector(".journal-feature-image");featuredMain.innerHTML=(journalImage?journalImage.outerHTML:"")+'<div class="eyebrow">'+(featured.featured?"নির্বাচিত লেখা":"সাম্প্রতিক লেখা")+'</div><h3>'+esc(featured.title)+'</h3><p>'+esc(ex)+(ex.length>=230?"…":"")+'</p><a class="button primary" href="read.html?slug='+encodeURIComponent(featured.slug)+'">লেখাটি পড়ুন ↗</a>';if(featured.cover_image){featuredMain.style.backgroundImage="linear-gradient(100deg,#fff9f0f2,#f7e9dce8),url("+JSON.stringify(featured.cover_image)+")";featuredMain.style.backgroundSize="cover";featuredMain.style.backgroundPosition="center"}}const years=[...new Set(allPosts.map(p=>(p.published_at||p.created_at||"").slice(0,4)).filter(y=>/^\d{4}$/.test(y)))].sort().reverse();yearFilter.innerHTML='<option value="">সব বছর</option>'+years.map(y=>'<option value="'+esc(y)+'">'+esc(y)+'</option>').join("");renderPosts();statusEl.textContent=allPosts.length?"মোট "+allPosts.length+"টি সাম্প্রতিক প্রকাশিত লেখা।":"এখনো ডেটাবেসে কোনো প্রকাশিত লেখা পাওয়া যায়নি।"}catch(e){grid.innerHTML='<p class="empty">এই মুহূর্তে অনলাইনে লেখার তালিকা লোড করা যাচ্ছে না। <a href="posts.html">প্রকাশিত লেখার তালিকা দেখুন</a>।</p>';statusEl.textContent="ডেটাবেস সংযোগ বা সেটআপ যাচাই প্রয়োজন।"}}
-const homeUrl=window.location.href,homeEncoded=encodeURIComponent(homeUrl),homeTitle=encodeURIComponent(document.title);document.getElementById("homeShareFb").href="https://www.facebook.com/sharer/sharer.php?u="+homeEncoded;document.getElementById("homeShareWa").href="https://wa.me/?text="+homeTitle+"%20"+homeEncoded;document.getElementById("homeShareTg").href="https://t.me/share/url?url="+homeEncoded+"&text="+homeTitle;document.getElementById("homeShareX").href="https://twitter.com/intent/tweet?url="+homeEncoded+"&text="+homeTitle;document.getElementById("homeShareLi").href="https://www.linkedin.com/sharing/share-offsite/?url="+homeEncoded;document.getElementById("homeCopyLink").addEventListener("click",async()=>{const status=document.getElementById("homeShareStatus");try{await navigator.clipboard.writeText(homeUrl);status.textContent="লিংক কপি হয়েছে।"}catch{window.prompt("লিংক কপি করুন",homeUrl)}});
-searchInput.addEventListener("input",renderPosts);yearFilter.addEventListener("change",renderPosts);languageFilter.addEventListener("change",renderPosts);loadPosts();
+
 </script>
-</body>
+<script>const siteLanguage=document.getElementById("siteLanguage");if(siteLanguage){siteLanguage.value=document.documentElement.lang==="en"?"en":"bn";siteLanguage.addEventListener("change",()=>{const selected=siteLanguage.value;document.documentElement.lang=selected;try{localStorage.setItem("siteLanguage",selected)}catch(e){}if(selected==="en"){siteLanguage.setAttribute("aria-label","Select language")}else{siteLanguage.setAttribute("aria-label","ভাষা নির্বাচন")}});try{const saved=localStorage.getItem("siteLanguage");if(saved==="en"||saved==="bn"){siteLanguage.value=saved;document.documentElement.lang=saved}}catch(e){}}</script>\n</body>
 </html>
