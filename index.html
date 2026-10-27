@@ -37,23 +37,38 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
-    width: 1280px;
-    background: var(--paper);
+    width: 100%;
+    min-height: 100%;
+    background: #5A6B3F;  /* olive green for sides */
     font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Paper grain texture overlay */
-  body::before {
+  /* Page wrapper — center content, max-width 1280px, paper background */
+  .page-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 0 40px rgba(0,0,0,0.18);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain texture overlay — applied to .page-wrap instead of body */
+  .page-wrap::before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
     pointer-events: none;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/></svg>");
-    z-index: 100;
+    z-index: 1;
     mix-blend-mode: multiply;
   }
+  /* Ensure content sits above texture */
+  .page-wrap > * { position: relative; z-index: 2; }
 
   /* ====== TOP UTILITY BAR ====== */
   .utility-bar {
@@ -1123,6 +1138,8 @@
 </head>
 <body>
 
+<div class="page-wrap">
+
 <!-- Top utility bar -->
 <div class="utility-bar">
   <div class="date">শুক্রবার, ২৮ অক্টোবর ২০২৬</div>
@@ -1660,6 +1677,8 @@
     <a href="#">© ২০২৬</a>
   </div>
 </div>
+
+</div><!-- /.page-wrap -->
 
 </body>
 </html>
