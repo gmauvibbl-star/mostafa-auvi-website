@@ -427,6 +427,23 @@ main.wrap>section#archive .paper{border-radius:2px!important;box-shadow:none!imp
  .hero{margin-top:12px}
 }
 
+
+#recent{background:#fbf8f1!important;border:1px solid #dfd1bd!important;border-top:4px solid #173e5a!important;border-radius:4px!important;padding:clamp(16px,2.4vw,28px)!important}
+#recent .section-head{border-bottom:1px solid #d9c8b1;padding-bottom:12px}
+#recent .section-head h2{color:#173e5a!important}
+#recent .paper{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+#recent .post-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+#recent .post-card{padding:0!important;overflow:hidden;background:#fff!important;border:1px solid #e0d7ca!important;border-radius:5px!important;box-shadow:0 5px 16px #1a2a3714!important;display:flex;flex-direction:column;min-width:0}
+#recent .post-card .cover{height:180px!important;min-height:180px;background-size:cover!important;background-position:center!important;position:relative}
+#recent .post-card .cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#071b2c25,transparent 55%)}
+#recent .post-card .post-content{padding:14px 16px 16px;display:flex;flex:1;flex-direction:column}
+#recent .post-card .post-meta{font-size:12px;color:#7b5b39;margin-bottom:5px}
+#recent .post-card h3{font-size:19px;line-height:1.55;margin:0 0 7px;color:#17324d!important}
+#recent .post-card p{font-size:14px;line-height:1.8;color:#58636a!important;margin:0 0 12px}
+#recent .post-card .read{margin-top:auto;display:inline-flex;align-self:flex-start;padding:5px 11px;background:#173e5a;color:white!important;border-radius:3px;text-decoration:none;font-size:13px}
+@media(max-width:820px){#recent .post-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){#recent .post-grid{grid-template-columns:1fr;gap:14px}#recent .post-card .cover{height:190px!important;min-height:190px}}
+
 </style>
 </head>
 <body>
@@ -437,6 +454,11 @@ main.wrap>section#archive .paper{border-radius:2px!important;box-shadow:none!imp
 <main class="wrap">
 <div class="homepage-stack">
 <header class="hero hero-banner" aria-label="মোস্তফা অভি’র ওয়েবসাইট ব্যানার"><img class="hero-art" src="hero-banner-final.png.png?v=20261027" alt="মোস্তফা অভি’র সাহিত্যাঙ্গন ব্যানার" fetchpriority="high"></header>
+<section id="recent">
+<div class="section-head"><div><h2>সাম্প্রতিক লেখা</h2><p>ড্যাশবোর্ড থেকে প্রকাশিত লেখাগুলো এখানে দেখানো হবে</p></div><a href="posts.html">সব লেখা ↗</a></div>
+<div class="paper"><div class="toolbar"><input id="searchInput" type="search" placeholder="শিরোনাম বা লেখার শব্দ দিয়ে খুঁজুন…" aria-label="লেখা খুঁজুন"><select id="yearFilter" aria-label="বছর অনুযায়ী বাছাই"><option value="">সব বছর</option></select><select id="languageFilter" aria-label="ভাষা অনুযায়ী বাছাই"><option value="">সব ভাষা</option><option value="bn">বাংলা</option><option value="en">English</option></select></div><div class="post-grid" id="postGrid"><p class="empty">প্রকাশিত লেখা লোড হচ্ছে…</p></div><p class="status" id="loadStatus" aria-live="polite"></p></div>
+</section>
+
 <section id="categories">
 <div class="section-head"><div><h2>বিভাগ অনুযায়ী পড়ুন</h2><p>আপনার পছন্দের বিষয় থেকে শুরু করুন</p></div></div>
 <div class="category-grid">
@@ -452,10 +474,7 @@ main.wrap>section#archive .paper{border-radius:2px!important;box-shadow:none!imp
 <a class="category" href="posts.html?category=পিডিএফ"><strong>পিডিএফ</strong><span>ডাউনলোডযোগ্য প্রকাশনা</span></a>
 </div>
 </section>
-<section id="recent">
-<div class="section-head"><div><h2>সাম্প্রতিক লেখা</h2><p>ড্যাশবোর্ড থেকে প্রকাশিত লেখাগুলো এখানে দেখানো হবে</p></div><a href="posts.html">সব লেখা ↗</a></div>
-<div class="paper"><div class="toolbar"><input id="searchInput" type="search" placeholder="শিরোনাম বা লেখার শব্দ দিয়ে খুঁজুন…" aria-label="লেখা খুঁজুন"><select id="yearFilter" aria-label="বছর অনুযায়ী বাছাই"><option value="">সব বছর</option></select><select id="languageFilter" aria-label="ভাষা অনুযায়ী বাছাই"><option value="">সব ভাষা</option><option value="bn">বাংলা</option><option value="en">English</option></select></div><div class="post-grid" id="postGrid"><p class="empty">প্রকাশিত লেখা লোড হচ্ছে…</p></div><p class="status" id="loadStatus" aria-live="polite"></p></div>
-</section>
+
 <section id="about">
 <div class="section-head"><div><h2>লেখক পরিচিতি</h2><p>লেখা, ইতিহাস ও মানুষের জীবনের প্রতি আগ্রহ</p></div></div>
 <div class="paper about-grid author-profile"><div class="author-portrait-wrap"><img class="author-portrait" src="কবির%20ছবি.jpg" alt="লেখক মোস্তফা অভির মূল ছবি" loading="lazy"></div><div class="author-bio"><p>মোস্তফা অভি একজন বাংলা ভাষার লেখক। তাঁর লেখায় মানুষের জীবন, বাংলার জনপদ, ইতিহাস ও কল্পনার নানা অনুষঙ্গ ফিরে আসে।</p><p>এই ওয়েবসাইটে গল্প, উপন্যাস, প্রবন্ধ, সাহিত্যালোচনা, ভ্রমণকাহিনি, ব্যক্তিগত রচনা এবং আইন-আদালত ও ব্যাংকিং-অর্থনীতিবিষয়ক লেখা এক জায়গায় সাজানো হচ্ছে।</p></div><div class="author-links"><h3 style="color:var(--red);margin-top:0">আরও পড়ুন</h3><p><a href="journal.html">জার্নাল</a><br><a href="posts.html">প্রকাশিত লেখা</a><br><a href="subscribe.html">নতুন লেখার ইমেইল আপডেট</a></p></div></div>
