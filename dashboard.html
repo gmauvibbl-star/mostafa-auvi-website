@@ -480,16 +480,20 @@
     <!-- Login panel -->
     <section id="loginPanel" class="login-panel hidden">
       <h2>নিরাপদ লগইন</h2>
-      <div class="sub">শুধুমাত্র অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে লগইন করুন</div>
+      <div class="sub">ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন</div>
       <div class="form-group">
-        <label for="email">আপনার ইমেইল <span class="hint">(অনুমোদিত অ্যাডমিন ইমেইল)</span></label>
+        <label for="email">ইমেইল <span class="hint">(অনুমোদিত অ্যাডমিন ইমেইল)</span></label>
         <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
       </div>
+      <div class="form-group">
+        <label for="password">পাসওয়ার্ড</label>
+        <input id="password" type="password" autocomplete="current-password" placeholder="আপনার পাসওয়ার্ড" required>
+      </div>
       <div class="btn-row">
-        <button id="loginBtn" class="btn gold">লগইন লিংক পাঠান →</button>
+        <button id="loginBtn" class="btn gold">লগইন করুন →</button>
       </div>
       <p style="margin-top:16px;font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-soft);">
-        আপনার ইমেইলে একটি ম্যাজিক লিংক পাঠানো হবে। সেই লিংকে ক্লিক করে লগইন করুন।
+        অনুমোদিত অ্যাডমিন ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন।
       </p>
     </section>
 
@@ -831,12 +835,27 @@
   $('loginBtn').onclick = async () => {
     if (!sb) return;
     const email = $('email').value.trim();
+    const password = $('password').value;
     if (!email) return setStatus('ইমেইল লিখুন।', 'error');
-    const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.href } });
-    if (error) return setStatus(error.message, 'error');
-    setStatus('লগইন লিংক পাঠানো হয়েছে। ইমেইল খুলে লিংকে ক্লিক করুন।', 'success');
-    showToast('ইমেইল চেক করুন!');
+    if (!password) return setStatus('পাসওয়ার্ড লিখুন।', 'error');
+    setStatus('লগইন করা হচ্ছে…', 'warning');
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      setStatus('লগইন ব্যর্থ: ' + error.message, 'error');
+      return;
+    }
+    setStatus('লগইন সফল! ড্যাশবোর্ড লোড হচ্ছে…', 'success');
+    showToast('স্বাগতম!');
+    // refresh() will be triggered by onAuthStateChange
   };
+
+  // Allow Enter key on password field to submit
+  $('password').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); $('loginBtn').click(); }
+  });
+  $('email').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); $('password').focus(); }
+  });
 
   $('logoutBtn').onclick = async () => {
     await sb.auth.signOut();
