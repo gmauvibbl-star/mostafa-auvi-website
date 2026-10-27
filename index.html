@@ -740,11 +740,21 @@
 
   /* ====== JOURNAL CARD ====== */
   .journal-card {
+    display: block;
     background: var(--cream);
     border: 1px solid var(--paper-dark);
     padding: 26px 28px;
     position: relative;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    cursor: pointer;
+  }
+  .journal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+    border-color: var(--teal-mid);
   }
   .journal-card::before {
     content: "";
@@ -818,7 +828,8 @@
     justify-content: space-between;
     align-items: center;
   }
-  .journal-more a {
+  .journal-more a,
+  .journal-more .read-link {
     color: var(--teal-deep);
     text-decoration: none;
     font-family: 'Playfair Display', serif;
@@ -828,8 +839,10 @@
     letter-spacing: 0.04em;
     transition: color .2s;
   }
+  .journal-card:hover .read-link { color: var(--blood); }
   .journal-more a:hover { color: var(--blood); }
-  .journal-more a .arrow { color: var(--gold-dim); margin-left: 6px; }
+  .journal-more a .arrow,
+  .journal-more .read-link .arrow { color: var(--gold-dim); margin-left: 6px; }
   .journal-more .stats {
     font-family: 'EB Garamond', serif;
     font-size: 12px;
@@ -837,109 +850,119 @@
     letter-spacing: 0.1em;
   }
   .journal-more .stats .dot { color: var(--gold-dim); margin: 0 8px; }
+  /* Inner elements reset for the <a> wrapper */
+  .journal-card .journal-meta,
+  .journal-card .journal-title,
+  .journal-card .journal-body,
+  .journal-card .journal-more { text-decoration: none; }
+  .journal-card .journal-title { color: var(--teal-deep); }
+  .journal-card .journal-body { color: var(--ink-soft); }
 
   /* ====== FEATURES SECTION (6 colored category cards + author intro) ====== */
   .features {
     background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-warm) 100%);
-    padding: 60px 50px 50px;
+    padding: 44px 50px 36px;
     border-top: 1px solid var(--paper-dark);
   }
   .features-header {
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
   }
   .features-header .eyebrow {
     font-family: 'Playfair Display', serif;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--gold-dim);
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 600;
   }
   .features-header h2 {
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 800;
     color: var(--teal-deep);
     line-height: 1.15;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .features-header .sub {
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 15px;
+    font-size: 13px;
     color: var(--ink-soft);
     letter-spacing: 0.05em;
   }
 
   .features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 50px;
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 10px;
+    margin-bottom: 40px;
   }
   .feat-card {
-    border-radius: 6px;
-    padding: 22px 22px 20px;
+    border-radius: 5px;
+    padding: 14px 10px 12px;
     color: #fff;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
     transition: transform .25s, box-shadow .25s;
-    min-height: 130px;
+    min-height: 140px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    text-decoration: none;
   }
   .feat-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.18), 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1);
   }
   .feat-card::before {
     content: "";
     position: absolute;
     top: 0; right: 0;
-    width: 80px; height: 80px;
+    width: 50px; height: 50px;
     background: radial-gradient(circle at top right, rgba(255,255,255,0.15) 0%, transparent 70%);
     pointer-events: none;
   }
   .feat-card .icon {
     font-family: 'Playfair Display', serif;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 900;
-    opacity: 0.65;
-    margin-bottom: 6px;
+    opacity: 0.55;
+    margin-bottom: 4px;
     line-height: 1;
   }
   .feat-card .title {
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 19px;
+    font-size: 13px;
     font-weight: 700;
     line-height: 1.25;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .feat-card .sub {
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 12px;
+    font-size: 10px;
     opacity: 0.85;
     line-height: 1.4;
   }
   .feat-card .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
+    gap: 3px;
+    margin-top: 6px;
   }
   .feat-card .tags .tag {
     display: inline-block;
-    padding: 3px 9px;
+    padding: 1px 6px;
     background: rgba(255,255,255,0.18);
     border: 1px solid rgba(255,255,255,0.35);
-    border-radius: 12px;
+    border-radius: 10px;
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 500;
     color: #fff;
   }
@@ -1076,19 +1099,25 @@
   @media (max-width: 1300px) {
     html, body { width: 100%; }
     .header, .nav, .hero, .lower, .features, .footer-strip { box-sizing: border-box; }
-    .features-grid { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1024px) {
+    html, body { width: 100%; }
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    html, body { width: 100%; }
     .hero { flex-direction: column; height: auto; }
     .hero-left, .hero-right { flex: none; width: 100%; }
     .hero-right { height: 320px; }
     .lower { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
     .author-intro { grid-template-columns: 1fr; text-align: center; }
     .author-intro .photo { margin: 0 auto; }
     .nav ul { gap: 14px; }
     .hero-title-bn { font-size: 56px !important; }
-    .feat-card { min-height: 100px; }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1514,7 +1543,7 @@
       <span class="bn">সাম্প্রতিক জার্নাল</span>
       <span class="num">— 03</span>
     </div>
-    <div class="journal-card">
+    <a class="journal-card" href="journal.html">
       <div class="journal-meta">
         <div class="date"><span class="day">২৭</span>অক্টোবর, ২০২৬</div>
         <div class="tag">নোটবুক</div>
@@ -1525,10 +1554,10 @@
         <p>বন্ধু ও সমপাঠিকা যাঁরা খসড়া পড়ে মতামত দিয়েছেন, তাঁদের প্রতিটি মন্তব্য আমার কাছে একেকটি চিঠির মতো মনে হয়েছে। এই লেখায় আমি সেই কথাবার্তার কিছু অংশ পাঠকের সঙ্গে ভাগ করছি — কারণ একটি বই কখনোই কেবল লেখকের নয়, সে তার পাঠকদেরও সমান...</p>
       </div>
       <div class="journal-more">
-        <a href="journal.html">সম্পূর্ণ লেখাটি পড়ুন <span class="arrow">→</span></a>
-        <div class="stats">৫ মিনিট পড়ুন <span class="dot">◆</span> ৪২ মন্তব্য</div>
+        <span class="read-link">সম্পূর্ণ লেখাটি পড়ুন <span class="arrow">→</span></span>
+        <span class="stats">৫ মিনিট পড়ুন <span class="dot">◆</span> ৪২ মন্তব্য</span>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -1554,7 +1583,7 @@
         <span class="tag">নভেলা</span>
         <span class="tag">গদ্য</span>
       </div>
-    </div>
+    </a>
 
     <!-- 2. Blue -->
     <a class="feat-card blue" href="posts.html#category-essay">
@@ -1563,7 +1592,7 @@
         <div class="title">প্রবন্ধ ও সাহিত্যসমালোচনা</div>
         <div class="sub">চর্চা, গদ্য ও বিশ্লেষণ</div>
       </div>
-    </div>
+    </a>
 
     <!-- 3. Green -->
     <a class="feat-card green" href="posts.html#category-law">
@@ -1572,7 +1601,7 @@
         <div class="title">আইন ও আদালত</div>
         <div class="sub">আইন, বিচার ও সাংবিধানিক প্রবচন</div>
       </div>
-    </div>
+    </a>
 
     <!-- 4. Purple -->
     <a class="feat-card purple" href="posts.html#category-personal">
@@ -1581,7 +1610,7 @@
         <div class="title">ব্যক্তিগত অনুভূতি</div>
         <div class="sub">নিজস্ব অভিজ্ঞতা ও বর্ণনা</div>
       </div>
-    </div>
+    </a>
 
     <!-- 5. Brown -->
     <a class="feat-card brown" href="posts.html#category-economy">
@@ -1590,7 +1619,7 @@
         <div class="title">ব্যাংকিং ও অর্থনীতি</div>
         <div class="sub">অর্থনীতি ও সমাজনীতি অভিজ্ঞতা</div>
       </div>
-    </div>
+    </a>
 
     <!-- 6. Teal -->
     <a class="feat-card teal" href="posts.html#category-publications">
