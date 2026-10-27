@@ -383,6 +383,50 @@ main.wrap>section#archive .archive-tools a:hover{background:#104e4c!important}
  main.wrap>section#featured,main.wrap>section#archive{margin-top:14px}
 }
 
+
+/* Editorial magazine refinement inspired by Bengali literary journals */
+:root{--bg:#f5f0e7;--paper:#fffdf8;--red:#742b38;--ink:#252b30;--muted:#5f625f;--line:#d8cbbb;--accent:#b58a4a}
+body{background:#f5f0e7;color:#252b30}
+.topnav{background:#17324d;border-bottom:3px solid #c79a58;box-shadow:0 4px 14px #172b351c;gap:4px}
+.topnav a{border:1px solid transparent;border-radius:3px;background:transparent;color:#fff8e9;padding:7px 11px}
+.topnav a:hover,.topnav a.active{background:#c79a58;color:#172b35;border-color:#c79a58}
+.wrap{max-width:1180px}
+.hero{border-radius:3px;border:1px solid #d5c2a6;box-shadow:0 8px 26px #3a2b1b12;position:relative}
+.hero:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:5px;background:linear-gradient(90deg,#742b38 0 34%,#c79a58 34% 67%,#245b78 67%)}
+section{scroll-margin-top:82px}
+.homepage-stack>section,main.wrap>section{border-radius:3px!important;box-shadow:none!important;margin-top:24px;margin-bottom:24px;padding:clamp(17px,2.5vw,30px)!important;border:1px solid #d8cbbb!important}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;border-bottom:2px solid #742b38;padding-bottom:10px;margin-bottom:18px}
+.section-head h2{font-size:clamp(22px,2.6vw,30px);letter-spacing:-.3px;margin:0;color:#742b38!important}
+.section-head p{margin:3px 0 0;color:#5f625f}
+.section-head>a{font-weight:700;white-space:nowrap}
+.homepage-stack>section#categories{background:#f0e5d2!important;border-color:#d9c3a1!important}
+.homepage-stack>section#categories .category{border-radius:2px;min-height:112px;justify-content:center;box-shadow:none;border:0;border-bottom:4px solid #c79a58;transition:transform .18s ease,filter .18s ease}
+.homepage-stack>section#categories .category strong{font-size:18px}
+.homepage-stack>section#categories .category span{color:#fff!important;opacity:.92}
+.homepage-stack>section#categories .category:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 5px 14px #172b3524}
+.homepage-stack>section#recent{background:#e5edf0!important;border-color:#c0d0d5!important}
+.homepage-stack>section#recent .paper{padding:0!important}
+.homepage-stack>section#recent .post-card{border-radius:2px!important;box-shadow:0 2px 8px #172b3510!important}
+.homepage-stack>section#recent .post-card .cover{height:5px}
+.homepage-stack>section#about{background:#e5eadf!important;border-color:#c4d0b9!important}
+.homepage-stack>section#about .paper{border-radius:2px!important;box-shadow:none!important}
+main.wrap>section#featured{background:#f0e2d7!important;border-color:#d7bca7!important}
+main.wrap>section#featured .feature-main{border-radius:2px!important;padding:clamp(20px,3vw,34px)!important}
+main.wrap>section#featured .mini-note{border-radius:2px!important;box-shadow:none!important}
+main.wrap>section#archive{background:#e1ece9!important;border-color:#b8d0ca!important}
+main.wrap>section#archive .paper{border-radius:2px!important;box-shadow:none!important}
+.paper{border-radius:3px;box-shadow:0 4px 16px #34291c0b}
+.button{border-radius:3px}
+.site-footer{padding:28px 18px;border-radius:0}
+.share-panel{border-radius:3px}
+@media(max-width:650px){
+ .topnav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;padding:9px 10px}
+ .topnav a{flex:0 0 auto;font-size:13px}
+ .section-head{align-items:flex-start;flex-direction:column}
+ .homepage-stack>section,main.wrap>section{padding:16px!important;margin-top:15px;margin-bottom:15px}
+ .hero{margin-top:12px}
+}
+
 </style>
 </head>
 <body>
