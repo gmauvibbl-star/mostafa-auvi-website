@@ -507,6 +507,11 @@
     display: grid;
     grid-template-columns: 1fr 1.15fr;
     gap: 44px;
+    align-items: stretch;  /* make both columns equal height */
+  }
+  .lower > div {
+    display: flex;
+    flex-direction: column;
   }
   .section-label {
     display: flex;
@@ -550,6 +555,9 @@
     border: 1px solid var(--teal-deep);
     overflow: hidden;
     border-radius: 4px;
+    flex: 1;  /* fill full column height */
+    display: flex;
+    flex-direction: column;
     box-shadow:
       0 16px 40px rgba(10,30,32,0.45),
       0 4px 10px rgba(0,0,0,0.15);
@@ -765,6 +773,9 @@
     text-decoration: none;
     transition: transform .25s, box-shadow .25s, border-color .25s;
     cursor: pointer;
+    flex: 1;  /* fill full column height — match coming-card */
+    display: flex;
+    flex-direction: column;
   }
   .journal-card:hover {
     transform: translateY(-3px);
@@ -824,6 +835,7 @@
     color: var(--ink-soft);
     line-height: 1.9;
     text-align: justify;
+    flex: 1;  /* push journal-more to bottom */
   }
   .journal-body p { margin-bottom: 12px; }
   .journal-body .dropcap {
