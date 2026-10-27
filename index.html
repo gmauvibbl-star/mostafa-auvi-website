@@ -1187,57 +1187,46 @@
     transition: color .2s;
   }
   .footer-strip .right a:hover { color: var(--cream); }
-  /* ====== AUTHOR LOGIN FLOATING BUTTON + MODAL ====== */
+  /* ====== AUTHOR LOGIN BUTTON (in footer) + MODAL ====== */
   .author-login-btn {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 99999;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 24px;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-right: 18px;
     background: linear-gradient(135deg, #E5C77A 0%, #B89248 100%);
     color: #0F3D3E;
-    border: 2px solid #FAF4E8;
+    border: 1.5px solid #FAF4E8;
     border-radius: 999px;
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     transition: all .25s;
     text-decoration: none;
-    outline: 2px solid rgba(212,180,104,0.4);
-    outline-offset: 2px;
+    vertical-align: middle;
   }
   .author-login-btn:hover {
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(0,0,0,0.4);
     background: linear-gradient(135deg, #FAF4E8 0%, #E5C77A 100%);
   }
-  .author-login-btn:active { transform: translateY(-1px) scale(1.02); }
+  .author-login-btn:active { transform: translateY(0); }
   .author-login-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     fill: currentColor;
   }
-  /* Pulse animation to draw attention */
-  @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2), 0 0 0 0 rgba(229,199,122,0.6); }
-    50% { box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2), 0 0 0 12px rgba(229,199,122,0); }
-  }
-  .author-login-btn:not(.logged-in) { animation: pulseGlow 2.5s ease-in-out infinite; }
   /* When user is logged in, show different label + dashboard link */
   .author-login-btn.logged-in {
-    background: linear-gradient(135deg, #0F3D3E 0%, #1B5E6B 100%);
-    color: #E5C77A;
+    background: linear-gradient(135deg, #E5C77A 0%, #B89248 100%);
+    color: #0F3D3E;
     border-color: #E5C77A;
-    animation: none;
   }
   .author-login-btn.logged-in:hover {
-    background: linear-gradient(135deg, #1B5E6B 0%, #0F3D3E 100%);
+    background: linear-gradient(135deg, #FAF4E8 0%, #E5C77A 100%);
   }
 
   /* Modal overlay */
@@ -1951,6 +1940,11 @@
     « লেখা মানুষকে আরেকটু মানুষ করে »
   </div>
   <div class="right">
+    <!-- Author login button inside footer -->
+    <button id="authorLoginBtn" class="author-login-btn" aria-label="লেখক লগইন">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span id="authorLoginLabel">লেখক লগইন</span>
+    </button>
     <a href="subscribe.html">পত্র বক্স</a>
     <a href="index.html">সাইটম্যাপ</a>
     <a href="about.html">গোপনীয়তা</a>
@@ -1960,12 +1954,7 @@
 
 </div><!-- /.page-wrap -->
 
-<!-- Author login floating button + modal -->
-<button id="authorLoginBtn" class="author-login-btn" aria-label="লেখক লগইন">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-  <span id="authorLoginLabel">লেখক লগইন</span>
-</button>
-
+<!-- Author login modal (kept outside page-wrap so it overlays correctly) -->
 <div id="loginModalOverlay" class="login-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
   <div class="login-modal">
     <button type="button" class="modal-close" aria-label="বন্ধ করুন" onclick="closeLoginModal()">×</button>
