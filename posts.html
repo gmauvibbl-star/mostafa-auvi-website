@@ -1,1 +1,49 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>প্রকাশিত লেখা | Mostafa Auvi</title><style>body{max-width:850px;margin:36px auto;padding:0 18px;font:17px/1.7 system-ui;color:#20252b}article{border-bottom:1px solid #ddd;padding:18px 0}a{color:#2856a6}.muted{color:#667085}</style></head><body><p><a href="./">← মূল ওয়েবসাইট</a></p><h1>প্রকাশিত লেখা</h1><p class="muted">সব লেখা বিনামূল্যে পড়ুন।</p><div id="list">সেটআপের অপেক্ষায়…</div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co",SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";const list=document.getElementById('list');if(SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&!SUPABASE_ANON_KEY.includes('YOUR_')){const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);sb.from('posts').select('title,slug,body,published_at').eq('published',true).order('published_at',{ascending:false}).then(({data,error})=>{if(error){list.textContent='লেখা লোড করা যায়নি।';return}list.innerHTML=data.length?data.map(p=>'<article><h2><a href="./read.html?slug='+encodeURIComponent(p.slug)+'">'+p.title.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</a></h2><p>'+p.body.slice(0,220).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'…</p><a href="./read.html?slug='+encodeURIComponent(p.slug)+'">পুরো লেখা পড়ুন →</a></article>').join(''):'এখনো কোনো লেখা প্রকাশিত হয়নি।'})}else list.textContent='এই পাতাটি চালু করতে SETUP-ADMIN-SUBSCRIPTION.md অনুসারে Supabase কনফিগার করতে হবে।';</script></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3eee7">
+<title>প্রকাশিত লেখা | MOSTAFA AUVI</title>
+<style>
+:root{--bg:#f3eee7;--paper:#fffefa;--red:#76242d;--ink:#292b2d;--muted:#77716a;--line:#e4d9cc;--accent:#a86a58}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.8 Georgia,"Noto Serif Bengali",serif}
+a{color:var(--red);text-decoration:none}a:hover{text-decoration:underline}
+header{background:var(--paper);border-bottom:1px solid var(--line);padding:24px 20px 18px}
+.header-inner,main,footer{max-width:980px;margin:auto}.brand{font:700 clamp(23px,4vw,34px)/1.2 Arial,sans-serif;letter-spacing:.08em;color:var(--red)}.bn{font-size:18px;display:block;margin-top:4px}.tagline{color:var(--muted);font:12px/1.5 Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;margin-top:8px}
+nav{display:flex;gap:10px 20px;flex-wrap:wrap;margin-top:18px;font:14px/1.5 Arial,sans-serif}nav a{color:var(--ink)}nav a.current{color:var(--red);font-weight:700}
+main{padding:30px 20px 55px}.eyebrow{font:700 11px/1.5 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(27px,4vw,38px);line-height:1.3;margin:8px 0} .intro{color:var(--muted);margin:0 0 20px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}.filters a{border:1px solid var(--line);border-radius:30px;padding:6px 13px;background:var(--paper);font-size:13px}.filters a.selected{background:var(--red);color:#fff;border-color:var(--red)}
+#status{color:var(--muted);font-size:14px;margin:16px 0}.post{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:12px 0;box-shadow:0 4px 16px #36261a08}.post h2{font-size:22px;line-height:1.4;margin:0}.post p{margin:0;color:#5e5a55;white-space:pre-line}.read{font:700 13px Arial,sans-serif;align-self:start;margin-top:3px}.empty{background:var(--paper);padding:20px;border-radius:8px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:20px;color:var(--muted);font:12px Arial,sans-serif}
+@media(min-width:700px){.post{grid-template-columns:minmax(0,1fr) auto;align-items:start}.post p{grid-column:1}.read{grid-column:2;grid-row:1/3;white-space:nowrap;margin-top:6px}}
+</style>
+</head>
+<body>
+<header><div class="header-inner">
+<a class="brand" href="./">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></a>
+<div class="tagline">Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
+<nav aria-label="প্রধান নেভিগেশন">
+<a href="./">প্রচ্ছদ</a><a href="posts.html?category=গল্প">গল্প</a><a href="posts.html?category=উপন্যাস">উপন্যাস</a><a href="posts.html?category=অনুবাদ%20সাহিত্য">অনুবাদ সাহিত্য</a><a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a><a href="posts.html?category=প্রবন্ধ">প্রবন্ধ ও সাহিত্যসমালোচনা</a><a href="posts.html?category=আইন-আদালত">আইন ও আদালত</a><a href="journal.html">Journal</a>
+</nav></div></header>
+<main>
+<div class="eyebrow">The Writing Archive</div>
+<h1 id="heading">প্রকাশিত লেখা</h1>
+<p class="intro">গল্প, উপন্যাস, প্রবন্ধ ও অন্যান্য লেখা—এক জায়গায়।</p>
+<div class="filters" id="filters">
+<a href="posts.html">সব লেখা</a><a href="posts.html?category=গল্প">গল্প</a><a href="posts.html?category=উপন্যাস">উপন্যাস</a><a href="posts.html?category=অনুবাদ%20সাহিত্য">অনুবাদ সাহিত্য</a><a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a><a href="posts.html?category=প্রবন্ধ">প্রবন্ধ</a><a href="posts.html?category=সাহিত্যালোচনা">সাহিত্যসমালোচনা</a><a href="posts.html?category=আইন-আদালত">আইন ও আদালত</a><a href="posts.html?category=ব্যাংকিং%20ও%20অর্থনীতি">ব্যাংকিং ও অর্থনীতি</a><a href="posts.html?category=ব্যক্তিগত%20রচনা">ব্যক্তিগত রচনা</a>
+</div>
+<div id="status">লেখার তালিকা লোড হচ্ছে…</div><section id="list" aria-live="polite"></section>
+</main>
+<footer><div>© MOSTAFA AUVI · মোস্তফা অভি</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co",SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+const list=document.getElementById("list"),statusEl=document.getElementById("status");
+const params=new URLSearchParams(location.search),category=params.get("category")||"";
+const labels={"গল্প":"গল্প","উপন্যাস":"উপন্যাস","অনুবাদ সাহিত্য":"অনুবাদ সাহিত্য","ভ্রমণকাহিনি":"ভ্রমণকাহিনি","প্রবন্ধ":"প্রবন্ধ ও সাহিত্যসমালোচনা","সাহিত্যালোচনা":"সাহিত্যসমালোচনা","আইন-আদালত":"আইন ও আদালত","ব্যাংকিং ও অর্থনীতি":"ব্যাংকিং ও অর্থনীতি","ব্যক্তিগত রচনা":"ব্যক্তিগত রচনা"};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+if(category){document.getElementById("heading").textContent=labels[category]||category;document.querySelector(".intro").textContent=(labels[category]||category)+" বিভাগের প্রকাশিত লেখা।";document.querySelectorAll("#filters a").forEach(a=>{if(new URL(a.href).searchParams.get("category")===category)a.classList.add("selected")})}else document.querySelector('#filters a[href="posts.html"]').classList.add("selected");
+(async()=>{try{const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);const {data,error}=await sb.from("posts").select("*").eq("published",true).order("published_at",{ascending:false,nullsFirst:false}).limit(200);if(error)throw error;let rows=data||[];if(category)rows=rows.filter(p=>String(p.category||"").trim()===category||(category==="প্রবন্ধ"&&String(p.category||"").trim()==="সাহিত্যালোচনা"));statusEl.textContent=rows.length?"মোট "+rows.length+"টি লেখা":"এই বিভাগে এখনো কোনো প্রকাশিত লেখা পাওয়া যায়নি।";list.innerHTML=rows.length?rows.map(p=>{const body=String(p.excerpt||p.body||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();return '<article class="post"><h2><a href="./read.html?slug='+encodeURIComponent(p.slug)+'">'+esc(p.title)+'</a></h2><p>'+esc(body.slice(0,300))+(body.length>300?"…":"")+'</p><a class="read" href="./read.html?slug='+encodeURIComponent(p.slug)+'">পুরো লেখা পড়ুন ↗</a></article>'}).join(""):'<div class="empty">এখনো কোনো লেখা প্রকাশিত হয়নি, অথবা এই বিভাগের নাম ডেটাবেসের বিভাগের নামের সঙ্গে মিলছে না।</div>'}catch(e){statusEl.textContent="লেখার তালিকা লোড করা যায়নি।";list.innerHTML='<div class="empty">ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।</div>'}})();
+</script>
+</body></html>
