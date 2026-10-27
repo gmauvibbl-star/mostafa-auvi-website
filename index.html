@@ -136,15 +136,19 @@
     margin-right: 6px;
   }
   .brand .tagline {
-    font-family: 'EB Garamond', serif;
-    font-size: 12px;
-    color: var(--ink-soft);
-    letter-spacing: 0.4em;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--blood);
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    margin-top: 8px;
-    font-weight: 500;
+    margin-top: 10px;
+    font-weight: 700;
   }
-  .brand .tagline .dot { color: var(--gold); margin: 0 8px; }
+  .brand .tagline .dot {
+    color: var(--gold);
+    margin: 0 10px;
+    font-size: 12px;
+  }
   .header-right {
     display: flex;
     align-items: center;
@@ -204,9 +208,9 @@
     color: var(--teal-deep);
     text-decoration: none;
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     transition: all .25s;
     background: transparent;
     border: none;
@@ -220,14 +224,32 @@
   }
   .nav ul li a .caret {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    opacity: 0.5;
+    font-size: 12px;
+    opacity: 0.55;
     margin-left: 3px;
   }
   .nav ul li.active a {
     color: var(--blood);
     border-bottom-color: var(--blood);
-    font-weight: 700;
+    font-weight: 800;
+  }
+  /* Each nav item gets its own signature color (for visual variety) */
+  .nav ul li.nav-home a     { color: #8B1818; }  /* maroon */
+  .nav ul li.nav-fiction a  { color: #1B5E6B; }  /* teal-blue */
+  .nav ul li.nav-essay a    { color: #2D5F52; }  /* forest green */
+  .nav ul li.nav-law a      { color: #5D3A8A; }  /* purple */
+  .nav ul li.nav-journal a  { color: #966C33; }  /* gold-brown */
+  .nav ul li.nav-author a   { color: #8A1A4A; }  /* rose */
+  .nav ul li.nav-all a      { color: #1F7A70; }  /* teal */
+  /* Active state overrides color */
+  .nav ul li.active a {
+    color: var(--blood) !important;
+    border-bottom-color: var(--blood) !important;
+  }
+  /* Hover keeps original color but adds underline */
+  .nav ul li:not(.active) a:hover {
+    border-bottom-color: currentColor;
+    filter: brightness(1.15);
   }
   .nav .search-box {
     display: flex;
@@ -1186,13 +1208,13 @@
 <!-- Navigation -->
 <nav class="nav">
   <ul>
-    <li class="active"><a href="index.html">Home</a></li>
-    <li><a href="posts.html#category-fiction">কথাসাহিত্য <span class="caret">⌄</span></a></li>
-    <li><a href="posts.html#category-essay">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
-    <li><a href="posts.html#category-law">আইন ও আদালত</a></li>
-    <li><a href="journal.html">Journal</a></li>
-    <li><a href="about.html">লেখক পরিচিতি</a></li>
-    <li><a href="posts.html">সব লেখা</a></li>
+    <li class="nav-home active"><a href="index.html">Home</a></li>
+    <li class="nav-fiction"><a href="posts.html#category-fiction">কথাসাহিত্য <span class="caret">⌄</span></a></li>
+    <li class="nav-essay"><a href="posts.html#category-essay">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
+    <li class="nav-law"><a href="posts.html#category-law">আইন ও আদালত</a></li>
+    <li class="nav-journal"><a href="journal.html">Journal</a></li>
+    <li class="nav-author"><a href="about.html">লেখক পরিচিতি</a></li>
+    <li class="nav-all"><a href="posts.html">সব লেখা</a></li>
   </ul>
   <div class="search-box">
     <input type="text" placeholder="অনুসন্ধান...">
