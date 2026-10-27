@@ -268,6 +268,47 @@ main.wrap>.share-panel{width:100%;max-width:none}
 body>section,main>section,body>footer,main>footer,section[id],.site-section,.archive-section{width:100%;max-width:none}
 @media(max-width:560px){main.wrap{padding:0 8px 20px}.homepage-stack>section#categories,.homepage-stack>section#recent,.homepage-stack>section#about{padding:14px}}
 
+
+/* বিভাগভিত্তিক রঙের নরম বিন্যাস */
+:root{--field-bg:#edf0e7;--field-ink:#263a31;--field-border:#d6dfd0}
+body{background:var(--field-bg)!important;color:#303832}
+main.wrap{background:var(--field-bg)!important}
+.homepage-stack{background:#fffdf8;border-color:#d8ded2}
+.homepage-stack>.hero.hero-banner{background:#f5ebdc;border-color:#d8ded2}
+.homepage-stack>section#categories{background:#f4f0e5!important;border-bottom:1px solid #ded8c8}
+.homepage-stack>section#recent{background:#eaf1f5!important;border-bottom:1px solid #d1dfe7}
+.homepage-stack>section#about{background:#f3ecf4!important}
+main.wrap>section#featured{background:#f7eee8!important;border:1px solid #e8d7ca}
+main.wrap>section#archive{background:#edf3e9!important;border:1px solid #d5e0ce}
+.homepage-stack>section#categories .category{background:#fffdf8;border-color:#ddd6c6}
+.homepage-stack>section#categories .category:nth-child(5n+1){background:#fff0e9;border-color:#ead2c6}
+.homepage-stack>section#categories .category:nth-child(5n+2){background:#eaf2f8;border-color:#d0e0ed}
+.homepage-stack>section#categories .category:nth-child(5n+3){background:#edf4e7;border-color:#d5e3ca}
+.homepage-stack>section#categories .category:nth-child(5n+4){background:#f3ebf6;border-color:#e0d1e8}
+.homepage-stack>section#categories .category:nth-child(5n){background:#f8f0dc;border-color:#e8ddbd}
+.homepage-stack>section#recent .post-card{background:#fff}
+.homepage-stack>section#recent .post-card:nth-child(4n+1){border-color:#cbdde8}
+.homepage-stack>section#recent .post-card:nth-child(4n+2){border-color:#d6dfc8}
+.homepage-stack>section#recent .post-card:nth-child(4n+3){border-color:#e8d2c7}
+.homepage-stack>section#recent .post-card:nth-child(4n){border-color:#ddd0e6}
+.homepage-stack>section#recent .post-card .cover{background:linear-gradient(90deg,#456d85,#a8c8d8)}
+.homepage-stack>section#recent .post-card:nth-child(4n+2) .cover{background:linear-gradient(90deg,#54744b,#b9d0a9)}
+.homepage-stack>section#recent .post-card:nth-child(4n+3) .cover{background:linear-gradient(90deg,#9a5b4b,#e6bca7)}
+.homepage-stack>section#recent .post-card:nth-child(4n) .cover{background:linear-gradient(90deg,#765b87,#d0b7df)}
+main.wrap>section#featured .feature-main{background:linear-gradient(135deg,#fffaf4,#f1dfd3);border-color:#e8d4c6}
+main.wrap>section#featured .mini-note{background:#fffaf6;border-color:#e5d7cc}
+main.wrap>section#archive .archive-tools a{background:#fbfff8;border-color:#d2dfca}
+.homepage-stack>section#about .paper{background:rgba(255,255,255,.48)}
+.section-head h2{color:#344b3d!important}
+.site-footer{background:#263e35!important;color:#f7f2e8!important;border-top:4px solid #d6b79b}
+.site-footer a{color:#f4d9b9}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid #8eafbd;outline-offset:1px}
+@media(max-width:560px){
+ .homepage-stack>section#categories{background:#f4f0e5!important}
+ .homepage-stack>section#recent{background:#eaf1f5!important}
+ .homepage-stack>section#about{background:#f3ecf4!important}
+}
+
 </style>
 </head>
 <body>
