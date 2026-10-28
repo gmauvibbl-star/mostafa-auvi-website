@@ -385,20 +385,29 @@
     border-radius: 2px;
     margin-bottom: 18px;
   }
+  /* Keep the title clean and separate from the article's decorative first letter. */
   .a4-title {
-    font-family: 'Playfair Display', 'Noto Serif Bengali', serif;
-    font-size: clamp(26px, 4vw, 38px);
-    font-weight: 800;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(23px, 3vw, 29px);
+    font-weight: 600;
     color: var(--ink);
-    line-height: 1.2;
-    letter-spacing: -0.005em;
-    margin-bottom: 14px;
+    line-height: 1.45;
+    letter-spacing: 0;
+    margin: 0 0 12px;
+    float: none;
+    clear: both;
+    display: block;
+  }
+  .a4-title::first-letter {
+    float: none;
+    font-size: inherit;
+    color: inherit;
   }
   .a4-title.bn {
     font-family: 'Noto Serif Bengali', serif;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0;
-    line-height: 1.32;
+    line-height: 1.45;
   }
   .a4-meta {
     display: flex;
