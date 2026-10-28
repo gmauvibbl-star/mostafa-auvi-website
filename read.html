@@ -1157,6 +1157,7 @@ const catLabel = cat => ({
 
 const params = new URLSearchParams(location.search);
 const slug = params.get('slug');
+const previewRequested = params.get('preview') === '1';
 const articleEl = document.getElementById('article');
 const shareUrl = location.href;
 
@@ -1277,22 +1278,49 @@ async function loadPost() {
       .eq('published', true)
       .maybeSingle();
     if (err1) throw err1;
-    if (!post) {
-      renderError('লেখাটি পাওয়া যায়নি', 'এই লিংকে কোনো প্রকাশিত লেখা নেই।');
+    let loadedPost = post;
+
+    // Draft preview is available only to the signed-in, approved author.
+    if (!loadedPost && previewRequested) {
+      const { data: { session }, error: sessionError } = await sb.auth.getSession();
+      if (sessionError) throw sessionError;
+      if (session) {
+        const { data: admin, error: adminError } = await sb.from('admin_users')
+          .select('user_id').eq('user_id', session.user.id).maybeSingle();
+        if (adminError) throw adminError;
+        if (admin) {
+          const { data: draft, error: draftError } = await sb.from('posts')
+            .select('id,group_id,language,slug,title,body,excerpt,cover_image,cover_image_url,image_url,category,tags,published_at')
+            .eq('slug', slug).maybeSingle();
+          if (draftError) throw draftError;
+          loadedPost = draft;
+          if (loadedPost && !loadedPost.published) {
+            const previewNotice = document.createElement('div');
+            previewNotice.textContent = 'লেখাটির খসড়া প্রিভিউ — এটি এখনো প্রকাশিত নয়।';
+            previewNotice.style.cssText = 'max-width:900px;margin:12px auto;padding:10px 16px;background:#fff0c9;border-left:4px solid #b89248;color:#3d2e22;font-family:serif;';
+            articleEl.parentNode.insertBefore(previewNotice, articleEl);
+          }
+        }
+      }
+    }
+    if (!loadedPost) {
+      renderError('লেখাটি পাওয়া যায়নি', previewRequested ? 'খসড়া দেখতে লেখক হিসেবে লগইন থাকতে হবে।' : 'এই লিংকে কোনো প্রকাশিত লেখা নেই।');
       return;
     }
+    // Use the loaded post whether published or author-previewed.
+    const activePost = loadedPost;
     // Fetch sibling in other language by group_id for language toggle
     let sibling = null;
-    if (post.group_id) {
+    if (activePost.group_id && activePost.published) {
       const { data: sib } = await sb.from('posts')
         .select('slug,language,title')
-        .eq('group_id', post.group_id)
-        .neq('language', post.language || 'bn')
+        .eq('group_id', activePost.group_id)
+        .neq('language', activePost.language || 'bn')
         .eq('published', true)
         .maybeSingle();
-      if (sib && sib.slug && sib.slug !== post.slug) sibling = sib;
+      if (sib && sib.slug && sib.slug !== activePost.slug) sibling = sib;
     }
-    renderArticle(post, sibling);
+    renderArticle(activePost, sibling);
   } catch (e) {
     console.error(e);
     renderError('লোড করা যায়নি', 'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
