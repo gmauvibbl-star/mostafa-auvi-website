@@ -506,6 +506,11 @@
     hyphens: auto;
     -webkit-hyphens: auto;
   }
+  /* Keep every paragraph on the same page background, even if pasted text carries highlight colors. */
+  .a4-body, .a4-body * {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
   .a4-body.en { font-family: 'EB Garamond', serif; }
   .a4-body p { margin: 0 0 1.15em; }
   .a4-body p:first-of-type::first-letter {
