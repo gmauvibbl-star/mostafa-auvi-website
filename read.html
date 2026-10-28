@@ -1207,7 +1207,25 @@ function renderArticle(post, sibling) {
   const dateStr = fmtDate(post.published_at, lang);
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean)
     : (post.tags ? String(post.tags).split(',').map(t => t.trim()).filter(Boolean) : []);
-  const bodyHtml = String(post.body || '').trim();
+  // Normalize pasted content so Word/Docs highlight colors cannot leak into the reading page.
+  const rawBodyHtml = String(post.body || '').trim();
+  const bodyDoc = new DOMParser().parseFromString(rawBodyHtml, 'text/html');
+  bodyDoc.body.querySelectorAll('*').forEach((el) => {
+    el.removeAttribute('bgcolor');
+    if (el.tagName === 'MARK') {
+      const span = bodyDoc.createElement('span');
+      while (el.firstChild) span.appendChild(el.firstChild);
+      el.replaceWith(span);
+    }
+    const style = el.style;
+    if (style) {
+      style.removeProperty('background');
+      style.removeProperty('background-color');
+      style.removeProperty('background-image');
+      if (!style.cssText.trim()) el.removeAttribute('style');
+    }
+  });
+  const bodyHtml = bodyDoc.body.innerHTML;
   const coverField = post.cover_image || post.cover_image_url || post.image_url || '';
   const coverHtml = coverField
     ? '<img class="a4-cover" src="' + esc(coverField) + '" alt="' + esc(post.title || '') + '">'
