@@ -1,45 +1,279 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Mostafa Auvi-এর প্রকাশিত লেখা"><meta property="og:type" content="article"><meta property="og:title" content="মোস্তফা অভি | লেখা"><meta property="og:description" content="মোস্তফা অভির লেখা পড়ুন ও শেয়ার করুন"><title>লেখা | Mostafa Auvi</title><style>body{max-width:780px;margin:36px auto;padding:0 18px;font:18px/1.9 system-ui;color:#20252b}.article-body{overflow-wrap:anywhere;white-space:pre-wrap}.article-body img{display:block;max-width:100%;height:auto;margin:18px auto;border-radius:8px}.article-body figure{margin:24px 0;text-align:center}.article-body figcaption,#coverCaption{font-size:.88em;color:#626b75;text-align:center;margin-top:5px}.article-body p{margin:1em 0}button,.share-links a{padding:9px 13px;border:0;border-radius:8px;background:#2856a6;color:white;cursor:pointer;margin:4px 5px 4px 0;text-decoration:none;display:inline-block}a{color:#2856a6}.share-links{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:20px 0}.share-label{width:100%;font-size:14px;color:#626b75}</style></head><body><p><a href="./posts.html">← সব লেখা</a></p><h1 id="title">লেখা লোড হচ্ছে…</h1><p id="date"></p><button id="languageToggle" type="button" hidden>Read in English</button><figure id="coverFigure" hidden style="margin:20px 0"><img id="cover" alt="" style="display:block;width:100%;max-height:520px;object-fit:contain;border-radius:10px"><figcaption id="coverCaption"></figcaption></figure><div id="body" class="article-body"></div><hr><div class="share-links" aria-label="লেখাটি শেয়ার করুন"><strong class="share-label">লেখাটি শেয়ার করুন</strong><button id="copy" type="button">লিংক কপি</button><button id="share" type="button">শেয়ার করুন</button><a id="wa" target="_blank" rel="noopener noreferrer">WhatsApp</a><a id="fb" target="_blank" rel="noopener noreferrer">Facebook</a><a id="tg" target="_blank" rel="noopener noreferrer">Telegram</a><a id="xshare" target="_blank" rel="noopener noreferrer">X</a><a id="li" target="_blank" rel="noopener noreferrer">LinkedIn</a></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co",SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";const url=location.href,slug=new URLSearchParams(location.search).get('slug');document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(url);alert('লিংক কপি হয়েছে')}catch{prompt('লিংক কপি করুন',url)}};document.getElementById('share').onclick=async()=>{if(navigator.share){try{await navigator.share({title:document.title,url})}catch{}}else{try{await navigator.clipboard.writeText(url);alert('লিংক কপি হয়েছে')}catch{prompt('লিংক কপি করুন',url)}}};document.getElementById('wa').href='https://wa.me/?text='+encodeURIComponent(url);document.getElementById('fb').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url);document.getElementById('tg').href='https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(document.title);document.getElementById('xshare').href='https://twitter.com/intent/tweet?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(document.title);document.getElementById('li').href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);let currentLanguage='bn',currentPost=null;document.getElementById('languageToggle').onclick=()=>{if(!currentPost)return;currentLanguage=currentLanguage==='bn'?'en':'bn';renderLanguage()};function renderLanguage(){const hasEnglish=!!(currentPost.title_en&&currentPost.body_en);const useEnglish=currentLanguage==='en'&&hasEnglish;document.getElementById('title').textContent=useEnglish?currentPost.title_en:currentPost.title;const bodyEl=document.getElementById('body');const content=String((useEnglish?currentPost.body_en:currentPost.body)||'');if(/<(figure|img|p|h[1-6]|blockquote|ul|ol|br)\b/i.test(content)){bodyEl.innerHTML=content}else{bodyEl.textContent=content}const coverFigure=document.getElementById('coverFigure');if(currentPost.cover_image_url){document.getElementById('cover').src=currentPost.cover_image_url;document.getElementById('cover').alt=useEnglish?currentPost.title_en:currentPost.title;document.getElementById('coverCaption').textContent='';coverFigure.hidden=false}else{coverFigure.hidden=true}document.getElementById('languageToggle').hidden=!hasEnglish;document.getElementById('languageToggle').textContent=useEnglish?'বাংলায় পড়ুন':'Read in English';document.documentElement.lang=useEnglish?'en':'bn';document.title=(useEnglish?currentPost.title_en:currentPost.title)+' | Mostafa Auvi'};if(!slug){document.getElementById('title').textContent='লেখা পাওয়া যায়নি'}else if(SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&!SUPABASE_ANON_KEY.includes('YOUR_')){supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY).from('posts').select('title,body,title_en,body_en,cover_image_url,published_at').eq('slug',slug).eq('published',true).maybeSingle().then(({data,error})=>{if(error||!data){document.getElementById('title').textContent='লেখাটি পাওয়া যায়নি';document.getElementById('body').textContent='';return}currentPost=data;renderLanguage();document.getElementById('date').textContent=data.published_at?new Date(data.published_at).toLocaleDateString('bn-BD'):''})}else{document.getElementById('title').textContent='সেটআপ বাকি';document.getElementById('body').textContent='Supabase কনফিগার না করা পর্যন্ত লেখা লোড হবে না।'}</script></body></html>
-Facebook
-WhatsApp
-Facebook
-WhatsApp
-Telegram
-X
-LinkedIn
-লিংক কপি
-সম্পর্কিত লেখা
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0F3D3E">
+<meta name="description" content="Mostafa Auvi-এর লেখা — গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা।">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mostafa Auvi | লেখা">
+<meta property="og:description" content="মোস্তফা অভির লেখা পড়ুন ও শেয়ার করুন।">
+<title>লেখা | Mostafa Auvi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-deep:#0F3D3E; --teal:#1B5E6B; --teal-mid:#2A7A7E;
+    --cream:#FAF4E8; --paper:#F4ECD8; --paper-warm:#EDE2C6; --paper-dark:#C8B898;
+    --ink:#1A1410; --ink-soft:#3D2E22; --ink-mute:#6B5A48;
+    --gold:#B89248; --gold-bright:#D4B468; --gold-dim:#7A6028;
+    --blood:#8A1818; --olive:#5A6B3F; --green:#2D5F52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100%;background:var(--olive);font-family:'Noto Serif Bengali','EB Garamond',serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{display:flex;justify-content:center}
+  .page-wrap{max-width:800px;width:100%;margin:0 auto;background:var(--paper);box-shadow:0 0 40px rgba(0,0,0,0.22);position:relative;min-height:100vh;display:flex;flex-direction:column}
 
-পূর্ববর্তী লেখা
+  /* ===== Top bar ===== */
+  .top-bar{background:var(--teal-deep);color:var(--cream);padding:11px 28px;display:flex;justify-content:space-between;align-items:center;font-family:'EB Garamond',serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase}
+  .top-bar a{color:var(--gold-bright);text-decoration:none;transition:color .2s}
+  .top-bar a:hover{color:#fff}
+  .top-bar .brand-mini{font-weight:600;letter-spacing:0.18em}
+  .top-bar .back-link::before{content:"← ";letter-spacing:0}
 
-পরবর্তী লেখা
-সম্পর্কিত লেখা
+  /* ===== Article header ===== */
+  .article-header{padding:48px 50px 26px;border-bottom:1px solid var(--paper-dark);position:relative}
+  .article-header::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:var(--gold)}
+  .category-badge{display:inline-block;font-family:'EB Garamond',serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);background:var(--paper-warm);border:1px solid var(--paper-dark);padding:4px 12px;border-radius:2px;margin-bottom:18px}
+  .article-title{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:clamp(28px,5vw,44px);line-height:1.18;font-weight:800;color:var(--teal-deep);margin-bottom:14px;letter-spacing:-0.01em}
+  .article-title.bn{font-family:'Noto Serif Bengali',serif;font-weight:700;letter-spacing:0}
+  .article-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--ink-mute)}
+  .article-meta .meta-sep{color:var(--paper-dark)}
+  .article-meta .meta-lang{font-style:normal;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;font-size:11px;color:var(--gold-dim)}
 
-পূর্ববর্তী লেখা
+  /* Language toggle */
+  .lang-toggle{display:inline-flex;align-items:center;gap:6px;background:var(--teal-deep);color:var(--cream);border:1px solid var(--teal-deep);padding:5px 14px;border-radius:2px;font-family:'EB Garamond',serif;font-style:normal;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-left:auto}
+  .lang-toggle:hover{background:var(--teal);border-color:var(--teal)}
+  .lang-toggle .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright)}
 
-পরবর্তী লেখা
-হোম
+  /* ===== Cover image ===== */
+  .cover-wrap{padding:0 50px;margin:28px 0 8px}
+  .cover-wrap img{display:block;width:100%;max-height:440px;object-fit:cover;border-radius:4px;box-shadow:0 6px 22px rgba(0,0,0,0.18);border:1px solid var(--paper-dark)}
 
-জার্নাল
+  /* ===== Article body ===== */
+  .article-body{padding:32px 50px 40px;font-family:'Noto Serif Bengali','EB Garamond',serif;font-size:18px;line-height:2;color:var(--ink-soft);text-align:justify;hyphens:auto;flex:1}
+  .article-body.en{font-family:'EB Garamond',serif}
+  .article-body p{margin:0 0 1.15em}
+  .article-body p:first-of-type::first-letter{font-family:'Playfair Display',serif;font-size:4.2em;font-weight:800;color:var(--teal-deep);float:left;line-height:0.85;margin:6px 12px 0 0;padding:6px 6px 0 0}
+  .article-body.en p:first-of-type::first-letter{font-family:'Playfair Display',serif}
+  .article-body h2{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:1.55em;font-weight:700;color:var(--teal-deep);margin:1.6em 0 0.7em;line-height:1.3;padding-bottom:6px;border-bottom:1px solid var(--paper-dark)}
+  .article-body h3{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:1.25em;font-weight:600;color:var(--teal-deep);margin:1.4em 0 0.5em;line-height:1.35}
+  .article-body img{display:block;max-width:100%;height:auto;margin:1.4em auto;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,0.14)}
+  .article-body figure{margin:1.6em 0;text-align:center}
+  .article-body figcaption{font-family:'EB Garamond',serif;font-style:italic;font-size:0.84em;color:var(--ink-mute);margin-top:6px;text-align:center}
+  .article-body blockquote{border-left:3px solid var(--gold);padding:4px 16px;margin:1.4em 0;font-style:italic;color:var(--ink-mute);background:var(--paper-warm);border-radius:0 3px 3px 0}
+  .article-body blockquote p{margin:0.5em 0}
+  .article-body ul,.article-body ol{padding-left:26px;margin:1em 0 1.2em}
+  .article-body li{margin:0.3em 0}
+  .article-body a{color:var(--blood);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+  .article-body a:hover{color:var(--teal-deep)}
+  .article-body strong,.article-body b{color:var(--teal-deep);font-weight:700}
+  .article-body em,.article-body i{color:var(--ink)}
+  .article-body hr{border:0;border-top:1px solid var(--paper-dark);margin:2em auto;width:40%}
+  .article-body [style*="background"]{padding:1px 4px;border-radius:2px}
 
-প্রকাশিত লেখা
+  /* ===== Tags ===== */
+  .tags-row{padding:0 50px 28px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--paper-dark)}
+  .tags-label{font-family:'EB Garamond',serif;font-style:italic;font-size:12px;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;margin-right:4px}
+  .tag-pill{display:inline-block;font-family:'EB Garamond',serif;font-size:12px;color:var(--teal-deep);background:var(--cream);border:1px solid var(--paper-dark);padding:3px 11px;border-radius:20px;letter-spacing:0.03em}
+  .tag-pill::before{content:"#";color:var(--gold-dim);margin-right:2px}
 
-ইমেইল সাবস্ক্রিপশন
-গল্প
+  /* ===== Share ===== */
+  .share-section{padding:26px 50px 36px;background:var(--paper-warm);border-bottom:1px solid var(--paper-dark)}
+  .share-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--teal-deep);letter-spacing:0.06em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .share-title::before,.share-title::after{content:"";flex:1;height:1px;background:var(--paper-dark)}
+  .share-buttons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .share-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 14px;border-radius:3px;font-family:'EB Garamond',serif;font-size:13px;font-weight:600;letter-spacing:0.05em;color:#fff;text-decoration:none;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;min-width:42px}
+  .share-btn:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.18);color:#fff}
+  .share-btn svg{width:14px;height:14px;fill:currentColor}
+  .share-fb{background:#1877F2}.share-x{background:#000}.share-wa{background:#25D366}
+  .share-tg{background:#0088CC}.share-li{background:#0A66C2}.share-copy{background:var(--teal-deep)}
 
-উপন্যাস
+  /* ===== Footer ===== */
+  .site-footer{background:var(--teal-deep);color:var(--cream);border-top:3px solid var(--gold);padding:30px 50px 22px}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold-bright);letter-spacing:0.08em;margin-bottom:4px}
+  .footer-brand .bn{font-family:'Noto Serif Bengali',serif;font-size:14px;color:var(--cream);display:block;letter-spacing:0;font-weight:500;margin-top:2px}
+  .footer-nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0;font-family:'EB Garamond',serif;font-size:13px}
+  .footer-nav a{color:var(--cream);text-decoration:none;opacity:0.85;transition:opacity .2s,color .2s}
+  .footer-nav a:hover{color:var(--gold-bright);opacity:1}
+  .footer-copy{font-family:'EB Garamond',serif;font-style:italic;font-size:11px;color:var(--gold-dim);letter-spacing:0.08em;border-top:1px solid rgba(184,146,72,0.25);padding-top:12px;margin-top:6px}
 
-প্রবন্ধ
+  /* ===== States ===== */
+  .loading-state,.error-state{padding:80px 50px;text-align:center}
+  .loading-state .spinner,.error-state .icon{font-family:'Playfair Display',serif;font-size:48px;color:var(--gold);margin-bottom:14px}
+  .loading-state h2,.error-state h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--teal-deep);margin-bottom:8px}
+  .loading-state p,.error-state p{font-family:'EB Garamond',serif;font-style:italic;color:var(--ink-mute);font-size:15px}
+  .error-state a{display:inline-block;margin-top:18px;color:var(--blood);font-weight:600;text-decoration:none;border-bottom:1px solid var(--blood);padding-bottom:1px}
 
-সাহিত্যালোচনা
+  /* ===== Responsive ===== */
+  @media(max-width:680px){
+    .top-bar{padding:10px 18px;font-size:11px}
+    .top-bar .brand-mini{display:none}
+    .article-header{padding:32px 22px 22px}
+    .article-title{font-size:26px}
+    .cover-wrap{padding:0 22px;margin:22px 0 6px}
+    .cover-wrap img{max-height:300px}
+    .article-body{padding:24px 22px 32px;font-size:17px;line-height:1.92}
+    .article-body p:first-of-type::first-letter{font-size:3.6em}
+    .tags-row{padding:0 22px 22px}
+    .share-section{padding:22px 22px 28px}
+    .share-btn{padding:7px 11px;font-size:12px}
+    .site-footer{padding:24px 22px 18px}
+    .article-meta{font-size:13px;gap:6px 12px}
+    .lang-toggle{padding:4px 10px;font-size:11px}
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <a class="back-link" href="./posts.html">সব লেখা</a>
+    <span class="brand-mini">Mostafa Auvi · মোস্তফা অভি</span>
+    <a href="./">প্রচ্ছদ</a>
+  </div>
 
-ভ্রমণকাহিনি
+  <!-- Article container -->
+  <article id="article">
+    <div class="loading-state" id="loadingState">
+      <div class="spinner">❦</div>
+      <h2>লেখা লোড হচ্ছে…</h2>
+      <p>কিছুক্ষণ অপেক্ষা করুন।</p>
+    </div>
+  </article>
 
-ব্যক্তিগত রচনা
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
+    <nav class="footer-nav">
+      <a href="./">প্রচ্ছদ</a>
+      <a href="./posts.html">প্রকাশিত লেখা</a>
+      <a href="./posts.html?category=গল্প">গল্প</a>
+      <a href="./posts.html?category=উপন্যাস">উপন্যাস</a>
+      <a href="./posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
+      <a href="./journal.html">Journal</a>
+    </nav>
+    <div class="footer-copy">© Mostafa Auvi · Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
+  </footer>
+</div>
 
-আমার কথা
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
-আইন-আদালত
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate=(iso,lang)=>{
+  if(!iso)return "";
+  const d=new Date(iso);
+  if(isNaN(d))return "";
+  try{return d.toLocaleDateString(lang==='en'?'en-GB':'bn-BD',{year:'numeric',month:'long',day:'numeric'})}catch{return d.toLocaleDateString()}
+};
+const catLabel=cat=>({"গল্প":"গল্প","উপন্যাস":"উপন্যাস","অনুবাদ সাহিত্য":"অনুবাদ সাহিত্য","ভ্রমণকাহিনি":"ভ্রমণকাহিনি","প্রবন্ধ":"প্রবন্ধ","সাহিত্যালোচনা":"সাহিত্যসমালোচনা","আইন-আদালত":"আইন ও আদালত","ব্যাংকিং ও অর্থনীতি":"ব্যাংকিং ও অর্থনীতি","ব্যক্তিগত রচনা":"ব্যক্তিগত রচনা"}[cat]||cat||"লেখা");
 
-ব্যাংকিং ও অর্থনীতি
+const params=new URLSearchParams(location.search);
+const slug=params.get('slug');
+const articleEl=document.getElementById('article');
+const shareUrl=location.href;
 
-পিডিএফ
+function renderError(title,msg){
+  articleEl.innerHTML='<div class="error-state"><div class="icon">❦</div><h2>'+esc(title)+'</h2><p>'+esc(msg)+'</p><a href="./posts.html">← সব লেখায় ফিরুন</a></div>';
+}
+
+function buildShareButtons(title){
+  const u=encodeURIComponent(shareUrl),t=encodeURIComponent(title||"");
+  return '<div class="share-section">'+
+    '<div class="share-title">লেখাটি শেয়ার করুন · Share</div>'+
+    '<div class="share-buttons">'+
+      '<a class="share-btn share-fb" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u='+u+'"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>'+
+      '<a class="share-btn share-x" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url='+u+'&text='+t+'"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 5.1-6.9zm-1.3 19.6h2L6.5 3.2H4.3l13.3 17.6z"/></svg>X</a>'+
+      '<a class="share-btn share-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text='+t+'%20'+u+'"><svg viewBox="0 0 24 24"><path d="M.06 24l1.68-6.16A11.87 11.87 0 0 1 .14 11.9C.14 5.34 5.48 0 12.05 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.49 8.42c0 6.57-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.7-1.45L.06 24zM6.6 20.13l.36.21a9.86 9.86 0 0 0 5.03 1.38h.01c5.46 0 9.9-4.44 9.9-9.9a9.86 9.86 0 0 0-2.9-7A9.82 9.82 0 0 0 12.06 2c-5.46 0-9.9 4.44-9.9 9.9a9.86 9.86 0 0 0 1.51 5.26l.24.38-1 3.63 3.7-.97zM17.5 14.4c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.9-2.2-.24-.57-.48-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42z"/></svg>WhatsApp</a>'+
+      '<a class="share-btn share-tg" target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url='+u+'&text='+t+'"><svg viewBox="0 0 24 24"><path d="M23.9 1.6l-3.6 17.1c-.3 1.2-1 1.5-2 .9l-5.5-4-2.7 2.6c-.3.3-.55.55-1.1.55l.4-5.6 10.3-9.3c.4-.4-.1-.6-.7-.2L6.2 13.4.9 11.7c-1.2-.4-1.2-1.2.3-1.8L22.4.2c1-.4 1.9.2 1.5 1.4z"/></svg>Telegram</a>'+
+      '<a class="share-btn share-li" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url='+u+'"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>'+
+      '<button class="share-btn share-copy" id="copyLinkBtn" type="button"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link</button>'+
+    '</div></div>';
+}
+
+function renderArticle(post,sibling){
+  const lang=post.language||'bn';
+  const isEn=lang==='en';
+  document.documentElement.lang=lang;
+  document.title=(post.title||'লেখা')+' | Mostafa Auvi';
+
+  const dateStr=fmtDate(post.published_at,lang);
+  const tags=Array.isArray(post.tags)?post.tags.filter(Boolean):(post.tags?String(post.tags).split(',').map(t=>t.trim()).filter(Boolean):[]);
+  const bodyHtml=String(post.body||'').trim();
+  const cover=post.cover_image?('<div class="cover-wrap"><img src="'+esc(post.cover_image)+'" alt="'+esc(post.title||'')+'"></div>'):'';
+
+  const langToggle=sibling?('<button class="lang-toggle" id="langToggle" type="button"><span class="dot"></span>'+(isEn?'বাংলায় পড়ুন':'Read in English')+'</button>'):'';
+  const langBadge='<span class="meta-lang">'+(isEn?'English':'বাংলা')+'</span>';
+
+  articleEl.innerHTML=
+    '<header class="article-header">'+
+      '<span class="category-badge">'+esc(catLabel(post.category))+'</span>'+
+      '<h1 class="article-title'+(isEn?'':' bn')+'">'+esc(post.title||'')+'</h1>'+
+      '<div class="article-meta">'+
+        '<span>'+esc(dateStr)+'</span>'+
+        '<span class="meta-sep">·</span>'+
+        langBadge+
+        langToggle+
+      '</div>'+
+    '</header>'+
+    cover+
+    '<div class="article-body'+(isEn?' en':'')+'" id="articleBody">'+bodyHtml+'</div>'+
+    (tags.length?('<div class="tags-row"><span class="tags-label">Tags</span>'+tags.map(t=>'<span class="tag-pill">'+esc(t)+'</span>').join('')+'</div>'):'')+
+    buildShareButtons(post.title||'');
+
+  // Language toggle handler
+  if(sibling){
+    document.getElementById('langToggle').onclick=()=>{
+      const newUrl='./read.html?slug='+encodeURIComponent(sibling.slug);
+      location.href=newUrl;
+    };
+  }
+
+  // Copy link handler
+  const copyBtn=document.getElementById('copyLinkBtn');
+  if(copyBtn){
+    copyBtn.onclick=async()=>{
+      try{await navigator.clipboard.writeText(shareUrl);copyBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/></svg>কপি হয়েছে!';setTimeout(()=>{copyBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link'},1800)}catch(e){prompt('লিংক কপি করুন:',shareUrl)}
+    };
+  }
+}
+
+async function loadPost(){
+  if(!slug){renderError('লেখা পাওয়া যায়নি','কোনো লেখার লিংক নির্বাচন করা হয়নি।');return}
+  if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){renderError('সেটআপ বাকি','Supabase কনফিগার করা হয়নি।');return}
+  try{
+    const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    // Fetch the post by slug
+    const {data:post,error:err1}=await sb.from('posts')
+      .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published_at')
+      .eq('slug',slug)
+      .eq('published',true)
+      .maybeSingle();
+    if(err1)throw err1;
+    if(!post){renderError('লেখাটি পাওয়া যায়নি','এই লিংকে কোনো প্রকাশিত লেখা নেই।');return}
+    // Fetch sibling in other language by group_id
+    let sibling=null;
+    if(post.group_id){
+      const {data:sib}=await sb.from('posts')
+        .select('slug,language,title')
+        .eq('group_id',post.group_id)
+        .neq('language',post.language||'bn')
+        .eq('published',true)
+        .maybeSingle();
+      if(sib&&sib.slug&&sib.slug!==post.slug)sibling=sib;
+    }
+    renderArticle(post,sibling);
+  }catch(e){
+    console.error(e);
+    renderError('লোড করা যায়নি','ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
+  }
+}
+
+loadPost();
+</script>
+</body>
+</html>
