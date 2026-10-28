@@ -1273,7 +1273,7 @@ async function loadPost() {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     // Fetch the post by slug (try multiple cover image field names)
     const { data: post, error: err1 } = await sb.from('posts')
-      .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published,published_at')
+      .select('*')
       .eq('slug', slug)
       .eq('published', true)
       .maybeSingle();
@@ -1290,7 +1290,7 @@ async function loadPost() {
         if (adminError) throw adminError;
         if (admin) {
           const { data: draft, error: draftError } = await sb.from('posts')
-            .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published,published_at')
+            .select('*')
             .eq('slug', slug).maybeSingle();
           if (draftError) throw draftError;
           loadedPost = draft;
@@ -1322,8 +1322,11 @@ async function loadPost() {
     }
     renderArticle(activePost, sibling);
   } catch (e) {
-    console.error(e);
-    renderError('লোড করা যায়নি', 'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
+    console.error('Article loading failed:', e);
+    const detail = e && (e.message || e.details || e.hint || e.code);
+    renderError('লোড করা যায়নি', detail
+      ? 'লেখা লোড করতে সমস্যা: ' + String(detail)
+      : 'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
   }
 }
 
