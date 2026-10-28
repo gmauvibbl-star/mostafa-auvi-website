@@ -1,140 +1,1025 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<title>লেখা | Mostafa Auvi (মোস্তফা অভি)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0F3D3E">
 <meta name="description" content="Mostafa Auvi-এর লেখা — গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা।">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mostafa Auvi | লেখা">
 <meta property="og:description" content="মোস্তফা অভির লেখা পড়ুন ও শেয়ার করুন।">
-<title>লেখা | Mostafa Auvi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --teal-deep:#0F3D3E; --teal:#1B5E6B; --teal-mid:#2A7A7E;
-    --cream:#FAF4E8; --paper:#F4ECD8; --paper-warm:#EDE2C6; --paper-dark:#C8B898;
-    --ink:#1A1410; --ink-soft:#3D2E22; --ink-mute:#6B5A48;
-    --gold:#B89248; --gold-bright:#D4B468; --gold-dim:#7A6028;
-    --blood:#8A1818; --olive:#5A6B3F; --green:#2D5F52;
+  :root {
+    --teal-deep: #0F3D3E;
+    --teal: #1B5E6B;
+    --teal-mid: #2A7A7E;
+    --teal-light: #4A9A9E;
+    --teal-pale: #C8DEDC;
+    --teal-mist: #E8F0EE;
+    --cream: #FAF4E8;
+    --paper: #F4ECD8;
+    --paper-warm: #EDE2C6;
+    --paper-dark: #C8B898;
+    --ink: #1A1410;
+    --ink-soft: #3D2E22;
+    --ink-mute: #6B5A48;
+    --gold: #B89248;
+    --gold-bright: #D4B468;
+    --gold-dim: #7A6028;
+    --blood: #8A1818;
+    --maroon-deep: #3D0A0A;
+    --olive: #5A6B3F;
+    --green: #2D5F52;
+    --milky: #FFFEF7;
+    --milky-warm: #FBF6E8;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:100%;min-height:100%;background:var(--olive);font-family:'Noto Serif Bengali','EB Garamond',serif;color:var(--ink);-webkit-font-smoothing:antialiased}
-  body{display:flex;justify-content:center}
-  .page-wrap{max-width:800px;width:100%;margin:0 auto;background:var(--paper);box-shadow:0 0 40px rgba(0,0,0,0.22);position:relative;min-height:100vh;display:flex;flex-direction:column}
 
-  /* ===== Top bar ===== */
-  .top-bar{background:var(--teal-deep);color:var(--cream);padding:11px 28px;display:flex;justify-content:space-between;align-items:center;font-family:'EB Garamond',serif;font-size:12px;letter-spacing:0.14em;text-transform:uppercase}
-  .top-bar a{color:var(--gold-bright);text-decoration:none;transition:color .2s}
-  .top-bar a:hover{color:#fff}
-  .top-bar .brand-mini{font-weight:600;letter-spacing:0.18em}
-  .top-bar .back-link::before{content:"← ";letter-spacing:0}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* ===== Article header ===== */
-  .article-header{padding:48px 50px 26px;border-bottom:1px solid var(--paper-dark);position:relative}
-  .article-header::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:var(--gold)}
-  .category-badge{display:inline-block;font-family:'EB Garamond',serif;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);background:var(--paper-warm);border:1px solid var(--paper-dark);padding:4px 12px;border-radius:2px;margin-bottom:18px}
-  .article-title{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:clamp(28px,5vw,44px);line-height:1.18;font-weight:800;color:var(--teal-deep);margin-bottom:14px;letter-spacing:-0.01em}
-  .article-title.bn{font-family:'Noto Serif Bengali',serif;font-weight:700;letter-spacing:0}
-  .article-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--ink-mute)}
-  .article-meta .meta-sep{color:var(--paper-dark)}
-  .article-meta .meta-lang{font-style:normal;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;font-size:11px;color:var(--gold-dim)}
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    background: var(--olive);
+    font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Page wrapper */
+  .page-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 0 40px rgba(0,0,0,0.18);
+    position: relative;
+    overflow-x: hidden;
+  }
+  .page-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/></svg>");
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  .page-wrap > * { position: relative; z-index: 2; }
+
+  /* ====== TOP UTILITY BAR ====== */
+  .utility-bar {
+    background: var(--teal-deep);
+    color: rgba(250,244,232,0.7);
+    font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .utility-bar .date {
+    color: var(--gold-bright);
+    font-style: italic;
+    letter-spacing: 0.08em;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .utility-bar .lang { display: flex; gap: 14px; align-items: center; font-size: 14px; }
+  .utility-bar .lang .lang-label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: rgba(250,244,232,0.55);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    margin-right: 4px;
+  }
+  .utility-bar .lang a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 4px 12px;
+    border: 1px solid rgba(184,146,72,0.35);
+    border-radius: 14px;
+    color: rgba(250,244,232,0.85);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    transition: all .2s;
+    cursor: pointer;
+  }
+  .utility-bar .lang a:hover {
+    background: rgba(184,146,72,0.18);
+    border-color: var(--gold-bright);
+    color: var(--gold-bright);
+  }
+  .utility-bar .lang a.active {
+    background: var(--gold-bright);
+    color: var(--teal-deep);
+    border-color: var(--gold-bright);
+    font-weight: 700;
+  }
+  .utility-bar .lang .sep { color: rgba(184,146,72,0.3); margin: 0 -8px; }
+
+  /* ====== MAIN HEADER ====== */
+  .header {
+    background: var(--paper);
+    padding: 30px 50px 24px;
+    position: relative;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .brand { font-family: 'Playfair Display', serif; line-height: 0.95; text-decoration: none; }
+  .brand .name {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    color: var(--teal-deep);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    display: flex;
+    align-items: baseline;
+  }
+  .brand .name .first {
+    font-style: italic;
+    color: var(--blood);
+    font-weight: 900;
+    margin-right: 6px;
+  }
+  .brand .tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--blood);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: 700;
+  }
+  .brand .tagline .dot { color: var(--gold); margin: 0 10px; font-size: 12px; }
+  .header-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .share { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .share .label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    margin-right: 6px;
+    font-weight: 600;
+  }
+  .share a {
+    display: inline-flex;
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--teal-deep);
+    border-radius: 50%;
+    text-decoration: none;
+    color: var(--teal-deep);
+    background: var(--cream);
+    align-items: center;
+    justify-content: center;
+    transition: all .25s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  }
+  .share a svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+  .share a:hover {
+    background: var(--teal-deep);
+    color: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(15,61,62,0.3);
+  }
+  .share a.share-fb:hover  { background: #1877F2; border-color: #1877F2; color: #fff; }
+  .share a.share-tw:hover  { background: #000000; border-color: #000000; color: #fff; }
+  .share a.share-ig:hover  { background: #C13584; border-color: #C13584; color: #fff; }
+  .share a.share-wa:hover  { background: #25D366; border-color: #25D366; color: #fff; }
+  .share a.share-em:hover  { background: #8B1818; border-color: #8B1818; color: #fff; }
+
+  .subscribe-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--blood);
+    color: var(--cream);
+    border: 1.5px solid var(--blood);
+    border-radius: 999px;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .25s;
+    box-shadow: 0 3px 10px rgba(138,24,24,0.3);
+    white-space: nowrap;
+  }
+  .subscribe-btn:hover {
+    background: var(--cream);
+    color: var(--blood);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(138,24,24,0.4);
+  }
+  .subscribe-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* ====== NAVIGATION ====== */
+  .nav {
+    background: var(--paper);
+    padding: 14px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--teal-deep);
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .nav ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0 4px;
+    text-decoration: none;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: all .25s;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .nav ul li a:hover { border-bottom-color: var(--gold); }
+  .nav ul li.active a {
+    color: var(--blood) !important;
+    border-bottom-color: var(--blood) !important;
+    font-weight: 800;
+  }
+  .nav ul li.nav-home a     { color: #8B1818; }
+  .nav ul li.nav-fiction a  { color: #1B5E6B; }
+  .nav ul li.nav-essay a    { color: #2D5F52; }
+  .nav ul li.nav-law a      { color: #5D3A8A; }
+  .nav ul li.nav-journal a  { color: #966C33; }
+  .nav ul li.nav-author a   { color: #8A1A4A; }
+  .nav ul li.nav-all a      { color: #1F7A70; }
+  .nav ul li:not(.active) a:hover { border-bottom-color: currentColor; filter: brightness(1.15); }
+  .nav .search-box {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--paper-dark);
+    padding: 6px 14px;
+    border-radius: 22px;
+    flex-shrink: 0;
+    transition: border-color .25s;
+  }
+  .nav .search-box:focus-within { border-color: var(--teal-deep); }
+  .nav .search-box input {
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    width: 140px;
+    outline: none;
+  }
+  .nav .search-box input::placeholder { color: var(--ink-soft); opacity: 0.55; }
+  .nav .search-box .icon { color: var(--teal-deep); font-size: 14px; }
+
+  /* ====== READ MAIN WRAPPER ====== */
+  .read-main {
+    padding: 28px 50px 60px;
+    background: var(--paper);
+  }
+
+  /* Back link bar */
+  .back-bar {
+    max-width: 800px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .back-bar.bottom { margin: 0 auto; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--cream);
+    color: var(--teal-deep);
+    border: 1px solid var(--paper-dark);
+    border-radius: 4px;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .back-link:hover {
+    background: var(--teal-deep);
+    color: var(--cream);
+    border-color: var(--teal-deep);
+  }
+  .back-bar .crumb {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+
+  /* ====== A4 READING PAGE ====== */
+  .a4-page {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--milky);
+    border-radius: 2px;
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.04),
+      0 4px 14px rgba(15,61,62,0.08),
+      0 16px 40px rgba(0,0,0,0.12);
+    padding: 44px 50px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .a4-page::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blood) 0%, var(--gold) 50%, var(--teal-deep) 100%);
+  }
+
+  /* Article header */
+  .a4-header { margin-bottom: 18px; }
+  .a4-cat-badge {
+    display: inline-block;
+    background: var(--blood);
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  .a4-title {
+    font-family: 'Playfair Display', 'Noto Serif Bengali', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin-bottom: 14px;
+  }
+  .a4-title.bn {
+    font-family: 'Noto Serif Bengali', serif;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.32;
+  }
+  .a4-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 16px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+  }
+  .a4-meta .meta-sep { color: var(--paper-dark); }
+  .a4-meta .meta-lang {
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--gold-dim);
+    background: var(--paper-warm);
+    padding: 2px 9px;
+    border-radius: 2px;
+    border: 1px solid var(--paper-dark);
+  }
+  .a4-meta .meta-author {
+    font-style: normal;
+    font-family: 'Noto Serif Bengali', serif;
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  .a4-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+    margin: 22px 0 6px;
+    position: relative;
+  }
+  .a4-divider::after {
+    content: "❦";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--milky);
+    color: var(--gold);
+    font-size: 14px;
+    padding: 0 10px;
+    font-family: 'Playfair Display', serif;
+  }
 
   /* Language toggle */
-  .lang-toggle{display:inline-flex;align-items:center;gap:6px;background:var(--teal-deep);color:var(--cream);border:1px solid var(--teal-deep);padding:5px 14px;border-radius:2px;font-family:'EB Garamond',serif;font-style:normal;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-left:auto}
-  .lang-toggle:hover{background:var(--teal);border-color:var(--teal)}
-  .lang-toggle .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright)}
+  .a4-lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--teal-deep);
+    color: var(--cream);
+    border: 1px solid var(--teal-deep);
+    padding: 6px 14px;
+    border-radius: 3px;
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s;
+    margin-left: auto;
+  }
+  .a4-lang-toggle:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .a4-lang-toggle .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+  }
+  .a4-meta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
 
-  /* ===== Cover image ===== */
-  .cover-wrap{padding:0 50px;margin:28px 0 8px}
-  .cover-wrap img{display:block;width:100%;max-height:440px;object-fit:cover;border-radius:4px;box-shadow:0 6px 22px rgba(0,0,0,0.18);border:1px solid var(--paper-dark)}
+  /* Cover image */
+  .a4-cover {
+    display: block;
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.18);
+    border: 1px solid var(--paper-dark);
+    margin: 8px 0 26px;
+  }
 
-  /* ===== Article body ===== */
-  .article-body{padding:32px 50px 40px;font-family:'Noto Serif Bengali','EB Garamond',serif;font-size:18px;line-height:2;color:var(--ink-soft);text-align:justify;hyphens:auto;flex:1}
-  .article-body.en{font-family:'EB Garamond',serif}
-  .article-body p{margin:0 0 1.15em}
-  .article-body p:first-of-type::first-letter{font-family:'Playfair Display',serif;font-size:4.2em;font-weight:800;color:var(--teal-deep);float:left;line-height:0.85;margin:6px 12px 0 0;padding:6px 6px 0 0}
-  .article-body.en p:first-of-type::first-letter{font-family:'Playfair Display',serif}
-  .article-body h2{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:1.55em;font-weight:700;color:var(--teal-deep);margin:1.6em 0 0.7em;line-height:1.3;padding-bottom:6px;border-bottom:1px solid var(--paper-dark)}
-  .article-body h3{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:1.25em;font-weight:600;color:var(--teal-deep);margin:1.4em 0 0.5em;line-height:1.35}
-  .article-body img{display:block;max-width:100%;height:auto;margin:1.4em auto;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,0.14)}
-  .article-body figure{margin:1.6em 0;text-align:center}
-  .article-body figcaption{font-family:'EB Garamond',serif;font-style:italic;font-size:0.84em;color:var(--ink-mute);margin-top:6px;text-align:center}
-  .article-body blockquote{border-left:3px solid var(--gold);padding:4px 16px;margin:1.4em 0;font-style:italic;color:var(--ink-mute);background:var(--paper-warm);border-radius:0 3px 3px 0}
-  .article-body blockquote p{margin:0.5em 0}
-  .article-body ul,.article-body ol{padding-left:26px;margin:1em 0 1.2em}
-  .article-body li{margin:0.3em 0}
-  .article-body a{color:var(--blood);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
-  .article-body a:hover{color:var(--teal-deep)}
-  .article-body strong,.article-body b{color:var(--teal-deep);font-weight:700}
-  .article-body em,.article-body i{color:var(--ink)}
-  .article-body hr{border:0;border-top:1px solid var(--paper-dark);margin:2em auto;width:40%}
-  .article-body [style*="background"]{padding:1px 4px;border-radius:2px}
+  /* Article body */
+  .a4-body {
+    font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
+    font-size: 17px;
+    line-height: 2;
+    color: var(--ink);
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .a4-body.en { font-family: 'EB Garamond', serif; }
+  .a4-body p { margin: 0 0 1.15em; }
+  .a4-body p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.2em;
+    font-weight: 800;
+    color: var(--blood);
+    float: left;
+    line-height: 0.85;
+    margin: 6px 12px 0 0;
+    padding: 6px 6px 0 0;
+  }
+  .a4-body h2 {
+    font-family: 'Playfair Display', 'Noto Serif Bengali', serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--teal-deep);
+    margin: 1.6em 0 0.7em;
+    line-height: 1.3;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .a4-body h3 {
+    font-family: 'Playfair Display', 'Noto Serif Bengali', serif;
+    font-size: 1.22em;
+    font-weight: 600;
+    color: var(--teal-deep);
+    margin: 1.4em 0 0.5em;
+    line-height: 1.35;
+  }
+  .a4-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.4em auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+  }
+  .a4-body figure { margin: 1.6em 0; text-align: center; }
+  .a4-body figcaption {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.84em;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    text-align: center;
+  }
+  .a4-body blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 6px 18px;
+    margin: 1.4em 0;
+    font-style: italic;
+    color: var(--ink-mute);
+    background: var(--milky-warm);
+    border-radius: 0 3px 3px 0;
+    font-family: 'EB Garamond', serif;
+  }
+  .a4-body blockquote p { margin: 0.5em 0; }
+  .a4-body ul, .a4-body ol { padding-left: 26px; margin: 1em 0 1.2em; }
+  .a4-body li { margin: 0.3em 0; }
+  .a4-body a {
+    color: var(--blood);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 3px;
+    transition: color .2s;
+  }
+  .a4-body a:hover { color: var(--teal-deep); }
+  .a4-body strong, .a4-body b { color: var(--teal-deep); font-weight: 700; }
+  .a4-body em, .a4-body i { color: var(--ink); font-family: 'EB Garamond', serif; }
+  .a4-body mark, .a4-body [style*="background"] {
+    background: rgba(212,180,104,0.32) !important;
+    color: var(--ink) !important;
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+  .a4-body hr {
+    border: 0;
+    border-top: 1px solid var(--paper-dark);
+    margin: 2em auto;
+    width: 40%;
+  }
 
-  /* ===== Tags ===== */
-  .tags-row{padding:0 50px 28px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--paper-dark)}
-  .tags-label{font-family:'EB Garamond',serif;font-style:italic;font-size:12px;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;margin-right:4px}
-  .tag-pill{display:inline-block;font-family:'EB Garamond',serif;font-size:12px;color:var(--teal-deep);background:var(--cream);border:1px solid var(--paper-dark);padding:3px 11px;border-radius:20px;letter-spacing:0.03em}
-  .tag-pill::before{content:"#";color:var(--gold-dim);margin-right:2px}
+  /* Tags */
+  .a4-tags {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--paper-dark);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .a4-tags-label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .tag-pill {
+    display: inline-block;
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    color: var(--teal-deep);
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-dark);
+    padding: 3px 11px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+  }
+  .tag-pill::before { content: "#"; color: var(--gold-dim); margin-right: 2px; }
 
-  /* ===== Share ===== */
-  .share-section{padding:26px 50px 36px;background:var(--paper-warm);border-bottom:1px solid var(--paper-dark)}
-  .share-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--teal-deep);letter-spacing:0.06em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-  .share-title::before,.share-title::after{content:"";flex:1;height:1px;background:var(--paper-dark)}
-  .share-buttons{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-  .share-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 14px;border-radius:3px;font-family:'EB Garamond',serif;font-size:13px;font-weight:600;letter-spacing:0.05em;color:#fff;text-decoration:none;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;min-width:42px}
-  .share-btn:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,0.18);color:#fff}
-  .share-btn svg{width:14px;height:14px;fill:currentColor}
-  .share-fb{background:#1877F2}.share-x{background:#000}.share-wa{background:#25D366}
-  .share-tg{background:#0088CC}.share-li{background:#0A66C2}.share-copy{background:var(--teal-deep)}
+  /* ====== SHARE SECTION (under article) ====== */
+  .share-section {
+    max-width: 800px;
+    margin: 22px auto 0;
+    background: var(--cream);
+    border: 1px solid var(--paper-dark);
+    border-radius: 4px;
+    padding: 22px 26px;
+  }
+  .share-section .share-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--teal-deep);
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .share-section .share-section-title::before,
+  .share-section .share-section-title::after {
+    content: ""; flex: 1; height: 1px;
+    background: var(--paper-dark);
+  }
+  .share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 3px;
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform .15s, box-shadow .15s, opacity .15s;
+    min-width: 44px;
+  }
+  .share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    color: #fff;
+    opacity: 0.95;
+  }
+  .share-btn svg { width: 14px; height: 14px; fill: currentColor; }
+  .share-fb  { background: #1877F2; }
+  .share-x   { background: #000000; }
+  .share-wa  { background: #25D366; }
+  .share-tg  { background: #0088CC; }
+  .share-li  { background: #0A66C2; }
+  .share-em  { background: var(--blood); }
+  .share-copy{ background: var(--teal-deep); }
 
-  /* ===== Footer ===== */
-  .site-footer{background:var(--teal-deep);color:var(--cream);border-top:3px solid var(--gold);padding:30px 50px 22px}
-  .footer-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold-bright);letter-spacing:0.08em;margin-bottom:4px}
-  .footer-brand .bn{font-family:'Noto Serif Bengali',serif;font-size:14px;color:var(--cream);display:block;letter-spacing:0;font-weight:500;margin-top:2px}
-  .footer-nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0;font-family:'EB Garamond',serif;font-size:13px}
-  .footer-nav a{color:var(--cream);text-decoration:none;opacity:0.85;transition:opacity .2s,color .2s}
-  .footer-nav a:hover{color:var(--gold-bright);opacity:1}
-  .footer-copy{font-family:'EB Garamond',serif;font-style:italic;font-size:11px;color:var(--gold-dim);letter-spacing:0.08em;border-top:1px solid rgba(184,146,72,0.25);padding-top:12px;margin-top:6px}
+  /* ====== STATES ====== */
+  .loading-state, .error-state {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--milky);
+    border-radius: 2px;
+    box-shadow: 0 4px 14px rgba(15,61,62,0.08), 0 16px 40px rgba(0,0,0,0.12);
+    padding: 80px 50px;
+    text-align: center;
+  }
+  .loading-state .spinner, .error-state .icon {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .loading-state h2, .error-state h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--teal-deep);
+    margin-bottom: 8px;
+  }
+  .loading-state p, .error-state p {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--ink-mute);
+    font-size: 15px;
+  }
+  .error-state a {
+    display: inline-block;
+    margin-top: 18px;
+    color: var(--blood);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid var(--blood);
+    padding-bottom: 1px;
+  }
 
-  /* ===== States ===== */
-  .loading-state,.error-state{padding:80px 50px;text-align:center}
-  .loading-state .spinner,.error-state .icon{font-family:'Playfair Display',serif;font-size:48px;color:var(--gold);margin-bottom:14px}
-  .loading-state h2,.error-state h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--teal-deep);margin-bottom:8px}
-  .loading-state p,.error-state p{font-family:'EB Garamond',serif;font-style:italic;color:var(--ink-mute);font-size:15px}
-  .error-state a{display:inline-block;margin-top:18px;color:var(--blood);font-weight:600;text-decoration:none;border-bottom:1px solid var(--blood);padding-bottom:1px}
+  /* ====== FOOTER STRIP ====== */
+  .footer-strip {
+    background: var(--teal-deep);
+    color: rgba(250,244,232,0.65);
+    padding: 16px 50px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    border-top: 3px double var(--gold);
+  }
+  .footer-strip .left {
+    color: var(--gold-bright);
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 14px;
+    justify-self: start;
+  }
+  .footer-strip .center { justify-self: center; display: flex; align-items: center; }
+  .footer-strip .right { justify-self: end; display: flex; align-items: center; gap: 20px; }
+  .footer-strip .left .author {
+    color: var(--cream);
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-right: 12px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(212,180,104,0.4);
+  }
+  .footer-strip .right a {
+    color: var(--gold-bright);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color .2s;
+  }
+  .footer-strip .right a:first-child { margin-left: 0; }
+  .footer-strip .right a:hover { color: var(--cream); }
 
-  /* ===== Responsive ===== */
-  @media(max-width:680px){
-    .top-bar{padding:10px 18px;font-size:11px}
-    .top-bar .brand-mini{display:none}
-    .article-header{padding:32px 22px 22px}
-    .article-title{font-size:26px}
-    .cover-wrap{padding:0 22px;margin:22px 0 6px}
-    .cover-wrap img{max-height:300px}
-    .article-body{padding:24px 22px 32px;font-size:17px;line-height:1.92}
-    .article-body p:first-of-type::first-letter{font-size:3.6em}
-    .tags-row{padding:0 22px 22px}
-    .share-section{padding:22px 22px 28px}
-    .share-btn{padding:7px 11px;font-size:12px}
-    .site-footer{padding:24px 22px 18px}
-    .article-meta{font-size:13px;gap:6px 12px}
-    .lang-toggle{padding:4px 10px;font-size:11px}
+  .author-login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #E5C77A 0%, #B89248 100%);
+    color: #0F3D3E;
+    border: 1.5px solid #FAF4E8;
+    border-radius: 999px;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    transition: all .25s;
+    text-decoration: none;
+    vertical-align: middle;
+  }
+  .author-login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(0,0,0,0.4);
+    background: linear-gradient(135deg, #FAF4E8 0%, #E5C77A 100%);
+  }
+  .author-login-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* ====== LOGIN MODAL ====== */
+  .login-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10, 20, 15, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 200;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .login-modal-overlay.open { display: flex; }
+  .login-modal {
+    background: var(--paper);
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    max-width: 460px; width: 100%;
+    padding: 36px 38px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .login-modal .modal-close {
+    position: absolute; top: 14px; right: 18px;
+    width: 32px; height: 32px;
+    border: none; background: transparent;
+    color: var(--ink-soft);
+    font-size: 22px; cursor: pointer;
+    border-radius: 50%;
+    transition: all .2s;
+    line-height: 1;
+  }
+  .login-modal .modal-close:hover { background: var(--paper-dark); color: var(--blood); }
+  .login-modal .eyebrow {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px; color: var(--gold-dim);
+    letter-spacing: 0.4em; text-transform: uppercase;
+    margin-bottom: 8px; font-weight: 600;
+  }
+  .login-modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--teal-deep);
+    margin-bottom: 6px; font-weight: 800;
+  }
+  .login-modal .modal-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic; font-size: 14px;
+    color: var(--ink-soft); margin-bottom: 22px;
+  }
+  .login-modal .form-group { margin-bottom: 16px; }
+  .login-modal .form-group label {
+    display: block;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--teal-deep); margin-bottom: 5px;
+  }
+  .login-modal .form-group input {
+    width: 100%; padding: 11px 14px;
+    border: 1.5px solid var(--paper-dark);
+    border-radius: 6px;
+    background: #fffefa;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 14px; color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .login-modal .form-group input:focus {
+    outline: none;
+    border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(42,122,126,0.15);
+  }
+  .login-modal .modal-status {
+    padding: 10px 14px; border-radius: 6px;
+    font-size: 13px; margin-bottom: 14px;
+    font-weight: 500; line-height: 1.5;
+    display: none;
+  }
+  .login-modal .modal-status.show { display: block; }
+  .login-modal .modal-status.error { background: #fde8e8; color: var(--blood); border-left: 3px solid var(--blood); }
+  .login-modal .modal-status.success { background: #e6f4ea; color: #2D5F52; border-left: 3px solid #2D5F52; }
+  .login-modal .modal-status.warning { background: #fff5e0; color: var(--gold-dim); border-left: 3px solid var(--gold); }
+  .login-modal .btn-row { display: flex; gap: 10px; margin-top: 14px; }
+  .login-modal .btn-row .btn { flex: 1; justify-content: center; padding: 11px 18px; font-size: 13px; }
+  .login-modal .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 22px; text-decoration: none;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.06em; transition: all .25s;
+    cursor: pointer; border-radius: 4px;
+    border: 1px solid transparent;
+  }
+  .login-modal .btn-primary {
+    background: var(--gold-bright); color: var(--teal-deep);
+    border-color: var(--gold-bright);
+  }
+  .login-modal .btn.secondary {
+    background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--paper-dark);
+  }
+  .login-modal .btn.secondary:hover { background: var(--paper-warm); }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .header { padding: 22px 30px 18px; }
+    .nav { padding: 12px 30px; gap: 14px; }
+    .nav ul { gap: 18px; }
+    .utility-bar { padding: 10px 30px; }
+    .read-main { padding: 22px 30px 40px; }
+    .a4-page { padding: 36px 32px 28px; }
+    .footer-strip { padding: 16px 30px; grid-template-columns: 1fr; text-align: center; gap: 12px; }
+    .footer-strip .left, .footer-strip .right { justify-self: center; }
+    .footer-strip .right { flex-wrap: wrap; justify-content: center; }
+    .footer-strip .right a { margin-left: 10px; margin-right: 10px; }
+    .footer-strip .left .author { display: block; border-right: 0; border-bottom: 1px solid rgba(212,180,104,0.4); padding-bottom: 8px; margin-bottom: 8px; margin-right: 0; padding-right: 0; }
+  }
+  @media (max-width: 680px) {
+    .brand .name { font-size: 36px; }
+    .brand .tagline { font-size: 12px; letter-spacing: 0.22em; }
+    .header-right { gap: 14px; }
+    .share a { width: 36px; height: 36px; }
+    .share a svg { width: 16px; height: 16px; }
+    .subscribe-btn { padding: 8px 14px; font-size: 12px; }
+    .utility-bar { padding: 8px 18px; font-size: 12px; }
+    .utility-bar .lang .lang-label { display: none; }
+    .nav { padding: 12px 18px; }
+    .nav ul { gap: 14px; }
+    .nav ul li a { font-size: 13px; }
+    .nav .search-box { display: none; }
+    .read-main { padding: 18px 16px 32px; }
+    .a4-page { padding: 24px 20px 22px; }
+    .a4-title { font-size: 24px; }
+    .a4-body { font-size: 16px; line-height: 1.95; }
+    .a4-body p:first-of-type::first-letter { font-size: 3.6em; }
+    .a4-meta { font-size: 13px; gap: 6px 12px; }
+    .a4-cover { max-height: 280px; }
+    .share-section { padding: 18px 16px; }
+    .share-btn { padding: 7px 11px; font-size: 12px; }
+    .footer-strip { padding: 14px 18px; }
+    .loading-state, .error-state { padding: 60px 22px; }
   }
 </style>
 </head>
 <body>
+
 <div class="page-wrap">
-  <!-- Top bar -->
-  <div class="top-bar">
-    <a class="back-link" href="./posts.html">সব লেখা</a>
-    <span class="brand-mini">Mostafa Auvi · মোস্তফা অভি</span>
-    <a href="./">প্রচ্ছদ</a>
+
+<!-- Top utility bar -->
+<div class="utility-bar">
+  <div class="date" id="todayDate">শুক্রবার, ২৮ অক্টোবর ২০২৬</div>
+  <div class="lang">
+    <span class="lang-label">ভাষা নির্বাচন:</span>
+    <a href="index.html" class="active" title="বাংলায় পড়তে ক্লিক করুন">বাংলা</a>
+    <span class="sep">·</span>
+    <a href="index-en.html" title="Click here to read in English">English</a>
+    <span class="sep">·</span>
+    <a href="#" title="Deutsch version coming soon">Deutsch</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-row">
+    <a class="brand" href="index.html" style="text-decoration:none;">
+      <div class="name"><span class="first">Mostafa</span>Auvi</div>
+      <div class="tagline">Fiction Writer<span class="dot">◆</span>Literary Critic</div>
+    </a>
+    <div class="header-right">
+      <div class="share">
+        <span class="label">Share —</span>
+        <a href="#" onclick="return sharePage('facebook')" class="share-fb" title="Facebook-এ শেয়ার করুন" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+        </a>
+        <a href="#" onclick="return sharePage('twitter')" class="share-tw" title="X / Twitter-এ শেয়ার করুন" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" onclick="return sharePage('whatsapp')" class="share-wa" title="WhatsApp-এ শেয়ার করুন" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        </a>
+        <a href="#" onclick="return sharePage('telegram')" class="share-ig" title="Telegram-এ শেয়ার করুন" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.662 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <a href="#" onclick="return sharePage('linkedin')" class="share-em" title="LinkedIn-এ শেয়ার করুন" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="#" onclick="return sharePage('email')" class="share-em" title="ইমেইলে শেয়ার করুন" aria-label="Email" style="background: var(--teal-deep); color: var(--cream); border-color: var(--teal-deep);">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.714-9.518-7.714h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+        </a>
+        <a href="#" onclick="return copyLink()" class="share-em" title="লিংক কপি করুন" aria-label="Copy Link" style="background: var(--gold-bright); color: var(--teal-deep); border-color: var(--gold-bright);">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+        </a>
+      </div>
+      <a href="subscribe.html" class="subscribe-btn" title="নতুন লেখার ইমেইল আপডেট পান">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.714-9.518-7.714h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+        <span>সাবস্ক্রাইব করুন</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav" aria-label="প্রধান নেভিগেশন">
+  <ul>
+    <li class="nav-home"><a href="index.html">Home</a></li>
+    <li class="nav-fiction"><a href="posts.html#category-fiction">কথাসাহিত্য</a></li>
+    <li class="nav-essay"><a href="posts.html#category-essay">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
+    <li class="nav-law"><a href="posts.html#category-law">আইন ও আদালত</a></li>
+    <li class="nav-journal"><a href="journal.html">Journal</a></li>
+    <li class="nav-author"><a href="about.html">লেখক পরিচিতি</a></li>
+    <li class="nav-all active"><a href="posts.html">সব লেখা</a></li>
+  </ul>
+  <div class="search-box">
+    <input type="text" placeholder="অনুসন্ধান..." id="navSearch" aria-label="অনুসন্ধান">
+    <span class="icon">⌕</span>
+  </div>
+</nav>
+
+<!-- MAIN READING AREA -->
+<main class="read-main">
+  <!-- Top back link bar -->
+  <div class="back-bar">
+    <a href="posts.html" class="back-link" title="সব লেখায় ফিরুন">← সব লেখা</a>
+    <span class="crumb" id="crumb">Mostafa Auvi · প্রকাশিত লেখা</span>
   </div>
 
-  <!-- Article container -->
+  <!-- Article container (A4 page) -->
   <article id="article">
     <div class="loading-state" id="loadingState">
       <div class="spinner">❦</div>
@@ -143,137 +1028,391 @@
     </div>
   </article>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
-    <nav class="footer-nav">
-      <a href="./">প্রচ্ছদ</a>
-      <a href="./posts.html">প্রকাশিত লেখা</a>
-      <a href="./posts.html?category=গল্প">গল্প</a>
-      <a href="./posts.html?category=উপন্যাস">উপন্যাস</a>
-      <a href="./posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
-      <a href="./journal.html">Journal</a>
-    </nav>
-    <div class="footer-copy">© Mostafa Auvi · Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
-  </footer>
+  <!-- Bottom back link bar (rendered into by JS) -->
+  <div class="back-bar bottom" id="bottomBackBar" style="margin-top:24px;"></div>
+</main>
+
+<!-- Footer strip -->
+<div class="footer-strip">
+  <div class="left">
+    <span class="author">Mostafa Auvi</span>
+    « লেখা মানুষকে আরেকটু মানুষ করে »
+  </div>
+  <div class="center">
+    <button id="authorLoginBtn" class="author-login-btn" aria-label="লেখক লগইন">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span id="authorLoginLabel">লেখক লগইন</span>
+    </button>
+  </div>
+  <div class="right">
+    <a href="subscribe.html">পত্র বক্স</a>
+    <a href="index.html">সাইটম্যাপ</a>
+    <a href="about.html">গোপনীয়তা</a>
+    <a href="#">© ২০২৬</a>
+  </div>
+</div>
+
+</div><!-- /.page-wrap -->
+
+<!-- Author login modal -->
+<div id="loginModalOverlay" class="login-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+  <div class="login-modal">
+    <button type="button" class="modal-close" aria-label="বন্ধ করুন" onclick="closeLoginModal()">×</button>
+    <div class="eyebrow">Author Access</div>
+    <h3 id="loginModalTitle">লেখক লগইন</h3>
+    <div class="modal-sub">ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন</div>
+    <div id="modalStatus" class="modal-status"></div>
+    <div class="form-group">
+      <label for="modalEmail">ইমেইল</label>
+      <input id="modalEmail" type="email" autocomplete="email" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label for="modalPassword">পাসওয়ার্ড</label>
+      <input id="modalPassword" type="password" autocomplete="current-password" placeholder="আপনার পাসওয়ার্ড">
+    </div>
+    <div class="btn-row">
+      <button type="button" id="modalLoginBtn" class="btn btn-primary">লগইন করুন →</button>
+      <button type="button" class="btn secondary" onclick="closeLoginModal()">বাতিল</button>
+    </div>
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);text-align:center;font-family:'EB Garamond',serif;font-size:13px;">
+      <a href="#" id="forgotPasswordLink" style="color:var(--blood);text-decoration:none;font-style:italic;font-weight:600;">পাসওয়ার্ড ভুলে গেছেন?</a>
+      <span style="color:var(--paper-dark);margin:0 8px;">·</span>
+      <span style="color:var(--ink-soft);">নতুন লেখক? <a href="#" id="signupLink" style="color:var(--teal-deep);text-decoration:none;font-weight:600;font-style:italic;">অ্যাকাউন্ট তৈরি করুন</a></span>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
-const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+/* ====== Date in utility bar (Bengali) ====== */
+(function(){
+  const days = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
+  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  const now = new Date();
+  const dateStr = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
+  const el = document.getElementById('todayDate');
+  if (el) el.textContent = dateStr;
+})();
 
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmtDate=(iso,lang)=>{
-  if(!iso)return "";
-  const d=new Date(iso);
-  if(isNaN(d))return "";
-  try{return d.toLocaleDateString(lang==='en'?'en-GB':'bn-BD',{year:'numeric',month:'long',day:'numeric'})}catch{return d.toLocaleDateString()}
+/* ====== Supabase config ====== */
+const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
+const fmtDate = (iso, lang) => {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  if (lang === 'en') {
+    try { return d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }); }
+    catch { return d.toLocaleDateString(); }
+  }
+  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  const toBn = n => String(n).replace(/[0-9]/g, x => '০১২৩৪৫৬৭৮৯'[x]);
+  return `${toBn(d.getDate())} ${months[d.getMonth()]} ${toBn(d.getFullYear())}`;
 };
-const catLabel=cat=>({"গল্প":"গল্প","উপন্যাস":"উপন্যাস","অনুবাদ সাহিত্য":"অনুবাদ সাহিত্য","ভ্রমণকাহিনি":"ভ্রমণকাহিনি","প্রবন্ধ":"প্রবন্ধ","সাহিত্যালোচনা":"সাহিত্যসমালোচনা","আইন-আদালত":"আইন ও আদালত","ব্যাংকিং ও অর্থনীতি":"ব্যাংকিং ও অর্থনীতি","ব্যক্তিগত রচনা":"ব্যক্তিগত রচনা"}[cat]||cat||"লেখা");
+const catLabel = cat => ({
+  "গল্প":"গল্প","উপন্যাস":"উপন্যাস","অনুবাদ সাহিত্য":"অনুবাদ সাহিত্য",
+  "ভ্রমণকাহিনি":"ভ্রমণকাহিনি","প্রবন্ধ":"প্রবন্ধ","সাহিত্যালোচনা":"সাহিত্যসমালোচনা",
+  "আইন-আদালত":"আইন ও আদালত","ব্যাংকিং ও অর্থনীতি":"ব্যাংকিং ও অর্থনীতি",
+  "ব্যক্তিগত রচনা":"ব্যক্তিগত রচনা","জার্নাল":"জার্নাল","Journal":"Journal",
+  "ডায়েরি":"ডায়েরি","নোটবুক":"নোটবুক","আত্মজীবনী":"আত্মজীবনী"
+}[cat] || cat || "লেখা");
 
-const params=new URLSearchParams(location.search);
-const slug=params.get('slug');
-const articleEl=document.getElementById('article');
-const shareUrl=location.href;
+const params = new URLSearchParams(location.search);
+const slug = params.get('slug');
+const articleEl = document.getElementById('article');
+const shareUrl = location.href;
 
-function renderError(title,msg){
-  articleEl.innerHTML='<div class="error-state"><div class="icon">❦</div><h2>'+esc(title)+'</h2><p>'+esc(msg)+'</p><a href="./posts.html">← সব লেখায় ফিরুন</a></div>';
+function renderError(title, msg) {
+  articleEl.innerHTML = '<div class="error-state"><div class="icon">❦</div><h2>' + esc(title) + '</h2><p>' + esc(msg) + '</p><a href="./posts.html">← সব লেখায় ফিরুন</a></div>';
+  const bb = document.getElementById('bottomBackBar');
+  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">← সব লেখা</a>';
 }
 
-function buildShareButtons(title){
-  const u=encodeURIComponent(shareUrl),t=encodeURIComponent(title||"");
-  return '<div class="share-section">'+
-    '<div class="share-title">লেখাটি শেয়ার করুন · Share</div>'+
-    '<div class="share-buttons">'+
-      '<a class="share-btn share-fb" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u='+u+'"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>'+
-      '<a class="share-btn share-x" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url='+u+'&text='+t+'"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 5.1-6.9zm-1.3 19.6h2L6.5 3.2H4.3l13.3 17.6z"/></svg>X</a>'+
-      '<a class="share-btn share-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text='+t+'%20'+u+'"><svg viewBox="0 0 24 24"><path d="M.06 24l1.68-6.16A11.87 11.87 0 0 1 .14 11.9C.14 5.34 5.48 0 12.05 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.49 8.42c0 6.57-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.7-1.45L.06 24zM6.6 20.13l.36.21a9.86 9.86 0 0 0 5.03 1.38h.01c5.46 0 9.9-4.44 9.9-9.9a9.86 9.86 0 0 0-2.9-7A9.82 9.82 0 0 0 12.06 2c-5.46 0-9.9 4.44-9.9 9.9a9.86 9.86 0 0 0 1.51 5.26l.24.38-1 3.63 3.7-.97zM17.5 14.4c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.9-2.2-.24-.57-.48-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42z"/></svg>WhatsApp</a>'+
-      '<a class="share-btn share-tg" target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url='+u+'&text='+t+'"><svg viewBox="0 0 24 24"><path d="M23.9 1.6l-3.6 17.1c-.3 1.2-1 1.5-2 .9l-5.5-4-2.7 2.6c-.3.3-.55.55-1.1.55l.4-5.6 10.3-9.3c.4-.4-.1-.6-.7-.2L6.2 13.4.9 11.7c-1.2-.4-1.2-1.2.3-1.8L22.4.2c1-.4 1.9.2 1.5 1.4z"/></svg>Telegram</a>'+
-      '<a class="share-btn share-li" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url='+u+'"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>'+
-      '<button class="share-btn share-copy" id="copyLinkBtn" type="button"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link</button>'+
+function buildShareButtons(title) {
+  const u = encodeURIComponent(shareUrl);
+  const t = encodeURIComponent(title || '');
+  const txt = encodeURIComponent('মোস্তফা অভি — ' + (title || ''));
+  return '<div class="share-section">' +
+    '<div class="share-section-title">এই লেখাটি শেয়ার করুন · Share</div>' +
+    '<div class="share-buttons">' +
+      '<a class="share-btn share-fb" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=' + u + '"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>' +
+      '<a class="share-btn share-x" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url=' + u + '&text=' + t + '"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 5.1-6.9zm-1.3 19.6h2L6.5 3.2H4.3l13.3 17.6z"/></svg>X</a>' +
+      '<a class="share-btn share-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=' + t + '%20' + u + '"><svg viewBox="0 0 24 24"><path d="M.06 24l1.68-6.16A11.87 11.87 0 0 1 .14 11.9C.14 5.34 5.48 0 12.05 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.49 8.42c0 6.57-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.7-1.45L.06 24zM6.6 20.13l.36.21a9.86 9.86 0 0 0 5.03 1.38h.01c5.46 0 9.9-4.44 9.9-9.9a9.86 9.86 0 0 0-2.9-7A9.82 9.82 0 0 0 12.06 2c-5.46 0-9.9 4.44-9.9 9.9a9.86 9.86 0 0 0 1.51 5.26l.24.38-1 3.63 3.7-.97zM17.5 14.4c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.9-2.2-.24-.57-.48-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42z"/></svg>WhatsApp</a>' +
+      '<a class="share-btn share-tg" target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=' + u + '&text=' + t + '"><svg viewBox="0 0 24 24"><path d="M23.9 1.6l-3.6 17.1c-.3 1.2-1 1.5-2 .9l-5.5-4-2.7 2.6c-.3.3-.55.55-1.1.55l.4-5.6 10.3-9.3c.4-.4-.1-.6-.7-.2L6.2 13.4.9 11.7c-1.2-.4-1.2-1.2.3-1.8L22.4.2c1-.4 1.9.2 1.5 1.4z"/></svg>Telegram</a>' +
+      '<a class="share-btn share-li" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=' + u + '"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>' +
+      '<a class="share-btn share-em" href="mailto:?subject=' + t + '&body=' + txt + '%0A%0A' + u + '"><svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.714-9.518-7.714h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>Email</a>' +
+      '<button class="share-btn share-copy" id="copyLinkBtn" type="button"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link</button>' +
     '</div></div>';
 }
 
-function renderArticle(post,sibling){
-  const lang=post.language||'bn';
-  const isEn=lang==='en';
-  document.documentElement.lang=lang;
-  document.title=(post.title||'লেখা')+' | Mostafa Auvi';
+function renderArticle(post, sibling) {
+  const lang = post.language || 'bn';
+  const isEn = lang === 'en';
+  document.documentElement.lang = lang;
+  document.title = (post.title || 'লেখা') + ' | Mostafa Auvi';
 
-  const dateStr=fmtDate(post.published_at,lang);
-  const tags=Array.isArray(post.tags)?post.tags.filter(Boolean):(post.tags?String(post.tags).split(',').map(t=>t.trim()).filter(Boolean):[]);
-  const bodyHtml=String(post.body||'').trim();
-  const cover=post.cover_image?('<div class="cover-wrap"><img src="'+esc(post.cover_image)+'" alt="'+esc(post.title||'')+'"></div>'):'';
+  const dateStr = fmtDate(post.published_at, lang);
+  const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean)
+    : (post.tags ? String(post.tags).split(',').map(t => t.trim()).filter(Boolean) : []);
+  const bodyHtml = String(post.body || '').trim();
+  const coverField = post.cover_image || post.cover_image_url || post.image_url || '';
+  const coverHtml = coverField
+    ? '<img class="a4-cover" src="' + esc(coverField) + '" alt="' + esc(post.title || '') + '">'
+    : '';
 
-  const langToggle=sibling?('<button class="lang-toggle" id="langToggle" type="button"><span class="dot"></span>'+(isEn?'বাংলায় পড়ুন':'Read in English')+'</button>'):'';
-  const langBadge='<span class="meta-lang">'+(isEn?'English':'বাংলা')+'</span>';
+  const langToggle = sibling
+    ? '<button class="a4-lang-toggle" id="langToggle" type="button"><span class="dot"></span>' + (isEn ? 'বাংলায় পড়ুন' : 'Read in English') + '</button>'
+    : '';
+  const langBadge = '<span class="meta-lang">' + (isEn ? 'English' : 'বাংলা') + '</span>';
 
-  articleEl.innerHTML=
-    '<header class="article-header">'+
-      '<span class="category-badge">'+esc(catLabel(post.category))+'</span>'+
-      '<h1 class="article-title'+(isEn?'':' bn')+'">'+esc(post.title||'')+'</h1>'+
-      '<div class="article-meta">'+
-        '<span>'+esc(dateStr)+'</span>'+
-        '<span class="meta-sep">·</span>'+
-        langBadge+
-        langToggle+
-      '</div>'+
-    '</header>'+
-    cover+
-    '<div class="article-body'+(isEn?' en':'')+'" id="articleBody">'+bodyHtml+'</div>'+
-    (tags.length?('<div class="tags-row"><span class="tags-label">Tags</span>'+tags.map(t=>'<span class="tag-pill">'+esc(t)+'</span>').join('')+'</div>'):'')+
-    buildShareButtons(post.title||'');
+  articleEl.innerHTML =
+    '<div class="a4-page">' +
+      '<header class="a4-header">' +
+        '<span class="a4-cat-badge">' + esc(catLabel(post.category)) + '</span>' +
+        '<h1 class="a4-title' + (isEn ? '' : ' bn') + '">' + esc(post.title || '') + '</h1>' +
+        '<div class="a4-meta-row">' +
+          '<div class="a4-meta">' +
+            '<span>' + esc(dateStr) + '</span>' +
+            '<span class="meta-sep">·</span>' +
+            '<span class="meta-author">✎ ' + (isEn ? 'Mostafa Auvi' : 'মোস্তফা অভি') + '</span>' +
+            '<span class="meta-sep">·</span>' +
+            langBadge +
+          '</div>' +
+          langToggle +
+        '</div>' +
+        '<hr class="a4-divider">' +
+      '</header>' +
+      coverHtml +
+      '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
+      (tags.length
+        ? '<div class="a4-tags"><span class="a4-tags-label">ট্যাগ</span>' + tags.map(t => '<span class="tag-pill">' + esc(t) + '</span>').join('') + '</div>'
+        : '') +
+    '</div>' +
+    buildShareButtons(post.title || '');
+
+  // Bottom back link bar
+  const bb = document.getElementById('bottomBackBar');
+  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">← সব লেখা</a><span class="crumb">Mostafa Auvi · ' + esc(catLabel(post.category)) + '</span>';
+
+  // Update crumb at top
+  const crumb = document.getElementById('crumb');
+  if (crumb) crumb.textContent = 'Mostafa Auvi · ' + esc(catLabel(post.category));
 
   // Language toggle handler
-  if(sibling){
-    document.getElementById('langToggle').onclick=()=>{
-      const newUrl='./read.html?slug='+encodeURIComponent(sibling.slug);
-      location.href=newUrl;
+  if (sibling) {
+    document.getElementById('langToggle').onclick = () => {
+      const newUrl = './read.html?slug=' + encodeURIComponent(sibling.slug);
+      location.href = newUrl;
     };
   }
 
   // Copy link handler
-  const copyBtn=document.getElementById('copyLinkBtn');
-  if(copyBtn){
-    copyBtn.onclick=async()=>{
-      try{await navigator.clipboard.writeText(shareUrl);copyBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/></svg>কপি হয়েছে!';setTimeout(()=>{copyBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link'},1800)}catch(e){prompt('লিংক কপি করুন:',shareUrl)}
+  const copyBtn = document.getElementById('copyLinkBtn');
+  if (copyBtn) {
+    copyBtn.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/></svg>কপি হয়েছে!';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link';
+        }, 1800);
+      } catch (e) { prompt('লিংক কপি করুন:', shareUrl); }
     };
   }
 }
 
-async function loadPost(){
-  if(!slug){renderError('লেখা পাওয়া যায়নি','কোনো লেখার লিংক নির্বাচন করা হয়নি।');return}
-  if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){renderError('সেটআপ বাকি','Supabase কনফিগার করা হয়নি।');return}
-  try{
-    const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-    // Fetch the post by slug
-    const {data:post,error:err1}=await sb.from('posts')
-      .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published_at')
-      .eq('slug',slug)
-      .eq('published',true)
+async function loadPost() {
+  if (!slug) {
+    renderError('লেখা পাওয়া যায়নি', 'কোনো লেখার লিংক নির্বাচন করা হয়নি।');
+    return;
+  }
+  if (!SUPABASE_URL.startsWith('https://') || SUPABASE_ANON_KEY.includes('YOUR_')) {
+    renderError('সেটআপ বাকি', 'Supabase কনফিগার করা হয়নি।');
+    return;
+  }
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Fetch the post by slug (try multiple cover image field names)
+    const { data: post, error: err1 } = await sb.from('posts')
+      .select('id,group_id,language,slug,title,body,excerpt,cover_image,cover_image_url,image_url,category,tags,published_at')
+      .eq('slug', slug)
+      .eq('published', true)
       .maybeSingle();
-    if(err1)throw err1;
-    if(!post){renderError('লেখাটি পাওয়া যায়নি','এই লিংকে কোনো প্রকাশিত লেখা নেই।');return}
-    // Fetch sibling in other language by group_id
-    let sibling=null;
-    if(post.group_id){
-      const {data:sib}=await sb.from('posts')
-        .select('slug,language,title')
-        .eq('group_id',post.group_id)
-        .neq('language',post.language||'bn')
-        .eq('published',true)
-        .maybeSingle();
-      if(sib&&sib.slug&&sib.slug!==post.slug)sibling=sib;
+    if (err1) throw err1;
+    if (!post) {
+      renderError('লেখাটি পাওয়া যায়নি', 'এই লিংকে কোনো প্রকাশিত লেখা নেই।');
+      return;
     }
-    renderArticle(post,sibling);
-  }catch(e){
+    // Fetch sibling in other language by group_id for language toggle
+    let sibling = null;
+    if (post.group_id) {
+      const { data: sib } = await sb.from('posts')
+        .select('slug,language,title')
+        .eq('group_id', post.group_id)
+        .neq('language', post.language || 'bn')
+        .eq('published', true)
+        .maybeSingle();
+      if (sib && sib.slug && sib.slug !== post.slug) sibling = sib;
+    }
+    renderArticle(post, sibling);
+  } catch (e) {
     console.error(e);
-    renderError('লোড করা যায়নি','ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
+    renderError('লোড করা যায়নি', 'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
   }
 }
 
+/* ====== Header share functionality ====== */
+(function() {
+  var pageUrl = window.location.href.split('#')[0];
+  var pageTitle = document.title || 'Mostafa Auvi — Fiction Writer & Literary Critic';
+  var pageText = 'মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।';
+
+  window.sharePage = function(platform) {
+    var url = '';
+    var encodedUrl = encodeURIComponent(pageUrl);
+    var encodedTitle = encodeURIComponent(pageTitle);
+    var encodedText = encodeURIComponent(pageText);
+    switch(platform) {
+      case 'facebook': url = 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl; break;
+      case 'twitter':  url = 'https://twitter.com/intent/tweet?url=' + encodedUrl + '&text=' + encodedText; break;
+      case 'whatsapp': url = 'https://wa.me/?text=' + encodeURIComponent(pageText + ' ' + pageUrl); break;
+      case 'telegram': url = 'https://t.me/share/url?url=' + encodedUrl + '&text=' + encodedText; break;
+      case 'linkedin': url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodedUrl; break;
+      case 'email':    url = 'mailto:?subject=' + encodedTitle + '&body=' + encodeURIComponent(pageText + '\n\n' + pageUrl); break;
+      default: return false;
+    }
+    if (platform === 'email') { window.location.href = url; }
+    else { window.open(url, '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes'); }
+    return false;
+  };
+
+  window.copyLink = function() {
+    var pageUrlCopy = window.location.href.split('#')[0];
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(pageUrlCopy).then(function() {
+        showToast('লিংক কপি হয়েছে: ' + pageUrlCopy);
+      }).catch(function() { fallbackCopy(pageUrlCopy); });
+    } else { fallbackCopy(pageUrlCopy); }
+    return false;
+  };
+
+  function fallbackCopy(text) {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand('copy'); showToast('লিংক কপি হয়েছে: ' + text); }
+    catch (err) { showToast('কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।'); }
+    document.body.removeChild(textarea);
+  }
+
+  function showToast(message) {
+    var existing = document.getElementById('share-toast');
+    if (existing) existing.remove();
+    var toast = document.createElement('div');
+    toast.id = 'share-toast';
+    toast.textContent = message;
+    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#0F3D3E;color:#f4ead2;padding:14px 22px;border-radius:8px;font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 6px 20px rgba(0,0,0,0.3);border:1.5px solid #b89248;max-width:90%;text-align:center;';
+    document.body.appendChild(toast);
+    setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 3500);
+  }
+})();
+
+/* ====== Author login modal ====== */
+(function() {
+  const loginBtn = document.getElementById('authorLoginBtn');
+  const loginLabel = document.getElementById('authorLoginLabel');
+  const overlay = document.getElementById('loginModalOverlay');
+  const modalStatus = document.getElementById('modalStatus');
+  const modalEmail = document.getElementById('modalEmail');
+  const modalPassword = document.getElementById('modalPassword');
+  const modalLoginBtn = document.getElementById('modalLoginBtn');
+
+  let sb = null;
+  try {
+    if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (e) { console.warn('Supabase init failed:', e); }
+
+  function showStatus(msg, type) {
+    if (!msg) { modalStatus.className = 'modal-status'; modalStatus.textContent = ''; return; }
+    modalStatus.className = 'modal-status show ' + type;
+    modalStatus.textContent = msg;
+  }
+  function openLoginModal() { overlay.classList.add('open'); setTimeout(() => modalEmail.focus(), 100); }
+  window.closeLoginModal = function() { overlay.classList.remove('open'); modalPassword.value = ''; showStatus('', ''); };
+
+  if (loginBtn) {
+    loginBtn.onclick = () => {
+      if (loginBtn.classList.contains('logged-in')) { window.location.href = 'dashboard.html'; return; }
+      openLoginModal();
+    };
+  }
+  if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) window.closeLoginModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) window.closeLoginModal(); });
+  if (modalEmail) modalEmail.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalPassword.focus(); } });
+  if (modalPassword) modalPassword.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
+
+  if (modalLoginBtn) {
+    modalLoginBtn.onclick = async () => {
+      if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
+      const email = modalEmail.value.trim();
+      const password = modalPassword.value;
+      if (!email || !password) { showStatus('ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
+      showStatus('লগইন করা হচ্ছে…', 'warning');
+      modalLoginBtn.disabled = true;
+      try {
+        const { data, error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) { showStatus('লগইন ব্যর্থ: ' + error.message, 'error'); modalLoginBtn.disabled = false; return; }
+        const { data: admin, error: adminErr } = await sb.from('admin_users').select('user_id').eq('user_id', data.user.id).maybeSingle();
+        if (adminErr || !admin) {
+          showStatus('অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
+          await sb.auth.signOut();
+          modalLoginBtn.disabled = false;
+          return;
+        }
+        showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+      } catch (e) {
+        showStatus('সমস্যা: ' + e.message, 'error');
+        modalLoginBtn.disabled = false;
+      }
+    };
+  }
+
+  async function checkSession() {
+    if (!sb) return;
+    try {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        const { data: admin } = await sb.from('admin_users').select('user_id').eq('user_id', session.user.id).maybeSingle();
+        if (admin) {
+          loginBtn.classList.add('logged-in');
+          loginLabel.textContent = 'ড্যাশবোর্ড খুলুন →';
+        }
+      }
+    } catch (e) {}
+  }
+  checkSession();
+
+  const forgotLink = document.getElementById('forgotPasswordLink');
+  forgotLink?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showStatus('পাসওয়ার্ড রিসেট করতে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন অথবা ড্যাশবোর্ড লিংক থেকে রিসেট করুন।', 'warning');
+  });
+  document.getElementById('signupLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।', 'warning');
+  });
+})();
+
+/* ====== Trigger article load ====== */
 loadPost();
 </script>
+
 </body>
 </html>

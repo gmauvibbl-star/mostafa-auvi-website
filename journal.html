@@ -939,12 +939,242 @@
   }
   .login-modal .btn.secondary:hover { background: var(--paper-warm); }
 
+  /* ====== GALPOPATH-STYLE SECTION HEADER ====== */
+  .gp-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--teal-deep);
+    margin-bottom: 6px;
+  }
+  .gp-section-title {
+    font-family: 'Playfair Display', 'Noto Serif Bengali', serif;
+    font-size: clamp(24px, 2.8vw, 32px);
+    font-weight: 800;
+    color: var(--teal-deep);
+    letter-spacing: 0.01em;
+    margin: 0;
+    line-height: 1.2;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .gp-section-title::before {
+    content: ""; display: inline-block;
+    width: 4px; height: 28px;
+    background: var(--blood);
+    border-radius: 2px;
+  }
+  .gp-section-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin: 0 0 24px;
+    letter-spacing: 0.04em;
+  }
+  .view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    background: var(--blood);
+    color: #fff;
+    border: 1.5px solid var(--blood);
+    border-radius: 4px;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all .25s;
+    box-shadow: 0 3px 10px rgba(138,24,24,0.25);
+    white-space: nowrap;
+  }
+  .view-all-btn:hover {
+    background: var(--maroon-deep);
+    border-color: var(--maroon-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(138,24,24,0.35);
+    color: #fff;
+  }
+
+  /* ====== GALPOPATH CARD GRID ====== */
+  .gcard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  .gcard {
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
+    border: 1px solid var(--paper-dark);
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .28s cubic-bezier(.4,0,.2,1),
+                box-shadow .28s cubic-bezier(.4,0,.2,1),
+                border-color .28s;
+    box-shadow: 0 2px 8px rgba(15,61,62,0.06);
+    cursor: pointer;
+  }
+  .gcard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(15,61,62,0.18);
+    border-color: var(--gold);
+  }
+  .gcard-cover {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--teal-deep);
+  }
+  .gcard-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .55s ease;
+  }
+  .gcard:hover .gcard-cover img { transform: scale(1.06); }
+  .gcard-cover-fallback {
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(212,180,104,0.18), transparent 55%),
+      linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 50%, var(--olive) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    color: var(--gold-bright);
+    opacity: 0.75;
+  }
+  .gcard-cat {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--blood);
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    max-width: calc(100% - 24px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gcard-body {
+    padding: 16px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+  }
+  .gcard-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--blood);
+    line-height: 1.42;
+    letter-spacing: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.4em;
+    margin: 0;
+    transition: color .2s;
+  }
+  .gcard:hover .gcard-title { color: var(--maroon-deep); }
+  .gcard-excerpt {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 13.5px;
+    color: var(--ink-mute);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    margin: 0;
+  }
+  .gcard-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--paper-warm);
+    margin-top: auto;
+  }
+  .gcard-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .gcard-date .clock {
+    font-size: 12px;
+    opacity: 0.7;
+    font-style: normal;
+  }
+  .gcard-read {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blood);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ====== LOAD MORE ====== */
+  .load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 4px 0 20px;
+  }
+  .load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 32px;
+    background: transparent;
+    color: var(--blood);
+    border: 2px solid var(--blood);
+    border-radius: 4px;
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all .25s;
+  }
+  .load-more-btn:hover {
+    background: var(--blood);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(138,24,24,0.3);
+  }
+
   /* ====== RESPONSIVE ====== */
   @media (max-width: 1024px) {
     .layout { grid-template-columns: 1fr; gap: 28px; padding: 30px 30px 50px; }
     .sidebar { position: static; }
     .journal-hero { padding: clamp(40px, 6vw, 64px) 30px clamp(32px, 4vw, 44px); }
     .journal-hero::before { right: 24px; top: 18px; font-size: 48px; }
+  }
+  @media (max-width: 980px) {
+    .gcard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 900px) {
     .header { padding: 22px 30px 18px; }
@@ -971,8 +1201,11 @@
     .nav ul li a { font-size: 13px; }
     .nav .search-box { display: none; }
     .layout { padding: 24px 18px 40px; }
-    .featured { padding: 22px 20px; }
-    .featured-body { font-size: 16px; line-height: 1.95; }
+    .gcard-grid { grid-template-columns: 1fr; gap: 18px; }
+    .gcard-title { font-size: 16px; }
+    .gcard-body { padding: 14px 16px 12px; }
+    .gp-section-title { font-size: 22px; }
+    .view-all-btn { padding: 8px 14px; font-size: 12px; }
     .journal-hero { min-height: 240px; }
     .journal-hero h1 { font-size: 30px; }
     .sidebox { padding: 18px 18px 16px; }
@@ -1065,21 +1298,26 @@
 <!-- MAIN LAYOUT -->
 <div class="layout">
   <main>
-    <!-- Featured entry (rendered by JS) -->
-    <article class="featured" id="featuredEntry">
-      <div class="state-box" id="loadingState">
+    <!-- Section header: title left, view-all right -->
+    <div class="gp-section-head">
+      <h2 class="gp-section-title">প্রকাশিত জার্নাল</h2>
+      <a href="posts.html" class="view-all-btn" title="সব জার্নাল এন্ট্রি দেখুন">সবগুলো দেখুন →</a>
+    </div>
+    <p class="gp-section-sub">ভাবনা, অনুভব, পর্যবেক্ষণ — লেখার ভেতর দিয়ে জীবনকে নতুন করে দেখা। প্রতিটি কার্ডে ক্লিক করে সম্পূর্ণ লেখা পড়ুন।</p>
+
+    <!-- Galpopath-style card grid -->
+    <div class="gcard-grid" id="gcardGrid" aria-live="polite">
+      <div class="state-box" id="loadingState" style="grid-column: 1 / -1;">
         <div class="icon">❦</div>
         <h3>জার্নাল লোড হচ্ছে…</h3>
         <p>কিছুক্ষণ অপেক্ষা করুন।</p>
       </div>
-    </article>
+    </div>
 
-    <!-- Archive list -->
-    <section class="archive-section" id="archiveSection" style="display:none;">
-      <h2 class="archive-title">আগের জার্নাল</h2>
-      <p class="archive-sub">পুরোনো এন্ট্রি ও দীর্ঘ চিন্তার আর্কাইভ।</p>
-      <div class="archive-list" id="archiveList"></div>
-    </section>
+    <!-- Load more button -->
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+      <button class="load-more-btn" id="loadMoreBtn" type="button">আরও লোড করুন ↓</button>
+    </div>
   </main>
 
   <!-- SIDEBAR -->
@@ -1087,11 +1325,11 @@
     <section class="sidebox">
       <h3><span class="icon">❖</span> Literary Journal</h3>
       <ul class="recent-list" id="recentList">
-        <li><a href="#featuredEntry">একাকীত্ব, বই আর বৃষ্টির বিকেল</a><div class="meta">১৫ জুন ২০২৫ · ব্যক্তিগত</div></li>
-        <li><a href="#archiveSection">নদীর ধারে এক বিকেল</a><div class="meta">২৫ এপ্রিল ২০২৫ · ভ্রমণ</div></li>
-        <li><a href="#archiveSection">শহরের ভেতর হারিয়ে যাওয়া মানুষ</a><div class="meta">০৫ এপ্রিল ২০২৫ · পর্যবেক্ষণ</div></li>
-        <li><a href="#archiveSection">নৈঃশব্দ্যের গল্প</a><div class="meta">২৮ মার্চ ২০২৫ · চিন্তা</div></li>
-        <li><a href="#archiveSection">নিজেকে নতুন করে দেখা</a><div class="meta">১৫ মার্চ ২০২৫ · আত্মজীবনী</div></li>
+        <li><a href="#gcardGrid">একাকীত্ব, বই আর বৃষ্টির বিকেল</a><div class="meta">১৫ জুন ২০২৫ · ব্যক্তিগত</div></li>
+        <li><a href="#gcardGrid">নদীর ধারে এক বিকেল</a><div class="meta">২৫ এপ্রিল ২০২৫ · ভ্রমণ</div></li>
+        <li><a href="#gcardGrid">শহরের ভেতর হারিয়ে যাওয়া মানুষ</a><div class="meta">০৫ এপ্রিল ২০২৫ · পর্যবেক্ষণ</div></li>
+        <li><a href="#gcardGrid">নৈঃশব্দ্যের গল্প</a><div class="meta">২৮ মার্চ ২০২৫ · চিন্তা</div></li>
+        <li><a href="#gcardGrid">নিজেকে নতুন করে দেখা</a><div class="meta">১৫ মার্চ ২০২৫ · আত্মজীবনী</div></li>
       </ul>
     </section>
 
@@ -1211,8 +1449,8 @@ const excerptText = (p, len=160) => {
   return txt.length > len ? txt.slice(0, len) + '…' : txt;
 };
 
-// Categories considered journal-like
-const JOURNAL_CATS = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','আত্মজীবনী','দৈনন্দিন','পর্যবেক্ষণ'];
+// Categories considered journal-like (per spec: Journal, জার্নাল, ব্যক্তিগত রচনা, আত্মজীবনী, ডায়েরি, নোটবুক + sensible extras)
+const JOURNAL_CATS = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','আত্মজীবনী','ডায়েরি','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal'];
 const isJournalEntry = (p) => {
   const c = String(p.category || '').trim().toLowerCase();
   if (JOURNAL_CATS.some(j => c === j.toLowerCase())) return true;
@@ -1223,12 +1461,14 @@ const isJournalEntry = (p) => {
   return false;
 };
 
+const PAGE_SIZE = 9;
 let allJournalPosts = [];
+let visibleCount = PAGE_SIZE;
 
 async function loadJournal() {
-  const featuredEl = document.getElementById('featuredEntry');
+  const gridEl = document.getElementById('gcardGrid');
   if (!SUPABASE_URL.startsWith('https://') || SUPABASE_ANON_KEY.includes('YOUR_')) {
-    renderFallback(featuredEl);
+    renderFallback(gridEl);
     return;
   }
   try {
@@ -1245,135 +1485,108 @@ async function loadJournal() {
     if (journalRows.length === 0) journalRows = rows;
     allJournalPosts = journalRows;
     if (journalRows.length === 0) {
-      renderEmpty(featuredEl);
+      renderEmpty(gridEl);
       return;
     }
-    const [featured, ...rest] = journalRows;
-    renderFeatured(featuredEl, featured);
-    renderArchive(rest);
+    visibleCount = PAGE_SIZE;
+    renderCards(gridEl);
     renderRecentList(journalRows);
   } catch (e) {
     console.error('Journal load error:', e);
-    renderFallback(featuredEl);
+    renderFallback(gridEl);
   }
 }
 
-function renderFeatured(container, p) {
-  const dateStr = fmtDateBn(p.published_at);
-  const cover = p.cover_image_url
-    ? `<img class="featured-cover" src="${esc(p.cover_image_url)}" alt="${esc(p.title || '')}" loading="lazy">`
-    : `<div class="featured-cover-fallback">❦</div>`;
-  const tags = Array.isArray(p.tags) ? p.tags.filter(Boolean) : [];
-  const tagsHtml = tags.length
-    ? `<div class="tags-row"><span class="tags-label">ট্যাগ</span>${tags.map(t => `<span class="tag-pill">${esc(t)}</span>`).join('')}</div>`
-    : '';
-  const cat = p.category || 'ব্যক্তিগত রচনা';
-  const readLink = `read.html?slug=${encodeURIComponent(p.slug)}`;
-  container.innerHTML = `
-    <div class="featured-eyebrow">নতুন জার্নাল · Latest Entry</div>
-    <h2 class="featured-title">${esc(p.title || '(শিরোনামহীন)')}</h2>
-    <div class="featured-meta">
-      <span class="cat-tag">${esc(cat)}</span>
-      <span>▦ ${esc(dateStr)}</span>
-      <span>✎ মোস্তফা অভি</span>
-    </div>
-    ${cover}
-    <div class="featured-body">${p.body || '<p>এই জার্নাল এন্ট্রিতে এখনো কোনো লেখা যোগ হয়নি।</p>'}</div>
-    <div class="featured-foot">
-      ${tagsHtml}
-      <div class="read-more-row">
-        <a class="btn btn-primary" href="${readLink}">সম্পূর্ণ লেখা পড়ুন →</a>
-        <a class="btn btn-secondary" href="#" onclick="return shareCurrent('${esc(p.slug)}','${esc(p.title || '').replace(/'/g,"\\'")}')">শেয়ার করুন</a>
-      </div>
-    </div>
-  `;
-}
-
-function renderArchive(rows) {
-  const section = document.getElementById('archiveSection');
-  const list = document.getElementById('archiveList');
-  if (!rows.length) { section.style.display = 'none'; return; }
-  section.style.display = 'block';
-  list.innerHTML = rows.slice(0, 12).map(p => {
+function renderCards(gridEl) {
+  if (!gridEl) return;
+  const slice = allJournalPosts.slice(0, visibleCount);
+  gridEl.innerHTML = slice.map(p => {
     const dateStr = fmtDateBn(p.published_at);
-    const excerpt = excerptText(p, 180);
+    const excerpt = excerptText(p, 110);
     const cat = p.category || 'জার্নাল';
     const readLink = `read.html?slug=${encodeURIComponent(p.slug)}`;
-    return `<a class="archive-entry" href="${readLink}">
-      <div class="archive-entry-head">
-        <h3>${esc(p.title || '(শিরোনামহীন)')}</h3>
-        <span class="date">${esc(dateStr)} · ${esc(cat)}</span>
+    const cover = p.cover_image_url
+      ? `<img src="${esc(p.cover_image_url)}" alt="${esc(p.title || '')}" loading="lazy">`
+      : `<div class="gcard-cover-fallback">❦</div>`;
+    return `<a class="gcard" href="${readLink}" aria-label="${esc(p.title || 'জার্নাল এন্ট্রি')}">
+      <div class="gcard-cover">
+        ${cover}
+        <span class="gcard-cat">${esc(cat)}</span>
       </div>
-      <p>${esc(excerpt)}</p>
-      <span class="read">পড়ুন →</span>
+      <div class="gcard-body">
+        <h3 class="gcard-title">${esc(p.title || '(শিরোনামহীন)')}</h3>
+        <p class="gcard-excerpt">${esc(excerpt)}</p>
+        <div class="gcard-foot">
+          <span class="gcard-date"><span class="clock">⏰</span> ${esc(dateStr)}</span>
+          <span class="gcard-read">পড়ুন →</span>
+        </div>
+      </div>
     </a>`;
   }).join('');
+  const wrap = document.getElementById('loadMoreWrap');
+  if (wrap) wrap.style.display = (allJournalPosts.length > visibleCount) ? 'flex' : 'none';
+}
+
+function loadMoreCards() {
+  visibleCount += PAGE_SIZE;
+  renderCards(document.getElementById('gcardGrid'));
 }
 
 function renderRecentList(rows) {
   const ul = document.getElementById('recentList');
   if (!ul) return;
-  ul.innerHTML = rows.slice(0, 6).map((p, i) => {
+  ul.innerHTML = rows.slice(0, 6).map((p) => {
     const dateStr = fmtDateBn(p.published_at);
     const cat = p.category || 'জার্নাল';
-    const href = i === 0 ? '#featuredEntry' : `read.html?slug=${encodeURIComponent(p.slug)}`;
+    const href = `read.html?slug=${encodeURIComponent(p.slug)}`;
     return `<li><a href="${href}">${esc(p.title || '(শিরোনামহীন)')}</a><div class="meta">${esc(dateStr)} · ${esc(cat)}</div></li>`;
   }).join('');
 }
 
 function renderEmpty(container) {
-  container.innerHTML = `<div class="state-box">
+  container.innerHTML = `<div class="state-box" style="grid-column: 1 / -1;">
     <div class="icon">❦</div>
     <h3>এখনো কোনো জার্নাল এন্ট্রি নেই</h3>
     <p>নতুন জার্নাল প্রকাশিত হলে এখানে দেখা যাবে।</p>
   </div>`;
+  const wrap = document.getElementById('loadMoreWrap');
+  if (wrap) wrap.style.display = 'none';
 }
 
-function renderFallback(container) {
-  // Fallback content (same as original journal featured entry)
-  container.innerHTML = `
-    <div class="featured-eyebrow">নতুন জার্নাল · Latest Entry</div>
-    <h2 class="featured-title">একাকীত্ব, বই আর বৃষ্টির বিকেল</h2>
-    <div class="featured-meta">
-      <span class="cat-tag">ব্যক্তিগত রচনা</span>
-      <span>▦ ১৫ জুন ২০২৫</span>
-      <span>✎ মোস্তফা অভি</span>
-    </div>
-    <div class="featured-cover-fallback">❦</div>
-    <div class="featured-body">
-      <p>আজ সারাদিন বৃষ্টি হয়েছে। এমন বৃষ্টি, যা শহরের কোলাহলকে আরও দূরে সরিয়ে দেয়, আর ঘরের ভেতর নিয়ে আসে এক ধরনের নিঃশব্দ শান্তি। জানালার কাঁচ বেয়ে বৃষ্টির ফোঁটা গড়িয়ে পড়তে দেখলে মনে হয়, সময় যেন ধীরে ধীরে থেমে আছে।</p>
-      <p>বিকেলের দিকে চা বানিয়ে নিলাম। হাতে নিলাম বহুদিনের সঙ্গী একটি পুরোনো বই। এমন সময়গুলোতে মনে হয়, জীবনের আসল সৌন্দর্য হয়তো এই সাধারণ মুহূর্তগুলোর মধ্যেই লুকিয়ে আছে। কোনো বড় পরিকল্পনা নেই, কোনো তাড়াহুড়ো নেই, শুধু আমি—নিজের সঙ্গে, নিজের ভাবনার সঙ্গে।</p>
-      <p>বৃষ্টি থামার আগ পর্যন্ত বইয়ের পাতায় চোখ রেখে ভাবছিলাম, আমরা কত দ্রুত বেঁচে থাকি, অথচ বাঁচার আসল স্বাদটা হয়তো এই ধীর মুহূর্তগুলোতেই।</p>
-    </div>
-    <div class="featured-foot">
-      <div class="tags-row"><span class="tags-label">ট্যাগ</span><span class="tag-pill">বৃষ্টি</span><span class="tag-pill">বই</span><span class="tag-pill">একাকীত্ব</span><span class="tag-pill">জীবন</span></div>
-      <div class="read-more-row">
-        <a class="btn btn-primary" href="posts/ekakitto-boi-bristi.html">সম্পূর্ণ লেখা পড়ুন →</a>
-        <a class="btn btn-secondary" href="#" onclick="return shareCurrent('ekakitto-boi-bristi','একাকীত্ব, বই আর বৃষ্টির বিকেল')">শেয়ার করুন</a>
+function renderFallback(gridEl) {
+  // Sample Galpopath-style journal cards for when Supabase is unavailable
+  const samples = [
+    { title: 'একাকীত্ব, বই আর বৃষ্টির বিকেল', cat: 'ব্যক্তিগত রচনা', date: '১৫ জুন ২০২৫', excerpt: 'আজ সারাদিন বৃষ্টি হয়েছে। এমন বৃষ্টি, যা শহরের কোলাহলকে আরও দূরে সরিয়ে দেয়।', href: 'posts/ekakitto-boi-bristi.html', img: 'https://images.unsplash.com/photo-1502444330042-904bdd7e8764?w=600&q=70&auto=format&fit=crop' },
+    { title: 'নদীর ধারে এক বিকেল', cat: 'ভ্রমণকাহিনি', date: '২৫ এপ্রিল ২০২৫', excerpt: 'নদীর ধারে বসে থাকা — সময়ের কাছে সময় ধার করা, যেন এক অদৃশ্য আলিঙ্গন।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=600&q=70&auto=format&fit=crop' },
+    { title: 'শহরের ভেতর হারিয়ে যাওয়া মানুষ', cat: 'পর্যবেক্ষণ', date: '০৫ এপ্রিল ২০২৫', excerpt: 'শহর কত মানুষকে নিজের করে নেয়, আবার কত মানুষকে একা রেখে দেয় নিজের সাথেই।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70&auto=format&fit=crop' },
+    { title: 'নৈঃশব্দ্যের গল্প', cat: 'চিন্তা', date: '২৮ মার্চ ২০২৫', excerpt: 'নীরবতা কখনো কখনো শব্দের চেয়ে অনেক বেশি কিছু বলে দেয়।', href: '#gcardGrid' },
+    { title: 'নিজেকে নতুন করে দেখা', cat: 'আত্মজীবনী', date: '১৫ মার্চ ২০২৫', excerpt: 'নিজেকে দেখা কঠিন, কিন্তু সেই কষ্টিপাথরেই জীবনের আসল রূপ ধরা দেয়।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=70&auto=format&fit=crop' },
+    { title: 'ডায়েরির পাতা থেকে', cat: 'ডায়েরি', date: '০২ মার্চ ২০২৫', excerpt: 'প্রতিটি দিন লেখার মধ্য দিয়ে আমি নিজেকেই আবার খুঁজে পাই।', href: '#gcardGrid' },
+    { title: 'নোটবুক: পড়ার পরে', cat: 'নোটবুক', date: '১৮ ফেব্রুয়ারি ২০২৫', excerpt: 'ভালো বই পড়া শেষ হলে কিছুক্ষণ চুপ করে থাকা প্রয়োজন।', href: '#gcardGrid' },
+    { title: 'ভোরের হাওয়ায় একটা চিঠি', cat: 'ব্যক্তিগত রচনা', date: '০৫ ফেব্রুয়ারি ২০২৫', excerpt: 'ভোরের নীরবতা কানে এমন এক সুর তোলে যা দিনের বেলায় শোনা যায় না।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1494806812800-a3291630a29b?w=600&q=70&auto=format&fit=crop' },
+    { title: 'বইয়ের তাকে সময়', cat: 'জার্নাল', date: '২২ জানুয়ারি ২০২৫', excerpt: 'বইয়ের তাক সাজাতে সাজাতে মনে হলো, আসলে আমি নিজের অতীতকেই গুছিয়ে নিচ্ছি।', href: '#gcardGrid' },
+  ];
+  gridEl.innerHTML = samples.map(s => {
+    const cover = s.img
+      ? `<img src="${esc(s.img)}" alt="${esc(s.title)}" loading="lazy">`
+      : `<div class="gcard-cover-fallback">❦</div>`;
+    return `<a class="gcard" href="${esc(s.href)}">
+      <div class="gcard-cover">
+        ${cover}
+        <span class="gcard-cat">${esc(s.cat)}</span>
       </div>
-    </div>
-  `;
-  // Show static archive
-  const section = document.getElementById('archiveSection');
-  const list = document.getElementById('archiveList');
-  section.style.display = 'block';
-  list.innerHTML = `
-    <a class="archive-entry" href="#featuredEntry">
-      <div class="archive-entry-head"><h3>নদীর ধারে এক বিকেল</h3><span class="date">২৫ এপ্রিল ২০২৫ · ভ্রমণ</span></div>
-      <p>নদীর ধারে বসে থাকা — সময়ের কাছে সময় ধার করা, যেন এক অদৃশ্য আলিঙ্গন।</p>
-      <span class="read">পড়ুন →</span>
-    </a>
-    <a class="archive-entry" href="#featuredEntry">
-      <div class="archive-entry-head"><h3>শহরের ভেতর হারিয়ে যাওয়া মানুষ</h3><span class="date">০৫ এপ্রিল ২০২৫ · পর্যবেক্ষণ</span></div>
-      <p>শহর কত মানুষকে নিজের করে নেয়, আবার কত মানুষকে একা রেখে দেয় নিজের সাথেই।</p>
-      <span class="read">পড়ুন →</span>
-    </a>
-    <a class="archive-entry" href="#featuredEntry">
-      <div class="archive-entry-head"><h3>নৈঃশব্দ্যের গল্প</h3><span class="date">২৮ মার্চ ২০২৫ · চিন্তা</span></div>
-      <p>নীরবতা কখনো কখনো শব্দের চেয়ে অনেক বেশি কিছু বলে দেয়।</p>
-      <span class="read">পড়ুন →</span>
-    </a>
-  `;
+      <div class="gcard-body">
+        <h3 class="gcard-title">${esc(s.title)}</h3>
+        <p class="gcard-excerpt">${esc(s.excerpt)}</p>
+        <div class="gcard-foot">
+          <span class="gcard-date"><span class="clock">⏰</span> ${esc(s.date)}</span>
+          <span class="gcard-read">পড়ুন →</span>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+  const wrap = document.getElementById('loadMoreWrap');
+  if (wrap) wrap.style.display = 'none';
 }
 
 function shareCurrent(slug, title) {
@@ -1391,16 +1604,16 @@ function journalSearch(e) {
   e.preventDefault();
   const q = document.getElementById('journalSearchInput').value.trim().toLowerCase();
   if (!q) return false;
-  // Filter archive + recent list
-  document.querySelectorAll('.archive-entry').forEach(el => {
+  // Filter cards + recent list
+  document.querySelectorAll('.gcard').forEach(el => {
     el.hidden = !el.textContent.toLowerCase().includes(q);
   });
   document.querySelectorAll('.recent-list li').forEach(li => {
     li.hidden = !li.textContent.toLowerCase().includes(q);
   });
-  // Scroll to archive
-  const archive = document.getElementById('archiveSection');
-  if (archive) archive.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Scroll to grid
+  const grid = document.getElementById('gcardGrid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return false;
 }
 
@@ -1546,7 +1759,8 @@ function journalSearch(e) {
   }
 })();
 
-/* ====== Trigger journal load ====== */
+/* ====== Trigger journal load + load-more handler ====== */
+document.getElementById('loadMoreBtn')?.addEventListener('click', loadMoreCards);
 loadJournal();
 </script>
 
