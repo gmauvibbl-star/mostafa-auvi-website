@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0F3D3E">
+<meta name="robots" content="noindex,nofollow">
+<title>লেখক ড্যাশবোর্ড | Mostafa Auvi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--teal-deep:#0F3D3E;--teal:#1B5E6B;--teal-mid:#2A7A7E;--cream:#FAF4E8;--paper:#F4ECD8;--paper-warm:#EDE2C6;--paper-dark:#C8B898;--ink:#1A1410;--ink-soft:#3D2E22;--gold:#B89248;--gold-bright:#D4B468;--gold-dim:#7A6028;--blood:#8A1818;--maroon-deep:#3D0A0A;--olive:#5A6B3F;--green:#2D5F52}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100%;background:var(--olive);font-family:'Noto Serif Bengali','EB Garamond',serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{display:flex;justify-content:center}
+  .page-wrap{max-width:1400px;width:100%;margin:0 auto;background:var(--paper);box-shadow:0 0 40px rgba(0,0,0,0.18);position:relative;min-height:100vh;padding-bottom:60px}
+  .top-bar{background:var(--teal-deep);color:var(--cream);padding:12px 40px;display:flex;justify-content:space-between;align-items:center;font-family:'EB Garamond',serif;font-size:13px;letter-spacing:0.1em}
+  .top-bar a{color:var(--gold-bright);text-decoration:none}
+  .dash-header{background:linear-gradient(135deg,var(--teal-deep) 0%,var(--teal) 100%);color:var(--cream);padding:28px 40px 24px;position:relative;overflow:hidden}
+  .dash-header::before{content:"";position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle at top right,rgba(212,180,104,0.18) 0%,transparent 70%);pointer-events:none}
+  .dash-header .eyebrow{font-family:'Playfair Display',serif;font-size:11px;color:var(--gold-bright);letter-spacing:0.4em;text-transform:uppercase;margin-bottom:6px;font-weight:600}
+  .dash-header h1{font-family:'Noto Serif Bengali',serif;font-size:30px;font-weight:800;color:var(--cream);line-height:1.1;margin-bottom:4px}
+  .dash-header .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:rgba(250,244,232,0.7)}
+  .dash-header .user-info{position:absolute;top:28px;right:40px;text-align:right;font-size:12px;color:rgba(250,244,232,0.6)}
+  .dash-header .user-info .email{color:var(--gold-bright);font-weight:600;font-family:'EB Garamond',serif;font-style:italic}
+  .dash-main{padding:24px 40px}
+  .status-banner{background:linear-gradient(135deg,#eef4ff 0%,#e0eaf5 100%);border-left:4px solid var(--teal);padding:12px 18px;border-radius:6px;margin-bottom:20px;font-size:13px;color:var(--ink-soft);font-weight:500;line-height:1.5}
+  .status-banner.error{background:linear-gradient(135deg,#fde8e8 0%,#f5d4d4 100%);border-left-color:var(--blood)}
+  .status-banner.success{background:linear-gradient(135deg,#e6f4ea 0%,#d0e8d4 100%);border-left-color:var(--green)}
+  .status-banner.warning{background:linear-gradient(135deg,#fff5e0 0%,#ffe8b8 100%);border-left-color:var(--gold)}
+  .login-panel{background:var(--cream);border:1px solid var(--paper-dark);border-radius:12px;padding:32px 36px;max-width:440px;margin:30px auto;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+  .login-panel h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--teal-deep);margin-bottom:6px;font-weight:700}
+  .login-panel .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-soft);margin-bottom:20px}
+  .form-group{margin-bottom:14px}
+  .form-group label{display:block;font-family:'Noto Serif Bengali',serif;font-size:12px;font-weight:700;color:var(--teal-deep);margin-bottom:5px}
+  .form-group label .hint{font-family:'EB Garamond',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:11px;margin-left:4px}
+  .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;border:1.5px solid var(--paper-dark);border-radius:6px;background:#fffefa;font-family:'Noto Serif Bengali',serif;font-size:13px;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--teal-mid);box-shadow:0 0 0 3px rgba(42,122,126,0.12)}
+  .form-group input[type="checkbox"]{width:16px;height:16px;margin-right:6px;vertical-align:middle;accent-color:var(--teal-deep)}
+  .checkbox-label{display:flex;align-items:center;font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:600;color:var(--teal-deep);cursor:pointer}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:1.5px solid var(--teal-deep);border-radius:6px;background:var(--teal-deep);color:var(--cream);font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;transition:all .2s;letter-spacing:0.02em}
+  .btn:hover{background:var(--teal);border-color:var(--teal);transform:translateY(-1px);box-shadow:0 4px 10px rgba(15,61,62,0.2)}
+  .btn.secondary{background:transparent;color:var(--teal-deep)}
+  .btn.secondary:hover{background:var(--teal-deep);color:var(--cream)}
+  .btn.gold{background:var(--gold-bright);color:var(--teal-deep);border-color:var(--gold-bright)}
+  .btn.gold:hover{background:var(--gold);color:var(--cream)}
+  .btn.danger{background:var(--blood);border-color:var(--blood);color:#fff}
+  .btn.danger:hover{background:var(--maroon-deep);border-color:var(--maroon-deep)}
+  .btn.green{background:var(--green);border-color:var(--green);color:#fff}
+  .btn.green:hover{background:#1f4538;border-color:#1f4538}
+  .btn.small{padding:6px 12px;font-size:11px}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+  .hidden{display:none!important}
+  /* Shared fields */
+  .shared-fields{background:var(--cream);border:1px solid var(--paper-dark);border-radius:10px;padding:18px 22px;margin-bottom:18px}
+  .shared-fields h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--teal-deep);margin-bottom:12px;font-weight:700;padding-bottom:8px;border-bottom:1px solid var(--paper-dark)}
+  .shared-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  /* Dual editor */
+  .dual-editor{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  .lang-pane{background:var(--cream);border:2px solid var(--paper-dark);border-radius:10px;overflow:hidden}
+  .lang-pane.bn{border-top:4px solid var(--blood)}
+  .lang-pane.en{border-top:4px solid var(--teal-deep)}
+  .lang-pane-header{padding:10px 16px;background:var(--paper-warm);display:flex;justify-content:space-between;align-items:center}
+  .lang-pane-header .lang-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--teal-deep)}
+  .lang-pane-header .lang-flag{font-size:11px;padding:2px 8px;border-radius:10px;font-family:'EB Garamond',serif;font-weight:700;letter-spacing:0.1em}
+  .lang-pane.bn .lang-flag{background:var(--blood);color:#fff}
+  .lang-pane.en .lang-flag{background:var(--teal-deep);color:#fff}
+  .lang-pane-body{padding:16px}
+  /* Rich text toolbar */
+  .toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:8px 10px;background:var(--paper-warm);border-bottom:1px solid var(--paper-dark);align-items:center}
+  .toolbar button{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid var(--paper-dark);border-radius:5px;background:#fffefa;color:var(--teal-deep);cursor:pointer;font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;transition:all .15s;padding:0}
+  .toolbar button:hover{background:var(--teal-deep);color:var(--cream);border-color:var(--teal-deep)}
+  .toolbar button.active{background:var(--teal-deep);color:var(--cream)}
+  .toolbar .sep{width:1px;height:22px;background:var(--paper-dark);margin:0 3px}
+  .toolbar .color-palette{display:inline-flex;gap:3px}
+  .toolbar .color-swatch{width:22px;height:22px;border-radius:4px;border:1.5px solid var(--paper-dark);cursor:pointer}
+  .toolbar .img-btn{width:auto;padding:0 10px;font-size:11px;gap:4px}
+  .toolbar .img-btn svg{width:13px;height:13px;fill:currentColor}
+  /* Rich text editor */
+  .editor-content{min-height:350px;padding:14px 16px;font-family:'Noto Serif Bengali',serif;font-size:14px;line-height:1.9;color:var(--ink);outline:none;overflow-y:auto;max-height:500px}
+  .editor-content:focus{background:#fffefa}
+  .editor-content p{margin-bottom:10px}
+  .editor-content img{max-width:100%;height:auto;border-radius:6px;margin:8px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  .editor-content h2{font-size:1.4em;font-family:'Playfair Display','Noto Serif Bengali',serif;font-weight:700;color:var(--teal-deep);margin-top:1.5em;margin-bottom:0.6em;line-height:1.3;padding-bottom:4px;border-bottom:1px solid var(--paper-dark)}
+  .editor-content h3{font-size:1.2em;font-family:'Playfair Display','Noto Serif Bengali',serif;font-weight:600;color:var(--teal-deep);margin-top:1.2em;margin-bottom:0.5em;line-height:1.35}
+  .editor-content blockquote{border-left:3px solid var(--gold);padding:4px 14px;margin:1em 0;font-style:italic;color:var(--ink-soft);background:var(--paper-warm);border-radius:0 3px 3px 0}
+  .editor-content blockquote p{margin:0.4em 0}
+  .editor-content ul,.editor-content ol{padding-left:24px;margin:1em 0}
+  .editor-content ul li,.editor-content ol li{margin:0.3em 0}
+  .editor-content a{color:var(--blood);text-decoration:underline;text-underline-offset:2px}
+  .editor-content a:hover{color:var(--teal-deep)}
+  .editor-content[contenteditable]:empty:before{content:attr(data-placeholder);color:var(--ink-soft);opacity:0.5;font-style:italic}
+  .toolbar button.fmt{width:auto;min-width:30px;padding:0 8px}
+  /* Cover image upload */
+  .cover-upload{display:flex;align-items:center;gap:10px}
+  .cover-upload .cover-preview{width:60px;height:80px;border:2px dashed var(--paper-dark);border-radius:6px;background:var(--paper-warm);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+  .cover-upload .cover-preview img{width:100%;height:100%;object-fit:cover}
+  .cover-upload .cover-preview .no-img{font-size:10px;color:var(--ink-soft);text-align:center;padding:4px}
+  .cover-upload .cover-btns{flex:1}
+  .cover-upload .cover-btns .btn{font-size:11px;padding:6px 10px}
+  /* Posts list */
+  .panel{background:var(--cream);border:1px solid var(--paper-dark);border-radius:12px;padding:22px 26px;margin-bottom:18px;box-shadow:0 4px 12px rgba(0,0,0,0.04)}
+  .panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--paper-dark)}
+  .panel-header h2{font-family:'Playfair Display',serif;font-size:18px;color:var(--teal-deep);font-weight:700}
+  .panel-header .num{font-family:'EB Garamond',serif;font-style:italic;color:var(--gold-dim);font-size:12px;letter-spacing:0.15em}
+  .posts-list{display:flex;flex-direction:column;gap:10px}
+  .post-item{background:#fffefa;border:1px solid var(--paper-dark);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;transition:all .2s}
+  .post-item:hover{border-color:var(--teal-mid);transform:translateX(2px);box-shadow:0 3px 8px rgba(0,0,0,0.06)}
+  .post-item .post-info{flex:1;min-width:0}
+  .post-item .post-title{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;color:var(--teal-deep);margin-bottom:3px;line-height:1.3}
+  .post-item .post-meta{font-family:'EB Garamond',serif;font-style:italic;font-size:11px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .post-item .post-actions{display:flex;gap:5px;flex-shrink:0}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-family:'EB Garamond',serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em}
+  .badge.published{background:var(--green);color:#fff}
+  .badge.draft{background:var(--paper-dark);color:var(--ink-soft)}
+  .badge.bn{background:var(--blood);color:#fff}
+  .badge.en{background:var(--teal-deep);color:#fff}
+  .badge.bn.en{background:linear-gradient(90deg,var(--blood) 50%,var(--teal-deep) 50%);color:#fff}
+  .empty-state{text-align:center;padding:28px 16px;color:var(--ink-soft);font-family:'EB Garamond',serif;font-style:italic;font-size:13px}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--teal-deep);color:var(--cream);padding:12px 20px;border-radius:8px;font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 6px 20px rgba(0,0,0,0.3);border:1.5px solid var(--gold-bright);max-width:90%;text-align:center}
+  .dash-footer{background:var(--teal-deep);color:rgba(250,244,232,0.6);padding:16px 40px;text-align:center;font-family:'EB Garamond',serif;font-size:11px;letter-spacing:0.1em;border-top:3px double var(--gold)}
+  .dash-footer a{color:var(--gold-bright);text-decoration:none;margin:0 5px}
+  /* Loading spinner */
+  .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(250,244,232,0.3);border-top-color:var(--cream);border-radius:50%;animation:spin 0.6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* Responsive */
+  @media(max-width:900px){.dual-editor{grid-template-columns:1fr}.shared-grid{grid-template-columns:1fr}.dash-main{padding:18px 20px}.dash-header{padding:22px 24px}.dash-header .user-info{position:static;text-align:left;margin-top:10px}}
+</style>
+
+<style>
+.status-banner.error strong { display:block; font-size:16px; margin-bottom:4px; }
+.status-banner.error { padding:14px 18px; border-left:4px solid #b91c1c; background:#fef2f2; color:#7f1d1d; }
+.status-banner.warning { background:#fffbeb; color:#78350f; border-left:4px solid #d97706; }
+.status-banner.success { background:#f0fdf4; color:#14532d; border-left:4px solid #16a34a; }
+.empty-state { background:#fef2f2; border:1px solid #fecaca; padding:18px; border-radius:8px; color:#7f1d1d; }
+.empty-state strong { font-size:15px; display:block; margin-bottom:6px; }
+.toast { background:#1f2937 !important; color:white !important; }
+</style>
+
+<script>
+window.addEventListener('load', async () => {
+  // ৩০ সেকেন্ড পরে যদি পোস্ট লিস্ট এখনো খালি থাকে, একটি টোস্ট দেখাবে
+  setTimeout(async () => {
+    if (window.__sbPostsLoadError) {
+      console.log('%c[Mostafa Auvi] RLS সমস্যা সমাধানের নির্দেশিকা:', 'color:#b91c1c;font-weight:bold');
+      console.log('  ১) Supabase Dashboard → SQL Editor খুলুন');
+      console.log('  ২) mostafa-auvi-rls-fix.sql ফাইলের বিষয়বস্তু পেস্ট করুন');
+      console.log('  ৩) Run চাপুন');
+      console.log('  অথবা লোকালি: node scripts/apply-rls-fix.mjs');
+    }
+  }, 5000);
+});
+</script>
+</head>
+<body>
+<div class="page-wrap">
+  <div class="top-bar"><a href="index.html">← মূল ওয়েবসাইটে ফিরুন</a><span>লেখক ড্যাশবোর্ড</span></div>
+  <header class="dash-header">
+    <div class="eyebrow">Author Dashboard</div>
+    <h1>লেখক ড্যাশবোর্ড</h1>
+    <div class="sub">বাংলা ও ইংরেজি — দুই ভাষায় লেখা তৈরি, সম্পাদনা ও প্রকাশ</div>
+    <div id="userInfo" class="user-info hidden"><div>লগইন করা অ্যাকাউন্ট:</div><div class="email" id="userEmail"></div></div>
+  </header>
+  <main class="dash-main">
+    <div id="statusBanner" class="status-banner">সেটআপ যাচাই করা হচ্ছে…</div>
+    <!-- Login -->
+    <section id="loginPanel" class="login-panel hidden">
+      <h2>নিরাপদ লগইন</h2>
+      <div class="sub">ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন</div>
+      <div class="form-group"><label for="email">ইমেইল</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+      <div class="form-group"><label for="password">পাসওয়ার্ড</label><input id="password" type="password" autocomplete="current-password" placeholder="আপনার পাসওয়ার্ড" required></div>
+      <div class="btn-row"><button id="loginBtn" class="btn gold">লগইন করুন →</button></div>
+    </section>
+    <!-- App -->
+    <section id="appPanel" class="hidden">
+      <!-- Shared fields -->
+      <div class="shared-fields">
+        <h3>📌 সাধারণ তথ্য (উভয় ভাষার জন্য শেয়ার্ড)</h3>
+        <input id="postId" type="hidden">
+        <input id="postGroupId" type="hidden">
+        <div class="shared-grid">
+          <div class="form-group">
+            <label>স্থায়ী লিংক নাম <span class="hint">(slug)</span></label>
+            <input id="slug" type="text" pattern="[a-z0-9-]+" placeholder="amar-notun-lekha">
+          </div>
+          <div class="form-group">
+            <label>বিভাগ</label>
+            <select id="category">
+              <option value="গল্প">গল্প</option><option value="উপন্যাস">উপন্যাস</option><option value="প্রবন্ধ">প্রবন্ধ</option><option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option><option value="আইন-আদালত">আইন-আদালত</option><option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option><option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option><option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option><option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option><option value="পিডিএফ">পিডিএফ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>প্রকাশনা</label>
+            <label class="checkbox-label"><input id="published" type="checkbox"> প্রকাশিত করুন</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual editor -->
+      <div class="dual-editor">
+        <!-- Bengali pane -->
+        <div class="lang-pane bn">
+          <div class="lang-pane-header">
+            <span class="lang-name">বাংলা সংস্করণ</span>
+            <span class="lang-flag">BN</span>
+          </div>
+          <div class="lang-pane-body">
+            <div class="form-group"><label>শিরোনাম (বাংলা)</label><input id="title_bn" type="text" placeholder="বাংলা শিরোনাম"></div>
+            <div class="form-group"><label>সারসংক্ষেপ (বাংলা)</label><input id="excerpt_bn" type="text" placeholder="বাংলা সারসংক্ষেপ"></div>
+            <div class="form-group"><label>ট্যাগ (বাংলা)</label><input id="tags_bn" type="text" placeholder="নদী, গ্রাম, স্মৃতি"></div>
+            <!-- Cover image upload -->
+            <div class="form-group">
+              <label>কভার ইমেজ (বাংলা)</label>
+              <div class="cover-upload">
+                <div class="cover-preview" id="coverPreview_bn"><div class="no-img">কভার<br>নেই</div></div>
+                <div class="cover-btns">
+                  <button class="btn small secondary" onclick="document.getElementById('coverFile_bn').click()">📤 ছবি বাছাই</button>
+                  <button class="btn small danger" onclick="clearCover('bn')" style="margin-top:4px">✕ মুছুন</button>
+                </div>
+                <input type="file" id="coverFile_bn" accept="image/*" style="display:none" onchange="uploadCover(event,'bn')">
+                <input type="hidden" id="cover_bn">
+              </div>
+            </div>
+            <!-- Rich text toolbar -->
+            <div class="toolbar" data-target="editor_bn">
+              <button onclick="rt('bold',this)" title="বোল্ড"><b>B</b></button>
+              <button onclick="rt('italic',this)" title="ইতালিয়ান"><i>I</i></button>
+              <button onclick="rt('underline',this)" title="আন্ডারলাইন"><u>U</u></button>
+              <div class="sep"></div>
+              <button onclick="rt('justifyLeft',this)" title="বামে">⬅</button>
+              <button onclick="rt('justifyCenter',this)" title="মাঝে">↔</button>
+              <button onclick="rt('justifyFull',this)" title="জাস্টিফাই">☰</button>
+              <div class="sep"></div>
+              <button class="fmt" onclick="rtBlock('h2')" title="H2 শিরোনাম"><b>H2</b></button>
+              <button class="fmt" onclick="rtBlock('h3')" title="H3 শিরোনাম"><b>H3</b></button>
+              <button class="fmt" onclick="rtBlock('blockquote')" title="উদ্ধৃতি">❝</button>
+              <button class="fmt" onclick="rt('insertUnorderedList',this)" title="বুলেট তালিকা">•</button>
+              <button class="fmt" onclick="rt('insertOrderedList',this)" title="সংখ্যাযুক্ত তালিকা">1.</button>
+              <button class="fmt" onclick="rtLink()" title="লিংক যোগ করুন">🔗</button>
+              <button class="fmt" onclick="rt('removeFormat',this)" title="ফরম্যাট মুছুন">✕</button>
+              <div class="sep"></div>
+              <div class="color-palette">
+                <div class="color-swatch" style="background:#FFF3B0" onclick="highlight('#FFF3B0')" title="হলুদ হাইলাইট"></div>
+                <div class="color-swatch" style="background:#FFD6D6" onclick="highlight('#FFD6D6')" title="লাল হাইলাইট"></div>
+                <div class="color-swatch" style="background:#D6F5D6" onclick="highlight('#D6F5D6')" title="সবুজ হাইলাইট"></div>
+                <div class="color-swatch" style="background:#D6E5FF" onclick="highlight('#D6E5FF')" title="নীল হাইলাইট"></div>
+              </div>
+              <div class="sep"></div>
+              <button class="img-btn" onclick="insertImage('bn')" title="ইমেজ যোগ করুন"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg> ছবি</button>
+              <input type="file" id="inlineImg_bn" accept="image/*" style="display:none" onchange="uploadInlineImage(event,'bn')">
+            </div>
+            <div class="editor-content" id="editor_bn" contenteditable="true" data-placeholder="এখানে বাংলা লেখা লিখুন…"></div>
+          </div>
+        </div>
+
+        <!-- English pane -->
+        <div class="lang-pane en">
+          <div class="lang-pane-header">
+            <span class="lang-name">English Version</span>
+            <span class="lang-flag">EN</span>
+          </div>
+          <div class="lang-pane-body">
+            <div class="form-group"><label>Title (English)</label><input id="title_en" type="text" placeholder="English title"></div>
+            <div class="form-group"><label>Excerpt (English)</label><input id="excerpt_en" type="text" placeholder="English excerpt"></div>
+            <div class="form-group"><label>Tags (English)</label><input id="tags_en" type="text" placeholder="river, village, memory"></div>
+            <div class="form-group">
+              <label>Cover Image (English)</label>
+              <div class="cover-upload">
+                <div class="cover-preview" id="coverPreview_en"><div class="no-img">No<br>cover</div></div>
+                <div class="cover-btns">
+                  <button class="btn small secondary" onclick="document.getElementById('coverFile_en').click()">📤 Select Image</button>
+                  <button class="btn small danger" onclick="clearCover('en')" style="margin-top:4px">✕ Remove</button>
+                </div>
+                <input type="file" id="coverFile_en" accept="image/*" style="display:none" onchange="uploadCover(event,'en')">
+                <input type="hidden" id="cover_en">
+              </div>
+            </div>
+            <div class="toolbar" data-target="editor_en">
+              <button onclick="rt('bold',this)" title="Bold"><b>B</b></button>
+              <button onclick="rt('italic',this)" title="Italic"><i>I</i></button>
+              <button onclick="rt('underline',this)" title="Underline"><u>U</u></button>
+              <div class="sep"></div>
+              <button onclick="rt('justifyLeft',this)" title="Left">⬅</button>
+              <button onclick="rt('justifyCenter',this)" title="Center">↔</button>
+              <button onclick="rt('justifyFull',this)" title="Justify">☰</button>
+              <div class="sep"></div>
+              <button class="fmt" onclick="rtBlock('h2')" title="H2 Heading"><b>H2</b></button>
+              <button class="fmt" onclick="rtBlock('h3')" title="H3 Heading"><b>H3</b></button>
+              <button class="fmt" onclick="rtBlock('blockquote')" title="Blockquote">❝</button>
+              <button class="fmt" onclick="rt('insertUnorderedList',this)" title="Bullet list">•</button>
+              <button class="fmt" onclick="rt('insertOrderedList',this)" title="Numbered list">1.</button>
+              <button class="fmt" onclick="rtLink()" title="Insert link">🔗</button>
+              <button class="fmt" onclick="rt('removeFormat',this)" title="Remove format">✕</button>
+              <div class="sep"></div>
+              <div class="color-palette">
+                <div class="color-swatch" style="background:#FFF3B0" onclick="highlight('#FFF3B0')" title="Yellow highlight"></div>
+                <div class="color-swatch" style="background:#FFD6D6" onclick="highlight('#FFD6D6')" title="Red highlight"></div>
+                <div class="color-swatch" style="background:#D6F5D6" onclick="highlight('#D6F5D6')" title="Green highlight"></div>
+                <div class="color-swatch" style="background:#D6E5FF" onclick="highlight('#D6E5FF')" title="Blue highlight"></div>
+              </div>
+              <div class="sep"></div>
+              <button class="img-btn" onclick="insertImage('en')" title="Insert image"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg> Image</button>
+              <input type="file" id="inlineImg_en" accept="image/*" style="display:none" onchange="uploadInlineImage(event,'en')">
+            </div>
+            <div class="editor-content" id="editor_en" contenteditable="true" data-placeholder="Write your English content here…"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save buttons -->
+      <div class="btn-row" style="justify-content:center;gap:12px;">
+        <button id="saveBnBtn" class="btn" style="background:var(--blood);border-color:var(--blood);">🔴 শুধু বাংলা সংরক্ষণ</button>
+        <button id="saveEnBtn" class="btn" style="background:var(--teal-deep);border-color:var(--teal-deep);">🔵 Save English Only</button>
+        <button id="saveBothBtn" class="btn gold" style="background:var(--gold-bright);color:var(--teal-deep);border-color:var(--gold-bright);">✨ উভয় ভাষায় সংরক্ষণ</button>
+        <button id="newBtn" class="btn secondary">নতুন লেখা</button>
+        <button id="cancelEditBtn" class="btn secondary hidden">বাতিল</button>
+      </div>
+
+      <!-- Posts list -->
+      <div class="panel" style="margin-top:18px">
+        <div class="panel-header"><h2>আপনার লেখাসমূহ</h2><span class="num" id="postsCount">— Loading</span></div>
+        <div id="postsList" class="posts-list"><div class="empty-state">লোড হচ্ছে…</div></div>
+      </div>
+
+      <div class="btn-row" style="justify-content:flex-end">
+        <button id="logoutBtn" class="btn danger">লগআউট</button>
+      </div>
+    </section>
+  </main>
+  <footer class="dash-footer"><strong>Mostafa Auvi</strong> · Author Dashboard · <a href="index.html">হোম</a> · <a href="posts.html">লেখাসমূহ</a></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
+  const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+  const $=id=>document.getElementById(id);
+  let sb=null,session=null,currentActiveEditor=null;
+
+  // Track which editor is active (for toolbar commands)
+  ['editor_bn','editor_en'].forEach(id=>{
+    const el=$(id);
+    el.addEventListener('focus',()=>{currentActiveEditor=id});
+    el.addEventListener('mouseup',()=>{currentActiveEditor=id});
+    el.addEventListener('keyup',()=>{currentActiveEditor=id});
+  });
+
+  function setStatus(msg,type){const b=$('statusBanner');b.textContent=msg;b.className='status-banner'+(type?' '+type:'')}
+
+  // ====== RLS / এরর ইন্টারপ্রেটার (patch-dashboard.mjs দ্বারা যোগকৃত) ======
+  function explainError(err) {
+    const msg = (err && (err.message || err.error_description || JSON.stringify(err))) || '';
+    if (/permission denied for table/i.test(msg) || /42501/.test(msg)) {
+      return {
+        title: 'ডেটাবেস অনুমতি সমস্যা (RLS)',
+        body: 'Supabase এর posts টেবিলে Row-Level Security (RLS) পলিসি যুক্ত নেই। ' +
+              'ফলে ড্যাশবোর্ড থেকে লেখা সেভ হচ্ছে না।\n\n' +
+              'সমাধান: আপনার Supabase প্রজেক্টের SQL Editor-এ mostafa-auvi-rls-fix.sql ফাইলটি পেস্ট করে রান করুন। ' +
+              'অথবা node scripts/apply-rls-fix.mjs কমান্ডটি চালান।',
+        kind: 'rls'
+      };
+    }
+    if (/JWT|invalid.*token|Auth session/i.test(msg)) {
+      return {
+        title: 'সেশন মেয়াদউত্তীর্ণ',
+        body: 'আপনার লগইন সেশন শেষ হয়ে গেছে। পেজ রিফ্রেশ করে আবার লগইন করুন।',
+        kind: 'auth'
+      };
+    }
+    if (/network|fetch|Failed to fetch/i.test(msg)) {
+      return {
+        title: 'নেটওয়ার্ক সমস্যা',
+        body: 'ইন্টারনেট সংযোগ বা Supabase সার্ভারে সমস্যা। কিছুক্ষণ পর আবার চেষ্টা করুন।',
+        kind: 'net'
+      };
+    }
+    if (/duplicate key value|23505/i.test(msg)) {
+      return {
+        title: 'স্লাগ বা গ্রুপ আইডি ডুপ্লিকেট',
+        body: 'একই slug দিয়ে আরেকটি পোস্ট আছে। slug পরিবর্তন করুন অথবা সম্পাদনা মোডে যান।',
+        kind: 'dup'
+      };
+    }
+    if (/violates not-null constraint|23502/i.test(msg)) {
+      return {
+        title: 'আবশ্যক ফিল্ড খালি',
+        body: 'কিছু আবশ্যক ফিল্ড (যেমন title বা body) খালি আছে। সব প্রয়োজনীয় তথ্য দিন।',
+        kind: 'val'
+      };
+    }
+    return null;
+  }
+
+  function showDetailedError(prefix, err) {
+    const info = explainError(err) || {
+      title: prefix || 'সংরক্ষণ ব্যর্থ',
+      body: 'ত্রুটি: ' + ((err && err.message) || String(err)),
+      kind: 'unknown'
+    };
+    const banner = $('statusBanner');
+    banner.innerHTML = '<strong>' + info.title + '</strong><br><span style="font-size:13px;opacity:.95">' +
+                       info.body.replace(/\n/g, '<br>') + '</span>';
+    banner.className = 'status-banner error';
+    // অতিরিক্ত টোস্ট
+    showToast('⚠ ' + info.title);
+    console.error('[dashboard]', prefix, err);
+  }
+
+
+  function showToast(msg){const e=document.querySelector('.toast');if(e)e.remove();const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{if(t.parentNode)t.parentNode.removeChild(t)},3500)}
+  function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+  // ====== Rich text commands ======
+  window.rt=function(cmd,btn){
+    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
+    editor.focus();
+    document.execCommand(cmd,false,null);
+    // Toggle active state
+    document.querySelectorAll('.toolbar button').forEach(b=>b.classList.remove('active'));
+  };
+  window.highlight=function(color){
+    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
+    editor.focus();
+    document.execCommand('hiliteColor',false,color);
+  };
+  // Block formatting: h2, h3, blockquote (formatBlock)
+  window.rtBlock=function(tag){
+    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
+    editor.focus();
+    document.execCommand('formatBlock',false,'<'+tag+'>');
+  };
+  // Insert link via prompt
+  window.rtLink=function(){
+    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
+    editor.focus();
+    const url=window.prompt('লিংক URL দিন / Enter URL:','https://');
+    if(url===null)return;
+    const trimmed=url.trim();
+    if(!trimmed)return;
+    document.execCommand('createLink',false,trimmed);
+  };
+  window.insertImage=function(lang){
+    const input=$('inlineImg_'+lang);
+    // Save current selection
+    const sel=window.getSelection();
+    const range=sel.rangeCount?sel.getRangeAt(0).cloneRange():null;
+    input._savedRange=range;
+    input.click();
+  };
+
+  // ====== Image upload to Supabase Storage ======
+  async function uploadImageToStorage(file,pathPrefix){
+    if(!sb)return{error:'Supabase not initialized'};
+    const fileName=pathPrefix+'/'+Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9.-]/g,'_');
+    const{data,error}=await sb.storage.from('post-images').upload(fileName,file,{cacheControl:'3600',upsert:false});
+    if(error)return{error:error.message};
+    const{data:urlData}=sb.storage.from('post-images').getPublicUrl(fileName);
+    return{url:urlData.publicUrl};
+  }
+
+  window.uploadInlineImage=async function(event,lang){
+    const file=event.target.files[0];
+    if(!file)return;
+    showToast('ছবি আপলোড হচ্ছে…');
+    const{url,error}=await uploadImageToStorage(file,'inline-'+lang);
+    if(error){showToast('আপলোড ব্যর্থ: '+error);return}
+    const editor=$('editor_'+lang);
+    editor.focus();
+    const input=$('inlineImg_'+lang);
+    if(input._savedRange){
+      const sel=window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(input._savedRange);
+    }
+    document.execCommand('insertHTML',false,'<img src="'+url+'" alt="" />');
+    showToast('ছবি যোগ হয়েছে!');
+    event.target.value='';
+  };
+
+  window.uploadCover=async function(event,lang){
+    const file=event.target.files[0];
+    if(!file)return;
+    showToast('কভার আপলোড হচ্ছে…');
+    const{url,error}=await uploadImageToStorage(file,'cover-'+lang);
+    if(error){showToast('আপলোড ব্যর্থ: '+error);return}
+    $('cover_'+lang).value=url;
+    $('coverPreview_'+lang).innerHTML='<img src="'+url+'">';
+    showToast('কভার সেট হয়েছে!');
+    event.target.value='';
+  };
+
+  window.clearCover=function(lang){
+    $('cover_'+lang).value='';
+    $('coverPreview_'+lang).innerHTML='<div class="no-img">'+(lang==='bn'?'কভার<br>নেই':'No<br>cover')+'</div>';
+  };
+
+  // ====== Reset form ======
+  function resetForm(){
+    $('postId').value='';$('postGroupId').value='';$('slug').value='';$('category').value='গল্প';
+    $('published').checked=false;
+    ['bn','en'].forEach(l=>{
+      $('title_'+l).value='';$('excerpt_'+l).value='';$('tags_'+l).value='';
+      $('cover_'+l).value='';
+      $('coverPreview_'+l).innerHTML='<div class="no-img">'+(l==='bn'?'কভার<br>নেই':'No<br>cover')+'</div>';
+      $('editor_'+l).innerHTML='';
+    });
+    $('cancelEditBtn').classList.add('hidden');
+  }
+
+  // ====== Save ======
+  async function savePost(lang){
+    const slug=$('slug').value.trim();
+    if(!slug){setStatus('স্থায়ী লিংক নাম (slug) দিন।','error');return false}
+    if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)){setStatus('slug-এ শুধু ছোট ইংরেজি অক্ষর, সংখ্যা ও হাইফেন।','error');return false}
+    const title=$('title_'+lang).value.trim();
+    const body=$('editor_'+lang).innerHTML.trim();
+    if(!title&&!body){setStatus((lang==='bn'?'বাংলা':'English')+' শিরোনাম বা লেখা দিন।','error');return false}
+    const groupId=$('postGroupId').value||slug;
+    const payload={
+      title:title||$('title_'+(lang==='bn'?'en':'bn')).value.trim()||slug,
+      slug:slug+'-'+lang,
+      group_id:groupId,
+      body:body,
+      excerpt:$('excerpt_'+lang).value.trim(),
+      tags:$('tags_'+lang).value.split(',').map(t=>t.trim()).filter(Boolean),
+      category:$('category').value,
+      language:lang,
+      cover_image:$('cover_'+lang).value||null,
+      published:$('published').checked,
+      updated_at:new Date().toISOString(),
+      ...($('published').checked?{published_at:new Date().toISOString()}:{})
+    };
+    // Check if post exists (by group_id + language)
+    const{data:existing}=await sb.from('posts').select('id').eq('group_id',groupId).eq('language',lang).maybeSingle();
+    let result;
+    if(existing&&existing.id){
+      result=await sb.from('posts').update(payload).eq('id',existing.id).select().single();
+    }else{
+      result=await sb.from('posts').insert(payload).select().single();
+    }
+    if(result.error){showDetailedError('সংরক্ষণ ব্যর্থ', result.error);return false}
+    $('postGroupId').value=groupId;
+    return true;
+  }
+
+  $('saveBnBtn').onclick=async()=>{setStatus('বাংলা সংরক্ষণ হচ্ছে…','warning');if(await savePost('bn')){setStatus('বাংলা সংরক্ষিত হয়েছে!','success');showToast('✅ বাংলা সংরক্ষিত');loadPosts()}}
+  $('saveEnBtn').onclick=async()=>{setStatus('English saving…','warning');if(await savePost('en')){setStatus('English saved!','success');showToast('✅ English saved');loadPosts()}}
+  $('saveBothBtn').onclick=async()=>{
+    setStatus('উভয় ভাষায় সংরক্ষণ হচ্ছে…','warning');
+    const bnOk=await savePost('bn');const enOk=await savePost('en');
+    if(bnOk&&enOk){setStatus('উভয় ভাষায় সংরক্ষিত!','success');showToast('✅ উভয় ভাষায় সংরক্ষিত')}
+    else if(bnOk||enOk){setStatus('আংশিক সংরক্ষিত। একটি ভাষায় সমস্যা হয়েছে।','warning')}
+    loadPosts();
+  };
+
+  $('newBtn').onclick=()=>{resetForm();setStatus('নতুন লেখা তৈরির জন্য প্রস্তুত।','success')};
+  $('cancelEditBtn').onclick=()=>{resetForm();setStatus('নতুন লেখা তৈরির জন্য প্রস্তুত।','success')};
+
+  // ====== Load posts ======
+  async function loadPosts(){
+    const{data,error}=await sb.from('posts').select('id,title,slug,group_id,language,category,published,updated_at,excerpt').order('updated_at',{ascending:false});
+    if(error){window.__sbPostsLoadError=true;const info=explainError(error)||{title:'লোড ত্রুটি',body:esc(error.message)};$('postsList').innerHTML='<div class="empty-state"><strong>'+info.title+'</strong><br>'+info.body.replace(/\n/g,'<br>')+'</div>';return}
+    // Group by group_id
+    const groups={};
+    data.forEach(p=>{if(!groups[p.group_id])groups[p.group_id]={bn:null,en:null};groups[p.group_id][p.language]=p});
+    const groupList=Object.values(groups);
+    $('postsCount').textContent='— '+groupList.length+' লেখা';
+    if(!groupList.length){$('postsList').innerHTML='<div class="empty-state">এখনো কোনো লেখা নেই। উপরের ফর্ম ব্যবহার করে প্রথম লেখা তৈরি করুন।</div>';return}
+    $('postsList').innerHTML=groupList.map(g=>{
+      const p=g.bn||g.en;const hasBn=!!g.bn;const hasEn=!!g.en;
+      const langBadge=hasBn&&hasEn?'<span class="badge bn en">BN+EN</span>':hasBn?'<span class="badge bn">BN</span>':'<span class="badge en">EN</span>';
+      const pubBadge=p.published?'<span class="badge published">প্রকাশিত</span>':'<span class="badge draft">খসড়া</span>';
+      const date=new Date(p.updated_at).toLocaleDateString('bn-BD',{year:'numeric',month:'short',day:'numeric'});
+      return '<div class="post-item"><div class="post-info"><div class="post-title">'+esc(p.title)+'</div><div class="post-meta">'+langBadge+' '+pubBadge+' <span>/'+esc(p.group_id)+'</span> <span>·</span> <span>'+esc(p.category||'—')+'</span> <span>·</span> <span>'+date+'</span></div></div><div class="post-actions">'+(p.published?'<a class="btn small secondary" href="read.html?slug='+encodeURIComponent(p.slug)+'" target="_blank">দেখুন</a>':'')+'<button class="btn small" data-edit="'+esc(p.group_id)+'">সম্পাদনা</button><button class="btn small danger" data-delete="'+esc(p.group_id)+'">মুছুন</button></div></div>';
+    }).join('');
+    // Wire edit
+    $('postsList').querySelectorAll('[data-edit]').forEach(b=>{
+      b.onclick=async()=>{
+        const groupId=b.dataset.edit;
+        resetForm();
+        $('postGroupId').value=groupId;
+        const{data:posts}=await sb.from('posts').select('*').eq('group_id',groupId);
+        if(!posts||!posts.length){showToast('লেখা পাওয়া যায়নি');return}
+        posts.forEach(p=>{
+          if(p.language==='bn'){
+            $('title_bn').value=p.title||'';$('excerpt_bn').value=p.excerpt||'';
+            $('tags_bn').value=Array.isArray(p.tags)?p.tags.join(', '):(p.tags||'');
+            $('cover_bn').value=p.cover_image||'';
+            if(p.cover_image){$('coverPreview_bn').innerHTML='<img src="'+p.cover_image+'">'}
+            $('editor_bn').innerHTML=p.body||'';
+          }else if(p.language==='en'){
+            $('title_en').value=p.title||'';$('excerpt_en').value=p.excerpt||'';
+            $('tags_en').value=Array.isArray(p.tags)?p.tags.join(', '):(p.tags||'');
+            $('cover_en').value=p.cover_image||'';
+            if(p.cover_image){$('coverPreview_en').innerHTML='<img src="'+p.cover_image+'">'}
+            $('editor_en').innerHTML=p.body||'';
+          }
+        });
+        $('slug').value=groupId;$('category').value=posts[0].category||'গল্প';
+        $('published').checked=posts[0].published;
+        $('cancelEditBtn').classList.remove('hidden');
+        window.scrollTo({top:0,behavior:'smooth'});
+        setStatus('সম্পাদনা মোডে: '+groupId,'success');
+      };
+    });
+    // Wire delete
+    $('postsList').querySelectorAll('[data-delete]').forEach(b=>{
+      b.onclick=async()=>{
+        if(!confirm('এই লেখা (উভয় ভাষা) স্থায়ীভাবে মুছে ফেলবেন?'))return;
+        const{error}=await sb.from('posts').delete().eq('group_id',b.dataset.delete);
+        if(error){showToast('মুছতে সমস্যা: '+error.message);return}
+        showToast('লেখা মুছে ফেলা হয়েছে');
+        if($('postGroupId').value===b.dataset.delete)resetForm();
+        loadPosts();
+      };
+    });
+  }
+
+  // ====== Login ======
+  $('loginBtn').onclick=async()=>{
+    if(!sb)return;
+    const email=$('email').value.trim(),password=$('password').value;
+    if(!email||!password)return setStatus('ইমেইল ও পাসওয়ার্ড দিন।','error');
+    setStatus('লগইন করা হচ্ছে…','warning');
+    const{data,error}=await sb.auth.signInWithPassword({email,password});
+    if(error){setStatus('লগইন ব্যর্থ: '+error.message,'error');return}
+    setStatus('লগইন সফল!','success');showToast('স্বাগতম!');
+  };
+  $('password').addEventListener('keypress',e=>{if(e.key==='Enter'){e.preventDefault();$('loginBtn').click()}});
+  $('email').addEventListener('keypress',e=>{if(e.key==='Enter'){e.preventDefault();$('password').focus()}});
+
+  $('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};
+
+  async function refresh(){
+    if(!sb)return;
+    const{data:{session:s}}=await sb.auth.getSession();session=s;
+    if(!session){$('loginPanel').classList.remove('hidden');$('appPanel').classList.add('hidden');$('userInfo').classList.add('hidden');setStatus('আপনার অ্যাকাউন্ট দিয়ে লগইন করুন।','warning');return}
+    const{data:admin,error}=await sb.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
+    if(error||!admin){const info=explainError(error)||{};setStatus(info.title||'এই অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়। '+(info.body?' — '+info.body:''),'error');$('loginPanel').classList.remove('hidden');$('appPanel').classList.add('hidden');$('userInfo').classList.add('hidden');await sb.auth.signOut();return}
+    $('loginPanel').classList.add('hidden');$('appPanel').classList.remove('hidden');$('userInfo').classList.remove('hidden');
+    $('userEmail').textContent=session.user.email;
+    setStatus('লগইন সফল! বাংলা ও ইংরেজি — দুই ভাষায় লেখা তৈরি করুন।','success');
+    loadPosts();
+  }
+
+  // Init
+  const configured=SUPABASE_URL.startsWith('https://')&&!SUPABASE_ANON_KEY.includes('YOUR_');
+  if(!configured){setStatus('সেটআপ করা হয়নি।','error');$('loginPanel').classList.remove('hidden')}
+  else{
+    sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    sb.auth.onAuthStateChange((e,s)=>{session=s;refresh()});
+    refresh();
+  }
+})();
+</script>
+</body>
+</html>
