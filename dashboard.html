@@ -288,6 +288,7 @@
         <button id="saveBnBtn" class="btn" style="background:var(--blood);border-color:var(--blood);">🔴 শুধু বাংলা সংরক্ষণ</button>
         <button id="saveEnBtn" class="btn" style="background:var(--teal-deep);border-color:var(--teal-deep);">🔵 Save English Only</button>
         <button id="saveBothBtn" class="btn gold" style="background:var(--gold-bright);color:var(--teal-deep);border-color:var(--gold-bright);">✨ উভয় ভাষায় সংরক্ষণ</button>
+        <button id="publishBtn" class="btn green">📢 প্রকাশ করুন</button>
         <button id="newBtn" class="btn secondary">নতুন লেখা</button>
         <button id="cancelEditBtn" class="btn secondary hidden">বাতিল</button>
       </div>
@@ -467,6 +468,22 @@
     if(bnOk&&enOk){setStatus('উভয় ভাষায় সংরক্ষিত!','success');showToast('✅ উভয় ভাষায় সংরক্ষিত')}
     else if(bnOk||enOk){setStatus('আংশিক সংরক্ষিত। একটি ভাষায় সমস্যা হয়েছে।','warning')}
     loadPosts();
+  };
+
+  $('publishBtn').onclick=async()=>{
+    $('published').checked=true;
+    const languages=['bn','en'].filter(lang=>$('title_'+lang).value.trim()||$('editor_'+lang).innerHTML.trim());
+    if(!languages.length){setStatus('প্রকাশ করার আগে অন্তত একটি ভাষায় শিরোনাম বা লেখা দিন।','error');return}
+    setStatus('লেখা প্রকাশ করা হচ্ছে…','warning');
+    let success=0;
+    for(const lang of languages){if(await savePost(lang))success++}
+    if(success===languages.length){
+      setStatus('লেখা প্রকাশিত হয়েছে!','success');
+      showToast('📢 লেখা প্রকাশিত হয়েছে');
+    }else if(success>0){
+      setStatus('আংশিক প্রকাশিত হয়েছে। তালিকায় অবস্থা যাচাই করুন।','warning');
+    }
+    await loadPosts();
   };
 
   $('newBtn').onclick=()=>{resetForm();setStatus('নতুন লেখা তৈরির জন্য প্রস্তুত।','success')};
