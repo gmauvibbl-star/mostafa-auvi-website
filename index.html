@@ -1073,24 +1073,26 @@
   }
   .feat-card .icon {
     font-family: 'Playfair Display', serif;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 900;
-    opacity: 0.55;
-    margin-bottom: 4px;
+    opacity: 0.65;
+    margin-bottom: 6px;
     line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .feat-card .title {
     font-family: 'Noto Serif Bengali', serif;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 700;
     line-height: 1.25;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
   .feat-card .sub {
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 10px;
-    opacity: 0.85;
+    font-size: 13px;
+    opacity: 0.9;
     line-height: 1.4;
   }
   .feat-card .tags {
@@ -1474,9 +1476,9 @@
     .features { padding: 30px 16px 24px; }
     .features-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
     .feat-card { min-height: 120px; padding: 12px 10px; }
-    .feat-card .title { font-size: 12px; }
-    .feat-card .sub { font-size: 9px; }
-    .feat-card .icon { font-size: 16px; }
+    .feat-card .title { font-size: 15px; }
+    .feat-card .sub { font-size: 12px; }
+    .feat-card .icon { font-size: 22px; }
 
     /* Author intro — stack */
     .author-intro { grid-template-columns: 1fr; gap: 16px; padding: 20px; text-align: center; }
@@ -1496,8 +1498,8 @@
     .hero-title-bn { font-size: 36px !important; }
     .features-grid { grid-template-columns: 1fr !important; }
     .feat-card { min-height: 90px; flex-direction: row; align-items: center; gap: 10px; }
-    .feat-card .icon { font-size: 20px; margin-bottom: 0; }
-    .feat-card > div { flex: 1; }
+    .feat-card .icon { font-size: 26px; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; }
+    .feat-card > div { flex: 1; min-width: 0; }
     .share a { width: 28px; height: 28px; }
     .share a svg { width: 12px; height: 12px; }
     .nav .search-box { display: none; }
@@ -1537,8 +1539,8 @@
     .hero-title-bn { font-size: 36px !important; }
     .features-grid { grid-template-columns: 1fr !important; }
     .feat-card { min-height: 90px; flex-direction: row; align-items: center; gap: 10px; }
-    .feat-card .icon { margin-bottom: 0; }
-    .feat-card > div { flex: 1; }
+    .feat-card .icon { margin-bottom: 0; white-space: nowrap; flex-shrink: 0; }
+    .feat-card > div { flex: 1; min-width: 0; }
     .nav .search-box { display: none; }
     .share a { width: 28px; height: 28px; }
     .brand .name { font-size: 28px; }
