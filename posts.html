@@ -153,6 +153,11 @@
     </nav>
   </header>
 
+  <div id="archiveLanguageSwitch" style="display:flex;justify-content:flex-end;gap:8px;padding:10px 50px 0;background:var(--paper);font-size:13px">
+    <a id="archiveBnLink" href="posts.html?lang=bn" style="color:var(--teal-deep);padding:5px 12px;border:1px solid var(--paper-dark);border-radius:20px;text-decoration:none">বাংলা</a>
+    <a id="archiveEnLink" href="posts.html?lang=en" style="color:var(--teal-deep);padding:5px 12px;border:1px solid var(--paper-dark);border-radius:20px;text-decoration:none">English</a>
+  </div>
+
   <!-- Intro -->
   <div class="intro">
     <div class="eyebrow">The Writing Archive · লেখার আর্কাইভ</div>
@@ -208,7 +213,27 @@ const catLabel=cat=>({"গল্প":"গল্প","উপন্যাস":"উ
 
 const params=new URLSearchParams(location.search);
 const category=params.get('category')||"";
+const language=params.get('lang')==='en'?'en':'bn';
 const grid=document.getElementById('grid');
+
+function languageUrl(lang, cat=category){
+  const q=new URLSearchParams();
+  q.set('lang',lang);
+  if(cat)q.set('category',cat);
+  return 'posts.html?'+q.toString();
+}
+document.getElementById('archiveBnLink').href=languageUrl('bn');
+document.getElementById('archiveEnLink').href=languageUrl('en');
+const activeLanguageLink=document.getElementById(language==='en'?'archiveEnLink':'archiveBnLink');
+activeLanguageLink.style.background='var(--teal-deep)';
+activeLanguageLink.style.color='var(--cream)';
+activeLanguageLink.style.borderColor='var(--teal-deep)';
+
+document.querySelectorAll('.nav a[href*="posts.html"], #filters a[href*="posts.html"]').forEach(a=>{
+  const original=new URL(a.href,location.href);
+  const cat=original.searchParams.get('category')||'';
+  a.href=languageUrl(language,cat);
+});
 const statusEl=document.getElementById('status');
 
 // Mark active filter
@@ -221,7 +246,10 @@ function markFilter(){
 
 // Update intro + nav active state based on category
 function updateIntro(){
-  if(category){
+  if(language==='en'){
+    document.getElementById('pageTitle').textContent=category?catLabel(category):'Published Writing';
+    document.getElementById('pageSubtitle').textContent=category?('Published writing in '+catLabel(category)+'.'):'Stories, novels, essays and literary criticism.';
+  }else if(category){
     document.getElementById('pageTitle').textContent=catLabel(category);
     document.getElementById('pageSubtitle').textContent=catLabel(category)+' বিভাগের প্রকাশিত লেখা।';
     document.querySelector('.nav a.current')?.classList.remove('current');
@@ -289,7 +317,7 @@ async function loadPosts(){
       .order('published_at',{ascending:false,nullsFirst:false})
       .limit(300);
     if(error)throw error;
-    let rows=data||[];
+    let rows=(data||[]).filter(p=>(p.language||'bn')===language);
     if(category){
       rows=rows.filter(p=>{
         const c=String(p.category||'').trim();
