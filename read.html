@@ -935,6 +935,41 @@
     .footer-strip { padding: 14px 18px; }
     .loading-state, .error-state { padding: 60px 22px; }
   }
+
+  /* ====== MOBILE RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .utility-bar { flex-direction: column; gap: 6px; padding: 8px 16px; font-size: 12px; }
+    .utility-bar .lang { gap: 8px; }
+    .utility-bar .lang a { padding: 3px 8px; font-size: 11px; }
+    .header { padding: 16px 16px 12px; }
+    .header-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .brand .name { font-size: 32px; }
+    .brand .tagline { font-size: 12px; }
+    .header-right { width: 100%; }
+    .share { gap: 6px; flex-wrap: wrap; }
+    .share a { width: 32px; height: 32px; }
+    .subscribe-btn { font-size: 11px; padding: 7px 14px; margin-left: 0; }
+    .nav { padding: 8px 12px; overflow-x: auto; }
+    .nav ul { gap: 12px; flex-wrap: nowrap; }
+    .nav ul li a { font-size: 12px; white-space: nowrap; }
+    .nav .search-box { display: none; }
+    .a4-page { padding: 24px 20px !important; margin: 12px 8px; }
+    .a4-page .article-title { font-size: 24px !important; }
+    .article-body { font-size: 15px !important; line-height: 1.9; }
+    .share-section { padding: 14px 16px; }
+    .share-section .share-btns { flex-wrap: wrap; gap: 6px; }
+    .share-section .share-btns a { width: 36px; height: 36px; }
+    .footer-strip { grid-template-columns: 1fr !important; text-align: center; }
+    .footer-strip .left, .footer-strip .center, .footer-strip .right { justify-self: center; }
+  }
+  @media (max-width: 480px) {
+    .brand .name { font-size: 28px; }
+    .a4-page { padding: 18px 14px !important; }
+    .a4-page .article-title { font-size: 20px !important; }
+    .article-body { font-size: 14px !important; }
+    .share a { width: 28px; height: 28px; }
+    .share a svg { width: 12px; height: 12px; }
+  }
 </style>
 </head>
 <body>

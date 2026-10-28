@@ -688,6 +688,38 @@
     .sidebox { padding: 18px 18px 16px; }
     .footer-strip { padding: 14px 18px; }
   }
+
+  /* ====== MOBILE RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .utility-bar { flex-direction: column; gap: 6px; padding: 8px 16px; font-size: 12px; }
+    .utility-bar .lang { gap: 8px; }
+    .utility-bar .lang a { padding: 3px 8px; font-size: 11px; }
+    .header { padding: 16px 16px 12px; }
+    .header-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .brand .name { font-size: 32px; }
+    .brand .tagline { font-size: 12px; }
+    .header-right { width: 100%; }
+    .share { gap: 6px; flex-wrap: wrap; }
+    .share a { width: 32px; height: 32px; }
+    .share a svg { width: 14px; height: 14px; }
+    .subscribe-btn { font-size: 11px; padding: 7px 14px; margin-left: 0; }
+    .nav { padding: 8px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .nav ul { gap: 12px; flex-wrap: nowrap; }
+    .nav ul li a { font-size: 12px; white-space: nowrap; }
+    .nav .search-box { display: none; }
+    .layout, .about-grid { grid-template-columns: 1fr !important; }
+    .about-photo, .author-photo-wrap { width: 140px; height: 140px; margin: 0 auto; max-width: 140px; max-height: 140px; }
+    .sidebar { position: static !important; }
+    .footer-strip { grid-template-columns: 1fr !important; text-align: center; }
+    .footer-strip .left, .footer-strip .center, .footer-strip .right { justify-self: center; }
+  }
+  @media (max-width: 480px) {
+    .brand .name { font-size: 28px; }
+    .header-row { gap: 8px; }
+    .share a { width: 28px; height: 28px; }
+    .share a svg { width: 12px; height: 12px; }
+    .about-photo, .author-photo-wrap { width: 110px; height: 110px; max-width: 110px; max-height: 110px; }
+  }
 </style>
 </head>
 <body>
