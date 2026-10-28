@@ -739,35 +739,35 @@
 
   /* ====== READER COMMENTS ====== */
   .reader-comments {
-    width: 100%;
-    box-sizing: border-box;
-    margin: 30px 0 0;
-    padding: 34px 28px 38px;
-    background: var(--milky);
-    border-top: 1px solid var(--paper-dark);
+    width: 100%; box-sizing: border-box; margin: 28px 0 0; padding: 32px 28px 36px;
+    background: transparent; border-top: 1px solid rgba(15,61,62,.12);
   }
   .reader-comments-inner { max-width: 800px; margin: 0 auto; }
-  .comments-heading { text-align: center; margin-bottom: 22px; }
-  .comments-kicker { color: var(--gold-dim); font: italic 12px 'EB Garamond', serif; letter-spacing: .14em; text-transform: uppercase; }
-  .comments-heading h2 { color: var(--teal-deep); font: 600 25px 'Noto Serif Bengali', serif; margin: 6px 0 8px; }
+  .comments-heading { text-align: left; margin-bottom: 20px; }
+  .comments-kicker { color: var(--gold-dim); font: italic 12px 'EB Garamond', serif; letter-spacing: .12em; text-transform: uppercase; }
+  .comments-heading h2 { color: var(--teal-deep); font: 600 25px 'Noto Serif Bengali', serif; margin: 5px 0 7px; }
   .comments-heading p { color: var(--ink-mute); font: 14px/1.8 'Noto Serif Bengali', serif; margin: 0; }
-  .comment-form { display: grid; gap: 9px; padding: 22px; border: 1px solid var(--paper-dark); border-radius: 8px; background: #fffdf7; }
-  .comment-form label { font: 600 14px 'Noto Serif Bengali', serif; color: var(--teal-deep); }
-  .comment-form input, .comment-form textarea { width: 100%; box-sizing: border-box; border: 1px solid #d9cfb8; border-radius: 5px; padding: 11px 12px; background: #fffefa; color: var(--ink); font: 15px/1.7 'Noto Serif Bengali', serif; }
+  .comment-form { display: grid; gap: 9px; padding: 22px; border: 1px solid rgba(15,61,62,.16); border-radius: 10px; background: rgba(255,253,247,.72); box-shadow: 0 5px 18px rgba(15,61,62,.045); }
+  .comment-form label { font: 600 14px 'Noto Serif Bengali', serif; color: var(--teal-deep); margin-top: 3px; }
+  .comment-form input, .comment-form textarea { width: 100%; box-sizing: border-box; border: 1px solid #d9cfb8; border-radius: 6px; padding: 11px 12px; background: #fffefa; color: var(--ink); font: 15px/1.7 'Noto Serif Bengali', serif; }
   .comment-form textarea { resize: vertical; min-height: 100px; }
-  .comment-form input:focus, .comment-form textarea:focus { outline: 2px solid rgba(42,122,126,.22); border-color: var(--teal-mid); }
+  .comment-form input:focus, .comment-form textarea:focus { outline: 2px solid rgba(42,122,126,.18); border-color: var(--teal-mid); }
   .comment-form-bottom { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:5px; }
   #commentStatus { color: var(--ink-mute); font: 13px/1.6 'Noto Serif Bengali', serif; }
-  #commentSubmit { border:0; border-radius:5px; padding:11px 17px; background:var(--teal-deep); color:var(--cream); cursor:pointer; font:600 14px 'Noto Serif Bengali', serif; }
-  #commentSubmit:disabled { opacity:.65; cursor:wait; }
-  .comments-list { display:grid; gap:12px; margin-top:22px; }
-  .comments-loading, .comments-empty { color:var(--ink-mute); text-align:center; font:14px/1.8 'Noto Serif Bengali', serif; }
-  .reader-comment { border-left:3px solid var(--gold); background:#fffdf7; border-radius:0 6px 6px 0; padding:14px 17px; overflow-wrap:anywhere; }
+  #commentSubmit { border:0; border-radius:6px; padding:11px 18px; background:var(--teal-deep); color:var(--cream); cursor:pointer; font:600 14px 'Noto Serif Bengali', serif; transition:background .2s, transform .2s; }
+  #commentSubmit:hover { background:var(--teal-mid); transform:translateY(-1px); }
+  #commentSubmit:disabled { opacity:.65; cursor:wait; transform:none; }
+  .comment-help-row { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--ink-mute); font:12px/1.6 'Noto Serif Bengali', serif; }
+  .comment-honeypot { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important; }
+  .comments-list { display:grid; gap:10px; margin-top:20px; }
+  .comments-list-title { color:var(--teal-deep); font:600 17px 'Noto Serif Bengali', serif; margin:0 0 2px; }
+  .comments-loading, .comments-empty { color:var(--ink-mute); text-align:left; font:14px/1.8 'Noto Serif Bengali', serif; padding:12px 0; }
+  .reader-comment { border:1px solid rgba(15,61,62,.12); border-left:3px solid var(--gold); background:rgba(255,253,247,.6); border-radius:0 8px 8px 0; padding:14px 17px; overflow-wrap:anywhere; }
   .reader-comment-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:7px; }
   .reader-comment-name { color:var(--teal-deep); font:600 15px 'Noto Serif Bengali', serif; }
   .reader-comment-date { color:var(--ink-mute); font:12px 'EB Garamond', serif; }
   .reader-comment-text { color:var(--ink); white-space:pre-wrap; font:15px/1.85 'Noto Serif Bengali', serif; }
-  @media(max-width:600px) { .reader-comments { padding:26px 14px 30px; } .comment-form { padding:15px; } }
+  @media(max-width:600px) { .reader-comments { padding:24px 14px 28px; } .comment-form { padding:15px; } .comments-heading h2 {font-size:22px;} }
 
   /* ====== FOOTER STRIP ====== */
   .footer-strip {
@@ -1118,21 +1118,25 @@
   <div class="reader-comments-inner">
     <div class="comments-heading">
       <span class="comments-kicker">Readers' voices</span>
-      <h2 id="commentsTitle">মন্তব্য করুন</h2>
-      <p>আপনার নাম ও মন্তব্য লিখুন। সাইন ইন লাগবে না। মন্তব্য জমা দিলেই প্রকাশিত হবে।</p>
+      <h2 id="commentsTitle">পাঠকের কথা</h2>
+      <p>লেখাটি নিয়ে আপনার ভাবনা জানাতে পারেন। শুধু নাম লিখুন, সাইন ইন লাগবে না।</p>
     </div>
     <form id="commentForm" class="comment-form">
       <label for="commentName">আপনার নাম</label>
-      <input id="commentName" name="name" type="text" maxlength="60" required placeholder="নাম লিখুন">
-      <label for="commentText">মন্তব্য</label>
-      <textarea id="commentText" name="comment" rows="4" maxlength="2000" required placeholder="আপনার মন্তব্য লিখুন"></textarea>
+      <input id="commentName" name="name" type="text" maxlength="60" autocomplete="name" required placeholder="নাম লিখুন">
+      <label for="commentText">আপনার মন্তব্য</label>
+      <textarea id="commentText" name="comment" rows="4" maxlength="2000" required placeholder="লেখাটি পড়ে আপনার মতামত লিখুন…"></textarea>
+      <div class="comment-help-row"><span>শালীন ও বিষয়ভিত্তিক মন্তব্য করুন।</span><span id="commentCount">০ / ২০০০</span></div>
+      <label class="comment-honeypot" aria-hidden="true" for="commentWebsite">ওয়েবসাইট</label>
+      <input class="comment-honeypot" id="commentWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="comment-form-bottom">
         <span id="commentStatus" role="status" aria-live="polite"></span>
         <button type="submit" id="commentSubmit">মন্তব্য প্রকাশ করুন</button>
       </div>
     </form>
-    <div id="commentsList" class="comments-list" aria-live="polite">
-      <p class="comments-loading">মন্তব্য লোড হচ্ছে…</p>
+    <div class="comments-list" aria-live="polite">
+      <h3 class="comments-list-title">পাঠকদের মন্তব্য</h3>
+      <div id="commentsList"><p class="comments-loading">মন্তব্য লোড হচ্ছে…</p></div>
     </div>
   </div>
 </section>
@@ -1578,6 +1582,10 @@ loadPost();
   const submit = document.getElementById('commentSubmit');
   const nameInput = document.getElementById('commentName');
   const textInput = document.getElementById('commentText');
+  const websiteInput = document.getElementById('commentWebsite');
+  const countLabel = document.getElementById('commentCount');
+  const toBnDigits = value => String(value).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  textInput.addEventListener('input', () => { countLabel.textContent = toBnDigits(textInput.value.length) + ' / ২০০০'; });
   const postSlug = new URLSearchParams(location.search).get('slug') || '';
 
   function dateLabel(value) {
@@ -1619,6 +1627,11 @@ loadPost();
     if (!postSlug) { showStatus('একটি নির্দিষ্ট লেখার পেজে গিয়ে মন্তব্য করুন।', true); return; }
     const authorName = nameInput.value.trim();
     const commentText = textInput.value.trim();
+    if (websiteInput.value.trim()) { form.reset(); return; }
+    try {
+      const lastSent = Number(sessionStorage.getItem('commentLastSentAt') || 0);
+      if (Date.now() - lastSent < 30000) { showStatus('পরপর মন্তব্য পাঠানোর আগে ৩০ সেকেন্ড অপেক্ষা করুন।', true); return; }
+    } catch (_) {}
     if (!authorName || !commentText) { showStatus('নাম ও মন্তব্য দুটোই লিখুন।', true); return; }
     if (authorName.length > 60 || commentText.length > 2000) { showStatus('নামের বা মন্তব্যের দৈর্ঘ্য সীমা ছাড়িয়েছে।', true); return; }
     submit.disabled = true;
@@ -1635,6 +1648,8 @@ loadPost();
       return;
     }
     textInput.value = '';
+    countLabel.textContent = '০ / ২০০০';
+    try { sessionStorage.setItem('commentLastSentAt', String(Date.now())); } catch (_) {}
     showStatus('আপনার মন্তব্য প্রকাশিত হয়েছে। ধন্যবাদ!', false);
     await loadComments();
   });
