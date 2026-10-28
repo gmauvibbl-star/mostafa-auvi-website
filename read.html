@@ -1273,7 +1273,7 @@ async function loadPost() {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     // Fetch the post by slug (try multiple cover image field names)
     const { data: post, error: err1 } = await sb.from('posts')
-      .select('id,group_id,language,slug,title,body,excerpt,cover_image,cover_image_url,image_url,category,tags,published,published_at')
+      .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published,published_at')
       .eq('slug', slug)
       .eq('published', true)
       .maybeSingle();
@@ -1290,7 +1290,7 @@ async function loadPost() {
         if (adminError) throw adminError;
         if (admin) {
           const { data: draft, error: draftError } = await sb.from('posts')
-            .select('id,group_id,language,slug,title,body,excerpt,cover_image,cover_image_url,image_url,category,tags,published,published_at')
+            .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published,published_at')
             .eq('slug', slug).maybeSingle();
           if (draftError) throw draftError;
           loadedPost = draft;
