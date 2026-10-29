@@ -221,6 +221,111 @@
     .btn-row .btn{font-size:11px;padding:8px 10px}
   }
 
+
+  /* Larger, more legible Bengali dashboard controls */
+  html,body{font-size:16px}
+  .page-wrap{max-width:1540px;padding-left:22px;padding-right:22px}
+  .top-bar{font-size:15px;padding:16px 32px}
+  .dash-header{padding:38px 42px 34px;min-height:150px}
+  .dash-header .eyebrow{font-size:13px}
+  .dash-header h1{font-size:36px;line-height:1.25}
+  .dash-header .sub{font-size:17px}
+  .dash-header .user-info{font-size:14px}
+  .dash-main{padding:30px 10px}
+  .status-banner{font-size:15px;padding:16px 20px;line-height:1.7;border-radius:14px}
+  .login-panel{max-width:520px;padding:40px 42px;border-radius:22px}
+  .login-panel h2{font-size:27px}
+  .login-panel .sub{font-size:16px}
+  .form-group{margin-bottom:18px}
+  .form-group label{font-size:15px;margin-bottom:8px}
+  .form-group label .hint{font-size:13px}
+  .form-group input,.form-group select,.form-group textarea{
+    min-height:50px;padding:12px 15px;font-size:16px;border-radius:11px
+  }
+  .form-group textarea{min-height:112px;line-height:1.75}
+  .checkbox-label{font-size:15px}
+  .btn{font-size:15px;padding:12px 20px;min-height:46px;border-radius:12px}
+  .btn.small{font-size:13px;padding:9px 13px;min-height:38px}
+  .btn-row{gap:11px;margin-top:18px}
+  .shared-fields{padding:26px 28px;margin-bottom:22px}
+  .shared-fields h3{font-size:19px;padding-bottom:12px;margin-bottom:18px}
+  .shared-grid{gap:18px}
+  .dual-editor{gap:22px;margin-bottom:22px}
+  .lang-pane{border-radius:16px}
+  .lang-pane-header{padding:15px 20px}
+  .lang-pane-header .lang-name{font-size:18px}
+  .lang-pane-header .lang-flag{font-size:13px;padding:5px 11px}
+  .lang-pane-body{padding:20px}
+  .toolbar{gap:6px;padding:11px 13px}
+  .toolbar button{width:36px;height:36px;font-size:15px;border-radius:8px}
+  .toolbar button.fmt{min-width:36px;padding:0 10px}
+  .toolbar .color-swatch{width:27px;height:27px}
+  .toolbar .img-btn{font-size:13px;padding:0 12px}
+  .toolbar .img-btn svg{width:16px;height:16px}
+  .editor-content{min-height:470px;max-height:680px;padding:20px 22px;font-size:17px;line-height:2}
+  .editor-content p{margin-bottom:14px}
+  .editor-content h2{font-size:1.55em}
+  .editor-content h3{font-size:1.3em}
+  .cover-upload{gap:14px}
+  .cover-upload .cover-preview{width:82px;height:108px;border-radius:11px}
+  .cover-upload .cover-preview .no-img{font-size:12px}
+  .cover-upload .cover-btns .btn{font-size:13px;padding:9px 13px}
+  .panel{padding:28px 30px;border-radius:18px}
+  .panel-header{margin-bottom:18px;padding-bottom:14px}
+  .panel-header h2{font-size:23px}
+  .panel-header .num{font-size:15px}
+  .posts-list{gap:13px}
+  .post-item{padding:17px 20px;gap:16px;border-radius:15px}
+  .post-item .post-title{font-size:17px;line-height:1.55;margin-bottom:6px}
+  .post-item .post-meta{font-size:13px;gap:10px}
+  .badge{font-size:12px;padding:4px 10px}
+  .empty-state{font-size:16px;padding:36px 18px}
+  .dash-footer{font-size:13px;padding:20px 28px}
+  .toast{font-size:15px;padding:14px 22px}
+  /* Alpana-inspired botanical corner ornaments, confined to the dashboard */
+  .dash-header,.shared-fields,.lang-pane,.panel,.login-panel{position:relative;isolation:isolate}
+  .shared-fields::after,.panel::after{
+    content:"❀  ❧";position:absolute;right:18px;bottom:8px;
+    color:rgba(22,169,131,.30);font-size:27px;letter-spacing:7px;
+    pointer-events:none;z-index:-1
+  }
+  .lang-pane.bn::after,.lang-pane.en::after{
+    content:"✿";position:absolute;right:14px;bottom:8px;
+    color:rgba(255,174,35,.35);font-size:30px;pointer-events:none
+  }
+  .dash-header::after{
+    content:"❀";position:absolute;right:26px;bottom:8px;
+    color:rgba(255,255,255,.24);font-size:74px;pointer-events:none
+  }
+  .login-panel::after{
+    content:"❧";position:absolute;right:18px;bottom:10px;
+    color:rgba(48,139,230,.18);font-size:54px;pointer-events:none
+  }
+  @media(max-width:900px){
+    .page-wrap{padding-left:10px;padding-right:10px}
+    .dash-header{padding:28px 22px}
+    .dash-header h1{font-size:30px}
+    .dash-main{padding:20px 0}
+    .shared-fields{padding:20px}
+    .lang-pane-body{padding:15px}
+    .editor-content{min-height:360px;font-size:16px}
+    .post-item{align-items:flex-start;flex-wrap:wrap}
+    .post-item .post-info{flex:1 1 100%}
+    .post-item .post-actions{flex-wrap:wrap}
+    .dash-footer{margin:0 -10px}
+  }
+  @media(max-width:560px){
+    .top-bar{font-size:13px;padding:12px}
+    .dash-header h1{font-size:25px}
+    .dash-header .sub{font-size:14px}
+    .login-panel{padding:25px 18px}
+    .form-group input,.form-group select,.form-group textarea{font-size:16px}
+    .editor-content{min-height:320px;padding:15px;font-size:16px}
+    .panel{padding:16px}
+    .post-item .post-actions .btn{font-size:11px;padding:7px 9px}
+    .btn-row .btn{font-size:12px;padding:9px 11px}
+  }
+
 </style>
 </head>
 <body>
