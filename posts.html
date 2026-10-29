@@ -305,7 +305,7 @@ const hubCategory=category==='কথাসাহিত্য'?'কথাসা�
 if(hubs[hubCategory]){
  essayHub.classList.add('visible');
  document.getElementById('hubLabel').textContent=hubTitles[hubCategory]||'বিষয়ভিত্তিক বিভাগ';
- hubGrid.innerHTML=hubs[hubCategory].map(([label,slug])=>'<a class="essay-hub-card" href="posts.html?category='+encodeURIComponent(slug)+'"><strong>'+label+'</strong></a>').join('');
+ hubGrid.innerHTML=hubs[hubCategory].map(([label,slug])=>'<a class="essay-hub-card" href="'+languageUrl(language,slug)+'"><strong>'+label+'</strong></a>').join('');
  hubGrid.querySelectorAll('.essay-hub-card').forEach(a=>{
   const c=new URL(a.href,location.href).searchParams.get('category')||'';
   if(c===category)a.classList.add('active');
@@ -395,12 +395,16 @@ async function loadPosts(){
     if(error)throw error;
     let rows=(data||[]).filter(p=>(p.language||'bn')===language);
     if(category){
-      rows=rows.filter(p=>{
-        const c=String(p.category||'').trim();
-        if(c===category)return true;
-        if(category==='প্রবন্ধ'&&(c==='সাহিত্যালোচনা'||c==='সাহিত্যসমালোচনা'))return true;
-        return false;
-      });
+      const categoryGroups = {
+        'গল্প':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প'],
+        'কথাসাহিত্য':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
+        'উপন্যাস':['উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
+        'অনুবাদ সাহিত্য':['অনুবাদ সাহিত্য','অনূদিত গল্প','অনূদিত উপন্যাস','অনূদিত প্রবন্ধ'],
+        'প্রবন্ধ':['প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য','সমাজ ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','চিন্তা ও মনন','অনূদিত প্রবন্ধ'],
+        'সাহিত্যালোচনা':['সাহিত্যালোচনা','সাহিত্যসমালোচনা','বই আলোচনা','লেখক ও সাহিত্যকর্ম','বিশ্বসাহিত্য','পাঠ-প্রতিক্রিয়া']
+      };
+      const allowed = categoryGroups[category] || [category];
+      rows=rows.filter(p=>allowed.includes(String(p.category||'').trim()));
     }
     renderCards(rows);
   }catch(e){
