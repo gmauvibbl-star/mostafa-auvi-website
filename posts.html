@@ -306,7 +306,7 @@ function excerptText(p){
 
 function renderCards(rows){
   if(!rows.length){
-    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>এই বিভাগে এখনো কোনো লেখা পাওয়া যায়নি</h3><p>নতুন লেখা প্রকাশিত হলে এখানে দেখা যাবে।</p></div>';
+    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>এখনো কোনো লেখা প্রকাশ করা হয়নি</h3><p>এই বিভাগে লেখা প্রকাশিত হলে এখানে দেখা যাবে।</p></div>';
     statusEl.innerHTML='এই বিভাগে কোনো প্রকাশিত লেখা নেই।';
     return;
   }
