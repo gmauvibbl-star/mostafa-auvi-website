@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0F3D3E">
+<meta name="description" content="Mostafa Auvi-এর প্রকাশিত লেখা — গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনার আর্কাইভ।">
+<title>প্রকাশিত লেখা | Mostafa Auvi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-deep:#0F3D3E; --teal:#1B5E6B; --teal-mid:#2A7A7E;
+    --cream:#FAF4E8; --paper:#F4ECD8; --paper-warm:#EDE2C6; --paper-dark:#C8B898;
+    --ink:#1A1410; --ink-soft:#3D2E22; --ink-mute:#6B5A48;
+    --gold:#B89248; --gold-bright:#D4B468; --gold-dim:#7A6028;
+    --blood:#8A1818; --olive:#5A6B3F; --green:#2D5F52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100%;background:var(--olive);font-family:'Noto Serif Bengali','EB Garamond',serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{display:flex;justify-content:center}
+  .page-wrap{max-width:1200px;width:100%;margin:0 auto;background:var(--paper);box-shadow:0 0 40px rgba(0,0,0,0.22);position:relative;min-height:100vh;display:flex;flex-direction:column}
+
+  /* ===== Site header ===== */
+  .site-header{background:linear-gradient(135deg,var(--teal-deep) 0%,var(--teal) 100%);color:var(--cream);padding:34px 50px 26px;position:relative;border-bottom:3px solid var(--gold)}
+  .site-header::after{content:"";position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);width:90px;height:3px;background:var(--gold-bright)}
+  .header-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}
+  .brand{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--cream);letter-spacing:0.06em;text-decoration:none;line-height:1}
+  .brand .bn{font-family:'Noto Serif Bengali',serif;font-size:15px;font-weight:500;color:var(--gold-bright);display:block;letter-spacing:0;margin-top:5px}
+  .tagline{font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:var(--gold-bright);letter-spacing:0.1em;text-align:right;max-width:380px}
+  .nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:20px;font-family:'EB Garamond',serif;font-size:13px;letter-spacing:0.05em}
+  .nav a{color:var(--cream);text-decoration:none;opacity:0.88;transition:color .2s,opacity .2s;padding-bottom:3px;border-bottom:1px solid transparent}
+  .nav a:hover,.nav a.current{color:var(--gold-bright);opacity:1;border-bottom-color:var(--gold)}
+
+  /* ===== Page intro ===== */
+  .intro{padding:42px 50px 12px;border-bottom:1px solid var(--paper-dark)}
+  .eyebrow{font-family:'EB Garamond',serif;font-style:italic;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+  .page-title{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--teal-deep);line-height:1.18;margin-bottom:8px}
+  .page-subtitle{font-family:'EB Garamond',serif;font-style:italic;font-size:15px;color:var(--ink-mute);max-width:680px}
+
+  /* ===== Filters ===== */
+  .filters{padding:22px 50px 8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .filter-pill{display:inline-block;font-family:'EB Garamond',serif;font-size:13px;color:var(--teal-deep);background:var(--cream);border:1px solid var(--paper-dark);padding:6px 14px;border-radius:20px;text-decoration:none;letter-spacing:0.03em;transition:all .18s}
+  .filter-pill:hover{border-color:var(--gold);color:var(--teal-deep)}
+  .filter-pill.selected{background:var(--teal-deep);color:var(--cream);border-color:var(--teal-deep)}
+
+  /* ===== Main category hubs ===== */
+  .essay-hub{display:none;padding:18px 50px 8px}
+  .essay-hub.visible{display:block}
+  .essay-hub-label{font:italic 12px 'EB Garamond',serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+  .essay-hub-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .essay-hub-card{display:flex;flex-direction:column;justify-content:center;min-height:94px;padding:14px 13px;border:1px solid transparent;border-top:4px solid currentColor;border-radius:5px;text-decoration:none;color:#fff;box-shadow:0 4px 10px rgba(26,20,16,.10);transition:transform .18s,box-shadow .18s,filter .18s}
+  .essay-hub-card:nth-child(5n+1){background:linear-gradient(145deg,#174E48,#26796A);border-color:#26796A;color:#FFF8E8}
+  .essay-hub-card:nth-child(5n+2){background:linear-gradient(145deg,#713D23,#A85D35);border-color:#A85D35;color:#FFF5E9}
+  .essay-hub-card:nth-child(5n+3){background:linear-gradient(145deg,#293F73,#4669A6);border-color:#4669A6;color:#F5F6FF}
+  .essay-hub-card:nth-child(5n+4){background:linear-gradient(145deg,#6C3158,#A64E7D);border-color:#A64E7D;color:#FFF3FA}
+  .essay-hub-card:nth-child(5n){background:linear-gradient(145deg,#596021,#8A963A);border-color:#8A963A;color:#FFFFF0}
+  .essay-hub-card:hover,.essay-hub-card.active{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 9px 20px rgba(26,20,16,.22);outline:2px solid var(--gold-bright);outline-offset:1px}
+  .essay-hub-card strong{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;line-height:1.5}
+  .essay-hub-card span{font:italic 11px 'EB Garamond',serif;letter-spacing:.08em;color:inherit;margin-top:9px}
+  @media(max-width:980px){.essay-hub-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(max-width:680px){.essay-hub{padding:16px 22px 8px}.essay-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.essay-hub-card{min-height:82px;padding:12px 10px}}
+  /* ===== Status ===== */
+  .status-row{padding:8px 50px 22px;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--gold-dim)}
+  .status-row .count{font-weight:600;color:var(--teal-deep);font-style:normal}
+
+  /* ===== Post grid ===== */
+  .grid{padding:0 50px 50px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;flex:1}
+  .card{background:var(--cream);border:1px solid var(--paper-dark);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(0,0,0,0.05);transition:transform .22s,box-shadow .22s,border-color .22s;text-decoration:none;color:inherit}
+  .card:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(15,61,62,0.18);border-color:var(--gold)}
+  .card-cover{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--paper-warm);border-bottom:1px solid var(--paper-dark)}
+  .card-cover-fallback{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal-deep),var(--teal));border-bottom:1px solid var(--paper-dark);font-family:'Playfair Display',serif;font-size:42px;color:var(--gold-bright);opacity:0.85}
+  .card-body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+  .card-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .badge{display:inline-block;font-family:'EB Garamond',serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px}
+  .badge.cat{background:var(--paper-warm);color:var(--gold-dim);border:1px solid var(--paper-dark)}
+  .badge.bn{background:var(--blood);color:#fff}
+  .badge.en{background:var(--teal-deep);color:#fff}
+  .card-title{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:20px;font-weight:700;color:var(--teal-deep);line-height:1.3;margin-bottom:8px;letter-spacing:-0.005em}
+  .card-title.bn{font-family:'Noto Serif Bengali',serif;font-weight:700;letter-spacing:0}
+  .card-excerpt{font-family:'EB Garamond',serif;font-size:14px;line-height:1.6;color:var(--ink-mute);flex:1;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card-excerpt.bn{font-family:'Noto Serif Bengali',serif;font-size:13.5px}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--paper-dark);padding-top:10px;margin-top:auto}
+  .card-date{font-family:'EB Garamond',serif;font-style:italic;font-size:12px;color:var(--gold-dim)}
+  .card-read{font-family:'EB Garamond',serif;font-size:13px;font-weight:600;color:var(--blood);text-decoration:none;letter-spacing:0.03em;transition:color .2s}
+  .card-read:hover{color:var(--teal-deep)}
+
+  /* ===== Empty state ===== */
+  .empty{padding:60px 50px;text-align:center;background:var(--cream);border:1px dashed var(--paper-dark);border-radius:6px;margin:0 50px 50px}
+  .empty .icon{font-family:'Playfair Display',serif;font-size:42px;color:var(--gold);margin-bottom:12px}
+  .empty h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--teal-deep);margin-bottom:6px}
+  .empty p{font-family:'EB Garamond',serif;font-style:italic;color:var(--ink-mute);font-size:14px}
+
+  /* ===== Footer ===== */
+  .site-footer{background:var(--teal-deep);color:var(--cream);border-top:3px solid var(--gold);padding:30px 50px 22px}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold-bright);letter-spacing:0.08em;margin-bottom:4px}
+  .footer-brand .bn{font-family:'Noto Serif Bengali',serif;font-size:14px;color:var(--cream);display:block;letter-spacing:0;font-weight:500;margin-top:2px}
+  .footer-nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0;font-family:'EB Garamond',serif;font-size:13px}
+  .footer-nav a{color:var(--cream);text-decoration:none;opacity:0.85;transition:opacity .2s,color .2s}
+  .footer-nav a:hover{color:var(--gold-bright);opacity:1}
+  .footer-copy{font-family:'EB Garamond',serif;font-style:italic;font-size:11px;color:var(--gold-dim);letter-spacing:0.08em;border-top:1px solid rgba(184,146,72,0.25);padding-top:12px;margin-top:6px}
+
+  /* ===== Responsive ===== */
+  @media(max-width:980px){
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media(max-width:680px){
+    .site-header{padding:24px 22px 20px}
+    .brand{font-size:24px}
+    .tagline{font-size:12px;text-align:left;max-width:100%}
+    .nav{gap:6px 14px;font-size:12px}
+    .intro{padding:30px 22px 10px}
+    .filters{padding:18px 22px 6px}
+    .status-row{padding:6px 22px 18px}
+    .grid{grid-template-columns:1fr;padding:0 22px 36px;gap:18px}
+    .empty{margin:0 22px 36px;padding:40px 22px}
+    .site-footer{padding:24px 22px 18px}
+  }
+
+  /* ====== MOBILE RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .utility-bar { flex-direction: column; gap: 6px; padding: 8px 16px; font-size: 12px; }
+    .utility-bar .lang { gap: 8px; }
+    .utility-bar .lang a { padding: 3px 8px; font-size: 11px; }
+    .header { padding: 16px 16px 12px; }
+    .header-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .brand .name { font-size: 32px; }
+    .brand .tagline { font-size: 12px; }
+    .header-right { width: 100%; }
+    .share { gap: 6px; flex-wrap: wrap; }
+    .share a { width: 32px; height: 32px; }
+    .subscribe-btn { font-size: 11px; padding: 7px 14px; margin-left: 0; }
+    .nav { padding: 8px 12px; overflow-x: auto; }
+    .nav ul { gap: 12px; flex-wrap: nowrap; }
+    .nav ul li a { font-size: 12px; white-space: nowrap; }
+    .nav .search-box { display: none; }
+    .dash-main, .posts-main { padding: 20px 16px; }
+    .post-grid { grid-template-columns: 1fr !important; }
+    .filters { gap: 6px; }
+    .filters a { font-size: 11px; padding: 5px 10px; }
+    .footer-strip { grid-template-columns: 1fr !important; text-align: center; }
+    .footer-strip .left, .footer-strip .center, .footer-strip .right { justify-self: center; }
+  }
+  @media (max-width: 480px) {
+    .brand .name { font-size: 28px; }
+    .share a { width: 28px; height: 28px; }
+    .share a svg { width: 12px; height: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="./">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></a>
+      <div class="tagline">Fiction Writer &amp; Literary Critic<br>Literature Beyond Borders</div>
+    </div>
+    <nav class="nav" aria-label="প্রধান নেভিগেশন">
+      <a href="./">প্রচ্ছদ</a>
+      <a href="posts.html" class="current">প্রকাশিত লেখা</a>
+      <a href="posts.html?category=গল্প">গল্প</a>
+      <a href="posts.html?category=উপন্যাস">উপন্যাস</a>
+      <a href="posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
+      <a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a>
+      <a href="posts.html?category=আইন-আদালত">আইন ও আদালত</a>
+      <a href="journal.html">Journal</a>
+    </nav>
+  </header>
+
+  <div id="archiveLanguageSwitch" style="display:flex;justify-content:flex-end;gap:8px;padding:10px 50px 0;background:var(--paper);font-size:13px">
+    <a id="archiveBnLink" href="posts.html?lang=bn" style="color:var(--teal-deep);padding:5px 12px;border:1px solid var(--paper-dark);border-radius:20px;text-decoration:none">বাংলা</a>
+    <a id="archiveEnLink" href="posts.html?lang=en" style="color:var(--teal-deep);padding:5px 12px;border:1px solid var(--paper-dark);border-radius:20px;text-decoration:none">English</a>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <div class="eyebrow">The Writing Archive · লেখার আর্কাইভ</div>
+    <h1 class="page-title" id="pageTitle">প্রকাশিত লেখা</h1>
+    <p class="page-subtitle" id="pageSubtitle">গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা—এক জায়গায়।</p>
+  </div>
+
+  <!-- Main category and subcategory cards -->
+  <section class="essay-hub" id="essayHub" aria-label="বিষয়ভিত্তিক উপবিভাগ">
+    <div class="essay-hub-label" id="hubLabel">বিষয়ভিত্তিক বিভাগ</div>
+    <div class="essay-hub-grid" id="essayHubGrid"></div>
+  </section>
+
+  <!-- Filters -->
+  <div class="filters" id="filters">
+    <a class="filter-pill" href="posts.html">সব লেখা</a>
+    <a class="filter-pill" href="posts.html?category=গল্প">গল্প</a>
+    <a class="filter-pill" href="posts.html?category=ছোটগল্প">ছোটগল্প</a>
+    <a class="filter-pill" href="posts.html?category=উপন্যাস">উপন্যাস</a>
+    <a class="filter-pill" href="posts.html?category=অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</a>
+    <a class="filter-pill" href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a>
+    <a class="filter-pill" href="posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
+    <a class="filter-pill" href="posts.html?category=সাহিত্যালোচনা">সাহিত্যসমালোচনা</a>
+    <a class="filter-pill" href="posts.html?category=আইন-আদালত">আইন ও আদালত</a>
+    <a class="filter-pill" href="posts.html?category=ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</a>
+  </div>
+
+  <div class="status-row" id="status">লেখার তালিকা লোড হচ্ছে…</div>
+  <section id="grid" class="grid" aria-live="polite"></section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
+    <nav class="footer-nav">
+      <a href="./">প্রচ্ছদ</a>
+      <a href="./posts.html">প্রকাশিত লেখা</a>
+      <a href="./posts.html?category=গল্প">গল্প</a>
+      <a href="./posts.html?category=উপন্যাস">উপন্যাস</a>
+      <a href="./posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
+      <a href="./journal.html">Journal</a>
+    </nav>
+    <div class="footer-copy">© Mostafa Auvi · Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
+const fmtDate=(iso,lang)=>{
+  if(!iso)return "";
+  const d=new Date(iso);
+  if(isNaN(d))return "";
+  try{return d.toLocaleDateString(lang==='en'?'en-GB':'bn-BD',{year:'numeric',month:'short',day:'numeric'})}catch{return d.toLocaleDateString()}
+};
+const catLabel=cat=>({"গল্প":"গল্প","ছোটগল্প":"ছোটগল্প","বড়গল্প":"বড়গল্প","অনূদিত গল্প":"অনূদিত গল্প","উপন্যাস":"উপন্যাস","অনুবাদ সাহিত্য":"অনুবাদ সাহিত্য","অনূদিত উপন্যাস":"অনূদিত উপন্যাস","অনূদিত প্রবন্ধ":"অনূদিত প্রবন্ধ","ভ্রমণকাহিনি":"ভ্রমণকাহিনি","প্রবন্ধ":"প্রবন্ধ","সাহিত্যালোচনা":"সাহিত্যসমালোচনা","আইন-আদালত":"আইন ও আদালত","ব্যাংকিং ও অর্থনীতি":"ব্যাংকিং ও অর্থনীতি","ব্যক্তিগত রচনা":"ব্যক্তিগত রচনা"}[cat]||cat||"লেখা");
+
+const params=new URLSearchParams(location.search);
+const category=params.get('category')||"";
+const language=params.get('lang')==='en'?'en':'bn';
+const grid=document.getElementById('grid');
+
+function languageUrl(lang, cat=category){
+  const q=new URLSearchParams();
+  q.set('lang',lang);
+  if(cat)q.set('category',cat);
+  return 'posts.html?'+q.toString();
+}
+document.getElementById('archiveBnLink').href=languageUrl('bn');
+document.getElementById('archiveEnLink').href=languageUrl('en');
+const activeLanguageLink=document.getElementById(language==='en'?'archiveEnLink':'archiveBnLink');
+activeLanguageLink.style.background='var(--teal-deep)';
+activeLanguageLink.style.color='var(--cream)';
+activeLanguageLink.style.borderColor='var(--teal-deep)';
+
+document.querySelectorAll('.nav a[href*="posts.html"], #filters a[href*="posts.html"]').forEach(a=>{
+  const original=new URL(a.href,location.href);
+  const cat=original.searchParams.get('category')||'';
+  a.href=languageUrl(language,cat);
+});
+const statusEl=document.getElementById('status');
+
+// Build distinct, color-coded subcategory cards for each main section.
+const hubs={
+ 'কথাসাহিত্য':[
+  ['গল্প','গল্প'],['ছোটগল্প','ছোটগল্প'],['উপন্যাস','উপন্যাস'],['বড়গল্প','বড়গল্প'],['ভ্রমণকাহিনি','ভ্রমণকাহিনি']
+ ],
+ 'প্রবন্ধ-সাহিত্যালোচনা':[
+  ['প্রবন্ধ','প্রবন্ধ'],['সাহিত্যসমালোচনা','সাহিত্যালোচনা']
+ ],
+ 'গল্প':[
+  ['ছোটগল্প','ছোটগল্প'],['বড়গল্প','বড়গল্প']
+ ],
+ 'উপন্যাস':[
+  ['সম্পূর্ণ উপন্যাস','সম্পূর্ণ উপন্যাস'],['ধারাবাহিক উপন্যাস','ধারাবাহিক উপন্যাস']
+ ],
+ 'প্রবন্ধ':[
+  ['প্রবন্ধ','প্রবন্ধ'],['দৈনন্দিন জীবন','দৈনন্দিন জীবন'],['সাহিত্য বিষয়ক প্রবন্ধ','সাহিত্য বিষয়ক প্রবন্ধ'],['বই আলোচনা','বই আলোচনা'],['বিশ্বসাহিত্য','বিশ্বসাহিত্য'],['সমাজ ও সংস্কৃতি','সমাজ ও সংস্কৃতি'],['ইতিহাস ও ঐতিহ্য','ইতিহাস ও ঐতিহ্য'],['চিন্তা ও মনন','চিন্তা ও মনন']
+ ],
+ 'সাহিত্যালোচনা':[
+  ['বই আলোচনা','বই আলোচনা'],['সাহিত্যসমালোচনা','সাহিত্যসমালোচনা'],['লেখক ও সাহিত্যকর্ম','লেখক ও সাহিত্যকর্ম'],['বিশ্বসাহিত্য','বিশ্বসাহিত্য'],['পাঠ-প্রতিক্রিয়া','পাঠ-প্রতিক্রিয়া']
+ ],
+ 'ভ্রমণকাহিনি':[
+  ['বাংলাদেশ ভ্রমণ','বাংলাদেশ ভ্রমণ'],['বিদেশ ভ্রমণ','বিদেশ ভ্রমণ'],['স্মৃতির ভাণ্ডার','স্মৃতির ভাণ্ডার'],['ফেলে আসা দিন','ফেলে আসা দিন']
+ ],
+ 'অনুবাদ সাহিত্য':[
+  ['অনূদিত গল্প','অনূদিত গল্প'],['অনূদিত উপন্যাস','অনূদিত উপন্যাস'],['অনূদিত প্রবন্ধ','অনূদিত প্রবন্ধ'],['বিশ্বসাহিত্য পরিচিতি','বিশ্বসাহিত্য পরিচিতি']
+ ],
+ 'আইন-আদালত':[
+  ['বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপ্রুডেন্স'],['বৃটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা'],['আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ'],['সিভিল আদালতের কড়চা','সিভিল আদালতের কড়চা'],['কেসস্টাডি','কেসস্টাডি']
+ ],
+ 'ব্যাংকিং ও অর্থনীতি':[
+  ['আমার ব্যাংকিং জীবন','আমার ব্যাংকিং জীবন'],['এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা']
+ ],
+ 'পিডিএফ':[
+  ['আমার বই','আমার বই'],['পিডিএফ বই','পিডিএফ বই']
+ ]
+};
+const hubTitles={
+ 'কথাসাহিত্য':'FICTION · কথাসাহিত্যের উপবিভাগ','গল্প':'STORIES · গল্পের ধরন',
+ 'উপন্যাস':'NOVELS · উপন্যাসের বিভাগ','প্রবন্ধ':'ESSAYS · প্রবন্ধের বিভাগ',
+ 'প্রবন্ধ-সাহিত্যালোচনা':'ESSAYS & CRITICISM · প্রবন্ধ ও সাহিত্যসমালোচনা',
+ 'সাহিত্যালোচনা':'LITERARY CRITICISM · আলোচনা ও সমালোচনা','ভ্রমণকাহিনি':'TRAVEL WRITING · ভ্রমণসাহিত্য',
+ 'অনুবাদ সাহিত্য':'TRAVEL & TRANSLATION · ভ্রমণ ও অনুবাদ সাহিত্য',
+ 'আইন-আদালত':'LAW & COURTS · আইন ও আদালত','ব্যাংকিং ও অর্থনীতি':'BANKING & ECONOMICS · ব্যাংকিং ও অর্থনীতি',
+ 'পিডিএফ':'PUBLICATIONS · প্রকাশনা ও PDF'
+};
+const essayHub=document.getElementById('essayHub');
+const hubGrid=document.getElementById('essayHubGrid');
+const hubCategory=category==='কথাসাহিত্য'?'কথাসাহিত্য':category;
+if(hubs[hubCategory]){
+ essayHub.classList.add('visible');
+ document.getElementById('hubLabel').textContent=hubTitles[hubCategory]||'বিষয়ভিত্তিক বিভাগ';
+ hubGrid.innerHTML=hubs[hubCategory].map(([label,slug])=>'<a class="essay-hub-card" href="'+languageUrl(language,slug)+'"><strong>'+label+'</strong></a>').join('');
+ hubGrid.querySelectorAll('.essay-hub-card').forEach(a=>{
+  const c=new URL(a.href,location.href).searchParams.get('category')||'';
+  if(c===category)a.classList.add('active');
+ });
+ document.getElementById('filters').style.display='none';
+}
+// Mark active filter
+function markFilter(){
+  document.querySelectorAll('#filters .filter-pill').forEach(a=>{
+    const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
+    if(c===category)a.classList.add('selected');
+  });
+}
+
+// Update intro + nav active state based on category
+function updateIntro(){
+  if(language==='en'){
+    document.getElementById('pageTitle').textContent=category?catLabel(category):'Published Writing';
+    document.getElementById('pageSubtitle').textContent=category?('Published writing in '+catLabel(category)+'.'):'Stories, novels, essays and literary criticism.';
+  }else if(category){
+    document.getElementById('pageTitle').textContent=catLabel(category);
+    document.getElementById('pageSubtitle').textContent=catLabel(category)+' বিভাগের প্রকাশিত লেখা।';
+    document.querySelector('.nav a.current')?.classList.remove('current');
+    document.querySelectorAll('.nav a').forEach(a=>{
+      const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
+      if(c===category)a.classList.add('current');
+    });
+  }
+  markFilter();
+}
+
+function excerptText(p){
+  let txt=String(p.excerpt||'').trim();
+  if(!txt){
+    const tmp=document.createElement('div');
+    tmp.innerHTML=String(p.body||'');
+    txt=tmp.textContent||tmp.innerText||'';
+  }
+  txt=txt.replace(/\s+/g,' ').trim();
+  return txt.length>180?txt.slice(0,180)+'…':txt;
+}
+
+function renderCards(rows){
+  if(!rows.length){
+    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>এখনো কোনো লেখা প্রকাশ করা হয়নি</h3><p>এই বিভাগে লেখা প্রকাশিত হলে এখানে দেখা যাবে।</p></div>';
+    statusEl.innerHTML='এই বিভাগে কোনো প্রকাশিত লেখা নেই।';
+    return;
+  }
+  statusEl.innerHTML='মোট <span class="count">'+rows.length+'</span>টি লেখা পাওয়া গেছে।';
+  grid.innerHTML=rows.map(p=>{
+    const isEn=(p.language||'bn')==='en';
+    const dateStr=fmtDate(p.published_at,p.language||'bn');
+    const cover=p.cover_image
+      ?'<img class="card-cover" src="'+esc(p.cover_image)+'" alt="'+esc(p.title||'')+'" loading="lazy">'
+      :'<div class="card-cover-fallback">❦</div>';
+    const excerpt=excerptText(p);
+    return '<a class="card" href="./read.html?slug='+encodeURIComponent(p.slug)+'">'+
+      cover+
+      '<div class="card-body">'+
+        '<div class="card-badges">'+
+          '<span class="badge cat">'+esc(catLabel(p.category))+'</span>'+
+          '<span class="badge '+(isEn?'en':'bn')+'">'+(isEn?'EN':'বাংলা')+'</span>'+
+        '</div>'+
+        '<h2 class="card-title'+(isEn?'':' bn')+'">'+esc(p.title||'(শিরোনামহীন)')+'</h2>'+
+        (excerpt?'<p class="card-excerpt'+(isEn?'':' bn')+'">'+esc(excerpt)+'</p>':'')+
+        '<div class="card-foot">'+
+          '<span class="card-date">'+esc(dateStr)+'</span>'+
+          '<span class="card-read">পুরো লেখা পড়ুন →</span>'+
+        '</div>'+
+      '</div>'+
+    '</a>';
+  }).join('');
+}
+
+async function loadPosts(){
+  if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
+    statusEl.textContent='Supabase কনফিগার করা হয়নি।';
+    return;
+  }
+  try{
+    const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    const {data,error}=await sb.from('posts')
+      .select('id,group_id,language,slug,title,body,excerpt,cover_image,category,tags,published_at')
+      .eq('published',true)
+      .order('published_at',{ascending:false,nullsFirst:false})
+      .limit(300);
+    if(error)throw error;
+    let rows=(data||[]).filter(p=>(p.language||'bn')===language);
+    if(category){
+      const categoryGroups = {
+        'গল্প':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প'],
+        'কথাসাহিত্য':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
+        'উপন্যাস':['উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
+        'অনুবাদ সাহিত্য':['অনুবাদ সাহিত্য','অনূদিত গল্প','অনূদিত উপন্যাস','অনূদিত প্রবন্ধ'],
+        'প্রবন্ধ':['প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য','সমাজ ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','চিন্তা ও মনন','অনূদিত প্রবন্ধ'],
+        'সাহিত্যালোচনা':['সাহিত্যালোচনা','সাহিত্যসমালোচনা','বই আলোচনা','লেখক ও সাহিত্যকর্ম','বিশ্বসাহিত্য','পাঠ-প্রতিক্রিয়া']
+      };
+      const allowed = categoryGroups[category] || [category];
+      rows=rows.filter(p=>allowed.includes(String(p.category||'').trim()));
+    }
+    renderCards(rows);
+  }catch(e){
+    console.error(e);
+    statusEl.textContent='লেখার তালিকা লোড করা যায়নি।';
+    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>লোড করা যায়নি</h3><p>ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।</p></div>';
+  }
+}
+
+updateIntro();
+loadPosts();
+</script>
+</body>
+</html>
