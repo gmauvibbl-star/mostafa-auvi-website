@@ -262,7 +262,11 @@ const statusEl=document.getElementById('status');
 // Show the topic hub when entering essays or literary criticism
 const essayCategories=['প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য'];
 const essayHub=document.getElementById('essayHub');
-if(essayCategories.includes(category)) essayHub.classList.add('visible');
+if(essayCategories.includes(category)) {
+  essayHub.classList.add('visible');
+  // In essay/criticism sections, show only the relevant topic subcategories.
+  document.getElementById('filters').style.display='none';
+}
 essayHub.querySelectorAll('.essay-hub-card').forEach(a=>{
   const c=new URL(a.href,location.href).searchParams.get('category')||'';
   if(c===category)a.classList.add('active');
