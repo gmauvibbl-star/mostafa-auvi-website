@@ -126,6 +126,101 @@
   @keyframes spin{to{transform:rotate(360deg)}}
   /* Responsive */
   @media(max-width:900px){.dual-editor{grid-template-columns:1fr}.shared-grid{grid-template-columns:1fr}.dash-main{padding:18px 20px}.dash-header{padding:22px 24px}.dash-header .user-info{position:static;text-align:left;margin-top:10px}}
+
+  /* Colorful dashboard refresh — dashboard.html only; no public-site assets or pages changed */
+  :root{
+    --teal-deep:#123b82;--teal:#1769c2;--teal-mid:#2797e8;
+    --cream:#ffffff;--paper:#f3f8ff;--paper-warm:#e7f2ff;--paper-dark:#d3e5fb;
+    --ink:#102d5c;--ink-soft:#496b9c;--gold:#ffad18;--gold-bright:#ffc247;--gold-dim:#a66a00;
+    --blood:#e83e62;--maroon-deep:#a91e45;--olive:#eaf4ff;--green:#0ca978
+  }
+  html,body{background:linear-gradient(135deg,#e9f4ff 0%,#f7f3ff 48%,#fff5e8 100%);color:var(--ink)}
+  .page-wrap{max-width:1440px;background:transparent;box-shadow:none;padding:0 18px 28px}
+  .top-bar{background:linear-gradient(100deg,#3159ed,#168fe5 58%,#6f73f6);color:#fff;border-radius:0 0 18px 18px;padding:14px 28px;box-shadow:0 7px 22px rgba(35,92,190,.15)}
+  .top-bar a{color:#fff;font-weight:700}
+  .dash-header{margin-top:18px;border-radius:20px;background:linear-gradient(110deg,#3158e9 0%,#258fe9 55%,#765ff0 100%);padding:30px 36px;box-shadow:0 12px 28px rgba(45,101,207,.18)}
+  .dash-header::before{width:320px;height:260px;background:radial-gradient(circle at top right,rgba(255,255,255,.3),transparent 70%)}
+  .dash-header .eyebrow{color:#ffe49a;letter-spacing:.22em}
+  .dash-header h1{color:#fff}
+  .dash-header .sub,.dash-header .user-info{color:rgba(255,255,255,.86)}
+  .dash-header .user-info .email{color:#fff0ad}
+  .dash-main{padding:24px 8px}
+  .status-banner{border:1px solid #cfe2ff;border-left:5px solid #3288ef;border-radius:12px;background:linear-gradient(100deg,#e8f2ff,#f4efff);color:#244b83;box-shadow:0 4px 14px rgba(53,103,185,.06)}
+  .status-banner.error{background:#fff0f1;border-color:#ffd1d7;border-left-color:#e83e62}
+  .status-banner.success{background:#e9fbf3;border-color:#c6f0dc;border-left-color:#0ca978}
+  .status-banner.warning{background:#fff7e4;border-color:#ffe4a3;border-left-color:#ffb21d}
+  .login-panel,.shared-fields,.lang-pane,.panel{background:rgba(255,255,255,.94);border:1px solid #d7e8fb;border-radius:18px;box-shadow:0 8px 24px rgba(39,94,165,.08)}
+  .login-panel{padding:34px 36px}
+  .login-panel h2,.shared-fields h3,.panel-header h2{color:#17458c}
+  .form-group label,.checkbox-label{color:#17458c}
+  .form-group input,.form-group select,.form-group textarea{border:1.5px solid #d4e4f8;border-radius:10px;background:#fbfdff}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#4a91f2;box-shadow:0 0 0 3px rgba(74,145,242,.14)}
+  .btn{border:0;border-radius:11px;background:linear-gradient(110deg,#2469ed,#238fe8);color:#fff;box-shadow:0 4px 10px rgba(40,105,220,.14)}
+  .btn:hover{background:linear-gradient(110deg,#174fd0,#167bd2);border:0;box-shadow:0 7px 16px rgba(40,105,220,.22)}
+  .btn.secondary{background:#e9f2ff;color:#1e5da9;border:1px solid #d5e6fb;box-shadow:none}
+  .btn.secondary:hover{background:#dceaff;color:#17458c}
+  .btn.gold{background:linear-gradient(110deg,#ffb21d,#ff8f16);color:#fff}
+  .btn.gold:hover{background:linear-gradient(110deg,#f49a00,#ef7910);color:#fff}
+  .btn.danger{background:linear-gradient(110deg,#ef4764,#dc3153);color:#fff}
+  .btn.danger:hover{background:linear-gradient(110deg,#d72e50,#bb2044)}
+  .btn.green{background:linear-gradient(110deg,#12bd85,#079b72);color:#fff}
+  .btn.green:hover{background:linear-gradient(110deg,#0ba978,#07835f)}
+  .shared-fields{padding:20px 22px}
+  .shared-fields h3{border-bottom:1px solid #d9e8fa}
+  .lang-pane{border:1px solid #d7e8fb;overflow:hidden}
+  .lang-pane.bn{border-top:5px solid #0db783}
+  .lang-pane.en{border-top:5px solid #3989f5}
+  .lang-pane-header{background:linear-gradient(100deg,#eaf3ff,#f4efff)}
+  .lang-pane-header .lang-name{color:#17458c}
+  .lang-pane.bn .lang-flag{background:#0db783}
+  .lang-pane.en .lang-flag{background:#3989f5}
+  .toolbar{background:#edf5ff;border-bottom:1px solid #d9e8fa}
+  .toolbar button{border:1px solid #d2e3f8;border-radius:7px;color:#225a9d;background:#fff}
+  .toolbar button:hover,.toolbar button.active{background:#286ee9;color:#fff;border-color:#286ee9}
+  .toolbar .color-swatch{border-color:#c9dcf4}
+  .editor-content{background:#fff}
+  .editor-content:focus{background:#fbfdff}
+  .editor-content h2,.editor-content h3{color:#17458c}
+  .editor-content blockquote{background:#eef5ff;border-left-color:#ffb21d}
+  .editor-content a{color:#d53e61}
+  .cover-upload .cover-preview{border-color:#bcd5f4;background:#f0f6ff;border-radius:10px}
+  .panel{padding:22px 24px}
+  .panel-header{border-bottom:2px solid #dceafb}
+  .panel-header .num{color:#5579ae}
+  .posts-list{gap:10px}
+  .post-item{background:linear-gradient(110deg,#fff 0%,#f7fbff 100%);border:1px solid #e0ecfa;border-radius:13px;padding:14px 16px;box-shadow:0 2px 7px rgba(44,93,158,.035)}
+  .post-item:nth-child(even){background:linear-gradient(110deg,#f2f8ff 0%,#f8f6ff 100%)}
+  .post-item:hover{border-color:#9bc5f7;transform:translateY(-1px);box-shadow:0 6px 15px rgba(48,105,183,.1)}
+  .post-item .post-title{color:#17458c;font-size:15px}
+  .post-item .post-meta{color:#5877a4}
+  .badge{border-radius:20px;letter-spacing:0}
+  .badge.published{background:#0db783}
+  .badge.draft{background:#ffca43;color:#654600}
+  .badge.bn{background:#0db783}
+  .badge.en{background:#3989f5}
+  .badge.bn.en{background:linear-gradient(90deg,#0db783 50%,#3989f5 50%)}
+  .empty-state{color:#5877a4}
+  .dash-footer{margin:0 -18px;background:linear-gradient(100deg,#234fd5,#187fcf);border-top:0;border-radius:16px 16px 0 0;color:rgba(255,255,255,.82)}
+  .dash-footer a{color:#fff0ad}
+  .toast{background:#17458c;border:1px solid #8bbcff;border-radius:12px}
+  @media(max-width:900px){
+    .page-wrap{padding:0 10px 18px}
+    .top-bar{padding:12px 16px}
+    .dash-header{padding:24px 20px}
+    .dash-main{padding:18px 0}
+    .panel{padding:16px}
+    .post-item{align-items:flex-start;flex-wrap:wrap}
+    .post-item .post-info{flex:1 1 100%}
+    .post-item .post-actions{flex-wrap:wrap}
+    .dash-footer{margin:0 -10px}
+  }
+  @media(max-width:560px){
+    .dash-header h1{font-size:24px}
+    .login-panel{padding:24px 18px;margin:18px auto}
+    .post-item .post-actions .btn{font-size:10px;padding:6px 9px}
+    .btn-row .btn{font-size:11px;padding:8px 10px}
+  }
+
 </style>
 </head>
 <body>
