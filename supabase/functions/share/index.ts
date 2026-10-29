@@ -2,6 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const SITE_URL = (Deno.env.get("SITE_URL") || "https://gmauvibbl-star.github.io/mostafa-auvi-website").replace(/\/$/, "");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+const SHARE_URL = `${SUPABASE_URL.replace(/\/$/, "")}/functions/v1/share`;
 const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 function esc(value: unknown): string {
@@ -61,7 +62,7 @@ Deno.serve(async (req) => {
 <meta property="og:site_name" content="Mostafa Auvi">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${esc(requestUrl.toString())}">
+<meta property="og:url" content="${esc(SHARE_URL + "?slug=" + encodeURIComponent(post.slug))}">
 <meta property="og:locale" content="${post.language === "en" ? "en_US" : "bn_BD"}">
 ${imageTags}
 <meta name="twitter:card" content="${image ? "summary_large_image" : "summary"}">
