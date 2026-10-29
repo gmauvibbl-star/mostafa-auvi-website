@@ -45,21 +45,22 @@
   .filter-pill:hover{border-color:var(--gold);color:var(--teal-deep)}
   .filter-pill.selected{background:var(--teal-deep);color:var(--cream);border-color:var(--teal-deep)}
 
-  /* ===== Essay & literary criticism sub-sections ===== */
+  /* ===== Main category hubs ===== */
   .essay-hub{display:none;padding:18px 50px 8px}
   .essay-hub.visible{display:block}
   .essay-hub-label{font:italic 12px 'EB Garamond',serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
   .essay-hub-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
   .essay-hub-card{display:flex;flex-direction:column;justify-content:center;min-height:94px;padding:14px 13px;border:1px solid transparent;border-top:4px solid currentColor;border-radius:5px;text-decoration:none;color:#fff;box-shadow:0 4px 10px rgba(26,20,16,.10);transition:transform .18s,box-shadow .18s,filter .18s}
-  .essay-hub-card:nth-child(1){background:linear-gradient(145deg,#174E48,#26796A);border-color:#26796A;color:#FFF8E8}
-  .essay-hub-card:nth-child(2){background:linear-gradient(145deg,#713D23,#A85D35);border-color:#A85D35;color:#FFF5E9}
-  .essay-hub-card:nth-child(3){background:linear-gradient(145deg,#293F73,#4669A6);border-color:#4669A6;color:#F5F6FF}
-  .essay-hub-card:nth-child(4){background:linear-gradient(145deg,#6C3158,#A64E7D);border-color:#A64E7D;color:#FFF3FA}
-  .essay-hub-card:nth-child(5){background:linear-gradient(145deg,#596021,#8A963A);border-color:#8A963A;color:#FFFFF0}
+  .essay-hub-card:nth-child(5n+1){background:linear-gradient(145deg,#174E48,#26796A);border-color:#26796A;color:#FFF8E8}
+  .essay-hub-card:nth-child(5n+2){background:linear-gradient(145deg,#713D23,#A85D35);border-color:#A85D35;color:#FFF5E9}
+  .essay-hub-card:nth-child(5n+3){background:linear-gradient(145deg,#293F73,#4669A6);border-color:#4669A6;color:#F5F6FF}
+  .essay-hub-card:nth-child(5n+4){background:linear-gradient(145deg,#6C3158,#A64E7D);border-color:#A64E7D;color:#FFF3FA}
+  .essay-hub-card:nth-child(5n){background:linear-gradient(145deg,#596021,#8A963A);border-color:#8A963A;color:#FFFFF0}
   .essay-hub-card:hover,.essay-hub-card.active{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 9px 20px rgba(26,20,16,.22);outline:2px solid var(--gold-bright);outline-offset:1px}
   .essay-hub-card strong{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;line-height:1.5}
   .essay-hub-card span{font:italic 11px 'EB Garamond',serif;letter-spacing:.08em;color:inherit;margin-top:9px}
-
+  @media(max-width:980px){.essay-hub-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(max-width:680px){.essay-hub{padding:16px 22px 8px}.essay-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.essay-hub-card{min-height:82px;padding:12px 10px}}
   /* ===== Status ===== */
   .status-row{padding:8px 50px 22px;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--gold-dim)}
   .status-row .count{font-weight:600;color:var(--teal-deep);font-style:normal}
@@ -180,16 +181,10 @@
     <p class="page-subtitle" id="pageSubtitle">গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা—এক জায়গায়।</p>
   </div>
 
-  <!-- Essay & literary criticism section menu -->
-  <section class="essay-hub" id="essayHub" aria-label="প্রবন্ধ ও সাহিত্যসমালোচনার বিভাগ">
-    <div class="essay-hub-label">ESSAYS &amp; LITERARY CRITICISM · বিষয়ভিত্তিক বিভাগ</div>
-    <div class="essay-hub-grid">
-      <a class="essay-hub-card" href="posts.html?category=প্রবন্ধ"><strong>প্রবন্ধ</strong></a>
-      <a class="essay-hub-card" href="posts.html?category=দৈনন্দিন%20জীবন"><strong>দৈনন্দিন জীবন</strong></a>
-      <a class="essay-hub-card" href="posts.html?category=সাহিত্য%20বিষয়ক%20প্রবন্ধ"><strong>সাহিত্য বিষয়ক প্রবন্ধ</strong></a>
-      <a class="essay-hub-card" href="posts.html?category=বই%20আলোচনা"><strong>বই আলোচনা</strong></a>
-      <a class="essay-hub-card" href="posts.html?category=বিশ্বসাহিত্য"><strong>বিশ্বসাহিত্য</strong></a>
-    </div>
+  <!-- Main category and subcategory cards -->
+  <section class="essay-hub" id="essayHub" aria-label="বিষয়ভিত্তিক উপবিভাগ">
+    <div class="essay-hub-label" id="hubLabel">বিষয়ভিত্তিক বিভাগ</div>
+    <div class="essay-hub-grid" id="essayHubGrid"></div>
   </section>
 
   <!-- Filters -->
@@ -263,19 +258,63 @@ document.querySelectorAll('.nav a[href*="posts.html"], #filters a[href*="posts.h
 });
 const statusEl=document.getElementById('status');
 
-// Show the topic hub when entering essays or literary criticism
-const essayCategories=['প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য'];
+// Build distinct, color-coded subcategory cards for each main section.
+const hubs={
+ 'কথাসাহিত্য':[
+  ['গল্প','গল্প'],['ছোটগল্প','ছোটগল্প'],['বড়গল্প','বড়গল্প'],['উপন্যাস','উপন্যাস'],['ধারাবাহিক উপন্যাস','ধারাবাহিক উপন্যাস'],['রম্যগল্প','রম্যগল্প'],['রহস্য ও গোয়েন্দা','রহস্য ও গোয়েন্দা'],['ঐতিহাসিক কাহিনি','ঐতিহাসিক কাহিনি'],['শিশু-কিশোর গল্প','শিশু-কিশোর গল্প']
+ ],
+ 'গল্প':[
+  ['ছোটগল্প','ছোটগল্প'],['বড়গল্প','বড়গল্প'],['অণুগল্প','অণুগল্প'],['রম্যগল্প','রম্যগল্প'],['রহস্য ও গোয়েন্দা','রহস্য ও গোয়েন্দা'],['ঐতিহাসিক গল্প','ঐতিহাসিক গল্প'],['শিশু-কিশোর গল্প','শিশু-কিশোর গল্প'],['অনূদিত গল্প','অনূদিত গল্প']
+ ],
+ 'উপন্যাস':[
+  ['সম্পূর্ণ উপন্যাস','সম্পূর্ণ উপন্যাস'],['ধারাবাহিক উপন্যাস','ধারাবাহিক উপন্যাস'],['ঐতিহাসিক উপন্যাস','ঐতিহাসিক উপন্যাস'],['সামাজিক উপন্যাস','সামাজিক উপন্যাস'],['উপন্যাসের খণ্ডাংশ','উপন্যাসের খণ্ডাংশ']
+ ],
+ 'প্রবন্ধ':[
+  ['প্রবন্ধ','প্রবন্ধ'],['দৈনন্দিন জীবন','দৈনন্দিন জীবন'],['সাহিত্য বিষয়ক প্রবন্ধ','সাহিত্য বিষয়ক প্রবন্ধ'],['বই আলোচনা','বই আলোচনা'],['বিশ্বসাহিত্য','বিশ্বসাহিত্য'],['সমাজ ও সংস্কৃতি','সমাজ ও সংস্কৃতি'],['ইতিহাস ও ঐতিহ্য','ইতিহাস ও ঐতিহ্য'],['চিন্তা ও মনন','চিন্তা ও মনন']
+ ],
+ 'সাহিত্যালোচনা':[
+  ['বই আলোচনা','বই আলোচনা'],['সাহিত্যসমালোচনা','সাহিত্যসমালোচনা'],['লেখক ও সাহিত্যকর্ম','লেখক ও সাহিত্যকর্ম'],['বিশ্বসাহিত্য','বিশ্বসাহিত্য'],['পাঠ-প্রতিক্রিয়া','পাঠ-প্রতিক্রিয়া']
+ ],
+ 'ভ্রমণকাহিনি':[
+  ['বাংলাদেশ ভ্রমণ','বাংলাদেশ ভ্রমণ'],['বিদেশ ভ্রমণ','বিদেশ ভ্রমণ'],['ভ্রমণস্মৃতি','ভ্রমণস্মৃতি'],['স্থান ও জনপদ','স্থান ও জনপদ'],['ভ্রমণ-নিবন্ধ','ভ্রমণ-নিবন্ধ']
+ ],
+ 'অনুবাদ সাহিত্য':[
+  ['অনূদিত গল্প','অনূদিত গল্প'],['অনূদিত উপন্যাস','অনূদিত উপন্যাস'],['অনূদিত প্রবন্ধ','অনূদিত প্রবন্ধ'],['বিশ্বসাহিত্য পরিচিতি','বিশ্বসাহিত্য পরিচিতি']
+ ],
+ 'ব্যক্তিগত রচনা':[
+  ['দৈনন্দিন জীবন','দৈনন্দিন জীবন'],['স্মৃতিকথা','স্মৃতিকথা'],['দিনলিপি','দিনলিপি'],['আমার কথা','আমার কথা'],['ব্যক্তিগত ভাবনা','ব্যক্তিগত ভাবনা']
+ ],
+ 'আইন-আদালত':[
+  ['আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ'],['আদালত ও বিচার','আদালত ও বিচার'],['আইনজীবীর অভিজ্ঞতা','আইনজীবীর অভিজ্ঞতা'],['আইন ও সমাজ','আইন ও সমাজ'],['আইন-সাহিত্য','আইন-সাহিত্য']
+ ],
+ 'ব্যাংকিং ও অর্থনীতি':[
+  ['ব্যাংকিং','ব্যাংকিং'],['এসএমই ও উদ্যোক্তা','এসএমই ও উদ্যোক্তা'],['অর্থনীতি','অর্থনীতি'],['আর্থিক অন্তর্ভুক্তি','আর্থিক অন্তর্ভুক্তি'],['ব্যবসা ও উদ্যোগ','ব্যবসা ও উদ্যোগ']
+ ],
+ 'পিডিএফ':[
+  ['প্রকাশনা ও PDF','পিডিএফ'],['বই ও পুস্তিকা','বই ও পুস্তিকা'],['ডাউনলোডযোগ্য লেখা','ডাউনলোডযোগ্য লেখা']
+ ]
+};
+const hubTitles={
+ 'কথাসাহিত্য':'FICTION · কথাসাহিত্যের উপবিভাগ','গল্প':'STORIES · গল্পের ধরন',
+ 'উপন্যাস':'NOVELS · উপন্যাসের বিভাগ','প্রবন্ধ':'ESSAYS · প্রবন্ধের বিভাগ',
+ 'সাহিত্যালোচনা':'LITERARY CRITICISM · আলোচনা ও সমালোচনা','ভ্রমণকাহিনি':'TRAVEL WRITING · ভ্রমণসাহিত্য',
+ 'অনুবাদ সাহিত্য':'TRANSLATION · অনুবাদ সাহিত্য','ব্যক্তিগত রচনা':'PERSONAL WRITING · ব্যক্তিগত রচনা',
+ 'আইন-আদালত':'LAW & COURTS · আইন ও আদালত','ব্যাংকিং ও অর্থনীতি':'BANKING & ECONOMICS · ব্যাংকিং ও অর্থনীতি',
+ 'পিডিএফ':'PUBLICATIONS · প্রকাশনা ও PDF'
+};
 const essayHub=document.getElementById('essayHub');
-if(essayCategories.includes(category)) {
-  essayHub.classList.add('visible');
-  // In essay/criticism sections, show only the relevant topic subcategories.
-  document.getElementById('filters').style.display='none';
-}
-essayHub.querySelectorAll('.essay-hub-card').forEach(a=>{
+const hubGrid=document.getElementById('essayHubGrid');
+const hubCategory=category==='কথাসাহিত্য'?'কথাসাহিত্য':category;
+if(hubs[hubCategory]){
+ essayHub.classList.add('visible');
+ document.getElementById('hubLabel').textContent=hubTitles[hubCategory]||'বিষয়ভিত্তিক বিভাগ';
+ hubGrid.innerHTML=hubs[hubCategory].map(([label,slug])=>'<a class="essay-hub-card" href="posts.html?category='+encodeURIComponent(slug)+'"><strong>'+label+'</strong></a>').join('');
+ hubGrid.querySelectorAll('.essay-hub-card').forEach(a=>{
   const c=new URL(a.href,location.href).searchParams.get('category')||'';
   if(c===category)a.classList.add('active');
-});
-
+ });
+ document.getElementById('filters').style.display='none';
+}
 // Mark active filter
 function markFilter(){
   document.querySelectorAll('#filters .filter-pill').forEach(a=>{
