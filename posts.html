@@ -50,11 +50,15 @@
   .essay-hub.visible{display:block}
   .essay-hub-label{font:italic 12px 'EB Garamond',serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
   .essay-hub-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
-  .essay-hub-card{display:flex;flex-direction:column;justify-content:space-between;min-height:94px;padding:14px 13px;background:linear-gradient(145deg,#fffaf0,#eee2c7);border:1px solid var(--paper-dark);border-top:3px solid var(--gold);text-decoration:none;color:var(--teal-deep);transition:transform .18s,border-color .18s,box-shadow .18s}
-  .essay-hub-card:hover,.essay-hub-card.active{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 6px 16px rgba(15,61,62,.12);background:var(--teal-deep);color:var(--cream)}
+  .essay-hub-card{display:flex;flex-direction:column;justify-content:center;min-height:94px;padding:14px 13px;border:1px solid transparent;border-top:4px solid currentColor;border-radius:5px;text-decoration:none;color:#fff;box-shadow:0 4px 10px rgba(26,20,16,.10);transition:transform .18s,box-shadow .18s,filter .18s}
+  .essay-hub-card:nth-child(1){background:linear-gradient(145deg,#174E48,#26796A);border-color:#26796A;color:#FFF8E8}
+  .essay-hub-card:nth-child(2){background:linear-gradient(145deg,#713D23,#A85D35);border-color:#A85D35;color:#FFF5E9}
+  .essay-hub-card:nth-child(3){background:linear-gradient(145deg,#293F73,#4669A6);border-color:#4669A6;color:#F5F6FF}
+  .essay-hub-card:nth-child(4){background:linear-gradient(145deg,#6C3158,#A64E7D);border-color:#A64E7D;color:#FFF3FA}
+  .essay-hub-card:nth-child(5){background:linear-gradient(145deg,#596021,#8A963A);border-color:#8A963A;color:#FFFFF0}
+  .essay-hub-card:hover,.essay-hub-card.active{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 9px 20px rgba(26,20,16,.22);outline:2px solid var(--gold-bright);outline-offset:1px}
   .essay-hub-card strong{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;line-height:1.5}
-  .essay-hub-card span{font:italic 11px 'EB Garamond',serif;letter-spacing:.08em;color:var(--gold-dim);margin-top:9px}
-  .essay-hub-card:hover span,.essay-hub-card.active span{color:var(--gold-bright)}
+  .essay-hub-card span{font:italic 11px 'EB Garamond',serif;letter-spacing:.08em;color:inherit;margin-top:9px}
 
   /* ===== Status ===== */
   .status-row{padding:8px 50px 22px;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--gold-dim)}
