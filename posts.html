@@ -45,6 +45,17 @@
   .filter-pill:hover{border-color:var(--gold);color:var(--teal-deep)}
   .filter-pill.selected{background:var(--teal-deep);color:var(--cream);border-color:var(--teal-deep)}
 
+  /* ===== Essay & literary criticism sub-sections ===== */
+  .essay-hub{display:none;padding:18px 50px 8px}
+  .essay-hub.visible{display:block}
+  .essay-hub-label{font:italic 12px 'EB Garamond',serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+  .essay-hub-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .essay-hub-card{display:flex;flex-direction:column;justify-content:space-between;min-height:94px;padding:14px 13px;background:linear-gradient(145deg,#fffaf0,#eee2c7);border:1px solid var(--paper-dark);border-top:3px solid var(--gold);text-decoration:none;color:var(--teal-deep);transition:transform .18s,border-color .18s,box-shadow .18s}
+  .essay-hub-card:hover,.essay-hub-card.active{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 6px 16px rgba(15,61,62,.12);background:var(--teal-deep);color:var(--cream)}
+  .essay-hub-card strong{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;line-height:1.5}
+  .essay-hub-card span{font:italic 11px 'EB Garamond',serif;letter-spacing:.08em;color:var(--gold-dim);margin-top:9px}
+  .essay-hub-card:hover span,.essay-hub-card.active span{color:var(--gold-bright)}
+
   /* ===== Status ===== */
   .status-row{padding:8px 50px 22px;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--gold-dim)}
   .status-row .count{font-weight:600;color:var(--teal-deep);font-style:normal}
@@ -165,6 +176,18 @@
     <p class="page-subtitle" id="pageSubtitle">গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা—এক জায়গায়।</p>
   </div>
 
+  <!-- Essay & literary criticism section menu -->
+  <section class="essay-hub" id="essayHub" aria-label="প্রবন্ধ ও সাহিত্যসমালোচনার বিভাগ">
+    <div class="essay-hub-label">ESSAYS &amp; LITERARY CRITICISM · বিষয়ভিত্তিক বিভাগ</div>
+    <div class="essay-hub-grid">
+      <a class="essay-hub-card" href="posts.html?category=প্রবন্ধ"><strong>প্রবন্ধ</strong><span>ESSAYS ↗</span></a>
+      <a class="essay-hub-card" href="posts.html?category=দৈনন্দিন%20জীবন"><strong>দৈনন্দিন জীবন</strong><span>DAILY LIFE ↗</span></a>
+      <a class="essay-hub-card" href="posts.html?category=সাহিত্য%20বিষয়ক%20প্রবন্ধ"><strong>সাহিত্য বিষয়ক প্রবন্ধ</strong><span>LITERATURE ↗</span></a>
+      <a class="essay-hub-card" href="posts.html?category=বই%20আলোচনা"><strong>বই আলোচনা</strong><span>BOOKS ↗</span></a>
+      <a class="essay-hub-card" href="posts.html?category=বিশ্বসাহিত্য"><strong>বিশ্বসাহিত্য</strong><span>WORLD LITERATURE ↗</span></a>
+    </div>
+  </section>
+
   <!-- Filters -->
   <div class="filters" id="filters">
     <a class="filter-pill" href="posts.html">সব লেখা</a>
@@ -235,6 +258,15 @@ document.querySelectorAll('.nav a[href*="posts.html"], #filters a[href*="posts.h
   a.href=languageUrl(language,cat);
 });
 const statusEl=document.getElementById('status');
+
+// Show the topic hub when entering essays or literary criticism
+const essayCategories=['প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য'];
+const essayHub=document.getElementById('essayHub');
+if(essayCategories.includes(category)) essayHub.classList.add('visible');
+essayHub.querySelectorAll('.essay-hub-card').forEach(a=>{
+  const c=new URL(a.href,location.href).searchParams.get('category')||'';
+  if(c===category)a.classList.add('active');
+});
 
 // Mark active filter
 function markFilter(){
