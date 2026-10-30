@@ -1518,7 +1518,7 @@ async function loadPost() {
 
   if (loginBtn) {
     loginBtn.onclick = () => {
-      if (loginBtn.classList.contains('logged-in')) { window.location.href = 'dashboard.html'; return; }
+      if (loginBtn.classList.contains('logged-in')) { window.location.href = 'admin.html'; return; }
       openLoginModal();
     };
   }
@@ -1546,7 +1546,7 @@ async function loadPost() {
           return;
         }
         showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
-        setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+        setTimeout(() => { window.location.href = 'admin.html'; }, 800);
       } catch (e) {
         showStatus('সমস্যা: ' + e.message, 'error');
         modalLoginBtn.disabled = false;
