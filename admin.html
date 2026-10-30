@@ -188,7 +188,7 @@ async function loadPosts(){
 }
 </script><script type="module">
 (async function(){
- const shellIds={bn:'bodyEditor',en:'bodyEnEditor'};
+ const shellIds={body:'bodyEditor',body_en:'bodyEnEditor'};
  const announce=(m)=>{const s=document.getElementById('status');if(s)s.textContent=m};
  try{
   const [{Editor,Node,mergeAttributes},{default:StarterKit},{default:ParagraphBase},{default:Underline},{default:TextAlign},{default:TextStyle},{default:Color},{default:Highlight},{default:FontFamily},{default:Image},{default:Link},{default:Table},{default:TableRow},{default:TableHeader},{default:TableCell},{default:Superscript},{default:Subscript},{default:Youtube},{default:Placeholder},{default:CharacterCount}]=await Promise.all([
@@ -302,7 +302,7 @@ async function loadPosts(){
    win.document.write('<!doctype html><html lang="'+(id==='body'?'bn':'en')+'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title.innerHTML+'</title><style>body{max-width:850px;margin:40px auto;padding:0 22px;background:#f7f1e7;color:#29251f;font:18px/1.9 Georgia,serif}h1{font-size:2em;border-bottom:1px solid #cbbda8;padding-bottom:15px}article{text-align:justify}p{margin:0 0 1.15em}img{max-width:100%;height:auto}figure{margin:1.5em auto;text-align:center}figcaption{font-size:.85em;color:#6c655b}blockquote{border-left:4px solid #9b744b;padding:12px 20px;background:#eee5d8}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:7px}iframe{width:100%;aspect-ratio:16/9;border:0}</style><h1>'+title.innerHTML+'</h1><article>'+editor.getHTML()+'</article></html>');
    win.document.close();
   }
-  window.auviPreview=()=>openEditorPreview(document.getElementById('title').value.trim()||document.getElementById('body').value.trim()?'body':'body_en');
+  window.auviPreview=()=>openEditorPreview((document.getElementById('title').value.trim()||document.getElementById('body').value.trim())?'body':'body_en');
   function runCommand(editor,cmd,id){
    const chain=editor.chain().focus();
    if(cmd==='bold')chain.toggleBold().run();
