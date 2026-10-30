@@ -1129,6 +1129,7 @@
       <div class="comment-help-row"><span>শালীন ও বিষয়ভিত্তিক মন্তব্য করুন।</span><span id="commentCount">০ / ২০০০</span></div>
       <label class="comment-honeypot" aria-hidden="true" for="commentWebsite">ওয়েবসাইট</label>
       <input class="comment-honeypot" id="commentWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div id="commentTurnstile" style="margin:8px 0;"></div>
       <div class="comment-form-bottom">
         <span id="commentStatus" role="status" aria-live="polite"></span>
         <button type="submit" id="commentSubmit">মন্তব্য প্রকাশ করুন</button>
@@ -1574,7 +1575,7 @@ async function loadPost() {
 loadPost();
 </script>
 <script>
-/* ====== Public, name-only comments ====== */
+/* ====== Public comments protected by Cloudflare Turnstile + server validation ====== */
 (function () {
   const form = document.getElementById('commentForm');
   if (!form || !window.supabase) return;
@@ -1586,6 +1587,9 @@ loadPost();
   const textInput = document.getElementById('commentText');
   const websiteInput = document.getElementById('commentWebsite');
   const countLabel = document.getElementById('commentCount');
+  const TURNSTILE_SITE_KEY = 'REPLACE_WITH_CLOUDFLARE_TURNSTILE_SITE_KEY';
+  let turnstileToken = '';
+  let turnstileWidgetId = null;
   const toBnDigits = value => String(value).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
   textInput.addEventListener('input', () => { countLabel.textContent = toBnDigits(textInput.value.length) + ' / ২০০০'; });
   const postSlug = new URLSearchParams(location.search).get('slug') || '';
@@ -1599,6 +1603,24 @@ loadPost();
     status.textContent = message;
     status.style.color = isError ? '#9b2c2c' : 'var(--ink-mute)';
   }
+  function resetTurnstile() {
+    turnstileToken = '';
+    if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
+  }
+  window.onCommentTurnstileLoaded = function () {
+    if (TURNSTILE_SITE_KEY.startsWith('REPLACE_')) {
+      showStatus('Turnstile Site Key বসানো বাকি। সেটআপ শেষ হলে মন্তব্য চালু হবে।', true);
+      submit.disabled = true;
+      return;
+    }
+    turnstileWidgetId = window.turnstile.render('#commentTurnstile', {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: token => { turnstileToken = token; submit.disabled = false; },
+      'expired-callback': () => { turnstileToken = ''; },
+      'error-callback': () => { turnstileToken = ''; showStatus('মানব-যাচাই লোড হয়নি। পৃষ্ঠা রিফ্রেশ করুন।', true); }
+    });
+    submit.disabled = true;
+  };
   async function loadComments() {
     if (!postSlug) {
       list.innerHTML = '<p class="comments-empty">নির্দিষ্ট লেখার পেজে এলে এখানে মন্তব্য দেখা যাবে।</p>';
@@ -1611,7 +1633,7 @@ loadPost();
       .limit(100);
     if (error) {
       console.error('Comment list error:', error);
-      list.innerHTML = '<p class="comments-empty">মন্তব্য লোড করা যায়নি। ডেটাবেসে comments টেবিলের SQL সেটআপ করা হয়েছে কি না দেখুন।</p>';
+      list.innerHTML = '<p class="comments-empty">মন্তব্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।</p>';
       return;
     }
     if (!data || !data.length) {
@@ -1630,33 +1652,40 @@ loadPost();
     const authorName = nameInput.value.trim();
     const commentText = textInput.value.trim();
     if (websiteInput.value.trim()) { form.reset(); return; }
-    try {
-      const lastSent = Number(sessionStorage.getItem('commentLastSentAt') || 0);
-      if (Date.now() - lastSent < 30000) { showStatus('পরপর মন্তব্য পাঠানোর আগে ৩০ সেকেন্ড অপেক্ষা করুন।', true); return; }
-    } catch (_) {}
     if (!authorName || !commentText) { showStatus('নাম ও মন্তব্য দুটোই লিখুন।', true); return; }
-    if (authorName.length > 60 || commentText.length > 2000) { showStatus('নামের বা মন্তব্যের দৈর্ঘ্য সীমা ছাড়িয়েছে।', true); return; }
+    if (authorName.length > 60 || commentText.length > 2000) { showStatus('নামের বা মন্তব্যের দৈর্ঘ্য সীমা ছাড়িয়েছে।', true); return; }
+    if (!turnstileToken) { showStatus('মন্তব্য পাঠানোর আগে মানব-যাচাই সম্পন্ন করুন।', true); return; }
     submit.disabled = true;
-    showStatus('মন্তব্য প্রকাশ হচ্ছে…', false);
-    const { error } = await client.from('comments').insert({
-      post_slug: postSlug,
-      author_name: authorName,
-      comment_text: commentText
-    });
-    submit.disabled = false;
-    if (error) {
+    showStatus('মন্তব্য যাচাই করে পাঠানো হচ্ছে…', false);
+    try {
+      const response = await fetch(SUPABASE_URL + '/functions/v1/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
+        body: JSON.stringify({ slug: postSlug, name: authorName, comment: commentText, website: websiteInput.value, turnstileToken })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        showStatus(result.error || 'মন্তব্য পাঠানো যায়নি। পরে আবার চেষ্টা করুন।', true);
+        resetTurnstile();
+        return;
+      }
+      textInput.value = '';
+      countLabel.textContent = '০ / ২০০০';
+      showStatus(result.message || 'আপনার মন্তব্য প্রকাশিত হয়েছে। ধন্যবাদ!', false);
+      resetTurnstile();
+      await loadComments();
+    } catch (error) {
       console.error('Comment submit error:', error);
-      showStatus('মন্তব্য প্রকাশ করা যায়নি। ডেটাবেস সেটআপ যাচাই করুন।', true);
-      return;
+      showStatus('সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।', true);
+      resetTurnstile();
+    } finally {
+      submit.disabled = !turnstileToken;
     }
-    textInput.value = '';
-    countLabel.textContent = '০ / ২০০০';
-    try { sessionStorage.setItem('commentLastSentAt', String(Date.now())); } catch (_) {}
-    showStatus('আপনার মন্তব্য প্রকাশিত হয়েছে। ধন্যবাদ!', false);
-    await loadComments();
   });
+  submit.disabled = true;
   loadComments();
 })();
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onCommentTurnstileLoaded&render=explicit" async defer></script>
 </body>
 </html>
