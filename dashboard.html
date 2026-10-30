@@ -26,7 +26,11 @@
   .login-container{margin:auto;text-align:center;background:var(--cream);padding:50px 60px;border-radius:12px;box-shadow:0 15px 40px rgba(50,74,109,0.15);border:1px solid var(--paper-dark);max-width:480px;width:90%;position:relative;border-top:6px solid var(--terracotta)}
   .login-container h1{font-family:'Playfair Display',serif;color:var(--indigo);font-size:32px;margin-bottom:12px;letter-spacing:0.05em}
   .login-container p{font-family:'EB Garamond',serif;font-style:italic;color:#6B5A48;font-size:17px;margin-bottom:35px;line-height:1.6}
-  .login-btn{background:var(--indigo);color:var(--cream);border:none;padding:14px 35px;font-size:18px;font-family:'Noto Serif Bengali',serif;border-radius:8px;cursor:pointer;transition:all 0.3s;font-weight:600;box-shadow:0 4px 15px rgba(50,74,109,0.3)}
+  .login-form{display:flex;flex-direction:column;gap:15px;text-align:left}
+  .login-form label{font-family:'EB Garamond',serif;font-size:16px;font-weight:600;color:var(--indigo)}
+  .login-form input{width:100%;padding:12px 16px;font-size:17px;font-family:'Noto Serif Bengali',serif;border:1px solid var(--paper-dark);border-radius:8px;background:#FFFDF8;color:var(--ink);transition:border-color .2s}
+  .login-form input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,0.15)}
+  .login-btn{background:var(--indigo);color:var(--cream);border:none;padding:14px 35px;font-size:18px;font-family:'Noto Serif Bengali',serif;border-radius:8px;cursor:pointer;transition:all 0.3s;font-weight:600;box-shadow:0 4px 15px rgba(50,74,109,0.3);margin-top:10px}
   .login-btn:hover{background:#26395a;transform:translateY(-2px)}
   .error-msg{color:var(--terracotta);margin-top:20px;font-size:16px}
 
@@ -101,8 +105,18 @@
 <!-- লগইন ভিউ -->
 <div id="loginView" class="login-container">
   <h1>লেখক ড্যাশবোর্ড</h1>
-  <p>শুধুমাত্র অনুমোদিত ব্যবহারকারীরা প্রবেশ করতে পারবেন।<br>অনুগ্রহ করে জিমেইল দিয়ে লগইন করুন।</p>
-  <button class="login-btn" onclick="loginWithGoogle()">Google দিয়ে লগইন করুন</button>
+  <p>শুধুমাত্র অনুমোদিত ব্যবহারকারীরা প্রবেশ করতে পারবেন।<br>অনুগ্রহ করে ইমেইল ও পাসওয়ার্ড দিন।</p>
+  <div class="login-form">
+    <div>
+      <label>ইমেইল (Email)</label>
+      <input type="email" id="loginEmail" placeholder="you@example.com">
+    </div>
+    <div>
+      <label>পাসওয়ার্ড (Password)</label>
+      <input type="password" id="loginPassword" placeholder="••••••••">
+    </div>
+    <button class="login-btn" onclick="loginWithEmail()">লগইন করুন</button>
+  </div>
   <div id="loginError" class="error-msg"></div>
 </div>
 
@@ -207,8 +221,8 @@ const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
 const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ⚠️ আপনার জিমেইল এখানে দিন। শুধু এই জিমেইল দিয়ে লগইন করলেই ড্যাশবোর্ড খুলবে।
-const OWNER_EMAIL = "gmauvibbl.gmail.com"; // <-- এখানে আপনার জিমেইল দিন
+// ✅ আপনার জিমেইল এখানে বসানো হয়েছে। শুধু এই জিমেইল দিয়ে লগইন করলেই ড্যাশবোর্ড খুলবে।
+const OWNER_EMAIL = "gmauvibbl@gmail.com"; 
 
 async function checkAuth() {
   const { data: { session } } = await sb.auth.getSession();
@@ -228,12 +242,26 @@ async function checkAuth() {
   }
 }
 
-async function loginWithGoogle() {
-  const { error } = await sb.auth.signInWithOAuth({
-    provider: 'google',
-    options: { redirectTo: window.location.href }
+// ইমেইল ও পাসওয়ার্ড দিয়ে লগইন
+async function loginWithEmail() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  
+  if(!email || !password) {
+    document.getElementById('loginError').innerText = "ইমেইল এবং পাসওয়ার্ড দিন।";
+    return;
+  }
+
+  const { data, error } = await sb.auth.signInWithPassword({
+    email: email,
+    password: password,
   });
-  if (error) document.getElementById('loginError').innerText = "লগইন ব্যর্থ: " + error.message;
+
+  if (error) {
+    document.getElementById('loginError').innerText = "লগইন ব্যর্থ: " + error.message;
+  } else {
+    checkAuth(); // লগইন সফল হলে ড্যাশবোর্ড খুলবে
+  }
 }
 
 async function logout() {
