@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1B3B36">
-  <link rel="stylesheet" href="dashboard-bg.css">
 <title>Author Dashboard | Mostafa Auvi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -203,21 +202,20 @@
     </div>
     <div class="sidebar-menu">
       <button class="menu-item active">✍️ Create New Writing</button>
-      <button class="menu-item">📚 My Writings</button>
-      <button class="menu-item">Published Works</button>
-      <button class="menu-item">⚙️ Profile Settings</button>
+      <button class="menu-item" onclick="window.location.href='./posts.html'">📚 My Writings</button>
+      <button class="menu-item" onclick="window.location.href='./posts.html'">Published Works</button>
+      <button class="menu-item" onclick="window.location.href='./index.html'" style="color:var(--pine-green);font-weight:600">🏠 মূল ওয়েবসাইট</button>
       <button class="menu-item" style="color:var(--terracotta)" onclick="logout()">🚪 Logout</button>
     </div>
   </div>
 
   <div class="main-content">
     <div class="top-nav">
-      <div class="brand-logo">🍂 Mostafa Auvi <span>Author Dashboard</span></div>
+      <a href="./index.html" class="brand-logo" style="text-decoration:none;display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;color:var(--pine-green);font-size:20px">🍂 Mostafa Auvi <span style="font-family:'Great Vibes',cursive;font-size:28px;color:var(--gold);transform:rotate(-10deg);display:inline-block">Author Dashboard</span></a>
       <div class="top-nav-links">
-        <a href="#">Dashboard</a>
+        <a href="./index.html" style="color:var(--pine-green);font-weight:600">🏠 মূল ওয়েবসাইটে ফেরা</a>
         <a href="./posts.html">My Books</a>
-        <a href="#">New Writing</a>
-        <a href="#">My Publications</a>
+        <button class="logout-top" onclick="logout()">🚪 Logout</button>
       </div>
     </div>
 
@@ -308,7 +306,7 @@
             <div class="upload-icon">📁</div>
             <div class="upload-text">CLICK TO UPLOAD COVER IMAGE<br>MAX SIZE: 2MB · JPG, PNG, WEBP</div>
             <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp" onchange="uploadCover(event)">
-            <img id="coverPreview" src="#" alt="Cover preview">
+            <img id="coverPreview" alt="Cover preview">
           </label>
           <input type="hidden" id="postCover" value="">
         </div>
@@ -323,7 +321,7 @@
         <div id="bnContentFields">
           <div class="form-group">
             <label>ট্যাগিং (Tags)</label>
-            <input type="text" id="bnTags" class="form-input" placeholder="কমা দিয়ে আলাদা করুন (যেমন: প্রেম, ইতিহাস)">
+            <input type="text" id="bnTags" class="form-input" placeholder="কমা দিয়ে আলাদা করুন (যেমন: প্রেম, ইতিহাস)">
           </div>
           <div class="form-group">
             <label>মূল লেখা (Main Body)</label>
@@ -389,14 +387,14 @@ const OWNER_EMAIL = "gmauvibbl@gmail.com";
 let currentLang = 'bn';
 
 const categoryTree = {
-  'কথাসাহিত্য':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
-  'প্রবন্ধ':['দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য','অনূদিত প্রবন্ধ'],
-  'সাহিত্যালোচনা':['লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যসমালোচনা'],
+  'কথাসাহিত্য':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
+  'প্রবন্ধ':['দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য','অনূদিত প্রবন্ধ'],
+  'সাহিত্যালোচনা':['লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যসমালোচনা'],
   'অনুবাদ সাহিত্য':['অনূদিত গল্প','অনূদিত উপন্যাস','অনূদিত প্রবন্ধ','বিশ্বসাহিত্য পরিচিতি'],
   'ভ্রমণকাহিনি':['বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ'],
   'স্মৃতির ভাণ্ডার':['ফেলে আসা দিন','স্মৃতিকথা','দিনলিপি'],
-  'আইন-আদালত':['বাংলাদেশের জুরিসপ্রুডেন্স','আইন বিষয়ক প্রবন্ধ','কেসস্টাডি'],
-  'ব্যাংকিং ও অর্থনীতি':['আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা'],
+  'আইন-আদালত':['বাংলাদেশের জুরিসপ্রুডেন্স','আইন বিষয়ক প্রবন্ধ','কেসস্টাডি'],
+  'ব্যাংকিং ও অর্থনীতি':['আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা'],
   'ব্যক্তিগত রচনা':['স্মৃতিকথা','দিনলিপি']
 };
 
@@ -446,13 +444,46 @@ function highlightText() {
 function uploadImageToBody(event, bodyId) {
   const file = event.target.files[0];
   if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    alert('ছবির সর্বোচ্চ সাইজ ২ MB।');
+    event.target.value = '';
+    return;
+  }
   const reader = new FileReader();
   reader.onload = function(e) {
-    const img = `<img src="${e.target.result}" alt="img">`;
-    document.getElementById(bodyId).focus();
-    document.execCommand('insertHTML', false, img);
+    const body = document.getElementById(bodyId);
+    body.focus();
+    const sel = window.getSelection();
+    let range;
+    // Use current selection if it's inside the editor; otherwise append at end.
+    if (sel && sel.rangeCount > 0 && body.contains(sel.anchorNode)) {
+      range = sel.getRangeAt(0);
+      range.deleteContents();
+    } else {
+      range = document.createRange();
+      range.selectNodeContents(body);
+      range.collapse(false);
+    }
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.alt = 'img';
+    range.insertNode(img);
+    // Move caret after the image so further typing continues normally.
+    range.setStartAfter(img);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    // Insert a trailing <br> so the cursor has somewhere to go.
+    const br = document.createElement('br');
+    range.insertNode(br);
+    range.setStartAfter(br);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
   };
   reader.readAsDataURL(file);
+  // Reset input so the same file can be selected again later.
+  event.target.value = '';
 }
 
 function uploadCover(event) {
@@ -481,26 +512,54 @@ function uploadCover(event) {
 async function loginWithEmail() {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
+  if (!email || !password) {
+    document.getElementById('loginError').innerText = "ইমেইল ও পাসওয়ার্ড দিন।";
+    return;
+  }
+  const btn = document.querySelector('#loginView button');
+  if (btn) { btn.disabled = true; btn.innerText = 'অপেক্ষা করুন...'; }
   const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (btn) { btn.disabled = false; btn.innerText = 'Login to Dashboard'; }
   if (error) document.getElementById('loginError').innerText = "Login Failed: " + error.message;
   else checkAuth();
 }
 
 async function checkAuth() {
-  const { data: { session } } = await sb.auth.getSession();
+  const { data: { session }, error } = await sb.auth.getSession();
+  if (error) {
+    document.getElementById('loginError').innerText = "Session error: " + error.message;
+    return;
+  }
   if (session) {
     if (session.user.email === OWNER_EMAIL) {
       document.getElementById('loginView').style.display = 'none';
       document.getElementById('dashboardView').style.display = 'flex';
       fetchPosts();
     } else {
-      sb.auth.signOut();
-      document.getElementById('loginError').innerText = "Access Denied!";
+      await sb.auth.signOut();
+      document.getElementById('loginError').innerText = "Access Denied! শুধুমাত্র অনুমোদিত লেখক ঢুকতে পারবেন।";
+      document.getElementById('loginView').style.display = 'flex';
+      document.getElementById('dashboardView').style.display = 'none';
     }
   } else {
     document.getElementById('loginView').style.display = 'flex';
     document.getElementById('dashboardView').style.display = 'none';
   }
+}
+
+async function logout() {
+  if (!confirm('লগআউট করতে চান?')) return;
+  try {
+    await sb.auth.signOut();
+  } catch (e) {
+    // ignore — we'll reset the UI anyway
+    console.warn('signOut error:', e);
+  }
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').innerText = '';
+  document.getElementById('loginView').style.display = 'flex';
+  document.getElementById('dashboardView').style.display = 'none';
 }
 
 async function savePost(isPublish, isBoth) {
@@ -557,32 +616,78 @@ async function savePost(isPublish, isBoth) {
     return;
   }
   if (isBoth && postsToInsert.length !== 2) {
-    status.innerText = "⚠️ দুই ভাষায় সংরক্ষণ করতে বাংলা ও ইংরেজি—দুই লেখাই পূরণ করুন।";
+    status.innerText = "⚠️ দুই ভাষায় সংরক্ষণ করতে বাংলা ও ইংরেজি—দুই লেখাই পূরণ করুন।";
     status.style.color = "var(--terracotta)";
     return;
   }
   status.innerText = "সংরক্ষণ হচ্ছে...";
-  const { error } = await sb.from('posts').insert(postsToInsert);
-  if (error) {
-    status.innerText = "Error: " + error.message;
-    status.style.color = "var(--terracotta)";
-  } else {
-    status.innerText = isPublish ? "✅ প্রকাশিত হয়েছে।" : "✅ খসড়া সংরক্ষিত হয়েছে।";
+  status.style.color = "var(--sage-green)";
+  try {
+    const { data, error } = await sb.from('posts').insert(postsToInsert).select();
+    if (error) {
+      let msg = error.message || 'Unknown error';
+      if (error.code === '42501') {
+        msg = 'RLS পলিসি ব্লক করেছে — Supabase ড্যাশবোর্ডে posts টেবিলে authenticated INSERT পলিসি দিন।';
+      } else if (error.code === '42P01') {
+        msg = 'posts টেবিল খুঁজছে না — Supabase ড্যাশবোর্ডে টেবিল তৈরি করুন।';
+      } else if (error.hint) {
+        msg += ' (হিন্ট: ' + error.hint + ')';
+      }
+      status.innerText = "❌ Error [" + (error.code || '?') + "]: " + msg;
+      status.style.color = "var(--terracotta)";
+      console.error('savePost error:', error);
+      return;
+    }
+    status.innerText = isPublish ? "✅ প্রকাশিত হয়েছে।" : "✅ খসড়া সংরক্ষিত হয়েছে।";
     status.style.color = "var(--pine-green)";
+    ['bnTitle','bnSubtitle','bnExcerpt','bnTags','enTitle','enSubtitle','enExcerpt','enTags','postSlug'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    ['bnBody','enBody'].forEach(id => { document.getElementById(id).innerHTML = ''; });
+    document.getElementById('postCover').value = '';
+    const prev = document.getElementById('coverPreview');
+    prev.removeAttribute('src');
+    prev.style.display = 'none';
+    document.getElementById('postFeatured').checked = false;
+    document.getElementById('postCategory').value = '';
+    document.getElementById('postCategory').dispatchEvent(new Event('change'));
     fetchPosts();
+  } catch (e) {
+    status.innerText = "❌ Network/JS error: " + (e.message || e);
+    status.style.color = "var(--terracotta)";
+    console.error('savePost exception:', e);
   }
 }
 
 async function fetchPosts() {
-  const { data } = await sb.from('posts').select('title, category, language').order('published_at', { ascending: false }).limit(5);
   const listEl = document.getElementById('postsList');
-  if (data && data.length > 0) {
-    listEl.innerHTML = data.map(p => `
-      <div class="draft-item">
-        <h4>${p.title}</h4>
-        <p>❖ ${p.category} • ${p.language === 'bn' ? 'বাংলা' : 'English'}</p>
-      </div>
-    `).join('');
+  listEl.innerHTML = '<div class="draft-item"><p style="text-align:center;color:#999">Loading...</p></div>';
+  try {
+    const { data, error } = await sb.from('posts')
+      .select('title, category, language, published')
+      .order('published_at', { ascending: false })
+      .limit(8);
+    if (error) {
+      listEl.innerHTML = '<div class="draft-item"><p style="color:var(--terracotta);font-size:12px">❌ ' +
+        (error.message || 'ত্রুটি') + '</p></div>';
+      console.error('fetchPosts error:', error);
+      return;
+    }
+    if (data && data.length > 0) {
+      listEl.innerHTML = data.map(p => `
+        <div class="draft-item">
+          <h4>${p.title || '(শিরোনামহীন)'}</h4>
+          <p>❖ ${p.category || '—'} • ${p.language === 'bn' ? 'বাংলা' : 'English'}${p.published ? ' • ✅ প্রকাশিত' : ' • ✎ খসড়া'}</p>
+        </div>
+      `).join('');
+    } else {
+      listEl.innerHTML = '<div class="draft-item"><p style="text-align:center;color:#999">কোনো লেখা নেই।</p></div>';
+    }
+  } catch (e) {
+    listEl.innerHTML = '<div class="draft-item"><p style="color:var(--terracotta);font-size:12px">❌ ' +
+      (e.message || 'ত্রুটি') + '</p></div>';
+    console.error('fetchPosts exception:', e);
   }
 }
 
