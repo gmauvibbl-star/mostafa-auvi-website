@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0F3D3E">
-<meta name="description" content="Mostafa Auvi-এর প্রকাশিত লেখা — গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনার আর্কাইভ।">
-<title>প্রকাশিত লেখা | Mostafa Auvi</title>
+<meta name="description" content="Mostafa Auvi-এর প্রকাশিত বই — গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনার আর্কাইভ।">
+<title>প্রকাশিত বই | Mostafa Auvi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
@@ -149,15 +149,15 @@
   }
 
 /* Published book cards */
-.book-archive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:24px 0}
+.book-archive-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin:30px auto;max-width:900px;align-items:start}
 .book-archive-card{overflow:hidden;border:1px solid var(--paper-dark);border-radius:12px;background:var(--paper,#faf8f2);box-shadow:0 6px 20px rgba(0,0,0,.07);display:flex;flex-direction:column}
-.book-archive-card .book-cover-frame{width:100%;aspect-ratio:.72;display:flex;align-items:center;justify-content:center;background:#e9eef1;overflow:hidden}
-.book-archive-card .book-cover-frame img{width:100%;height:100%;object-fit:contain;display:block}
+.book-archive-card .book-cover-frame{width:100%;aspect-ratio:0.78;display:flex;align-items:center;justify-content:center;background:#eee5d2;overflow:hidden;padding:18px 22px}
+.book-archive-card .book-cover-frame img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;filter:drop-shadow(0 5px 8px rgba(35,25,15,.22))}
 .book-archive-card .book-info{padding:14px 15px 4px;text-align:center}
 .book-archive-card .book-info strong{display:block;font-family:inherit;font-size:17px;line-height:1.5}
 .book-archive-card .book-info span{display:block;color:var(--ink-soft);font-size:13px;margin-top:5px}
 .book-archive-card .book-year{text-align:center;padding:5px 12px 14px;color:var(--teal-deep);font-weight:600}
-@media(max-width:650px){.book-archive-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.book-archive-card .book-info strong{font-size:14px}}
+@media(max-width:650px){.book-archive-grid{grid-template-columns:1fr;gap:22px;padding:0 8px}.book-archive-card{width:100%;max-width:430px;margin:0 auto}.book-archive-card .book-cover-frame{aspect-ratio:.82;padding:14px 26px}.book-archive-card .book-info strong{font-size:16px}}
 
 .book-rokomari-link{display:inline-block;padding:9px 14px;border:1px solid var(--teal-deep,#286b68);border-radius:7px;color:var(--teal-deep,#286b68);font-size:13px;text-decoration:none;font-weight:600}
 .book-rokomari-link:hover{background:var(--teal-deep,#286b68);color:#fff}
@@ -173,7 +173,7 @@
     </div>
     <nav class="nav" aria-label="প্রধান নেভিগেশন">
       <a href="./">প্রচ্ছদ</a>
-      <a href="posts.html" class="current">প্রকাশিত লেখা</a>
+      <a href="posts.html" class="current">প্রকাশিত বই</a>
       <a href="posts.html?category=গল্প">গল্প</a>
       <a href="posts.html?category=উপন্যাস">উপন্যাস</a>
       <a href="posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
@@ -190,9 +190,9 @@
 
   <!-- Intro -->
   <div class="intro">
-    <div class="eyebrow">The Writing Archive · লেখার আর্কাইভ</div>
-    <h1 class="page-title" id="pageTitle">প্রকাশিত লেখা</h1>
-    <p class="page-subtitle" id="pageSubtitle">গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা—এক জায়গায়।</p>
+    <div class="eyebrow">Published Books · প্রকাশিত বই</div>
+    <h1 class="page-title" id="pageTitle">প্রকাশিত বই</h1>
+    <p class="page-subtitle" id="pageSubtitle">প্রকাশিত বইয়ের প্রচ্ছদ, পরিচিতি ও প্রকাশনার তথ্য।</p>
   </div>
 
   <!-- Main category and subcategory cards -->
@@ -203,7 +203,7 @@
 
   <!-- Filters -->
   <div class="filters" id="filters">
-    <a class="filter-pill" href="posts.html">সব লেখা</a>
+    <a class="filter-pill" href="posts.html">সব বই</a>
     <a class="filter-pill" href="posts.html?category=গল্প">গল্প</a>
     <a class="filter-pill" href="posts.html?category=ছোটগল্প">ছোটগল্প</a>
     <a class="filter-pill" href="posts.html?category=উপন্যাস">উপন্যাস</a>
@@ -215,7 +215,7 @@
     <a class="filter-pill" href="posts.html?category=ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</a>
   </div>
 
-  <div class="status-row" id="status">লেখার তালিকা লোড হচ্ছে…</div>
+  <div class="status-row" id="status">বইয়ের তালিকা লোড হচ্ছে…</div>
   <section id="grid" class="grid" aria-live="polite"></section>
 
   <!-- Footer -->
@@ -223,7 +223,7 @@
     <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
     <nav class="footer-nav">
       <a href="./">প্রচ্ছদ</a>
-      <a href="./posts.html">প্রকাশিত লেখা</a>
+      <a href="./posts.html">প্রকাশিত বই</a>
       <a href="./posts.html?category=গল্প">গল্প</a>
       <a href="./posts.html?category=উপন্যাস">উপন্যাস</a>
       <a href="./posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
@@ -349,7 +349,7 @@ function updateIntro(){
     document.getElementById('pageSubtitle').textContent=category?('Published writing in '+catLabel(category)+'.'):'Stories, novels, essays and literary criticism.';
   }else if(category){
     document.getElementById('pageTitle').textContent=catLabel(category);
-    document.getElementById('pageSubtitle').textContent=catLabel(category)+' বিভাগের প্রকাশিত লেখা।';
+    document.getElementById('pageSubtitle').textContent=catLabel(category)+' বিভাগের প্রকাশিত বই।';
     document.querySelector('.nav a.current')?.classList.remove('current');
     document.querySelectorAll('.nav a').forEach(a=>{
       const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
@@ -373,7 +373,7 @@ function excerptText(p){
 function renderCards(rows){
   if(!rows.length){
     grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>এখনো কোনো লেখা প্রকাশ করা হয়নি</h3><p>এই বিভাগে লেখা প্রকাশিত হলে এখানে দেখা যাবে।</p></div>';
-    statusEl.innerHTML='এই বিভাগে কোনো প্রকাশিত লেখা নেই।';
+    statusEl.innerHTML='এই বিভাগে কোনো প্রকাশিত বই নেই।';
     return;
   }
   statusEl.innerHTML='মোট <span class="count">'+rows.length+'</span>টি লেখা পাওয়া গেছে।';
