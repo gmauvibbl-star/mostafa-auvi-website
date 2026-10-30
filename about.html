@@ -1085,7 +1085,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
   window.closeLoginModal = function() { overlay.classList.remove('open'); modalPassword.value = ''; showStatus('', ''); };
 
   loginBtn.onclick = () => {
-    if (loginBtn.classList.contains('logged-in')) { window.location.href = 'dashboard.html'; return; }
+    if (loginBtn.classList.contains('logged-in')) { window.location.href = 'admin.html'; return; }
     openLoginModal();
   };
   overlay.addEventListener('click', (e) => { if (e.target === overlay) window.closeLoginModal(); });
@@ -1111,7 +1111,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
         return;
       }
       showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+      setTimeout(() => { window.location.href = 'admin.html'; }, 800);
     } catch (e) {
       showStatus('সমস্যা: ' + e.message, 'error');
       modalLoginBtn.disabled = false;
