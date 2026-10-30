@@ -402,7 +402,7 @@ function renderCards(rows){
 }
 
 async function loadPosts(){
-  if(category==='আমার বই'){ renderBookArchive(); return; }
+  if(!category||category==='আমার বই'){ renderBookArchive(); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
     statusEl.textContent='Supabase কনফিগার করা হয়নি।';
     return;
