@@ -503,12 +503,13 @@ async function checkAuth() {
 async function savePost(isPublish, isBoth) {
   const parentCategory = document.getElementById('postCategory').value;
   const subcategory = document.getElementById('postSubcategory').value;
-  const category = subcategory ? parentCategory + ' / ' + subcategory : parentCategory;
+  // category keeps the leaf value for the existing archive filters.
+  const category = subcategory;
   const cover = document.getElementById('postCover').value;
   const featured = document.getElementById('postFeatured').checked;
   const status = document.getElementById('postStatus');
-  if (isPublish && !parentCategory) {
-    status.innerText = "⚠️ প্রকাশের আগে প্রধান বিভাগ নির্বাচন করুন।";
+  if (isPublish && (!parentCategory || !subcategory)) {
+    status.innerText = "⚠️ প্রকাশের আগে বিভাগ ও উপবিভাগ—দুটিই নির্বাচন করুন।";
     status.style.color = "var(--terracotta)";
     return;
   }
@@ -533,7 +534,7 @@ async function savePost(isPublish, isBoth) {
       excerpt: document.getElementById(excerptId).value.trim(),
       tags: document.getElementById(tagsId).value.trim(),
       body: document.getElementById(bodyId).innerHTML,
-      language, slug, category, cover_image: cover,
+      language, slug, category, parent_category: parentCategory, subcategory, cover_image: cover,
       published: isPublish,
       featured,
       published_at: isPublish ? new Date().toISOString() : null
