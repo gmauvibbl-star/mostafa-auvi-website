@@ -57,8 +57,24 @@ Deno.serve(async (req) => {
         remoteip: req.headers.get("cf-connecting-ip") || ""
       })
     });
-    const verificationResult = await verification.json();
-    if (!verification.ok || !verificationResult.success) {
+    let verificationResult: Record<string, unknown>;
+    try {
+      verificationResult = await verification.json();
+    } catch (parseError) {
+      console.error("Turnstile Siteverify response could not be parsed:", {
+        httpStatus: verification.status,
+        error: String(parseError)
+      });
+      return json(502, { error: "মানব-যাচাই সেবা থেকে সঠিক উত্তর পাওয়া যায়নি। আবার চেষ্টা করুন।" });
+    }
+    if (!verification.ok || verificationResult.success !== true) {
+      // Log only Cloudflare's diagnostic codes; never log the secret or token.
+      console.error("Turnstile Siteverify rejected the token:", {
+        httpStatus: verification.status,
+        errorCodes: verificationResult["error-codes"] || [],
+        hostname: verificationResult.hostname || null,
+        action: verificationResult.action || null
+      });
       return json(400, { error: "মানব-যাচাই ব্যর্থ হয়েছে। আবার চেষ্টা করুন।" });
     }
 
