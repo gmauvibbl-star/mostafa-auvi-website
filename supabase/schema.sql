@@ -35,6 +35,10 @@ alter table public.posts add column if not exists language text not null default
 alter table public.posts add column if not exists featured boolean not null default false;
 alter table public.posts add column if not exists title_en text;
 alter table public.posts add column if not exists body_en text;
+alter table public.posts add column if not exists group_id text;
+alter table public.posts add column if not exists cover_image text;
+alter table public.posts add column if not exists parent_category text;
+alter table public.posts add column if not exists subcategory text;
 
 create table if not exists public.subscribers (
   id uuid primary key default gen_random_uuid(),
