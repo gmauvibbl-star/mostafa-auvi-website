@@ -236,73 +236,32 @@
           </div>
         </div>
 
-        <!-- Keep the original dashboard form layout -->
+        <!-- Existing dashboard design retained; fields reordered inside the same form card -->
         <div class="form-row">
           <div class="form-group">
             <label>Link / Slug</label>
-            <input type="text" id="postSlug" class="form-input" placeholder="auto-generated-if-blank">
+            <input type="text" id="postSlug" class="form-input" placeholder="খালি রাখলে শিরোনাম থেকে তৈরি হবে">
           </div>
           <div class="form-group">
             <label>বিভাগ ও উপবিভাগ (Category)</label>
-            <select id="postCategory" class="form-input" required>
-              <option value="">বিভাগ নির্বাচন করুন</option>
-              <optgroup label="গল্প">
-                <option value="গল্প / ছোটগল্প">ছোটগল্প</option>
-                <option value="গল্প / বড়গল্প">বড়গল্প</option>
-                <option value="গল্প / অনূদিত গল্প">অনূদিত গল্প</option>
-              </optgroup>
-              <optgroup label="উপন্যাস">
-                <option value="উপন্যাস / সম্পূর্ণ উপন্যাস">সম্পূর্ণ উপন্যাস</option>
-                <option value="উপন্যাস / ধারাবাহিক উপন্যাস">ধারাবাহিক উপন্যাস</option>
-                <option value="উপন্যাস / অনূদিত উপন্যাস">অনূদিত উপন্যাস</option>
-              </optgroup>
-              <optgroup label="প্রবন্ধ">
-                <option value="প্রবন্ধ / দৈনন্দিন জীবন">দৈনন্দিন জীবন</option>
-                <option value="প্রবন্ধ / সাহিত্য বিষয়ক প্রবন্ধ">সাহিত্য বিষয়ক প্রবন্ধ</option>
-                <option value="প্রবন্ধ / বই আলোচনা">বই আলোচনা</option>
-                <option value="প্রবন্ধ / বিশ্বসাহিত্য">বিশ্বসাহিত্য</option>
-              </optgroup>
-              <optgroup label="সাহিত্যালোচনা">
-                <option value="সাহিত্যালোচনা / লেখক ও সাহিত্যকর্ম">লেখক ও সাহিত্যকর্ম</option>
-                <option value="সাহিত্যালোচনা / পাঠ-প্রতিক্রিয়া">পাঠ-প্রতিক্রিয়া</option>
-              </optgroup>
-              <optgroup label="অনুবাদ সাহিত্য">
-                <option value="অনুবাদ সাহিত্য / অনূদিত প্রবন্ধ">অনূদিত প্রবন্ধ</option>
-                <option value="অনুবাদ সাহিত্য / বিশ্বসাহিত্য পরিচিতি">বিশ্বসাহিত্য পরিচিতি</option>
-              </optgroup>
-              <optgroup label="ভ্রমণকাহিনি">
-                <option value="ভ্রমণকাহিনি / বাংলাদেশ ভ্রমণ">বাংলাদেশ ভ্রমণ</option>
-                <option value="ভ্রমণকাহিনি / বিদেশ ভ্রমণ">বিদেশ ভ্রমণ</option>
-              </optgroup>
-              <optgroup label="স্মৃতির ভাণ্ডার">
-                <option value="স্মৃতির ভাণ্ডার / ফেলে আসা দিন">ফেলে আসা দিন</option>
-              </optgroup>
-              <optgroup label="আইন-আদালত">
-                <option value="আইন-আদালত / বাংলাদেশের জুরিসপ্রুডেন্স">বাংলাদেশের জুরিসপ্রুডেন্স</option>
-                <option value="আইন-আদালত / আইন বিষয়ক প্রবন্ধ">আইন বিষয়ক প্রবন্ধ</option>
-                <option value="আইন-আদালত / কেসস্টাডি">কেসস্টাডি</option>
-              </optgroup>
-              <optgroup label="ব্যাংকিং ও অর্থনীতি">
-                <option value="ব্যাংকিং ও অর্থনীতি / আমার ব্যাংকিং জীবন">আমার ব্যাংকিং জীবন</option>
-                <option value="ব্যাংকিং ও অর্থনীতি / এসএমই ব্যাংকিং নিয়ে যত কথা">এসএমই ব্যাংকিং নিয়ে যত কথা</option>
-              </optgroup>
-              <optgroup label="ব্যক্তিগত রচনা">
-                <option value="ব্যক্তিগত রচনা / স্মৃতিকথা">স্মৃতিকথা</option>
-                <option value="ব্যক্তিগত রচনা / দিনলিপি">দিনলিপি</option>
-              </optgroup>
-            </select>
+            <div class="form-row" style="margin:0;gap:8px">
+              <select id="postCategory" class="form-input" required>
+                <option value="">প্রধান বিভাগ</option>
+                <option value="গল্প">গল্প</option>
+                <option value="উপন্যাস">উপন্যাস</option>
+                <option value="প্রবন্ধ">প্রবন্ধ</option>
+                <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
+                <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
+                <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
+                <option value="আইন-আদালত">আইন-আদালত</option>
+                <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
+                <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
+              </select>
+              <select id="postSubcategory" class="form-input" disabled>
+                <option value="">উপবিভাগ</option>
+              </select>
+            </div>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label>Cover Photo</label>
-          <label class="upload-box">
-            <div class="upload-icon">📁</div>
-            <div class="upload-text">CLICK TO UPLOAD COVER IMAGE<br>MAX SIZE: 2MB</div>
-            <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp" onchange="uploadCover(event)">
-            <img id="coverPreview" src="#" alt="Cover preview">
-          </label>
-          <input type="hidden" id="postCover" value="">
         </div>
 
         <div id="bnTitleFields">
@@ -312,7 +271,7 @@
           </div>
           <div class="form-group">
             <label>উপশিরোনাম (Subtitle)</label>
-            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম">
+            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম (ঐচ্ছিক)">
           </div>
         </div>
         <div id="enTitleFields" style="display:none">
@@ -322,35 +281,53 @@
           </div>
           <div class="form-group">
             <label>Subtitle</label>
-            <input type="text" id="enSubtitle" class="form-input" placeholder="Subtitle">
+            <input type="text" id="enSubtitle" class="form-input" placeholder="Optional subtitle">
           </div>
         </div>
 
         <div id="bnSummaryFields">
           <div class="form-group">
             <label>সারসংক্ষেপ (Summary)</label>
-            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সারসংক্ষেপ"></textarea>
+            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সংক্ষিপ্ত পরিচিতি"></textarea>
           </div>
         </div>
         <div id="enSummaryFields" style="display:none">
           <div class="form-group">
-            <label>Summary</label>
-            <textarea id="enExcerpt" class="form-textarea" placeholder="Writing summary"></textarea>
+            <label>Summary / Excerpt</label>
+            <textarea id="enExcerpt" class="form-textarea" placeholder="A short introduction to the writing"></textarea>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>Cover Photo</label>
+          <label class="upload-box">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">CLICK TO UPLOAD COVER IMAGE<br>MAX SIZE: 2MB · JPG, PNG, WEBP</div>
+            <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp" onchange="uploadCover(event)">
+            <img id="coverPreview" src="#" alt="Cover preview">
+          </label>
+          <input type="hidden" id="postCover" value="">
+        </div>
+
+        <div class="form-group" style="margin-bottom:14px">
+          <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0">
+            <input type="checkbox" id="postFeatured" style="width:16px;height:16px;accent-color:var(--pine-green)">
+            <span>নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</span>
+          </label>
         </div>
 
         <div id="bnContentFields">
           <div class="form-group">
             <label>ট্যাগিং (Tags)</label>
-            <input type="text" id="bnTags" class="form-input" placeholder="কমা দিয়ে আলাদা করুন (যেমন: প্রেম, দেশ)">
+            <input type="text" id="bnTags" class="form-input" placeholder="কমা দিয়ে আলাদা করুন (যেমন: প্রেম, ইতিহাস)">
           </div>
           <div class="form-group">
             <label>মূল লেখা (Main Body)</label>
             <div class="editor-toolbar">
-              <button class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
-              <button class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
-              <button class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
-              <button class="tool-btn" onclick="highlightText()">🖍️</button>
+              <button type="button" class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
+              <button type="button" class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
+              <button type="button" class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
+              <button type="button" class="tool-btn" onclick="highlightText()">🖍️</button>
               <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" accept="image/*" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'bnBody')"></label>
             </div>
             <div id="bnBody" class="rich-area" contenteditable="true" data-placeholder="এখানে আপনার লেখা লিখুন..."></div>
@@ -364,10 +341,10 @@
           <div class="form-group">
             <label>Main Body</label>
             <div class="editor-toolbar">
-              <button class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
-              <button class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
-              <button class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
-              <button class="tool-btn" onclick="highlightText()">🖍️</button>
+              <button type="button" class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
+              <button type="button" class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
+              <button type="button" class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
+              <button type="button" class="tool-btn" onclick="highlightText()">🖍️</button>
               <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" accept="image/*" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'enBody')"></label>
             </div>
             <div id="enBody" class="rich-area" contenteditable="true" data-placeholder="Write your content here..."></div>
@@ -429,6 +406,8 @@ function updateSubcategories() {
 }
 
 
+document.getElementById('postCategory').addEventListener('change', updateSubcategories);
+
 function switchLang(lang, ev) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -475,7 +454,7 @@ function uploadCover(event) {
   const file = event.target.files[0];
   if (!file) return;
   if (!['image/jpeg','image/png','image/webp'].includes(file.type)) {
-    alert('অনুগ্রহ করে একটি ছবি নির্বাচন করুন।');
+    alert('শুধু JPG, PNG অথবা WebP ছবি আপলোড করুন।');
     event.target.value = '';
     return;
   }
@@ -520,61 +499,70 @@ async function checkAuth() {
 }
 
 async function savePost(isPublish, isBoth) {
-  const category = document.getElementById('postCategory').value;
+  const parentCategory = document.getElementById('postCategory').value;
+  const subcategory = document.getElementById('postSubcategory').value;
+  const category = subcategory ? parentCategory + ' / ' + subcategory : parentCategory;
   const cover = document.getElementById('postCover').value;
-  const featured = false;
-  if (!category) {
-    document.getElementById('postStatus').innerText = "⚠️ অনুগ্রহ করে বিভাগ নির্বাচন করুন।";
-    document.getElementById('postStatus').style.color = "var(--terracotta)";
+  const featured = document.getElementById('postFeatured').checked;
+  const status = document.getElementById('postStatus');
+  if (!parentCategory) {
+    status.innerText = "⚠️ অনুগ্রহ করে প্রধান বিভাগ নির্বাচন করুন।";
+    status.style.color = "var(--terracotta)";
     return;
   }
   let slug = document.getElementById('postSlug').value.trim();
-  
   const bnTitle = document.getElementById('bnTitle').value.trim();
   const enTitle = document.getElementById('enTitle').value.trim();
-  
   if (!slug) slug = (bnTitle || enTitle).toLowerCase().replace(/[^\u0980-\u09FFa-z0-9 ]/g, '').replace(/\s+/g, '-');
-
-  let postsToInsert = [];
-  
-  if (isBoth) {
-    if (bnTitle && document.getElementById('bnBody').innerText.trim()) {
-      postsToInsert.push({
-        title: bnTitle, subtitle: document.getElementById('bnSubtitle').value, 
-        excerpt: document.getElementById('bnExcerpt').value, tags: document.getElementById('bnTags').value,
-        body: document.getElementById('bnBody').innerHTML, language: 'bn', slug, category, cover_image: cover, 
-        published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null
-      });
-    }
-    if (enTitle && document.getElementById('enBody').innerText.trim()) {
-      postsToInsert.push({
-        title: enTitle, subtitle: document.getElementById('enSubtitle').value, 
-        excerpt: document.getElementById('enExcerpt').value, tags: document.getElementById('enTags').value,
-        body: document.getElementById('enBody').innerHTML, language: 'en', slug, category, cover_image: cover, 
-        published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null
-      });
-    }
-  } else {
-    if (currentLang === 'bn' && bnTitle && document.getElementById('bnBody').innerText.trim()) {
-      postsToInsert.push({ title: bnTitle, subtitle: document.getElementById('bnSubtitle').value, excerpt: document.getElementById('bnExcerpt').value, tags: document.getElementById('bnTags').value, body: document.getElementById('bnBody').innerHTML, language: 'bn', slug, category, cover_image: cover, published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null });
-    } else if (currentLang === 'en' && enTitle && document.getElementById('enBody').innerText.trim()) {
-      postsToInsert.push({ title: enTitle, subtitle: document.getElementById('enSubtitle').value, excerpt: document.getElementById('enExcerpt').value, tags: document.getElementById('enTags').value, body: document.getElementById('enBody').innerHTML, language: 'en', slug, category, cover_image: cover, published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null });
-    }
-  }
-
-  if (postsToInsert.length === 0) {
-    document.getElementById('postStatus').innerText = "⚠️ Title and Body are required!";
-    document.getElementById('postStatus').style.color = "var(--terracotta)";
+  if (!slug) {
+    status.innerText = "⚠️ শিরোনাম বা Slug লিখুন।";
+    status.style.color = "var(--terracotta)";
     return;
   }
-
+  const bnBody = document.getElementById('bnBody').innerText.trim();
+  const enBody = document.getElementById('enBody').innerText.trim();
+  const postsToInsert = [];
+  const addPost = (language, title, bodyId, excerptId, subtitleId, tagsId) => {
+    const bodyText = document.getElementById(bodyId).innerText.trim();
+    if (!title || !bodyText) return;
+    postsToInsert.push({
+      title,
+      subtitle: document.getElementById(subtitleId).value.trim(),
+      excerpt: document.getElementById(excerptId).value.trim(),
+      tags: document.getElementById(tagsId).value.trim(),
+      body: document.getElementById(bodyId).innerHTML,
+      language, slug, category, cover_image: cover,
+      published: isPublish,
+      featured,
+      published_at: isPublish ? new Date().toISOString() : null
+    });
+  };
+  if (isBoth) {
+    addPost('bn', bnTitle, 'bnBody', 'bnExcerpt', 'bnSubtitle', 'bnTags');
+    addPost('en', enTitle, 'enBody', 'enExcerpt', 'enSubtitle', 'enTags');
+  } else if (currentLang === 'bn') {
+    addPost('bn', bnTitle, 'bnBody', 'bnExcerpt', 'bnSubtitle', 'bnTags');
+  } else {
+    addPost('en', enTitle, 'enBody', 'enExcerpt', 'enSubtitle', 'enTags');
+  }
+  if (!postsToInsert.length) {
+    status.innerText = "⚠️ শিরোনাম ও মূল লেখা দিতে হবে।";
+    status.style.color = "var(--terracotta)";
+    return;
+  }
+  if (isBoth && postsToInsert.length !== 2) {
+    status.innerText = "⚠️ দুই ভাষায় সংরক্ষণ করতে বাংলা ও ইংরেজি—দুই লেখাই পূরণ করুন।";
+    status.style.color = "var(--terracotta)";
+    return;
+  }
+  status.innerText = "সংরক্ষণ হচ্ছে...";
   const { error } = await sb.from('posts').insert(postsToInsert);
   if (error) {
-    document.getElementById('postStatus').innerText = "Error: " + error.message;
-    document.getElementById('postStatus').style.color = "var(--terracotta)";
+    status.innerText = "Error: " + error.message;
+    status.style.color = "var(--terracotta)";
   } else {
-    document.getElementById('postStatus').innerText = "✅ Saved Successfully!";
-    document.getElementById('postStatus').style.color = "var(--pine-green)";
+    status.innerText = isPublish ? "✅ প্রকাশিত হয়েছে।" : "✅ খসড়া সংরক্ষিত হয়েছে।";
+    status.style.color = "var(--pine-green)";
     fetchPosts();
   }
 }
