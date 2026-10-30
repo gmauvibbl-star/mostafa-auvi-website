@@ -90,7 +90,8 @@
   .editor-content ul li,.editor-content ol li{margin:0.3em 0}
   .editor-content a{color:var(--blood);text-decoration:underline;text-underline-offset:2px}
   .editor-content a:hover{color:var(--teal-deep)}
-  .editor-content[contenteditable]:empty:before{content:attr(data-placeholder);color:var(--ink-soft);opacity:0.5;font-style:italic}
+  .editor-content img{max-width:100%;height:auto;resize:both;overflow:auto}.editor-content blockquote{border-left:4px solid #8a5b43;margin:16px 0;padding:10px 18px;background:#f5eee3;font-style:italic}.editor-content table{border-collapse:collapse;width:100%;margin:14px 0}.editor-content td{border:1px solid #b9aa96;padding:8px;min-width:50px}.toolbar select,.toolbar input[type=color]{height:29px;border:1px solid var(--paper-dark);border-radius:4px;background:#fffefa;max-width:115px}.toolbar .wide-tool{width:auto;padding:0 7px;font-size:11px}
+    .editor-content[contenteditable]:empty:before{content:attr(data-placeholder);color:var(--ink-soft);opacity:0.5;font-style:italic}
   .toolbar button.fmt{width:auto;min-width:30px;padding:0 8px}
   /* Cover image upload */
   .cover-upload{display:flex;align-items:center;gap:10px}
@@ -410,25 +411,52 @@ window.addEventListener('load', async () => {
   function showToast(msg){const e=document.querySelector('.toast');if(e)e.remove();const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{if(t.parentNode)t.parentNode.removeChild(t)},3500)}
   function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
+
+  // Extended writing tools and local autosave
+  let savedEditorRange=null;
+  function restoreSelection(){const ed=$(currentActiveEditor||'editor_bn');ed.focus();if(savedEditorRange){const s=getSelection();s.removeAllRanges();try{s.addRange(savedEditorRange)}catch(e){}}}
+  ['editor_bn','editor_en'].forEach(id=>{
+    const ed=$(id);ed.addEventListener('focus',()=>currentActiveEditor=id);
+    ['keyup','mouseup'].forEach(ev=>ed.addEventListener(ev,()=>{const s=getSelection();if(s&&s.rangeCount&&ed.contains(s.anchorNode))savedEditorRange=s.getRangeAt(0).cloneRange()}));
+    ed.addEventListener('input',()=>{try{localStorage.setItem('mostafa-auvi-draft-'+id,ed.innerHTML);localStorage.setItem('mostafa-auvi-draft-'+id+'-time',new Date().toISOString())}catch(e){}});
+  });
+  document.addEventListener('selectionchange',()=>{const ed=$(currentActiveEditor||'editor_bn'),s=getSelection();if(ed&&s&&s.rangeCount&&ed.contains(s.anchorNode))savedEditorRange=s.getRangeAt(0).cloneRange()});
+  ['bn','en'].forEach(lang=>{
+    const bar=document.querySelector('.toolbar[data-target="editor_'+lang+'"]');
+    if(bar&&!bar.dataset.extended){bar.dataset.extended='1';const id='editor_'+lang;
+      bar.insertAdjacentHTML('beforeend',
+      '<span class="sep"></span>'+
+      '<button class="fmt" type="button" onmousedown="event.preventDefault()" onclick="rt(\'strikeThrough\',this)" title="Strikethrough">S̶</button>'+
+      '<select title="Font family" onchange="rtStyle(\'fontName\',this.value)"><option value="">Font</option><option>Georgia</option><option>Arial</option><option>Times New Roman</option><option>Noto Serif Bengali</option></select>'+
+      '<select title="Font size" onchange="rtFontSize(this.value)"><option value="">Size</option><option value="2">Small</option><option value="3">Normal</option><option value="4">Large</option><option value="5">X-Large</option><option value="6">XX-Large</option></select>'+
+      '<input type="color" title="Text color" value="#76242d" onchange="rtStyle(\'foreColor\',this.value)">'+
+      '<input type="color" title="Highlight" value="#fff3b0" onchange="highlight(this.value)">'+
+      '<select title="Line height" onchange="rtBlockStyle(\'lineHeight\',this.value)"><option value="">Line</option><option value="1.2">1.2</option><option value="1.5">1.5</option><option value="1.8">1.8</option><option value="2">2</option></select>'+
+      '<select title="Paragraph spacing" onchange="rtBlockStyle(\'marginBottom\',this.value)"><option value="">Para</option><option value="6px">6px</option><option value="12px">12px</option><option value="18px">18px</option><option value="24px">24px</option></select>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="rt(\'justifyRight\',this)">Right</button>'+
+      '<button class="fmt" onmousedown="event.preventDefault()" onclick="rt(\'undo\',this)">↶</button><button class="fmt" onmousedown="event.preventDefault()" onclick="rt(\'redo\',this)">↷</button>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="insertTable()">Table</button>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="insertRule()">HR</button>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="insertYoutube()">YouTube</button>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="toggleEditorFullscreen(\''+id+'\')">⛶</button>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="previewEditor(\''+id+'\')">Preview</button>'+
+      '<button class="fmt wide-tool" onmousedown="event.preventDefault()" onclick="restoreLocalDraft(\''+id+'\')">Restore</button>');
+    }
+  });
+  window.rtStyle=(cmd,v)=>{if(v){restoreSelection();document.execCommand(cmd,false,v)}};
+  window.rtFontSize=v=>{if(v){restoreSelection();document.execCommand('fontSize',false,v)}};
+  window.rtBlockStyle=(p,v)=>{if(!v)return;restoreSelection();let n=getSelection().anchorNode?.parentElement,ed=$(currentActiveEditor||'editor_bn');while(n&&n!==ed&&!/^(P|H1|H2|H3|BLOCKQUOTE|DIV)$/.test(n.tagName))n=n.parentElement;(n&&n!==ed?n:ed).style[p]=v};
+  window.insertRule=()=>{restoreSelection();document.execCommand('insertHorizontalRule',false,null)};
+  window.insertTable=()=>{let r=Math.max(1,Math.min(10,+prompt('কতটি সারি?','2')||2)),c=Math.max(1,Math.min(8,+prompt('কতটি কলাম?','2')||2)),h='<table><tbody>';for(let i=0;i<r;i++){h+='<tr>';for(let j=0;j<c;j++)h+='<td><br></td>';h+='</tr>'}h+='</tbody></table><p><br></p>';restoreSelection();document.execCommand('insertHTML',false,h)};
+  window.insertYoutube=()=>{let u=prompt('YouTube URL দিন:');if(!u)return;let m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);if(!m){showToast('সঠিক YouTube URL দিন');return}restoreSelection();document.execCommand('insertHTML',false,'<div><iframe src="https://www.youtube-nocookie.com/embed/'+m[1]+'" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0"></iframe></div><p><br></p>')};
+  window.toggleEditorFullscreen=id=>{let p=$(id).closest('.lang-pane');if(!document.fullscreenElement)p.requestFullscreen?.();else document.exitFullscreen?.()};
+  window.previewEditor=id=>{let w=open('','_blank');if(!w){showToast('Preview-এর জন্য popup অনুমতি দিন');return}w.document.write('<meta charset="utf-8"><style>body{max-width:850px;margin:40px auto;padding:20px;font:18px/1.8 Georgia}img{max-width:100%}table{border-collapse:collapse}td{border:1px solid #aaa;padding:8px}</style>'+$(id).innerHTML);w.document.close()};
+  window.restoreLocalDraft=id=>{let v=localStorage.getItem('mostafa-auvi-draft-'+id);if(v!==null&&confirm('স্থানীয় অটো-সেভ খসড়া ফিরিয়ে আনবেন?'))$(id).innerHTML=v};
   // ====== Rich text commands ======
-  window.rt=function(cmd,btn){
-    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
-    editor.focus();
-    document.execCommand(cmd,false,null);
-    // Toggle active state
-    document.querySelectorAll('.toolbar button').forEach(b=>b.classList.remove('active'));
-  };
-  window.highlight=function(color){
-    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
-    editor.focus();
-    document.execCommand('hiliteColor',false,color);
-  };
+  window.rt=function(cmd,btn){restoreSelection();document.execCommand(cmd,false,null);document.querySelectorAll('.toolbar button').forEach(b=>b.classList.remove('active'))};
+  window.highlight=function(color){restoreSelection();document.execCommand('hiliteColor',false,color)};
   // Block formatting: h2, h3, blockquote (formatBlock)
-  window.rtBlock=function(tag){
-    const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
-    editor.focus();
-    document.execCommand('formatBlock',false,'<'+tag+'>');
-  };
+  window.rtBlock=function(tag){restoreSelection();document.execCommand('formatBlock',false,'<'+tag+'>')};
   // Insert link via prompt
   window.rtLink=function(){
     const editor=currentActiveEditor?$(currentActiveEditor):$('editor_bn');
