@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Dashboard - Mostafa Auvi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; }
+        .ProseMirror { min-height: 250px; outline: none; }
+        .ProseMirror p.is-editor-empty:first-child::before {
+            content: attr(data-placeholder); float: left; color: #adb5bd;
+            pointer-events: none; height: 0;
+        }
+        .ProseMirror blockquote {
+            border-left: 4px solid #d97706; padding-left: 1rem;
+            margin-left: 0; margin-right: 0; font-style: italic; color: #4b5563;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-xl">🍂</span>
+                <span class="font-bold text-lg text-gray-900">Mostafa Auvi <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Author Dashboard</span></span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="./index.html" class="text-sm font-medium text-gray-600 hover:text-amber-600 transition">🏠 মূল ওয়েবসাইটে ফেরা</a>
+                <a href="./posts.html" class="text-sm font-medium text-gray-600 hover:text-amber-600 transition">My Books</a>
+                <a href="#" id="logout-link" class="text-sm font-medium text-red-600 hover:text-red-700 transition">🚪 Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-gradient-to-r from-amber-700 to-amber-900 rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-lg flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-bold mb-2">Writer's Dashboard</h1>
+                <p class="text-amber-100 text-sm sm:text-base">Write. Share. Inspire. Create stories that echo through time.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-100">Create New Writing</h2>
+                <form id="writing-form" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" for="language">ভাষা (Language)</label>
+                            <select id="language" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                <option value="bengali">Bengali (বাংলা)</option><option value="english">English</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" for="slug">লিংক / স্লাগ (Slug)</label>
+                            <input type="text" id="slug" placeholder="e.g. moshari-analysis" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="title">শিরোনাম (Title)</label>
+                        <input type="text" id="title" placeholder="লেখার মূল শিরোনাম এখানে লিখুন..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="subtitle">উপশিরোনাম (Subtitle)</label>
+                        <input type="text" id="subtitle" placeholder="ছোট বিবরণ বা উপশিরোনাম..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" for="category">বিভাগ (Category)</label>
+                            <select id="category" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                <option value="">বিভাগ নির্বাচন করুন</option>
+                                <option value="কথাসাহিত্য">কথাসাহিত্য</option><option value="প্রবন্ধ">প্রবন্ধ</option>
+                                <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option><option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
+                                <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option><option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option>
+                                <option value="আইন-আদালত">আইন-আদালত</option><option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
+                                <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2" for="subcategory">উপবিভাগ (Sub-category)</label>
+                            <input type="text" id="subcategory" placeholder="যেমন: গল্প বিশ্লেষণ" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="summary">সারসংক্ষেপ (Summary)</label>
+                        <textarea id="summary" rows="3" placeholder="লেখার সংক্ষিপ্তসার..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="cover-image">Cover Photo</label>
+                        <label class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 transition cursor-pointer bg-gray-50 block">
+                            <span class="text-3xl mb-2 block">📁</span>
+                            <span class="text-sm font-medium text-gray-600">CLICK TO UPLOAD COVER IMAGE</span>
+                            <p class="text-xs text-gray-400 mt-1">MAX SIZE: 2MB · JPG, PNG, WEBP</p>
+                            <input type="file" id="cover-image" accept="image/jpeg,image/png,image/webp" class="sr-only">
+                        </label>
+                    </div>
+                    <div class="flex items-center space-x-3 bg-amber-50 p-4 rounded-xl border border-amber-100">
+                        <input type="checkbox" id="featured" class="w-4 h-4 text-amber-600 rounded border-gray-300 focus:ring-amber-500">
+                        <label for="featured" class="text-sm font-medium text-gray-800 cursor-pointer">নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</label>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="tags">ট্যাগিং (Tags)</label>
+                        <input type="text" id="tags" placeholder="comma separated: গল্প, সাহিত্য, বিশ্লেষণ" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" for="main-body">মূল লেখা (Main Body - Rich Text Editor)</label>
+                        <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm bg-white">
+                            <div class="bg-gray-100 px-3 py-2 border-b border-gray-300 flex flex-wrap gap-1 text-sm text-gray-700 items-center" aria-label="Formatting toolbar">
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded font-bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded underline" title="Underline"><i class="fa-solid fa-underline"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded line-through" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+                                <span class="border-r border-gray-300 h-5 mx-1"></span>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Left"><i class="fa-solid fa-align-left"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Center"><i class="fa-solid fa-align-center"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Right"><i class="fa-solid fa-align-right"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Justify"><i class="fa-solid fa-align-justify"></i></button>
+                                <span class="border-r border-gray-300 h-5 mx-1"></span>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Blockquote"><i class="fa-solid fa-quote-right"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Insert Link"><i class="fa-solid fa-link"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Insert Image"><i class="fa-regular fa-image"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Table"><i class="fa-solid fa-table"></i></button>
+                                <span class="border-r border-gray-300 h-5 mx-1"></span>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded text-xs font-semibold">Clear Format</button>
+                            </div>
+                            <div class="p-4">
+                                <textarea id="main-body" rows="10" placeholder="আপনার মূল লেখা এখানে বিস্তারিত লিখুন..." class="w-full focus:outline-none resize-y"></textarea>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-2 border-t border-gray-200 text-xs text-gray-500 flex justify-between">
+                                <span>Word Count: <span id="word-count">0</span></span>
+                                <span>Character Count: <span id="char-count">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 pt-4 border-t border-gray-100 items-center justify-between">
+                        <div class="flex gap-2">
+                            <button type="button" id="save-draft" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Save as Draft</button>
+                            <button type="button" id="save-both" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Save Both Languages</button>
+                        </div>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-700 text-white font-medium hover:bg-amber-800 transition shadow">✨ Publish</button>
+                    </div>
+                </form>
+                <p class="mt-4 text-xs text-amber-800 bg-amber-50 border border-amber-100 rounded-lg p-3">এটি কেবল নকশার প্রিভিউ। লগইন, Supabase-এ সংরক্ষণ/প্রকাশ, ছবি আপলোড ও এডিটর টুলবার এখনো যুক্ত করা হয়নি।</p>
+            </div>
+
+            <aside class="space-y-6">
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6 rounded-2xl shadow-sm">
+                    <p class="text-sm italic text-gray-300 mb-4">"A writer lives a thousand lives before he dies. The man who never reads lives only one."</p>
+                    <p class="text-xs font-semibold text-amber-400">— George R.R. Martin</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">Recent Writings</h3>
+                    <div id="recent-writings-list" class="space-y-4 text-sm"><div class="text-gray-500 text-sm">Loading...</div></div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script>
+        const mainBody = document.getElementById('main-body');
+        const wordCount = document.getElementById('word-count');
+        const charCount = document.getElementById('char-count');
+        mainBody.addEventListener('input', () => {
+            const text = mainBody.value.trim();
+            wordCount.textContent = text === '' ? 0 : text.split(/\\s+/).length;
+            charCount.textContent = text.length;
+        });
+        document.getElementById('writing-form').addEventListener('submit', event => {
+            event.preventDefault();
+            alert('এটি শুধু প্রিভিউ। Publish সুবিধা এখনো যুক্ত করা হয়নি।');
+        });
+        document.getElementById('save-draft').addEventListener('click', () => alert('এটি শুধু প্রিভিউ। Draft সংরক্ষণ এখনো যুক্ত করা হয়নি।'));
+        document.getElementById('save-both').addEventListener('click', () => alert('দুই ভাষায় সংরক্ষণের সুবিধা এখনো যুক্ত করা হয়নি।'));
+        document.getElementById('logout-link').addEventListener('click', event => {
+            event.preventDefault();
+            alert('এই প্রিভিউতে লগআউট সুবিধা যুক্ত নেই।');
+        });
+    </script>
+</body>
+</html>
