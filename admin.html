@@ -364,6 +364,13 @@ async function loadPosts(){
   window.auviEditors=editors;
   window.auviEditorReady=true;
   announce('Rich Text Editor প্রস্তুত। বাংলা ও ইংরেজি লেখা সম্পাদনা করা যাবে।');
- }catch(error){console.error('Tiptap initialization failed',error);announce('Rich Text Editor লোড হয়নি: '+(error?.message||error)+'। ইন্টারনেট সংযোগ পরীক্ষা করে পৃষ্ঠা রিফ্রেশ করুন।')}
+ }catch(error){
+  console.error('Tiptap initialization failed',error);
+  Object.values(window.auviEditors||{}).forEach(ed=>{try{ed.destroy()}catch(e){}});
+  window.auviEditors={};
+  document.querySelectorAll('.editor-source').forEach(ta=>{ta.classList.remove('editor-source');ta.style.display='block';ta.style.minHeight='420px';ta.setAttribute('aria-hidden','false')});
+  document.querySelectorAll('.editor-surface,.editor-toolbar').forEach(el=>el.style.display='none');
+  announce('Rich Text Editor লোড হয়নি; সাধারণ লেখার ঘর চালু করা হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করে পরে রিফ্রেশ করুন।');
+ }
 })();
 </script></body></html>
