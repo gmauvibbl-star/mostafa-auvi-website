@@ -177,14 +177,38 @@
           </div>
         </div>
 
-        <!-- General Info (Slug & Category Dropdown) -->
-        <div class="form-row">
+        <!-- 1. Link / Slug -->
+        <div class="form-group">
+          <label>Link / Slug</label>
+          <input type="text" id="postSlug" class="form-input" placeholder="খালি রাখলে শিরোনাম থেকে তৈরি হবে">
+        </div>
+
+        <!-- 2. Title and subtitle: selected language -->
+        <div id="bnTitleFields">
           <div class="form-group">
-            <label>Link / Slug</label>
-            <input type="text" id="postSlug" class="form-input" placeholder="auto-generated-if-blank">
+            <label>শিরোনাম (Title)</label>
+            <input type="text" id="bnTitle" class="form-input" placeholder="বাংলা শিরোনাম">
           </div>
           <div class="form-group">
-            <label>বিভাগ ও উপবিভাগ (Category)</label>
+            <label>উপশিরোনাম (Subtitle)</label>
+            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম (ঐচ্ছিক)">
+          </div>
+        </div>
+        <div id="enTitleFields" style="display:none">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="enTitle" class="form-input" placeholder="English Title">
+          </div>
+          <div class="form-group">
+            <label>Subtitle</label>
+            <input type="text" id="enSubtitle" class="form-input" placeholder="Optional subtitle">
+          </div>
+        </div>
+
+        <!-- 3. Category and subcategory -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>বিভাগ (Category)</label>
             <select id="postCategory" class="form-input" required>
               <option value="">প্রধান বিভাগ নির্বাচন করুন</option>
               <option value="গল্প">গল্প</option>
@@ -197,20 +221,37 @@
               <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
               <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
             </select>
-            <label for="postSubcategory" style="margin-top:12px">উপবিভাগ (Subcategory)</label>
+          </div>
+          <div class="form-group">
+            <label>উপবিভাগ (Subcategory)</label>
             <select id="postSubcategory" class="form-input" disabled>
               <option value="">আগে প্রধান বিভাগ নির্বাচন করুন</option>
             </select>
           </div>
         </div>
-        
+
+        <!-- 4. Summary -->
+        <div id="bnSummaryFields">
+          <div class="form-group">
+            <label>সারসংক্ষেপ (Summary)</label>
+            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সংক্ষিপ্ত পরিচিতি"></textarea>
+          </div>
+        </div>
+        <div id="enSummaryFields" style="display:none">
+          <div class="form-group">
+            <label>Summary / Excerpt</label>
+            <textarea id="enExcerpt" class="form-textarea" placeholder="A short introduction to the writing"></textarea>
+          </div>
+        </div>
+
+        <!-- 5. Cover photo -->
         <div class="form-group">
-          <label>Cover Photo</label>
+          <label>প্রচ্ছদ ছবি (Cover Photo)</label>
           <label class="upload-box">
             <div class="upload-icon">📁</div>
-            <div class="upload-text">Click to upload cover image<br>Max size: 2MB</div>
-            <input type="file" id="coverUpload" accept="image/*" onchange="uploadCover(event)">
-            <img id="coverPreview" src="#" alt="preview">
+            <div class="upload-text">কভার ছবি আপলোড করুন<br>সর্বোচ্চ ২ MB · JPG, PNG, WebP</div>
+            <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp,image/gif" onchange="uploadCover(event)">
+            <img id="coverPreview" src="#" alt="Cover preview">
           </label>
           <input type="hidden" id="postCover" value="">
         </div>
@@ -222,20 +263,8 @@
           </label>
         </div>
 
-        <!-- Bengali Form -->
-        <div id="bnForm">
-          <div class="form-group">
-            <label>শিরোনাম (Title)</label>
-            <input type="text" id="bnTitle" class="form-input" placeholder="বাংলা শিরোনাম">
-          </div>
-          <div class="form-group">
-            <label>উপশিরোনাম (Subtitle)</label>
-            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম">
-          </div>
-          <div class="form-group">
-            <label>সারসংক্ষেপ (Summary)</label>
-            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সারসংক্ষেপ"></textarea>
-          </div>
+        <!-- 6. Tags and 7. Main body -->
+        <div id="bnContentFields">
           <div class="form-group">
             <label>ট্যাগিং (Tags)</label>
             <input type="text" id="bnTags" class="form-input" placeholder="কমা দিয়ে আলাদা করুন (যেমন: প্রেম, দেশ)">
@@ -247,29 +276,15 @@
               <button class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
               <button class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
               <button class="tool-btn" onclick="highlightText()">🖍️</button>
-              <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'bnBody')"></label>
+              <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" accept="image/*" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'bnBody')"></label>
             </div>
             <div id="bnBody" class="rich-area" contenteditable="true" data-placeholder="এখানে আপনার লেখা লিখুন..."></div>
           </div>
         </div>
-
-        <!-- English Form -->
-        <div id="enForm" style="display:none">
-          <div class="form-group">
-            <label>Title</label>
-            <input type="text" id="enTitle" class="form-input" placeholder="English Title">
-          </div>
-          <div class="form-group">
-            <label>Subtitle</label>
-            <input type="text" id="enSubtitle" class="form-input" placeholder="Subtitle">
-          </div>
-          <div class="form-group">
-            <label>Summary / Excerpt</label>
-            <textarea id="enExcerpt" class="form-textarea" placeholder="Short excerpt"></textarea>
-          </div>
+        <div id="enContentFields" style="display:none">
           <div class="form-group">
             <label>Tags</label>
-            <input type="text" id="enTags" class="form-input" placeholder="Separate by commas (e.g., love, nature)">
+            <input type="text" id="enTags" class="form-input" placeholder="Separate by commas (e.g., love, history)">
           </div>
           <div class="form-group">
             <label>Main Body</label>
@@ -278,7 +293,7 @@
               <button class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
               <button class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
               <button class="tool-btn" onclick="highlightText()">🖍️</button>
-              <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'enBody')"></label>
+              <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" accept="image/*" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'enBody')"></label>
             </div>
             <div id="enBody" class="rich-area" contenteditable="true" data-placeholder="Write your content here..."></div>
           </div>
@@ -343,8 +358,12 @@ function switchLang(lang, ev) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   if(ev) ev.target.classList.add('active');
-  document.getElementById('bnForm').style.display = lang === 'bn' ? 'block' : 'none';
-  document.getElementById('enForm').style.display = lang === 'en' ? 'block' : 'none';
+  ['bnTitleFields','bnSummaryFields','bnContentFields'].forEach(id => {
+    document.getElementById(id).style.display = lang === 'bn' ? 'block' : 'none';
+  });
+  ['enTitleFields','enSummaryFields','enContentFields'].forEach(id => {
+    document.getElementById(id).style.display = lang === 'en' ? 'block' : 'none';
+  });
 }
 
 function execCmd(cmd) { document.execCommand(cmd, false, null); }
