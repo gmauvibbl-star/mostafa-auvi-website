@@ -40,7 +40,7 @@
   <div class="tool-group"><button type="button" data-cmd="h1">H1</button><button type="button" data-cmd="h2">H2</button><button type="button" data-cmd="h3">H3</button><button type="button" data-cmd="blockquote">উদ্ধৃতি</button><button type="button" data-cmd="pullquote">Pull Quote</button><button type="button" data-cmd="dropcap">Drop Cap</button><button type="button" data-cmd="hr">রেখা</button></div>
   <div class="tool-group"><button type="button" data-cmd="bulletList">• তালিকা</button><button type="button" data-cmd="orderedList">১. তালিকা</button><button type="button" data-cmd="table">ছক</button><button type="button" data-cmd="link">লিংক</button><button type="button" data-cmd="footnote">পাদটীকা</button><button type="button" data-cmd="superscript">x²</button><button type="button" data-cmd="subscript">x₂</button><button type="button" data-cmd="special">প্রতীক</button></div>
   <div class="tool-group"><button type="button" data-cmd="image">ছবি বসান</button><select data-control="imageAlign" aria-label="ছবির অবস্থান"><option value="">ছবির অবস্থান</option><option value="left">বামে</option><option value="center">মাঝে</option><option value="right">ডানে</option></select><select data-control="imageWidth" aria-label="ছবির আকার"><option value="">ছবির আকার</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap" aria-label="ছবির চারপাশে লেখা"><option value="">লেখার প্রবাহ</option><option value="none">লেখা নিচে</option><option value="left">ছবি বামে, লেখা পাশে</option><option value="right">ছবি ডানে, লেখা পাশে</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
-  <div class="tool-group"><button type="button" data-cmd="findReplace">খুঁজুন/বদলান</button><button type="button" data-cmd="fullscreen">পূর্ণ পর্দা</button><button type="button" data-cmd="preview">প্রিভিউ</button></div>
+  <div class="tool-group"><button type="button" data-cmd="findReplace">খুঁজুন/বদলান</button><button type="button" data-cmd="restoreDraft">খসড়া ফেরত</button><button type="button" data-cmd="fullscreen">পূর্ণ পর্দা</button><button type="button" data-cmd="preview">প্রিভিউ</button></div>
  </div>
  <div class="editor-surface" id="bodyEditor" aria-label="বাংলা লেখার এডিটর"></div>
  <textarea id="body" class="editor-source" aria-hidden="true" tabindex="-1"></textarea>
@@ -60,7 +60,7 @@
   <div class="tool-group"><button type="button" data-cmd="h1">H1</button><button type="button" data-cmd="h2">H2</button><button type="button" data-cmd="h3">H3</button><button type="button" data-cmd="blockquote">Quote</button><button type="button" data-cmd="pullquote">Pull quote</button><button type="button" data-cmd="dropcap">Drop cap</button><button type="button" data-cmd="hr">Rule</button></div>
   <div class="tool-group"><button type="button" data-cmd="bulletList">Bullets</button><button type="button" data-cmd="orderedList">Numbering</button><button type="button" data-cmd="table">Table</button><button type="button" data-cmd="link">Link</button><button type="button" data-cmd="footnote">Footnote</button><button type="button" data-cmd="superscript">x²</button><button type="button" data-cmd="subscript">x₂</button><button type="button" data-cmd="special">Symbols</button></div>
   <div class="tool-group"><button type="button" data-cmd="image">Insert image</button><select data-control="imageAlign"><option value="">Image position</option><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select><select data-control="imageWidth"><option value="">Image size</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap"><option value="">Text wrap</option><option value="none">No wrap</option><option value="left">Image left</option><option value="right">Image right</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
-  <div class="tool-group"><button type="button" data-cmd="findReplace">Find/Replace</button><button type="button" data-cmd="fullscreen">Full screen</button><button type="button" data-cmd="preview">Preview</button></div>
+  <div class="tool-group"><button type="button" data-cmd="findReplace">Find/Replace</button><button type="button" data-cmd="restoreDraft">Restore draft</button><button type="button" data-cmd="fullscreen">Full screen</button><button type="button" data-cmd="preview">Preview</button></div>
  </div>
  <div class="editor-surface" id="bodyEnEditor" aria-label="English writing editor"></div>
  <textarea id="body_en" class="editor-source" aria-hidden="true" tabindex="-1"></textarea>
@@ -176,7 +176,7 @@ async function savePost(publish,unpublish=false){
  finally{setBusy(false)}
 }
 document.getElementById('draftBtn').onclick=()=>savePost(false);document.getElementById('publishBtn').onclick=()=>savePost(true);document.getElementById('unpublishBtn').onclick=()=>savePost(false,true);
-document.getElementById('previewBtn')?.addEventListener('click',async()=>{const ok=await savePost(false);if(ok){const slug=val('slug')||val('slug_en');if(slug)window.open('./read.html?slug='+encodeURIComponent(slug)+'&preview=1','_blank','noopener');}});
+document.getElementById('previewBtn')?.addEventListener('click',()=>window.auviPreview?.());
 async function loadGroup(group){const {data,error}=await sb.from('posts').select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,featured,published,published_at,updated_at').eq('group_id',group);if(error)throw error;fill(data||[])}
 async function loadPosts(){
  const el=document.getElementById('posts');el.textContent='লেখা লোড হচ্ছে…';
@@ -274,6 +274,17 @@ async function loadPosts(){
    };
    input.click();
   }
+  function openEditorPreview(id){
+   const editor=editors[id];if(!editor)return;
+   const titleInput=document.getElementById(id==='body'?'title':'title_en');
+   const title=document.createElement('div');title.textContent=titleInput.value||'শিরোনামহীন লেখা';
+   const win=window.open('','_blank');
+   if(!win){announce('প্রিভিউ খুলতে পপ-আপ অনুমতি দিন।');return}
+   win.document.open();
+   win.document.write('<!doctype html><html lang="'+(id==='body'?'bn':'en')+'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title.innerHTML+'</title><style>body{max-width:850px;margin:40px auto;padding:0 22px;background:#f7f1e7;color:#29251f;font:18px/1.9 Georgia,serif}h1{font-size:2em;border-bottom:1px solid #cbbda8;padding-bottom:15px}article{text-align:justify}p{margin:0 0 1.15em}img{max-width:100%;height:auto}figure{margin:1.5em auto;text-align:center}figcaption{font-size:.85em;color:#6c655b}blockquote{border-left:4px solid #9b744b;padding:12px 20px;background:#eee5d8}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:7px}iframe{width:100%;aspect-ratio:16/9;border:0}</style><h1>'+title.innerHTML+'</h1><article>'+editor.getHTML()+'</article></html>');
+   win.document.close();
+  }
+  window.auviPreview=()=>openEditorPreview(document.getElementById('title').value.trim()||document.getElementById('body').value.trim()?'body':'body_en');
   function runCommand(editor,cmd,id){
    const chain=editor.chain().focus();
    if(cmd==='bold')chain.toggleBold().run();
@@ -303,7 +314,8 @@ async function loadPosts(){
    else if(cmd==='youtube'){const url=prompt('YouTube ভিডিওর URL দিন:','https://www.youtube.com/watch?v=');if(url)chain.setYoutubeVideo({src:url,width:640,height:360}).run()}
    else if(cmd==='removeFormat')chain.unsetAllMarks().clearNodes().run();
    else if(cmd==='fullscreen'){const el=document.getElementById(id==='body'?'bodyEditorShell':'bodyEnEditorShell');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()}
-   else if(cmd==='preview')document.getElementById('previewBtn')?.click();
+   else if(cmd==='preview')openEditorPreview(id);
+   else if(cmd==='restoreDraft'){const key='auvi-rich-draft-'+(document.getElementById('groupId').value||'new')+'-'+id;const saved=localStorage.getItem(key);if(saved&&confirm('এই লেখার ব্রাউজারে সেভ করা খসড়াটি ফেরত আনবেন?'))editor.commands.setContent(saved);else if(!saved)announce('এই লেখার কোনো স্বয়ংক্রিয় খসড়া পাওয়া যায়নি।');}
    else if(cmd==='findReplace'){const find=prompt('যে শব্দ/বাক্য খুঁজবেন:','');if(!find)return;const replacement=prompt('যে লেখা দিয়ে বদলাবেন:','');if(replacement===null)return;const positions=[];editor.state.doc.descendants((node,pos)=>{if(node.isText&&node.text){let from=0;while((from=node.text.indexOf(find,from))!==-1){positions.push({from:pos+from,to:pos+from+find.length});from+=find.length}}});if(!positions.length){announce('শব্দটি পাওয়া যায়নি।');return}let tr=editor.state.tr;positions.sort((a,b)=>b.from-a.from).forEach(p=>{tr=tr.insertText(replacement,p.from,p.to)});editor.view.dispatch(tr);announce('মোট '+positions.length+'টি জায়গায় পরিবর্তন করা হয়েছে।')}
   }
   const editors={};window.auviEditors=editors;
