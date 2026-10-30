@@ -176,7 +176,23 @@ async function savePost(publish,unpublish=false){
  finally{setBusy(false)}
 }
 document.getElementById('draftBtn').onclick=()=>savePost(false);document.getElementById('publishBtn').onclick=()=>savePost(true);document.getElementById('unpublishBtn').onclick=()=>savePost(false,true);
-document.getElementById('previewBtn')?.addEventListener('click',()=>window.auviPreview?.());
+function openWritingPreview(){
+ const en=!!(val('title').trim()||val('body').trim())?false:true;
+ const title=val(en?'title_en':'title').trim()||'শিরোনামহীন লেখা';
+ const editor=window.auviEditors?.[en?'body_en':'body'];
+ const html=editor?.getHTML?.()||val(en?'body_en':'body')||'<p>এখনো কোনো লেখা যোগ করা হয়নি।</p>';
+ const cover=val('coverImage').trim();
+ const excerpt=val('excerpt').trim();
+ const win=window.open('','_blank');
+ if(!win){status('প্রিভিউ খুলতে ব্রাউজারের পপ-আপ অনুমতি দিন।');return}
+ const safeTitle=esc(title);
+ const safeCover=cover?'<figure class="cover"><img src="'+esc(cover)+'" alt="কভার ছবি"></figure>':'';
+ const safeExcerpt=excerpt?'<p class="excerpt">'+esc(excerpt)+'</p>':'';
+ win.document.open();
+ win.document.write('<!doctype html><html lang="'+(en?'en':'bn')+'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+safeTitle+'</title><style>body{max-width:850px;margin:36px auto;padding:0 22px;background:#f7f1e7;color:#29251f;font:18px/1.9 Georgia,serif}h1{font-size:2em;line-height:1.35;border-bottom:1px solid #cbbda8;padding-bottom:15px}article{text-align:justify;overflow-wrap:anywhere}p{margin:0 0 1.15em}img{max-width:100%;height:auto}.cover{text-align:center;margin:24px 0}.cover img{max-height:460px;object-fit:contain}.excerpt{font-size:1.05em;color:#6c655b;border-left:3px solid #9b744b;padding-left:16px}figure{margin:1.5em auto;text-align:center}figcaption{font-size:.85em;color:#6c655b}blockquote{border-left:4px solid #9b744b;padding:12px 20px;background:#eee5d8}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:7px}iframe{width:100%;aspect-ratio:16/9;border:0}</style><main><h1>'+safeTitle+'</h1>'+safeCover+safeExcerpt+'<article>'+html+'</article></main></html>');
+ win.document.close();
+}
+document.getElementById('previewBtn')?.addEventListener('click',openWritingPreview);
 async function loadGroup(group){const {data,error}=await sb.from('posts').select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,featured,published,published_at,updated_at').eq('group_id',group);if(error)throw error;fill(data||[])}
 async function loadPosts(){
  const el=document.getElementById('posts');el.textContent='লেখা লোড হচ্ছে…';
