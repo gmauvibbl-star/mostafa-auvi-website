@@ -343,10 +343,29 @@ async function loadPosts(){
    const source=document.getElementById(id),host=document.getElementById(elementId);
    const editor=new Editor({element:host,extensions:baseExtensions,content:source.value||'<p></p>',editorProps:{attributes:{class:'tiptap',spellcheck:'true'}},onUpdate:({editor})=>{source.value=editor.getHTML();syncCount(editor,id);try{const key='auvi-rich-draft-'+(document.getElementById('groupId').value||'new')+'-'+id;localStorage.setItem(key,editor.getHTML());const a=document.getElementById(id+'Autosave');if(a)a.textContent='স্বয়ংক্রিয় খসড়া সেভ হয়েছে · '+new Date().toLocaleTimeString()}catch(e){}}});
    editors[id]=editor;window.auviEditors[id]=editor;syncCount(editor,id);
-   host.closest('.rich-editor').querySelectorAll('[data-cmd]').forEach(btn=>{btn.addEventListener('mousedown',e=>e.preventDefault());btn.addEventListener('click',()=>runCommand(editor,btn.dataset.cmd,id))});
+   // Keep the user's text selection while focus moves from the editor to toolbar controls.
+   let savedSelection={from:editor.state.selection.from,to:editor.state.selection.to};
+   const rememberSelection=()=>{
+    const selection=editor.state.selection;
+    savedSelection={from:selection.from,to:selection.to};
+   };
+   const restoreSelection=()=>{
+    if(!savedSelection)return;
+    const max=editor.state.doc.content.size;
+    const from=Math.max(1,Math.min(savedSelection.from,max));
+    const to=Math.max(from,Math.min(savedSelection.to,max));
+    editor.commands.setTextSelection({from,to});
+   };
+   editor.on('selectionUpdate',rememberSelection);
+   editor.on('blur',rememberSelection);
+   host.closest('.rich-editor').querySelectorAll('[data-cmd]').forEach(btn=>{
+    btn.addEventListener('mousedown',e=>e.preventDefault());
+    btn.addEventListener('click',()=>{restoreSelection();runCommand(editor,btn.dataset.cmd,id);rememberSelection()});
+   });
    host.closest('.rich-editor').querySelectorAll('[data-control]').forEach(control=>{
     control.addEventListener('change',()=>{
      const v=control.value;if(!v)return;
+     restoreSelection();
      const c=editor.chain().focus();
      if(control.dataset.control==='fontFamily')c.setFontFamily(v).run();
      else if(control.dataset.control==='fontSize')c.setMark('textStyle',{fontSize:v}).run();
@@ -359,6 +378,7 @@ async function loadPosts(){
      else if(control.dataset.control==='imageWidth')c.updateAttributes('image',{width:v}).run();
      else if(control.dataset.control==='imageWrap')c.updateAttributes('image',{wrap:v}).run();
      control.selectedIndex=0;
+     rememberSelection();
     });
    });
   }
