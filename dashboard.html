@@ -117,6 +117,65 @@
     .content-grid{grid-template-columns:1fr}
     .form-row{grid-template-columns:1fr}
   }
+
+  /* Screenshot-matched compact dashboard layout: preserve the original design */
+  @media(min-width:901px){
+    .sidebar{width:115px;padding:14px 7px}
+    .sidebar-profile{margin-bottom:16px;padding-bottom:12px}
+    .avatar-circle{width:40px;height:40px;font-size:17px;margin-bottom:5px}
+    .sidebar-profile h3{font-size:15px}
+    .sidebar-profile p{font-size:9px}
+    .sidebar-menu{gap:3px}
+    .menu-item{gap:5px;padding:7px 6px;font-size:10px;border-radius:5px;line-height:1.25}
+    .main-content{margin-left:115px;padding:0 15px 20px}
+    .top-nav{padding:10px 0;margin-bottom:15px}
+    .brand-logo{font-size:13px;gap:5px}
+    .brand-logo span{font-size:17px}
+    .top-nav-links{gap:14px}
+    .top-nav-links a{font-size:9px}
+    .hero-banner{padding:18px 20px;margin-bottom:15px;border-radius:9px}
+    .hero-banner h1{font-size:20px;margin-bottom:2px}
+    .hero-banner p{font-size:12px}
+    .content-grid{grid-template-columns:2fr 1fr;gap:15px}
+    .form-card{padding:18px;border-radius:9px}
+    .form-header{margin-bottom:12px;padding-bottom:9px}
+    .form-header h2{font-size:15px}
+    .lang-switch{padding:2px}
+    .lang-btn{padding:5px 10px;font-size:9px}
+    .form-row{gap:10px;margin-bottom:10px}
+    .form-group{margin-bottom:10px}
+    .form-group label{font-size:9px;margin-bottom:4px;letter-spacing:.02em}
+    .form-input,.form-textarea{padding:7px 9px;font-size:11px;border-radius:5px}
+    .form-textarea{min-height:38px}
+    .upload-box{padding:7px;gap:8px;border-radius:5px}
+    .upload-icon{font-size:15px}
+    .upload-text{font-size:9px;line-height:1.25}
+    #coverPreview{max-width:70px}
+    .editor-toolbar{padding:4px;gap:3px}
+    .tool-btn{width:22px;height:22px;font-size:10px}
+    .rich-area{min-height:95px;padding:8px;font-size:12px;line-height:1.5}
+    .action-btns{gap:7px;margin-top:14px;padding-top:10px}
+    .btn{padding:7px 11px;font-size:10px}
+    .right-col{gap:15px}
+    .quote-card{padding:15px;border-radius:9px}
+    .quote-text{font-size:11px;line-height:1.45;margin-bottom:8px}
+    .quote-card::before{font-size:45px;top:-5px;left:5px}
+    .quote-author{font-size:9px}
+    .drafts-list{padding:13px;border-radius:9px}
+    .drafts-list h3{font-size:12px;margin-bottom:8px;padding-bottom:6px}
+    .draft-item{padding:6px 0}
+    .draft-item h4{font-size:10px}
+    .draft-item p{font-size:9px}
+  }
+  @media(max-width:900px){
+    .main-content{padding:0 12px 18px}
+    .hero-banner{padding:22px}
+    .form-card{padding:18px}
+    .top-nav-links{gap:10px;flex-wrap:wrap}
+    .action-btns{flex-wrap:wrap}
+    .btn-publish{flex-basis:100%}
+  }
+
 </style>
 </head>
 <body>
