@@ -185,55 +185,21 @@
           </div>
           <div class="form-group">
             <label>বিভাগ ও উপবিভাগ (Category)</label>
-            <select id="postCategory" class="form-input">
-              <optgroup label="কথাসাহিত্য">
-                <option value="গল্প">গল্প</option>
-                <option value="ছোটগল্প">ছোটগল্প</option>
-                <option value="বড়গল্প">বড়গল্প</option>
-                <option value="অনূদিত গল্প">অনূদিত গল্প</option>
-                <option value="উপন্যাস">উপন্যাস</option>
-                <option value="সম্পূর্ণ উপন্যাস">সম্পূর্ণ উপন্যাস</option>
-                <option value="ধারাবাহিক উপন্যাস">ধারাবাহিক উপন্যাস</option>
-                <option value="অনূদিত উপন্যাস">অনূদিত উপন্যাস</option>
-              </optgroup>
-              <optgroup label="প্রবন্ধ ও সাহিত্যালোচনা">
-                <option value="প্রবন্ধ">প্রবন্ধ</option>
-                <option value="দৈনন্দিন জীবন">দৈনন্দিন জীবন</option>
-                <option value="সাহিত্য বিষয়ক প্রবন্ধ">সাহিত্য বিষয়ক প্রবন্ধ</option>
-                <option value="বই আলোচনা">বই আলোচনা</option>
-                <option value="বিশ্বসাহিত্য">বিশ্বসাহিত্য</option>
-                <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
-                <option value="লেখক ও সাহিত্যকর্ম">লেখক ও সাহিত্যকর্ম</option>
-                <option value="পাঠ-প্রতিক্রিয়া">পাঠ-প্রতিক্রিয়া</option>
-              </optgroup>
-              <optgroup label="অনুবাদ সাহিত্য">
-                <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
-                <option value="অনূদিত প্রবন্ধ">অনূদিত প্রবন্ধ</option>
-                <option value="বিশ্বসাহিত্য পরিচিতি">বিশ্বসাহিত্য পরিচিতি</option>
-              </optgroup>
-              <optgroup label="ভ্রমণকাহিনি">
-                <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
-                <option value="বাংলাদেশ ভ্রমণ">বাংলাদেশ ভ্রমণ</option>
-                <option value="বিদেশ ভ্রমণ">বিদেশ ভ্রমণ</option>
-                <option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option>
-                <option value="ফেলে আসা দিন">ফেলে আসা দিন</option>
-              </optgroup>
-              <optgroup label="আইন-আদালত">
-                <option value="আইন-আদালত">আইন-আদালত</option>
-                <option value="বাংলাদেশের জুরিসপ্রুডেন্স">বাংলাদেশের জুরিসপ্রুডেন্স</option>
-                <option value="আইন বিষয়ক প্রবন্ধ">আইন বিষয়ক প্রবন্ধ</option>
-                <option value="কেসস্টাডি">কেসস্টাডি</option>
-              </optgroup>
-              <optgroup label="ব্যাংকিং ও অর্থনীতি">
-                <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
-                <option value="আমার ব্যাংকিং জীবন">আমার ব্যাংকিং জীবন</option>
-                <option value="এসএমই ব্যাংকিং নিয়ে যত কথা">এসএমই ব্যাংকিং নিয়ে যত কথা</option>
-              </optgroup>
-              <optgroup label="ব্যক্তিগত রচনা">
-                <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
-                <option value="স্মৃতিকথা">স্মৃতিকথা</option>
-                <option value="দিনলিপি">দিনলিপি</option>
-              </optgroup>
+            <select id="postCategory" class="form-input" required>
+              <option value="">প্রধান বিভাগ নির্বাচন করুন</option>
+              <option value="গল্প">গল্প</option>
+              <option value="উপন্যাস">উপন্যাস</option>
+              <option value="প্রবন্ধ">প্রবন্ধ</option>
+              <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
+              <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
+              <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
+              <option value="আইন-আদালত">আইন-আদালত</option>
+              <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
+              <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
+            </select>
+            <label for="postSubcategory" style="margin-top:12px">উপবিভাগ (Subcategory)</label>
+            <select id="postSubcategory" class="form-input" disabled>
+              <option value="">আগে প্রধান বিভাগ নির্বাচন করুন</option>
             </select>
           </div>
         </div>
@@ -245,6 +211,14 @@
             <div class="upload-text">Click to upload cover image<br>Max size: 2MB</div>
             <input type="file" id="coverUpload" accept="image/*" onchange="uploadCover(event)">
             <img id="coverPreview" src="#" alt="preview">
+          </label>
+          <input type="hidden" id="postCover" value="">
+        </div>
+
+        <div class="form-group featured-setting">
+          <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0">
+            <input type="checkbox" id="postFeatured" style="width:18px;height:18px;accent-color:var(--pine-green)">
+            <span>নির্বাচিত লেখা (Featured) — হোমপেজে বিশেষভাবে দেখান</span>
           </label>
         </div>
 
@@ -343,6 +317,28 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const OWNER_EMAIL = "gmauvibbl@gmail.com";
 let currentLang = 'bn';
 
+const categoryTree = {
+  'গল্প':['ছোটগল্প','বড়গল্প','অনূদিত গল্প'],
+  'উপন্যাস':['সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
+  'প্রবন্ধ':['দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য'],
+  'সাহিত্যালোচনা':['লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া'],
+  'অনুবাদ সাহিত্য':['অনূদিত প্রবন্ধ','বিশ্বসাহিত্য পরিচিতি'],
+  'ভ্রমণকাহিনি':['বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','স্মৃতির ভাণ্ডার','ফেলে আসা দিন'],
+  'আইন-আদালত':['বাংলাদেশের জুরিসপ্রুডেন্স','আইন বিষয়ক প্রবন্ধ','কেসস্টাডি'],
+  'ব্যাংকিং ও অর্থনীতি':['আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা'],
+  'ব্যক্তিগত রচনা':['স্মৃতিকথা','দিনলিপি']
+};
+
+function updateSubcategories() {
+  const parent = document.getElementById('postCategory').value;
+  const child = document.getElementById('postSubcategory');
+  const options = categoryTree[parent] || [];
+  child.innerHTML = '<option value="">উপবিভাগ নির্বাচন করুন (ঐচ্ছিক)</option>' +
+    options.map(value => '<option value="' + value + '">' + value + '</option>').join('');
+  child.disabled = options.length === 0;
+}
+document.getElementById('postCategory').addEventListener('change', updateSubcategories);
+
 function switchLang(lang, ev) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
@@ -384,6 +380,16 @@ function uploadImageToBody(event, bodyId) {
 function uploadCover(event) {
   const file = event.target.files[0];
   if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    alert('অনুগ্রহ করে একটি ছবি নির্বাচন করুন।');
+    event.target.value = '';
+    return;
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    alert('কভার ছবির সর্বোচ্চ সাইজ ২ MB।');
+    event.target.value = '';
+    return;
+  }
   const reader = new FileReader();
   reader.onload = function(e) {
     document.getElementById('postCover').value = e.target.result;
@@ -420,8 +426,9 @@ async function checkAuth() {
 }
 
 async function savePost(isPublish, isBoth) {
-  const category = document.getElementById('postCategory').value;
+  const category = document.getElementById('postSubcategory').value || document.getElementById('postCategory').value;
   const cover = document.getElementById('postCover').value;
+  const featured = document.getElementById('postFeatured').checked;
   let slug = document.getElementById('postSlug').value.trim();
   
   const bnTitle = document.getElementById('bnTitle').value.trim();
@@ -437,7 +444,7 @@ async function savePost(isPublish, isBoth) {
         title: bnTitle, subtitle: document.getElementById('bnSubtitle').value, 
         excerpt: document.getElementById('bnExcerpt').value, tags: document.getElementById('bnTags').value,
         body: document.getElementById('bnBody').innerHTML, language: 'bn', slug, category, cover_image: cover, 
-        published: isPublish, published_at: new Date().toISOString()
+        published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null
       });
     }
     if (enTitle && document.getElementById('enBody').innerText.trim()) {
@@ -445,14 +452,14 @@ async function savePost(isPublish, isBoth) {
         title: enTitle, subtitle: document.getElementById('enSubtitle').value, 
         excerpt: document.getElementById('enExcerpt').value, tags: document.getElementById('enTags').value,
         body: document.getElementById('enBody').innerHTML, language: 'en', slug, category, cover_image: cover, 
-        published: isPublish, published_at: new Date().toISOString()
+        published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null
       });
     }
   } else {
     if (currentLang === 'bn' && bnTitle) {
-      postsToInsert.push({ title: bnTitle, subtitle: document.getElementById('bnSubtitle').value, excerpt: document.getElementById('bnExcerpt').value, tags: document.getElementById('bnTags').value, body: document.getElementById('bnBody').innerHTML, language: 'bn', slug, category, cover_image: cover, published: isPublish, published_at: new Date().toISOString() });
+      postsToInsert.push({ title: bnTitle, subtitle: document.getElementById('bnSubtitle').value, excerpt: document.getElementById('bnExcerpt').value, tags: document.getElementById('bnTags').value, body: document.getElementById('bnBody').innerHTML, language: 'bn', slug, category, cover_image: cover, published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null });
     } else if (currentLang === 'en' && enTitle) {
-      postsToInsert.push({ title: enTitle, subtitle: document.getElementById('enSubtitle').value, excerpt: document.getElementById('enExcerpt').value, tags: document.getElementById('enTags').value, body: document.getElementById('enBody').innerHTML, language: 'en', slug, category, cover_image: cover, published: isPublish, published_at: new Date().toISOString() });
+      postsToInsert.push({ title: enTitle, subtitle: document.getElementById('enSubtitle').value, excerpt: document.getElementById('enExcerpt').value, tags: document.getElementById('enTags').value, body: document.getElementById('enBody').innerHTML, language: 'en', slug, category, cover_image: cover, published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null });
     }
   }
 
