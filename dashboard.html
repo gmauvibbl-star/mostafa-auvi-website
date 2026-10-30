@@ -405,7 +405,7 @@ function updateSubcategories() {
   const parent = document.getElementById('postCategory').value;
   const child = document.getElementById('postSubcategory');
   const options = categoryTree[parent] || [];
-  child.innerHTML = '<option value="">উপবিভাগ নির্বাচন করুন (ঐচ্ছিক)</option>' +
+  child.innerHTML = '<option value="">উপবিভাগ নির্বাচন করুন</option>' +
     options.map(value => '<option value="' + value + '">' + value + '</option>').join('');
   child.disabled = options.length === 0;
   child.required = options.length > 0;
