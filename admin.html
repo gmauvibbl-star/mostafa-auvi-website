@@ -39,14 +39,14 @@
   <div class="tool-group"><label class="color-tool" title="লেখার রং">A<input type="color" data-control="textColor" value="#202020"></label><label class="color-tool highlight-tool" title="হাইলাইট">▰<input type="color" data-control="highlightColor" value="#fff19a"></label><button type="button" data-cmd="removeFormat">ফরম্যাট মুছুন</button></div>
   <div class="tool-group"><button type="button" data-cmd="h1">H1</button><button type="button" data-cmd="h2">H2</button><button type="button" data-cmd="h3">H3</button><button type="button" data-cmd="blockquote">উদ্ধৃতি</button><button type="button" data-cmd="pullquote">Pull Quote</button><button type="button" data-cmd="dropcap">Drop Cap</button><button type="button" data-cmd="hr">রেখা</button></div>
   <div class="tool-group"><button type="button" data-cmd="bulletList">• তালিকা</button><button type="button" data-cmd="orderedList">১. তালিকা</button><button type="button" data-cmd="table">ছক</button><button type="button" data-cmd="link">লিংক</button><button type="button" data-cmd="footnote">পাদটীকা</button><button type="button" data-cmd="superscript">x²</button><button type="button" data-cmd="subscript">x₂</button><button type="button" data-cmd="special">প্রতীক</button></div>
-  <div class="tool-group"><button type="button" data-cmd="image">ছবি বসান</button><select data-control="imageAlign" aria-label="ছবির অবস্থান"><option value="">ছবির অবস্থান</option><option value="left">বামে</option><option value="center">মাঝে</option><option value="right">ডানে</option></select><select data-control="imageWidth" aria-label="ছবির আকার"><option value="">ছবির আকার</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap" aria-label="ছবির চারপাশে লেখা"><option value="">লেখার প্রবাহ</option><option value="none">লেখা নিচে</option><option value="left">ছবি বামে, লেখা পাশে</option><option value="right">ছবি ডানে, লেখা পাশে</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
+  <div class="tool-group"><button type="button" data-cmd="image">ছবি বসান</button><button type="button" data-cmd="gallery">গ্যালারি</button><select data-control="imageAlign" aria-label="ছবির অবস্থান"><option value="">ছবির অবস্থান</option><option value="left">বামে</option><option value="center">মাঝে</option><option value="right">ডানে</option></select><select data-control="imageWidth" aria-label="ছবির আকার"><option value="">ছবির আকার</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap" aria-label="ছবির চারপাশে লেখা"><option value="">লেখার প্রবাহ</option><option value="none">লেখা নিচে</option><option value="left">ছবি বামে, লেখা পাশে</option><option value="right">ছবি ডানে, লেখা পাশে</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
   <div class="tool-group"><button type="button" data-cmd="findReplace">খুঁজুন/বদলান</button><button type="button" data-cmd="restoreDraft">খসড়া ফেরত</button><button type="button" data-cmd="fullscreen">পূর্ণ পর্দা</button><button type="button" data-cmd="preview">প্রিভিউ</button></div>
  </div>
  <div class="editor-surface" id="bodyEditor" aria-label="বাংলা লেখার এডিটর"></div>
  <textarea id="body" class="editor-source" aria-hidden="true" tabindex="-1"></textarea>
  <div class="editor-footer"><span id="bodyCount">শব্দ: ০ · অক্ষর: ০</span><span id="bodyAutosave">এই ব্রাউজারে খসড়া স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে</span></div>
 </div>
-<input id="inlineImageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden></section>
+<input id="inlineImageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden><input id="galleryFiles" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden></section>
 <section class="lang-panel"><h3>English version</h3><p class="help">Fill this section when the English version is ready. Leave it blank if you are publishing only in Bengali.</p>
 <label for="title_en">English title</label><input id="title_en" maxlength="180">
 <label for="slug_en">English permanent link / slug</label><input id="slug_en" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="180" placeholder="my-new-story">
@@ -59,7 +59,7 @@
   <div class="tool-group"><label class="color-tool">A<input type="color" data-control="textColor" value="#202020"></label><label class="color-tool">▰<input type="color" data-control="highlightColor" value="#fff19a"></label><button type="button" data-cmd="removeFormat">Clear format</button></div>
   <div class="tool-group"><button type="button" data-cmd="h1">H1</button><button type="button" data-cmd="h2">H2</button><button type="button" data-cmd="h3">H3</button><button type="button" data-cmd="blockquote">Quote</button><button type="button" data-cmd="pullquote">Pull quote</button><button type="button" data-cmd="dropcap">Drop cap</button><button type="button" data-cmd="hr">Rule</button></div>
   <div class="tool-group"><button type="button" data-cmd="bulletList">Bullets</button><button type="button" data-cmd="orderedList">Numbering</button><button type="button" data-cmd="table">Table</button><button type="button" data-cmd="link">Link</button><button type="button" data-cmd="footnote">Footnote</button><button type="button" data-cmd="superscript">x²</button><button type="button" data-cmd="subscript">x₂</button><button type="button" data-cmd="special">Symbols</button></div>
-  <div class="tool-group"><button type="button" data-cmd="image">Insert image</button><select data-control="imageAlign"><option value="">Image position</option><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select><select data-control="imageWidth"><option value="">Image size</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap"><option value="">Text wrap</option><option value="none">No wrap</option><option value="left">Image left</option><option value="right">Image right</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
+  <div class="tool-group"><button type="button" data-cmd="image">Insert image</button><button type="button" data-cmd="gallery">Gallery</button><select data-control="imageAlign"><option value="">Image position</option><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select><select data-control="imageWidth"><option value="">Image size</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap"><option value="">Text wrap</option><option value="none">No wrap</option><option value="left">Image left</option><option value="right">Image right</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
   <div class="tool-group"><button type="button" data-cmd="findReplace">Find/Replace</button><button type="button" data-cmd="restoreDraft">Restore draft</button><button type="button" data-cmd="fullscreen">Full screen</button><button type="button" data-cmd="preview">Preview</button></div>
  </div>
  <div class="editor-surface" id="bodyEnEditor" aria-label="English writing editor"></div>
@@ -220,6 +220,8 @@ async function loadPosts(){
    wrap:{default:'none',parseHTML:el=>el.getAttribute('data-wrap')||'none',renderHTML:attrs=>({'data-wrap':attrs.wrap})}
   } }});
   const Figure=Node.create({name:'figure',group:'block',content:'image figcaption?',parseHTML(){return [{tag:'figure'}]},renderHTML({HTMLAttributes}){return ['figure',mergeAttributes(HTMLAttributes,{class:'article-figure'}),0]}});
+  const Gallery=Node.create({name:'gallery',group:'block',content:'image+',parseHTML(){return [{tag:'div.image-gallery'}]},renderHTML({HTMLAttributes}){return ['div',mergeAttributes(HTMLAttributes,{class:'image-gallery'}),0]}});
+  const FootnoteItem=Node.create({name:'footnoteItem',group:'block',content:'inline*',addAttributes(){return {id:{default:null,parseHTML:el=>el.getAttribute('id'),renderHTML:attrs=>attrs.id?{id:attrs.id}:{}}}},parseHTML(){return [{tag:'p.footnote-item'}]},renderHTML({HTMLAttributes}){return ['p',mergeAttributes(HTMLAttributes,{class:'footnote-item'}),0]}});
   const Figcaption=Node.create({name:'figcaption',group:'block',content:'inline*',parseHTML(){return [{tag:'figcaption'}]},renderHTML({HTMLAttributes}){return ['figcaption',HTMLAttributes,0]}});
   const Paragraph=ParagraphBase.extend({addAttributes(){return {...(this.parent?.()||{}),style:{default:null,parseHTML:el=>el.getAttribute('style')||null,renderHTML:attrs=>attrs.style?{style:attrs.style}:{ }},class:{default:null,parseHTML:el=>el.getAttribute('class')||null,renderHTML:attrs=>attrs.class?{class:attrs.class}:{}}}},parseHTML(){return [{tag:'p'}]},renderHTML({HTMLAttributes}){return ['p',mergeAttributes(this.options.HTMLAttributes||{},HTMLAttributes),0]}});
   const baseExtensions=[
@@ -232,7 +234,7 @@ async function loadPosts(){
    Highlight.configure({multicolor:true}),
    FontFamily,
    RichImage.configure({allowBase64:false}),
-   Figure,Figcaption,
+   Figure,Gallery,FootnoteItem,Figcaption,
    Link.configure({openOnClick:false,autolink:true,HTMLAttributes:{rel:'noopener noreferrer',target:'_blank'}}),
    Table.configure({resizable:true}),TableRow,TableHeader,TableCell,
    Superscript,Subscript,
@@ -250,6 +252,22 @@ async function loadPosts(){
    const el=document.getElementById(id+'Count');if(!el)return;
    const words=editor.storage.characterCount.words(),chars=editor.storage.characterCount.characters();
    el.textContent=(id==='body'?'শব্দ: ':'Words: ')+words+' · '+(id==='body'?'অক্ষর: ':'Characters: ')+chars;
+  }
+  function insertGallery(editor,id){
+   const input=document.getElementById('galleryFiles');input.value='';
+   input.onchange=async()=>{
+    const files=Array.from(input.files||[]).slice(0,8);if(!files.length)return;
+    try{
+     if(typeof uploadImage!=='function')throw new Error('ছবি আপলোড ফাংশন পাওয়া যায়নি।');
+     document.querySelectorAll('button').forEach(b=>b.disabled=true);
+     const nodes=[];
+     for(const file of files){const url=await uploadImage(file);nodes.push({type:'image',attrs:{src:url,alt:file.name.replace(/\.[^.]+$/,''),title:'',width:'100%',align:'center',wrap:'none'}})}
+     editor.chain().focus().insertContent({type:'gallery',content:nodes}).run();
+     announce(nodes.length+'টি ছবি দিয়ে গ্যালারি তৈরি হয়েছে।');
+    }catch(e){announce('গ্যালারি তৈরি করা যায়নি: '+(e?.message||e))}
+    finally{document.querySelectorAll('button').forEach(b=>b.disabled=false)}
+   };
+   input.click();
   }
   function insertImage(editor,id){
    const input=document.getElementById('inlineImageFile');input.value='';
@@ -306,11 +324,12 @@ async function loadPosts(){
    else if(cmd==='orderedList')chain.toggleOrderedList().run();
    else if(cmd==='table')chain.insertTable({rows:3,cols:3,withHeaderRow:true}).run();
    else if(cmd==='link'){const old=editor.getAttributes('link').href||'',url=prompt('লিংক/URL লিখুন:',old);if(url===null)return;if(!url.trim())editor.chain().focus().extendMarkRange('link').unsetLink().run();else editor.chain().focus().extendMarkRange('link').setLink({href:url.trim()}).run()}
-   else if(cmd==='footnote'){const note=prompt('পাদটীকার লেখা লিখুন:','');if(note)editor.chain().focus().insertContent('<sup title="'+note.replace(/["<>]/g,'')+'">†</sup>').run()}
+   else if(cmd==='footnote'){const note=prompt('পাদটীকার লেখা লিখুন:','');if(note){const count=(editor.getHTML().match(/class="footnote-item"/g)||[]).length+1,id='footnote-'+count;editor.chain().focus().insertContent('<sup><a href="#'+id+'">['+count+']</a></sup>').run();editor.chain().focus().insertContentAt(editor.state.doc.content.size,{type:'footnoteItem',attrs:{id},content:[{type:'text',text:'['+count+'] '+note}]}).run()}}
    else if(cmd==='superscript')chain.toggleSuperscript().run();
    else if(cmd==='subscript')chain.toggleSubscript().run();
    else if(cmd==='special'){const s=prompt('বিশেষ চিহ্ন লিখুন (যেমন — • … § ©):','—');if(s)chain.insertContent(s).run()}
    else if(cmd==='image')insertImage(editor,id);
+   else if(cmd==='gallery')insertGallery(editor,id);
    else if(cmd==='youtube'){const url=prompt('YouTube ভিডিওর URL দিন:','https://www.youtube.com/watch?v=');if(url)chain.setYoutubeVideo({src:url,width:640,height:360}).run()}
    else if(cmd==='removeFormat')chain.unsetAllMarks().clearNodes().run();
    else if(cmd==='fullscreen'){const el=document.getElementById(id==='body'?'bodyEditorShell':'bodyEnEditorShell');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()}
