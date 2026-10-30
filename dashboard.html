@@ -40,6 +40,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hind Siligur
 .recent-item:last-child{border-bottom:0}
 .recent-thumb{width:62px;height:56px;flex:0 0 62px;border-radius:7px;background:linear-gradient(135deg,#e9dfcc,#cbb99b);display:grid;place-items:center;color:#795c3e}
 .quote-panel{background:linear-gradient(135deg,#5b2028,#3e151b);color:#f8ebd5}
+#authorStudioFrame{min-height:1750px}
+@media(max-width:760px){#authorStudioFrame{min-height:2100px}}
 @media(max-width:1100px){.workspace{grid-template-columns:210px minmax(0,1fr)!important}.right-column{grid-column:2}.sidebar{grid-row:1 / span 2}}
 @media(max-width:760px){.app{display:block!important}.sidebar{display:none}.topbar{height:auto;min-height:70px;padding:12px}.workspace{display:block!important;padding:14px!important}.right-column{margin-top:16px}.brand-mobile{display:flex!important}.welcome{padding:18px!important}.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.form-grid{grid-template-columns:1fr!important}}
 .brand-mobile{display:none}
@@ -93,22 +95,22 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hind Siligur
   </div>
   <div class="panel overflow-hidden">
     <div class="px-4 sm:px-5 py-4 flex items-center justify-between border-b" style="border-color:var(--line)"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-rose-100 text-rose-900 grid place-items-center"><i class="fa-solid fa-plus"></i></span><h2 class="section-title text-2xl">Create New Writing</h2></div><span class="hidden sm:inline text-xs text-stone-500"><i class="fa-solid fa-link mr-1"></i> Multilingual writing studio</span></div>
-    <form id="writing-form" class="p-4 sm:p-5 space-y-4">
-      <div class="grid form-grid grid-cols-2 gap-3">
-        <div><label class="field-label" for="language">ভাষা (Language)</label><select id="language" class="field"><option value="bengali">বাংলা (Bengali)</option><option value="english">English</option><option value="hindi">हिन्दी (Hindi)</option></select></div>
-        <div><label class="field-label" for="slug">Slug (URL)</label><input id="slug" type="text" placeholder="your-writing-url" class="field"></div>
-        <div><label class="field-label" for="title">শিরোনাম (Title)</label><input id="title" type="text" placeholder="লেখার শিরোনাম লিখুন..." class="field"></div>
-        <div><label class="field-label" for="subtitle">উপশিরোনাম (Subtitle)</label><input id="subtitle" type="text" placeholder="উপশিরোনাম লিখুন..." class="field"></div>
-        <div><label class="field-label" for="category">বিভাগ (Category)</label><select id="category" class="field"><option value="">বিভাগ নির্বাচন করুন</option><option value="কথাসাহিত্য">কথাসাহিত্য</option><option value="প্রবন্ধ">প্রবন্ধ</option><option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option><option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option><option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option><option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option><option value="আইন-আদালত">আইন-আদালত</option><option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option><option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option></select></div>
-        <div><label class="field-label" for="subcategory">উপবিভাগ (Sub-category)</label><input id="subcategory" type="text" placeholder="উপবিভাগ লিখুন..." class="field"></div>
-        <div><label class="field-label" for="cover-image">Cover Image</label><label class="upload-box" for="cover-image"><i class="fa-regular fa-image text-2xl text-stone-500 mb-2"></i><span class="text-xs text-stone-600">Click to upload or drag &amp; drop</span><span class="text-xs text-stone-400 mt-1">JPG, PNG, WEBP</span></label><input type="file" id="cover-image" accept="image/*" class="hidden"></div>
-        <div><label class="field-label" for="summary">সারসংক্ষেপ (Summary)</label><textarea id="summary" rows="4" placeholder="লেখার সংক্ষিপ্ত বিবরণ লিখুন..." class="field h-[100px] resize-y"></textarea></div>
+    <div class="p-3 sm:p-4" style="background:#fbf7ef">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <div><h3 class="section-title text-xl">সম্পূর্ণ লেখার স্টুডিও</h3><p class="text-xs text-stone-500 mt-1">নিরাপদ লগইন, Tiptap রিচ-টেক্সট এডিটর, Supabase-এ খসড়া ও প্রকাশনা</p></div>
+        <a href="./admin.html" target="_blank" rel="noopener" class="soft-btn rounded-lg px-3 py-2 text-xs">নতুন ট্যাবে খুলুন ↗</a>
       </div>
-      <div class="flex items-center gap-2 rounded-lg px-3 py-2" style="background:#f8f0e3;border:1px solid #eadcc6"><input type="checkbox" id="featured" class="accent-rose-900"><label for="featured" class="text-sm">নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</label></div>
-      <div><label class="field-label" for="tags">Tags</label><input id="tags" type="text" placeholder="গল্প, সাহিত্য, বিশ্লেষণ..." class="field"></div>
-      <div><label class="field-label" for="main-body">মূল লেখা (Main Body)</label><div class="border rounded-lg overflow-hidden" style="border-color:var(--line)"><div class="editor-toolbar"><button type="button" title="Bold"><i class="fa-solid fa-bold"></i></button><button type="button" title="Italic"><i class="fa-solid fa-italic"></i></button><button type="button" title="Underline"><i class="fa-solid fa-underline"></i></button><span class="border-l mx-1" style="border-color:var(--line)"></span><button type="button" title="Align left"><i class="fa-solid fa-align-left"></i></button><button type="button" title="Align center"><i class="fa-solid fa-align-center"></i></button><button type="button" title="Align right"><i class="fa-solid fa-align-right"></i></button><button type="button" title="Quote"><i class="fa-solid fa-quote-right"></i></button><button type="button" title="Insert link"><i class="fa-solid fa-link"></i></button><button type="button" title="Insert image"><i class="fa-regular fa-image"></i></button><button type="button" title="List"><i class="fa-solid fa-list"></i></button></div><textarea id="main-body" rows="9" placeholder="এখানে আপনার লেখার মূল অংশ লিখুন..." class="editor-area"></textarea><div class="flex justify-between px-3 py-2 text-xs text-stone-500 border-t" style="background:#faf7f0;border-color:var(--line)"><span>Word Count: <b id="word-count">0</b></span><span>Character Count: <b id="char-count">0</b></span></div></div></div>
-      <div class="flex flex-wrap gap-2 justify-between items-center pt-3 border-t" style="border-color:var(--line)"><div class="flex flex-wrap gap-2"><button type="button" class="soft-btn rounded-lg px-4 py-2 text-sm"><i class="fa-regular fa-floppy-disk mr-1"></i> Save as Draft</button><button type="button" class="soft-btn rounded-lg px-4 py-2 text-sm">Save Both Languages</button></div><div class="flex gap-2"><button type="button" class="soft-btn rounded-lg px-4 py-2 text-sm"><i class="fa-regular fa-eye mr-1"></i> Preview</button><button type="submit" class="primary-btn rounded-lg px-5 py-2 text-sm"><i class="fa-regular fa-paper-plane mr-1"></i> Publish</button></div></div>
-    </form>
+      <iframe
+        id="authorStudioFrame"
+        src="./admin.html"
+        title="Mostafa Auvi Secure Author Writing Studio"
+        loading="eager"
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="display:block;width:100%;min-height:1750px;border:1px solid #e6dccb;border-radius:9px;background:#f8f3e9"
+        allow="clipboard-read; clipboard-write; fullscreen"
+      ></iframe>
+      <p class="text-xs text-stone-500 mt-3">এডিটরটি বিদ্যমান নিরাপদ লেখক-ব্যবস্থার সঙ্গে যুক্ত। লগইন ও লেখা সংরক্ষণের কাজ একই Supabase ব্যবস্থায় হবে।</p>
+    </div>orm>
   </div>
 </section>
 <aside class="right-column space-y-4">
