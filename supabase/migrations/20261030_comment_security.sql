@@ -45,3 +45,7 @@ $$;
 
 REVOKE ALL ON FUNCTION public.consume_comment_rate_limit(text, integer, integer) FROM PUBLIC, anon, authenticated;
 GRANT EXECUTE ON FUNCTION public.consume_comment_rate_limit(text, integer, integer) TO service_role;
+
+-- All public comment submissions must pass through the protected Edge Function.
+REVOKE INSERT ON TABLE public.comments FROM anon, authenticated;
+GRANT INSERT ON TABLE public.comments TO service_role;
