@@ -131,7 +131,7 @@ async function savePost(publish,unpublish=false){
   for(const item of [{lang:'bn',value:bn,old:existingBn},{lang:'en',value:en,old:existingEn}]){
    if(!item.value)continue;
    const old=item.old;
-   const row={group_id:group,language:item.lang,parent_category:parentCategory,subcategory,category, title:item.value.title,slug:item.value.slug,body:item.value.body,category,tags,excerpt,cover_image:cover||null,published:unpublish?false:publish,updated_at:now,published_at:unpublish?null:(publish?(old?.published_at||now):null)};
+   const row={group_id:group,language:item.lang,parent_category:parentCategory,subcategory,title:item.value.title,slug:item.value.slug,body:item.value.body,category,tags,excerpt,cover_image:cover||null,published:unpublish?false:publish,updated_at:now,published_at:unpublish?null:(publish?(old?.published_at||now):null)};
    let result;
    if(old)result=await sb.from('posts').update(row).eq('id',old.id).select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,published,published_at,updated_at').single();
    else result=await sb.from('posts').insert(row).select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,published,published_at,updated_at').single();
