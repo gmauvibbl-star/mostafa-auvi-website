@@ -399,7 +399,7 @@ function uploadImageToBody(event, bodyId) {
 function uploadCover(event) {
   const file = event.target.files[0];
   if (!file) return;
-  if (!file.type.startsWith('image/')) {
+  if (!['image/jpeg','image/png','image/webp'].includes(file.type)) {
     alert('অনুগ্রহ করে একটি ছবি নির্বাচন করুন।');
     event.target.value = '';
     return;
@@ -448,6 +448,11 @@ async function savePost(isPublish, isBoth) {
   const category = document.getElementById('postSubcategory').value || document.getElementById('postCategory').value;
   const cover = document.getElementById('postCover').value;
   const featured = document.getElementById('postFeatured').checked;
+  if (!category) {
+    document.getElementById('postStatus').innerText = "⚠️ অনুগ্রহ করে বিভাগ নির্বাচন করুন।";
+    document.getElementById('postStatus').style.color = "var(--terracotta)";
+    return;
+  }
   let slug = document.getElementById('postSlug').value.trim();
   
   const bnTitle = document.getElementById('bnTitle').value.trim();
@@ -475,9 +480,9 @@ async function savePost(isPublish, isBoth) {
       });
     }
   } else {
-    if (currentLang === 'bn' && bnTitle) {
+    if (currentLang === 'bn' && bnTitle && document.getElementById('bnBody').innerText.trim()) {
       postsToInsert.push({ title: bnTitle, subtitle: document.getElementById('bnSubtitle').value, excerpt: document.getElementById('bnExcerpt').value, tags: document.getElementById('bnTags').value, body: document.getElementById('bnBody').innerHTML, language: 'bn', slug, category, cover_image: cover, published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null });
-    } else if (currentLang === 'en' && enTitle) {
+    } else if (currentLang === 'en' && enTitle && document.getElementById('enBody').innerText.trim()) {
       postsToInsert.push({ title: enTitle, subtitle: document.getElementById('enSubtitle').value, excerpt: document.getElementById('enExcerpt').value, tags: document.getElementById('enTags').value, body: document.getElementById('enBody').innerHTML, language: 'en', slug, category, cover_image: cover, published: isPublish, featured, published_at: isPublish ? new Date().toISOString() : null });
     }
   }
