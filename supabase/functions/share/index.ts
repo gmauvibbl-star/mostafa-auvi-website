@@ -48,6 +48,14 @@ Deno.serve(async (req) => {
       : rawImage ? new URL(rawImage.replace(/^\//, ""), SITE_URL + "/").toString() : "";
     const isCrawler = /facebookexternalhit|facebot|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot/i.test(req.headers.get("user-agent") || "");
 
+    // Real visitors receive an HTTP redirect; social crawlers receive Open Graph HTML.
+    if (!isCrawler) {
+      return new Response(null, {
+        status: 302,
+        headers: { "Location": articleUrl, "Cache-Control": "no-cache" }
+      });
+    }
+
     const imageTags = image
       ? `<meta property="og:image" content="${esc(image)}"><meta property="og:image:secure_url" content="${esc(image)}"><meta property="og:image:alt" content="${esc(title)}"><meta name="twitter:image" content="${esc(image)}">`
       : "";
@@ -69,7 +77,7 @@ ${imageTags}
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <link rel="canonical" href="${esc(articleUrl)}">
-${isCrawler ? "" : `<meta http-equiv="refresh" content="0;url=${esc(articleUrl)}"><script>location.replace(${JSON.stringify(articleUrl)});</script>`}
+
 </head>
 <body>
 <p>${esc(title)}</p>
