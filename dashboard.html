@@ -1,238 +1,129 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author Dashboard - Mostafa Auvi</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Hind Siliguri) -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body { font-family: 'Hind Siliguri', sans-serif; }
-        /* Tiptap Editor Custom Styles */
-        .ProseMirror {
-            min-height: 250px;
-            outline: none;
-        }
-        .ProseMirror p.is-editor-empty:first-child::before {
-            content: attr(data-placeholder);
-            float: left;
-            color: #adb5bd;
-            pointer-events: none;
-            height: 0;
-        }
-        /* Custom Blockquote & Pull Quote styling */
-        .ProseMirror blockquote {
-            border-left: 4px solid #d97706;
-            padding-left: 1rem;
-            margin-left: 0;
-            margin-right: 0;
-            font-style: italic;
-            color: #4b5563;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Author Dashboard — Mostafa Auvi</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--wine:#4a171d;--wine2:#65242c;--gold:#c99a58;--paper:#f8f3e9;--line:#e6dccb;--ink:#382b28;--muted:#82766d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hind Siliguri','Noto Sans Devanagari',sans-serif}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+.sidebar{background:linear-gradient(180deg,#49171d 0%,#351116 100%);color:#fff8ec}
+.brand{height:80px;background:#42151b;display:flex;align-items:center;padding:0 25px;gap:13px;border-bottom:1px solid #75434a}
+.brand-mark{font-size:34px;color:#e4bd79}
+.brand-title{font:600 27px/1 'Cormorant Garamond',serif;letter-spacing:.5px}
+.brand-sub{font-size:10px;letter-spacing:1.8px;color:#e6c996;margin-top:5px}
+.nav-link{display:flex;align-items:center;gap:15px;padding:11px 15px;border-radius:8px;color:#f7ebdd;text-decoration:none;font-size:15px;transition:.2s}
+.nav-link i{width:22px;text-align:center;color:#e8c78e;font-size:17px}
+.nav-link.active,.nav-link:hover{background:#744047;box-shadow:inset 0 0 0 1px #98666a}
+.topbar{height:80px;background:#fcf9f2;border-bottom:1px solid var(--line)}
+.panel{background:#fffdf8;border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 8px #5b3c1b0a}
+.field{width:100%;border:1px solid #ded5c8;border-radius:7px;background:#fffdf9;padding:10px 12px;color:#40352f;outline:none;font:14px 'Hind Siliguri',sans-serif}
+.field:focus{border-color:#a86d50;box-shadow:0 0 0 3px #a86d501a}
+.field-label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#55453d}
+.section-title{font:600 27px/1.1 'Cormorant Garamond',serif;color:#511a20}
+.stat-card{background:#fffdf8;border:1px solid var(--line);border-radius:9px;padding:14px;min-height:91px}
+.stat-icon{height:42px;width:42px;display:grid;place-items:center;border-radius:50%;font-size:17px}
+.upload-box{border:1px dashed #d8cdbd;border-radius:8px;background:#fcfaf5;min-height:100px;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer}
+.editor-toolbar{background:#f6f1e8;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:5px;padding:8px}
+.editor-toolbar button{padding:5px 8px;border-radius:5px;color:#594b42}
+.editor-toolbar button:hover{background:#e9dfd0}
+.editor-area{width:100%;min-height:185px;border:0;outline:0;resize:vertical;padding:14px;background:#fffdf9;font:15px 'Hind Siliguri',sans-serif}
+.primary-btn{background:linear-gradient(135deg,#762a34,#511820);color:#fffaf0;border:1px solid #68232c}
+.primary-btn:hover{background:#42151b}
+.soft-btn{border:1px solid #dfd3c2;background:#fffaf1;color:#63333a}
+.recent-item{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #eee6d9}
+.recent-item:last-child{border-bottom:0}
+.recent-thumb{width:62px;height:56px;flex:0 0 62px;border-radius:7px;background:linear-gradient(135deg,#e9dfcc,#cbb99b);display:grid;place-items:center;color:#795c3e}
+.quote-panel{background:linear-gradient(135deg,#5b2028,#3e151b);color:#f8ebd5}
+@media(max-width:1100px){.workspace{grid-template-columns:210px minmax(0,1fr)!important}.right-column{grid-column:2}.sidebar{grid-row:1 / span 2}}
+@media(max-width:760px){.app{display:block!important}.sidebar{display:none}.topbar{height:auto;min-height:70px;padding:12px}.workspace{display:block!important;padding:14px!important}.right-column{margin-top:16px}.brand-mobile{display:flex!important}.welcome{padding:18px!important}.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.form-grid{grid-template-columns:1fr!important}}
+.brand-mobile{display:none}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-
-    <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <span class="text-xl">🍂</span>
-                <span class="font-bold text-lg text-gray-900">Mostafa Auvi <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Author Dashboard</span></span>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="./index.html" class="text-sm font-medium text-gray-600 hover:text-amber-600 transition">🏠 মূল ওয়েবসাইটে ফেরা</a>
-                <a href="./posts.html" class="text-sm font-medium text-gray-600 hover:text-amber-600 transition">My Books</a>
-                <a href="#" class="text-sm font-medium text-red-600 hover:text-red-700 transition">🚪 Logout</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <!-- Welcome Banner -->
-        <div class="bg-gradient-to-r from-amber-700 to-amber-900 rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-lg flex flex-col sm:flex-row justify-between items-center">
-            <div>
-                <h1 class="text-2xl sm:text-3xl font-bold mb-2">Writer's Dashboard</h1>
-                <p class="text-amber-100 text-sm sm:text-base">Write. Share. Inspire. Create stories that echo through time.</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- Main Form Section (Left 2 Columns) -->
-            <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
-                <h2 class="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-100">Create New Writing</h2>
-                
-                <form id="writing-form" class="space-y-6">
-                    
-                    <!-- Language & Slug -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">ভাষা (Language)</label>
-                            <select id="language" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                                <option value="bengali">Bengali (বাংলা)</option>
-                                <option value="english">English</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">লিংক / স্লাগ (Slug)</label>
-                            <input type="text" id="slug" placeholder="e.g. moshari-analysis" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- Title & Subtitle -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">শিরোনাম (Title)</label>
-                        <input type="text" id="title" placeholder="লেখার মূল শিরোনাম এখানে লিখুন..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">উপশিরোনাম (Subtitle)</label>
-                        <input type="text" id="subtitle" placeholder="ছোট বিবরণ বা উপশিরোনাম..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                    </div>
-
-                    <!-- Category & Subcategory -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">বিভাগ (Category)</label>
-                            <select id="category" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                                <option value="">বিভাগ নির্বাচন করুন</option>
-                                <option value="কথাসাহিত্য">কথাসাহিত্য</option>
-                                <option value="প্রবন্ধ">প্রবন্ধ</option>
-                                <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
-                                <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
-                                <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
-                                <option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option>
-                                <option value="আইন-আদালত">আইন-আদালত</option>
-                                <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
-                                <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">উপবিভাগ (Sub-category)</label>
-                            <input type="text" id="subcategory" placeholder="যেমন: গল্প বিশ্লেষণ" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- Summary -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">সারসংক্ষেপ (Summary)</label>
-                        <textarea id="summary" rows="3" placeholder="লেখার সংক্ষিপ্তসার..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
-                    </div>
-
-                    <!-- Cover Photo Upload -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Cover Photo</label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 transition cursor-pointer bg-gray-50">
-                            <span class="text-3xl mb-2 block">📁</span>
-                            <span class="text-sm font-medium text-gray-600">CLICK TO UPLOAD COVER IMAGE</span>
-                            <p class="text-xs text-gray-400 mt-1">MAX SIZE: 2MB · JPG, PNG, WEBP</p>
-                            <input type="file" id="cover-image" class="hidden">
-                        </div>
-                    </div>
-
-                    <!-- Featured Checkbox -->
-                    <div class="flex items-center space-x-3 bg-amber-50 p-4 rounded-xl border border-amber-100">
-                        <input type="checkbox" id="featured" class="w-4 h-4 text-amber-600 rounded border-gray-300 focus:ring-amber-500">
-                        <label for="featured" class="text-sm font-medium text-gray-800 cursor-pointer">নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</label>
-                    </div>
-
-                    <!-- Tags -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">ট্যাগিং (Tags)</label>
-                        <input type="text" id="tags" placeholder="comma separated: গল্প, সাহিত্য, বিশ্লেষণ" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
-                    </div>
-
-                    <!-- Rich Text Editor Section (Tiptap / Custom Toolbar Layout) -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">মূল লেখা (Main Body - Rich Text Editor)</label>
-                        <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm bg-white">
-                            <!-- 1. উপরের টুলবার (Formatting Toolbar) -->
-                            <div class="bg-gray-100 px-3 py-2 border-b border-gray-300 flex flex-wrap gap-1 text-sm text-gray-700 items-center">
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded font-bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded underline" title="Underline"><i class="fa-solid fa-underline"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded line-through" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
-                                <span class="border-r border-gray-300 h-5 mx-1"></span>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Left"><i class="fa-solid fa-align-left"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Center"><i class="fa-solid fa-align-center"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Right"><i class="fa-solid fa-align-right"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Justify"><i class="fa-solid fa-align-justify"></i></button>
-                                <span class="border-r border-gray-300 h-5 mx-1"></span>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Blockquote"><i class="fa-solid fa-quote-right"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Insert Link"><i class="fa-solid fa-link"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Insert Image"><i class="fa-regular fa-image"></i></button>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Table"><i class="fa-solid fa-table"></i></button>
-                                <span class="border-r border-gray-300 h-5 mx-1"></span>
-                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded text-xs font-semibold">Clear Format</button>
-                            </div>
-                            
-                            <!-- 2. মাঝখানে লেখার জায়গা (Writing Canvas Area) -->
-                            <div class="p-4">
-                                <textarea id="main-body" rows="10" placeholder="আপনার মূল লেখা এখানে বিস্তারিত লিখুন..." class="w-full focus:outline-none resize-y"></textarea>
-                            </div>
-
-                            <!-- Editor Footer / Word Count -->
-                            <div class="bg-gray-50 px-4 py-2 border-t border-gray-200 text-xs text-gray-500 flex justify-between">
-                                <span>Word Count: <span id="word-count">0</span></span>
-                                <span>Character Count: <span id="char-count">0</span></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. নিচে প্রকাশনা সেটিংস ও অ্যাকশন বাটন -->
-                    <div class="flex flex-wrap gap-4 pt-4 border-t border-gray-100 items-center justify-between">
-                        <div class="flex gap-2">
-                            <button type="button" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Save as Draft</button>
-                            <button type="button" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Save Both Languages</button>
-                        </div>
-                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-700 text-white font-medium hover:bg-amber-800 transition shadow">✨ Publish</button>
-                    </div>
-
-                </form>
-            </div>
-
-            <!-- Right Column: Sidebar (Quote & Recent Writings) -->
-            <div class="space-y-6">
-                <!-- Writer Quote Box -->
-                <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6 rounded-2xl shadow-sm">
-                    <p class="text-sm italic text-gray-300 mb-4">"A writer lives a thousand lives before he dies. The man who never reads lives only one."</p>
-                    <p class="text-xs font-semibold text-amber-400">— George R.R. Martin</p>
-                </div>
-
-                <!-- Recent Writings Widget -->
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">Recent Writings</h3>
-                    
-                    <div id="recent-writings-list" class="space-y-4 text-sm">
-                        <div class="text-gray-500 text-sm">Loading...</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Basic Script for Word/Char Count -->
-    <script>
-        const mainBody = document.getElementById('main-body');
-        const wordCount = document.getElementById('word-count');
-        const charCount = document.getElementById('char-count');
-
-        mainBody.addEventListener('input', () => {
-            const text = mainBody.value.trim();
-            const chars = text.length;
-            const words = text === '' ? 0 : text.split(/\s+/).length;
-            
-            wordCount.textContent = words;
-            charCount.textContent = chars;
-        });
-    </script>
+<body>
+<div class="app min-h-screen" style="display:grid;grid-template-columns:282px minmax(0,1fr)">
+<aside class="sidebar min-h-screen flex flex-col">
+  <div class="brand"><div class="brand-mark">✒</div><div><div class="brand-title">MOSTAFA AUVI</div><div class="brand-sub">MULTILINGUAL AUTHOR STUDIO</div></div></div>
+  <nav class="px-3 py-5 space-y-1 flex-1">
+    <a class="nav-link active" href="#overview"><i class="fa-solid fa-house"></i>Overview</a>
+    <a class="nav-link" href="#writing-form"><i class="fa-solid fa-pen-nib"></i>New Writing</a>
+    <a class="nav-link" href="#recent-writings-list"><i class="fa-regular fa-file-lines"></i>My Writings</a>
+    <a class="nav-link" href="./posts.html"><i class="fa-solid fa-book-open"></i>Published Works</a>
+    <a class="nav-link" href="./journal.html"><i class="fa-regular fa-bookmark"></i>Journal</a>
+    <a class="nav-link" href="./posts.html"><i class="fa-solid fa-book"></i>Books &amp; Publications</a>
+    <a class="nav-link" href="#writing-form"><i class="fa-regular fa-image"></i>Media Library</a>
+    <a class="nav-link" href="#recent-writings-list"><i class="fa-solid fa-users"></i>Subscribers</a>
+    <a class="nav-link" href="#recent-writings-list"><i class="fa-regular fa-envelope"></i>Email Updates</a>
+    <a class="nav-link" href="#recent-writings-list"><i class="fa-regular fa-comments"></i>Comments</a>
+    <a class="nav-link" href="#writing-form"><i class="fa-solid fa-share-nodes"></i>SEO &amp; Sharing</a>
+    <a class="nav-link" href="#overview"><i class="fa-solid fa-gear"></i>Website Settings</a>
+  </nav>
+  <div class="px-5 py-5 border-t border-white/10" style="background:linear-gradient(0deg,#351116,#4a171d)">
+    <p class="serif italic text-lg leading-snug text-amber-100">“Good writing is a journey of the heart, mind and soul.”</p>
+    <p class="text-xs text-amber-200 mt-3">— Mostafa Auvi</p>
+  </div>
+</aside>
+<div class="min-w-0">
+<header class="topbar flex items-center justify-between px-7 gap-4">
+  <div class="hidden md:block"><p class="serif text-lg text-stone-700">“শব্দই আমার পথ, লেখা আমার জীবন।”</p><p class="text-xs text-stone-500">— মোস্তফা অভি</p></div>
+  <div class="brand-mobile items-center gap-2"><span class="text-2xl text-amber-700">✒</span><span class="serif text-xl font-semibold">MOSTAFA AUVI</span></div>
+  <div class="flex items-center gap-4 ml-auto">
+    <label class="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white/60 text-sm" style="border-color:var(--line)"><i class="fa-solid fa-globe text-amber-900"></i><select aria-label="Dashboard language" class="bg-transparent outline-none"><option>বাংলা</option><option>English</option><option>हिन्दी</option></select></label>
+    <button type="button" aria-label="Notifications" class="text-xl text-amber-950 px-2"><i class="fa-regular fa-bell"></i></button>
+    <div class="border-l pl-4 flex items-center gap-3" style="border-color:var(--line)"><div class="w-10 h-10 rounded-full bg-stone-200 overflow-hidden flex items-center justify-center text-stone-600"><i class="fa-solid fa-user"></i></div><div class="hidden sm:block"><div class="serif font-semibold text-lg leading-tight">Mostafa Auvi</div><div class="text-xs text-stone-500">Author</div></div><i class="fa-solid fa-chevron-down text-xs text-stone-500"></i></div>
+    <a href="./index.html" class="hidden lg:inline text-sm text-amber-900 hover:underline">View Website ↗</a>
+  </div>
+</header>
+<main id="overview" class="workspace p-5 lg:p-6" style="display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:20px;align-items:start">
+<section class="min-w-0">
+  <div class="welcome relative overflow-hidden rounded-xl p-6 mb-4 flex items-center justify-between" style="background:linear-gradient(90deg,#fbf6ec 0%,#f7edda 68%,#ead9b8 100%);border:1px solid #e8dcc8">
+    <div class="relative z-10"><div class="flex items-center gap-3"><span class="text-4xl text-amber-900">✒</span><h1 class="section-title text-3xl md:text-4xl">Welcome back, Mostafa</h1></div><p class="text-sm text-stone-600 ml-14 mt-2">Create. Edit. Publish. Share your stories with the world.</p></div>
+    <div class="hidden md:block text-6xl opacity-30 text-amber-900 pr-5"><i class="fa-solid fa-water"></i></div>
+  </div>
+  <div class="stats grid grid-cols-2 xl:grid-cols-4 gap-3 mb-5">
+    <div class="stat-card flex items-center gap-3"><div class="stat-icon bg-red-50 text-red-900"><i class="fa-regular fa-file-lines"></i></div><div><p class="text-xs text-stone-600">Total Writings</p><p class="serif text-2xl font-semibold">—</p><p class="text-xs text-stone-400">All your works</p></div></div>
+    <div class="stat-card flex items-center gap-3"><div class="stat-icon bg-green-50 text-green-700"><i class="fa-solid fa-circle-check"></i></div><div><p class="text-xs text-stone-600">Published</p><p class="serif text-2xl font-semibold">—</p><p class="text-xs text-stone-400">Published works</p></div></div>
+    <div class="stat-card flex items-center gap-3"><div class="stat-icon bg-blue-50 text-blue-800"><i class="fa-regular fa-pen-to-square"></i></div><div><p class="text-xs text-stone-600">Drafts</p><p class="serif text-2xl font-semibold">—</p><p class="text-xs text-stone-400">Saved drafts</p></div></div>
+    <div class="stat-card flex items-center gap-3"><div class="stat-icon bg-sky-50 text-sky-800"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-stone-600">Subscribers</p><p class="serif text-2xl font-semibold">—</p><p class="text-xs text-stone-400">Email readers</p></div></div>
+  </div>
+  <div class="panel overflow-hidden">
+    <div class="px-4 sm:px-5 py-4 flex items-center justify-between border-b" style="border-color:var(--line)"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-rose-100 text-rose-900 grid place-items-center"><i class="fa-solid fa-plus"></i></span><h2 class="section-title text-2xl">Create New Writing</h2></div><span class="hidden sm:inline text-xs text-stone-500"><i class="fa-solid fa-link mr-1"></i> Multilingual writing studio</span></div>
+    <form id="writing-form" class="p-4 sm:p-5 space-y-4">
+      <div class="grid form-grid grid-cols-2 gap-3">
+        <div><label class="field-label" for="language">ভাষা (Language)</label><select id="language" class="field"><option value="bengali">বাংলা (Bengali)</option><option value="english">English</option><option value="hindi">हिन्दी (Hindi)</option></select></div>
+        <div><label class="field-label" for="slug">Slug (URL)</label><input id="slug" type="text" placeholder="your-writing-url" class="field"></div>
+        <div><label class="field-label" for="title">শিরোনাম (Title)</label><input id="title" type="text" placeholder="লেখার শিরোনাম লিখুন..." class="field"></div>
+        <div><label class="field-label" for="subtitle">উপশিরোনাম (Subtitle)</label><input id="subtitle" type="text" placeholder="উপশিরোনাম লিখুন..." class="field"></div>
+        <div><label class="field-label" for="category">বিভাগ (Category)</label><select id="category" class="field"><option value="">বিভাগ নির্বাচন করুন</option><option value="কথাসাহিত্য">কথাসাহিত্য</option><option value="প্রবন্ধ">প্রবন্ধ</option><option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option><option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option><option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option><option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option><option value="আইন-আদালত">আইন-আদালত</option><option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option><option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option></select></div>
+        <div><label class="field-label" for="subcategory">উপবিভাগ (Sub-category)</label><input id="subcategory" type="text" placeholder="উপবিভাগ লিখুন..." class="field"></div>
+        <div><label class="field-label" for="cover-image">Cover Image</label><label class="upload-box" for="cover-image"><i class="fa-regular fa-image text-2xl text-stone-500 mb-2"></i><span class="text-xs text-stone-600">Click to upload or drag &amp; drop</span><span class="text-xs text-stone-400 mt-1">JPG, PNG, WEBP</span></label><input type="file" id="cover-image" accept="image/*" class="hidden"></div>
+        <div><label class="field-label" for="summary">সারসংক্ষেপ (Summary)</label><textarea id="summary" rows="4" placeholder="লেখার সংক্ষিপ্ত বিবরণ লিখুন..." class="field h-[100px] resize-y"></textarea></div>
+      </div>
+      <div class="flex items-center gap-2 rounded-lg px-3 py-2" style="background:#f8f0e3;border:1px solid #eadcc6"><input type="checkbox" id="featured" class="accent-rose-900"><label for="featured" class="text-sm">নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</label></div>
+      <div><label class="field-label" for="tags">Tags</label><input id="tags" type="text" placeholder="গল্প, সাহিত্য, বিশ্লেষণ..." class="field"></div>
+      <div><label class="field-label" for="main-body">মূল লেখা (Main Body)</label><div class="border rounded-lg overflow-hidden" style="border-color:var(--line)"><div class="editor-toolbar"><button type="button" title="Bold"><i class="fa-solid fa-bold"></i></button><button type="button" title="Italic"><i class="fa-solid fa-italic"></i></button><button type="button" title="Underline"><i class="fa-solid fa-underline"></i></button><span class="border-l mx-1" style="border-color:var(--line)"></span><button type="button" title="Align left"><i class="fa-solid fa-align-left"></i></button><button type="button" title="Align center"><i class="fa-solid fa-align-center"></i></button><button type="button" title="Align right"><i class="fa-solid fa-align-right"></i></button><button type="button" title="Quote"><i class="fa-solid fa-quote-right"></i></button><button type="button" title="Insert link"><i class="fa-solid fa-link"></i></button><button type="button" title="Insert image"><i class="fa-regular fa-image"></i></button><button type="button" title="List"><i class="fa-solid fa-list"></i></button></div><textarea id="main-body" rows="9" placeholder="এখানে আপনার লেখার মূল অংশ লিখুন..." class="editor-area"></textarea><div class="flex justify-between px-3 py-2 text-xs text-stone-500 border-t" style="background:#faf7f0;border-color:var(--line)"><span>Word Count: <b id="word-count">0</b></span><span>Character Count: <b id="char-count">0</b></span></div></div></div>
+      <div class="flex flex-wrap gap-2 justify-between items-center pt-3 border-t" style="border-color:var(--line)"><div class="flex flex-wrap gap-2"><button type="button" class="soft-btn rounded-lg px-4 py-2 text-sm"><i class="fa-regular fa-floppy-disk mr-1"></i> Save as Draft</button><button type="button" class="soft-btn rounded-lg px-4 py-2 text-sm">Save Both Languages</button></div><div class="flex gap-2"><button type="button" class="soft-btn rounded-lg px-4 py-2 text-sm"><i class="fa-regular fa-eye mr-1"></i> Preview</button><button type="submit" class="primary-btn rounded-lg px-5 py-2 text-sm"><i class="fa-regular fa-paper-plane mr-1"></i> Publish</button></div></div>
+    </form>
+  </div>
+</section>
+<aside class="right-column space-y-4">
+  <div class="panel p-4"><div class="flex items-center justify-between pb-3 border-b" style="border-color:var(--line)"><h3 class="section-title text-xl"><i class="fa-regular fa-newspaper text-amber-800 mr-2"></i>Recent Writings</h3><a href="./posts.html" class="text-xs text-rose-900 hover:underline">View All →</a></div><div id="recent-writings-list" class="pt-1"><div class="text-sm text-stone-500 py-3">Loading...</div></div></div>
+  <div class="panel p-4"><h3 class="section-title text-xl mb-3"><i class="fa-solid fa-gift text-amber-800 mr-2"></i>Quick Actions</h3><div class="grid grid-cols-2 gap-2"><a href="#writing-form" class="soft-btn rounded-lg p-3 text-center text-xs"><i class="fa-solid fa-pen-nib block text-lg mb-2"></i>New Writing</a><a href="#writing-form" class="soft-btn rounded-lg p-3 text-center text-xs"><i class="fa-regular fa-images block text-lg mb-2"></i>Media Library</a><a href="#recent-writings-list" class="soft-btn rounded-lg p-3 text-center text-xs"><i class="fa-solid fa-users block text-lg mb-2"></i>Subscribers</a><a href="#overview" class="soft-btn rounded-lg p-3 text-center text-xs"><i class="fa-solid fa-chart-line block text-lg mb-2"></i>SEO Settings</a></div></div>
+  <div class="quote-panel rounded-xl p-5"><div class="text-3xl text-amber-200 mb-2"><i class="fa-solid fa-book-open"></i></div><h3 class="serif text-2xl font-semibold text-amber-100">লেখা হোক সীমাহীন...</h3><p class="text-sm text-amber-100/80 mt-2">তিন ভাষায় আপনার চিন্তা, আপনার পাঠকের কাছে।</p><div class="flex gap-3 text-sm text-amber-100 mt-5"><span>বাংলা</span><span>English</span><span>हिन्दी</span></div></div>
+</aside>
+</main>
+</div>
+</div>
+<script>
+const mainBody=document.getElementById('main-body');
+const wordCount=document.getElementById('word-count');
+const charCount=document.getElementById('char-count');
+mainBody.addEventListener('input',()=>{const text=mainBody.value.trim();charCount.textContent=text.length;wordCount.textContent=text===''?0:text.split(/\s+/).length;});
+</script>
 </body>
 </html>
