@@ -1,415 +1,2046 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-<title>লেখক ড্যাশবোর্ড | Mostafa Auvi</title>
-<style>
-:root{color-scheme:light;--ink:#29251f;--muted:#6c655b;--line:#ddd3c4;--paper:#f4eee3;--accent:#8b2026;--pale:#fffdf8}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:1120px;margin:28px auto;padding:0 16px 48px}.dashboard-head{background:#e9ddc5;border:1px solid #d6c6ad;border-radius:16px;padding:18px 22px;margin:14px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.brand{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;color:#94151b}.dashboard-head p{margin:3px 0 0}.head-links{display:flex;gap:8px;flex-wrap:wrap}.head-links a{display:inline-block;text-decoration:none;background:#bfe8f7;color:#94151b;border:1px solid #8dcfe8;border-radius:999px;padding:7px 13px;font-weight:650}.panel{background:var(--pale);border:1px solid var(--line);border-radius:14px;padding:clamp(15px,3vw,24px);margin:16px 0;box-shadow:0 4px 18px #49351a0a}h1,h2,h3{line-height:1.3}h1{font-size:clamp(1.7rem,4vw,2.4rem)}.panel h2{margin-top:0}label{display:block;font-weight:650;margin:12px 0 5px}input,textarea,select{width:100%;padding:11px 12px;border:1px solid #c9bdac;border-radius:8px;background:white;color:var(--ink);font:inherit}textarea{min-height:220px;resize:vertical}#body,#body_en{text-align:justify}button{border:0;border-radius:8px;padding:10px 15px;background:var(--accent);color:white;font:inherit;cursor:pointer;margin:6px 6px 6px 0}button.secondary{background:#e8dfd1;color:var(--ink)}button.danger{background:#7b2424}button:disabled{opacity:.55;cursor:wait}.muted,.help{color:var(--muted)}.help{font-size:.9rem}.status{padding:11px 13px;border-radius:8px;background:#eee5d8;margin:12px 0;white-space:pre-wrap;overflow-wrap:anywhere}.hidden{display:none!important}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}.full{grid-column:1/-1}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.inline-check{display:flex;align-items:center;gap:8px;margin:10px 18px 10px 0}.inline-check input{width:auto}.item{border-top:1px solid var(--line);padding:15px 0;overflow-wrap:anywhere}.item:first-child{border-top:0}.item-title{font-size:1.05rem;font-weight:700}.tag{display:inline-block;padding:2px 8px;border-radius:99px;background:#eee5d8;font-size:.85rem;margin-left:6px}.lang-panel{border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;background:#fffaf2}.lang-panel h3{margin:0}.cover-preview img{display:block;max-width:100%;max-height:280px;object-fit:contain;border-radius:10px;border:1px solid var(--line)}.rich-editor{border:1px solid #c9bdac;border-radius:10px;overflow:hidden;background:#fff}.editor-toolbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:9px;background:#eee5d8;border-bottom:1px solid var(--line)}.tool-group{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding-right:7px;margin-right:4px;border-right:1px solid #d2c5b2}.tool-group:last-child{border:0}.editor-toolbar button{margin:0;padding:6px 9px;background:#fffaf2;color:var(--ink);border:1px solid #c9bdac;font-size:.88rem}.editor-toolbar button:hover,.editor-toolbar button.is-active{background:#e4d5bd;border-color:#a99170}.editor-toolbar select{width:auto;min-width:75px;max-width:150px;padding:6px;font-size:.82rem}.color-tool{display:inline-flex;align-items:center;gap:4px;margin:0;padding:4px 7px;border:1px solid #c9bdac;background:#fffaf2;border-radius:7px}.color-tool input{width:24px;height:24px;padding:0;border:0;background:transparent}.editor-surface{min-height:460px;padding:24px 30px;outline:none;font:18px/1.8 "Noto Serif Bengali","Noto Serif",serif;color:#29251f}.editor-surface .tiptap{min-height:410px;outline:none}#bodyEnEditor .tiptap{font-family:Georgia,'EB Garamond',serif}.editor-surface .tiptap p{margin:0 0 1em;text-align:justify}.editor-surface .tiptap h1,.editor-surface .tiptap h2,.editor-surface .tiptap h3{margin:1.2em 0 .55em}.editor-surface .tiptap blockquote{border-left:4px solid #9b744b;padding:12px 20px;margin:1.4em 0;background:#f7f1e7}.editor-surface .tiptap blockquote.pull-quote{font-size:1.3em;font-weight:600;text-align:center;border:0;border-top:2px solid #9b744b;border-bottom:2px solid #9b744b;padding:18px 24px}.editor-surface .tiptap p.drop-cap:first-letter{float:left;font-size:3.3em;line-height:.85;padding:5px 7px 0 0;color:#8b2026}.editor-surface .tiptap figure{margin:1.4em auto;max-width:100%;text-align:center}.editor-surface .tiptap figure img{max-width:100%;height:auto}.editor-surface .tiptap figure img[data-align="left"]{display:block;margin-left:0;margin-right:auto}.editor-surface .tiptap figure img[data-align="center"]{display:block;margin-left:auto;margin-right:auto}.editor-surface .tiptap figure img[data-align="right"]{display:block;margin-left:auto;margin-right:0}.editor-surface .tiptap figcaption{font-size:.86em;color:#6c655b;text-align:center;margin-top:6px}.editor-surface .tiptap img[data-wrap="left"]{float:left;margin:8px 18px 10px 0}.editor-surface .tiptap img[data-wrap="right"]{float:right;margin:8px 0 10px 18px}.editor-surface .tiptap .image-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:1.4em 0}.editor-surface .tiptap .image-gallery img{width:100%;height:auto;margin:0}.editor-surface .tiptap table{border-collapse:collapse;width:100%;margin:1em 0}.editor-surface .tiptap td,.editor-surface .tiptap th{border:1px solid #b9ad9d;padding:7px}.editor-surface .tiptap th{background:#eee5d8}.editor-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 14px;background:#faf6ee;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}.editor-source{display:none!important}.editor-surface .tiptap p.is-editor-empty:first-child:before{content:attr(data-placeholder);float:left;color:#9b9387;pointer-events:none;height:0}@media(max-width:640px){.editor-surface{padding:16px;min-height:360px}.editor-toolbar select{max-width:115px}.tool-group{border:0}}@media(max-width:640px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.wrap{margin-top:12px}.panel{border-radius:10px}}
-</style>
-</head>
-<body><main class="wrap">
-<header class="dashboard-head"><div><div class="brand">মোস্তফা অভি</div><p>লেখক ড্যাশবোর্ড · লেখা পরিচালনা</p></div><nav class="head-links" aria-label="প্রধান নেভিগেশন"><a href="./">হোম</a><a href="./posts.html">প্রকাশিত লেখা</a><a href="./journal.html">জার্নাল</a></nav></header>
-<h1>লেখক ড্যাশবোর্ড</h1><p class="muted">শুধু অনুমোদিত লেখক এখানে লেখা পরিচালনা করতে পারবেন। পাঠকেরা লগইন ছাড়াই প্রকাশিত লেখা পড়তে পারবেন।</p>
-<div id="status" class="status" role="status" aria-live="polite">সেটআপ যাচাই করা হচ্ছে…</div><button id="denyLogoutBtn" class="secondary hidden" type="button">এই অ্যাকাউন্ট থেকে লগআউট</button>
-<section id="login" class="panel hidden"><h2>নিরাপদ লগইন</h2><p>শুধু অনুমোদিত লেখক ইমেইল ও পাসওয়ার্ড দিয়ে প্রবেশ করতে পারবেন।</p><label for="email">ইমেইল</label><input id="email" type="email" autocomplete="username" placeholder="আপনার অনুমোদিত ইমেইল" required><label for="password">পাসওয়ার্ড</label><input id="password" type="password" autocomplete="current-password" required><button id="loginBtn" type="button">লগইন করুন</button><p><a href="#" id="forgotLink">পাসওয়ার্ড ভুলে গেছেন?</a></p></section>
-<section id="resetBox" class="panel hidden"><h2>নতুন পাসওয়ার্ড সেট করুন</h2><label for="newPass">নতুন পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর)</label><input type="password" id="newPass" minlength="8" autocomplete="new-password"><button id="savePass" type="button">পাসওয়ার্ড সেভ করুন</button><button id="cancelReset" class="secondary" type="button">বাতিল</button></section>
-<section id="app" class="hidden">
-<div class="panel"><div class="row"><h2 style="flex:1">লেখা তৈরি / সম্পাদনা</h2><button id="logoutBtn" class="secondary" type="button">লগআউট</button></div>
-<form id="postForm">
-<input id="bnId" type="hidden"><input id="enId" type="hidden"><input id="groupId" type="hidden">
-<div class="grid">
-<div class="full"><label for="parentCategory">বিভাগ</label><select id="parentCategory" required><option value="">বিভাগ নির্বাচন করুন</option><option>কথাসাহিত্য</option><option>প্রবন্ধ</option><option>সাহিত্যালোচনা</option><option>অনুবাদ সাহিত্য</option><option>ভ্রমণকাহিনি</option><option>স্মৃতির ভাণ্ডার</option><option>ব্যক্তিগত রচনা</option><option>আইন-আদালত</option><option>ব্যাংকিং ও অর্থনীতি</option><option>পিডিএফ ও প্রকাশনা</option></select></div>
-<div class="full"><label for="subcategory">উপবিভাগ</label><select id="subcategory" disabled required><option value="">আগে বিভাগ নির্বাচন করুন</option></select></div>
-<div><label for="excerpt">সংক্ষিপ্ত পরিচিতি (ঐচ্ছিক)</label><textarea id="excerpt" style="min-height:90px" maxlength="600"></textarea></div>
-<div><label for="tags">ট্যাগ (কমা দিয়ে আলাদা করুন)</label><input id="tags" placeholder="সাহিত্য, স্মৃতি, ভ্রমণ"></div>
-<div class="full"><label class="inline-check"><input id="featured" type="checkbox"> নির্বাচিত লেখা (Featured Writing)</label><p class="help">চিহ্নিত লেখা জার্নালের নির্বাচিত লেখার তালিকায় দেখানো হবে।</p></div>
-<div class="full"><label>কভার ছবি (ঐচ্ছিক)</label><button type="button" id="coverPickBtn" class="secondary" style="width:100%;min-height:70px;border:2px dashed #b8a58d;background:#fffaf2;color:#554638">ছবি বেছে নিতে এখানে চাপ দিন</button><input id="coverFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden><div id="coverPreview" class="cover-preview" style="margin:10px 0"></div><label for="coverImage">কভার ছবির URL (প্রয়োজনে)</label><input id="coverImage" type="url" placeholder="https://…"><p class="help">সর্বোচ্চ 5 MB ছবি আপলোড করা যাবে।</p></div>
-</div>
-<section class="lang-panel"><h3>বাংলা সংস্করণ</h3><p class="help">বাংলা লেখা প্রস্তুত থাকলে এই অংশ পূরণ করুন। না থাকলে ফাঁকা রাখুন।</p>
-<label for="title">বাংলা শিরোনাম</label><input id="title" maxlength="180">
-<label for="slug">বাংলা স্থায়ী লিংক / slug</label><input id="slug" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="180" placeholder="amar-notun-lekha">
-<label for="body">বাংলা মূল লেখা</label>
-<div class="rich-editor" id="bodyEditorShell">
- <div class="editor-toolbar" data-editor="body">
-  <div class="tool-group"><button type="button" data-cmd="bold" title="Bold"><b>B</b></button><button type="button" data-cmd="italic" title="Italic"><i>I</i></button><button type="button" data-cmd="underline" title="Underline"><u>U</u></button><button type="button" data-cmd="strike" title="Strikethrough"><s>S</s></button><button type="button" data-cmd="undo" title="Undo">↶</button><button type="button" data-cmd="redo" title="Redo">↷</button></div>
-  <div class="tool-group"><button type="button" data-cmd="alignLeft">বামে</button><button type="button" data-cmd="alignCenter">মাঝে</button><button type="button" data-cmd="alignRight">ডানে</button><button type="button" data-cmd="justify">জাস্টিফাই</button></div>
-  <div class="tool-group"><select data-control="fontFamily" aria-label="ফন্ট"><option value="">ফন্ট</option><option value="Noto Serif Bengali">Noto Serif Bengali</option><option value="Noto Sans Bengali">Noto Sans Bengali</option><option value="Georgia">Georgia</option><option value="Arial">Arial</option><option value="serif">Serif</option><option value="sans-serif">Sans Serif</option></select><select data-control="fontSize" aria-label="ফন্ট সাইজ"><option value="">আকার</option><option>12px</option><option>14px</option><option>16px</option><option>18px</option><option>20px</option><option>24px</option><option>28px</option><option>32px</option><option>36px</option></select><select data-control="lineHeight" aria-label="লাইন দূরত্ব"><option value="">লাইন দূরত্ব</option><option value="1.2">1.2</option><option value="1.4">1.4</option><option value="1.6">1.6</option><option value="1.8">1.8</option><option value="2">2.0</option></select><select data-control="paragraphSpacing" aria-label="অনুচ্ছেদের ফাঁক"><option value="">অনুচ্ছেদ ফাঁক</option><option value="0.5em">ছোট</option><option value="1em">মাঝারি</option><option value="1.5em">বড়</option><option value="2em">আরও বড়</option></select><select data-control="textIndent" aria-label="প্রথম লাইনের ফাঁক"><option value="">প্রথম লাইন</option><option value="1em">1em</option><option value="1.5em">1.5em</option><option value="2em">2em</option><option value="3em">3em</option></select></div>
-  <div class="tool-group"><label class="color-tool" title="লেখার রং">A<input type="color" data-control="textColor" value="#202020"></label><label class="color-tool highlight-tool" title="হাইলাইট">▰<input type="color" data-control="highlightColor" value="#fff19a"></label><label class="color-tool" title="পটভূমির রং">BG<input type="color" data-control="backgroundColor" value="#fff19a"></label><button type="button" data-cmd="removeFormat">ফরম্যাট মুছুন</button></div>
-  <div class="tool-group"><button type="button" data-cmd="h1">H1</button><button type="button" data-cmd="h2">H2</button><button type="button" data-cmd="h3">H3</button><button type="button" data-cmd="blockquote">উদ্ধৃতি</button><button type="button" data-cmd="pullquote">Pull Quote</button><button type="button" data-cmd="dropcap">Drop Cap</button><button type="button" data-cmd="hr">রেখা</button></div>
-  <div class="tool-group"><button type="button" data-cmd="bulletList">• তালিকা</button><button type="button" data-cmd="orderedList">১. তালিকা</button><button type="button" data-cmd="table">ছক</button><button type="button" data-cmd="link">লিংক</button><button type="button" data-cmd="footnote">পাদটীকা</button><button type="button" data-cmd="superscript">x²</button><button type="button" data-cmd="subscript">x₂</button><button type="button" data-cmd="special">প্রতীক</button></div>
-  <div class="tool-group"><button type="button" data-cmd="image">ছবি বসান</button><button type="button" data-cmd="gallery">গ্যালারি</button><select data-control="imageAlign" aria-label="ছবির অবস্থান"><option value="">ছবির অবস্থান</option><option value="left">বামে</option><option value="center">মাঝে</option><option value="right">ডানে</option></select><select data-control="imageWidth" aria-label="ছবির আকার"><option value="">ছবির আকার</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap" aria-label="ছবির চারপাশে লেখা"><option value="">লেখার প্রবাহ</option><option value="none">লেখা নিচে</option><option value="left">ছবি বামে, লেখা পাশে</option><option value="right">ছবি ডানে, লেখা পাশে</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
-  <div class="tool-group"><button type="button" data-cmd="findReplace">খুঁজুন/বদলান</button><button type="button" data-cmd="restoreDraft">খসড়া ফেরত</button><button type="button" data-cmd="fullscreen">পূর্ণ পর্দা</button><button type="button" data-cmd="preview">প্রিভিউ</button></div>
- </div>
- <div class="editor-surface" id="bodyEditor" aria-label="বাংলা লেখার এডিটর"></div>
- <textarea id="body" class="editor-source" aria-hidden="true" tabindex="-1"></textarea>
- <div class="editor-footer"><span id="bodyCount">শব্দ: ০ · অক্ষর: ০</span><span id="bodyAutosave">এই ব্রাউজারে খসড়া স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে</span></div>
-</div>
-<input id="inlineImageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden><input id="galleryFiles" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden></section>
-<section class="lang-panel"><h3>English version</h3><p class="help">Fill this section when the English version is ready. Leave it blank if you are publishing only in Bengali.</p>
-<label for="title_en">English title</label><input id="title_en" maxlength="180">
-<label for="slug_en">English permanent link / slug</label><input id="slug_en" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="180" placeholder="my-new-story">
-<label for="body_en">English text</label>
-<div class="rich-editor" id="bodyEnEditorShell">
- <div class="editor-toolbar" data-editor="body_en">
-  <div class="tool-group"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="underline"><u>U</u></button><button type="button" data-cmd="strike"><s>S</s></button><button type="button" data-cmd="undo">↶</button><button type="button" data-cmd="redo">↷</button></div>
-  <div class="tool-group"><button type="button" data-cmd="alignLeft">Left</button><button type="button" data-cmd="alignCenter">Center</button><button type="button" data-cmd="alignRight">Right</button><button type="button" data-cmd="justify">Justify</button></div>
-  <div class="tool-group"><select data-control="fontFamily"><option value="">Font</option><option value="Noto Serif Bengali">Noto Serif Bengali</option><option value="Georgia">Georgia</option><option value="Arial">Arial</option><option value="serif">Serif</option><option value="sans-serif">Sans Serif</option></select><select data-control="fontSize"><option value="">Size</option><option>12px</option><option>14px</option><option>16px</option><option>18px</option><option>20px</option><option>24px</option><option>28px</option><option>32px</option></select><select data-control="lineHeight"><option value="">Line height</option><option value="1.2">1.2</option><option value="1.4">1.4</option><option value="1.6">1.6</option><option value="1.8">1.8</option><option value="2">2.0</option></select><select data-control="paragraphSpacing"><option value="">Paragraph gap</option><option value="0.5em">Small</option><option value="1em">Medium</option><option value="1.5em">Large</option></select><select data-control="textIndent"><option value="">Indent</option><option value="1em">1em</option><option value="1.5em">1.5em</option><option value="2em">2em</option></select></div>
-  <div class="tool-group"><label class="color-tool">A<input type="color" data-control="textColor" value="#202020"></label><label class="color-tool">▰<input type="color" data-control="highlightColor" value="#fff19a"></label><label class="color-tool">BG<input type="color" data-control="backgroundColor" value="#fff19a"></label><button type="button" data-cmd="removeFormat">Clear format</button></div>
-  <div class="tool-group"><button type="button" data-cmd="h1">H1</button><button type="button" data-cmd="h2">H2</button><button type="button" data-cmd="h3">H3</button><button type="button" data-cmd="blockquote">Quote</button><button type="button" data-cmd="pullquote">Pull quote</button><button type="button" data-cmd="dropcap">Drop cap</button><button type="button" data-cmd="hr">Rule</button></div>
-  <div class="tool-group"><button type="button" data-cmd="bulletList">Bullets</button><button type="button" data-cmd="orderedList">Numbering</button><button type="button" data-cmd="table">Table</button><button type="button" data-cmd="link">Link</button><button type="button" data-cmd="footnote">Footnote</button><button type="button" data-cmd="superscript">x²</button><button type="button" data-cmd="subscript">x₂</button><button type="button" data-cmd="special">Symbols</button></div>
-  <div class="tool-group"><button type="button" data-cmd="image">Insert image</button><button type="button" data-cmd="gallery">Gallery</button><select data-control="imageAlign"><option value="">Image position</option><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select><select data-control="imageWidth"><option value="">Image size</option><option value="25%">25%</option><option value="40%">40%</option><option value="50%">50%</option><option value="70%">70%</option><option value="85%">85%</option><option value="100%">100%</option></select><select data-control="imageWrap"><option value="">Text wrap</option><option value="none">No wrap</option><option value="left">Image left</option><option value="right">Image right</option></select><button type="button" data-cmd="youtube">YouTube</button></div>
-  <div class="tool-group"><button type="button" data-cmd="findReplace">Find/Replace</button><button type="button" data-cmd="restoreDraft">Restore draft</button><button type="button" data-cmd="fullscreen">Full screen</button><button type="button" data-cmd="preview">Preview</button></div>
- </div>
- <div class="editor-surface" id="bodyEnEditor" aria-label="English writing editor"></div>
- <textarea id="body_en" class="editor-source" aria-hidden="true" tabindex="-1"></textarea>
- <div class="editor-footer"><span id="body_enCount">Words: 0 · Characters: 0</span><span id="body_enAutosave">Draft autosaves in this browser</span></div>
-</div></section>
-<div class="row"><button id="draftBtn" type="button">খসড়া হিসেবে সংরক্ষণ</button><button id="publishBtn" type="button">প্রকাশ করুন</button><button id="previewBtn" class="secondary" type="button">প্রিভিউ</button><button id="unpublishBtn" class="secondary" type="button">প্রকাশ বন্ধ করুন</button><button id="newBtn" class="secondary" type="button">নতুন লেখা</button></div>
-<p class="help">একটি ভাষার অংশ পূরণ করলেই সেই ভাষার পোস্ট সংরক্ষিত হবে। দুটি অংশ পূরণ করলে একবার Publish চাপলে দুটিই প্রকাশিত হবে। প্রতিটি ভাষার আলাদা slug থাকবে; দুটি সংস্করণ একই group_id দিয়ে যুক্ত থাকবে।</p>
-</form></div>
-<div class="panel"><h2>আপনার লেখা</h2><div id="posts">লেখা লোড হচ্ছে…</div></div>
-</section></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-'use strict';
-const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
-const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
-const CATEGORY_TREE={
- "কথাসাহিত্য":["গল্প","ছোটগল্প","বড়গল্প","অণুগল্প","রম্যগল্প","রহস্য ও গোয়েন্দা","ঐতিহাসিক গল্প","শিশু-কিশোর গল্প","অনূদিত গল্প","উপন্যাস","সম্পূর্ণ উপন্যাস","ধারাবাহিক উপন্যাস","ঐতিহাসিক উপন্যাস","সামাজিক উপন্যাস","উপন্যাসের খণ্ডাংশ","অনূদিত উপন্যাস"],
- "প্রবন্ধ":["দৈনন্দিন জীবন","সাহিত্য বিষয়ক প্রবন্ধ","বই আলোচনা","বিশ্বসাহিত্য","সমাজ ও সংস্কৃতি","ইতিহাস ও ঐতিহ্য","চিন্তা ও মনন","অনূদিত প্রবন্ধ"],
- "সাহিত্যালোচনা":["সাহিত্যসমালোচনা","লেখক ও সাহিত্যকর্ম","পাঠ-প্রতিক্রিয়া"],
- "অনুবাদ সাহিত্য":["অনূদিত গল্প","অনূদিত উপন্যাস","অনূদিত প্রবন্ধ","বিশ্বসাহিত্য পরিচিতি"],
- "ভ্রমণকাহিনি":["বাংলাদেশ ভ্রমণ","বিদেশ ভ্রমণ","ভ্রমণস্মৃতি","স্থান ও জনপদ","ভ্রমণ-নিবন্ধ"],
- "স্মৃতির ভাণ্ডার":["স্মৃতিকথা","দিনলিপি","ফেলে আসা দিন","স্মৃতির কথা"],
- "ব্যক্তিগত রচনা":["আমার কথা","ব্যক্তিগত ভাবনা","দিনলিপি","স্মৃতিকথা"],
- "আইন-আদালত":["আইন বিষয়ক প্রবন্ধ","আদালত ও বিচার","আইনজীবীর অভিজ্ঞতা","আইন ও সমাজ","আইন-সাহিত্য","বাংলাদেশের জুরিসপ্রুডেন্স","বৃটিশ ল ও নৈতিকতার কথকতা","সিভিল আদালতের কড়চা","কেসস্টাডি"],
- "ব্যাংকিং ও অর্থনীতি":["ব্যাংকিং","আমার ব্যাংকিং জীবন","এসএমই ব্যাংকিং","এসএমই ব্যাংকিং নিয়ে যত কথা","অর্থনীতি","আর্থিক অন্তর্ভুক্তি","ব্যবসা ও উদ্যোগ"],
- "পিডিএফ ও প্রকাশনা":["আমার বই","বই ও পুস্তিকা","পিডিএফ বই","ডাউনলোডযোগ্য লেখা"]
-};
-function updateSubcategories(selected=""){
- const parent=val('parentCategory'),select=document.getElementById('subcategory'),options=CATEGORY_TREE[parent]||[];
- select.innerHTML='<option value="">উপবিভাগ নির্বাচন করুন</option>'+options.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');
- select.disabled=!options.length;
- if(selected&&options.includes(selected))select.value=selected;
-}
-const statusEl=document.getElementById('status'),login=document.getElementById('login'),app=document.getElementById('app'),form=document.getElementById('postForm');
-let sb=null,session=null,activeRows=[],busy=false,refreshVersion=0;
-const configured=SUPABASE_URL.startsWith('https://')&&SUPABASE_ANON_KEY&&!SUPABASE_ANON_KEY.includes('YOUR_');
-function status(s){statusEl.textContent=s}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function setBusy(v){busy=v;document.querySelectorAll('button').forEach(b=>b.disabled=v)}
-window.auviEditors=window.auviEditors||{};
-function val(id){const ed=window.auviEditors[id];return ed?ed.getHTML():document.getElementById(id).value}
-function setVal(id,v){const value=v??'',ta=document.getElementById(id);ta.value=value;const ed=window.auviEditors[id];if(ed)ed.commands.setContent(value||'<p></p>',false)}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>মোস্তফা অভি — লেখক ড্যাশবোর্ড | MOSTSFA AUVI Author Dashboard</title>
+  <meta name="description" content="বাংলা ও ইংরেজি দ্বিভাষিক লেখক ব্যবস্থাপনা ড্যাশবোর্ড" />
+  <meta name="author" content="MOSTSFA AUVI" />
 
-function validSlug(s){return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s)}
-function languageRow(rows,lang){return rows.find(r=>r.language===lang)||null}
-function fill(rows=[]){
- activeRows=rows;const bn=languageRow(rows,'bn'),en=languageRow(rows,'en'),base=bn||en;
- setVal('bnId',bn?.id||'');setVal('enId',en?.id||'');setVal('groupId',base?.group_id||'');
- setVal('parentCategory',base?.parent_category||'');updateSubcategories(base?.subcategory||base?.category||'');setVal('excerpt',base?.excerpt||'');setVal('tags',(base?.tags||[]).join(', '));setVal('coverImage',base?.cover_image||'');document.getElementById('featured').checked=!!base?.featured;
- setVal('title',bn?.title||'');setVal('slug',bn?.slug||'');setVal('body',bn?.body||'');
- setVal('title_en',en?.title||'');setVal('slug_en',en?.slug||'');setVal('body_en',en?.body||'');
- showCoverPreview(base?.cover_image||'');
- document.getElementById('unpublishBtn').classList.toggle('hidden',!rows.some(r=>r.published));
- document.getElementById('publishBtn').textContent=rows.some(r=>r.published)?'প্রকাশিত লেখা আপডেট করুন':'প্রকাশ করুন';
-}
-async function isAuthorized(s){const {data,error}=await sb.from('admin_users').select('user_id').eq('user_id',s.user.id).maybeSingle();return !error&&!!data}
-async function refresh(){
- if(!sb)return;const version=++refreshVersion;const {data,error}=await sb.auth.getSession();if(version!==refreshVersion)return;
- if(error){status('সেশন যাচাই করা যায়নি: '+error.message);return}
- session=data.session;app.classList.add('hidden');login.classList.toggle('hidden',!!session);
- if(!session){status('লেখা পরিচালনা করতে অনুমোদিত অ্যাকাউন্ট দিয়ে লগইন করুন।');return}
- status('অ্যাকাউন্টের অনুমতি যাচাই হচ্ছে…');let authorized=false;
- try{authorized=await isAuthorized(session)}catch(e){if(version===refreshVersion)status('লেখক অনুমতি যাচাই করা যায়নি: '+(e?.message||'Supabase সংযোগ পরীক্ষা করুন।'));return}
- if(version!==refreshVersion)return;
- if(!authorized){status('এই অ্যাকাউন্টটি লেখক হিসেবে অনুমোদিত নয়।\nআপনার লগইন User ID (UUID): '+session.user.id+'\n\nSupabase → SQL Editor-এ চালান:\nINSERT INTO public.admin_users (user_id) VALUES (\''+session.user.id+'\') ON CONFLICT (user_id) DO NOTHING;');login.classList.remove('hidden');['email','password','loginBtn'].forEach(id=>document.getElementById(id).classList.add('hidden'));document.getElementById('denyLogoutBtn').classList.remove('hidden');return}
- ['email','password','loginBtn'].forEach(id=>document.getElementById(id).classList.remove('hidden'));document.getElementById('denyLogoutBtn').classList.add('hidden');login.classList.add('hidden');app.classList.remove('hidden');status('নিরাপদে লগইন হয়েছে।');await loadPosts();
-}
-if(!configured){status('Supabase URL বা publishable key সেট করা নেই।');login.classList.remove('hidden')}
-else{sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});sb.auth.onAuthStateChange((event,nextSession)=>{if(event==='PASSWORD_RECOVERY'&&nextSession){document.getElementById('resetBox').classList.remove('hidden');status('নতুন পাসওয়ার্ড দিন এবং সেভ করুন।')}setTimeout(()=>refresh(),0)});refresh()}
-document.getElementById('forgotLink').onclick=async e=>{e.preventDefault();const email=val('email').trim();if(!email)return status('আগে ইমেইল লিখুন।');setBusy(true);try{const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:'https://gmauvibbl-star.github.io/mostafa-auvi-website/admin.html'});status(error?'রিসেট ইমেইল পাঠানো যায়নি: '+error.message:'যদি এই ইমেইলটি নিবন্ধিত থাকে, রিসেট নির্দেশনা পাঠানো হয়েছে। ইনবক্স ও স্প্যাম ফোল্ডার দেখুন।')}finally{setBusy(false)}};
-document.getElementById('savePass').onclick=async()=>{const password=val('newPass');if(password.length<8)return status('পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।');setBusy(true);try{const {error}=await sb.auth.updateUser({password});if(error){status('পাসওয়ার্ড পরিবর্তন হয়নি: '+error.message);return}document.getElementById('resetBox').classList.add('hidden');await sb.auth.signOut();status('পাসওয়ার্ড পরিবর্তন হয়েছে। নতুন পাসওয়ার্ড দিয়ে লগইন করুন।')}finally{setBusy(false)}};
-document.getElementById('cancelReset').onclick=()=>document.getElementById('resetBox').classList.add('hidden');
-document.getElementById('loginBtn').onclick=async()=>{const email=val('email').trim(),password=val('password');if(!email||!password)return status('ইমেইল ও পাসওয়ার্ড—দুটিই লিখুন।');setBusy(true);try{const {error}=await sb.auth.signInWithPassword({email,password});if(error)status('লগইন হয়নি: '+error.message)}finally{setBusy(false)}};
-async function logout(){if(busy||!sb)return;setBusy(true);try{const {error}=await sb.auth.signOut({scope:'local'});if(error){status('লগআউট করা যায়নি: '+error.message);return}session=null;app.classList.add('hidden');login.classList.remove('hidden');['email','password','loginBtn'].forEach(id=>document.getElementById(id).classList.remove('hidden'));document.getElementById('password').value='';fill();status('এই ব্রাউজার থেকে নিরাপদে লগআউট হয়েছে।')}catch(e){status('লগআউট করা যায়নি: '+(e?.message||'আবার চেষ্টা করুন।'))}finally{setBusy(false)}}
-document.getElementById('logoutBtn').onclick=logout;document.getElementById('denyLogoutBtn').onclick=logout;
-document.getElementById('newBtn').onclick=()=>{fill();status('নতুন লেখা তৈরির ফর্ম প্রস্তুত।')};
-// The form-level preview button must call the same preview routine as each editor toolbar.
-document.getElementById('previewBtn').addEventListener('click',()=>{
- if(typeof window.auviPreview==='function')window.auviPreview();
- else status('প্রিভিউ প্রস্তুত হচ্ছে। কয়েক সেকেন্ড পর আবার চাপ দিন।');
-});
-document.getElementById('parentCategory').addEventListener('change',()=>updateSubcategories());
-function showCoverPreview(url){const box=document.getElementById('coverPreview');box.innerHTML=url?'<img src="'+esc(url)+'" alt="কভার ছবির প্রিভিউ"><button type="button" class="secondary" id="removeCoverPreview">কভার ছবি সরান</button>':'';const b=document.getElementById('removeCoverPreview');if(b)b.onclick=()=>{setVal('coverImage','');document.getElementById('coverFile').value='';showCoverPreview('')}}
-document.getElementById('coverImage').addEventListener('input',e=>showCoverPreview(e.target.value.trim()));
-document.getElementById('coverPickBtn').onclick=()=>document.getElementById('coverFile').click();
-async function uploadImage(file){if(!session||!(await isAuthorized(session)))throw new Error('অনুমোদিত লেখক হিসেবে লগইন করুন।');if(file.size>5*1024*1024)throw new Error('ছবিটি 5 MB-এর চেয়ে বড়।');if(!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type))throw new Error('JPG, PNG, WebP বা GIF ছবি বেছে নিন।');const name=file.name.replace(/[^a-zA-Z0-9._-]/g,'-').replace(/-+/g,'-');const path=Date.now()+'-'+Math.random().toString(36).slice(2,8)+'-'+name;const {data,error}=await sb.storage.from('post-covers').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});if(error)throw new Error(error.message+' (post-covers bucket ও upload policy যাচাই করুন)');return sb.storage.from('post-covers').getPublicUrl(data.path).data.publicUrl}
-document.getElementById('coverFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;const previewReader=new FileReader();previewReader.onload=()=>showCoverPreview(String(previewReader.result||''));previewReader.readAsDataURL(file);setBusy(true);try{const url=await uploadImage(file);setVal('coverImage',url);showCoverPreview(url);status('কভার ছবি আপলোড হয়েছে এবং সংরক্ষণের জন্য প্রস্তুত।')}catch(err){setVal('coverImage','');status('ছবির প্রিভিউ দেখা যাচ্ছে, কিন্তু সার্ভারে আপলোড হয়নি: '+err.message+'. Supabase Storage-এর post-covers bucket ও policy পরীক্ষা করুন।')}finally{setBusy(false)}});
-// Inline images are inserted by the Tiptap editor module below.
-function readLanguage(lang){const en=lang==='en',title=val(en?'title_en':'title').trim(),slug=val(en?'slug_en':'slug').trim(),body=val(en?'body_en':'body').trim();if(!title&&!slug&&!body)return null;if(!title||!slug||!body)throw new Error((en?'English':'বাংলা')+' সংস্করণের শিরোনাম, slug ও মূল লেখা—তিনটিই পূরণ করুন।');if(!validSlug(slug))throw new Error((en?'English':'বাংলা')+' slug-এ ছোট ইংরেজি অক্ষর, সংখ্যা ও একক হাইফেন ব্যবহার করুন।');return {language:lang,title,slug,body}}
-async function savePost(publish,unpublish=false){
- if(busy||!session)return;if(!(await isAuthorized(session))){status('লেখক অনুমতি যাচাই করা যায়নি। আবার লগইন করুন।');app.classList.add('hidden');return}
- let bn,en;try{bn=readLanguage('bn');en=readLanguage('en')}catch(e){return status(e.message)}
- if(!bn&&!en)return status('বাংলা বা ইংরেজি—অন্তত একটি ভাষার শিরোনাম, slug ও মূল লেখা পূরণ করুন।');
- const existingBn=activeRows.find(r=>r.language==='bn'),existingEn=activeRows.find(r=>r.language==='en');
- if(bn&&en&&bn.slug===en.slug)return status('বাংলা ও ইংরেজি সংস্করণের slug আলাদা হতে হবে।');
- const cover=val('coverImage').trim();if(cover&&!/^https?:\/\//i.test(cover))return status('কভার ছবির URL http:// বা https:// দিয়ে শুরু হতে হবে।');
- const group=val('groupId').trim()||('auvi-'+(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2)));
- const parentCategory=val('parentCategory').trim()||null,subcategory=val('subcategory').trim()||null,category=subcategory,tags=val('tags').split(',').map(x=>x.trim()).filter(Boolean),excerpt=val('excerpt').trim()||null,now=new Date().toISOString();
- if(publish&&(!parentCategory||!subcategory))return status('প্রকাশের আগে বিভাগ ও উপবিভাগ—দুটিই নির্বাচন করুন।');
-  if(publish&&!confirm('প্রস্তুত ভাষার '+(bn&&en?'দুটি সংস্করণ':bn?'বাংলা সংস্করণ':'ইংরেজি সংস্করণ')+' প্রকাশ করবেন?'))return;
- if(unpublish&&!confirm('এই লেখার প্রস্তুত ভাষার সংস্করণগুলো অপ্রকাশিত করবেন?'))return;
- setBusy(true);
- try{
-  const changes=[];
-  for(const item of [{lang:'bn',value:bn,old:existingBn},{lang:'en',value:en,old:existingEn}]){
-   if(!item.value)continue;
-   const old=item.old;
-   const row={group_id:group,language:item.lang,parent_category:parentCategory,subcategory,title:item.value.title,slug:item.value.slug,body:item.value.body,category,tags,excerpt,cover_image:cover||null,featured:document.getElementById('featured').checked,published:unpublish?false:publish,updated_at:now,published_at:unpublish?null:(publish?(old?.published_at||now):null)};
-   let result;
-   if(old)result=await sb.from('posts').update(row).eq('id',old.id).select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,featured,published,published_at,updated_at').single();
-   else result=await sb.from('posts').insert(row).select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,featured,published,published_at,updated_at').single();
-   if(result.error)throw new Error((item.lang==='bn'?'বাংলা':'English')+' সংস্করণ সংরক্ষণে সমস্যা: '+result.error.message);
-   changes.push(result.data);
-  }
-  if(changes.length===0)throw new Error('সংরক্ষণের জন্য কোনো ভাষার লেখা পাওয়া যায়নি।');
-  status(unpublish?'প্রস্তুত সংস্করণগুলো অপ্রকাশিত হয়েছে।':publish?'প্রস্তুত ভাষার সংস্করণগুলো প্রকাশিত হয়েছে।':'প্রস্তুত ভাষার খসড়া সংরক্ষিত হয়েছে।');
-  await loadPosts();await loadGroup(group);return true;
- }catch(e){status('সংরক্ষণ সম্পূর্ণ হয়নি: '+e.message+'. তালিকা রিফ্রেশ করে কোন সংস্করণ সংরক্ষিত হয়েছে যাচাই করুন।');return false}
- finally{setBusy(false)}
-}
-document.getElementById('draftBtn').onclick=()=>savePost(false);document.getElementById('publishBtn').onclick=()=>savePost(true);document.getElementById('unpublishBtn').onclick=()=>savePost(false,true);
-document.getElementById('previewBtn')?.addEventListener('click',()=>window.auviPreview?.());
-async function loadGroup(group){const {data,error}=await sb.from('posts').select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,featured,published,published_at,updated_at').eq('group_id',group);if(error)throw error;fill(data||[])}
-async function loadPosts(){
- const el=document.getElementById('posts');el.textContent='লেখা লোড হচ্ছে…';
- const {data,error}=await sb.from('posts').select('id,group_id,language,slug,title,published,updated_at,category,parent_category,subcategory,featured').order('updated_at',{ascending:false});
- if(error){el.textContent='লেখার তালিকা লোড করা যায়নি: '+error.message;return}
- el.innerHTML=data?.length?data.map(p=>'<div class="item"><div class="item-title">'+esc(p.title)+'</div><span class="tag">'+(p.language==='en'?'English':'বাংলা')+'</span><span class="tag">'+(p.published?'প্রকাশিত':'খসড়া')+'</span>'+(p.category?'<span class="tag">'+esc(p.category)+'</span>':'')+(p.featured?'<span class="tag">নির্বাচিত</span>':'')+'<div class="muted">/'+esc(p.slug)+' · আপডেট: '+(p.updated_at?new Date(p.updated_at).toLocaleString('bn-BD'):'—')+'</div><div class="row"><button type="button" data-edit="'+esc(p.id)+'">এডিট</button><button type="button" class="danger" data-delete="'+esc(p.id)+'">এই ভাষার পোস্ট মুছুন</button>'+(p.published?'<a href="./read.html?slug='+encodeURIComponent(p.slug)+'" target="_blank" rel="noopener">লেখা দেখুন</a>':'')+'</div></div>').join(''):'এখনো কোনো লেখা নেই।';
- el.querySelectorAll('[data-edit]').forEach(b=>b.onclick=async()=>{if(busy)return;setBusy(true);try{const {data:p,error}=await sb.from('posts').select('id,group_id,language,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,tags,featured,published,published_at,updated_at').eq('id',b.dataset.edit).single();if(error)throw error;if(p.group_id){await loadGroup(p.group_id)}else fill([p]);status('এই লেখার সঙ্গে যুক্ত ভাষার সংস্করণগুলো সম্পাদনার জন্য লোড হয়েছে.');window.scrollTo({top:0,behavior:'smooth'})}catch(e){status('লেখা খোলা যায়নি: '+e.message)}finally{setBusy(false)}});
- el.querySelectorAll('[data-delete]').forEach(b=>b.onclick=async()=>{if(busy)return;const row=b.closest('.item'),name=row?.querySelector('.item-title')?.textContent||'এই লেখা';if(!confirm('“'+name+'” ('+(row?.querySelector('.tag')?.textContent||'')+') স্থায়ীভাবে মুছে ফেলবেন? অন্য ভাষার সংস্করণ আলাদাভাবে অক্ষত থাকবে।'))return;setBusy(true);try{if(!(await isAuthorized(session)))throw new Error('লেখক অনুমতি যাচাই হয়নি।');const {data,error}=await sb.from('posts').delete().eq('id',b.dataset.delete).select('id');if(error)throw error;if(!data?.length)throw new Error('কোনো পোস্ট মুছে ফেলা হয়নি।');status('নির্বাচিত ভাষার পোস্ট মুছে ফেলা হয়েছে।');await loadPosts();if(val('bnId')===b.dataset.delete||val('enId')===b.dataset.delete)fill()}catch(e){status('মুছে ফেলা যায়নি: '+e.message)}finally{setBusy(false)}});
-}
-</script><script type="module">
-(async function(){
- const shellIds={body:'bodyEditor',body_en:'bodyEnEditor'};
- const announce=(m)=>{const s=document.getElementById('status');if(s)s.textContent=m};
- try{
-  const [{Editor,Node,mergeAttributes},{default:StarterKit},{default:ParagraphBase},{default:Underline},{default:TextAlign},{default:TextStyle},{default:Color},{default:Highlight},{default:FontFamily},{default:Image},{default:Link},{default:Table},{default:TableRow},{default:TableHeader},{default:TableCell},{default:Superscript},{default:Subscript},{default:Youtube},{default:Placeholder},{default:CharacterCount}]=await Promise.all([
-   import('https://esm.sh/@tiptap/core@2.11.5'),
-   import('https://esm.sh/@tiptap/starter-kit@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-paragraph@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-underline@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-text-align@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-text-style@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-color@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-highlight@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-font-family@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-image@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-link@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-table@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-table-row@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-table-header@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-table-cell@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-superscript@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-subscript@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-youtube@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-placeholder@2.11.5'),
-   import('https://esm.sh/@tiptap/extension-character-count@2.11.5')
-  ]);
-  const RichTextStyle=TextStyle.extend({addAttributes(){return {...(this.parent?.()||{}),fontSize:{default:null,parseHTML:el=>el.style.fontSize||null,renderHTML:attrs=>attrs.fontSize?{style:'font-size:'+attrs.fontSize}:{} }}}});
-  const RichImage=Image.extend({addAttributes(){return {...(this.parent?.()||{}),
-   width:{default:'100%',parseHTML:el=>el.getAttribute('data-width')||el.style.width||'100%',renderHTML:attrs=>({'data-width':attrs.width,style:'width:'+attrs.width+';max-width:100%;height:auto'})},
-   align:{default:'center',parseHTML:el=>el.getAttribute('data-align')||'center',renderHTML:attrs=>({'data-align':attrs.align})},
-   wrap:{default:'none',parseHTML:el=>el.getAttribute('data-wrap')||'none',renderHTML:attrs=>({'data-wrap':attrs.wrap})}
-  } }});
-  const Figure=Node.create({name:'figure',group:'block',content:'image figcaption?',parseHTML(){return [{tag:'figure'}]},renderHTML({HTMLAttributes}){return ['figure',mergeAttributes(HTMLAttributes,{class:'article-figure'}),0]}});
-  const Gallery=Node.create({name:'gallery',group:'block',content:'image+',parseHTML(){return [{tag:'div.image-gallery'}]},renderHTML({HTMLAttributes}){return ['div',mergeAttributes(HTMLAttributes,{class:'image-gallery'}),0]}});
-  const FootnoteItem=Node.create({name:'footnoteItem',group:'block',content:'inline*',addAttributes(){return {id:{default:null,parseHTML:el=>el.getAttribute('id'),renderHTML:attrs=>attrs.id?{id:attrs.id}:{}}}},parseHTML(){return [{tag:'p.footnote-item'}]},renderHTML({HTMLAttributes}){return ['p',mergeAttributes(HTMLAttributes,{class:'footnote-item'}),0]}});
-  const Figcaption=Node.create({name:'figcaption',group:'block',content:'inline*',parseHTML(){return [{tag:'figcaption'}]},renderHTML({HTMLAttributes}){return ['figcaption',HTMLAttributes,0]}});
-  const Paragraph=ParagraphBase.extend({addAttributes(){return {...(this.parent?.()||{}),style:{default:null,parseHTML:el=>el.getAttribute('style')||null,renderHTML:attrs=>attrs.style?{style:attrs.style}:{ }},class:{default:null,parseHTML:el=>el.getAttribute('class')||null,renderHTML:attrs=>attrs.class?{class:attrs.class}:{}}}},parseHTML(){return [{tag:'p'}]},renderHTML({HTMLAttributes}){return ['p',mergeAttributes(this.options.HTMLAttributes||{},HTMLAttributes),0]}});
-  const baseExtensions=[
-   StarterKit.configure({paragraph:false,blockquote:{HTMLAttributes:{class:'editor-quote'}}}),
-   Paragraph,
-   Underline,
-   TextAlign.configure({types:['heading','paragraph']}),
-   RichTextStyle,
-   Color,
-   Highlight.configure({multicolor:true}),
-   FontFamily,
-   RichImage.configure({allowBase64:false}),
-   Figure,Gallery,FootnoteItem,Figcaption,
-   Link.configure({openOnClick:false,autolink:true,HTMLAttributes:{rel:'noopener noreferrer',target:'_blank'}}),
-   Table.configure({resizable:true}),TableRow,TableHeader,TableCell,
-   Superscript,Subscript,
-   Youtube.configure({controls:true,modestBranding:true}),
-   Placeholder.configure({placeholder:'এখানে আপনার লেখা শুরু করুন…'}),
-   CharacterCount
-  ];
-  function styleForParagraph(editor,property,value){
-   const current=editor.getAttributes('paragraph').style||'';
-   const rules={};current.split(';').forEach(x=>{const p=x.indexOf(':');if(p>0)rules[x.slice(0,p).trim()]=x.slice(p+1).trim()});
-   rules[property]=value;
-   editor.chain().focus().updateAttributes('paragraph',{style:Object.entries(rules).map(([k,v])=>k+':'+v).join(';')}).run();
-  }
-  function syncCount(editor,id){
-   const el=document.getElementById(id+'Count');if(!el)return;
-   const words=editor.storage.characterCount.words(),chars=editor.storage.characterCount.characters();
-   el.textContent=(id==='body'?'শব্দ: ':'Words: ')+words+' · '+(id==='body'?'অক্ষর: ':'Characters: ')+chars;
-  }
-  function insertGallery(editor,id){
-   const input=document.getElementById('galleryFiles');input.value='';
-   input.onchange=async()=>{
-    const files=Array.from(input.files||[]).slice(0,8);if(!files.length)return;
-    try{
-     if(typeof uploadImage!=='function')throw new Error('ছবি আপলোড ফাংশন পাওয়া যায়নি।');
-     document.querySelectorAll('button').forEach(b=>b.disabled=true);
-     const nodes=[];
-     for(const file of files){const url=await uploadImage(file);nodes.push({type:'image',attrs:{src:url,alt:file.name.replace(/\.[^.]+$/,''),title:'',width:'100%',align:'center',wrap:'none'}})}
-     editor.chain().focus().insertContent({type:'gallery',content:nodes}).run();
-     announce(nodes.length+'টি ছবি দিয়ে গ্যালারি তৈরি হয়েছে।');
-    }catch(e){announce('গ্যালারি তৈরি করা যায়নি: '+(e?.message||e))}
-    finally{document.querySelectorAll('button').forEach(b=>b.disabled=false)}
-   };
-   input.click();
-  }
-  function insertImage(editor,id){
-   const input=document.getElementById('inlineImageFile');input.value='';
-   input.onchange=async()=>{
-    const file=input.files?.[0];if(!file)return;
-    const shell=document.getElementById(id==='body'?'bodyEditorShell':'bodyEnEditorShell');
-    const before=window.auviEditors[id]?.getJSON();
-    try{
-     if(typeof uploadImage!=='function')throw new Error('ছবি আপলোড ফাংশন পাওয়া যায়নি।');
-     document.querySelectorAll('button').forEach(b=>b.disabled=true);
-     const url=await uploadImage(file);
-     const alt=prompt('ছবির বিকল্প বর্ণনা (Alt Text) লিখুন:','')||'';
-     const caption=prompt('ছবির ক্যাপশন লিখুন (না চাইলে খালি রাখুন):','')||'';
-     const align=prompt('ছবির অবস্থান লিখুন: left / center / right','center')||'center';
-     const width=prompt('ছবির প্রস্থ লিখুন: 25%, 40%, 50%, 70%, 85%, 100%','100%')||'100%';
-     const safeAlign=['left','center','right'].includes(align)?align:'center';
-     const safeWidth=/^(25|40|50|70|85|100)%$/.test(width)?width:'100%';
-     editor.chain().focus().insertContent({type:'figure',content:[{type:'image',attrs:{src:url,alt,title:caption,width:safeWidth,align:safeAlign,wrap:'none'}},{type:'figcaption',content:caption?[{type:'text',text:caption}]:[]}]}).run();
-     announce('ছবি আপলোড করে লেখায় বসানো হয়েছে।');
-    }catch(e){announce('ছবি যোগ করা যায়নি: '+(e?.message||e))}
-    finally{document.querySelectorAll('button').forEach(b=>b.disabled=false)}
-   };
-   input.click();
-  }
-  function openEditorPreview(id){
-   const editor=editors[id];if(!editor)return;
-   const titleInput=document.getElementById(id==='body'?'title':'title_en');
-   const title=document.createElement('div');title.textContent=titleInput.value||'শিরোনামহীন লেখা';
-   const win=window.open('','_blank');
-   if(!win){announce('প্রিভিউ খুলতে পপ-আপ অনুমতি দিন।');return}
-   win.document.open();
-   win.document.write('<!doctype html><html lang="'+(id==='body'?'bn':'en')+'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title.innerHTML+'</title><style>body{max-width:850px;margin:40px auto;padding:0 22px;background:#f7f1e7;color:#29251f;font:18px/1.9 Georgia,serif}h1{font-size:2em;border-bottom:1px solid #cbbda8;padding-bottom:15px}article{text-align:justify}p{margin:0 0 1.15em}img{max-width:100%;height:auto}figure{margin:1.5em auto;text-align:center}figcaption{font-size:.85em;color:#6c655b}blockquote{border-left:4px solid #9b744b;padding:12px 20px;background:#eee5d8}table{border-collapse:collapse;width:100%}td,th{border:1px solid #aaa;padding:7px}iframe{width:100%;aspect-ratio:16/9;border:0}</style><h1>'+title.innerHTML+'</h1><article>'+editor.getHTML()+'</article></html>');
-   win.document.close();
-  }
-  window.auviPreview=()=>openEditorPreview((document.getElementById('title').value.trim()||document.getElementById('body').value.trim())?'body':'body_en');
-  function runCommand(editor,cmd,id){
-   const chain=editor.chain().focus();
-   if(cmd==='bold')chain.toggleBold().run();
-   else if(cmd==='italic')chain.toggleItalic().run();
-   else if(cmd==='underline')chain.toggleUnderline().run();
-   else if(cmd==='strike')chain.toggleStrike().run();
-   else if(cmd==='undo')chain.undo().run();
-   else if(cmd==='redo')chain.redo().run();
-   else if(cmd==='alignLeft')chain.setTextAlign('left').run();
-   else if(cmd==='alignCenter')chain.setTextAlign('center').run();
-   else if(cmd==='alignRight')chain.setTextAlign('right').run();
-   else if(cmd==='justify')chain.setTextAlign('justify').run();
-   else if(cmd==='h1'||cmd==='h2'||cmd==='h3')chain.toggleHeading({level:Number(cmd.slice(1))}).run();
-   else if(cmd==='blockquote')chain.toggleBlockquote().run();
-   else if(cmd==='pullquote'){if(editor.isActive('blockquote'))chain.toggleBlockquote().run();else chain.toggleBlockquote().run();editor.chain().focus().updateAttributes('blockquote',{class:'pull-quote'}).run()}
-   else if(cmd==='dropcap')editor.chain().focus().updateAttributes('paragraph',{class:'drop-cap'}).run();
-   else if(cmd==='hr')chain.setHorizontalRule().run();
-   else if(cmd==='bulletList')chain.toggleBulletList().run();
-   else if(cmd==='orderedList')chain.toggleOrderedList().run();
-   else if(cmd==='table')chain.insertTable({rows:3,cols:3,withHeaderRow:true}).run();
-   else if(cmd==='link'){const old=editor.getAttributes('link').href||'',url=prompt('লিংক/URL লিখুন:',old);if(url===null)return;if(!url.trim())editor.chain().focus().extendMarkRange('link').unsetLink().run();else editor.chain().focus().extendMarkRange('link').setLink({href:url.trim()}).run()}
-   else if(cmd==='footnote'){const note=prompt('পাদটীকার লেখা লিখুন:','');if(note){const count=(editor.getHTML().match(/class="footnote-item"/g)||[]).length+1,id='footnote-'+count;editor.chain().focus().insertContent('<sup><a href="#'+id+'">['+count+']</a></sup>').run();editor.chain().focus().insertContentAt(editor.state.doc.content.size,{type:'footnoteItem',attrs:{id},content:[{type:'text',text:'['+count+'] '+note}]}).run()}}
-   else if(cmd==='superscript')chain.toggleSuperscript().run();
-   else if(cmd==='subscript')chain.toggleSubscript().run();
-   else if(cmd==='special'){const s=prompt('বিশেষ চিহ্ন লিখুন (যেমন — • … § ©):','—');if(s)chain.insertContent(s).run()}
-   else if(cmd==='image')insertImage(editor,id);
-   else if(cmd==='gallery')insertGallery(editor,id);
-   else if(cmd==='youtube'){const url=prompt('YouTube ভিডিওর URL দিন:','https://www.youtube.com/watch?v=');if(url)chain.setYoutubeVideo({src:url,width:640,height:360}).run()}
-   else if(cmd==='removeFormat')chain.unsetAllMarks().clearNodes().updateAttributes('paragraph',{style:null,class:null}).run();
-   else if(cmd==='fullscreen'){const el=document.getElementById(id==='body'?'bodyEditorShell':'bodyEnEditorShell');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()}
-   else if(cmd==='preview')openEditorPreview(id);
-   else if(cmd==='restoreDraft'){const key='auvi-rich-draft-'+(document.getElementById('groupId').value||'new')+'-'+id;const saved=localStorage.getItem(key);if(saved&&confirm('এই লেখার ব্রাউজারে সেভ করা খসড়াটি ফেরত আনবেন?'))editor.commands.setContent(saved);else if(!saved)announce('এই লেখার কোনো স্বয়ংক্রিয় খসড়া পাওয়া যায়নি।');}
-   else if(cmd==='findReplace'){const find=prompt('যে শব্দ/বাক্য খুঁজবেন:','');if(!find)return;const replacement=prompt('যে লেখা দিয়ে বদলাবেন:','');if(replacement===null)return;const positions=[];editor.state.doc.descendants((node,pos)=>{if(node.isText&&node.text){let from=0;while((from=node.text.indexOf(find,from))!==-1){positions.push({from:pos+from,to:pos+from+find.length});from+=find.length}}});if(!positions.length){announce('শব্দটি পাওয়া যায়নি।');return}let tr=editor.state.tr;positions.sort((a,b)=>b.from-a.from).forEach(p=>{tr=tr.insertText(replacement,p.from,p.to)});editor.view.dispatch(tr);announce('মোট '+positions.length+'টি জায়গায় পরিবর্তন করা হয়েছে।')}
-  }
-  const editors={};window.auviEditors=editors;
-  for(const [id,elementId] of Object.entries(shellIds)){
-   const source=document.getElementById(id),host=document.getElementById(elementId);
-   const editor=new Editor({element:host,extensions:baseExtensions,content:source.value||'<p></p>',editorProps:{attributes:{class:'tiptap',spellcheck:'true'}},onUpdate:({editor})=>{source.value=editor.getHTML();syncCount(editor,id);try{const key='auvi-rich-draft-'+(document.getElementById('groupId').value||'new')+'-'+id;localStorage.setItem(key,editor.getHTML());const a=document.getElementById(id+'Autosave');if(a)a.textContent='স্বয়ংক্রিয় খসড়া সেভ হয়েছে · '+new Date().toLocaleTimeString()}catch(e){}}});
-   editors[id]=editor;window.auviEditors[id]=editor;syncCount(editor,id);
-   // Preserve a ProseMirror selection bookmark while toolbar controls take focus.
-   let savedBookmark=editor.state.selection.getBookmark();
-   const rememberSelection=()=>{savedBookmark=editor.state.selection.getBookmark()};
-   const restoreSelection=()=>{
-    if(!savedBookmark)return;
-    try{
-     const selection=savedBookmark.resolve(editor.state.doc);
-     editor.view.dispatch(editor.state.tr.setSelection(selection));
-     editor.commands.focus();
-    }catch(error){
-     savedBookmark=editor.state.selection.getBookmark();
+  <!-- Bengali fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/rasel-uxui/SolaimanLipi@latest/SolaimanLipi.css" rel="stylesheet" />
+
+  <!-- Supabase JS v2 (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* ============================================================
+       CSS — Design System
+       ============================================================ */
+    :root {
+      --radius: 8px;
+      --bg: #ffffff;
+      --fg: #18181b;
+      --muted: #f4f4f5;
+      --muted-fg: #71717a;
+      --border: #e4e4e7;
+      --card: #ffffff;
+      --primary: #059669;
+      --primary-fg: #ffffff;
+      --primary-soft: #d1fae5;
+      --accent: #f97316;
+      --destructive: #dc2626;
+      --warning: #d97706;
+      --sidebar: #fafaf9;
+      --sidebar-fg: #44403c;
+      --ring: #10b981;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.04);
     }
-   };
-   editor.on('selectionUpdate',rememberSelection);
-   editor.on('blur',rememberSelection);
-   editor.on('transaction',({transaction})=>{
-    if(transaction.docChanged&&savedBookmark){
-     try{savedBookmark=savedBookmark.map(transaction.mapping)}catch(error){rememberSelection()}
+    .dark {
+      --bg: #18181b;
+      --fg: #f4f4f5;
+      --muted: #27272a;
+      --muted-fg: #a1a1aa;
+      --border: rgba(255,255,255,0.08);
+      --card: #1f1f23;
+      --primary: #10b981;
+      --primary-fg: #08120e;
+      --primary-soft: rgba(16,185,129,0.15);
+      --accent: #fb923c;
+      --destructive: #ef4444;
+      --warning: #f59e0b;
+      --sidebar: #1c1c1f;
+      --sidebar-fg: #d4d4d8;
+      --ring: #10b981;
+      --shadow: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.2);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,.4), 0 4px 6px rgba(0,0,0,.2);
     }
-    if(transaction.selectionSet)rememberSelection();
-   });
-   const toolbar=host.closest('.rich-editor');
-   toolbar.querySelectorAll('[data-cmd]').forEach(btn=>{
-    btn.addEventListener('pointerdown',e=>e.preventDefault());
-    btn.addEventListener('click',()=>{
-     restoreSelection();
-     runCommand(editor,btn.dataset.cmd,id);
-     rememberSelection();
-    });
-   });
-   toolbar.querySelectorAll('[data-control]').forEach(control=>{
-    control.addEventListener('pointerdown',rememberSelection);
-    control.addEventListener('focus',rememberSelection);
-    control.addEventListener('change',()=>{
-     const v=control.value;if(!v)return;
-     restoreSelection();
-     const c=editor.chain().focus();
-     if(control.dataset.control==='fontFamily')c.setFontFamily(v).run();
-     else if(control.dataset.control==='fontSize')c.setMark('textStyle',{fontSize:v}).run();
-     else if(control.dataset.control==='lineHeight')styleForParagraph(editor,'line-height',v);
-     else if(control.dataset.control==='paragraphSpacing')styleForParagraph(editor,'margin-bottom',v);
-     else if(control.dataset.control==='textIndent')styleForParagraph(editor,'text-indent',v);
-     else if(control.dataset.control==='textColor')c.setColor(v).run();
-     else if(control.dataset.control==='highlightColor'||control.dataset.control==='backgroundColor')c.setHighlight({color:v}).run();
-     else if(control.dataset.control==='imageAlign')c.updateAttributes('image',{align:v}).run();
-     else if(control.dataset.control==='imageWidth')c.updateAttributes('image',{width:v}).run();
-     else if(control.dataset.control==='imageWrap')c.updateAttributes('image',{wrap:v}).run();
-     control.selectedIndex=0;
-     rememberSelection();
-    });
-   });
-  }
-  window.auviEditors=editors;
-  window.auviEditorReady=true;
-  announce('Rich Text Editor প্রস্তুত। বাংলা ও ইংরেজি লেখা সম্পাদনা করা যাবে।');
- }catch(error){
-  console.error('Tiptap initialization failed',error);
-  Object.values(window.auviEditors||{}).forEach(ed=>{try{ed.destroy()}catch(e){}});
-  window.auviEditors={};
-  document.querySelectorAll('.editor-source').forEach(ta=>{ta.classList.remove('editor-source');ta.style.display='block';ta.style.minHeight='420px';ta.setAttribute('aria-hidden','false')});
-  document.querySelectorAll('.editor-surface,.editor-toolbar').forEach(el=>el.style.display='none');
-  announce('Rich Text Editor লোড হয়নি; সাধারণ লেখার ঘর চালু করা হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করে পরে রিফ্রেশ করুন।');
- }
-})();
-</script></body></html>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .bn-font { font-family: 'SolaimanLipi', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: var(--radius); border: 1px solid var(--border);
+      background: var(--card); color: var(--fg); cursor: pointer;
+      font-family: inherit; font-size: 14px; font-weight: 500;
+      transition: all .15s; line-height: 1.2;
+    }
+    .btn:hover:not(:disabled) { background: var(--muted); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+    .btn-primary:hover:not(:disabled) { background: #047857; filter: brightness(1.05); }
+    .dark .btn-primary:hover:not(:disabled) { background: #059669; filter: brightness(0.9); }
+    .btn-destructive { background: var(--destructive); color: #fff; border-color: var(--destructive); }
+    .btn-ghost { background: transparent; border-color: transparent; }
+    .btn-ghost:hover:not(:disabled) { background: var(--muted); }
+    .btn-sm { padding: 6px 10px; font-size: 13px; }
+    .btn-icon { padding: 8px; width: 36px; height: 36px; justify-content: center; }
+
+    /* Inputs */
+    .input, .textarea, .select {
+      width: 100%; padding: 8px 12px; border-radius: var(--radius);
+      border: 1px solid var(--border); background: var(--card); color: var(--fg);
+      font-family: inherit; font-size: 14px; transition: border-color .15s, box-shadow .15s;
+    }
+    .input:focus, .textarea:focus, .select:focus {
+      outline: none; border-color: var(--ring);
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .textarea { resize: vertical; min-height: 70px; }
+    .label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--fg); }
+    .label .req { color: var(--destructive); }
+
+    /* Cards */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    .card-h { font-size: 14px; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 6px; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 500;
+      background: var(--muted); color: var(--muted-fg);
+    }
+    .badge-default { background: var(--primary-soft); color: var(--primary); }
+    .dark .badge-default { color: #6ee7b7; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .dark .badge-warning { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+    /* Layout */
+    .min-h-screen { min-height: 100vh; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-1 { flex: 1; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+    .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+    .mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; }
+    .w-full { width: 100%; }
+    .max-w-md { max-width: 448px; } .max-w-6xl { max-width: 1152px; }
+    .hidden { display: none !important; }
+    .text-center { text-align: center; }
+    .text-sm { font-size: 13px; } .text-xs { font-size: 11px; }
+    .text-muted { color: var(--muted-fg); }
+    .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .grid { display: grid; }
+    .grid-2 { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Top bar */
+    .topbar {
+      height: 56px; border-bottom: 1px solid var(--border);
+      background: var(--card); display: flex; align-items: center;
+      justify-content: space-between; padding: 0 16px; gap: 12px;
+    }
+    .topbar h1 { font-size: 15px; font-weight: 600; margin: 0; }
+
+    /* Sidebar */
+    .layout { display: flex; min-height: calc(100vh - 56px); }
+    .sidebar {
+      width: 240px; flex-shrink: 0; border-right: 1px solid var(--border);
+      background: var(--sidebar); padding: 12px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .sidebar .brand {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px; margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand .logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), #047857);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; flex-shrink: 0;
+    }
+    .brand .logo svg { width: 20px; height: 20px; }
+    .brand .name { font-size: 14px; font-weight: 600; }
+    .brand .sub { font-size: 11px; color: var(--muted-fg); }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: var(--radius);
+      cursor: pointer; font-size: 14px; color: var(--sidebar-fg);
+      transition: background .15s; border: none; background: transparent;
+      font-family: inherit; text-align: left; width: 100%;
+    }
+    .nav-item:hover { background: var(--muted); }
+    .nav-item.active { background: var(--primary-soft); color: var(--primary); font-weight: 500; }
+    .dark .nav-item.active { color: #6ee7b7; }
+    .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .user-card {
+      margin-top: auto; padding: 10px; border-radius: var(--radius);
+      background: var(--muted); display: flex; align-items: center; gap: 8px;
+    }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--primary);
+      color: var(--primary-fg); display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; flex-shrink: 0;
+    }
+    .user-card .info { flex: 1; min-width: 0; }
+    .user-card .name { font-size: 13px; font-weight: 500; }
+    .user-card .email { font-size: 11px; color: var(--muted-fg); }
+
+    /* Main content */
+    .main { flex: 1; padding: 24px; overflow: auto; }
+    .main-inner { max-width: 1152px; margin: 0 auto; }
+
+    /* Login page */
+    .login-wrap {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 16px; background: linear-gradient(135deg, #d1fae5 0%, var(--bg) 50%, #fed7aa 100%);
+    }
+    .dark .login-wrap { background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg) 50%, rgba(249,115,22,0.1) 100%); }
+    .login-card { width: 100%; max-width: 448px; }
+    .login-brand { text-align: center; margin-bottom: 24px; }
+    .login-brand .logo-big {
+      width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 12px;
+      background: linear-gradient(135deg, var(--primary), #047857);
+      display: flex; align-items: center; justify-content: center; color: #fff;
+      box-shadow: 0 8px 20px rgba(5,150,105,0.3);
+    }
+    .login-brand .logo-big svg { width: 32px; height: 32px; }
+    .login-brand h1 { font-size: 24px; font-weight: 700; margin: 0; }
+    .login-brand p { font-size: 13px; color: var(--muted-fg); margin: 4px 0 0; }
+
+    .tab-strip {
+      display: flex; gap: 4px; padding: 4px;
+      background: var(--muted); border-radius: 8px; margin-bottom: 16px;
+    }
+    .tab-strip button {
+      flex: 1; padding: 8px; border: none; background: transparent;
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      cursor: pointer; border-radius: 6px; color: var(--muted-fg);
+    }
+    .tab-strip button.active { background: var(--card); color: var(--fg); box-shadow: var(--shadow); }
+
+    /* Editor */
+    .editor-shell {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--card); overflow: hidden; display: flex; flex-direction: column;
+    }
+    .editor-shell.fullscreen { position: fixed; inset: 0; z-index: 1000; border-radius: 0; }
+    .editor-toolbar {
+      display: flex; flex-wrap: wrap; gap: 2px; padding: 8px;
+      border-bottom: 1px solid var(--border);
+      background: var(--muted); position: relative; align-items: flex-start;
+    }
+    .tb-btn {
+      width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+      border: none; background: transparent; color: var(--muted-fg); cursor: pointer;
+      border-radius: 6px; transition: all .1s;
+    }
+    .tb-btn:hover:not(:disabled) { background: var(--bg); color: var(--fg); }
+    .tb-btn.active { background: var(--primary-soft); color: var(--primary); }
+    .dark .tb-btn.active { color: #6ee7b7; }
+    .tb-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .tb-btn svg { width: 16px; height: 16px; }
+    .tb-divider { width: 1px; height: 24px; background: var(--border); margin: 4px 4px; }
+    .tb-select {
+      height: 32px; padding: 0 8px; border: 1px solid transparent; background: transparent;
+      color: var(--muted-fg); font-family: inherit; font-size: 13px; border-radius: 6px; cursor: pointer;
+    }
+    .tb-select:hover { background: var(--bg); color: var(--fg); }
+
+    .tb-popover {
+      position: absolute; z-index: 100; top: 42px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: var(--shadow-lg); padding: 8px; max-height: 280px; overflow: auto;
+      min-width: 200px;
+    }
+    .tb-popover button {
+      display: block; width: 100%; text-align: left;
+      padding: 6px 10px; border: none; background: transparent;
+      color: var(--fg); cursor: pointer; border-radius: 4px; font-family: inherit;
+      font-size: 13px;
+    }
+    .tb-popover button:hover { background: var(--muted); }
+    .tb-color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; min-width: 180px; }
+    .tb-color-grid button {
+      width: 24px; height: 24px; padding: 0; border: 1px solid var(--border);
+      border-radius: 4px; cursor: pointer;
+    }
+    .tb-color-grid button:hover { transform: scale(1.1); }
+
+    .editor-content {
+      min-height: 320px; padding: 16px; outline: none; line-height: 1.8;
+      font-family: 'SolaimanLipi', 'Noto Sans Bengali', sans-serif; font-size: 17px;
+      word-wrap: break-word;
+    }
+    .editor-content:empty::before {
+      content: attr(data-placeholder); color: var(--muted-fg); pointer-events: none;
+    }
+    .editor-content h1 { font-size: 1.75rem; font-weight: 700; margin: 0.8em 0 0.4em; line-height: 1.3; }
+    .editor-content h2 { font-size: 1.5rem; font-weight: 700; margin: 0.8em 0 0.4em; line-height: 1.3; }
+    .editor-content h3 { font-size: 1.25rem; font-weight: 600; margin: 0.8em 0 0.4em; line-height: 1.3; }
+    .editor-content p { margin: 0 0 0.8em; }
+    .editor-content ul { list-style: disc; padding-left: 1.5em; margin: 0.5em 0; }
+    .editor-content ol { list-style: decimal; padding-left: 1.5em; margin: 0.5em 0; }
+    .editor-content blockquote { border-left: 3px solid var(--border); padding-left: 1em; margin: 0.8em 0; color: var(--muted-fg); font-style: italic; }
+    .editor-content a { color: var(--primary); text-decoration: underline; }
+    .editor-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 0.5em 0; }
+    .editor-content table { border-collapse: collapse; width: 100%; margin: 0.8em 0; }
+    .editor-content th, .editor-content td { border: 1px solid var(--border); padding: 0.5em 0.75em; text-align: left; }
+    .editor-content th { background: var(--muted); font-weight: 600; }
+    .editor-content hr { border: 0; border-top: 1px solid var(--border); margin: 1.2em 0; }
+    .editor-content iframe { border: 0; }
+
+    .editor-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 12px; border-top: 1px solid var(--border);
+      background: var(--muted); font-size: 11px; color: var(--muted-fg);
+    }
+
+    /* Toast */
+    #toast-host {
+      position: fixed; top: 16px; right: 16px; z-index: 9999;
+      display: flex; flex-direction: column; gap: 8px; max-width: 380px;
+    }
+    .toast {
+      padding: 12px 14px; border-radius: 8px; background: var(--card);
+      border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+      font-size: 13px; animation: slideIn .2s; min-width: 280px;
+    }
+    .toast.success { border-left: 4px solid var(--primary); }
+    .toast.error { border-left: 4px solid var(--destructive); }
+    .toast.info { border-left: 4px solid var(--accent); }
+    .toast .t-title { font-weight: 600; margin-bottom: 2px; }
+    .toast .t-desc { color: var(--muted-fg); font-size: 12px; }
+    @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+    /* Loader */
+    .spinner { width: 24px; height: 24px; border: 3px solid var(--muted); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* List item */
+    .writing-item {
+      display: flex; gap: 12px; padding: 12px; border: 1px solid var(--border);
+      border-radius: var(--radius); background: var(--card); transition: box-shadow .15s;
+    }
+    .writing-item:hover { box-shadow: var(--shadow); }
+    .writing-item .thumb { width: 96px; height: 64px; border-radius: 6px; background: var(--muted); flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .writing-item .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .writing-item .info { flex: 1; min-width: 0; }
+    .writing-item .title { font-size: 14px; font-weight: 500; margin: 0 0 2px; }
+    .writing-item .meta { font-size: 11px; color: var(--muted-fg); display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Cover uploader */
+    .cover-uploader {
+      width: 100%; aspect-ratio: 16/9; border-radius: var(--radius);
+      border: 2px dashed var(--border); cursor: pointer; transition: all .15s;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--muted-fg); background: var(--muted);
+    }
+    .cover-uploader:hover { border-color: var(--primary); background: var(--primary-soft); }
+    .cover-uploader.has-image { border-style: solid; padding: 0; overflow: hidden; }
+    .cover-uploader img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Tag input */
+    .tag-input-wrap {
+      display: flex; flex-wrap: wrap; gap: 6px; padding: 8px;
+      border: 1px solid var(--border); border-radius: var(--radius); background: var(--card);
+      min-height: 42px;
+    }
+    .tag-input-wrap input {
+      flex: 1; min-width: 120px; border: none; outline: none; background: transparent;
+      color: var(--fg); font-family: inherit; font-size: 13px;
+    }
+    .tag-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 999px; background: var(--primary-soft);
+      color: var(--primary); font-size: 12px;
+    }
+    .dark .tag-chip { color: #6ee7b7; }
+    .tag-chip button {
+      border: none; background: transparent; color: inherit; cursor: pointer;
+      padding: 0; display: flex; align-items: center;
+    }
+
+    /* Switch */
+    .switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .switch .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--border); border-radius: 999px; transition: .15s;
+    }
+    .switch .slider::before {
+      content: ''; position: absolute; height: 14px; width: 14px; left: 3px; top: 3px;
+      background: #fff; border-radius: 50%; transition: .15s;
+    }
+    .switch input:checked + .slider { background: var(--primary); }
+    .switch input:checked + .slider::before { transform: translateX(16px); }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 999;
+      display: flex; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal {
+      background: var(--card); border-radius: var(--radius); padding: 24px;
+      max-width: 480px; width: 100%; box-shadow: var(--shadow-lg);
+    }
+    .modal h3 { margin: 0 0 8px; font-size: 16px; }
+    .modal p { margin: 0 0 16px; color: var(--muted-fg); font-size: 14px; }
+
+    /* Mobile */
+    .mobile-only { display: none; }
+    @media (max-width: 1024px) {
+      .sidebar { display: none; }
+      .mobile-only { display: flex; }
+      .sidebar.open {
+        display: flex; position: fixed; inset: 0 auto 0 0; z-index: 100;
+        box-shadow: var(--shadow-lg);
+      }
+      .sidebar.open + .backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Toast host -->
+  <div id="toast-host"></div>
+
+  <!-- App host — সব content JS দিয়ে render হবে -->
+  <div id="app"></div>
+
+  <!-- ============================================================
+       JavaScript — সম্পূর্ণ অ্যাপ্লিকেশন
+       ============================================================ -->
+  <script>
+    // ============================================================
+    // 🔧 CONFIG — এখানে আপনার Supabase URL ও anon key বসান
+    // ============================================================
+    const SUPABASE_URL  = 'YOUR_SUPABASE_URL';        // যেমন: https://abcxyz.supabase.co
+    const SUPABASE_KEY  = 'YOUR_SUPABASE_ANON_KEY';   // যেমন: eyJhbGciOi...
+    const COVERS_BUCKET = 'covers';                   // Storage bucket নাম
+
+    // যদি এখানে ডিফল্ট ভ্যালু থাকে, ড্যাশবোর্ড "config করুন" মেসেজ দেখাবে
+
+    // ============================================================
+    // State
+    // ============================================================
+    const state = {
+      session: null,
+      user: null,
+      userEmail: null,
+      view: 'new',           // 'new' | 'list' | 'stats'
+      editingId: null,
+      categories: [],
+      selectedParentCategory: '',
+      tags: [],
+      writings: [],
+      pagination: { page: 1, limit: 10, total: 0, totalPages: 1 },
+      filter: { status: 'all', search: '' },
+      activeTab: 'bn',
+      theme: localStorage.getItem('auvi-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+      loading: true,
+      saving: false,
+    };
+
+    // Editor state (rich text)
+    let editor = null; // RichTextEditor instance
+
+    // ============================================================
+    // Utilities
+    // ============================================================
+    function $(selector, root = document) { return root.querySelector(selector); }
+    function $$(selector, root = document) { return Array.from(root.querySelectorAll(selector)); }
+    function el(tag, props = {}, ...children) {
+      const e = document.createElement(tag);
+      Object.entries(props).forEach(([k, v]) => {
+        if (k === 'class') e.className = v;
+        else if (k === 'style' && typeof v === 'object') Object.assign(e.style, v);
+        else if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2).toLowerCase(), v);
+        else if (k === 'html') e.innerHTML = v;
+        else if (v !== null && v !== undefined && v !== false) e.setAttribute(k, v);
+      });
+      children.flat().forEach(c => {
+        if (c == null || c === false) return;
+        if (typeof c === 'string' || typeof c === 'number') e.appendChild(document.createTextNode(String(c)));
+        else e.appendChild(c);
+      });
+      return e;
+    }
+    function icon(name, props = {}) {
+      const i = document.createElement('i');
+      i.setAttribute('data-lucide', name);
+      Object.entries(props).forEach(([k, v]) => i.setAttribute(k, v));
+      return i;
+    }
+    function refreshIcons() {
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function slugify(text) {
+      return (text || '').trim().toLowerCase()
+        .replace(/[\s\u0964\u0965।]+/g, '-')
+        .replace(/[^\u0980-\u09FFa-z0-9-]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    }
+
+    function formatDate(iso) {
+      try { return new Date(iso).toLocaleDateString('bn-BD'); } catch { return ''; }
+    }
+    function formatNumber(n) {
+      try { return Number(n).toLocaleString('bn-BD'); } catch { return String(n); }
+    }
+
+    function toast(title, desc = '', type = 'info', duration = 3500) {
+      const host = $('#toast-host');
+      const t = el('div', { class: `toast ${type}` },
+        el('div', { class: 't-title' }, title),
+        desc && el('div', { class: 't-desc' }, desc)
+      );
+      host.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .2s'; setTimeout(() => t.remove(), 200); }, duration);
+    }
+
+    // Theme
+    function applyTheme(theme) {
+      state.theme = theme;
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      localStorage.setItem('auvi-theme', theme);
+    }
+
+    // ============================================================
+    // Supabase client
+    // ============================================================
+    let supabase = null;
+    function initSupabase() {
+      if (!SUPABASE_URL || !SUPABASE_KEY || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+        return false;
+      }
+      try {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+          auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+        });
+        return true;
+      } catch (e) {
+        console.error('Supabase init failed', e);
+        return false;
+      }
+    }
+
+    // ============================================================
+    // AUTH
+    // ============================================================
+    async function checkSession() {
+      if (!supabase) return false;
+      const { data, error } = await supabase.auth.getSession();
+      if (error || !data.session) return false;
+      state.session = data.session;
+      state.user = data.session.user;
+      state.userEmail = data.session.user.email;
+      // Verify admin
+      const { data: adminRec } = await supabase.from('admin_users').select('user_id').eq('user_id', state.user.id).maybeSingle();
+      if (!adminRec) {
+        toast('অ্যাক্সেস নেই', 'এই অ্যাকাউন্ট লেখক ড্যাশবোর্ড ব্যবহার করতে পারবে না। প্রথমে admin_users টেবিলে যোগ করুন।', 'error', 6000);
+        await supabase.auth.signOut();
+        return false;
+      }
+      return true;
+    }
+
+    async function signIn(email, password) {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw new Error(error.message);
+      return checkSession();
+    }
+
+    async function signUp(email, password) {
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) throw new Error(error.message);
+      // After signup, the user is created in auth.users but NOT yet in admin_users
+      // They need to manually be added to admin_users table OR via edge function
+      if (data.user && !data.session) {
+        throw new Error('ইমেইল ভেরিফিকেশন প্রয়োজন। ইমেইল চেক করুন।');
+      }
+      if (data.user) {
+        // Try to insert into admin_users (will fail due to RLS for non-admins, but that's expected)
+        await supabase.from('admin_users').insert({ user_id: data.user.id });
+      }
+      return checkSession();
+    }
+
+    async function resetPassword(email) {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.href,
+      });
+      if (error) throw new Error(error.message);
+    }
+
+    async function signOut() {
+      await supabase.auth.signOut();
+      state.session = null;
+      state.user = null;
+      state.view = 'new';
+      state.editingId = null;
+      renderApp();
+    }
+
+    // ============================================================
+    // CATEGORIES
+    // ============================================================
+    async function loadCategories() {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .order('sort_order', { ascending: true });
+      if (error) { console.error(error); return; }
+      state.categories = data || [];
+    }
+
+    function getParentCategories() {
+      return state.categories.filter(c => !c.parent_id);
+    }
+    function getSubcategories(parentId) {
+      return state.categories.filter(c => c.parent_id === parentId);
+    }
+
+    // ============================================================
+    // TAGS
+    // ============================================================
+    async function loadTags() {
+      const { data, error } = await supabase.from('tags').select('id, name').order('name');
+      if (error) { console.error(error); return; }
+      state.tags = data || [];
+    }
+
+    async function ensureTags(names) {
+      const trimmed = names.map(n => n.trim()).filter(Boolean);
+      const result = [];
+      for (const name of trimmed) {
+        // Check cache
+        let existing = state.tags.find(t => t.name.toLowerCase() === name.toLowerCase());
+        if (existing) { result.push(existing.id); continue; }
+        // Try insert
+        const { data, error } = await supabase.from('tags').insert({ name }).select().single();
+        if (!error && data) {
+          state.tags.push(data);
+          result.push(data.id);
+        } else {
+          // Maybe exists — try fetch
+          const { data: existing2 } = await supabase.from('tags').select('id, name').eq('name', name).maybeSingle();
+          if (existing2) { state.tags.push(existing2); result.push(existing2.id); }
+        }
+      }
+      return result;
+    }
+
+    // ============================================================
+    // WRITINGS CRUD
+    // ============================================================
+    async function loadWritings() {
+      let query = supabase.from('posts').select('*, category:categories(id,name,name_en,slug), post_tags(tag_id)', { count: 'exact' });
+      // Filter
+      if (state.filter.status !== 'all') query = query.eq('status', state.filter.status);
+      if (state.filter.search) {
+        query = query.or(`title.ilike.%${state.filter.search}%,title_en.ilike.%${state.filter.search}%`);
+      }
+      // Pagination
+      const page = state.pagination.page;
+      const limit = state.pagination.limit;
+      query = query.order('updated_at', { ascending: false }).range((page - 1) * limit, page * limit - 1);
+      const { data, error, count } = await query;
+      if (error) { console.error(error); toast('তালিকা লোড ব্যর্থ', error.message, 'error'); return; }
+      state.writings = data || [];
+      state.pagination.total = count || 0;
+      state.pagination.totalPages = Math.max(Math.ceil((count || 0) / limit), 1);
+    }
+
+    async function loadWritingForEdit(id) {
+      const { data, error } = await supabase
+        .from('posts')
+        .select('*, post_tags(tag_id)')
+        .eq('id', id)
+        .single();
+      if (error) throw new Error(error.message);
+      // Load tag names
+      let tagNames = [];
+      if (data.post_tags && data.post_tags.length > 0) {
+        const tagIds = data.post_tags.map(pt => pt.tag_id);
+        const { data: tagData } = await supabase.from('tags').select('name').in('id', tagIds);
+        tagNames = (tagData || []).map(t => t.name);
+      }
+      return { ...data, tags: tagNames };
+    }
+
+    async function saveWriting(formData) {
+      // Compute word count
+      const text = (formData.body || '').replace(/<[^>]*>/g, ' ').trim();
+      const wordCount = text ? text.split(/\s+/).length : 0;
+      const payload = {
+        title: formData.title,
+        slug: formData.slug,
+        title_en: formData.title_en || null,
+        slug_en: formData.slug_en || null,
+        intro: formData.intro || null,
+        intro_en: formData.intro_en || null,
+        body: formData.body || '',
+        body_en: formData.body_en || null,
+        category_id: formData.category_id || null,
+        cover_image: formData.cover_image || null,
+        featured: formData.featured || false,
+        status: formData.status || 'draft',
+        word_count: wordCount,
+        published: formData.status === 'published',
+        published_at: formData.status === 'published' ? new Date().toISOString() : null,
+        updated_at: new Date().toISOString(),
+      };
+      let postId;
+      if (state.editingId) {
+        const { data, error } = await supabase.from('posts').update(payload).eq('id', state.editingId).select().single();
+        if (error) throw new Error(error.message);
+        postId = data.id;
+      } else {
+        const { data, error } = await supabase.from('posts').insert(payload).select().single();
+        if (error) throw new Error(error.message);
+        postId = data.id;
+      }
+      // Tags: first remove all existing, then add new
+      await supabase.from('post_tags').delete().eq('post_id', postId);
+      if (formData.tags && formData.tags.length > 0) {
+        const tagIds = await ensureTags(formData.tags);
+        const inserts = tagIds.map(tid => ({ post_id: postId, tag_id: tid }));
+        if (inserts.length > 0) {
+          const { error: ptErr } = await supabase.from('post_tags').insert(inserts);
+          if (ptErr) console.error('post_tags insert error', ptErr);
+        }
+      }
+      return postId;
+    }
+
+    async function deleteWriting(id) {
+      const { error } = await supabase.from('posts').delete().eq('id', id);
+      if (error) throw new Error(error.message);
+    }
+
+    async function toggleWritingStatus(w) {
+      const newStatus = w.status === 'published' ? 'draft' : 'published';
+      const { error } = await supabase.from('posts').update({
+        status: newStatus,
+        published: newStatus === 'published',
+        published_at: newStatus === 'published' ? new Date().toISOString() : null,
+        updated_at: new Date().toISOString(),
+      }).eq('id', w.id);
+      if (error) throw new Error(error.message);
+    }
+
+    // ============================================================
+    // COVER IMAGE UPLOAD (Supabase Storage)
+    // ============================================================
+    async function uploadCover(file) {
+      if (file.size > 5 * 1024 * 1024) throw new Error('ফাইল ৫MB এর বেশি');
+      if (!file.type.startsWith('image/')) throw new Error('শুধু ছবি ফাইল দিন');
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
+      const path = `covers/${filename}`;
+      const { error } = await supabase.storage.from(COVERS_BUCKET).upload(path, file, { cacheControl: '3600', upsert: false });
+      if (error) throw new Error(error.message);
+      const { data } = supabase.storage.from(COVERS_BUCKET).getPublicUrl(path);
+      return data.publicUrl;
+    }
+
+    // ============================================================
+    // STATS
+    // ============================================================
+    async function loadStats() {
+      const { count: total } = await supabase.from('posts').select('*', { count: 'exact', head: true });
+      const { count: drafts } = await supabase.from('posts').select('*', { count: 'exact', head: true }).eq('status', 'draft');
+      const { count: published } = await supabase.from('posts').select('*', { count: 'exact', head: true }).eq('status', 'published');
+      const { count: featured } = await supabase.from('posts').select('*', { count: 'exact', head: true }).eq('featured', true);
+      // Recent
+      const { data: recent } = await supabase.from('posts')
+        .select('id,title,title_en,status,updated_at,category:categories(name)')
+        .order('updated_at', { ascending: false }).limit(5);
+      // Total words
+      const { data: allPosts } = await supabase.from('posts').select('word_count');
+      const totalWords = (allPosts || []).reduce((sum, p) => sum + (p.word_count || 0), 0);
+      return { total: total || 0, drafts: drafts || 0, published: published || 0, featured: featured || 0, totalWords, recent: recent || [] };
+    }
+
+    // ============================================================
+    // RICH TEXT EDITOR (contentEditable + execCommand)
+    // ============================================================
+    function createRichEditor(mountEl, opts = {}) {
+      const state = {
+        value: opts.value || '',
+        language: opts.language || 'bn',
+        storageKey: opts.storageKey,
+        isPreview: false,
+        isFullscreen: false,
+        lastSavedAt: null,
+        history: [],
+        historyIdx: -1,
+        skipNextHistory: false,
+      };
+
+      const shell = el('div', { class: 'editor-shell' });
+
+      // Toolbar
+      const toolbar = el('div', { class: 'editor-toolbar' });
+      const content = el('div', { class: 'editor-content', contenteditable: 'true', 'data-placeholder': opts.placeholder || 'এখানে লিখুন...' });
+      const footer = el('div', { class: 'editor-footer' });
+      const wordCount = el('span', {}, 'শব্দ: ০');
+      const charCount = el('span', {}, 'অক্ষর: ০');
+      const savedLabel = el('span', { class: 'hidden' });
+      footer.append(wordCount, el('div', { class: 'flex items-center gap-2' }, savedLabel));
+
+      shell.append(toolbar, el('div', { style: { flex: '1', overflow: 'auto', minHeight: '320px' } }, content), footer);
+      mountEl.appendChild(shell);
+      content.innerHTML = state.value || '';
+
+      // Helpers
+      const exec = (cmd, val) => {
+        if (state.isPreview) return;
+        content.focus();
+        try { document.execCommand(cmd, false, val); } catch {}
+        syncContent();
+      };
+
+      const syncContent = () => {
+        const html = content.innerHTML;
+        state.value = html;
+        if (opts.onChange) opts.onChange(html);
+        if (!state.skipNextHistory) {
+          const last = state.history[state.historyIdx];
+          if (!last || last !== html) {
+            state.history = state.history.slice(0, state.historyIdx + 1);
+            state.history.push(html);
+            if (state.history.length > 50) state.history = state.history.slice(-50);
+            state.historyIdx = state.history.length - 1;
+          }
+        }
+        state.skipNextHistory = false;
+        updateCounts();
+      };
+
+      const updateCounts = () => {
+        const text = content.innerText || '';
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        wordCount.textContent = `শব্দ: ${formatNumber(words)}`;
+        charCount.textContent = `অক্ষর: ${formatNumber(text.length)}`;
+      };
+
+      // Toolbar buttons
+      function tbBtn(title, iconSvg, onClick, activeFn) {
+        const b = el('button', { class: 'tb-btn', title, type: 'button' });
+        b.innerHTML = iconSvg;
+        b.addEventListener('mousedown', e => e.preventDefault());
+        b.addEventListener('click', () => { onClick(); b.blur(); });
+        if (activeFn) b.dataset.activeFn = '1';
+        return b;
+      }
+
+      function popoverTrigger(label, buildContent) {
+        const wrap = el('div', { style: { position: 'relative' } });
+        const btn = el('button', { class: 'tb-select', type: 'button' });
+        btn.innerHTML = `${label} <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>`;
+        const pop = el('div', { class: 'tb-popover hidden' });
+        let open = false;
+        const toggle = () => {
+          open = !open;
+          pop.classList.toggle('hidden', !open);
+          if (open) {
+            // Close other popovers
+            $$('.tb-popover').forEach(p => { if (p !== pop) p.classList.add('hidden'); });
+            pop.innerHTML = '';
+            buildContent(pop);
+          }
+        };
+        btn.addEventListener('mousedown', e => e.preventDefault());
+        btn.addEventListener('click', toggle);
+        wrap.append(btn, pop);
+        return wrap;
+      }
+
+      // Close popovers on outside click
+      document.addEventListener('mousedown', (e) => {
+        if (!e.target.closest('.editor-toolbar')) {
+          $$('.tb-popover').forEach(p => p.classList.add('hidden'));
+        }
+      });
+
+      // Build toolbar
+      const ic = (paths) => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+
+      // Undo/Redo
+      toolbar.append(tbBtn('Undo (আগের কাজ বাতিল)', ic('<path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6.7 2.7L3 13"/>'), () => {
+        if (state.historyIdx > 0) {
+          state.historyIdx--;
+          state.skipNextHistory = true;
+          content.innerHTML = state.history[state.historyIdx];
+          if (opts.onChange) opts.onChange(state.history[state.historyIdx]);
+          updateCounts();
+        }
+      }));
+      toolbar.append(tbBtn('Redo (ফিরিয়ে আনা)', ic('<path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6.7 2.7L21 13"/>'), () => {
+        if (state.historyIdx < state.history.length - 1) {
+          state.historyIdx++;
+          state.skipNextHistory = true;
+          content.innerHTML = state.history[state.historyIdx];
+          if (opts.onChange) opts.onChange(state.history[state.historyIdx]);
+          updateCounts();
+        }
+      }));
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Headings
+      toolbar.append(tbBtn('H1', ic('<path d="M4 12h16M4 6v12M20 6v12"/>'), () => exec('formatBlock', 'h1')));
+      toolbar.append(tbBtn('H2', ic('<path d="M4 12h16M4 6v12M20 6v12M4 18h8"/>'), () => exec('formatBlock', 'h2')));
+      toolbar.append(tbBtn('H3', ic('<path d="M4 6v12M4 12h8M12 6v12"/>'), () => exec('formatBlock', 'h3')));
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Bold/Italic/Underline/Strikethrough
+      toolbar.append(tbBtn('বোল্ড', ic('<path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>'), () => exec('bold')));
+      toolbar.append(tbBtn('ইটালিক', ic('<path d="M19 4h-9M14 20H5M15 4 9 20"/>'), () => exec('italic')));
+      toolbar.append(tbBtn('আন্ডারলাইন', ic('<path d="M6 4v6a6 6 0 0 0 12 0V4M4 20h16"/>'), () => exec('underline')));
+      toolbar.append(tbBtn('কাটা দাগ (Strikethrough)', ic('<path d="M16 4H9a3 3 0 0 0-2.83 4M14 12a4 4 0 0 1 0 8H6"/><path d="M4 12l16 0"/>'), () => exec('strikeThrough')));
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Font family popover
+      const FONTS = [
+        { label: 'সলাইমান লিপি', value: "'SolaimanLipi', 'Noto Sans Bengali', sans-serif" },
+        { label: 'নোটো সানস বাংলা', value: "'Noto Sans Bengali', sans-serif" },
+        { label: 'নোটো সেরিফ বাংলা', value: "'Noto Serif Bengali', serif" },
+        { label: 'হিন্দ শিলিগুড়ি', value: "'Hind Siliguri', sans-serif" },
+        { label: 'Arial', value: 'Arial, sans-serif' },
+        { label: 'Times New Roman', value: "'Times New Roman', serif" },
+        { label: 'Georgia', value: 'Georgia, serif' },
+        { label: 'Verdana', value: 'Verdana, sans-serif' },
+      ];
+      toolbar.append(popoverTrigger('ফন্ট', (pop) => {
+        FONTS.forEach(f => {
+          const b = el('button', { type: 'button' }, f.label);
+          b.style.fontFamily = f.value;
+          b.addEventListener('click', () => { exec('fontName', f.value); $$('.tb-popover').forEach(p => p.classList.add('hidden')); });
+          pop.appendChild(b);
+        });
+      }));
+
+      // Font size popover
+      const SIZES = [
+        { label: 'ছোট (12px)', value: '12px' },
+        { label: 'মাঝারি (14px)', value: '14px' },
+        { label: 'সাধারণ (16px)', value: '16px' },
+        { label: 'বড় (18px)', value: '18px' },
+        { label: 'অতি বড় (20px)', value: '20px' },
+        { label: 'বিশাল (24px)', value: '24px' },
+        { label: 'প্রচুর বড় (32px)', value: '32px' },
+        { label: 'সর্বোচ্চ (48px)', value: '48px' },
+      ];
+      toolbar.append(popoverTrigger('আকার', (pop) => {
+        SIZES.forEach(s => {
+          const b = el('button', { type: 'button' }, `${s.label}`);
+          b.style.fontSize = s.value;
+          b.addEventListener('click', () => {
+            content.focus();
+            const sel = window.getSelection();
+            if (!sel || sel.rangeCount === 0) { $$('.tb-popover').forEach(p => p.classList.add('hidden')); return; }
+            const range = sel.getRangeAt(0);
+            if (range.collapsed) {
+              try { document.execCommand('fontSize', false, '7'); } catch {}
+              content.querySelectorAll('font[size="7"]').forEach(f => {
+                const span = el('span'); span.style.fontSize = s.value;
+                while (f.firstChild) span.appendChild(f.firstChild);
+                f.replaceWith(span);
+              });
+            } else {
+              const span = el('span'); span.style.fontSize = s.value;
+              try { range.surroundContents(span); }
+              catch {
+                const frag = range.extractContents();
+                span.appendChild(frag);
+                range.insertNode(span);
+              }
+            }
+            syncContent();
+            $$('.tb-popover').forEach(p => p.classList.add('hidden'));
+          });
+          pop.appendChild(b);
+        });
+      }));
+
+      // Text color
+      const TEXT_COLORS = ['#000000', '#374151', '#6B7280', '#DC2626', '#EA580C', '#D97706', '#CA8A04', '#16A34A', '#15803D', '#0891B2', '#2563EB', '#7C3AED', '#C026D3', '#DB2777', '#FFFFFF'];
+      toolbar.append(popoverTrigger('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>', (pop) => {
+        const grid = el('div', { class: 'tb-color-grid' });
+        TEXT_COLORS.forEach(c => {
+          const b = el('button', { type: 'button', style: { backgroundColor: c } });
+          b.addEventListener('click', () => { exec('foreColor', c); $$('.tb-popover').forEach(p => p.classList.add('hidden')); });
+          grid.appendChild(b);
+        });
+        pop.appendChild(grid);
+      }));
+
+      // Highlight
+      const HIGHLIGHTS = ['#FEF08A', '#FDE68A', '#FCD34D', '#A7F3D0', '#6EE7B7', '#FBCFE8', '#BFDBFE', '#93C5FD', '#DDD6FE', '#FECACA', '#D9F99D', '#E5E7EB'];
+      toolbar.append(popoverTrigger('<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>', (pop) => {
+        const grid = el('div', { class: 'tb-color-grid' });
+        HIGHLIGHTS.forEach(c => {
+          const b = el('button', { type: 'button', style: { backgroundColor: c } });
+          b.addEventListener('click', () => { exec('hiliteColor', c); $$('.tb-popover').forEach(p => p.classList.add('hidden')); });
+          grid.appendChild(b);
+        });
+        pop.appendChild(grid);
+      }));
+
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Alignment
+      toolbar.append(tbBtn('বাম সারিবদ্ধ', ic('<path d="M3 6h18M3 12h12M3 18h18"/>'), () => exec('justifyLeft')));
+      toolbar.append(tbBtn('মাঝখানে', ic('<path d="M3 6h18M6 12h12M3 18h18"/>'), () => exec('justifyCenter')));
+      toolbar.append(tbBtn('ডানদিকে সারিবদ্ধ', ic('<path d="M3 6h18M9 12h12M3 18h18"/>'), () => exec('justifyRight')));
+      toolbar.append(tbBtn('উভয়পাশে', ic('<path d="M3 6h18M3 12h18M3 18h18"/>'), () => exec('justifyFull')));
+
+      // Line height
+      const LHS = ['1', '1.2', '1.5', '1.8', '2', '2.5', '3'];
+      toolbar.append(popoverTrigger('লাইন', (pop) => {
+        LHS.forEach(lh => {
+          const b = el('button', { type: 'button' }, `লাইন উচ্চতা ${lh}`);
+          b.style.lineHeight = lh;
+          b.addEventListener('click', () => {
+            content.focus();
+            const sel = window.getSelection();
+            if (!sel || sel.rangeCount === 0) { $$('.tb-popover').forEach(p => p.classList.add('hidden')); return; }
+            const range = sel.getRangeAt(0);
+            let block = range.commonAncestorContainer;
+            if (block.nodeType !== 1) block = block.parentElement;
+            while (block && !['P','DIV','H1','H2','H3','H4','H5','H6','LI','BLOCKQUOTE'].includes(block.tagName)) {
+              block = block.parentElement;
+              if (block === content) break;
+            }
+            if (block && block !== content) block.style.lineHeight = lh;
+            syncContent();
+            $$('.tb-popover').forEach(p => p.classList.add('hidden'));
+          });
+          pop.appendChild(b);
+        });
+      }));
+
+      // Paragraph spacing
+      const SPACES = ['0px', '8px', '12px', '16px', '20px', '24px', '32px', '40px'];
+      toolbar.append(popoverTrigger('প্যারা', (pop) => {
+        SPACES.forEach(m => {
+          const b = el('button', { type: 'button' }, `প্যারাগ্রাফ দূরত্ব ${m}`);
+          b.addEventListener('click', () => {
+            content.focus();
+            const sel = window.getSelection();
+            if (!sel || sel.rangeCount === 0) { $$('.tb-popover').forEach(p => p.classList.add('hidden')); return; }
+            const range = sel.getRangeAt(0);
+            let block = range.commonAncestorContainer;
+            if (block.nodeType !== 1) block = block.parentElement;
+            while (block && !['P','DIV','H1','H2','H3','H4','H5','H6','LI','BLOCKQUOTE'].includes(block.tagName)) {
+              block = block.parentElement;
+              if (block === content) break;
+            }
+            if (block && block !== content) { block.style.marginBottom = m; block.style.marginTop = '0'; }
+            syncContent();
+            $$('.tb-popover').forEach(p => p.classList.add('hidden'));
+          });
+          pop.appendChild(b);
+        });
+      }));
+
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Lists
+      toolbar.append(tbBtn('বুলেট তালিকা', ic('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'), () => exec('insertUnorderedList')));
+      toolbar.append(tbBtn('সংখ্যা তালিকা', ic('<path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M4 16h2v3M4 19h2"/>'), () => exec('insertOrderedList')));
+      toolbar.append(tbBtn('উদ্ধৃতি', ic('<path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>'), () => exec('formatBlock', 'blockquote')));
+
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Insert: image URL, image upload, link, table, HR, YouTube
+      toolbar.append(tbBtn('ছবি URL', ic('<rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'), () => {
+        const url = prompt('ছবির URL দিন:');
+        if (url) { exec('insertImage', url); }
+      }));
+      toolbar.append(tbBtn('ছবি আপলোড', ic('<rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'), async () => {
+        const fi = el('input', { type: 'file', accept: 'image/*' });
+        fi.style.display = 'none';
+        document.body.appendChild(fi);
+        fi.addEventListener('change', async () => {
+          const f = fi.files?.[0];
+          if (!f) return;
+          try {
+            toast('আপলোড হচ্ছে...', '', 'info', 1500);
+            const url = await uploadCover(f);
+            exec('insertImage', url);
+          } catch (e) { toast('আপলোড ব্যর্থ', e.message, 'error'); }
+          fi.remove();
+        });
+        fi.click();
+      }));
+      toolbar.append(tbBtn('লিংক', ic('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'), () => {
+        const sel = window.getSelection();
+        const url = prompt('লিংক URL:');
+        if (!url) return;
+        if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+          exec('createLink', url);
+          content.querySelectorAll(`a[href="${url}"]`).forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+        } else {
+          const html = `<a href="${url}" target="_blank" rel="noopener">${url}</a>`;
+          try { document.execCommand('insertHTML', false, html); } catch {}
+          syncContent();
+        }
+      }));
+      toolbar.append(tbBtn('ছক (টেবিল)', ic('<path d="M12 3v18M3 8h18M3 16h18M3 3h18v18H3z"/>'), () => {
+        const rows = 3, cols = 3;
+        const t = el('table');
+        const tb = el('tbody');
+        for (let r = 0; r < rows; r++) {
+          const tr = el('tr');
+          for (let c = 0; c < cols; c++) {
+            const cell = el(r === 0 ? 'th' : 'td');
+            cell.textContent = r === 0 ? `শিরোনাম ${c+1}` : ' ';
+            tr.appendChild(cell);
+          }
+          tb.appendChild(tr);
+        }
+        t.appendChild(tb);
+        try { document.execCommand('insertHTML', false, t.outerHTML + '<p></p>'); } catch {}
+        syncContent();
+      }));
+      toolbar.append(tbBtn('অনুভূমিক রেখা', ic('<path d="M5 12h14"/>'), () => exec('insertHorizontalRule')));
+      toolbar.append(tbBtn('YouTube ভিডিও', ic('<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.56 49.56 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>'), () => {
+        const url = prompt('YouTube লিংক (https://youtube.com/watch?v=...):');
+        if (!url) return;
+        let id = '';
+        const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([A-Za-z0-9_-]{11})/);
+        if (m) id = m[1];
+        else if (/^[A-Za-z0-9_-]{11}$/.test(url)) id = url;
+        if (!id) { toast('ভুল URL', 'সঠিক YouTube লিংক দিন', 'error'); return; }
+        const html = `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:14px 0;border-radius:8px;"><iframe src="https://www.youtube.com/embed/${id}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div><p></p>`;
+        try { document.execCommand('insertHTML', false, html); } catch {}
+        syncContent();
+      }));
+
+      toolbar.append(el('div', { class: 'tb-divider' }));
+
+      // Auto-save / Restore
+      toolbar.append(tbBtn('সংরক্ষিত খসড়া ফিরিয়ে আনা', ic('<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>'), () => {
+        if (!state.storageKey) return;
+        try {
+          const raw = localStorage.getItem(state.storageKey);
+          if (!raw) { toast('কোনো খসড়া নেই', '', 'info'); return; }
+          const payload = JSON.parse(raw);
+          if (confirm(`"${new Date(payload.savedAt).toLocaleString()}" এ সংরক্ষিত খসড়া ফিরিয়ে আনবেন?`)) {
+            state.skipNextHistory = true;
+            content.innerHTML = payload.html;
+            if (opts.onChange) opts.onChange(payload.html);
+            updateCounts();
+            toast('খসড়া ফিরিয়ে আনা হয়েছে', '', 'success');
+          }
+        } catch {}
+      }));
+      toolbar.append(tbBtn('সংরক্ষিত খসড়া মুছুন', ic('<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/>'), () => {
+        if (!state.storageKey) return;
+        if (confirm('সংরক্ষিত খসড়া মুছে ফেলবেন?')) {
+          try { localStorage.removeItem(state.storageKey); savedLabel.classList.add('hidden'); toast('খসড়া মুছে ফেলা হয়েছে'); } catch {}
+        }
+      }));
+
+      // Right side: preview, fullscreen
+      const rightWrap = el('div', { style: { marginLeft: 'auto', display: 'flex', gap: '2px' } });
+      rightWrap.append(tbBtn('প্রিভিউ মোড', ic('<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>'), () => {
+        state.isPreview = !state.isPreview;
+        content.contentEditable = !state.isPreview;
+        shell.classList.toggle('preview-mode', state.isPreview);
+        if (state.isPreview) content.style.background = 'var(--muted)';
+        else content.style.background = '';
+      }));
+      rightWrap.append(tbBtn('পূর্ণ পর্দা', ic('<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/>'), () => {
+        state.isFullscreen = !state.isFullscreen;
+        shell.classList.toggle('fullscreen', state.isFullscreen);
+      }));
+      toolbar.appendChild(rightWrap);
+
+      // Init history
+      if (state.value) {
+        state.history.push(state.value);
+        state.historyIdx = 0;
+      }
+
+      // Event handlers
+      content.addEventListener('input', syncContent);
+      content.addEventListener('keyup', updateCounts);
+      content.addEventListener('mouseup', updateCounts);
+
+      // Auto-save (debounced)
+      let saveTimer = null;
+      const onChangeDebounced = (html) => {
+        if (!state.storageKey) return;
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(() => {
+          try {
+            const payload = { html, savedAt: new Date().toISOString() };
+            localStorage.setItem(state.storageKey, JSON.stringify(payload));
+            state.lastSavedAt = payload.savedAt;
+            savedLabel.textContent = `সেভ: ${new Date(payload.savedAt).toLocaleTimeString()}`;
+            savedLabel.classList.remove('hidden');
+          } catch {}
+        }, 800);
+      };
+      const origOnChange = opts.onChange;
+      opts.onChange = (html) => { if (origOnChange) origOnChange(html); onChangeDebounced(html); };
+
+      // Load lastSavedAt
+      if (state.storageKey) {
+        try {
+          const raw = localStorage.getItem(state.storageKey);
+          if (raw) {
+            const payload = JSON.parse(raw);
+            state.lastSavedAt = payload.savedAt;
+            savedLabel.textContent = `সেভ: ${new Date(payload.savedAt).toLocaleTimeString()}`;
+            savedLabel.classList.remove('hidden');
+          }
+        } catch {}
+      }
+
+      updateCounts();
+      return {
+        getValue: () => state.value,
+        setValue: (html) => {
+          state.skipNextHistory = true;
+          content.innerHTML = html || '';
+          state.value = html || '';
+          if (opts.onChange) opts.onChange(html);
+          updateCounts();
+        },
+        destroy: () => { shell.remove(); },
+      };
+    }
+
+    // ============================================================
+    // RENDERING — Login
+    // ============================================================
+    function renderConfigError() {
+      const app = $('#app');
+      app.innerHTML = '';
+      const wrap = el('div', { class: 'login-wrap' },
+        el('div', { class: 'login-card' },
+          el('div', { class: 'login-brand' },
+            el('div', { class: 'logo-big' }, icon('book-open')),
+            el('h1', { class: 'bn-font' }, 'মোস্তফা অভি — লেখক ড্যাশবোর্ড'),
+            el('p', {}, 'MOSTSFA AUVI — Author Dashboard')
+          ),
+          el('div', { class: 'card' },
+            el('h3', { style: { marginTop: 0 } }, '⚠️ Supabase কনফিগার করুন'),
+            el('p', { class: 'text-muted text-sm' },
+              'এই ড্যাশবোর্ড ব্যবহার করতে হলে ফাইলের উপরে (যেখানে JavaScript শুরু) CONFIG সেকশনে আপনার Supabase URL ও anon key বসান:'
+            ),
+            el('pre', { style: { background: 'var(--muted)', padding: '12px', borderRadius: '8px', fontSize: '12px', overflowX: 'auto' } },
+              `const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_KEY = 'YOUR_ANON_KEY';`
+            ),
+            el('p', { class: 'text-muted text-sm mt-2' },
+              'Supabase Dashboard → Settings → API → "Project URL" ও "anon public" key কপি করে বসান।'
+            ),
+            el('p', { class: 'text-muted text-sm' },
+              'তারপর supabase-schema.sql ফাইলটি Supabase SQL Editor-এ রান করুন।'
+            )
+          )
+        )
+      );
+      app.appendChild(wrap);
+      refreshIcons();
+    }
+
+    function renderLogin() {
+      const app = $('#app');
+      app.innerHTML = '';
+      const wrap = el('div', { class: 'login-wrap' });
+      const card = el('div', { class: 'login-card' });
+      card.innerHTML = `
+        <div class="login-brand">
+          <div class="logo-big"><i data-lucide="book-open"></i></div>
+          <h1 class="bn-font">মোস্তফা অভি — লেখক ড্যাশবোর্ড</h1>
+          <p>MOSTSFA AUVI — Author Dashboard</p>
+        </div>
+        <div class="card">
+          <div class="tab-strip">
+            <button data-mode="login" class="active">লগইন</button>
+            <button data-mode="signup">নতুন অ্যাকাউন্ট</button>
+            <button data-mode="reset">রিসেট</button>
+          </div>
+          <form id="login-form" class="flex flex-col gap-3">
+            <div id="signup-fields" class="hidden">
+              <label class="label">নাম (বাংলা)</label>
+              <input class="input" name="name" placeholder="যেমন: মোস্তফা অভি" />
+            </div>
+            <div>
+              <label class="label">ইমেইল</label>
+              <input class="input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+            </div>
+            <div>
+              <label class="label" id="pw-label">পাসওয়ার্ড</label>
+              <input class="input" type="password" name="password" placeholder="কমপক্ষে ৬ অক্ষর" required autocomplete="current-password" />
+            </div>
+            <button type="submit" class="btn btn-primary w-full" id="submit-btn">লগইন করুন</button>
+          </form>
+          <div class="mt-4 pt-4" style="border-top:1px solid var(--border); font-size:11px; color:var(--muted-fg); background:var(--muted); margin: 16px -16px -16px; padding: 12px 16px; border-radius: 0 0 8px 8px;">
+            <p style="font-weight:500; color:var(--fg); margin: 0 0 4px;">প্রথমবার সেটআপ:</p>
+            <p style="margin:0">১. supabase-schema.sql রান করুন<br>
+            ২. admin_users টেবিলে নিজের user_id যোগ করুন<br>
+            ৩. তারপর লগইন করুন</p>
+          </div>
+        </div>
+        <p class="text-center text-xs text-muted mt-4">© ${new Date().getFullYear()} মোস্তফা অভি — সর্বস্বত্ব সংরক্ষিত</p>
+      `;
+      wrap.appendChild(card);
+      app.appendChild(wrap);
+
+      let mode = 'login';
+      const updateMode = (m) => {
+        mode = m;
+        $$('.tab-strip button').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+        $('#signup-fields').classList.toggle('hidden', m !== 'signup');
+        $('#pw-label').textContent = m === 'reset' ? 'নতুন পাসওয়ার্ড (ইমেইলে রিসেট লিংক যাবে)' : 'পাসওয়ার্ড';
+        $('#submit-btn').textContent = m === 'login' ? 'লগইন করুন' : m === 'signup' ? 'অ্যাকাউন্ট তৈরি করুন' : 'রিসেট লিংক পাঠান';
+      };
+      $$('.tab-strip button').forEach(b => b.addEventListener('click', () => updateMode(b.dataset.mode)));
+
+      $('#login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = $('#submit-btn');
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:6px;"></span> অপেক্ষা করুন...';
+        const email = $('#login-form [name=email]').value;
+        const password = $('#login-form [name=password]').value;
+        try {
+          if (mode === 'login') {
+            const ok = await signIn(email, password);
+            if (ok) { toast('স্বাগতম!', 'লগইন সফল', 'success'); await afterAuth(); }
+          } else if (mode === 'signup') {
+            await signUp(email, password);
+            toast('অ্যাকাউন্ট তৈরি হয়েছে', 'ইমেইল ভেরিফাই করে admin_users টেবিলে যোগ করুন', 'success', 5000);
+          } else if (mode === 'reset') {
+            await resetPassword(email);
+            toast('রিসেট লিংক পাঠানো হয়েছে', 'ইমেইল চেক করুন', 'success');
+          }
+        } catch (err) {
+          toast('ত্রুটি', err.message || 'অজানা সমস্যা', 'error');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = origText;
+        }
+      });
+      refreshIcons();
+    }
+
+    // ============================================================
+    // RENDERING — Dashboard shell
+    // ============================================================
+    function renderApp() {
+      applyTheme(state.theme);
+      const app = $('#app');
+      app.innerHTML = '';
+
+      if (!state.session) { renderLogin(); return; }
+
+      // Topbar
+      const topbar = el('div', { class: 'topbar' });
+      const left = el('div', { class: 'flex items-center gap-2' });
+      const menuBtn = el('button', { class: 'btn btn-ghost btn-icon mobile-only', title: 'মেনু' }, icon('menu'));
+      menuBtn.addEventListener('click', () => $('.sidebar').classList.toggle('open'));
+      left.append(menuBtn, el('h1', { class: 'bn-font' },
+        state.view === 'new' ? (state.editingId ? 'লেখা সম্পাদনা' : 'নতুন লেখা তৈরি') :
+        state.view === 'list' ? 'আমার লেখাসমূহ' : 'পরিসংখ্যান'
+      ));
+      const right = el('div', { class: 'flex items-center gap-2' });
+      const themeBtn = el('button', { class: 'btn btn-ghost btn-icon', title: 'থিম পরিবর্তন' },
+        icon(state.theme === 'dark' ? 'sun' : 'moon'));
+      themeBtn.addEventListener('click', () => {
+        applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+        renderApp();
+      });
+      const userBtn = el('button', { class: 'btn btn-ghost', style: { padding: '4px 8px', gap: '6px' } },
+        el('div', { class: 'avatar' }, (state.userEmail || 'A').slice(0, 2).toUpperCase()),
+        el('span', { class: 'bn-font hidden md:inline', style: { fontSize: '13px' } }, state.userEmail || '')
+      );
+      userBtn.addEventListener('click', signOut);
+      userBtn.title = 'লগআউট করতে ক্লিক করুন';
+      right.append(themeBtn, userBtn);
+      topbar.append(left, right);
+
+      // Layout
+      const layout = el('div', { class: 'layout' });
+      const sidebar = el('aside', { class: 'sidebar' });
+      const brand = el('div', { class: 'brand' },
+        el('div', { class: 'logo' }, icon('book-open')),
+        el('div', {},
+          el('div', { class: 'name bn-font' }, 'মোস্তফা অভি'),
+          el('div', { class: 'sub' }, 'Author Dashboard')
+        )
+      );
+      const navItems = [
+        { id: 'new', label: 'নতুন লেখা', icon: 'file-plus' },
+        { id: 'list', label: 'আমার লেখাসমূহ', icon: 'list-ordered' },
+        { id: 'stats', label: 'পরিসংখ্যান', icon: 'bar-chart-3' },
+      ];
+      const nav = el('nav', { class: 'flex flex-col gap-2' });
+      navItems.forEach(item => {
+        const btn = el('button', { class: `nav-item ${state.view === item.id ? 'active' : ''}`, type: 'button' },
+          icon(item.icon),
+          el('span', { class: 'bn-font' }, item.label)
+        );
+        btn.addEventListener('click', () => {
+          state.view = item.id;
+          if (item.id === 'new') state.editingId = null;
+          renderApp();
+        });
+        nav.appendChild(btn);
+      });
+      const userCard = el('div', { class: 'user-card' },
+        el('div', { class: 'avatar' }, (state.userEmail || 'A').slice(0, 2).toUpperCase()),
+        el('div', { class: 'info' },
+          el('div', { class: 'name bn-font truncate' }, state.userEmail || ''),
+          el('div', { class: 'email truncate' }, 'লেখক')
+        )
+      );
+      sidebar.append(brand, nav, userCard);
+
+      const main = el('main', { class: 'main' });
+      const inner = el('div', { class: 'main-inner' });
+
+      layout.append(sidebar, main);
+      main.appendChild(inner);
+      app.append(topbar, layout);
+
+      // Render active view
+      if (state.view === 'new') renderEditorView(inner);
+      else if (state.view === 'list') renderListView(inner);
+      else if (state.view === 'stats') renderStatsView(inner);
+
+      refreshIcons();
+    }
+
+    // ============================================================
+    // VIEW: Editor (নতুন লেখা / সম্পাদনা)
+    // ============================================================
+    async function renderEditorView(mount) {
+      const formData = {
+        title: '', slug: '', intro: '', body: '',
+        title_en: '', slug_en: '', intro_en: '', body_en: '',
+        category_id: '', tags: [], featured: false, status: 'draft', cover_image: null,
+      };
+
+      // Header
+      const header = el('div', { class: 'flex justify-between items-center gap-2 mb-4 flex-wrap' },
+        el('div', {},
+          el('h2', { class: 'bn-font', style: { fontSize: '20px', fontWeight: 600, margin: 0 } },
+            state.editingId ? 'লেখা সম্পাদনা' : 'নতুন লেখা তৈরি'),
+          el('p', { class: 'text-muted text-sm' }, state.editingId ? 'Edit existing writing' : 'Create a new bilingual writing')
+        ),
+        el('div', { class: 'flex gap-2' },
+          el('button', { class: 'btn', onclick: () => { state.view = 'list'; state.editingId = null; renderApp(); } }, 'বাতিল'),
+          el('button', { class: 'btn', id: 'save-draft-btn' }, icon('save'), 'খসড়া সেভ'),
+          el('button', { class: 'btn btn-primary', id: 'publish-btn' }, icon('file-text'), 'প্রকাশ করুন')
+        )
+      );
+
+      // Layout grid
+      const grid = el('div', { class: 'grid', style: { gridTemplateColumns: 'minmax(0, 2fr) minmax(280px, 1fr)', gap: '20px' } });
+      const leftCol = el('div', { class: 'flex flex-col gap-3' });
+      const rightCol = el('div', { class: 'flex flex-col gap-3' });
+
+      // Tabs
+      const tabWrap = el('div', { class: 'tab-strip' },
+        el('button', { class: state.activeTab === 'bn' ? 'active' : '', 'data-tab': 'bn' }, 'বাংলা সংস্করণ'),
+        el('button', { class: state.activeTab === 'en' ? 'active' : '', 'data-tab': 'en' }, 'English Version')
+      );
+
+      // Bengali fields
+      const bnFields = el('div', { class: state.activeTab === 'bn' ? '' : 'hidden' });
+      bnFields.innerHTML = `
+        <div class="grid grid-2 mb-2">
+          <div>
+            <label class="label">শিরোনাম (বাংলা) <span class="req">*</span></label>
+            <input class="input bn-font" id="f-title" placeholder="লেখার শিরোনাম..." />
+          </div>
+          <div>
+            <label class="label">স্লাগ</label>
+            <input class="input" id="f-slug" placeholder="auto-slug" />
+          </div>
+        </div>
+        <div class="mb-2">
+          <label class="label">সংক্ষিপ্ত ভূমিকা</label>
+          <textarea class="textarea bn-font" id="f-intro" placeholder="এক বা দুই বাক্যে ভূমিকা..." rows="2"></textarea>
+        </div>
+        <div>
+          <label class="label">মূল লেখা</label>
+          <div id="bn-editor-mount"></div>
+        </div>
+      `;
+
+      // English fields
+      const enFields = el('div', { class: state.activeTab === 'en' ? '' : 'hidden' });
+      enFields.innerHTML = `
+        <div class="grid grid-2 mb-2">
+          <div>
+            <label class="label">Title (English)</label>
+            <input class="input" id="f-title-en" placeholder="Title in English..." />
+          </div>
+          <div>
+            <label class="label">Slug</label>
+            <input class="input" id="f-slug-en" placeholder="auto-slug" />
+          </div>
+        </div>
+        <div class="mb-2">
+          <label class="label">Brief Introduction</label>
+          <textarea class="textarea" id="f-intro-en" placeholder="One or two sentence introduction..." rows="2"></textarea>
+        </div>
+        <div>
+          <label class="label">Content</label>
+          <div id="en-editor-mount"></div>
+        </div>
+      `;
+
+      leftCol.append(tabWrap, bnFields, enFields);
+
+      // Tab switching
+      tabWrap.querySelectorAll('button').forEach(b => {
+        b.addEventListener('click', () => {
+          state.activeTab = b.dataset.tab;
+          bnFields.classList.toggle('hidden', state.activeTab !== 'bn');
+          enFields.classList.toggle('hidden', state.activeTab !== 'en');
+          tabWrap.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+        });
+      });
+
+      // Right column: category, cover, tags, options
+      const catCard = el('div', { class: 'card' });
+      catCard.innerHTML = `
+        <h3 class="card-h"><i data-lucide="file-text" style="width:14px;height:14px;"></i> ক্যাটাগরি</h3>
+        <label class="label">প্রধান ক্যাটাগরি</label>
+        <select class="select mb-2" id="f-parent-cat"><option value="">নির্বাচন করুন...</option></select>
+        <label class="label">উপক্যাটাগরি (ঐচ্ছিক)</label>
+        <select class="select" id="f-sub-cat"><option value="">নির্বাচন করুন...</option></select>
+        <div class="mt-2" id="cat-badge"></div>
+      `;
+
+      const coverCard = el('div', { class: 'card' });
+      coverCard.innerHTML = `<h3 class="card-h">কভার ছবি</h3>`;
+      const coverUploader = el('div', { class: 'cover-uploader', id: 'cover-uploader' },
+        icon('image-plus'),
+        el('div', { class: 'text-sm', style: { marginTop: '8px', fontWeight: 500 } }, 'কভার ছবি আপলোড করুন'),
+        el('div', { class: 'text-xs text-muted', style: { marginTop: '4px' } }, 'JPG, PNG, WebP — ৫MB')
+      );
+      const coverInput = el('input', { type: 'file', accept: 'image/*', style: { display: 'none' } });
+      coverCard.append(coverUploader, coverInput);
+
+      const tagsCard = el('div', { class: 'card' });
+      tagsCard.innerHTML = `<h3 class="card-h">ট্যাগ</h3>`;
+      const tagInputWrap = el('div', { class: 'tag-input-wrap' });
+      const tagInput = el('input', { type: 'text', placeholder: 'ট্যাগ লিখুন, Enter চাপুন...' });
+      tagInputWrap.appendChild(tagInput);
+      const renderTags = () => {
+        tagInputWrap.querySelectorAll('.tag-chip').forEach(c => c.remove());
+        formData.tags.forEach(t => {
+          const chip = el('span', { class: 'tag-chip bn-font' }, t,
+            el('button', { type: 'button' }, icon('x')));
+          chip.querySelector('button').addEventListener('click', () => {
+            formData.tags = formData.tags.filter(x => x !== t);
+            renderTags();
+          });
+          tagInputWrap.insertBefore(chip, tagInput);
+        });
+      };
+      tagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          const v = tagInput.value.trim();
+          if (v && !formData.tags.includes(v)) {
+            formData.tags.push(v);
+            tagInput.value = '';
+            renderTags();
+          }
+        } else if (e.key === 'Backspace' && !tagInput.value && formData.tags.length > 0) {
+          formData.tags.pop();
+          renderTags();
+        }
+      });
+      tagsCard.appendChild(tagInputWrap);
+
+      const optCard = el('div', { class: 'card' });
+      optCard.innerHTML = `
+        <h3 class="card-h">প্রকাশনা অপশন</h3>
+        <div class="flex items-center justify-between">
+          <label class="flex items-center gap-2" style="cursor:pointer">
+            <i data-lucide="star" style="width:16px;height:16px;color:#f59e0b;"></i>
+            <div>
+              <div class="text-sm">ফিচার্ড লেখা</div>
+              <div class="text-xs text-muted">হোমপেজে দেখাবে</div>
+            </div>
+          </label>
+          <label class="switch"><input type="checkbox" id="f-featured"><span class="slider"></span></label>
+        </div>
+        <div class="flex items-center justify-between mt-2">
+          <div class="flex items-center gap-2">
+            <i data-lucide="eye" style="width:16px;height:16px;"></i>
+            <div>
+              <div class="text-sm">বর্তমান স্ট্যাটাস</div>
+              <div class="text-xs text-muted" id="status-text">খসড়া</div>
+            </div>
+          </div>
+          <span class="badge badge-warning" id="status-badge">খসড়া</span>
+        </div>
+      `;
+
+      rightCol.append(catCard, coverCard, tagsCard, optCard);
+      grid.append(leftCol, rightCol);
+      mount.append(header, grid);
+
+      // Populate categories
+      const parentSel = $('#f-parent-cat');
+      getParentCategories().forEach(c => {
+        const opt = el('option', { value: c.id }, `${c.name} / ${c.name_en}`);
+        parentSel.appendChild(opt);
+      });
+      parentSel.addEventListener('change', () => {
+        const subSel = $('#f-sub-cat');
+        subSel.innerHTML = '<option value="">নির্বাচন করুন...</option>';
+        getSubcategories(parentSel.value).forEach(c => {
+          subSel.appendChild(el('option', { value: c.id }, `${c.name} / ${c.name_en}`));
+        });
+        formData.category_id = parentSel.value;
+        updateCatBadge();
+      });
+      $('#f-sub-cat').addEventListener('change', () => {
+        formData.category_id = $('#f-sub-cat').value || parentSel.value;
+        updateCatBadge();
+      });
+      function updateCatBadge() {
+        const badge = $('#cat-badge');
+        badge.innerHTML = '';
+        if (formData.category_id) {
+          const cat = state.categories.find(c => c.id === formData.category_id);
+          if (cat) badge.appendChild(el('span', { class: 'badge badge-default bn-font' }, `${cat.name} / ${cat.name_en}`));
+        }
+      }
+
+      // Cover upload
+      coverUploader.addEventListener('click', () => coverInput.click());
+      coverInput.addEventListener('change', async () => {
+        const f = coverInput.files?.[0];
+        if (!f) return;
+        try {
+          toast('আপলোড হচ্ছে...', '', 'info', 1500);
+          const url = await uploadCover(f);
+          formData.cover_image = url;
+          coverUploader.classList.add('has-image');
+          coverUploader.innerHTML = `<img src="${url}" alt="Cover" />`;
+        } catch (e) { toast('আপলোড ব্যর্থ', e.message, 'error'); }
+        coverInput.value = '';
+      });
+
+      // Featured switch
+      $('#f-featured').addEventListener('change', (e) => { formData.featured = e.target.checked; });
+
+      // Title -> slug auto
+      $('#f-title').addEventListener('input', (e) => {
+        formData.title = e.target.value;
+        if (!formData.slug || formData.slug === slugify(formData.title)) {
+          formData.slug = slugify(e.target.value);
+          $('#f-slug').value = formData.slug;
+        }
+      });
+      $('#f-slug').addEventListener('input', (e) => { formData.slug = e.target.value; });
+      $('#f-intro').addEventListener('input', (e) => { formData.intro = e.target.value; });
+      $('#f-title-en').addEventListener('input', (e) => {
+        formData.title_en = e.target.value;
+        if (!formData.slug_en || formData.slug_en === slugify(formData.title_en)) {
+          formData.slug_en = slugify(e.target.value);
+          $('#f-slug-en').value = formData.slug_en;
+        }
+      });
+      $('#f-slug-en').addEventListener('input', (e) => { formData.slug_en = e.target.value; });
+      $('#f-intro-en').addEventListener('input', (e) => { formData.intro_en = e.target.value; });
+
+      // Init rich text editors
+      let bnEd = null, enEd = null;
+      const initEditors = () => {
+        bnEd = createRichEditor($('#bn-editor-mount'), {
+          language: 'bn',
+          value: formData.body,
+          storageKey: `draft-bn-${state.editingId || 'new'}`,
+          placeholder: 'এখানে আপনার বাংলা লেখা লিখুন...',
+          onChange: (html) => { formData.body = html; },
+        });
+        enEd = createRichEditor($('#en-editor-mount'), {
+          language: 'en',
+          value: formData.body_en,
+          storageKey: `draft-en-${state.editingId || 'new'}`,
+          placeholder: 'Write your English content here...',
+          onChange: (html) => { formData.body_en = html; },
+        });
+      };
+
+      // Load editing data
+      if (state.editingId) {
+        mount.appendChild(el('div', { class: 'flex items-center justify-center', style: { padding: '40px' } },
+          el('div', { class: 'spinner' })));
+        try {
+          const w = await loadWritingForEdit(state.editingId);
+          formData.title = w.title || '';
+          formData.slug = w.slug || '';
+          formData.intro = w.intro || '';
+          formData.body = w.body || '';
+          formData.title_en = w.title_en || '';
+          formData.slug_en = w.slug_en || '';
+          formData.intro_en = w.intro_en || '';
+          formData.body_en = w.body_en || '';
+          formData.category_id = w.category_id || '';
+          formData.tags = w.tags || [];
+          formData.featured = w.featured || false;
+          formData.status = w.status || 'draft';
+          formData.cover_image = w.cover_image || null;
+          // Populate UI
+          $('#f-title').value = formData.title;
+          $('#f-slug').value = formData.slug;
+          $('#f-intro').value = formData.intro;
+          $('#f-title-en').value = formData.title_en;
+          $('#f-slug-en').value = formData.slug_en;
+          $('#f-intro-en').value = formData.intro_en;
+          $('#f-featured').checked = formData.featured;
+          // Category
+          if (formData.category_id) {
+            const cat = state.categories.find(c => c.id === formData.category_id);
+            if (cat) {
+              const parent = cat.parent_id ? state.categories.find(p => p.id === cat.parent_id) : cat;
+              if (parent) {
+                parentSel.value = parent.id;
+                parentSel.dispatchEvent(new Event('change'));
+                if (cat.parent_id) $('#f-sub-cat').value = cat.id;
+              }
+            }
+          }
+          // Cover
+          if (formData.cover_image) {
+            coverUploader.classList.add('has-image');
+            coverUploader.innerHTML = `<img src="${formData.cover_image}" alt="Cover" />`;
+          }
+          // Status
+          $('#status-text').textContent = formData.status === 'published' ? 'প্রকাশিত' : 'খসড়া';
+          const sb = $('#status-badge');
+          sb.textContent = formData.status === 'published' ? 'প্রকাশিত' : 'খসড়া';
+          sb.className = `badge ${formData.status === 'published' ? 'badge-default' : 'badge-warning'}`;
+          renderTags();
+        } catch (e) {
+          toast('লেখা লোড ব্যর্থ', e.message, 'error');
+        }
+        // Remove spinner
+        mount.lastChild.remove();
+      }
+      initEditors();
+
+      // Save / Publish
+      const save = async (status) => {
+        if (!formData.title.trim()) {
+          toast('ত্রুটি', 'বাংলা শিরোনাম দিন', 'error');
+          state.activeTab = 'bn';
+          renderApp();
+          return;
+        }
+        if (!formData.slug.trim()) formData.slug = slugify(formData.title);
+        if (!formData.category_id) {
+          toast('ত্রুটি', 'ক্যাটাগরি নির্বাচন করুন', 'error');
+          return;
+        }
+        const btn = status === 'published' ? $('#publish-btn') : $('#save-draft-btn');
+        const orig = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:6px;"></span> সেভ হচ্ছে...';
+        try {
+          formData.status = status;
+          await saveWriting(formData);
+          toast(status === 'published' ? 'প্রকাশিত হয়েছে' : 'খসড়া সংরক্ষিত', `"${formData.title}" সফলভাবে সেভ হয়েছে`, 'success');
+          state.view = 'list';
+          state.editingId = null;
+          await loadWritings();
+          renderApp();
+        } catch (e) {
+          toast('সংরক্ষণ ব্যর্থ', e.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = orig;
+          refreshIcons();
+        }
+      };
+      $('#save-draft-btn').addEventListener('click', () => save('draft'));
+      $('#publish-btn').addEventListener('click', () => save('published'));
+
+      refreshIcons();
+    }
+
+    // ============================================================
+    // VIEW: Writings List
+    // ============================================================
+    async function renderListView(mount) {
+      mount.appendChild(el('div', { class: 'flex justify-between items-center gap-2 mb-4 flex-wrap' },
+        el('div', {},
+          el('h2', { class: 'bn-font', style: { fontSize: '20px', fontWeight: 600, margin: 0 } }, 'আমার লেখাসমূহ'),
+          el('p', { class: 'text-muted text-sm', id: 'count-text' }, 'লোড হচ্ছে...')
+        ),
+        el('button', { class: 'btn btn-primary', onclick: () => { state.view = 'new'; state.editingId = null; renderApp(); } },
+          icon('plus'), 'নতুন লেখা')
+      ));
+
+      // Filters
+      const filters = el('div', { class: 'flex gap-2 mb-4 flex-wrap' },
+        el('div', { style: { position: 'relative', flex: 1, minWidth: '240px' } },
+          el('input', { class: 'input', placeholder: 'শিরোনাম দিয়ে খুঁজুন...', id: 'search-input', value: state.filter.search })
+        ),
+        el('select', { class: 'select', id: 'status-filter', style: { width: 'auto' } },
+          el('option', { value: 'all' }, 'সব'),
+          el('option', { value: 'draft' }, 'খসড়া'),
+          el('option', { value: 'published' }, 'প্রকাশিত')
+        )
+      );
+      const listHost = el('div', { class: 'flex flex-col gap-2', id: 'list-host' });
+      listHost.appendChild(el('div', { class: 'flex items-center justify-center', style: { padding: '40px' } }, el('div', { class: 'spinner' })));
+      mount.append(filters, listHost);
+
+      // Filter handlers
+      let searchTimer = null;
+      $('#search-input').addEventListener('input', (e) => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(async () => {
+          state.filter.search = e.target.value;
+          state.pagination.page = 1;
+          await loadWritings();
+          renderListItems();
+        }, 250);
+      });
+      $('#status-filter').value = state.filter.status;
+      $('#status-filter').addEventListener('change', async (e) => {
+        state.filter.status = e.target.value;
+        state.pagination.page = 1;
+        await loadWritings();
+        renderListItems();
+      });
+
+      await loadWritings();
+      renderListItems();
+      refreshIcons();
+    }
+
+    function renderListItems() {
+      const host = $('#list-host');
+      $('#count-text').textContent = `মোট ${formatNumber(state.pagination.total)} টি লেখা`;
+      host.innerHTML = '';
+      if (state.writings.length === 0) {
+        host.appendChild(el('div', { class: 'text-center', style: { padding: '64px', border: '2px dashed var(--border)', borderRadius: 'var(--radius)' } },
+          icon('file-text'),
+          el('p', { class: 'text-muted mt-2' }, 'কোনো লেখা পাওয়া যায়নি'),
+          el('button', { class: 'btn btn-primary mt-2', onclick: () => { state.view = 'new'; state.editingId = null; renderApp(); } },
+            icon('plus'), 'প্রথম লেখা লিখুন')
+        ));
+        refreshIcons();
+        return;
+      }
+      state.writings.forEach(w => {
+        const item = el('div', { class: 'writing-item' });
+        const thumb = el('div', { class: 'thumb' },
+          w.cover_image ? el('img', { src: w.cover_image, alt: '' }) : icon('file-text'));
+        const info = el('div', { class: 'info' },
+          el('div', { class: 'flex items-center gap-2 flex-wrap' },
+            el('h3', { class: 'title bn-font truncate', style: { flex: 1, minWidth: 0 } }, w.title),
+            w.featured && el('span', { class: 'badge badge-default' }, '★ ফিচার্ড'),
+            el('span', {
+              class: `badge ${w.status === 'published' ? 'badge-default' : 'badge-warning'}`,
+              style: { cursor: 'pointer' },
+              title: 'স্ট্যাটাস পরিবর্তন করতে ক্লিক করুন',
+              onclick: async () => {
+                try { await toggleWritingStatus(w); await loadWritings(); renderListItems(); toast('স্ট্যাটাস পরিবর্তিত'); }
+                catch (e) { toast('ত্রুটি', e.message, 'error'); }
+              }
+            }, w.status === 'published' ? 'প্রকাশিত' : 'খসড়া')
+          ),
+          w.title_en && el('p', { class: 'text-xs text-muted truncate' }, w.title_en),
+          el('div', { class: 'meta' },
+            w.category && el('span', {}, icon('file-text'), w.category.name),
+            el('span', {}, icon('calendar'), formatDate(w.updated_at)),
+            el('span', {}, `শব্দ: ${formatNumber(w.word_count || 0)}`)
+          )
+        );
+        const actions = el('div', { class: 'flex gap-1', style: { flexShrink: 0 } },
+          el('button', { class: 'btn btn-ghost btn-sm btn-icon', title: 'সম্পাদনা',
+            onclick: () => { state.editingId = w.id; state.view = 'new'; renderApp(); }
+          }, icon('pencil')),
+          el('button', { class: 'btn btn-ghost btn-sm btn-icon', title: 'মুছুন',
+            onclick: async () => {
+              if (!confirm('এই লেখাটি মুছে ফেলবেন?')) return;
+              try { await deleteWriting(w.id); await loadWritings(); renderListItems(); toast('লেখা মুছে ফেলা হয়েছে'); }
+              catch (e) { toast('ত্রুটি', e.message, 'error'); }
+            }
+          }, icon('trash-2'))
+        );
+        item.append(thumb, info, actions);
+        host.appendChild(item);
+      });
+
+      // Pagination
+      if (state.pagination.totalPages > 1) {
+        const pag = el('div', { class: 'flex justify-between items-center mt-2' },
+          el('p', { class: 'text-xs text-muted' }, `পৃষ্ঠা ${formatNumber(state.pagination.page)} / ${formatNumber(state.pagination.totalPages)}`),
+          el('div', { class: 'flex gap-1' },
+            el('button', { class: 'btn btn-sm btn-icon', disabled: state.pagination.page <= 1,
+              onclick: async () => { state.pagination.page--; await loadWritings(); renderListItems(); }
+            }, icon('chevron-left')),
+            el('button', { class: 'btn btn-sm btn-icon', disabled: state.pagination.page >= state.pagination.totalPages,
+              onclick: async () => { state.pagination.page++; await loadWritings(); renderListItems(); }
+            }, icon('chevron-right'))
+          )
+        );
+        host.appendChild(pag);
+      }
+      refreshIcons();
+    }
+
+    // ============================================================
+    // VIEW: Stats
+    // ============================================================
+    async function renderStatsView(mount) {
+      mount.appendChild(el('h2', { class: 'bn-font', style: { fontSize: '20px', fontWeight: 600, margin: '0 0 4px' } }, 'পরিসংখ্যান'));
+      mount.appendChild(el('p', { class: 'text-muted text-sm mb-4' }, 'আপনার লেখার সারসংক্ষেপ'));
+      const spinnerWrap = el('div', { class: 'flex items-center justify-center', style: { padding: '40px' } }, el('div', { class: 'spinner' }));
+      mount.appendChild(spinnerWrap);
+      try {
+        const stats = await loadStats();
+        spinnerWrap.remove();
+
+        const cards = [
+          { label: 'মোট লেখা', value: stats.total, icon: 'file-text', cls: 'badge-default' },
+          { label: 'প্রকাশিত', value: stats.published, icon: 'check-circle-2', cls: 'badge-default' },
+          { label: 'খসড়া', value: stats.drafts, icon: 'file-edit', cls: 'badge-warning' },
+          { label: 'ফিচার্ড', value: stats.featured, icon: 'star', cls: 'badge-default' },
+        ];
+        const cardsGrid = el('div', { class: 'grid grid-4 mb-4' });
+        cards.forEach(c => {
+          cardsGrid.appendChild(el('div', { class: 'card' },
+            el('div', { class: 'flex items-center justify-between' },
+              el('div', {},
+                el('p', { class: 'text-xs text-muted' }, c.label),
+                el('p', { style: { fontSize: '24px', fontWeight: 700, marginTop: '4px' } }, formatNumber(c.value))
+              ),
+              el('div', { class: `badge ${c.cls}`, style: { width: '36px', height: '36px', borderRadius: '8px' } }, icon(c.icon))
+            )
+          ));
+        });
+        mount.appendChild(cardsGrid);
+
+        // Total words
+        mount.appendChild(el('div', { class: 'card mb-4' },
+          el('h3', { class: 'card-h' }, icon('type'), 'মোট শব্দ লিখেছেন'),
+          el('div', { class: 'flex items-baseline gap-2' },
+            el('span', { style: { fontSize: '28px', fontWeight: 700 } }, formatNumber(stats.totalWords)),
+            el('span', { class: 'text-muted text-sm' }, 'শব্দ')
+          ),
+          el('p', { class: 'text-xs text-muted mt-2' },
+            stats.total > 0 ? `গড়ে প্রতি লেখায় ${formatNumber(Math.round(stats.totalWords / stats.total))} শব্দ` : '')
+        ));
+
+        // Recent
+        const recentCard = el('div', { class: 'card' },
+          el('h3', { class: 'card-h' }, 'সাম্প্রতিক লেখা')
+        );
+        if (stats.recent.length === 0) {
+          recentCard.appendChild(el('p', { class: 'text-sm text-muted' }, 'এখনো কোনো লেখা নেই'));
+        } else {
+          stats.recent.forEach(w => {
+            const row = el('div', { class: 'flex items-center justify-between gap-2', style: { padding: '8px 0', borderBottom: '1px solid var(--border)' } },
+              el('div', { style: { minWidth: 0, flex: 1 } },
+                el('p', { class: 'text-sm bn-font truncate' }, w.title),
+                el('p', { class: 'text-xs text-muted' },
+                  (w.category?.name || '') + ' · ' + formatDate(w.updated_at))
+              ),
+              el('span', { class: `badge ${w.status === 'published' ? 'badge-default' : 'badge-warning'}` },
+                w.status === 'published' ? 'প্রকাশিত' : 'খসড়া')
+            );
+            recentCard.appendChild(row);
+          });
+        }
+        mount.appendChild(recentCard);
+      } catch (e) {
+        spinnerWrap.remove();
+        mount.appendChild(el('div', { class: 'card' }, el('p', { class: 'text-destructive' }, 'ত্রুটি: ' + e.message)));
+      }
+      refreshIcons();
+    }
+
+    // ============================================================
+    // After auth — load initial data and render
+    // ============================================================
+    async function afterAuth() {
+      state.loading = true;
+      renderApp();
+      await Promise.all([loadCategories(), loadTags()]);
+      state.loading = false;
+      renderApp();
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    async function init() {
+      applyTheme(state.theme);
+      if (!initSupabase()) {
+        renderConfigError();
+        return;
+      }
+      // Show loading
+      $('#app').innerHTML = '<div class="min-h-screen flex items-center justify-center"><div class="flex flex-col items-center gap-3"><div class="spinner"></div><p class="text-muted text-sm">লোড হচ্ছে...</p></div></div>';
+      const ok = await checkSession();
+      if (ok) {
+        await loadCategories();
+        await loadTags();
+      }
+      renderApp();
+
+      // Listen to auth state changes
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_OUT') {
+          state.session = null; state.user = null;
+          renderApp();
+        } else if (event === 'SIGNED_IN' && session && !state.session) {
+          state.session = session; state.user = session.user; state.userEmail = session.user.email;
+          await afterAuth();
+        }
+      });
+    }
+
+    // Boot
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>
