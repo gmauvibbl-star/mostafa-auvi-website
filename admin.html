@@ -191,9 +191,10 @@ async function loadPosts(){
  const shellIds={bn:'bodyEditor',en:'bodyEnEditor'};
  const announce=(m)=>{const s=document.getElementById('status');if(s)s.textContent=m};
  try{
-  const [{Editor,Node,mergeAttributes},{default:StarterKit},{default:Underline},{default:TextAlign},{default:TextStyle},{default:Color},{default:Highlight},{default:FontFamily},{default:Image},{default:Link},{default:Table},{default:TableRow},{default:TableHeader},{default:TableCell},{default:Superscript},{default:Subscript},{default:Youtube},{default:Placeholder},{default:CharacterCount}]=await Promise.all([
+  const [{Editor,Node,mergeAttributes},{default:StarterKit},{default:ParagraphBase},{default:Underline},{default:TextAlign},{default:TextStyle},{default:Color},{default:Highlight},{default:FontFamily},{default:Image},{default:Link},{default:Table},{default:TableRow},{default:TableHeader},{default:TableCell},{default:Superscript},{default:Subscript},{default:Youtube},{default:Placeholder},{default:CharacterCount}]=await Promise.all([
    import('https://esm.sh/@tiptap/core@2.11.5'),
    import('https://esm.sh/@tiptap/starter-kit@2.11.5'),
+   import('https://esm.sh/@tiptap/extension-paragraph@2.11.5'),
    import('https://esm.sh/@tiptap/extension-underline@2.11.5'),
    import('https://esm.sh/@tiptap/extension-text-align@2.11.5'),
    import('https://esm.sh/@tiptap/extension-text-style@2.11.5'),
@@ -220,7 +221,7 @@ async function loadPosts(){
   } }});
   const Figure=Node.create({name:'figure',group:'block',content:'image figcaption?',parseHTML(){return [{tag:'figure'}]},renderHTML({HTMLAttributes}){return ['figure',mergeAttributes(HTMLAttributes,{class:'article-figure'}),0]}});
   const Figcaption=Node.create({name:'figcaption',group:'block',content:'inline*',parseHTML(){return [{tag:'figcaption'}]},renderHTML({HTMLAttributes}){return ['figcaption',HTMLAttributes,0]}});
-  const Paragraph=StarterKit.configure({paragraph:false}).extend({name:'paragraph',addOptions(){return { ...this.parent?.() }},addAttributes(){return {...(this.parent?.()||{}),style:{default:null,parseHTML:el=>el.getAttribute('style')||null,renderHTML:attrs=>attrs.style?{style:attrs.style}:{ }},class:{default:null,parseHTML:el=>el.getAttribute('class')||null,renderHTML:attrs=>attrs.class?{class:attrs.class}:{}}}},parseHTML(){return [{tag:'p'}]},renderHTML({HTMLAttributes}){return ['p',mergeAttributes(this.options.HTMLAttributes||{},HTMLAttributes),0]}});
+  const Paragraph=ParagraphBase.extend({addAttributes(){return {...(this.parent?.()||{}),style:{default:null,parseHTML:el=>el.getAttribute('style')||null,renderHTML:attrs=>attrs.style?{style:attrs.style}:{ }},class:{default:null,parseHTML:el=>el.getAttribute('class')||null,renderHTML:attrs=>attrs.class?{class:attrs.class}:{}}}},parseHTML(){return [{tag:'p'}]},renderHTML({HTMLAttributes}){return ['p',mergeAttributes(this.options.HTMLAttributes||{},HTMLAttributes),0]}});
   const baseExtensions=[
    StarterKit.configure({paragraph:false,blockquote:{HTMLAttributes:{class:'editor-quote'}}}),
    Paragraph,
@@ -305,11 +306,11 @@ async function loadPosts(){
    else if(cmd==='preview')document.getElementById('previewBtn')?.click();
    else if(cmd==='findReplace'){const find=prompt('যে শব্দ/বাক্য খুঁজবেন:','');if(!find)return;const replacement=prompt('যে লেখা দিয়ে বদলাবেন:','');if(replacement===null)return;const positions=[];editor.state.doc.descendants((node,pos)=>{if(node.isText&&node.text){let from=0;while((from=node.text.indexOf(find,from))!==-1){positions.push({from:pos+from,to:pos+from+find.length});from+=find.length}}});if(!positions.length){announce('শব্দটি পাওয়া যায়নি।');return}let tr=editor.state.tr;positions.sort((a,b)=>b.from-a.from).forEach(p=>{tr=tr.insertText(replacement,p.from,p.to)});editor.view.dispatch(tr);announce('মোট '+positions.length+'টি জায়গায় পরিবর্তন করা হয়েছে।')}
   }
-  const editors={};
+  const editors={};window.auviEditors=editors;
   for(const [id,elementId] of Object.entries(shellIds)){
    const source=document.getElementById(id),host=document.getElementById(elementId);
    const editor=new Editor({element:host,extensions:baseExtensions,content:source.value||'<p></p>',editorProps:{attributes:{class:'tiptap',spellcheck:'true'}},onUpdate:({editor})=>{source.value=editor.getHTML();syncCount(editor,id);try{const key='auvi-rich-draft-'+(document.getElementById('groupId').value||'new')+'-'+id;localStorage.setItem(key,editor.getHTML());const a=document.getElementById(id+'Autosave');if(a)a.textContent='স্বয়ংক্রিয় খসড়া সেভ হয়েছে · '+new Date().toLocaleTimeString()}catch(e){}}});
-   editors[id]=editor;syncCount(editor,id);
+   editors[id]=editor;window.auviEditors[id]=editor;syncCount(editor,id);
    host.closest('.rich-editor').querySelectorAll('[data-cmd]').forEach(btn=>btn.addEventListener('click',()=>runCommand(editor,btn.dataset.cmd,id)));
    host.closest('.rich-editor').querySelectorAll('[data-control]').forEach(control=>{
     control.addEventListener('change',()=>{
