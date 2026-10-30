@@ -433,7 +433,7 @@ async function loadPosts(){
     const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
     // Optimization: Removed 'body' from select query to reduce payload size massively!
     const {data,error}=await sb.from('posts')
-      .select('id,group_id,language,slug,title,excerpt,cover_image,category,tags,published_at')
+      .select('id,group_id,language,slug,title,excerpt,cover_image,category,parent_category,subcategory,tags,published_at')
       .eq('published',true)
       .order('published_at',{ascending:false,nullsFirst:false})
       .limit(300);
@@ -450,7 +450,11 @@ async function loadPosts(){
         'ব্যাংকিং ও অর্থনীতি':['ব্যাংকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা']
       };
       const allowed = categoryGroups[category] || [category];
-      rows=rows.filter(p=>allowed.includes(String(p.category||'').trim()));
+      rows=rows.filter(p=>{
+        const leaf=String(p.subcategory||p.category||'').trim();
+        const parent=String(p.parent_category||'').trim();
+        return leaf===category || parent===category || allowed.includes(leaf);
+      });
     }
     renderCards(rows);
   }catch(e){
