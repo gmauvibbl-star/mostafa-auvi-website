@@ -1,0 +1,18 @@
+-- Add separate main category and subcategory fields
+
+ALTER TABLE public.posts
+ADD COLUMN IF NOT EXISTS parent_category TEXT,
+ADD COLUMN IF NOT EXISTS subcategory TEXT;
+
+-- Preserve existing category information
+UPDATE public.posts
+SET subcategory = category
+WHERE subcategory IS NULL
+AND category IS NOT NULL;
+
+-- Create indexes for category filtering
+CREATE INDEX IF NOT EXISTS posts_parent_category_idx
+ON public.posts(parent_category);
+
+CREATE INDEX IF NOT EXISTS posts_subcategory_idx
+ON public.posts(subcategory);
