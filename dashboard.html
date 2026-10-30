@@ -1,698 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1B3B36">
-<link rel="stylesheet" href="dashboard-bg.css">
-<title>Author Dashboard | Mostafa Auvi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Great+Vibes&family=Noto+Serif+Bengali:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --pine-green:#1B3B36;
-    --sage-green:#4A6A5A;
-    --sage-light:#E8EDE8;
-    --mist:#F4F7F5;
-    --cream:#FFFDF8;
-    --gold:#D4AF37;
-    --gold-light:#E8C547;
-    --terracotta:#B85C38;
-    --ink:#1A1410;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Noto Serif Bengali',serif;background:var(--mist);color:var(--ink);min-height:100vh;display:flex}
-  
-  body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 10% 10%, rgba(74,106,90,0.1) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(212,175,55,0.08) 0%, transparent 40%);z-index:-1}
-
-  /* ===== Sidebar ===== */
-  .sidebar{width:260px;height:100vh;background:var(--sage-light);border-right:1px solid rgba(27,59,54,0.1);display:flex;flex-direction:column;padding:25px 15px;position:fixed;left:0;top:0;box-shadow:2px 0 15px rgba(0,0,0,0.03)}
-  .sidebar-profile{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid rgba(27,59,54,0.1)}
-  .avatar-circle{width:80px;height:80px;background:var(--pine-green);border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:30px}
-  .sidebar-profile h3{font-family:'Great Vibes',cursive;font-size:26px;color:var(--pine-green)}
-  .sidebar-profile p{font-family:'EB Garamond',serif;font-size:14px;color:var(--sage-green);font-style:italic}
-  .sidebar-menu{display:flex;flex-direction:column;gap:5px}
-  .menu-item{display:flex;align-items:center;gap:10px;padding:12px 15px;text-decoration:none;color:var(--pine-green);font-family:'EB Garamond',serif;font-size:16px;border-radius:8px;transition:all .2s;cursor:pointer;background:transparent;border:none;text-align:left;width:100%}
-  .menu-item:hover{background:rgba(255,255,255,0.6)}
-  .menu-item.active{background:var(--pine-green);color:var(--gold-light);font-weight:600}
-
-  /* ===== Main Content ===== */
-  .main-content{margin-left:260px;flex:1;padding:0 30px 30px;background:transparent}
-  
-  .top-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid rgba(27,59,54,0.1);margin-bottom:30px}
-  .brand-logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;color:var(--pine-green);font-size:20px}
-  .brand-logo span{font-family:'Great Vibes',cursive;font-size:28px;color:var(--gold);transform:rotate(-10deg);display:inline-block}
-  .top-nav-links{display:flex;gap:25px}
-  .top-nav-links a{text-decoration:none;font-family:'EB Garamond',serif;font-size:15px;color:var(--sage-green);transition:color .2s}
-  .top-nav-links a:hover{color:var(--gold)}
-  .logout-top{background:var(--terracotta);color:#fff;padding:8px 18px;border-radius:20px;font-family:'EB Garamond',serif;border:none;cursor:pointer;font-size:14px;transition:background .2s}
-  .logout-top:hover{background:#9c4a2c}
-
-  .hero-banner{position:relative;background:linear-gradient(135deg, rgba(232,237,232,0.5), rgba(255,253,248,0.8)), url("https://www.transparenttextures.com/patterns/rice-paper-2.png");border-radius:16px;padding:40px;margin-bottom:30px;overflow:hidden;border:1px solid rgba(212,175,55,0.2)}
-  .hero-banner::after{content:"";position:absolute;bottom:-20px;right:-20px;width:200px;height:200px;background:radial-gradient(var(--sage-green), transparent 70%);opacity:0.1}
-  .hero-banner h1{font-family:'Playfair Display',serif;font-size:32px;color:var(--pine-green);margin-bottom:5px}
-  .hero-banner p{font-family:'EB Garamond',serif;font-style:italic;font-size:18px;color:var(--gold)}
-
-  .content-grid{display:grid;grid-template-columns:2fr 1fr;gap:30px}
-  
-  .form-card{background:var(--cream);padding:35px;border-radius:16px;box-shadow:0 5px 20px rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.05)}
-  .form-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;border-bottom:1px solid rgba(0,0,0,0.05);padding-bottom:15px}
-  .form-header h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--pine-green)}
-  .lang-switch{display:flex;background:var(--mist);border-radius:20px;padding:4px}
-  .lang-btn{padding:8px 20px;border:none;background:transparent;cursor:pointer;font-family:'EB Garamond',serif;font-size:14px;color:var(--sage-green);border-radius:16px;transition:all .2s}
-  .lang-btn.active{background:var(--pine-green);color:var(--gold-light);font-weight:600}
-
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
-  .form-group{margin-bottom:20px}
-  .form-group label{display:block;font-family:'EB Garamond',serif;font-size:14px;font-weight:600;color:var(--sage-green);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
-  .form-input, .form-textarea{width:100%;padding:12px 16px;font-family:'Noto Serif Bengali',serif;font-size:16px;border:1px solid #E0DED9;border-radius:8px;background:#fff;transition:border-color .2s}
-  .form-input:focus, .form-textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.1)}
-  .form-textarea{min-height:80px;resize:vertical}
-  
-  .upload-box{border:1px dashed var(--sage-green);padding:15px;border-radius:8px;background:var(--sage-light);display:flex;align-items:center;gap:15px;cursor:pointer}
-  .upload-box input{display:none}
-  .upload-icon{font-size:24px;color:var(--pine-green)}
-  .upload-text{font-family:'EB Garamond',serif;font-size:14px;color:var(--sage-green)}
-  #coverPreview{max-width:100px;border-radius:8px;display:none}
-
-  .editor-toolbar{display:flex;gap:5px;padding:8px;background:var(--sage-light);border:1px solid #E0DED9;border-bottom:none;border-radius:8px 8px 0 0}
-  .tool-btn{background:#fff;border:1px solid #E0DED9;width:32px;height:32px;border-radius:4px;cursor:pointer;font-size:14px;color:var(--pine-green);display:flex;align-items:center;justify-content:center;transition:all .2s}
-  .tool-btn:hover{background:var(--pine-green);color:var(--gold-light)}
-  .rich-area{width:100%;min-height:200px;padding:15px;border:1px solid #E0DED9;border-radius:0 0 8px 8px;background:#fff;font-family:'Noto Serif Bengali',serif;font-size:16px;line-height:1.6;outline:none}
-  .rich-area img{max-width:100%;border-radius:8px;margin:10px 0}
-  .rich-area mark{background-color:var(--gold-light);padding:2px 4px;border-radius:4px}
-
-  .action-btns{display:flex;gap:15px;margin-top:30px;border-top:1px solid rgba(0,0,0,0.05);padding-top:20px}
-  .btn{padding:12px 24px;border-radius:30px;font-family:'EB Garamond',serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid}
-  .btn-draft{background:transparent;color:var(--sage-green);border-color:var(--sage-green)}
-  .btn-draft:hover{background:var(--sage-light)}
-  .btn-both{background:transparent;color:var(--pine-green);border-color:var(--pine-green)}
-  .btn-both:hover{background:var(--mist)}
-  .btn-publish{background:linear-gradient(135deg, var(--gold), var(--gold-light));color:#3E2E12;border:none;flex:1;box-shadow:0 4px 10px rgba(212,175,55,0.3)}
-  .btn-publish:hover{transform:translateY(-1px);box-shadow:0 5px 12px rgba(212,175,55,0.4)}
-
-  .right-col{display:flex;flex-direction:column;gap:30px}
-  .quote-card{background:var(--pine-green);color:#fff;padding:30px;border-radius:16px;position:relative;overflow:hidden}
-  .quote-card::before{content:"❝";font-family:'Playfair Display',serif;font-size:80px;color:rgba(212,175,55,0.2);position:absolute;top:-10px;left:10px}
-  .quote-text{font-family:'EB Garamond',serif;font-style:italic;font-size:18px;line-height:1.6;margin-bottom:15px;position:relative;z-index:1}
-  .quote-author{font-family:'EB Garamond',serif;font-size:14px;color:var(--gold-light);text-align:right}
-
-  .drafts-list{background:#fff;padding:25px;border-radius:16px;box-shadow:0 5px 20px rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.05)}
-  .drafts-list h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--pine-green);margin-bottom:15px;border-bottom:1px solid rgba(0,0,0,0.05);padding-bottom:10px}
-  .draft-item{padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
-  .draft-item:last-child{border:none}
-  .draft-item h4{font-size:16px;color:var(--ink);margin-bottom:3px}
-  .draft-item p{font-size:13px;color:var(--sage-green);font-family:'EB Garamond',serif}
-
-  .login-overlay{position:fixed;inset:0;background:var(--mist);display:flex;align-items:center;justify-content:center;z-index:1000}
-  .login-box{background:#fff;padding:50px 40px;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,0.1);max-width:400px;width:90%;text-align:center;border-top:6px solid var(--gold)}
-  .login-box h1{font-family:'Great Vibes',cursive;font-size:42px;color:var(--pine-green);margin-bottom:10px}
-  .login-box input{width:100%;padding:12px 16px;margin-bottom:15px;border:1px solid #E0DED9;border-radius:8px;font-family:'EB Garamond',serif;font-size:16px}
-  .login-box button{width:100%;padding:14px;background:var(--pine-green);color:var(--gold-light);border:none;border-radius:8px;cursor:pointer;font-size:16px;font-weight:600;transition:background .2s}
-  .login-box button:hover{background:var(--sage-green)}
-
-  @media(max-width:900px){
-    .sidebar{display:none}
-    .main-content{margin-left:0}
-    .content-grid{grid-template-columns:1fr}
-    .form-row{grid-template-columns:1fr}
-  }
-
-  /* Screenshot-matched compact dashboard layout: preserve the original design */
-  @media(min-width:901px){
-    .sidebar{width:115px;padding:14px 7px}
-    .sidebar-profile{margin-bottom:16px;padding-bottom:12px}
-    .avatar-circle{width:40px;height:40px;font-size:17px;margin-bottom:5px}
-    .sidebar-profile h3{font-size:15px}
-    .sidebar-profile p{font-size:9px}
-    .sidebar-menu{gap:3px}
-    .menu-item{gap:5px;padding:7px 6px;font-size:10px;border-radius:5px;line-height:1.25}
-    .main-content{margin-left:115px;padding:0 15px 20px}
-    .top-nav{padding:10px 0;margin-bottom:15px}
-    .brand-logo{font-size:13px;gap:5px}
-    .brand-logo span{font-size:17px}
-    .top-nav-links{gap:14px}
-    .top-nav-links a{font-size:9px}
-    .hero-banner{padding:18px 20px;margin-bottom:15px;border-radius:9px}
-    .hero-banner h1{font-size:20px;margin-bottom:2px}
-    .hero-banner p{font-size:12px}
-    .content-grid{grid-template-columns:2fr 1fr;gap:15px}
-    .form-card{padding:18px;border-radius:9px}
-    .form-header{margin-bottom:12px;padding-bottom:9px}
-    .form-header h2{font-size:15px}
-    .lang-switch{padding:2px}
-    .lang-btn{padding:5px 10px;font-size:9px}
-    .form-row{gap:10px;margin-bottom:10px}
-    .form-group{margin-bottom:10px}
-    .form-group label{font-size:9px;margin-bottom:4px;letter-spacing:.02em}
-    .form-input,.form-textarea{padding:7px 9px;font-size:11px;border-radius:5px}
-    .form-textarea{min-height:38px}
-    .upload-box{padding:7px;gap:8px;border-radius:5px}
-    .upload-icon{font-size:15px}
-    .upload-text{font-size:9px;line-height:1.25}
-    #coverPreview{max-width:70px}
-    .editor-toolbar{padding:4px;gap:3px}
-    .tool-btn{width:22px;height:22px;font-size:10px}
-    .rich-area{min-height:95px;padding:8px;font-size:12px;line-height:1.5}
-    .action-btns{gap:7px;margin-top:14px;padding-top:10px}
-    .btn{padding:7px 11px;font-size:10px}
-    .right-col{gap:15px}
-    .quote-card{padding:15px;border-radius:9px}
-    .quote-text{font-size:11px;line-height:1.45;margin-bottom:8px}
-    .quote-card::before{font-size:45px;top:-5px;left:5px}
-    .quote-author{font-size:9px}
-    .drafts-list{padding:13px;border-radius:9px}
-    .drafts-list h3{font-size:12px;margin-bottom:8px;padding-bottom:6px}
-    .draft-item{padding:6px 0}
-    .draft-item h4{font-size:10px}
-    .draft-item p{font-size:9px}
-  }
-  @media(max-width:900px){
-    .main-content{padding:0 12px 18px}
-    .hero-banner{padding:22px}
-    .form-card{padding:18px}
-    .top-nav-links{gap:10px;flex-wrap:wrap}
-    .action-btns{flex-wrap:wrap}
-    .btn-publish{flex-basis:100%}
-  }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Dashboard - Mostafa Auvi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Hind Siliguri) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; }
+        /* Tiptap Editor Custom Styles */
+        .ProseMirror {
+            min-height: 250px;
+            outline: none;
+        }
+        .ProseMirror p.is-editor-empty:first-child::before {
+            content: attr(data-placeholder);
+            float: left;
+            color: #adb5bd;
+            pointer-events: none;
+            height: 0;
+        }
+        /* Custom Blockquote & Pull Quote styling */
+        .ProseMirror blockquote {
+            border-left: 4px solid #d97706;
+            padding-left: 1rem;
+            margin-left: 0;
+            margin-right: 0;
+            font-style: italic;
+            color: #4b5563;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-<!-- Login View -->
-<div id="loginView" class="login-overlay">
-  <div class="login-box">
-    <h1>Author's Gateway</h1>
-    <p style="font-family:'EB Garamond',serif;font-style:italic;color:#666;margin-bottom:25px">Please login to continue</p>
-    <input type="email" id="loginEmail" placeholder="Email Address">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button onclick="loginWithEmail()">Login to Dashboard</button>
-    <div id="loginError" style="color:var(--terracotta);margin-top:15px;font-size:14px"></div>
-  </div>
-</div>
-
-<!-- Dashboard Layout -->
-<div id="dashboardView" style="display:none; width:100%">
-  <div class="sidebar">
-    <div class="sidebar-profile">
-      <div class="avatar-circle">📖</div>
-      <h3>Mostafa Auvi</h3>
-      <p>Author</p>
-    </div>
-    <div class="sidebar-menu">
-      <button class="menu-item active">✍️ Create New Writing</button>
-      <button class="menu-item" onclick="window.location.href='./posts.html'">📚 My Writings</button>
-      <button class="menu-item" onclick="window.location.href='./posts.html'">Published Works</button>
-      <button class="menu-item" onclick="window.location.href='./index.html'" style="color:var(--pine-green);font-weight:600">🏠 মূল ওয়েবসাইট</button>
-      <button class="menu-item" style="color:var(--terracotta)" onclick="logout()">🚪 Logout</button>
-    </div>
-  </div>
-
-  <div class="main-content">
-    <div class="top-nav">
-      <a href="./index.html" class="brand-logo" style="text-decoration:none;display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;color:var(--pine-green);font-size:20px">🍂 Mostafa Auvi <span style="font-family:'Great Vibes',cursive;font-size:28px;color:var(--gold);transform:rotate(-10deg);display:inline-block">Author Dashboard</span></a>
-      <div class="top-nav-links">
-        <a href="./index.html" style="color:var(--pine-green);font-weight:600">🏠 মূল ওয়েবসাইটে ফেরা</a>
-        <a href="./posts.html">My Books</a>
-        <button class="logout-top" onclick="logout()">🚪 Logout</button>
-      </div>
-    </div>
-
-    <div class="hero-banner">
-      <h1>Writer's Dashboard</h1>
-      <p>Write. Share. Inspire.</p>
-    </div>
-
-    <div class="content-grid">
-      <!-- Form Section -->
-      <div class="form-card">
-        <div class="form-header">
-          <h2>Create New Writing</h2>
-          <div class="lang-switch">
-            <button class="lang-btn active" onclick="switchLang('bn', event)">Bengali (বাংলা)</button>
-            <button class="lang-btn" onclick="switchLang('en', event)">English</button>
-          </div>
-        </div>
-
-        <!-- Existing dashboard design retained; fields reordered inside the same form card -->
-        <div class="form-row">
-          <div class="form-group">
-            <label>Link / Slug</label>
-            <input type="text" id="postSlug" class="form-input" placeholder="খালি রাখলে শিরোনাম থেকে তৈরি হবে">
-          </div>
-
-        </div>
-
-        <div id="bnTitleFields">
-          <div class="form-group">
-            <label>শিরোনাম (Title)</label>
-            <input type="text" id="bnTitle" class="form-input" placeholder="লেখার শিরোনাম">
-          </div>
-          <div class="form-group">
-            <label>উপশিরোনাম (Subtitle)</label>
-            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম (ঐচ্ছিক)">
-          </div>
-        </div>
-        <div id="enTitleFields" style="display:none">
-          <div class="form-group">
-            <label>Title</label>
-            <input type="text" id="enTitle" class="form-input" placeholder="Writing title">
-          </div>
-          <div class="form-group">
-            <label>Subtitle</label>
-            <input type="text" id="enSubtitle" class="form-input" placeholder="Optional subtitle">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="postCategory">বিভাগ</label>
-          <select id="postCategory" class="form-input" required>
-            <option value="">বিভাগ নির্বাচন করুন</option>
-            <option value="কথাসাহিত্য">কথাসাহিত্য</option>
-            <option value="প্রবন্ধ">প্রবন্ধ</option>
-            <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
-            <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
-            <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
-            <option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option>
-            <option value="আইন-আদালত">আইন-আদালত</option>
-            <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
-            <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="postSubcategory">উপবিভাগ</label>
-          <select id="postSubcategory" class="form-input" disabled>
-            <option value="">আগে বিভাগ নির্বাচন করুন</option>
-          </select>
-        </div>
-
-        <div id="bnSummaryFields">
-          <div class="form-group">
-            <label>সারসংক্ষেপ (Summary)</label>
-            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সংক্ষিপ্ত পরিচিতি"></textarea>
-          </div>
-        </div>
-        <div id="enSummaryFields" style="display:none">
-          <div class="form-group">
-            <label>Summary / Excerpt</label>
-            <textarea id="enExcerpt" class="form-textarea" placeholder="A short introduction to the writing"></textarea>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Cover Photo</label>
-          <label class="upload-box">
-            <div class="upload-icon">📁</div>
-            <div class="upload-text">CLICK TO UPLOAD COVER IMAGE<br>MAX SIZE: 2MB · JPG, PNG, WEBP</div>
-            <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp" onchange="uploadCover(event)">
-            <img id="coverPreview" alt="Cover preview">
-          </label>
-          <input type="hidden" id="postCover" value="">
-        </div>
-
-        <div class="form-group" style="margin-bottom:14px">
-          <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0">
-            <input type="checkbox" id="postFeatured" style="width:16px;height:16px;accent-color:var(--pine-green)">
-            <span>নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</span>
-          </label>
-        </div>
-
-        <div id="bnContentFields">
-          <div class="form-group">
-            <label>ট্যাগিং (Tags)</label>
-            <input type="text" id="bnTags" class="form-input" placeholder="কমা দিয়ে আলাদা করুন (যেমন: প্রেম, ইতিহাস)">
-          </div>
-          <div class="form-group">
-            <label>মূল লেখা (Main Body)</label>
-            <div class="editor-toolbar">
-              <button type="button" class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
-              <button type="button" class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
-              <button type="button" class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
-              <button type="button" class="tool-btn" onclick="highlightText()">🖍️</button>
-              <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" accept="image/*" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'bnBody')"></label>
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-xl">🍂</span>
+                <span class="font-bold text-lg text-gray-900">Mostafa Auvi <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Author Dashboard</span></span>
             </div>
-            <div id="bnBody" class="rich-area" contenteditable="true" data-placeholder="এখানে আপনার লেখা লিখুন..."></div>
-          </div>
-        </div>
-        <div id="enContentFields" style="display:none">
-          <div class="form-group">
-            <label>Tags</label>
-            <input type="text" id="enTags" class="form-input" placeholder="Separate tags with commas">
-          </div>
-          <div class="form-group">
-            <label>Main Body</label>
-            <div class="editor-toolbar">
-              <button type="button" class="tool-btn" onclick="execCmd('bold')"><b>B</b></button>
-              <button type="button" class="tool-btn" onclick="execCmd('italic')"><i>I</i></button>
-              <button type="button" class="tool-btn" onclick="execCmd('underline')"><u>U</u></button>
-              <button type="button" class="tool-btn" onclick="highlightText()">🖍️</button>
-              <label class="tool-btn" style="position:relative;overflow:hidden">🖼️<input type="file" accept="image/*" style="position:absolute;top:0;left:0;opacity:0" onchange="uploadImageToBody(event, 'enBody')"></label>
+            <div class="flex items-center space-x-4">
+                <a href="./index.html" class="text-sm font-medium text-gray-600 hover:text-amber-600 transition">🏠 মূল ওয়েবসাইটে ফেরা</a>
+                <a href="./posts.html" class="text-sm font-medium text-gray-600 hover:text-amber-600 transition">My Books</a>
+                <a href="#" class="text-sm font-medium text-red-600 hover:text-red-700 transition">🚪 Logout</a>
             </div>
-            <div id="enBody" class="rich-area" contenteditable="true" data-placeholder="Write your content here..."></div>
-          </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Welcome Banner -->
+        <div class="bg-gradient-to-r from-amber-700 to-amber-900 rounded-2xl p-6 sm:p-8 text-white mb-8 shadow-lg flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-bold mb-2">Writer's Dashboard</h1>
+                <p class="text-amber-100 text-sm sm:text-base">Write. Share. Inspire. Create stories that echo through time.</p>
+            </div>
         </div>
 
-        <div class="action-btns">
-          <button class="btn btn-draft" onclick="savePost(false, false)">Save as Draft</button>
-          <button class="btn btn-both" onclick="savePost(true, true)">Save Both Languages</button>
-          <button class="btn btn-publish" onclick="savePost(true, false)">✨ Publish</button>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Main Form Section (Left 2 Columns) -->
+            <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-100">Create New Writing</h2>
+                
+                <form id="writing-form" class="space-y-6">
+                    
+                    <!-- Language & Slug -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">ভাষা (Language)</label>
+                            <select id="language" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                <option value="bengali">Bengali (বাংলা)</option>
+                                <option value="english">English</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">লিংক / স্লাগ (Slug)</label>
+                            <input type="text" id="slug" placeholder="e.g. moshari-analysis" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Title & Subtitle -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">শিরোনাম (Title)</label>
+                        <input type="text" id="title" placeholder="লেখার মূল শিরোনাম এখানে লিখুন..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">উপশিরোনাম (Subtitle)</label>
+                        <input type="text" id="subtitle" placeholder="ছোট বিবরণ বা উপশিরোনাম..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <!-- Category & Subcategory -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">বিভাগ (Category)</label>
+                            <select id="category" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                <option value="">বিভাগ নির্বাচন করুন</option>
+                                <option value="কথাসাহিত্য">কথাসাহিত্য</option>
+                                <option value="প্রবন্ধ">প্রবন্ধ</option>
+                                <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
+                                <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
+                                <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
+                                <option value="স্মৃতির ভাণ্ডার">স্মৃতির ভাণ্ডার</option>
+                                <option value="আইন-আদালত">আইন-আদালত</option>
+                                <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
+                                <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">উপবিভাগ (Sub-category)</label>
+                            <input type="text" id="subcategory" placeholder="যেমন: গল্প বিশ্লেষণ" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">সারসংক্ষেপ (Summary)</label>
+                        <textarea id="summary" rows="3" placeholder="লেখার সংক্ষিপ্তসার..." class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Cover Photo Upload -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Cover Photo</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 transition cursor-pointer bg-gray-50">
+                            <span class="text-3xl mb-2 block">📁</span>
+                            <span class="text-sm font-medium text-gray-600">CLICK TO UPLOAD COVER IMAGE</span>
+                            <p class="text-xs text-gray-400 mt-1">MAX SIZE: 2MB · JPG, PNG, WEBP</p>
+                            <input type="file" id="cover-image" class="hidden">
+                        </div>
+                    </div>
+
+                    <!-- Featured Checkbox -->
+                    <div class="flex items-center space-x-3 bg-amber-50 p-4 rounded-xl border border-amber-100">
+                        <input type="checkbox" id="featured" class="w-4 h-4 text-amber-600 rounded border-gray-300 focus:ring-amber-500">
+                        <label for="featured" class="text-sm font-medium text-gray-800 cursor-pointer">নির্বাচিত লেখা (Featured) — হোমপেজে দেখান</label>
+                    </div>
+
+                    <!-- Tags -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ট্যাগিং (Tags)</label>
+                        <input type="text" id="tags" placeholder="comma separated: গল্প, সাহিত্য, বিশ্লেষণ" class="w-full rounded-xl border-gray-300 border px-4 py-2.5 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <!-- Rich Text Editor Section (Tiptap / Custom Toolbar Layout) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">মূল লেখা (Main Body - Rich Text Editor)</label>
+                        <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm bg-white">
+                            <!-- 1. উপরের টুলবার (Formatting Toolbar) -->
+                            <div class="bg-gray-100 px-3 py-2 border-b border-gray-300 flex flex-wrap gap-1 text-sm text-gray-700 items-center">
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded font-bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded underline" title="Underline"><i class="fa-solid fa-underline"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded line-through" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+                                <span class="border-r border-gray-300 h-5 mx-1"></span>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Left"><i class="fa-solid fa-align-left"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Center"><i class="fa-solid fa-align-center"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Align Right"><i class="fa-solid fa-align-right"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Justify"><i class="fa-solid fa-align-justify"></i></button>
+                                <span class="border-r border-gray-300 h-5 mx-1"></span>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Blockquote"><i class="fa-solid fa-quote-right"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Insert Link"><i class="fa-solid fa-link"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Insert Image"><i class="fa-regular fa-image"></i></button>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded" title="Table"><i class="fa-solid fa-table"></i></button>
+                                <span class="border-r border-gray-300 h-5 mx-1"></span>
+                                <button type="button" class="p-1.5 hover:bg-gray-200 rounded text-xs font-semibold">Clear Format</button>
+                            </div>
+                            
+                            <!-- 2. মাঝখানে লেখার জায়গা (Writing Canvas Area) -->
+                            <div class="p-4">
+                                <textarea id="main-body" rows="10" placeholder="আপনার মূল লেখা এখানে বিস্তারিত লিখুন..." class="w-full focus:outline-none resize-y"></textarea>
+                            </div>
+
+                            <!-- Editor Footer / Word Count -->
+                            <div class="bg-gray-50 px-4 py-2 border-t border-gray-200 text-xs text-gray-500 flex justify-between">
+                                <span>Word Count: <span id="word-count">0</span></span>
+                                <span>Character Count: <span id="char-count">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. নিচে প্রকাশনা সেটিংস ও অ্যাকশন বাটন -->
+                    <div class="flex flex-wrap gap-4 pt-4 border-t border-gray-100 items-center justify-between">
+                        <div class="flex gap-2">
+                            <button type="button" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Save as Draft</button>
+                            <button type="button" class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">Save Both Languages</button>
+                        </div>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-700 text-white font-medium hover:bg-amber-800 transition shadow">✨ Publish</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Right Column: Sidebar (Quote & Recent Writings) -->
+            <div class="space-y-6">
+                <!-- Writer Quote Box -->
+                <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6 rounded-2xl shadow-sm">
+                    <p class="text-sm italic text-gray-300 mb-4">"A writer lives a thousand lives before he dies. The man who never reads lives only one."</p>
+                    <p class="text-xs font-semibold text-amber-400">— George R.R. Martin</p>
+                </div>
+
+                <!-- Recent Writings Widget -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">Recent Writings</h3>
+                    
+                    <div id="recent-writings-list" class="space-y-4 text-sm">
+                        <div class="text-gray-500 text-sm">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div id="postStatus" style="text-align:center;margin-top:15px;font-family:'EB Garamond',serif;font-style:italic;color:var(--pine-green)"></div>
-      </div>
+    </main>
 
-      <!-- Right Column -->
-      <div class="right-col">
-        <div class="quote-card">
-          <div class="quote-text">A writer lives a thousand lives before he dies. The man who never reads lives only one.</div>
-          <div class="quote-author">— George R.R. Martin</div>
-        </div>
-        <div class="drafts-list">
-          <h3>Recent Writings</h3>
-          <div id="postsList">
-            <div class="draft-item"><p style="text-align:center;color:#999">Loading...</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- Basic Script for Word/Char Count -->
+    <script>
+        const mainBody = document.getElementById('main-body');
+        const wordCount = document.getElementById('word-count');
+        const charCount = document.getElementById('char-count');
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
-const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-const OWNER_EMAIL = "gmauvibbl@gmail.com";
-let currentLang = 'bn';
-
-const categoryTree = {
-  'কথাসাহিত্য':['গল্প','ছোটগল্প','বড়গল্প','অনূদিত গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস'],
-  'প্রবন্ধ':['দৈনন্দিন জীবন','সাহিত্য বিষয়ক প্রবন্ধ','বই আলোচনা','বিশ্বসাহিত্য','অনূদিত প্রবন্ধ'],
-  'সাহিত্যালোচনা':['লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যসমালোচনা'],
-  'অনুবাদ সাহিত্য':['অনূদিত গল্প','অনূদিত উপন্যাস','অনূদিত প্রবন্ধ','বিশ্বসাহিত্য পরিচিতি'],
-  'ভ্রমণকাহিনি':['বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ'],
-  'স্মৃতির ভাণ্ডার':['ফেলে আসা দিন','স্মৃতিকথা','দিনলিপি'],
-  'আইন-আদালত':['বাংলাদেশের জুরিসপ্রুডেন্স','আইন বিষয়ক প্রবন্ধ','কেসস্টাডি'],
-  'ব্যাংকিং ও অর্থনীতি':['আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা'],
-  'ব্যক্তিগত রচনা':['স্মৃতিকথা','দিনলিপি']
-};
-
-function updateSubcategories() {
-  const parent = document.getElementById('postCategory').value;
-  const child = document.getElementById('postSubcategory');
-  const options = categoryTree[parent] || [];
-  child.innerHTML = '<option value="">উপবিভাগ নির্বাচন করুন</option>' +
-    options.map(value => '<option value="' + value + '">' + value + '</option>').join('');
-  child.disabled = options.length === 0;
-  child.required = options.length > 0;
-}
-
-
-document.getElementById('postCategory').addEventListener('change', updateSubcategories);
-
-function switchLang(lang, ev) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  if(ev) ev.target.classList.add('active');
-  ['bnTitleFields','bnSummaryFields','bnContentFields'].forEach(id => {
-    document.getElementById(id).style.display = lang === 'bn' ? 'block' : 'none';
-  });
-  ['enTitleFields','enSummaryFields','enContentFields'].forEach(id => {
-    document.getElementById(id).style.display = lang === 'en' ? 'block' : 'none';
-  });
-}
-
-function execCmd(cmd) { document.execCommand(cmd, false, null); }
-
-function highlightText() {
-  const selection = window.getSelection();
-  if (selection.rangeCount > 0 && selection.toString().trim() !== '') {
-    const range = selection.getRangeAt(0);
-    const mark = document.createElement('mark');
-    try {
-      range.surroundContents(mark);
-    } catch(e) {
-      mark.appendChild(range.extractContents());
-      range.insertNode(mark);
-    }
-  } else {
-    alert("অনুগ্রহ করে হাইলাইট করার জন্য কিছু লেখা সিলেক্ট করুন!");
-  }
-}
-
-function uploadImageToBody(event, bodyId) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (file.size > 2 * 1024 * 1024) {
-    alert('ছবির সর্বোচ্চ সাইজ ২ MB।');
-    event.target.value = '';
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const body = document.getElementById(bodyId);
-    body.focus();
-    const sel = window.getSelection();
-    let range;
-    // Use current selection if it's inside the editor; otherwise append at end.
-    if (sel && sel.rangeCount > 0 && body.contains(sel.anchorNode)) {
-      range = sel.getRangeAt(0);
-      range.deleteContents();
-    } else {
-      range = document.createRange();
-      range.selectNodeContents(body);
-      range.collapse(false);
-    }
-    const img = document.createElement('img');
-    img.src = e.target.result;
-    img.alt = 'img';
-    range.insertNode(img);
-    // Move caret after the image so further typing continues normally.
-    range.setStartAfter(img);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    // Insert a trailing <br> so the cursor has somewhere to go.
-    const br = document.createElement('br');
-    range.insertNode(br);
-    range.setStartAfter(br);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-  };
-  reader.readAsDataURL(file);
-  // Reset input so the same file can be selected again later.
-  event.target.value = '';
-}
-
-function uploadCover(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (!['image/jpeg','image/png','image/webp'].includes(file.type)) {
-    alert('শুধু JPG, PNG অথবা WebP ছবি আপলোড করুন।');
-    event.target.value = '';
-    return;
-  }
-  if (file.size > 2 * 1024 * 1024) {
-    alert('কভার ছবির সর্বোচ্চ সাইজ ২ MB।');
-    event.target.value = '';
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    document.getElementById('postCover').value = e.target.result;
-    const preview = document.getElementById('coverPreview');
-    preview.src = e.target.result;
-    preview.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-}
-
-async function loginWithEmail() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value.trim();
-  if (!email || !password) {
-    document.getElementById('loginError').innerText = "ইমেইল ও পাসওয়ার্ড দিন।";
-    return;
-  }
-  const btn = document.querySelector('#loginView button');
-  if (btn) { btn.disabled = true; btn.innerText = 'অপেক্ষা করুন...'; }
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-  if (btn) { btn.disabled = false; btn.innerText = 'Login to Dashboard'; }
-  if (error) document.getElementById('loginError').innerText = "Login Failed: " + error.message;
-  else checkAuth();
-}
-
-async function checkAuth() {
-  const { data: { session }, error } = await sb.auth.getSession();
-  if (error) {
-    document.getElementById('loginError').innerText = "Session error: " + error.message;
-    return;
-  }
-  if (session) {
-    if (session.user.email === OWNER_EMAIL) {
-      document.getElementById('loginView').style.display = 'none';
-      document.getElementById('dashboardView').style.display = 'flex';
-      fetchPosts();
-    } else {
-      await sb.auth.signOut();
-      document.getElementById('loginError').innerText = "Access Denied! শুধুমাত্র অনুমোদিত লেখক ঢুকতে পারবেন।";
-      document.getElementById('loginView').style.display = 'flex';
-      document.getElementById('dashboardView').style.display = 'none';
-    }
-  } else {
-    document.getElementById('loginView').style.display = 'flex';
-    document.getElementById('dashboardView').style.display = 'none';
-  }
-}
-
-async function logout() {
-  if (!confirm('লগআউট করতে চান?')) return;
-  try {
-    await sb.auth.signOut();
-  } catch (e) {
-    // ignore — we'll reset the UI anyway
-    console.warn('signOut error:', e);
-  }
-  document.getElementById('loginEmail').value = '';
-  document.getElementById('loginPassword').value = '';
-  document.getElementById('loginError').innerText = '';
-  document.getElementById('loginView').style.display = 'flex';
-  document.getElementById('dashboardView').style.display = 'none';
-}
-
-async function savePost(isPublish, isBoth) {
-  const parentCategory = document.getElementById('postCategory').value;
-  const subcategory = document.getElementById('postSubcategory').value;
-  // category keeps the leaf value for the existing archive filters.
-  const category = subcategory;
-  const cover = document.getElementById('postCover').value;
-  const featured = document.getElementById('postFeatured').checked;
-  const status = document.getElementById('postStatus');
-  if (isPublish && (!parentCategory || !subcategory)) {
-    status.innerText = "⚠️ প্রকাশের আগে বিভাগ ও উপবিভাগ—দুটিই নির্বাচন করুন।";
-    status.style.color = "var(--terracotta)";
-    return;
-  }
-  let slug = document.getElementById('postSlug').value.trim();
-  const bnTitle = document.getElementById('bnTitle').value.trim();
-  const enTitle = document.getElementById('enTitle').value.trim();
-  if (!slug) slug = (bnTitle || enTitle).toLowerCase().replace(/[^\u0980-\u09FFa-z0-9 ]/g, '').replace(/\s+/g, '-');
-  if (!slug) {
-    status.innerText = "⚠️ শিরোনাম বা Slug লিখুন।";
-    status.style.color = "var(--terracotta)";
-    return;
-  }
-  const bnBody = document.getElementById('bnBody').innerText.trim();
-  const enBody = document.getElementById('enBody').innerText.trim();
-  const postsToInsert = [];
-  const addPost = (language, title, bodyId, excerptId, subtitleId, tagsId) => {
-    const bodyText = document.getElementById(bodyId).innerText.trim();
-    if (!title || !bodyText) return;
-    postsToInsert.push({
-      title,
-      subtitle: document.getElementById(subtitleId).value.trim(),
-      excerpt: document.getElementById(excerptId).value.trim(),
-      tags: document.getElementById(tagsId).value.trim(),
-      body: document.getElementById(bodyId).innerHTML,
-      language, slug, category, parent_category: parentCategory, subcategory, cover_image: cover,
-      published: isPublish,
-      featured,
-      published_at: isPublish ? new Date().toISOString() : null
-    });
-  };
-  if (isBoth) {
-    addPost('bn', bnTitle, 'bnBody', 'bnExcerpt', 'bnSubtitle', 'bnTags');
-    addPost('en', enTitle, 'enBody', 'enExcerpt', 'enSubtitle', 'enTags');
-  } else if (currentLang === 'bn') {
-    addPost('bn', bnTitle, 'bnBody', 'bnExcerpt', 'bnSubtitle', 'bnTags');
-  } else {
-    addPost('en', enTitle, 'enBody', 'enExcerpt', 'enSubtitle', 'enTags');
-  }
-  if (!postsToInsert.length) {
-    status.innerText = "⚠️ শিরোনাম ও মূল লেখা দিতে হবে।";
-    status.style.color = "var(--terracotta)";
-    return;
-  }
-  if (isBoth && postsToInsert.length !== 2) {
-    status.innerText = "⚠️ দুই ভাষায় সংরক্ষণ করতে বাংলা ও ইংরেজি—দুই লেখাই পূরণ করুন।";
-    status.style.color = "var(--terracotta)";
-    return;
-  }
-  status.innerText = "সংরক্ষণ হচ্ছে...";
-  status.style.color = "var(--sage-green)";
-  try {
-    const { data, error } = await sb.from('posts').insert(postsToInsert).select();
-    if (error) {
-      let msg = error.message || 'Unknown error';
-      if (error.code === '42501') {
-        msg = 'RLS পলিসি ব্লক করেছে — Supabase ড্যাশবোর্ডে posts টেবিলে authenticated INSERT পলিসি দিন।';
-      } else if (error.code === '42P01') {
-        msg = 'posts টেবিল খুঁজছে না — Supabase ড্যাশবোর্ডে টেবিল তৈরি করুন।';
-      } else if (error.hint) {
-        msg += ' (হিন্ট: ' + error.hint + ')';
-      }
-      status.innerText = "❌ Error [" + (error.code || '?') + "]: " + msg;
-      status.style.color = "var(--terracotta)";
-      console.error('savePost error:', error);
-      return;
-    }
-    status.innerText = isPublish ? "✅ প্রকাশিত হয়েছে।" : "✅ খসড়া সংরক্ষিত হয়েছে।";
-    status.style.color = "var(--pine-green)";
-    ['bnTitle','bnSubtitle','bnExcerpt','bnTags','enTitle','enSubtitle','enExcerpt','enTags','postSlug'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    ['bnBody','enBody'].forEach(id => { document.getElementById(id).innerHTML = ''; });
-    document.getElementById('postCover').value = '';
-    const prev = document.getElementById('coverPreview');
-    prev.removeAttribute('src');
-    prev.style.display = 'none';
-    document.getElementById('postFeatured').checked = false;
-    document.getElementById('postCategory').value = '';
-    document.getElementById('postCategory').dispatchEvent(new Event('change'));
-    fetchPosts();
-  } catch (e) {
-    status.innerText = "❌ Network/JS error: " + (e.message || e);
-    status.style.color = "var(--terracotta)";
-    console.error('savePost exception:', e);
-  }
-}
-
-async function fetchPosts() {
-  const listEl = document.getElementById('postsList');
-  listEl.innerHTML = '<div class="draft-item"><p style="text-align:center;color:#999">Loading...</p></div>';
-  try {
-    const { data, error } = await sb.from('posts')
-      .select('title, category, language, published')
-      .order('published_at', { ascending: false })
-      .limit(8);
-    if (error) {
-      listEl.innerHTML = '<div class="draft-item"><p style="color:var(--terracotta);font-size:12px">❌ ' +
-        (error.message || 'ত্রুটি') + '</p></div>';
-      console.error('fetchPosts error:', error);
-      return;
-    }
-    if (data && data.length > 0) {
-      listEl.innerHTML = data.map(p => `
-        <div class="draft-item">
-          <h4>${p.title || '(শিরোনামহীন)'}</h4>
-          <p>❖ ${p.category || '—'} • ${p.language === 'bn' ? 'বাংলা' : 'English'}${p.published ? ' • ✅ প্রকাশিত' : ' • ✎ খসড়া'}</p>
-        </div>
-      `).join('');
-    } else {
-      listEl.innerHTML = '<div class="draft-item"><p style="text-align:center;color:#999">কোনো লেখা নেই।</p></div>';
-    }
-  } catch (e) {
-    listEl.innerHTML = '<div class="draft-item"><p style="color:var(--terracotta);font-size:12px">❌ ' +
-      (e.message || 'ত্রুটি') + '</p></div>';
-    console.error('fetchPosts exception:', e);
-  }
-}
-
-checkAuth();
-</script>
+        mainBody.addEventListener('input', () => {
+            const text = mainBody.value.trim();
+            const chars = text.length;
+            const words = text === '' ? 0 : text.split(/\s+/).length;
+            
+            wordCount.textContent = words;
+            charCount.textContent = chars;
+        });
+    </script>
 </body>
 </html>
