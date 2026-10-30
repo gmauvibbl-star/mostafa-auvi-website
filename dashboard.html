@@ -137,6 +137,11 @@ document.getElementById('loginBtn').onclick=async()=>{const email=val('email').t
 async function logout(){if(busy||!sb)return;setBusy(true);try{const {error}=await sb.auth.signOut({scope:'local'});if(error){status('লগআউট করা যায়নি: '+error.message);return}session=null;app.classList.add('hidden');login.classList.remove('hidden');['email','password','loginBtn'].forEach(id=>document.getElementById(id).classList.remove('hidden'));document.getElementById('password').value='';fill();status('এই ব্রাউজার থেকে নিরাপদে লগআউট হয়েছে।')}catch(e){status('লগআউট করা যায়নি: '+(e?.message||'আবার চেষ্টা করুন।'))}finally{setBusy(false)}}
 document.getElementById('logoutBtn').onclick=logout;document.getElementById('denyLogoutBtn').onclick=logout;
 document.getElementById('newBtn').onclick=()=>{fill();status('নতুন লেখা তৈরির ফর্ম প্রস্তুত।')};
+// The form-level preview button must call the same preview routine as each editor toolbar.
+document.getElementById('previewBtn').addEventListener('click',()=>{
+ if(typeof window.auviPreview==='function')window.auviPreview();
+ else status('প্রিভিউ প্রস্তুত হচ্ছে। কয়েক সেকেন্ড পর আবার চাপ দিন।');
+});
 document.getElementById('parentCategory').addEventListener('change',()=>updateSubcategories());
 function showCoverPreview(url){const box=document.getElementById('coverPreview');box.innerHTML=url?'<img src="'+esc(url)+'" alt="কভার ছবির প্রিভিউ"><button type="button" class="secondary" id="removeCoverPreview">কভার ছবি সরান</button>':'';const b=document.getElementById('removeCoverPreview');if(b)b.onclick=()=>{setVal('coverImage','');document.getElementById('coverFile').value='';showCoverPreview('')}}
 document.getElementById('coverImage').addEventListener('input',e=>showCoverPreview(e.target.value.trim()));
