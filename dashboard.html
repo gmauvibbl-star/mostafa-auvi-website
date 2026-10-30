@@ -177,93 +177,109 @@
           </div>
         </div>
 
-        <!-- 1. Link / Slug -->
-        <div class="form-group">
-          <label>Link / Slug</label>
-          <input type="text" id="postSlug" class="form-input" placeholder="খালি রাখলে শিরোনাম থেকে তৈরি হবে">
-        </div>
-
-        <!-- 2. Title and subtitle: selected language -->
-        <div id="bnTitleFields">
-          <div class="form-group">
-            <label>শিরোনাম (Title)</label>
-            <input type="text" id="bnTitle" class="form-input" placeholder="বাংলা শিরোনাম">
-          </div>
-          <div class="form-group">
-            <label>উপশিরোনাম (Subtitle)</label>
-            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম (ঐচ্ছিক)">
-          </div>
-        </div>
-        <div id="enTitleFields" style="display:none">
-          <div class="form-group">
-            <label>Title</label>
-            <input type="text" id="enTitle" class="form-input" placeholder="English Title">
-          </div>
-          <div class="form-group">
-            <label>Subtitle</label>
-            <input type="text" id="enSubtitle" class="form-input" placeholder="Optional subtitle">
-          </div>
-        </div>
-
-        <!-- 3. Category and subcategory -->
+        <!-- Keep the original dashboard form layout -->
         <div class="form-row">
           <div class="form-group">
-            <label>বিভাগ (Category)</label>
+            <label>Link / Slug</label>
+            <input type="text" id="postSlug" class="form-input" placeholder="auto-generated-if-blank">
+          </div>
+          <div class="form-group">
+            <label>বিভাগ ও উপবিভাগ (Category)</label>
             <select id="postCategory" class="form-input" required>
-              <option value="">প্রধান বিভাগ নির্বাচন করুন</option>
-              <option value="গল্প">গল্প</option>
-              <option value="উপন্যাস">উপন্যাস</option>
-              <option value="প্রবন্ধ">প্রবন্ধ</option>
-              <option value="সাহিত্যালোচনা">সাহিত্যালোচনা</option>
-              <option value="অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</option>
-              <option value="ভ্রমণকাহিনি">ভ্রমণকাহিনি</option>
-              <option value="আইন-আদালত">আইন-আদালত</option>
-              <option value="ব্যাংকিং ও অর্থনীতি">ব্যাংকিং ও অর্থনীতি</option>
-              <option value="ব্যক্তিগত রচনা">ব্যক্তিগত রচনা</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>উপবিভাগ (Subcategory)</label>
-            <select id="postSubcategory" class="form-input" disabled>
-              <option value="">আগে প্রধান বিভাগ নির্বাচন করুন</option>
+              <option value="">বিভাগ নির্বাচন করুন</option>
+              <optgroup label="গল্প">
+                <option value="গল্প / ছোটগল্প">ছোটগল্প</option>
+                <option value="গল্প / বড়গল্প">বড়গল্প</option>
+                <option value="গল্প / অনূদিত গল্প">অনূদিত গল্প</option>
+              </optgroup>
+              <optgroup label="উপন্যাস">
+                <option value="উপন্যাস / সম্পূর্ণ উপন্যাস">সম্পূর্ণ উপন্যাস</option>
+                <option value="উপন্যাস / ধারাবাহিক উপন্যাস">ধারাবাহিক উপন্যাস</option>
+                <option value="উপন্যাস / অনূদিত উপন্যাস">অনূদিত উপন্যাস</option>
+              </optgroup>
+              <optgroup label="প্রবন্ধ">
+                <option value="প্রবন্ধ / দৈনন্দিন জীবন">দৈনন্দিন জীবন</option>
+                <option value="প্রবন্ধ / সাহিত্য বিষয়ক প্রবন্ধ">সাহিত্য বিষয়ক প্রবন্ধ</option>
+                <option value="প্রবন্ধ / বই আলোচনা">বই আলোচনা</option>
+                <option value="প্রবন্ধ / বিশ্বসাহিত্য">বিশ্বসাহিত্য</option>
+              </optgroup>
+              <optgroup label="সাহিত্যালোচনা">
+                <option value="সাহিত্যালোচনা / লেখক ও সাহিত্যকর্ম">লেখক ও সাহিত্যকর্ম</option>
+                <option value="সাহিত্যালোচনা / পাঠ-প্রতিক্রিয়া">পাঠ-প্রতিক্রিয়া</option>
+              </optgroup>
+              <optgroup label="অনুবাদ সাহিত্য">
+                <option value="অনুবাদ সাহিত্য / অনূদিত প্রবন্ধ">অনূদিত প্রবন্ধ</option>
+                <option value="অনুবাদ সাহিত্য / বিশ্বসাহিত্য পরিচিতি">বিশ্বসাহিত্য পরিচিতি</option>
+              </optgroup>
+              <optgroup label="ভ্রমণকাহিনি">
+                <option value="ভ্রমণকাহিনি / বাংলাদেশ ভ্রমণ">বাংলাদেশ ভ্রমণ</option>
+                <option value="ভ্রমণকাহিনি / বিদেশ ভ্রমণ">বিদেশ ভ্রমণ</option>
+              </optgroup>
+              <optgroup label="স্মৃতির ভাণ্ডার">
+                <option value="স্মৃতির ভাণ্ডার / ফেলে আসা দিন">ফেলে আসা দিন</option>
+              </optgroup>
+              <optgroup label="আইন-আদালত">
+                <option value="আইন-আদালত / বাংলাদেশের জুরিসপ্রুডেন্স">বাংলাদেশের জুরিসপ্রুডেন্স</option>
+                <option value="আইন-আদালত / আইন বিষয়ক প্রবন্ধ">আইন বিষয়ক প্রবন্ধ</option>
+                <option value="আইন-আদালত / কেসস্টাডি">কেসস্টাডি</option>
+              </optgroup>
+              <optgroup label="ব্যাংকিং ও অর্থনীতি">
+                <option value="ব্যাংকিং ও অর্থনীতি / আমার ব্যাংকিং জীবন">আমার ব্যাংকিং জীবন</option>
+                <option value="ব্যাংকিং ও অর্থনীতি / এসএমই ব্যাংকিং নিয়ে যত কথা">এসএমই ব্যাংকিং নিয়ে যত কথা</option>
+              </optgroup>
+              <optgroup label="ব্যক্তিগত রচনা">
+                <option value="ব্যক্তিগত রচনা / স্মৃতিকথা">স্মৃতিকথা</option>
+                <option value="ব্যক্তিগত রচনা / দিনলিপি">দিনলিপি</option>
+              </optgroup>
             </select>
           </div>
         </div>
 
-        <!-- 4. Summary -->
-        <div id="bnSummaryFields">
-          <div class="form-group">
-            <label>সারসংক্ষেপ (Summary)</label>
-            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সংক্ষিপ্ত পরিচিতি"></textarea>
-          </div>
-        </div>
-        <div id="enSummaryFields" style="display:none">
-          <div class="form-group">
-            <label>Summary / Excerpt</label>
-            <textarea id="enExcerpt" class="form-textarea" placeholder="A short introduction to the writing"></textarea>
-          </div>
-        </div>
-
-        <!-- 5. Cover photo -->
         <div class="form-group">
-          <label>প্রচ্ছদ ছবি (Cover Photo)</label>
+          <label>Cover Photo</label>
           <label class="upload-box">
             <div class="upload-icon">📁</div>
-            <div class="upload-text">কভার ছবি আপলোড করুন<br>সর্বোচ্চ ২ MB · JPG, PNG, WebP</div>
-            <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp,image/gif" onchange="uploadCover(event)">
+            <div class="upload-text">CLICK TO UPLOAD COVER IMAGE<br>MAX SIZE: 2MB</div>
+            <input type="file" id="coverUpload" accept="image/jpeg,image/png,image/webp" onchange="uploadCover(event)">
             <img id="coverPreview" src="#" alt="Cover preview">
           </label>
           <input type="hidden" id="postCover" value="">
         </div>
 
-        <div class="form-group featured-setting">
-          <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0">
-            <input type="checkbox" id="postFeatured" style="width:18px;height:18px;accent-color:var(--pine-green)">
-            <span>নির্বাচিত লেখা (Featured) — হোমপেজে বিশেষভাবে দেখান</span>
-          </label>
+        <div id="bnTitleFields">
+          <div class="form-group">
+            <label>শিরোনাম (Title)</label>
+            <input type="text" id="bnTitle" class="form-input" placeholder="লেখার শিরোনাম">
+          </div>
+          <div class="form-group">
+            <label>উপশিরোনাম (Subtitle)</label>
+            <input type="text" id="bnSubtitle" class="form-input" placeholder="উপশিরোনাম">
+          </div>
+        </div>
+        <div id="enTitleFields" style="display:none">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="enTitle" class="form-input" placeholder="Writing title">
+          </div>
+          <div class="form-group">
+            <label>Subtitle</label>
+            <input type="text" id="enSubtitle" class="form-input" placeholder="Subtitle">
+          </div>
         </div>
 
-        <!-- 6. Tags and 7. Main body -->
+        <div id="bnSummaryFields">
+          <div class="form-group">
+            <label>সারসংক্ষেপ (Summary)</label>
+            <textarea id="bnExcerpt" class="form-textarea" placeholder="লেখার সারসংক্ষেপ"></textarea>
+          </div>
+        </div>
+        <div id="enSummaryFields" style="display:none">
+          <div class="form-group">
+            <label>Summary</label>
+            <textarea id="enExcerpt" class="form-textarea" placeholder="Writing summary"></textarea>
+          </div>
+        </div>
+
         <div id="bnContentFields">
           <div class="form-group">
             <label>ট্যাগিং (Tags)</label>
@@ -284,7 +300,7 @@
         <div id="enContentFields" style="display:none">
           <div class="form-group">
             <label>Tags</label>
-            <input type="text" id="enTags" class="form-input" placeholder="Separate by commas (e.g., love, history)">
+            <input type="text" id="enTags" class="form-input" placeholder="Separate tags with commas">
           </div>
           <div class="form-group">
             <label>Main Body</label>
@@ -297,6 +313,13 @@
             </div>
             <div id="enBody" class="rich-area" contenteditable="true" data-placeholder="Write your content here..."></div>
           </div>
+        </div>
+
+        <div class="form-group featured-setting" style="margin-top:0">
+          <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0">
+            <input type="checkbox" id="postFeatured" style="width:18px;height:18px;accent-color:var(--pine-green)">
+            <span>নির্বাচিত লেখা (Featured)</span>
+          </label>
         </div>
 
         <div class="action-btns">
@@ -352,7 +375,7 @@ function updateSubcategories() {
     options.map(value => '<option value="' + value + '">' + value + '</option>').join('');
   child.disabled = options.length === 0;
 }
-document.getElementById('postCategory').addEventListener('change', updateSubcategories);
+
 
 function switchLang(lang, ev) {
   currentLang = lang;
@@ -445,7 +468,7 @@ async function checkAuth() {
 }
 
 async function savePost(isPublish, isBoth) {
-  const category = document.getElementById('postSubcategory').value || document.getElementById('postCategory').value;
+  const category = document.getElementById('postCategory').value;
   const cover = document.getElementById('postCover').value;
   const featured = document.getElementById('postFeatured').checked;
   if (!category) {
