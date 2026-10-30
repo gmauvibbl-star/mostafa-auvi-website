@@ -331,7 +331,7 @@ async function loadPosts(){
    else if(cmd==='image')insertImage(editor,id);
    else if(cmd==='gallery')insertGallery(editor,id);
    else if(cmd==='youtube'){const url=prompt('YouTube ভিডিওর URL দিন:','https://www.youtube.com/watch?v=');if(url)chain.setYoutubeVideo({src:url,width:640,height:360}).run()}
-   else if(cmd==='removeFormat')chain.unsetAllMarks().clearNodes().run();
+   else if(cmd==='removeFormat')chain.unsetAllMarks().clearNodes().updateAttributes('paragraph',{style:null,class:null}).run();
    else if(cmd==='fullscreen'){const el=document.getElementById(id==='body'?'bodyEditorShell':'bodyEnEditorShell');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()}
    else if(cmd==='preview')openEditorPreview(id);
    else if(cmd==='restoreDraft'){const key='auvi-rich-draft-'+(document.getElementById('groupId').value||'new')+'-'+id;const saved=localStorage.getItem(key);if(saved&&confirm('এই লেখার ব্রাউজারে সেভ করা খসড়াটি ফেরত আনবেন?'))editor.commands.setContent(saved);else if(!saved)announce('এই লেখার কোনো স্বয়ংক্রিয় খসড়া পাওয়া যায়নি।');}
