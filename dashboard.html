@@ -507,8 +507,8 @@ async function savePost(isPublish, isBoth) {
   const cover = document.getElementById('postCover').value;
   const featured = document.getElementById('postFeatured').checked;
   const status = document.getElementById('postStatus');
-  if (!parentCategory) {
-    status.innerText = "⚠️ অনুগ্রহ করে প্রধান বিভাগ নির্বাচন করুন।";
+  if (isPublish && !parentCategory) {
+    status.innerText = "⚠️ প্রকাশের আগে প্রধান বিভাগ নির্বাচন করুন।";
     status.style.color = "var(--terracotta)";
     return;
   }
