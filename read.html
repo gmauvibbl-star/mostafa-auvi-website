@@ -515,11 +515,8 @@
     hyphens: auto;
     -webkit-hyphens: auto;
   }
-  /* Keep every paragraph on the same page background, even if pasted text carries highlight colors. */
-  .a4-body, .a4-body * {
-    background-color: transparent !important;
-    background-image: none !important;
-  }
+  /* Preserve deliberate formatting added in the author's rich-text editor. */
+  .a4-body, .a4-body * { background-image: none; }
   .a4-body.en { font-family: 'EB Garamond', serif; }
   .a4-body p { margin: 0 0 1.15em; }
   .a4-body p:first-of-type::first-letter {
@@ -558,7 +555,12 @@
     border-radius: 6px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.14);
   }
-  .a4-body figure { margin: 1.6em 0; text-align: center; }
+  .a4-body figure { margin: 1.6em 0; text-align: center; max-width:100%; }
+  .a4-body img[data-align="left"] { margin-left:0; margin-right:auto; }
+  .a4-body img[data-align="center"] { margin-left:auto; margin-right:auto; }
+  .a4-body img[data-align="right"] { margin-left:auto; margin-right:0; }
+  .a4-body img[data-wrap="left"] { float:left; margin:8px 18px 10px 0; }
+  .a4-body img[data-wrap="right"] { float:right; margin:8px 0 10px 18px; }
   .a4-body figcaption {
     font-family: 'EB Garamond', serif;
     font-style: italic;
@@ -578,6 +580,12 @@
     font-family: 'EB Garamond', serif;
   }
   .a4-body blockquote p { margin: 0.5em 0; }
+  .a4-body blockquote.pull-quote { border:0; border-top:2px solid var(--gold); border-bottom:2px solid var(--gold); padding:18px 24px; text-align:center; font-size:1.25em; background:transparent; }
+  .a4-body p.drop-cap:first-letter { font-size:3.4em; float:left; line-height:.85; padding:5px 9px 0 0; color:var(--blood); }
+  .a4-body table { border-collapse:collapse; width:100%; margin:1.2em 0; }
+  .a4-body th,.a4-body td { border:1px solid var(--paper-dark); padding:8px 10px; text-align:left; }
+  .a4-body th { background:#f2eadc; }
+  .a4-body iframe { display:block; width:min(100%,720px); aspect-ratio:16/9; height:auto; margin:1.5em auto; border:0; border-radius:6px; }
   .a4-body ul, .a4-body ol { padding-left: 26px; margin: 1em 0 1.2em; }
   .a4-body li { margin: 0.3em 0; }
   .a4-body a {
@@ -590,12 +598,7 @@
   .a4-body a:hover { color: var(--teal-deep); }
   .a4-body strong, .a4-body b { color: var(--teal-deep); font-weight: 700; }
   .a4-body em, .a4-body i { color: var(--ink); font-family: 'EB Garamond', serif; }
-  .a4-body mark, .a4-body [style*="background"] {
-    background: rgba(212,180,104,0.32) !important;
-    color: var(--ink) !important;
-    padding: 1px 4px;
-    border-radius: 2px;
-  }
+  .a4-body mark { padding: 0 2px; border-radius: 2px; }
   .a4-body hr {
     border: 0;
     border-top: 1px solid var(--paper-dark);
@@ -1270,22 +1273,23 @@ function renderArticle(post, sibling) {
   const dateStr = fmtDate(post.published_at, lang);
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean)
     : (post.tags ? String(post.tags).split(',').map(t => t.trim()).filter(Boolean) : []);
-  // Normalize pasted content so Word/Docs highlight colors cannot leak into the reading page.
+  // Sanitize stored rich text while retaining the editor's deliberate inline formatting.
   const rawBodyHtml = String(post.body || '').trim();
   const bodyDoc = new DOMParser().parseFromString(rawBodyHtml, 'text/html');
+  bodyDoc.body.querySelectorAll('script,style,object,embed,form,input,button,textarea,select').forEach(el => el.remove());
+  const safeStyle = new Set(['color','background-color','font-size','font-family','line-height','text-align','margin','margin-bottom','margin-left','margin-right','text-indent','width','max-width','height','float','display']);
   bodyDoc.body.querySelectorAll('*').forEach((el) => {
     el.removeAttribute('bgcolor');
-    if (el.tagName === 'MARK') {
-      const span = bodyDoc.createElement('span');
-      while (el.firstChild) span.appendChild(el.firstChild);
-      el.replaceWith(span);
-    }
-    const style = el.style;
-    if (style) {
-      style.removeProperty('background');
-      style.removeProperty('background-color');
-      style.removeProperty('background-image');
-      if (!style.cssText.trim()) el.removeAttribute('style');
+    Array.from(el.attributes).forEach(attr => {
+      if (/^on/i.test(attr.name) || attr.name === 'srcdoc') el.removeAttribute(attr.name);
+      if (['href','src','xlink:href'].includes(attr.name.toLowerCase()) && /^\s*javascript:/i.test(attr.value)) el.removeAttribute(attr.name);
+    });
+    if (el.hasAttribute('style')) {
+      Array.from(el.style).forEach(prop => {
+        const value = el.style.getPropertyValue(prop);
+        if (!safeStyle.has(prop) || /url\s*\(|expression|javascript|@import/i.test(value)) el.style.removeProperty(prop);
+      });
+      if (!el.style.cssText.trim()) el.removeAttribute('style');
     }
   });
   const bodyHtml = bodyDoc.body.innerHTML;
