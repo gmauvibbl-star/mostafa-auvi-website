@@ -1273,6 +1273,40 @@ function renderArticle(post, sibling) {
   const isEn = lang === 'en';
   document.documentElement.lang = lang;
   document.title = (post.title || 'লেখা') + ' | Mostafa Auvi';
+  const plainArticleText = String(post.excerpt || post.body || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\\s+/g, ' ').trim();
+  const seoDescription = (plainArticleText || 'মোস্তফা অভির প্রকাশিত লেখা।').slice(0, 155);
+  const canonicalUrl = location.origin + location.pathname + '?slug=' + encodeURIComponent(post.slug || slug);
+  const setSeoMeta = (selector, attr, key, value) => {
+    let node = document.head.querySelector(selector);
+    if (!node) { node = document.createElement('meta'); node.setAttribute(attr, key); document.head.appendChild(node); }
+    node.setAttribute('content', value);
+  };
+  setSeoMeta('meta[name="description"]', 'name', 'description', seoDescription);
+  setSeoMeta('meta[property="og:type"]', 'property', 'og:type', 'article');
+  setSeoMeta('meta[property="og:title"]', 'property', 'og:title', (post.title || 'লেখা') + ' | Mostafa Auvi');
+  setSeoMeta('meta[property="og:description"]', 'property', 'og:description', seoDescription);
+  setSeoMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+  setSeoMeta('meta[property="og:site_name"]', 'property', 'og:site_name', 'Mostafa Auvi');
+  setSeoMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary');
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+  canonical.href = canonicalUrl;
+  const existingArticleSchema = document.getElementById('articleStructuredData');
+  if (existingArticleSchema) existingArticleSchema.remove();
+  const articleSchema = document.createElement('script');
+  articleSchema.type = 'application/ld+json';
+  articleSchema.id = 'articleStructuredData';
+  articleSchema.textContent = JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: post.title || 'Mostafa Auvi',
+    description: seoDescription,
+    author: {'@type':'Person', name:'Mostafa Auvi', alternateName:'মোস্তফা অভি'},
+    datePublished: post.published_at || undefined,
+    inLanguage: lang,
+    mainEntityOfPage: canonicalUrl,
+    publisher: {'@type':'Person', name:'Mostafa Auvi'}
+  });
+  document.head.appendChild(articleSchema);
 
   const dateStr = fmtDate(post.published_at, lang);
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean)
