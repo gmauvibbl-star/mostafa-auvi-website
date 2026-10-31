@@ -16,3 +16,27 @@
 
       // MAIN section
       const mainSection = el('div', { class: 'sidebar-section' });
+            // Nav with sections
+      const sidebarScroll = el('div', { class: 'sidebar-scroll' });
+
+      // RETURN section — external navigation back to the public site
+      const returnSection = el('div', { class: 'sidebar-section' });
+      returnSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'ফিরে যান'));
+      const returnNav = [
+        { label: 'মূল ওয়েবসাইটে ফিরুন', icon: 'home', href: 'index.html' },
+        { label: 'জার্নালে ফিরুন', icon: 'book-open', href: 'journal.html' },
+      ];
+      returnNav.forEach(item => {
+        const a = el('a', {
+          class: 'nav-item bn-font nav-return',
+          href: item.href,
+          title: item.label,
+        }, icon(item.icon), el('span', {}, item.label));
+        returnSection.appendChild(a);
+      });
+
+      // MAIN section
+      const mainSection = el('div', { class: 'sidebar-section' });
+      mainSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'Main'));
+      const mainNav = [
+        ...
