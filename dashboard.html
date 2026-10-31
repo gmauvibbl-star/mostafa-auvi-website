@@ -21,109 +21,177 @@
 
   <style>
     /* ============================================================
-       CSS — Design System
+       CSS — Mostafa Auvi Dashboard
+       Color palette inspired by traditional Bengali decorative art
        ============================================================ */
     :root {
-      --radius: 8px;
-      --bg: #ffffff;
-      --fg: #18181b;
-      --muted: #f4f4f5;
-      --muted-fg: #71717a;
-      --border: #e4e4e7;
-      --card: #ffffff;
-      --primary: #059669;
-      --primary-fg: #ffffff;
-      --primary-soft: #d1fae5;
-      --accent: #f97316;
-      --destructive: #dc2626;
-      --warning: #d97706;
-      --sidebar: #fafaf9;
-      --sidebar-fg: #44403c;
-      --ring: #10b981;
-      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
-      --shadow-lg: 0 10px 25px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.04);
+      /* Core palette — Bengali decorative */
+      --sidebar-bg: #1B3D34;        /* deep emerald */
+      --sidebar-fg: #E8DDD3;         /* warm cream text */
+      --sidebar-muted: #8FA8A0;      /* muted sidebar text */
+      --sidebar-hover: #244D42;      /* hover bg */
+      --sidebar-active: #C85A4C;     /* terracotta active */
+      --sidebar-active-fg: #FFFFFF;
+
+      --bg: #F5EFE0;                 /* cream main bg */
+      --card: #FFFFFF;               /* white card */
+      --card-cream: #FAF7F2;         /* off-white variant */
+      --fg: #2C1810;                 /* deep brown text */
+      --muted: #EDE4D3;              /* muted bg */
+      --muted-fg: #6B5D54;           /* muted text */
+      --border: #E8DDD3;             /* warm border */
+      --border-strong: #D4B896;      /* stronger border */
+
+      --primary: #C85A4C;            /* terracotta */
+      --primary-hover: #B84C28;      /* darker terracotta */
+      --primary-fg: #FFFFFF;
+      --primary-soft: #F4D9D2;       /* soft terracotta bg */
+
+      --accent: #B84C28;             /* deep marigold */
+      --accent-soft: #FAEBD7;
+      --secondary: #1E3A52;          /* deep blue */
+      --destructive: #B91C1C;
+      --warning: #D97706;
+      --success: #166534;
+      --info: #1E40AF;
+
+      --ring: #C85A4C;
+      --radius: 6px;
+      --radius-lg: 10px;
+      --shadow: 0 1px 2px rgba(44,24,16,.06), 0 1px 3px rgba(44,24,16,.04);
+      --shadow-lg: 0 8px 24px rgba(44,24,16,.10), 0 2px 8px rgba(44,24,16,.06);
+
+      /* Tab */
+      --tab-active: #C85A4C;
+      --tab-bg: #FAF7F2;
     }
     .dark {
-      --bg: #18181b;
-      --fg: #f4f4f5;
-      --muted: #27272a;
-      --muted-fg: #a1a1aa;
-      --border: rgba(255,255,255,0.08);
-      --card: #1f1f23;
-      --primary: #10b981;
-      --primary-fg: #08120e;
-      --primary-soft: rgba(16,185,129,0.15);
-      --accent: #fb923c;
-      --destructive: #ef4444;
-      --warning: #f59e0b;
-      --sidebar: #1c1c1f;
-      --sidebar-fg: #d4d4d8;
-      --ring: #10b981;
+      --sidebar-bg: #0F1F1A;
+      --sidebar-fg: #D4C8B8;
+      --sidebar-muted: #6B8077;
+      --sidebar-hover: #162B22;
+      --sidebar-active: #C85A4C;
+
+      --bg: #1A1612;
+      --card: #221C16;
+      --card-cream: #1F1A14;
+      --fg: #F4E8D8;
+      --muted: #2A2218;
+      --muted-fg: #A89A8A;
+      --border: rgba(232,221,211,0.10);
+      --border-strong: rgba(212,184,150,0.25);
+
+      --primary: #D67060;
+      --primary-hover: #C85A4C;
+      --primary-fg: #FFFFFF;
+      --primary-soft: rgba(200,90,76,0.15);
+
+      --accent: #D4683F;
+      --accent-soft: rgba(184,76,40,0.15);
+      --secondary: #2D5A78;
+      --destructive: #DC2626;
+      --warning: #F59E0B;
+      --success: #16A34A;
+      --info: #3B82F6;
+
+      --ring: #D67060;
       --shadow: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.2);
-      --shadow-lg: 0 10px 25px rgba(0,0,0,.4), 0 4px 6px rgba(0,0,0,.2);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,.5), 0 4px 6px rgba(0,0,0,.3);
+
+      --tab-active: #D67060;
+      --tab-bg: #1F1A14;
     }
+
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; height: 100%; }
     body {
       font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
       background: var(--bg);
       color: var(--fg);
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
     .bn-font { font-family: 'SolaimanLipi', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif; }
 
-    /* Buttons */
+    /* ============================================================
+       Buttons
+       ============================================================ */
     .btn {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 14px; border-radius: var(--radius); border: 1px solid var(--border);
+      padding: 7px 14px; border-radius: var(--radius); border: 1px solid var(--border);
       background: var(--card); color: var(--fg); cursor: pointer;
-      font-family: inherit; font-size: 14px; font-weight: 500;
-      transition: all .15s; line-height: 1.2;
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      transition: all .15s; line-height: 1.3;
     }
-    .btn:hover:not(:disabled) { background: var(--muted); }
+    .btn:hover:not(:disabled) { background: var(--muted); border-color: var(--border-strong); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-primary { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
-    .btn-primary:hover:not(:disabled) { background: #047857; filter: brightness(1.05); }
-    .dark .btn-primary:hover:not(:disabled) { background: #059669; filter: brightness(0.9); }
+    .btn-primary {
+      background: var(--primary); color: var(--primary-fg);
+      border-color: var(--primary);
+    }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
     .btn-destructive { background: var(--destructive); color: #fff; border-color: var(--destructive); }
     .btn-ghost { background: transparent; border-color: transparent; }
     .btn-ghost:hover:not(:disabled) { background: var(--muted); }
-    .btn-sm { padding: 6px 10px; font-size: 13px; }
-    .btn-icon { padding: 8px; width: 36px; height: 36px; justify-content: center; }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    .btn-icon { padding: 7px; width: 32px; height: 32px; justify-content: center; }
+    .btn-lg { padding: 10px 20px; font-size: 14px; }
 
-    /* Inputs */
+    /* ============================================================
+       Inputs
+       ============================================================ */
     .input, .textarea, .select {
-      width: 100%; padding: 8px 12px; border-radius: var(--radius);
+      width: 100%; padding: 7px 11px; border-radius: var(--radius);
       border: 1px solid var(--border); background: var(--card); color: var(--fg);
-      font-family: inherit; font-size: 14px; transition: border-color .15s, box-shadow .15s;
+      font-family: inherit; font-size: 13px; transition: border-color .15s, box-shadow .15s;
     }
     .input:focus, .textarea:focus, .select:focus {
-      outline: none; border-color: var(--ring);
-      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+      outline: none; border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(200,90,76,0.12);
     }
     .textarea { resize: vertical; min-height: 70px; }
-    .label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--fg); }
+    .label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--fg); }
     .label .req { color: var(--destructive); }
+    .label-hint { font-size: 11px; color: var(--muted-fg); font-weight: 400; }
 
-    /* Cards */
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
-    .card-h { font-size: 14px; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 6px; }
+    /* ============================================================
+       Cards & panels
+       ============================================================ */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow);
+    }
+    .card-h {
+      font-size: 13px; font-weight: 700; margin: 0 0 12px 0;
+      display: flex; align-items: center; gap: 6px;
+      color: var(--fg); text-transform: none;
+    }
+    .card-h svg { width: 14px; height: 14px; color: var(--primary); }
 
-    /* Badges */
+    /* ============================================================
+       Badges
+       ============================================================ */
     .badge {
       display: inline-flex; align-items: center; gap: 4px;
       padding: 2px 8px; border-radius: 999px;
-      font-size: 11px; font-weight: 500;
+      font-size: 11px; font-weight: 600;
       background: var(--muted); color: var(--muted-fg);
     }
     .badge-default { background: var(--primary-soft); color: var(--primary); }
-    .dark .badge-default { color: #6ee7b7; }
-    .badge-warning { background: #fef3c7; color: #92400e; }
-    .dark .badge-warning { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .dark .badge-default { color: #F4D9D2; }
+    .badge-warning { background: #FEF3C7; color: #92400E; }
+    .dark .badge-warning { background: rgba(245,158,11,0.15); color: #FBBF24; }
+    .badge-info { background: #DBEAFE; color: #1E40AF; }
+    .badge-count {
+      background: var(--primary); color: var(--primary-fg);
+      min-width: 18px; height: 18px; padding: 0 5px;
+      justify-content: center; border-radius: 999px; font-size: 10px;
+    }
 
-    /* Layout */
+    /* ============================================================
+       Layout helpers
+       ============================================================ */
     .min-h-screen { min-height: 100vh; }
     .flex { display: flex; }
     .flex-col { flex-direction: column; }
@@ -131,8 +199,9 @@
     .items-center { align-items: center; }
     .justify-center { justify-content: center; }
     .justify-between { justify-content: space-between; }
-    .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
-    .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+    .flex-wrap { flex-wrap: wrap; }
+    .gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+    .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
     .mx-auto { margin-left: auto; margin-right: auto; }
     .mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
     .mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; }
@@ -140,8 +209,9 @@
     .max-w-md { max-width: 448px; } .max-w-6xl { max-width: 1152px; }
     .hidden { display: none !important; }
     .text-center { text-align: center; }
-    .text-sm { font-size: 13px; } .text-xs { font-size: 11px; }
+    .text-sm { font-size: 12px; } .text-xs { font-size: 11px; }
     .text-muted { color: var(--muted-fg); }
+    .text-primary { color: var(--primary); }
     .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .grid { display: grid; }
     .grid-2 { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -151,144 +221,246 @@
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* Top bar */
+    /* ============================================================
+       Top header bar
+       ============================================================ */
     .topbar {
-      height: 56px; border-bottom: 1px solid var(--border);
+      height: 52px; border-bottom: 1px solid var(--border);
       background: var(--card); display: flex; align-items: center;
-      justify-content: space-between; padding: 0 16px; gap: 12px;
+      justify-content: space-between; padding: 0 18px; gap: 12px;
+      position: sticky; top: 0; z-index: 50;
     }
-    .topbar h1 { font-size: 15px; font-weight: 600; margin: 0; }
+    .topbar-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted-fg); }
+    .breadcrumb .sep { color: var(--border-strong); }
+    .breadcrumb .current { color: var(--fg); font-weight: 600; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
 
-    /* Sidebar */
-    .layout { display: flex; min-height: calc(100vh - 56px); }
+    /* ============================================================
+       Layout: sidebar + main
+       ============================================================ */
+    .layout { display: flex; min-height: calc(100vh - 52px); }
+
     .sidebar {
-      width: 240px; flex-shrink: 0; border-right: 1px solid var(--border);
-      background: var(--sidebar); padding: 12px; display: flex; flex-direction: column; gap: 4px;
+      width: 240px; flex-shrink: 0;
+      background: var(--sidebar-bg); color: var(--sidebar-fg);
+      padding: 0; display: flex; flex-direction: column;
+      border-right: 1px solid rgba(0,0,0,0.15);
     }
-    .sidebar .brand {
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 12px; margin-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+    .sidebar-brand {
+      padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
     }
-    .brand .logo {
+    .sidebar-brand .logo {
       width: 36px; height: 36px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--primary), #047857);
+      background: var(--sidebar-active); color: var(--sidebar-active-fg);
       display: flex; align-items: center; justify-content: center;
-      color: #fff; flex-shrink: 0;
+      flex-shrink: 0; font-weight: 700;
     }
-    .brand .logo svg { width: 20px; height: 20px; }
-    .brand .name { font-size: 14px; font-weight: 600; }
-    .brand .sub { font-size: 11px; color: var(--muted-fg); }
+    .sidebar-brand .logo svg { width: 18px; height: 18px; }
+    .sidebar-brand .name { font-size: 14px; font-weight: 700; line-height: 1.2; }
+    .sidebar-brand .sub { font-size: 11px; color: var(--sidebar-muted); margin-top: 2px; }
+
+    .sidebar-scroll { flex: 1; overflow-y: auto; padding: 8px 0; }
+    .sidebar-section { padding: 8px 0 4px; }
+    .sidebar-section-title {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--sidebar-muted);
+      padding: 8px 16px 4px;
+    }
     .nav-item {
       display: flex; align-items: center; gap: 10px;
-      padding: 9px 12px; border-radius: var(--radius);
-      cursor: pointer; font-size: 14px; color: var(--sidebar-fg);
-      transition: background .15s; border: none; background: transparent;
-      font-family: inherit; text-align: left; width: 100%;
+      padding: 8px 16px; cursor: pointer; font-size: 13px;
+      color: var(--sidebar-fg); transition: background .12s;
+      border: none; background: transparent; font-family: inherit;
+      text-align: left; width: 100%; border-left: 3px solid transparent;
     }
-    .nav-item:hover { background: var(--muted); }
-    .nav-item.active { background: var(--primary-soft); color: var(--primary); font-weight: 500; }
-    .dark .nav-item.active { color: #6ee7b7; }
+    .nav-item:hover { background: var(--sidebar-hover); }
+    .nav-item.active {
+      background: var(--sidebar-active); color: var(--sidebar-active-fg);
+      font-weight: 600; border-left-color: var(--accent);
+    }
     .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .nav-item .count {
+      margin-left: auto; background: rgba(255,255,255,0.15);
+      color: inherit; padding: 1px 6px; border-radius: 999px; font-size: 10px;
+    }
 
-    .user-card {
-      margin-top: auto; padding: 10px; border-radius: var(--radius);
-      background: var(--muted); display: flex; align-items: center; gap: 8px;
+    .sidebar-footer {
+      padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
     }
     .avatar {
-      width: 32px; height: 32px; border-radius: 50%; background: var(--primary);
-      color: var(--primary-fg); display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 600; flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--sidebar-active); color: var(--sidebar-active-fg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0;
     }
-    .user-card .info { flex: 1; min-width: 0; }
-    .user-card .name { font-size: 13px; font-weight: 500; }
-    .user-card .email { font-size: 11px; color: var(--muted-fg); }
+    .sidebar-footer .info { flex: 1; min-width: 0; }
+    .sidebar-footer .name { font-size: 12px; font-weight: 600; }
+    .sidebar-footer .email { font-size: 10px; color: var(--sidebar-muted); }
+    .sidebar-footer .logout-btn {
+      background: transparent; border: none; color: var(--sidebar-muted);
+      cursor: pointer; padding: 4px; border-radius: 4px;
+    }
+    .sidebar-footer .logout-btn:hover { background: rgba(255,255,255,0.1); color: var(--sidebar-fg); }
+    .sidebar-footer .logout-btn svg { width: 14px; height: 14px; }
 
-    /* Main content */
-    .main { flex: 1; padding: 24px; overflow: auto; }
-    .main-inner { max-width: 1152px; margin: 0 auto; }
+    /* ============================================================
+       Main content
+       ============================================================ */
+    .main { flex: 1; padding: 20px 24px; overflow: auto; background: var(--bg); }
+    .main-inner { max-width: 1200px; margin: 0 auto; }
 
-    /* Login page */
+    /* Page header (within main) */
+    .page-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .page-title { font-size: 20px; font-weight: 700; margin: 0; color: var(--fg); }
+    .page-subtitle { font-size: 12px; color: var(--muted-fg); margin-top: 2px; }
+
+    /* ============================================================
+       Tabs (top of editor)
+       ============================================================ */
+    .tabs-bar {
+      display: flex; gap: 0; border-bottom: 2px solid var(--border);
+      background: var(--card); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 0 8px; overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 12px 16px; border: none; background: transparent;
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      cursor: pointer; color: var(--muted-fg);
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+      transition: all .15s; display: inline-flex; align-items: center; gap: 6px;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--fg); }
+    .tab-btn.active {
+      color: var(--primary); border-bottom-color: var(--primary); font-weight: 600;
+    }
+    .tab-content {
+      background: var(--card); border: 1px solid var(--border);
+      border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      padding: 20px;
+    }
+
+    /* Sub-tabs (language tabs within Topic Details) */
+    .sub-tabs {
+      display: flex; gap: 4px; padding: 4px;
+      background: var(--muted); border-radius: var(--radius); margin-bottom: 14px;
+      width: fit-content; max-width: 100%;
+    }
+    .sub-tab {
+      padding: 6px 14px; border: none; background: transparent;
+      font-family: inherit; font-size: 12px; font-weight: 500;
+      cursor: pointer; border-radius: 4px; color: var(--muted-fg);
+      transition: all .15s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .sub-tab.active { background: var(--card); color: var(--fg); box-shadow: var(--shadow); font-weight: 600; }
+    .lang-flag {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 12px; border-radius: 2px; font-size: 10px;
+      font-weight: 700; color: #fff;
+    }
+    .lang-flag.bn { background: linear-gradient(135deg, #006a4e 0%, #f42a41 100%); }
+    .lang-flag.en { background: linear-gradient(135deg, #1e3a8a 0%, #dc2626 100%); }
+
+    /* ============================================================
+       Login page
+       ============================================================ */
     .login-wrap {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      padding: 16px; background: linear-gradient(135deg, #d1fae5 0%, var(--bg) 50%, #fed7aa 100%);
+      padding: 16px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(200,90,76,0.18) 0%, transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(30,58,82,0.18) 0%, transparent 45%),
+        var(--bg);
     }
-    .dark .login-wrap { background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg) 50%, rgba(249,115,22,0.1) 100%); }
-    .login-card { width: 100%; max-width: 448px; }
-    .login-brand { text-align: center; margin-bottom: 24px; }
+    .dark .login-wrap {
+      background:
+        radial-gradient(circle at 20% 30%, rgba(200,90,76,0.10) 0%, transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(45,90,120,0.10) 0%, transparent 45%),
+        var(--bg);
+    }
+    .login-card { width: 100%; max-width: 420px; }
+    .login-brand { text-align: center; margin-bottom: 22px; }
     .login-brand .logo-big {
-      width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 12px;
-      background: linear-gradient(135deg, var(--primary), #047857);
-      display: flex; align-items: center; justify-content: center; color: #fff;
-      box-shadow: 0 8px 20px rgba(5,150,105,0.3);
+      width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 12px;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 20px rgba(200,90,76,0.35);
     }
-    .login-brand .logo-big svg { width: 32px; height: 32px; }
-    .login-brand h1 { font-size: 24px; font-weight: 700; margin: 0; }
-    .login-brand p { font-size: 13px; color: var(--muted-fg); margin: 4px 0 0; }
+    .login-brand .logo-big svg { width: 28px; height: 28px; }
+    .login-brand h1 { font-size: 22px; font-weight: 700; margin: 0; }
+    .login-brand p { font-size: 12px; color: var(--muted-fg); margin: 4px 0 0; }
 
     .tab-strip {
       display: flex; gap: 4px; padding: 4px;
-      background: var(--muted); border-radius: 8px; margin-bottom: 16px;
+      background: var(--muted); border-radius: var(--radius); margin-bottom: 14px;
     }
     .tab-strip button {
-      flex: 1; padding: 8px; border: none; background: transparent;
-      font-family: inherit; font-size: 13px; font-weight: 500;
-      cursor: pointer; border-radius: 6px; color: var(--muted-fg);
+      flex: 1; padding: 7px; border: none; background: transparent;
+      font-family: inherit; font-size: 12px; font-weight: 500;
+      cursor: pointer; border-radius: 4px; color: var(--muted-fg);
     }
     .tab-strip button.active { background: var(--card); color: var(--fg); box-shadow: var(--shadow); }
 
-    /* Editor */
+    /* ============================================================
+       Editor
+       ============================================================ */
     .editor-shell {
       border: 1px solid var(--border); border-radius: var(--radius);
       background: var(--card); overflow: hidden; display: flex; flex-direction: column;
     }
     .editor-shell.fullscreen { position: fixed; inset: 0; z-index: 1000; border-radius: 0; }
     .editor-toolbar {
-      display: flex; flex-wrap: wrap; gap: 2px; padding: 8px;
+      display: flex; flex-wrap: wrap; gap: 2px; padding: 6px;
       border-bottom: 1px solid var(--border);
-      background: var(--muted); position: relative; align-items: flex-start;
+      background: var(--card-cream); position: relative; align-items: flex-start;
     }
     .tb-btn {
-      width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center;
       border: none; background: transparent; color: var(--muted-fg); cursor: pointer;
-      border-radius: 6px; transition: all .1s;
+      border-radius: 4px; transition: all .1s;
     }
-    .tb-btn:hover:not(:disabled) { background: var(--bg); color: var(--fg); }
+    .tb-btn:hover:not(:disabled) { background: var(--muted); color: var(--fg); }
     .tb-btn.active { background: var(--primary-soft); color: var(--primary); }
-    .dark .tb-btn.active { color: #6ee7b7; }
+    .dark .tb-btn.active { color: #F4D9D2; }
     .tb-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .tb-btn svg { width: 16px; height: 16px; }
-    .tb-divider { width: 1px; height: 24px; background: var(--border); margin: 4px 4px; }
+    .tb-btn svg { width: 15px; height: 15px; }
+    .tb-divider { width: 1px; height: 22px; background: var(--border); margin: 4px 4px; }
     .tb-select {
-      height: 32px; padding: 0 8px; border: 1px solid transparent; background: transparent;
-      color: var(--muted-fg); font-family: inherit; font-size: 13px; border-radius: 6px; cursor: pointer;
+      height: 30px; padding: 0 6px; border: 1px solid transparent; background: transparent;
+      color: var(--muted-fg); font-family: inherit; font-size: 12px; border-radius: 4px; cursor: pointer;
     }
-    .tb-select:hover { background: var(--bg); color: var(--fg); }
+    .tb-select:hover { background: var(--muted); color: var(--fg); }
 
     .tb-popover {
-      position: absolute; z-index: 100; top: 42px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-      box-shadow: var(--shadow-lg); padding: 8px; max-height: 280px; overflow: auto;
+      position: absolute; z-index: 100; top: 38px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); padding: 6px; max-height: 280px; overflow: auto;
       min-width: 200px;
     }
     .tb-popover button {
       display: block; width: 100%; text-align: left;
       padding: 6px 10px; border: none; background: transparent;
       color: var(--fg); cursor: pointer; border-radius: 4px; font-family: inherit;
-      font-size: 13px;
+      font-size: 12px;
     }
     .tb-popover button:hover { background: var(--muted); }
-    .tb-color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; min-width: 180px; }
+    .tb-color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; min-width: 180px; }
     .tb-color-grid button {
-      width: 24px; height: 24px; padding: 0; border: 1px solid var(--border);
-      border-radius: 4px; cursor: pointer;
+      width: 22px; height: 22px; padding: 0; border: 1px solid var(--border);
+      border-radius: 3px; cursor: pointer;
     }
     .tb-color-grid button:hover { transform: scale(1.1); }
 
     .editor-content {
-      min-height: 320px; padding: 16px; outline: none; line-height: 1.8;
-      font-family: 'SolaimanLipi', 'Noto Sans Bengali', sans-serif; font-size: 17px;
-      word-wrap: break-word;
+      min-height: 300px; padding: 14px; outline: none; line-height: 1.8;
+      font-family: 'SolaimanLipi', 'Noto Sans Bengali', sans-serif; font-size: 16px;
+      word-wrap: break-word; color: var(--fg);
     }
     .editor-content:empty::before {
       content: attr(data-placeholder); color: var(--muted-fg); pointer-events: none;
@@ -299,9 +471,12 @@
     .editor-content p { margin: 0 0 0.8em; }
     .editor-content ul { list-style: disc; padding-left: 1.5em; margin: 0.5em 0; }
     .editor-content ol { list-style: decimal; padding-left: 1.5em; margin: 0.5em 0; }
-    .editor-content blockquote { border-left: 3px solid var(--border); padding-left: 1em; margin: 0.8em 0; color: var(--muted-fg); font-style: italic; }
+    .editor-content blockquote {
+      border-left: 3px solid var(--primary); padding-left: 1em;
+      margin: 0.8em 0; color: var(--muted-fg); font-style: italic;
+    }
     .editor-content a { color: var(--primary); text-decoration: underline; }
-    .editor-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 0.5em 0; }
+    .editor-content img { max-width: 100%; height: auto; border-radius: 6px; margin: 0.5em 0; }
     .editor-content table { border-collapse: collapse; width: 100%; margin: 0.8em 0; }
     .editor-content th, .editor-content td { border: 1px solid var(--border); padding: 0.5em 0.75em; text-align: left; }
     .editor-content th { background: var(--muted); font-weight: 600; }
@@ -310,102 +485,146 @@
 
     .editor-footer {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 12px; border-top: 1px solid var(--border);
-      background: var(--muted); font-size: 11px; color: var(--muted-fg);
+      padding: 6px 10px; border-top: 1px solid var(--border);
+      background: var(--card-cream); font-size: 11px; color: var(--muted-fg);
     }
 
-    /* Toast */
+    /* ============================================================
+       Toast
+       ============================================================ */
     #toast-host {
       position: fixed; top: 16px; right: 16px; z-index: 9999;
-      display: flex; flex-direction: column; gap: 8px; max-width: 380px;
+      display: flex; flex-direction: column; gap: 8px; max-width: 360px;
     }
     .toast {
-      padding: 12px 14px; border-radius: 8px; background: var(--card);
+      padding: 11px 14px; border-radius: var(--radius); background: var(--card);
       border: 1px solid var(--border); box-shadow: var(--shadow-lg);
-      font-size: 13px; animation: slideIn .2s; min-width: 280px;
+      font-size: 12px; animation: slideIn .2s; min-width: 260px;
     }
-    .toast.success { border-left: 4px solid var(--primary); }
+    .toast.success { border-left: 4px solid var(--success); }
     .toast.error { border-left: 4px solid var(--destructive); }
-    .toast.info { border-left: 4px solid var(--accent); }
-    .toast .t-title { font-weight: 600; margin-bottom: 2px; }
-    .toast .t-desc { color: var(--muted-fg); font-size: 12px; }
+    .toast.info { border-left: 4px solid var(--primary); }
+    .toast .t-title { font-weight: 700; margin-bottom: 2px; color: var(--fg); }
+    .toast .t-desc { color: var(--muted-fg); font-size: 11px; }
     @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
     /* Loader */
-    .spinner { width: 24px; height: 24px; border: 3px solid var(--muted); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    .spinner { width: 22px; height: 22px; border: 3px solid var(--muted); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* List item */
+    /* ============================================================
+       Writings list item
+       ============================================================ */
     .writing-item {
       display: flex; gap: 12px; padding: 12px; border: 1px solid var(--border);
-      border-radius: var(--radius); background: var(--card); transition: box-shadow .15s;
+      border-radius: var(--radius); background: var(--card); transition: all .15s;
     }
-    .writing-item:hover { box-shadow: var(--shadow); }
-    .writing-item .thumb { width: 96px; height: 64px; border-radius: 6px; background: var(--muted); flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .writing-item:hover { box-shadow: var(--shadow); border-color: var(--border-strong); }
+    .writing-item .thumb {
+      width: 88px; height: 60px; border-radius: 4px; background: var(--muted);
+      flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
     .writing-item .thumb img { width: 100%; height: 100%; object-fit: cover; }
     .writing-item .info { flex: 1; min-width: 0; }
-    .writing-item .title { font-size: 14px; font-weight: 500; margin: 0 0 2px; }
-    .writing-item .meta { font-size: 11px; color: var(--muted-fg); display: flex; flex-wrap: wrap; gap: 8px; }
+    .writing-item .title { font-size: 13px; font-weight: 600; margin: 0 0 2px; color: var(--fg); }
+    .writing-item .meta {
+      font-size: 11px; color: var(--muted-fg);
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 4px;
+    }
+    .writing-item .meta svg { width: 10px; height: 10px; }
 
-    /* Cover uploader */
+    /* ============================================================
+       Cover uploader
+       ============================================================ */
     .cover-uploader {
       width: 100%; aspect-ratio: 16/9; border-radius: var(--radius);
-      border: 2px dashed var(--border); cursor: pointer; transition: all .15s;
+      border: 2px dashed var(--border-strong); cursor: pointer; transition: all .15s;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: var(--muted-fg); background: var(--muted);
+      color: var(--muted-fg); background: var(--card-cream);
     }
-    .cover-uploader:hover { border-color: var(--primary); background: var(--primary-soft); }
+    .cover-uploader:hover { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); }
     .cover-uploader.has-image { border-style: solid; padding: 0; overflow: hidden; }
     .cover-uploader img { width: 100%; height: 100%; object-fit: cover; }
+    .cover-uploader svg { width: 24px; height: 24px; }
 
-    /* Tag input */
+    /* ============================================================
+       Tag input
+       ============================================================ */
     .tag-input-wrap {
-      display: flex; flex-wrap: wrap; gap: 6px; padding: 8px;
+      display: flex; flex-wrap: wrap; gap: 5px; padding: 7px;
       border: 1px solid var(--border); border-radius: var(--radius); background: var(--card);
-      min-height: 42px;
+      min-height: 38px;
     }
     .tag-input-wrap input {
-      flex: 1; min-width: 120px; border: none; outline: none; background: transparent;
-      color: var(--fg); font-family: inherit; font-size: 13px;
+      flex: 1; min-width: 100px; border: none; outline: none; background: transparent;
+      color: var(--fg); font-family: inherit; font-size: 12px;
     }
     .tag-chip {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 2px 8px; border-radius: 999px; background: var(--primary-soft);
-      color: var(--primary); font-size: 12px;
+      padding: 2px 7px; border-radius: 999px; background: var(--primary-soft);
+      color: var(--primary); font-size: 11px; font-weight: 500;
     }
-    .dark .tag-chip { color: #6ee7b7; }
+    .dark .tag-chip { color: #F4D9D2; }
     .tag-chip button {
       border: none; background: transparent; color: inherit; cursor: pointer;
       padding: 0; display: flex; align-items: center;
     }
+    .tag-chip button svg { width: 10px; height: 10px; }
 
-    /* Switch */
-    .switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+    /* ============================================================
+       Switch (toggle)
+       ============================================================ */
+    .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .switch .slider {
       position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--border); border-radius: 999px; transition: .15s;
+      background: var(--border-strong); border-radius: 999px; transition: .15s;
     }
     .switch .slider::before {
-      content: ''; position: absolute; height: 14px; width: 14px; left: 3px; top: 3px;
+      content: ''; position: absolute; height: 12px; width: 12px; left: 3px; top: 3px;
       background: #fff; border-radius: 50%; transition: .15s;
     }
     .switch input:checked + .slider { background: var(--primary); }
     .switch input:checked + .slider::before { transform: translateX(16px); }
 
-    /* Modal */
+    /* ============================================================
+       Modal
+       ============================================================ */
     .modal-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 999;
+      position: fixed; inset: 0; background: rgba(44,24,16,0.5); z-index: 999;
       display: flex; align-items: center; justify-content: center; padding: 16px;
     }
     .modal {
-      background: var(--card); border-radius: var(--radius); padding: 24px;
-      max-width: 480px; width: 100%; box-shadow: var(--shadow-lg);
+      background: var(--card); border-radius: var(--radius-lg); padding: 22px;
+      max-width: 460px; width: 100%; box-shadow: var(--shadow-lg);
     }
-    .modal h3 { margin: 0 0 8px; font-size: 16px; }
-    .modal p { margin: 0 0 16px; color: var(--muted-fg); font-size: 14px; }
+    .modal h3 { margin: 0 0 8px; font-size: 15px; }
+    .modal p { margin: 0 0 16px; color: var(--muted-fg); font-size: 13px; }
 
-    /* Mobile */
+    /* ============================================================
+       Options menu (top right)
+       ============================================================ */
+    .options-menu { position: relative; }
+    .options-dropdown {
+      position: absolute; right: 0; top: 100%; margin-top: 4px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-lg);
+      min-width: 200px; z-index: 100; padding: 4px;
+    }
+    .options-dropdown button {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      padding: 7px 10px; border: none; background: transparent;
+      color: var(--fg); font-family: inherit; font-size: 12px;
+      cursor: pointer; border-radius: 4px; text-align: left;
+    }
+    .options-dropdown button:hover { background: var(--muted); }
+    .options-dropdown button svg { width: 14px; height: 14px; color: var(--muted-fg); }
+    .options-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+    /* ============================================================
+       Mobile
+       ============================================================ */
     .mobile-only { display: none; }
     @media (max-width: 1024px) {
       .sidebar { display: none; }
@@ -414,8 +633,19 @@
         display: flex; position: fixed; inset: 0 auto 0 0; z-index: 100;
         box-shadow: var(--shadow-lg);
       }
-      .sidebar.open + .backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; }
+      .sidebar.open + .backdrop {
+        display: block; position: fixed; inset: 0;
+        background: rgba(44,24,16,0.5); z-index: 99;
+      }
+      .main { padding: 16px; }
     }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted-fg); }
+    .sidebar ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
   </style>
 </head>
 <body>
@@ -430,9 +660,9 @@
        ============================================================ -->
   <script>
     // ============================================================
-    // 🔧 CONFIG — এখানে আপনার Supabase URL ও anon key বসান
+    // 🔧 CONFIG — Mostafa Auvi-র Supabase project
     // ============================================================
-        const SUPABASE_URL  = 'https://voswrndbxrsaqfzwffhh.supabase.co';
+    const SUPABASE_URL  = 'https://voswrndbxrsaqfzwffhh.supabase.co';
     const SUPABASE_KEY  = 'sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I';
     const STORAGE_BUCKET = 'post-images';            // আপনার আগের storage bucket
     const COVER_FOLDER_BN = 'cover-bn';              // বাংলা কভার সাবফোল্ডার
@@ -441,6 +671,22 @@
     const INLINE_FOLDER_EN = 'inline-en';
 
     // যদি এখানে ডিফল্ট ভ্যালু থাকে, ড্যাশবোর্ড "config করুন" মেসেজ দেখাবে
+
+    // ক্যাটাগরি তালিকা (hardcoded — আপনার বর্তমান ক্যাটাগরি + অতিরিক্ত)
+    const CATEGORIES = [
+      { name: 'গল্প',           nameEn: 'Fiction' },
+      { name: 'ছোটগল্প',        nameEn: 'Short Story' },
+      { name: 'উপন্যাস',        nameEn: 'Novel' },
+      { name: 'প্রবন্ধ',         nameEn: 'Essays' },
+      { name: 'সাহিত্যালোচনা',   nameEn: 'Literary Criticism' },
+      { name: 'অনুবাদ সাহিত্য',  nameEn: 'Translated Literature' },
+      { name: 'ভ্রমণ',          nameEn: 'Travel' },
+      { name: 'স্মৃতিচারণ',     nameEn: 'Memoirs' },
+      { name: 'ব্যক্তিগত লেখা',  nameEn: 'Personal Writings' },
+      { name: 'আইন-আদালত',     nameEn: 'Law & Court' },
+      { name: 'ব্যাংকিং ও অর্থনীতি', nameEn: 'Banking & Economics' },
+      { name: 'PDF ও প্রকাশনা',  nameEn: 'PDF & Publications' },
+    ];
 
     // ============================================================
     // State
@@ -451,7 +697,7 @@
       userEmail: null,
       view: 'new',           // 'new' | 'list' | 'stats'
       editingId: null,
-      categories: [],
+      categories: CATEGORIES,         // hardcoded তালিকা ব্যবহার করছি
       selectedParentCategory: '',
       tags: [],
       writings: [],
@@ -606,67 +852,48 @@
     }
 
     // ============================================================
-    // CATEGORIES
+    // CATEGORIES — hardcoded তালিকা (আপনার schema-তে category text কলাম হিসেবে সংরক্ষিত)
     // ============================================================
-    async function loadCategories() {
-      const { data, error } = await supabase
-        .from('categories')
-        .select('*')
-        .order('sort_order', { ascending: true });
-      if (error) { console.error(error); return; }
-      state.categories = data || [];
+    function loadCategories() {
+      // Hardcoded তালিকা — কোনো DB call লাগে না
+      return Promise.resolve();
     }
-
     function getParentCategories() {
-      return state.categories.filter(c => !c.parent_id);
+      return state.categories;
     }
-    function getSubcategories(parentId) {
-      return state.categories.filter(c => c.parent_id === parentId);
+    function getSubcategories(_parentId) {
+      return []; // আপনার schema-তে আলাদা subcategory নেই, ক্যাটাগরি text হিসেবে সংরক্ষিত হয়
     }
 
     // ============================================================
-    // TAGS
+    // TAGS — আপনার schema-তে tags একটি text[] array কলাম হিসেবে posts টেবিলেই থাকে
     // ============================================================
     async function loadTags() {
-      const { data, error } = await supabase.from('tags').select('id, name').order('name');
-      if (error) { console.error(error); return; }
-      state.tags = data || [];
-    }
-
-    async function ensureTags(names) {
-      const trimmed = names.map(n => n.trim()).filter(Boolean);
-      const result = [];
-      for (const name of trimmed) {
-        // Check cache
-        let existing = state.tags.find(t => t.name.toLowerCase() === name.toLowerCase());
-        if (existing) { result.push(existing.id); continue; }
-        // Try insert
-        const { data, error } = await supabase.from('tags').insert({ name }).select().single();
-        if (!error && data) {
-          state.tags.push(data);
-          result.push(data.id);
-        } else {
-          // Maybe exists — try fetch
-          const { data: existing2 } = await supabase.from('tags').select('id, name').eq('name', name).maybeSingle();
-          if (existing2) { state.tags.push(existing2); result.push(existing2.id); }
-        }
-      }
-      return result;
+      // সব posts থেকে unique tag নাম সংগ্রহ করি autocomplete-এর জন্য
+      const { data, error } = await supabase.from('posts').select('tags');
+      if (error || !data) { state.tags = []; return; }
+      const tagSet = new Set();
+      data.forEach(p => { (p.tags || []).forEach(t => tagSet.add(t)); });
+      state.tags = Array.from(tagSet).sort().map(name => ({ name }));
     }
 
     // ============================================================
-    // WRITINGS CRUD
+    // WRITINGS CRUD — আপনার schema: bilingual = দুটি row (group_id দিয়ে যুক্ত)
     // ============================================================
+
+    // লেখার তালিকা — শুধু বাংলা ভার্সন দেখাব (group_id দিয়ে deduplicate)
     async function loadWritings() {
-      let query = supabase.from('posts').select('*, category:categories(id,name,name_en,slug), post_tags(tag_id)', { count: 'exact' });
-      // Filter
-      if (state.filter.status !== 'all') query = query.eq('status', state.filter.status);
-      if (state.filter.search) {
-        query = query.or(`title.ilike.%${state.filter.search}%,title_en.ilike.%${state.filter.search}%`);
-      }
-      // Pagination
       const page = state.pagination.page;
       const limit = state.pagination.limit;
+      // প্রথমে বাংলা row গুলো আনি (language='bn'); যদি bn না থাকে, en দেখাব
+      let query = supabase.from('posts')
+        .select('id, title, slug, group_id, language, category, cover_image, published, featured, updated_at, tags', { count: 'exact' });
+      // Filter
+      if (state.filter.status === 'draft') query = query.eq('published', false);
+      else if (state.filter.status === 'published') query = query.eq('published', true);
+      if (state.filter.search) {
+        query = query.ilike('title', `%${state.filter.search}%`);
+      }
       query = query.order('updated_at', { ascending: false }).range((page - 1) * limit, page * limit - 1);
       const { data, error, count } = await query;
       if (error) { console.error(error); toast('তালিকা লোড ব্যর্থ', error.message, 'error'); return; }
@@ -675,96 +902,197 @@
       state.pagination.totalPages = Math.max(Math.ceil((count || 0) / limit), 1);
     }
 
+    // একটি লেখা edit করার জন্য লোড করি — group_id দিয়ে দুটি row (bn + en) আনি
     async function loadWritingForEdit(id) {
-      const { data, error } = await supabase
-        .from('posts')
-        .select('*, post_tags(tag_id)')
-        .eq('id', id)
-        .single();
+      // প্রথমে প্রধান row
+      const { data: main, error } = await supabase.from('posts').select('*').eq('id', id).single();
       if (error) throw new Error(error.message);
-      // Load tag names
-      let tagNames = [];
-      if (data.post_tags && data.post_tags.length > 0) {
-        const tagIds = data.post_tags.map(pt => pt.tag_id);
-        const { data: tagData } = await supabase.from('tags').select('name').in('id', tagIds);
-        tagNames = (tagData || []).map(t => t.name);
+      if (!main.group_id) {
+        // group_id নেই — শুধু এই row টাই দেখাব
+        return { ...main, tags: main.tags || [] };
       }
-      return { ...data, tags: tagNames };
+      // group_id দিয়ে sibling row খুঁজি (bn হলে en, en হলে bn)
+      const otherLang = main.language === 'bn' ? 'en' : 'bn';
+      const { data: sibling } = await supabase.from('posts')
+        .select('*')
+        .eq('group_id', main.group_id)
+        .eq('language', otherLang)
+        .maybeSingle();
+      // যদি main bn হয়: bn fields = main থেকে, en fields = sibling থেকে
+      // যদি main en হয়: en fields = main থেকে, bn fields = sibling থেকে
+      if (main.language === 'bn') {
+        return {
+          group_id: main.group_id,
+          category: main.category,
+          cover_image: main.cover_image,
+          featured: main.featured,
+          published: main.published,
+          // Bengali
+          bn_id: main.id,
+          title: main.title || '',
+          slug: main.slug || '',
+          excerpt: main.excerpt || '',
+          body: main.body || '',
+          tags: main.tags || [],
+          // English
+          en_id: sibling?.id || null,
+          title_en: sibling?.title || '',
+          slug_en: sibling?.slug || '',
+          excerpt_en: sibling?.excerpt || '',
+          body_en: sibling?.body || '',
+          hasEnglish: !!sibling,
+        };
+      } else {
+        return {
+          group_id: main.group_id,
+          category: main.category,
+          cover_image: main.cover_image,
+          featured: main.featured,
+          published: main.published,
+          // Bengali
+          bn_id: sibling?.id || null,
+          title: sibling?.title || '',
+          slug: sibling?.slug || '',
+          excerpt: sibling?.excerpt || '',
+          body: sibling?.body || '',
+          tags: sibling?.tags || [],
+          // English
+          en_id: main.id,
+          title_en: main.title || '',
+          slug_en: main.slug || '',
+          excerpt_en: main.excerpt || '',
+          body_en: main.body || '',
+          hasEnglish: true,
+        };
+      }
     }
 
+    // লেখা সংরক্ষণ — দুটি row (bn + en) একই group_id দিয়ে
     async function saveWriting(formData) {
-      // Compute word count
-      const text = (formData.body || '').replace(/<[^>]*>/g, ' ').trim();
-      const wordCount = text ? text.split(/\s+/).length : 0;
-      const payload = {
-        title: formData.title,
-        slug: formData.slug,
-        title_en: formData.title_en || null,
-        slug_en: formData.slug_en || null,
-        intro: formData.intro || null,
-        intro_en: formData.intro_en || null,
-        body: formData.body || '',
-        body_en: formData.body_en || null,
-        category_id: formData.category_id || null,
+      const now = new Date().toISOString();
+      const published = formData.status === 'published';
+      const groupId = formData.group_id || (`post-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`);
+      const tagsArray = (formData.tags || []).filter(Boolean);
+      const commonFields = {
+        category: formData.category || null,
         cover_image: formData.cover_image || null,
         featured: formData.featured || false,
-        status: formData.status || 'draft',
-        word_count: wordCount,
-        published: formData.status === 'published',
-        published_at: formData.status === 'published' ? new Date().toISOString() : null,
-        updated_at: new Date().toISOString(),
+        published,
+        published_at: published ? now : null,
+        updated_at: now,
+        tags: tagsArray,
+        group_id: groupId,
       };
-      let postId;
-      if (state.editingId) {
-        const { data, error } = await supabase.from('posts').update(payload).eq('id', state.editingId).select().single();
-        if (error) throw new Error(error.message);
-        postId = data.id;
+
+      // Bengali row
+      const bnPayload = {
+        ...commonFields,
+        language: 'bn',
+        title: formData.title || '',
+        slug: formData.slug || slugify(formData.title),
+        excerpt: formData.excerpt || null,
+        body: formData.body || '',
+        parent_category: null,
+        subcategory: null,
+      };
+
+      // English row (শুধু যদি title_en থাকে)
+      const enPayload = formData.title_en && formData.title_en.trim() ? {
+        ...commonFields,
+        language: 'en',
+        title: formData.title_en,
+        slug: formData.slug_en || slugify(formData.title_en),
+        excerpt: formData.excerpt_en || null,
+        body: formData.body_en || '',
+        parent_category: null,
+        subcategory: null,
+      } : null;
+
+      // Update or insert bn row
+      if (formData.bn_id) {
+        const { error } = await supabase.from('posts').update(bnPayload).eq('id', formData.bn_id);
+        if (error) throw new Error('বাংলা row আপডেট ব্যর্থ: ' + error.message);
       } else {
-        const { data, error } = await supabase.from('posts').insert(payload).select().single();
-        if (error) throw new Error(error.message);
-        postId = data.id;
+        const { error } = await supabase.from('posts').insert({ ...bnPayload, created_at: now });
+        if (error) throw new Error('বাংলা row ইনসার্ট ব্যর্থ: ' + error.message);
       }
-      // Tags: first remove all existing, then add new
-      await supabase.from('post_tags').delete().eq('post_id', postId);
-      if (formData.tags && formData.tags.length > 0) {
-        const tagIds = await ensureTags(formData.tags);
-        const inserts = tagIds.map(tid => ({ post_id: postId, tag_id: tid }));
-        if (inserts.length > 0) {
-          const { error: ptErr } = await supabase.from('post_tags').insert(inserts);
-          if (ptErr) console.error('post_tags insert error', ptErr);
+
+      // Update or insert en row
+      if (enPayload) {
+        if (formData.en_id) {
+          const { error } = await supabase.from('posts').update(enPayload).eq('id', formData.en_id);
+          if (error) throw new Error('English row আপডেট ব্যর্থ: ' + error.message);
+        } else {
+          const { error } = await supabase.from('posts').insert({ ...enPayload, created_at: now });
+          if (error) throw new Error('English row ইনসার্ট ব্যর্থ: ' + error.message);
         }
+      } else if (formData.en_id) {
+        // যদি English row আগে ছিল কিন্তু এখন title_en খালি — delete করি
+        const { error } = await supabase.from('posts').delete().eq('id', formData.en_id);
+        if (error) console.error('English row delete error', error);
       }
-      return postId;
+
+      return groupId;
     }
 
-    async function deleteWriting(id) {
-      const { error } = await supabase.from('posts').delete().eq('id', id);
-      if (error) throw new Error(error.message);
+    // লেখা মুছুন — group_id দিয়ে দুটি row মুছবে
+    async function deleteWriting(w) {
+      const groupId = w.group_id;
+      if (groupId) {
+        // পুরো group delete
+        const { error } = await supabase.from('posts').delete().eq('group_id', groupId);
+        if (error) throw new Error(error.message);
+      } else {
+        // শুধু একটি row delete
+        const { error } = await supabase.from('posts').delete().eq('id', w.id);
+        if (error) throw new Error(error.message);
+      }
     }
 
+    // স্ট্যাটাস toggle — group_id দিয়ে দুটি row
     async function toggleWritingStatus(w) {
-      const newStatus = w.status === 'published' ? 'draft' : 'published';
-      const { error } = await supabase.from('posts').update({
-        status: newStatus,
-        published: newStatus === 'published',
-        published_at: newStatus === 'published' ? new Date().toISOString() : null,
-        updated_at: new Date().toISOString(),
-      }).eq('id', w.id);
-      if (error) throw new Error(error.message);
+      const newPublished = !w.published;
+      const now = new Date().toISOString();
+      const payload = {
+        published: newPublished,
+        published_at: newPublished ? now : null,
+        updated_at: now,
+      };
+      if (w.group_id) {
+        const { error } = await supabase.from('posts').update(payload).eq('group_id', w.group_id);
+        if (error) throw new Error(error.message);
+      } else {
+        const { error } = await supabase.from('posts').update(payload).eq('id', w.id);
+        if (error) throw new Error(error.message);
+      }
     }
 
     // ============================================================
-    // COVER IMAGE UPLOAD (Supabase Storage)
+    // IMAGE UPLOAD (Supabase Storage — post-images bucket)
     // ============================================================
-    async function uploadCover(file) {
+    async function uploadCover(file, language = 'bn') {
       if (file.size > 5 * 1024 * 1024) throw new Error('ফাইল ৫MB এর বেশি');
       if (!file.type.startsWith('image/')) throw new Error('শুধু ছবি ফাইল দিন');
       const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
       const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
-      const path = `covers/${filename}`;
-      const { error } = await supabase.storage.from(COVERS_BUCKET).upload(path, file, { cacheControl: '3600', upsert: false });
+      const folder = language === 'en' ? COVER_FOLDER_EN : COVER_FOLDER_BN;
+      const path = `${folder}/${filename}`;
+      const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(path, file, { cacheControl: '3600', upsert: false });
       if (error) throw new Error(error.message);
-      const { data } = supabase.storage.from(COVERS_BUCKET).getPublicUrl(path);
+      const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+      return data.publicUrl;
+    }
+
+    async function uploadInlineImage(file, language = 'bn') {
+      if (file.size > 5 * 1024 * 1024) throw new Error('ফাইল ৫MB এর বেশি');
+      if (!file.type.startsWith('image/')) throw new Error('শুধু ছবি ফাইল দিন');
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+      const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
+      const folder = language === 'en' ? INLINE_FOLDER_EN : INLINE_FOLDER_BN;
+      const path = `${folder}/${filename}`;
+      const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(path, file, { cacheControl: '3600', upsert: false });
+      if (error) throw new Error(error.message);
+      const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(path);
       return data.publicUrl;
     }
 
@@ -772,18 +1100,35 @@
     // STATS
     // ============================================================
     async function loadStats() {
-      const { count: total } = await supabase.from('posts').select('*', { count: 'exact', head: true });
-      const { count: drafts } = await supabase.from('posts').select('*', { count: 'exact', head: true }).eq('status', 'draft');
-      const { count: published } = await supabase.from('posts').select('*', { count: 'exact', head: true }).eq('status', 'published');
-      const { count: featured } = await supabase.from('posts').select('*', { count: 'exact', head: true }).eq('featured', true);
-      // Recent
+      // মোট unique group_id গণনা — কিন্তু সহজ পথে সব bn row গুনি
+      const { count: totalBn } = await supabase.from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('language', 'bn');
+      const { count: drafts } = await supabase.from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('language', 'bn').eq('published', false);
+      const { count: published } = await supabase.from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('language', 'bn').eq('published', true);
+      const { count: featured } = await supabase.from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('language', 'bn').eq('featured', true);
+      const { count: totalEn } = await supabase.from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('language', 'en');
+      // Recent (bn rows)
       const { data: recent } = await supabase.from('posts')
-        .select('id,title,title_en,status,updated_at,category:categories(name)')
+        .select('id, title, slug, group_id, published, featured, updated_at, category, cover_image')
+        .eq('language', 'bn')
         .order('updated_at', { ascending: false }).limit(5);
-      // Total words
-      const { data: allPosts } = await supabase.from('posts').select('word_count');
-      const totalWords = (allPosts || []).reduce((sum, p) => sum + (p.word_count || 0), 0);
-      return { total: total || 0, drafts: drafts || 0, published: published || 0, featured: featured || 0, totalWords, recent: recent || [] };
+      return {
+        total: totalBn || 0,
+        totalEn: totalEn || 0,
+        drafts: drafts || 0,
+        published: published || 0,
+        featured: featured || 0,
+        recent: recent || [],
+      };
     }
 
     // ============================================================
@@ -1308,9 +1653,9 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           </form>
           <div class="mt-4 pt-4" style="border-top:1px solid var(--border); font-size:11px; color:var(--muted-fg); background:var(--muted); margin: 16px -16px -16px; padding: 12px 16px; border-radius: 0 0 8px 8px;">
             <p style="font-weight:500; color:var(--fg); margin: 0 0 4px;">প্রথমবার সেটআপ:</p>
-            <p style="margin:0">১. supabase-schema.sql রান করুন<br>
-            ২. admin_users টেবিলে নিজের user_id যোগ করুন<br>
-            ৩. তারপর লগইন করুন</p>
+            <p style="margin:0">১. admin_users টেবিলে নিজের user_id যোগ করুন<br>
+            (Authentication → Users থেকে user_id কপি করে SQL Editor-এ রান করুন)<br>
+            ২. তারপর লগইন করুন</p>
           </div>
         </div>
         <p class="text-center text-xs text-muted mt-4">© ${new Date().getFullYear()} মোস্তফা অভি — সর্বস্বত্ব সংরক্ষিত</p>
@@ -1367,68 +1712,165 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
 
       if (!state.session) { renderLogin(); return; }
 
-      // Topbar
+      // Breadcrumb text based on current view
+      const crumbText = state.view === 'new'
+        ? (state.editingId ? 'লেখা সম্পাদনা' : 'নতুন লেখা')
+        : state.view === 'list' ? 'আমার লেখাসমূহ'
+        : 'পরিসংখ্যান';
+
+      // Topbar — breadcrumb + page title + options
       const topbar = el('div', { class: 'topbar' });
-      const left = el('div', { class: 'flex items-center gap-2' });
+      const topbarLeft = el('div', { class: 'topbar-left' });
       const menuBtn = el('button', { class: 'btn btn-ghost btn-icon mobile-only', title: 'মেনু' }, icon('menu'));
       menuBtn.addEventListener('click', () => $('.sidebar').classList.toggle('open'));
-      left.append(menuBtn, el('h1', { class: 'bn-font' },
-        state.view === 'new' ? (state.editingId ? 'লেখা সম্পাদনা' : 'নতুন লেখা তৈরি') :
-        state.view === 'list' ? 'আমার লেখাসমূহ' : 'পরিসংখ্যান'
-      ));
-      const right = el('div', { class: 'flex items-center gap-2' });
+      const breadcrumb = el('div', { class: 'breadcrumb' },
+        el('span', {}, 'হোম'),
+        el('span', { class: 'sep' }, '/'),
+        el('span', { class: 'sep' }, 'লেখা'),
+        el('span', { class: 'sep' }, '/'),
+        el('span', { class: 'current bn-font' }, crumbText)
+      );
+      topbarLeft.append(menuBtn, breadcrumb);
+
+      // Top right: theme toggle + options dropdown + user
+      const topbarRight = el('div', { class: 'topbar-right' });
       const themeBtn = el('button', { class: 'btn btn-ghost btn-icon', title: 'থিম পরিবর্তন' },
         icon(state.theme === 'dark' ? 'sun' : 'moon'));
       themeBtn.addEventListener('click', () => {
         applyTheme(state.theme === 'dark' ? 'light' : 'dark');
         renderApp();
       });
-      const userBtn = el('button', { class: 'btn btn-ghost', style: { padding: '4px 8px', gap: '6px' } },
-        el('div', { class: 'avatar' }, (state.userEmail || 'A').slice(0, 2).toUpperCase()),
-        el('span', { class: 'bn-font hidden md:inline', style: { fontSize: '13px' } }, state.userEmail || '')
-      );
-      userBtn.addEventListener('click', signOut);
-      userBtn.title = 'লগআউট করতে ক্লিক করুন';
-      right.append(themeBtn, userBtn);
-      topbar.append(left, right);
 
-      // Layout
+      // Options dropdown
+      const optionsWrap = el('div', { class: 'options-menu' });
+      const optionsBtn = el('button', { class: 'btn btn-ghost', title: 'অপশন', type: 'button' },
+        icon('settings'), el('span', { class: 'hidden md:inline' }, 'অপশন'),
+        icon('chevron-down')
+      );
+      let optionsOpen = false;
+      const optionsDropdown = el('div', { class: 'options-dropdown hidden' });
+      const toggleOptions = (e) => {
+        e.stopPropagation();
+        optionsOpen = !optionsOpen;
+        optionsDropdown.classList.toggle('hidden', !optionsOpen);
+      };
+      optionsBtn.addEventListener('click', toggleOptions);
+      document.addEventListener('click', () => {
+        if (optionsOpen) { optionsOpen = false; optionsDropdown.classList.add('hidden'); }
+      });
+      // Options items
+      const optThemeLight = el('button', { type: 'button' }, icon('sun'), 'লাইট মোড');
+      optThemeLight.addEventListener('click', () => { applyTheme('light'); renderApp(); });
+      const optThemeDark = el('button', { type: 'button' }, icon('moon'), 'ডার্ক মোড');
+      optThemeDark.addEventListener('click', () => { applyTheme('dark'); renderApp(); });
+      const optStats = el('button', { type: 'button' }, icon('bar-chart-3'), 'পরিসংখ্যান');
+      optStats.addEventListener('click', () => { state.view = 'stats'; renderApp(); });
+      const optLogout = el('button', { type: 'button' }, icon('log-out'), 'লগআউট');
+      optLogout.addEventListener('click', signOut);
+      optionsDropdown.append(optThemeLight, optThemeDark, el('div', { class: 'options-divider' }),
+        optStats, el('div', { class: 'options-divider' }), optLogout);
+      optionsWrap.append(optionsBtn, optionsDropdown);
+
+      // User avatar
+      const userAvatar = el('button', { class: 'btn btn-ghost', style: { padding: '4px', gap: '6px' }, title: state.userEmail || '' },
+        el('div', { class: 'avatar' }, (state.userEmail || 'A').slice(0, 2).toUpperCase())
+      );
+
+      topbarRight.append(themeBtn, optionsWrap, userAvatar);
+      topbar.append(topbarLeft, topbarRight);
+
+      // Layout: sidebar + main
       const layout = el('div', { class: 'layout' });
+
+      // Sidebar — multi-section like CMS
       const sidebar = el('aside', { class: 'sidebar' });
-      const brand = el('div', { class: 'brand' },
+
+      // Brand
+      const brand = el('div', { class: 'sidebar-brand' },
         el('div', { class: 'logo' }, icon('book-open')),
         el('div', {},
           el('div', { class: 'name bn-font' }, 'মোস্তফা অভি'),
           el('div', { class: 'sub' }, 'Author Dashboard')
         )
       );
-      const navItems = [
+
+      // Nav with sections
+      const sidebarScroll = el('div', { class: 'sidebar-scroll' });
+
+      // MAIN section
+      const mainSection = el('div', { class: 'sidebar-section' });
+      mainSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'Main'));
+      const mainNav = [
+        { id: 'stats', label: 'ড্যাশবোর্ড', icon: 'layout-dashboard' },
         { id: 'new', label: 'নতুন লেখা', icon: 'file-plus' },
         { id: 'list', label: 'আমার লেখাসমূহ', icon: 'list-ordered' },
-        { id: 'stats', label: 'পরিসংখ্যান', icon: 'bar-chart-3' },
       ];
-      const nav = el('nav', { class: 'flex flex-col gap-2' });
-      navItems.forEach(item => {
-        const btn = el('button', { class: `nav-item ${state.view === item.id ? 'active' : ''}`, type: 'button' },
+      mainNav.forEach(item => {
+        const isActive = state.view === item.id || (item.id === 'new' && state.view === 'new');
+        const btn = el('button', { class: `nav-item bn-font ${isActive ? 'active' : ''}`, type: 'button' },
           icon(item.icon),
-          el('span', { class: 'bn-font' }, item.label)
+          el('span', {}, item.label)
         );
         btn.addEventListener('click', () => {
           state.view = item.id;
           if (item.id === 'new') state.editingId = null;
           renderApp();
         });
-        nav.appendChild(btn);
+        mainSection.appendChild(btn);
       });
-      const userCard = el('div', { class: 'user-card' },
+
+      // SITE DATA section (placeholder — not fully implemented yet)
+      const siteSection = el('div', { class: 'sidebar-section' });
+      siteSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'Site Data'));
+      const siteNav = [
+        { label: 'ক্যাটাগরি', icon: 'folder-tree' },
+        { label: 'ট্যাগ', icon: 'tag' },
+        { label: 'মিডিয়া লাইব্রেরি', icon: 'image' },
+      ];
+      siteNav.forEach(item => {
+        const btn = el('button', { class: 'nav-item bn-font', type: 'button', disabled: true, style: { opacity: '0.5', cursor: 'not-allowed' } },
+          icon(item.icon),
+          el('span', {}, item.label)
+        );
+        btn.title = 'শীঘ্রই আসছে';
+        siteSection.appendChild(btn);
+      });
+
+      // EXTRA section
+      const extraSection = el('div', { class: 'sidebar-section' });
+      extraSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'Extra'));
+      const extraNav = [
+        { label: 'সেটিংস', icon: 'settings' },
+        { label: 'প্রোফাইল', icon: 'user' },
+      ];
+      extraNav.forEach(item => {
+        const btn = el('button', { class: 'nav-item bn-font', type: 'button', disabled: true, style: { opacity: '0.5', cursor: 'not-allowed' } },
+          icon(item.icon),
+          el('span', {}, item.label)
+        );
+        btn.title = 'শীঘ্রই আসছে';
+        extraSection.appendChild(btn);
+      });
+
+      sidebarScroll.append(mainSection, siteSection, extraSection);
+
+      // Footer — user card + logout
+      const sidebarFooter = el('div', { class: 'sidebar-footer' },
         el('div', { class: 'avatar' }, (state.userEmail || 'A').slice(0, 2).toUpperCase()),
         el('div', { class: 'info' },
           el('div', { class: 'name bn-font truncate' }, state.userEmail || ''),
           el('div', { class: 'email truncate' }, 'লেখক')
-        )
+        ),
+        (() => {
+          const b = el('button', { class: 'logout-btn', title: 'লগআউট' }, icon('log-out'));
+          b.addEventListener('click', signOut);
+          return b;
+        })()
       );
-      sidebar.append(brand, nav, userCard);
 
+      sidebar.append(brand, sidebarScroll, sidebarFooter);
+
+      // Main content area
       const main = el('main', { class: 'main' });
       const inner = el('div', { class: 'main-inner' });
 
@@ -1449,17 +1891,21 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
     // ============================================================
     async function renderEditorView(mount) {
       const formData = {
-        title: '', slug: '', intro: '', body: '',
-        title_en: '', slug_en: '', intro_en: '', body_en: '',
-        category_id: '', tags: [], featured: false, status: 'draft', cover_image: null,
+        group_id: null, bn_id: null, en_id: null,
+        title: '', slug: '', excerpt: '', body: '',
+        title_en: '', slug_en: '', excerpt_en: '', body_en: '',
+        category: '', tags: [], featured: false, status: 'draft', cover_image: null,
       };
 
+      // Active top tab — default 'topic'
+      let activeTopTab = 'topic';
+
       // Header
-      const header = el('div', { class: 'flex justify-between items-center gap-2 mb-4 flex-wrap' },
+      const header = el('div', { class: 'page-head' },
         el('div', {},
-          el('h2', { class: 'bn-font', style: { fontSize: '20px', fontWeight: 600, margin: 0 } },
+          el('h2', { class: 'page-title bn-font' },
             state.editingId ? 'লেখা সম্পাদনা' : 'নতুন লেখা তৈরি'),
-          el('p', { class: 'text-muted text-sm' }, state.editingId ? 'Edit existing writing' : 'Create a new bilingual writing')
+          el('p', { class: 'page-subtitle' }, state.editingId ? 'Edit existing writing' : 'Create a new bilingual writing')
         ),
         el('div', { class: 'flex gap-2' },
           el('button', { class: 'btn', onclick: () => { state.view = 'list'; state.editingId = null; renderApp(); } }, 'বাতিল'),
@@ -1468,16 +1914,38 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         )
       );
 
-      // Layout grid
-      const grid = el('div', { class: 'grid', style: { gridTemplateColumns: 'minmax(0, 2fr) minmax(280px, 1fr)', gap: '20px' } });
-      const leftCol = el('div', { class: 'flex flex-col gap-3' });
-      const rightCol = el('div', { class: 'flex flex-col gap-3' });
+      // Top tabs (CMS-style: Topic Details / Photos / Tags & Category / SEO Settings)
+      const tabsBar = el('div', { class: 'tabs-bar' });
+      const tabs = [
+        { id: 'topic', label: 'বিষয়বস্তু', icon: 'file-text' },
+        { id: 'photos', label: 'কভার ছবি', icon: 'image', badge: formData.cover_image ? 1 : 0 },
+        { id: 'tags', label: 'ট্যাগ ও ক্যাটাগরি', icon: 'tag' },
+        { id: 'seo', label: 'SEO সেটিংস', icon: 'settings-2' },
+      ];
+      tabs.forEach(t => {
+        const btn = el('button', { class: `tab-btn bn-font ${activeTopTab === t.id ? 'active' : ''}`, 'data-tab': t.id, type: 'button' },
+          icon(t.icon),
+          el('span', {}, t.label),
+          t.badge ? el('span', { class: 'badge-count' }, String(t.badge)) : null
+        );
+        tabsBar.appendChild(btn);
+      });
+      const tabContent = el('div', { class: 'tab-content' });
 
-      // Tabs
-      const tabWrap = el('div', { class: 'tab-strip' },
-        el('button', { class: state.activeTab === 'bn' ? 'active' : '', 'data-tab': 'bn' }, 'বাংলা সংস্করণ'),
-        el('button', { class: state.activeTab === 'en' ? 'active' : '', 'data-tab': 'en' }, 'English Version')
+      // ===== TOPIC TAB CONTENT =====
+      const topicTab = el('div', { class: activeTopTab === 'topic' ? '' : 'hidden' });
+
+      // Language sub-tabs
+      const langTabs = el('div', { class: 'sub-tabs' });
+      const bnTabBtn = el('button', { class: `sub-tab bn-font ${state.activeTab === 'bn' ? 'active' : ''}`, 'data-lang': 'bn', type: 'button' },
+        el('span', { class: 'lang-flag bn' }, 'বা'),
+        el('span', {}, 'বাংলা সংস্করণ')
       );
+      const enTabBtn = el('button', { class: `sub-tab ${state.activeTab === 'en' ? 'active' : ''}`, 'data-lang': 'en', type: 'button' },
+        el('span', { class: 'lang-flag en' }, 'EN'),
+        el('span', {}, 'English Version')
+      );
+      langTabs.append(bnTabBtn, enTabBtn);
 
       // Bengali fields
       const bnFields = el('div', { class: state.activeTab === 'bn' ? '' : 'hidden' });
@@ -1493,8 +1961,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           </div>
         </div>
         <div class="mb-2">
-          <label class="label">সংক্ষিপ্ত ভূমিকা</label>
-          <textarea class="textarea bn-font" id="f-intro" placeholder="এক বা দুই বাক্যে ভূমিকা..." rows="2"></textarea>
+          <label class="label">সংক্ষিপ্ত ভূমিকা (excerpt)</label>
+          <textarea class="textarea bn-font" id="f-excerpt" placeholder="এক বা দুই বাক্যে ভূমিকা..." rows="2"></textarea>
         </div>
         <div>
           <label class="label">মূল লেখা</label>
@@ -1516,8 +1984,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           </div>
         </div>
         <div class="mb-2">
-          <label class="label">Brief Introduction</label>
-          <textarea class="textarea" id="f-intro-en" placeholder="One or two sentence introduction..." rows="2"></textarea>
+          <label class="label">Brief Introduction (excerpt)</label>
+          <textarea class="textarea" id="f-excerpt-en" placeholder="One or two sentence introduction..." rows="2"></textarea>
         </div>
         <div>
           <label class="label">Content</label>
@@ -1525,41 +1993,50 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         </div>
       `;
 
-      leftCol.append(tabWrap, bnFields, enFields);
+      topicTab.append(langTabs, bnFields, enFields);
 
-      // Tab switching
-      tabWrap.querySelectorAll('button').forEach(b => {
+      // Language tab switching
+      [bnTabBtn, enTabBtn].forEach(b => {
         b.addEventListener('click', () => {
-          state.activeTab = b.dataset.tab;
+          state.activeTab = b.dataset.lang;
           bnFields.classList.toggle('hidden', state.activeTab !== 'bn');
           enFields.classList.toggle('hidden', state.activeTab !== 'en');
-          tabWrap.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+          bnTabBtn.classList.toggle('active', state.activeTab === 'bn');
+          enTabBtn.classList.toggle('active', state.activeTab === 'en');
         });
       });
 
-      // Right column: category, cover, tags, options
-      const catCard = el('div', { class: 'card' });
-      catCard.innerHTML = `
-        <h3 class="card-h"><i data-lucide="file-text" style="width:14px;height:14px;"></i> ক্যাটাগরি</h3>
-        <label class="label">প্রধান ক্যাটাগরি</label>
-        <select class="select mb-2" id="f-parent-cat"><option value="">নির্বাচন করুন...</option></select>
-        <label class="label">উপক্যাটাগরি (ঐচ্ছিক)</label>
-        <select class="select" id="f-sub-cat"><option value="">নির্বাচন করুন...</option></select>
-        <div class="mt-2" id="cat-badge"></div>
+      // ===== PHOTOS TAB CONTENT =====
+      const photosTab = el('div', { class: activeTopTab === 'photos' ? '' : 'hidden' });
+      const photosCard = el('div', { class: 'card' });
+      photosCard.innerHTML = `
+        <h3 class="card-h"><i data-lucide="image" style="width:14px;height:14px;"></i> কভার ছবি</h3>
+        <p class="text-muted text-sm mb-2">এই লেখার প্রধান প্রচ্ছদ ছবি। JPG, PNG, WebP — সর্বোচ্চ ৫MB।</p>
       `;
-
-      const coverCard = el('div', { class: 'card' });
-      coverCard.innerHTML = `<h3 class="card-h">কভার ছবি</h3>`;
       const coverUploader = el('div', { class: 'cover-uploader', id: 'cover-uploader' },
         icon('image-plus'),
         el('div', { class: 'text-sm', style: { marginTop: '8px', fontWeight: 500 } }, 'কভার ছবি আপলোড করুন'),
         el('div', { class: 'text-xs text-muted', style: { marginTop: '4px' } }, 'JPG, PNG, WebP — ৫MB')
       );
       const coverInput = el('input', { type: 'file', accept: 'image/*', style: { display: 'none' } });
-      coverCard.append(coverUploader, coverInput);
+      photosCard.append(coverUploader, coverInput);
+      photosTab.appendChild(photosCard);
 
+      // ===== TAGS & CATEGORY TAB CONTENT =====
+      const tagsTab = el('div', { class: activeTopTab === 'tags' ? '' : 'hidden' });
+      const catCard = el('div', { class: 'card mb-4' });
+      catCard.innerHTML = `
+        <h3 class="card-h"><i data-lucide="folder-tree" style="width:14px;height:14px;"></i> ক্যাটাগরি</h3>
+        <label class="label">ক্যাটাগরি নির্বাচন করুন <span class="req">*</span></label>
+        <select class="select" id="f-category"><option value="">নির্বাচন করুন...</option></select>
+        <p class="text-xs text-muted mt-2" id="cat-hint">লেখার প্রধান বিষয় অনুযায়ী ক্যাটাগরি নির্বাচন করুন।</p>
+        <div class="mt-2" id="cat-badge"></div>
+      `;
       const tagsCard = el('div', { class: 'card' });
-      tagsCard.innerHTML = `<h3 class="card-h">ট্যাগ</h3>`;
+      tagsCard.innerHTML = `
+        <h3 class="card-h"><i data-lucide="tag" style="width:14px;height:14px;"></i> ট্যাগ</h3>
+        <p class="text-muted text-sm mb-2">ট্যাগ লিখে Enter চাপুন। একাধিক ট্যাগ যোগ করতে পারেন।</p>
+      `;
       const tagInputWrap = el('div', { class: 'tag-input-wrap' });
       const tagInput = el('input', { type: 'text', placeholder: 'ট্যাগ লিখুন, Enter চাপুন...' });
       tagInputWrap.appendChild(tagInput);
@@ -1590,21 +2067,26 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         }
       });
       tagsCard.appendChild(tagInputWrap);
+      tagsTab.append(catCard, tagsCard);
 
-      const optCard = el('div', { class: 'card' });
-      optCard.innerHTML = `
-        <h3 class="card-h">প্রকাশনা অপশন</h3>
-        <div class="flex items-center justify-between">
+      // ===== SEO SETTINGS TAB CONTENT =====
+      const seoTab = el('div', { class: activeTopTab === 'seo' ? '' : 'hidden' });
+      const seoCard = el('div', { class: 'card' });
+      seoCard.innerHTML = `
+        <h3 class="card-h"><i data-lucide="settings-2" style="width:14px;height:14px;"></i> প্রকাশনা ও SEO অপশন</h3>
+
+        <div class="flex items-center justify-between mb-4">
           <label class="flex items-center gap-2" style="cursor:pointer">
-            <i data-lucide="star" style="width:16px;height:16px;color:#f59e0b;"></i>
+            <i data-lucide="star" style="width:16px;height:16px;color:#D97706;"></i>
             <div>
               <div class="text-sm">ফিচার্ড লেখা</div>
-              <div class="text-xs text-muted">হোমপেজে দেখাবে</div>
+              <div class="text-xs text-muted">হোমপেজে হাইলাইটেড দেখাবে</div>
             </div>
           </label>
           <label class="switch"><input type="checkbox" id="f-featured"><span class="slider"></span></label>
         </div>
-        <div class="flex items-center justify-between mt-2">
+
+        <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
             <i data-lucide="eye" style="width:16px;height:16px;"></i>
             <div>
@@ -1614,36 +2096,58 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           </div>
           <span class="badge badge-warning" id="status-badge">খসড়া</span>
         </div>
-      `;
 
-      rightCol.append(catCard, coverCard, tagsCard, optCard);
-      grid.append(leftCol, rightCol);
-      mount.append(header, grid);
+        <div class="options-divider" style="height:1px;background:var(--border);margin:14px 0;"></div>
+
+        <div class="mb-2">
+          <label class="label">বাংলা স্লাগ (URL)</label>
+          <input class="input" id="f-seo-slug-bn" placeholder="বাংলা-স্লাগ" readonly />
+          <p class="text-xs text-muted mt-1">এই লেখার বাংলা ভার্সনের URL।</p>
+        </div>
+
+        <div class="mb-2">
+          <label class="label">English Slug (URL)</label>
+          <input class="input" id="f-seo-slug-en" placeholder="english-slug" readonly />
+          <p class="text-xs text-muted mt-1">English ভার্সনের URL।</p>
+        </div>
+
+        <div class="mt-4 p-3" style="background:var(--card-cream);border-radius:var(--radius);font-size:12px;color:var(--muted-fg);">
+          <strong style="color:var(--fg);">💡 টিপ:</strong> স্লাগ স্বয়ংক্রিয়ভাবে শিরোনাম থেকে তৈরি হয়। ম্যানুয়ালি পরিবর্তন করতে "বিষয়বস্তু" ট্যাবে যান।
+        </div>
+      `;
+      seoTab.appendChild(seoCard);
+
+      // ===== Assemble tabs =====
+      tabContent.append(topicTab, photosTab, tagsTab, seoTab);
+      mount.append(header, tabsBar, tabContent);
+
+      // Top tab switching
+      tabsBar.querySelectorAll('.tab-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          activeTopTab = b.dataset.tab;
+          topicTab.classList.toggle('hidden', activeTopTab !== 'topic');
+          photosTab.classList.toggle('hidden', activeTopTab !== 'photos');
+          tagsTab.classList.toggle('hidden', activeTopTab !== 'tags');
+          seoTab.classList.toggle('hidden', activeTopTab !== 'seo');
+          tabsBar.querySelectorAll('.tab-btn').forEach(x => x.classList.toggle('active', x === b));
+        });
+      });
 
       // Populate categories
-      const parentSel = $('#f-parent-cat');
+      const catSel = $('#f-category');
       getParentCategories().forEach(c => {
-        const opt = el('option', { value: c.id }, `${c.name} / ${c.name_en}`);
-        parentSel.appendChild(opt);
+        const opt = el('option', { value: c.name }, `${c.name} / ${c.name_en}`);
+        catSel.appendChild(opt);
       });
-      parentSel.addEventListener('change', () => {
-        const subSel = $('#f-sub-cat');
-        subSel.innerHTML = '<option value="">নির্বাচন করুন...</option>';
-        getSubcategories(parentSel.value).forEach(c => {
-          subSel.appendChild(el('option', { value: c.id }, `${c.name} / ${c.name_en}`));
-        });
-        formData.category_id = parentSel.value;
-        updateCatBadge();
-      });
-      $('#f-sub-cat').addEventListener('change', () => {
-        formData.category_id = $('#f-sub-cat').value || parentSel.value;
+      catSel.addEventListener('change', () => {
+        formData.category = catSel.value;
         updateCatBadge();
       });
       function updateCatBadge() {
         const badge = $('#cat-badge');
         badge.innerHTML = '';
-        if (formData.category_id) {
-          const cat = state.categories.find(c => c.id === formData.category_id);
+        if (formData.category) {
+          const cat = state.categories.find(c => c.name === formData.category);
           if (cat) badge.appendChild(el('span', { class: 'badge badge-default bn-font' }, `${cat.name} / ${cat.name_en}`));
         }
       }
@@ -1655,7 +2159,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         if (!f) return;
         try {
           toast('আপলোড হচ্ছে...', '', 'info', 1500);
-          const url = await uploadCover(f);
+          const lang = state.activeTab;
+          const url = await uploadCover(f, lang);
           formData.cover_image = url;
           coverUploader.classList.add('has-image');
           coverUploader.innerHTML = `<img src="${url}" alt="Cover" />`;
@@ -1675,7 +2180,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         }
       });
       $('#f-slug').addEventListener('input', (e) => { formData.slug = e.target.value; });
-      $('#f-intro').addEventListener('input', (e) => { formData.intro = e.target.value; });
+      $('#f-excerpt').addEventListener('input', (e) => { formData.excerpt = e.target.value; });
       $('#f-title-en').addEventListener('input', (e) => {
         formData.title_en = e.target.value;
         if (!formData.slug_en || formData.slug_en === slugify(formData.title_en)) {
@@ -1684,7 +2189,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         }
       });
       $('#f-slug-en').addEventListener('input', (e) => { formData.slug_en = e.target.value; });
-      $('#f-intro-en').addEventListener('input', (e) => { formData.intro_en = e.target.value; });
+      $('#f-excerpt-en').addEventListener('input', (e) => { formData.excerpt_en = e.target.value; });
 
       // Init rich text editors
       let bnEd = null, enEd = null;
@@ -1711,38 +2216,34 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           el('div', { class: 'spinner' })));
         try {
           const w = await loadWritingForEdit(state.editingId);
+          formData.group_id = w.group_id || null;
+          formData.bn_id = w.bn_id || null;
+          formData.en_id = w.en_id || null;
           formData.title = w.title || '';
           formData.slug = w.slug || '';
-          formData.intro = w.intro || '';
+          formData.excerpt = w.excerpt || '';
           formData.body = w.body || '';
           formData.title_en = w.title_en || '';
           formData.slug_en = w.slug_en || '';
-          formData.intro_en = w.intro_en || '';
+          formData.excerpt_en = w.excerpt_en || '';
           formData.body_en = w.body_en || '';
-          formData.category_id = w.category_id || '';
+          formData.category = w.category || '';
           formData.tags = w.tags || [];
           formData.featured = w.featured || false;
-          formData.status = w.status || 'draft';
+          formData.status = w.published ? 'published' : 'draft';
           formData.cover_image = w.cover_image || null;
           // Populate UI
           $('#f-title').value = formData.title;
           $('#f-slug').value = formData.slug;
-          $('#f-intro').value = formData.intro;
+          $('#f-excerpt').value = formData.excerpt;
           $('#f-title-en').value = formData.title_en;
           $('#f-slug-en').value = formData.slug_en;
-          $('#f-intro-en').value = formData.intro_en;
+          $('#f-excerpt-en').value = formData.excerpt_en;
           $('#f-featured').checked = formData.featured;
           // Category
-          if (formData.category_id) {
-            const cat = state.categories.find(c => c.id === formData.category_id);
-            if (cat) {
-              const parent = cat.parent_id ? state.categories.find(p => p.id === cat.parent_id) : cat;
-              if (parent) {
-                parentSel.value = parent.id;
-                parentSel.dispatchEvent(new Event('change'));
-                if (cat.parent_id) $('#f-sub-cat').value = cat.id;
-              }
-            }
+          if (formData.category) {
+            catSel.value = formData.category;
+            updateCatBadge();
           }
           // Cover
           if (formData.cover_image) {
@@ -1772,7 +2273,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           return;
         }
         if (!formData.slug.trim()) formData.slug = slugify(formData.title);
-        if (!formData.category_id) {
+        if (!formData.category) {
           toast('ত্রুটি', 'ক্যাটাগরি নির্বাচন করুন', 'error');
           return;
         }
@@ -1877,20 +2378,22 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
             el('h3', { class: 'title bn-font truncate', style: { flex: 1, minWidth: 0 } }, w.title),
             w.featured && el('span', { class: 'badge badge-default' }, '★ ফিচার্ড'),
             el('span', {
-              class: `badge ${w.status === 'published' ? 'badge-default' : 'badge-warning'}`,
+              class: `badge ${w.published ? 'badge-default' : 'badge-warning'}`,
               style: { cursor: 'pointer' },
               title: 'স্ট্যাটাস পরিবর্তন করতে ক্লিক করুন',
               onclick: async () => {
                 try { await toggleWritingStatus(w); await loadWritings(); renderListItems(); toast('স্ট্যাটাস পরিবর্তিত'); }
                 catch (e) { toast('ত্রুটি', e.message, 'error'); }
               }
-            }, w.status === 'published' ? 'প্রকাশিত' : 'খসড়া')
+            }, w.published ? 'প্রকাশিত' : 'খসড়া'),
+            // Language badge if this is an English-only row (rare in list)
+            w.language === 'en' && el('span', { class: 'badge' }, 'EN')
           ),
-          w.title_en && el('p', { class: 'text-xs text-muted truncate' }, w.title_en),
+          w.tags && w.tags.length > 0 && el('p', { class: 'text-xs text-muted truncate' },
+            icon('tag'), ' ' + w.tags.slice(0, 4).join(', ') + (w.tags.length > 4 ? ` +${w.tags.length - 4}` : '')),
           el('div', { class: 'meta' },
-            w.category && el('span', {}, icon('file-text'), w.category.name),
-            el('span', {}, icon('calendar'), formatDate(w.updated_at)),
-            el('span', {}, `শব্দ: ${formatNumber(w.word_count || 0)}`)
+            w.category && el('span', {}, icon('file-text'), w.category),
+            el('span', {}, icon('calendar'), formatDate(w.updated_at))
           )
         );
         const actions = el('div', { class: 'flex gap-1', style: { flexShrink: 0 } },
@@ -1899,8 +2402,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           }, icon('pencil')),
           el('button', { class: 'btn btn-ghost btn-sm btn-icon', title: 'মুছুন',
             onclick: async () => {
-              if (!confirm('এই লেখাটি মুছে ফেলবেন?')) return;
-              try { await deleteWriting(w.id); await loadWritings(); renderListItems(); toast('লেখা মুছে ফেলা হয়েছে'); }
+              if (!confirm('এই লেখাটি মুছে ফেলবেন? (বাংলা ও English দুটি ভার্সনই মুছে যাবে)')) return;
+              try { await deleteWriting(w); await loadWritings(); renderListItems(); toast('লেখা মুছে ফেলা হয়েছে'); }
               catch (e) { toast('ত্রুটি', e.message, 'error'); }
             }
           }, icon('trash-2'))
@@ -1940,10 +2443,10 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         spinnerWrap.remove();
 
         const cards = [
-          { label: 'মোট লেখা', value: stats.total, icon: 'file-text', cls: 'badge-default' },
+          { label: 'মোট লেখা (বাংলা)', value: stats.total, icon: 'file-text', cls: 'badge-default' },
+          { label: 'মোট লেখা (English)', value: stats.totalEn, icon: 'languages', cls: 'badge-default' },
           { label: 'প্রকাশিত', value: stats.published, icon: 'check-circle-2', cls: 'badge-default' },
           { label: 'খসড়া', value: stats.drafts, icon: 'file-edit', cls: 'badge-warning' },
-          { label: 'ফিচার্ড', value: stats.featured, icon: 'star', cls: 'badge-default' },
         ];
         const cardsGrid = el('div', { class: 'grid grid-4 mb-4' });
         cards.forEach(c => {
@@ -1959,15 +2462,14 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         });
         mount.appendChild(cardsGrid);
 
-        // Total words
+        // Total featured
         mount.appendChild(el('div', { class: 'card mb-4' },
-          el('h3', { class: 'card-h' }, icon('type'), 'মোট শব্দ লিখেছেন'),
-          el('div', { class: 'flex items-baseline gap-2' },
-            el('span', { style: { fontSize: '28px', fontWeight: 700 } }, formatNumber(stats.totalWords)),
-            el('span', { class: 'text-muted text-sm' }, 'শব্দ')
-          ),
-          el('p', { class: 'text-xs text-muted mt-2' },
-            stats.total > 0 ? `গড়ে প্রতি লেখায় ${formatNumber(Math.round(stats.totalWords / stats.total))} শব্দ` : '')
+          el('div', { class: 'flex items-center justify-between' },
+            el('div', {},
+              el('p', { class: 'text-xs text-muted' }, 'ফিচার্ড লেখা'),
+              el('p', { style: { fontSize: '24px', fontWeight: 700, marginTop: '4px' } }, formatNumber(stats.featured))),
+            el('div', { class: 'badge badge-default', style: { width: '36px', height: '36px', borderRadius: '8px' } }, icon('star'))
+          )
         ));
 
         // Recent
@@ -1982,10 +2484,10 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
               el('div', { style: { minWidth: 0, flex: 1 } },
                 el('p', { class: 'text-sm bn-font truncate' }, w.title),
                 el('p', { class: 'text-xs text-muted' },
-                  (w.category?.name || '') + ' · ' + formatDate(w.updated_at))
+                  (w.category || '') + ' · ' + formatDate(w.updated_at))
               ),
-              el('span', { class: `badge ${w.status === 'published' ? 'badge-default' : 'badge-warning'}` },
-                w.status === 'published' ? 'প্রকাশিত' : 'খসড়া')
+              el('span', { class: `badge ${w.published ? 'badge-default' : 'badge-warning'}` },
+                w.published ? 'প্রকাশিত' : 'খসড়া')
             );
             recentCard.appendChild(row);
           });
