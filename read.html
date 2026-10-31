@@ -1273,7 +1273,7 @@ function renderArticle(post, sibling) {
   const isEn = lang === 'en';
   document.documentElement.lang = lang;
   document.title = (post.title || 'লেখা') + ' | Mostafa Auvi';
-  const plainArticleText = String(post.excerpt || post.body || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\\s+/g, ' ').trim();
+  const plainArticleText = String(post.excerpt || post.body || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
   const seoDescription = (plainArticleText || 'মোস্তফা অভির প্রকাশিত লেখা।').slice(0, 155);
   const canonicalUrl = location.origin + location.pathname + '?slug=' + encodeURIComponent(post.slug || slug);
   const setSeoMeta = (selector, attr, key, value) => {
