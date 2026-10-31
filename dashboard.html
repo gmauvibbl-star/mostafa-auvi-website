@@ -674,19 +674,62 @@
 
     // ক্যাটাগরি তালিকা (hardcoded — আপনার বর্তমান ক্যাটাগরি + অতিরিক্ত)
     const CATEGORIES = [
-      { name: 'গল্প',           nameEn: 'Fiction' },
-      { name: 'ছোটগল্প',        nameEn: 'Short Story' },
-      { name: 'উপন্যাস',        nameEn: 'Novel' },
-      { name: 'প্রবন্ধ',         nameEn: 'Essays' },
-      { name: 'সাহিত্যালোচনা',   nameEn: 'Literary Criticism' },
-      { name: 'অনুবাদ সাহিত্য',  nameEn: 'Translated Literature' },
-      { name: 'ভ্রমণ',          nameEn: 'Travel' },
-      { name: 'স্মৃতিচারণ',     nameEn: 'Memoirs' },
-      { name: 'ব্যক্তিগত লেখা',  nameEn: 'Personal Writings' },
-      { name: 'আইন-আদালত',     nameEn: 'Law & Court' },
-      { name: 'ব্যাংকিং ও অর্থনীতি', nameEn: 'Banking & Economics' },
-      { name: 'PDF ও প্রকাশনা',  nameEn: 'PDF & Publications' },
+      { name: 'গল্প',           nameEn: 'Fiction', subs: [
+        { name: 'ছোটগল্প',        nameEn: 'Short Story' },
+        { name: 'উপন্যাস',        nameEn: 'Novel' },
+        { name: 'কিশোর গল্প',     nameEn: 'Teen Story' },
+      ]},
+      { name: 'প্রবন্ধ',         nameEn: 'Essays', subs: [
+        { name: 'সামাজিক প্রবন্ধ',     nameEn: 'Social Essay' },
+        { name: 'রাজনৈতিক প্রবন্ধ',    nameEn: 'Political Essay' },
+        { name: 'ঐতিহাসিক প্রবন্ধ',    nameEn: 'Historical Essay' },
+      ]},
+      { name: 'সাহিত্যালোচনা',   nameEn: 'Literary Criticism', subs: [
+        { name: 'বই পর্যালোচনা',       nameEn: 'Book Review' },
+        { name: 'সাহিত্যিক বিশ্লেষণ',  nameEn: 'Literary Analysis' },
+      ]},
+      { name: 'অনুবাদ সাহিত্য',  nameEn: 'Translated Literature', subs: [
+        { name: 'ইংরেজি থেকে অনূদিত',  nameEn: 'From English' },
+        { name: 'অন্যান্য ভাষা থেকে',   nameEn: 'From Other Languages' },
+      ]},
+      { name: 'ভ্রমণ',          nameEn: 'Travel', subs: [
+        { name: 'দেশীয় ভ্রমণ',  nameEn: 'Domestic Travel' },
+        { name: 'বিদেশ ভ্রমণ',  nameEn: 'International Travel' },
+      ]},
+      { name: 'স্মৃতিচারণ',     nameEn: 'Memoirs', subs: [
+        { name: 'জীবনস্মৃতি',  nameEn: 'Life Memoir' },
+        { name: 'সময়স্মৃতি',  nameEn: 'Time Memoir' },
+      ]},
+      { name: 'ব্যক্তিগত লেখা',  nameEn: 'Personal Writings', subs: [
+        { name: 'ডায়েরি',      nameEn: 'Diary' },
+        { name: 'চিঠি',        nameEn: 'Letters' },
+        { name: 'আত্মজীবনী',   nameEn: 'Autobiography' },
+      ]},
+      { name: 'আইন-আদালত',     nameEn: 'Law & Court', subs: [
+        { name: 'আইনি বিশ্লেষণ',     nameEn: 'Legal Analysis' },
+        { name: 'আদালতের ঘটনা',     nameEn: 'Court Stories' },
+      ]},
+      { name: 'ব্যাংকিং ও অর্থনীতি', nameEn: 'Banking & Economics', subs: [
+        { name: 'ব্যাংকিং',     nameEn: 'Banking' },
+        { name: 'অর্থনীতি',    nameEn: 'Economics' },
+      ]},
+      { name: 'PDF ও প্রকাশনা',  nameEn: 'PDF & Publications', subs: [
+        { name: 'বই',       nameEn: 'Books' },
+        { name: 'জার্নাল',  nameEn: 'Journals' },
+      ]},
     ];
+
+    // Sub-category lookup সহ — পুরোনো flat list compatibility
+    function findCategoryByName(name) {
+      // প্রথমে parent এ খুঁজি
+      for (const p of CATEGORIES) {
+        if (p.name === name) return { parent: p, sub: null };
+        for (const s of (p.subs || [])) {
+          if (s.name === name) return { parent: p, sub: s };
+        }
+      }
+      return null;
+    }
 
     // ============================================================
     // State
@@ -861,8 +904,9 @@
     function getParentCategories() {
       return state.categories;
     }
-    function getSubcategories(_parentId) {
-      return []; // আপনার schema-তে আলাদা subcategory নেই, ক্যাটাগরি text হিসেবে সংরক্ষিত হয়
+    function getSubcategories(parentName) {
+      const parent = state.categories.find(c => c.name === parentName);
+      return parent && parent.subs ? parent.subs : [];
     }
 
     // ============================================================
@@ -975,6 +1019,8 @@
       const tagsArray = (formData.tags || []).filter(Boolean);
       const commonFields = {
         category: formData.category || null,
+        parent_category: formData.category || null,
+        subcategory: formData.subcategory || null,
         cover_image: formData.cover_image || null,
         featured: formData.featured || false,
         published,
@@ -992,8 +1038,6 @@
         slug: formData.slug || slugify(formData.title),
         excerpt: formData.excerpt || null,
         body: formData.body || '',
-        parent_category: null,
-        subcategory: null,
       };
 
       // English row (শুধু যদি title_en থাকে)
@@ -1004,8 +1048,6 @@
         slug: formData.slug_en || slugify(formData.title_en),
         excerpt: formData.excerpt_en || null,
         body: formData.body_en || '',
-        parent_category: null,
-        subcategory: null,
       } : null;
 
       // Update or insert bn row
@@ -1894,7 +1936,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         group_id: null, bn_id: null, en_id: null,
         title: '', slug: '', excerpt: '', body: '',
         title_en: '', slug_en: '', excerpt_en: '', body_en: '',
-        category: '', tags: [], featured: false, status: 'draft', cover_image: null,
+        category: '', subcategory: '', tags: [], featured: false, status: 'draft', cover_image: null,
       };
 
       // Active top tab — default 'topic'
@@ -2027,9 +2069,13 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       const catCard = el('div', { class: 'card mb-4' });
       catCard.innerHTML = `
         <h3 class="card-h"><i data-lucide="folder-tree" style="width:14px;height:14px;"></i> ক্যাটাগরি</h3>
-        <label class="label">ক্যাটাগরি নির্বাচন করুন <span class="req">*</span></label>
+        <label class="label">প্রধান ক্যাটাগরি <span class="req">*</span></label>
         <select class="select" id="f-category"><option value="">নির্বাচন করুন...</option></select>
-        <p class="text-xs text-muted mt-2" id="cat-hint">লেখার প্রধান বিষয় অনুযায়ী ক্যাটাগরি নির্বাচন করুন।</p>
+        <div class="mt-2" id="subcat-wrap" style="display:none;">
+          <label class="label">উপক্যাটাগরি (ঐচ্ছিক)</label>
+          <select class="select" id="f-sub-category"><option value="">-- ঐচ্ছিক --</option></select>
+        </div>
+        <p class="text-xs text-muted mt-2" id="cat-hint">লেখার প্রধান বিষয় অনুযায়ী ক্যাটাগরি নির্বাচন করুন। উপক্যাটাগরি ঐচ্ছিক।</p>
         <div class="mt-2" id="cat-badge"></div>
       `;
       const tagsCard = el('div', { class: 'card' });
@@ -2141,6 +2187,29 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       });
       catSel.addEventListener('change', () => {
         formData.category = catSel.value;
+        formData.subcategory = '';
+        // Populate sub-categories
+        const subWrap = $('#subcat-wrap');
+        const subSel = $('#f-sub-category');
+        subSel.innerHTML = '<option value="">-- ঐচ্ছিক --</option>';
+        if (catSel.value) {
+          const subs = getSubcategories(catSel.value);
+          if (subs.length > 0) {
+            subs.forEach(s => {
+              subSel.appendChild(el('option', { value: s.name }, `${s.name} / ${s.name_en}`));
+            });
+            subWrap.style.display = 'block';
+          } else {
+            subWrap.style.display = 'none';
+          }
+        } else {
+          subWrap.style.display = 'none';
+        }
+        updateCatBadge();
+      });
+      // Sub-category change handler
+      $('#f-sub-category').addEventListener('change', (e) => {
+        formData.subcategory = e.target.value;
         updateCatBadge();
       });
       function updateCatBadge() {
@@ -2148,7 +2217,17 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         badge.innerHTML = '';
         if (formData.category) {
           const cat = state.categories.find(c => c.name === formData.category);
-          if (cat) badge.appendChild(el('span', { class: 'badge badge-default bn-font' }, `${cat.name} / ${cat.name_en}`));
+          if (cat) {
+            const parts = [`${cat.name} / ${cat.name_en}`];
+            if (formData.subcategory) {
+              const sub = (cat.subs || []).find(s => s.name === formData.subcategory);
+              if (sub) parts.push(`${sub.name} / ${sub.name_en}`);
+            }
+            badge.appendChild(el('div', { class: 'flex flex-col gap-1' },
+              el('span', { class: 'badge badge-default bn-font' }, parts[0]),
+              parts[1] ? el('span', { class: 'badge bn-font', style: { background: 'var(--accent-soft)', color: 'var(--accent)' } }, '↳ ' + parts[1]) : null
+            ));
+          }
         }
       }
 
@@ -2228,6 +2307,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           formData.excerpt_en = w.excerpt_en || '';
           formData.body_en = w.body_en || '';
           formData.category = w.category || '';
+          formData.subcategory = w.subcategory || '';
           formData.tags = w.tags || [];
           formData.featured = w.featured || false;
           formData.status = w.published ? 'published' : 'draft';
@@ -2240,9 +2320,27 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           $('#f-slug-en').value = formData.slug_en;
           $('#f-excerpt-en').value = formData.excerpt_en;
           $('#f-featured').checked = formData.featured;
-          // Category
+          // Category — handle legacy data where category might be a subcategory name
           if (formData.category) {
+            // Check if the stored category is actually a parent or a sub
+            const lookup = findCategoryByName(formData.category);
+            if (lookup) {
+              if (lookup.sub) {
+                // Stored category is actually a sub — set parent + sub
+                formData.category = lookup.parent.name;
+                formData.subcategory = lookup.sub.name;
+              } else {
+                // Stored category is a parent — keep as is, subcategory from w.subcategory
+                formData.subcategory = w.subcategory || '';
+              }
+            }
             catSel.value = formData.category;
+            // Trigger change to populate sub-categories
+            catSel.dispatchEvent(new Event('change'));
+            // Now set subcategory value
+            if (formData.subcategory) {
+              $('#f-sub-category').value = formData.subcategory;
+            }
             updateCatBadge();
           }
           // Cover
