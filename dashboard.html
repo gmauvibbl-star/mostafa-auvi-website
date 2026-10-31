@@ -33,13 +33,17 @@
       --sidebar-active: #C85A4C;     /* terracotta active */
       --sidebar-active-fg: #FFFFFF;
 
-      --bg: #F5EFE0;                 /* cream main bg */
-      --card: #FFFFFF;               /* white card */
+      --bg: #8B1A1A;                 /* deep red/maroon main bg (Bengali alpana inspired) */
+      --bg-deep: #6B1313;            /* even deeper red for shadows */
+      --alpana-color: #F5EFE6;       /* cream alpana pattern color */
+      --card: #FFFFFF;               /* white card (stays readable on red bg) */
       --card-cream: #FAF7F2;         /* off-white variant */
-      --fg: #2C1810;                 /* deep brown text */
-      --muted: #EDE4D3;              /* muted bg */
-      --muted-fg: #6B5D54;           /* muted text */
-      --border: #E8DDD3;             /* warm border */
+      --fg: #2C1810;                 /* deep brown text (in cards) */
+      --fg-on-red: #F9E6D3;          /* cream text on red bg */
+      --muted: #EDE4D3;              /* muted bg (in cards) */
+      --muted-fg: #6B5D54;           /* muted text (in cards) */
+      --muted-on-red: #E8C8B8;       /* muted text on red bg */
+      --border: #E8DDD3;             /* warm border (in cards) */
       --border-strong: #D4B896;      /* stronger border */
 
       --primary: #C85A4C;            /* terracotta */
@@ -72,10 +76,14 @@
       --sidebar-hover: #162B22;
       --sidebar-active: #C85A4C;
 
-      --bg: #1A1612;
+      --bg: #5C1010;                 /* deeper red for dark mode */
+      --bg-deep: #3D0808;
+      --alpana-color: #E8C8B8;
       --card: #221C16;
       --card-cream: #1F1A14;
       --fg: #F4E8D8;
+      --fg-on-red: #F9E6D3;
+      --muted-on-red: #C8A898;
       --muted: #2A2218;
       --muted-fg: #A89A8A;
       --border: rgba(232,221,211,0.10);
@@ -309,7 +317,14 @@
     /* ============================================================
        Main content
        ============================================================ */
-    .main { flex: 1; padding: 20px 24px; overflow: auto; background: var(--bg); }
+    .main {
+      flex: 1; padding: 20px 24px; overflow: auto;
+      background-color: var(--bg);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%23F5EFE6' stroke-width='0.9' opacity='0.18'><circle cx='200' cy='200' r='12'/><circle cx='200' cy='200' r='22'/><circle cx='200' cy='200' r='36'/><circle cx='200' cy='200' r='55'/><circle cx='200' cy='200' r='80'/><g transform='translate(200 200)'><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(45)'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(90)'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(135)'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(180)'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(225)'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(270)'/><path d='M0 -22 Q8 -50 0 -75 Q-8 -50 0 -22 Z' transform='rotate(315)'/></g><g transform='translate(60 60)'><circle r='5'/><path d='M-15 0 Q-7 -15 0 -15 Q7 -15 15 0 Q7 15 0 15 Q-7 15 -15 0 Z'/><circle r='12'/></g><g transform='translate(340 60)'><circle r='5'/><path d='M-15 0 Q-7 -15 0 -15 Q7 -15 15 0 Q7 15 0 15 Q-7 15 -15 0 Z'/><circle r='12'/></g><g transform='translate(60 340)'><circle r='5'/><path d='M-15 0 Q-7 -15 0 -15 Q7 -15 15 0 Q7 15 0 15 Q-7 15 -15 0 Z'/><circle r='12'/></g><g transform='translate(340 340)'><circle r='5'/><path d='M-15 0 Q-7 -15 0 -15 Q7 -15 15 0 Q7 15 0 15 Q-7 15 -15 0 Z'/><circle r='12'/></g><path d='M60 60 Q200 130 340 60' stroke-dasharray='2 5'/><path d='M60 340 Q200 270 340 340' stroke-dasharray='2 5'/><path d='M60 60 Q130 200 60 340' stroke-dasharray='2 5'/><path d='M340 60 Q270 200 340 340' stroke-dasharray='2 5'/><circle cx='200' cy='60' r='3' fill='%23F5EFE6'/><circle cx='200' cy='340' r='3' fill='%23F5EFE6'/><circle cx='60' cy='200' r='3' fill='%23F5EFE6'/><circle cx='340' cy='200' r='3' fill='%23F5EFE6'/></g></svg>");
+      background-repeat: repeat;
+      background-size: 400px 400px;
+      background-position: center;
+    }
     .main-inner { max-width: 1200px; margin: 0 auto; }
 
     /* Page header (within main) */
@@ -317,8 +332,8 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
     }
-    .page-title { font-size: 20px; font-weight: 700; margin: 0; color: var(--fg); }
-    .page-subtitle { font-size: 12px; color: var(--muted-fg); margin-top: 2px; }
+    .page-title { font-size: 20px; font-weight: 700; margin: 0; color: var(--fg-on-red); }
+    .page-subtitle { font-size: 12px; color: var(--muted-on-red); margin-top: 2px; }
 
     /* ============================================================
        Tabs (top of editor)
@@ -2407,8 +2422,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
     async function renderListView(mount) {
       mount.appendChild(el('div', { class: 'flex justify-between items-center gap-2 mb-4 flex-wrap' },
         el('div', {},
-          el('h2', { class: 'bn-font', style: { fontSize: '20px', fontWeight: 600, margin: 0 } }, 'আমার লেখাসমূহ'),
-          el('p', { class: 'text-muted text-sm', id: 'count-text' }, 'লোড হচ্ছে...')
+          el('h2', { class: 'page-title bn-font' }, 'আমার লেখাসমূহ'),
+          el('p', { class: 'page-subtitle', id: 'count-text' }, 'লোড হচ্ছে...')
         ),
         el('button', { class: 'btn btn-primary', onclick: () => { state.view = 'new'; state.editingId = null; renderApp(); } },
           icon('plus'), 'নতুন লেখা')
@@ -2532,8 +2547,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
     // VIEW: Stats
     // ============================================================
     async function renderStatsView(mount) {
-      mount.appendChild(el('h2', { class: 'bn-font', style: { fontSize: '20px', fontWeight: 600, margin: '0 0 4px' } }, 'পরিসংখ্যান'));
-      mount.appendChild(el('p', { class: 'text-muted text-sm mb-4' }, 'আপনার লেখার সারসংক্ষেপ'));
+      mount.appendChild(el('h2', { class: 'page-title bn-font', style: { margin: '0 0 4px' } }, 'পরিসংখ্যান'));
+      mount.appendChild(el('p', { class: 'page-subtitle mb-4' }, 'আপনার লেখার সারসংক্ষেপ'));
       const spinnerWrap = el('div', { class: 'flex items-center justify-center', style: { padding: '40px' } }, el('div', { class: 'spinner' }));
       mount.appendChild(spinnerWrap);
       try {
