@@ -1,1 +1,280 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ইমেইল সাবস্ক্রিপশন | Mostafa Auvi</title><style>body{max-width:650px;margin:40px auto;padding:0 18px;font:17px/1.7 system-ui;color:#20252b}input{width:100%;padding:12px;border:1px solid #bbc3cf;border-radius:8px;font:inherit;box-sizing:border-box}button{margin-top:12px;padding:11px 16px;border:0;border-radius:8px;background:#2856a6;color:white;font:inherit;cursor:pointer}.status{margin-top:15px}</style></head><body><p><a href="./">← মূল ওয়েবসাইট</a></p><h1>নতুন লেখার ইমেইল আপডেট</h1><p>নতুন লেখা প্রকাশিত হলে ইমেইলে খবর পেতে সাবস্ক্রাইব করুন। সাবস্ক্রিপশন নিশ্চিত করার ইমেইল পাঠানো হবে। যেকোনো সময় আনসাবস্ক্রাইব করতে পারবেন।</p><form id="form"><label for="email">ইমেইল ঠিকানা</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com"><button>সাবস্ক্রাইব করুন</button></form><p class="status" id="status" aria-live="polite"></p><script>const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co",SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";document.getElementById('form').onsubmit=async e=>{e.preventDefault();const s=document.getElementById('status');if(!SUPABASE_URL.startsWith('https://')||SUPABASE_URL.includes('YOUR_')||SUPABASE_ANON_KEY.includes('YOUR_')){s.textContent='সাবস্ক্রিপশন চালু করতে সাইটের মালিককে সেটআপ সম্পন্ন করতে হবে।';return}s.textContent='পাঠানো হচ্ছে…';try{const r=await fetch(SUPABASE_URL+'/functions/v1/subscription',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY},body:JSON.stringify({action:'subscribe',email:document.getElementById('email').value.trim()})});const d=await r.json();s.textContent=r.ok?(d.message||'ইমেইল দেখুন এবং সাবস্ক্রিপশন নিশ্চিত করুন।'):(d.error||'এখন সাবস্ক্রাইব করা যায়নি। পরে চেষ্টা করুন।')}catch{s.textContent='সংযোগে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।'}};</script></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ইমেইল সাবস্ক্রিপশন | Mostafa Auvi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-deep: #0F3D3E;
+    --teal-mid: #2A7A7E;
+    --gold: #B8860B;
+    --gold-dim: #8B6914;
+    --cream: #FFFDF7;
+    --ink: #20252b;
+    --ink-mute: #5a6470;
+    --bg: #FAF7F0;
+    --border: #d9cfb8;
+    --success: #166534;
+    --error: #9b2c2c;
+    --warning: #B8860B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    font: 16px/1.8 'Hind Siliguri', 'Noto Serif Bengali', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100vh;
+  }
+  a { color: var(--teal-mid); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .back-link { color: var(--ink-mute); font-size: 14px; display: inline-block; margin-bottom: 24px; }
+  .back-link:hover { color: var(--teal-deep); }
+  h1 {
+    color: var(--teal-deep);
+    font: 600 28px/1.3 'Noto Serif Bengali', serif;
+    margin: 0 0 12px;
+  }
+  .kicker {
+    color: var(--gold-dim);
+    font: italic 12px/1 'EB Garamond', Georgia, serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  p.intro { color: var(--ink-mute); margin: 0 0 24px; font-size: 15px; line-height: 1.7; }
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(15,61,62,.06);
+  }
+  label {
+    display: block;
+    font: 600 14px 'Hind Siliguri', sans-serif;
+    color: var(--teal-deep);
+    margin-bottom: 6px;
+  }
+  input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    font: 16px 'Hind Siliguri', sans-serif;
+    color: var(--ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input[type="email"]:focus {
+    outline: none;
+    border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(42,122,126,.15);
+  }
+  button {
+    margin-top: 16px;
+    width: 100%;
+    padding: 13px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--teal-deep);
+    color: var(--cream);
+    font: 600 15px 'Hind Siliguri', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  button:hover:not(:disabled) { background: var(--teal-mid); }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.65; cursor: wait; }
+  .status {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+  .status.visible { display: block; }
+  .status.success { background: #ecfdf5; color: var(--success); border-left: 3px solid var(--success); }
+  .status.error { background: #fef2f2; color: var(--error); border-left: 3px solid var(--error); }
+  .status.info { background: #fef9e7; color: var(--warning); border-left: 3px solid var(--warning); }
+  .status.processing { background: #e0f2fe; color: #075985; border-left: 3px solid #0284c7; }
+  .action-view { display: none; }
+  .action-view.active { display: block; }
+  .footer-note {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-mute);
+    font-size: 13px;
+    text-align: center;
+  }
+  .footer-note a { color: var(--ink-mute); }
+  .footer-note a:hover { color: var(--teal-deep); }
+  .spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 600px) {
+    body { padding: 24px 14px 40px; }
+    h1 { font-size: 24px; }
+    .card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="./" class="back-link">← মূল ওয়েবসাইট</a>
+
+<!-- SUBSCRIBE VIEW -->
+<div id="view-subscribe" class="action-view active">
+  <div class="kicker">Newsletter</div>
+  <h1>নতুন লেখার ইমেইল আপডেট</h1>
+  <p class="intro">নতুন লেখা প্রকাশিত হলে ইমেইলে খবর পেতে সাবস্ক্রাইব করুন। সাবস্ক্রিপশন নিশ্চিত করার জন্য একটি ইমেইল পাঠানো হবে। যেকোনো সময় আনসাবস্ক্রাইব করতে পারবেন।</p>
+  <div class="card">
+    <form id="subscribeForm">
+      <label for="email">আপনার ইমেইল ঠিকানা</label>
+      <input id="email" type="email" required autocomplete="email" placeholder="you@example.com" maxlength="254">
+      <button type="submit" id="subscribeBtn">সাবস্ক্রাইব করুন</button>
+    </form>
+    <div class="status" id="subscribeStatus" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<!-- CONFIRM VIEW -->
+<div id="view-confirm" class="action-view">
+  <div class="kicker">Confirmation</div>
+  <h1>সাবস্ক্রিপশন নিশ্চিত করা হচ্ছে…</h1>
+  <p class="intro">একটু অপেক্ষা করুন, আমরা আপনার সাবস্ক্রিপশন নিশ্চিত করছি।</p>
+  <div class="card">
+    <div class="status processing visible" id="confirmStatus"><span class="spinner"></span> যাচাই করা হচ্ছে…</div>
+  </div>
+</div>
+
+<!-- UNSUBSCRIBE VIEW -->
+<div id="view-unsubscribe" class="action-view">
+  <div class="kicker">Unsubscribe</div>
+  <h1>আনসাবস্ক্রাইব করা হচ্ছে…</h1>
+  <p class="intro">একটু অপেক্ষা করুন, আপনাকে সাবস্ক্রাইবার লিস্ট থেকে সরানো হচ্ছে।</p>
+  <div class="card">
+    <div class="status processing visible" id="unsubscribeStatus"><span class="spinner"></span> প্রক্রিয়া করা হচ্ছে…</div>
+  </div>
+</div>
+
+<div class="footer-note">
+  <a href="./">মূল ওয়েবসাইট</a> · <a href="./read.html">সাম্প্রতিক লেখা</a><br>
+  © 2026 Mostafa Auvi
+</div>
+
+<script>
+const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+function showStatus(elemId, message, type) {
+  const el = document.getElementById(elemId);
+  el.className = 'status visible ' + type;
+  el.innerHTML = message;
+}
+
+function showView(viewName) {
+  document.querySelectorAll('.action-view').forEach(v => v.classList.remove('active'));
+  const view = document.getElementById('view-' + viewName);
+  if (view) view.classList.add('active');
+}
+
+async function callSubscription(action, payload) {
+  const response = await fetch(SUPABASE_URL + '/functions/v1/subscription', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY
+    },
+    body: JSON.stringify({ action, ...payload })
+  });
+  const data = await response.json().catch(() => ({}));
+  return { ok: response.ok, data };
+}
+
+// Handle subscribe form submission
+document.getElementById('subscribeForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const emailInput = document.getElementById('email');
+  const btn = document.getElementById('subscribeBtn');
+  const email = emailInput.value.trim();
+
+  if (!email) {
+    showStatus('subscribeStatus', 'ইমেইল ঠিকানা লিখুন।', 'error');
+    return;
+  }
+
+  btn.disabled = true;
+  showStatus('subscribeStatus', '<span class="spinner"></span> পাঠানো হচ্ছে…', 'processing');
+
+  try {
+    const { ok, data } = await callSubscription('subscribe', { email });
+    if (ok) {
+      showStatus('subscribeStatus', data.message || '✅ আপনার ইমেইলে confirmation লিংক পাঠানো হয়েছে। ইনবক্স ও Spam ফোল্ডার চেক করুন।', 'success');
+      emailInput.value = '';
+    } else {
+      showStatus('subscribeStatus', data.error || 'এখন সাবস্ক্রাইব করা যায়নি। পরে চেষ্টা করুন।', 'error');
+    }
+  } catch (err) {
+    showStatus('subscribeStatus', 'সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।', 'error');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+// Handle action from URL params (?action=confirm&token=... or ?action=unsubscribe&token=...)
+async function handleActionFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const action = params.get('action');
+  const token = params.get('token');
+
+  if (action === 'confirm' && token) {
+    showView('confirm');
+    try {
+      const { ok, data } = await callSubscription('confirm', { token });
+      if (ok) {
+        showStatus('confirmStatus', data.message || '✅ আপনার সাবস্ক্রিপশন নিশ্চিত হয়েছে।', 'success');
+      } else {
+        showStatus('confirmStatus', data.error || 'নিশ্চিত করা যায়নি।', 'error');
+      }
+    } catch (err) {
+      showStatus('confirmStatus', 'সংযোগে সমস্যা। আবার চেষ্টা করুন।', 'error');
+    }
+  } else if (action === 'unsubscribe' && token) {
+    showView('unsubscribe');
+    try {
+      const { ok, data } = await callSubscription('unsubscribe', { token });
+      if (ok) {
+        showStatus('unsubscribeStatus', data.message || '✅ আপনি সফলভাবে আনসাবস্ক্রাইব করেছেন।', 'success');
+      } else {
+        showStatus('unsubscribeStatus', data.error || 'আনসাবস্ক্রাইব করা যায়নি।', 'error');
+      }
+    } catch (err) {
+      showStatus('unsubscribeStatus', 'সংযোগে সমস্যা। আবার চেষ্টা করুন।', 'error');
+    }
+  }
+  // else: default subscribe view (already active)
+}
+
+handleActionFromUrl();
+</script>
+
+</body>
+</html>
