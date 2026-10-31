@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gmauvibbl-star.github.io/mostafa-auvi-website/sitemap.xml
