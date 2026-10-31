@@ -1,42 +1,16 @@
-      // RETURN section — external navigation back to the public site
-      const returnSection = el('div', { class: 'sidebar-section' });
-      returnSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'ফিরে যান'));
-      const returnNav = [
-        { label: 'মূল ওয়েবসাইটে ফিরুন', icon: 'home', href: 'index.html' },
-        { label: 'জার্নালে ফিরুন', icon: 'book-open', href: 'journal.html' },
-      ];
-      returnNav.forEach(item => {
-        const a = el('a', {
-          class: 'nav-item bn-font nav-return',
-          href: item.href,
-          title: item.label,
-        }, icon(item.icon), el('span', {}, item.label));
-        returnSection.appendChild(a);
-      });
-
-      // MAIN section
-      const mainSection = el('div', { class: 'sidebar-section' });
-            // Nav with sections
-      const sidebarScroll = el('div', { class: 'sidebar-scroll' });
-
-      // RETURN section — external navigation back to the public site
-      const returnSection = el('div', { class: 'sidebar-section' });
-      returnSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'ফিরে যান'));
-      const returnNav = [
-        { label: 'মূল ওয়েবসাইটে ফিরুন', icon: 'home', href: 'index.html' },
-        { label: 'জার্নালে ফিরুন', icon: 'book-open', href: 'journal.html' },
-      ];
-      returnNav.forEach(item => {
-        const a = el('a', {
-          class: 'nav-item bn-font nav-return',
-          href: item.href,
-          title: item.label,
-        }, icon(item.icon), el('span', {}, item.label));
-        returnSection.appendChild(a);
-      });
-
-      // MAIN section
-      const mainSection = el('div', { class: 'sidebar-section' });
-      mainSection.appendChild(el('div', { class: 'sidebar-section-title' }, 'Main'));
-      const mainNav = [
-        ...
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=./admin.html">
+  <title>Opening Author Dashboard — Mostafa Auvi</title>
+  <script>
+    window.location.replace("./admin.html");
+  </script>
+</head>
+<body>
+  <p>Opening the author dashboard…</p>
+  <p>If you are not redirected, <a href="./admin.html">open the author dashboard</a>.</p>
+</body>
+</html>
