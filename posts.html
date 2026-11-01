@@ -406,6 +406,9 @@ function renderSubcategoryPills(){
   }).join('');
 }
 // Mark active filter (legacy nav-pill marking)
+const filtersOld=document.getElementById('filters');
+if(filtersOld) filtersOld.style.display='none';
+
 function markFilter(){
   document.querySelectorAll('#filters .filter-pill').forEach(a=>{
     const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
