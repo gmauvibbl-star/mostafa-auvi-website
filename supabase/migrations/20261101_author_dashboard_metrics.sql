@@ -3,7 +3,7 @@
 
 create table if not exists public.post_views (
   id bigint generated always as identity primary key,
-  post_id uuid not null references public.posts(id) on delete cascade,
+  post_id bigint not null references public.posts(id) on delete cascade,
   viewed_at timestamptz not null default now()
 );
 create index if not exists post_views_post_id_idx on public.post_views(post_id);
@@ -18,7 +18,7 @@ security definer
 set search_path = ''
 as $$
 declare
-  v_post_id uuid;
+  v_post_id bigint;
 begin
   select p.id into v_post_id
   from public.posts p
