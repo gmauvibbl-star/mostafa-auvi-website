@@ -10,8 +10,8 @@ This repository currently uses GitHub Pages, which serves static files only. The
 ## 1. Set up Supabase
 1. Create a Supabase project and open **SQL Editor**.
 2. Run `supabase/schema.sql`.
-3. In Authentication settings, enable email OTP/magic-link login and set the site URL and redirect URL to `https://gmauvibbl-star.github.io/mostafa-auvi-website/admin.html`.
-4. Copy the project URL and the **anon/publishable** key into `admin.html`, `posts.html`, `read.html`, and `subscribe.html`, replacing `YOUR_SUPABASE_PROJECT_URL` and `YOUR_SUPABASE_ANON_KEY`. These are public browser values; never use the service-role key.
+3. In Authentication settings, enable email OTP/magic-link login and set the site URL and redirect URL to `https://gmauvibbl-star.github.io/mostafa-auvi-website/dashboard.html`.
+4. Copy the project URL and the **anon/publishable** key into `dashboard.html`, `posts.html`, `read.html`, and `subscribe.html`, replacing `YOUR_SUPABASE_PROJECT_URL` and `YOUR_SUPABASE_ANON_KEY`. These are public browser values; never use the service-role key.
 5. Sign in to the dashboard once, then find your user UUID in Supabase **Authentication → Users**. In SQL Editor, grant admin access to that one account:
    `insert into public.admin_users(user_id) values ('YOUR_AUTH_USER_UUID');`
    Keep this table restricted; do not add a public insert policy.
@@ -65,7 +65,7 @@ Before launch, verify in SQL Editor that RLS is enabled and inspect the policies
 - Existing articles need to be imported or linked separately; they are not automatically migrated into the new database.
 
 ## Files
-- `admin.html`: magic-link owner dashboard, draft/publish/edit UI.
+- `dashboard.html`: magic-link owner dashboard, draft/publish/edit UI.
 - `posts.html`: public list of published articles.
 - `read.html`: public article reader and share/copy links.
 - `subscribe.html`: subscription form.
