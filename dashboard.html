@@ -898,6 +898,11 @@
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
     }
+    function hasMeaningfulArticleContent(html) {
+      const doc = new DOMParser().parseFromString(String(html || ''), 'text/html');
+      const text = (doc.body.textContent || '').replace(/[\\s\\u00a0]+/g, ' ').trim();
+      return !!text || !!doc.body.querySelector('img, video, iframe, audio');
+    }
     function formatDate(iso) {
       try { return new Date(iso).toLocaleDateString('bn-BD'); } catch { return ''; }
     }
@@ -1166,6 +1171,11 @@
         group_id: groupId,
       };
 
+      // প্রকাশিত লেখায় বাংলা মূল বিষয়বস্তু অবশ্যই থাকতে হবে।
+      if (published && !hasMeaningfulArticleContent(formData.body)) {
+        throw new Error('প্রকাশের আগে সম্পূর্ণ বাংলা মূল লেখা দিন। খসড়া হিসেবে অসম্পূর্ণ লেখা সেভ করা যাবে।');
+      }
+
       // Bengali row
       const bnPayload = {
         ...commonFields,
@@ -1217,7 +1227,8 @@
         }
       } else if (formData.en_id) {
         const { error } = await supabase.from('posts').delete().eq('id', formData.en_id);
-        if (error) console.error('English row delete error', error);
+        if (error) throw new Error('English সংস্করণ মুছতে ব্যর্থ: ' + error.message);
+        formData.en_id = null;
       }
 
       return groupId;
@@ -2567,6 +2578,11 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         if (!formData.slug.trim()) formData.slug = slugify(formData.title);
         if (!formData.category) {
           toast('ত্রুটি', 'ক্যাটাগরি নির্বাচন করুন', 'error');
+          return;
+        }
+        if (status === 'published' && !hasMeaningfulArticleContent(formData.body)) {
+          toast('প্রকাশ করা যায়নি', 'প্রকাশের আগে সম্পূর্ণ বাংলা মূল লেখা দিন।', 'error');
+          state.activeTab = 'bn';
           return;
         }
         const btn = status === 'published' ? $('#publish-btn') : $('#save-draft-btn');
