@@ -1307,7 +1307,12 @@ function applyReadShellLanguage(lang) {
     setText('label[for="commentText"]','Your comment'); setAttr('#commentText','placeholder','Write your response to the piece…');
     const help=document.querySelector('.comment-help-row > span:first-child'); if(help) help.textContent='Please keep comments respectful and relevant.';
     setText('label[for="commentWebsite"]','Website'); setText('#commentSubmit','Post Comment');
-    setText('.comments-list-title','Comments'); setText('#authorLoginLabel','Author Login');
+    setText('.comments-list-title','Comments');
+    setText('.comments-loading','Loading comments…');
+    setText('#commentCount','0 / 2000');
+    setText('#authorLoginLabel','Author Login');
+    const footerLeft = document.querySelector('.footer-strip .left');
+    if (footerLeft) { const quote = Array.from(footerLeft.childNodes).find(n => n.nodeType === Node.TEXT_NODE); if (quote) quote.textContent = ' · “Writing makes us a little more human.”'; }
     setText('.footer-strip .right a:nth-child(1)','Subscribe'); setText('.footer-strip .right a:nth-child(2)','Sitemap'); setText('.footer-strip .right a:nth-child(3)','Privacy');
     setText('#loginModalTitle','Author Login'); setText('.modal-sub','Sign in with your email and password');
     setText('label[for="modalEmail"]','Email'); setText('label[for="modalPassword"]','Password');
