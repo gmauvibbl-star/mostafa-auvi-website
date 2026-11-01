@@ -1986,11 +1986,11 @@
 (function(){
   const now = new Date();
   const el = document.getElementById('todayDate');
-  if (el) el.textContent = now.toLocaleDateString(journalLanguage === 'en' ? 'en-GB' : 'bn-BD', {
+  if (el) el.textContent = now.toLocaleDateString(new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en-GB' : 'bn-BD', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   });
   const label = document.querySelector('.utility-bar .lang-label');
-  if (label) label.textContent = journalLanguage === 'en' ? 'Language:' : 'ভাষা নির্বাচন:';
+  if (label) label.textContent = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'Language:' : 'ভাষা নির্বাচন:';
 })();
 
 /* ====== Supabase config + journal fetching ====== */
@@ -2012,7 +2012,7 @@ const fmtJournalDate = (iso) => {
   if (!iso) return '';
   const d = new Date(iso);
   if (isNaN(d)) return '';
-  return d.toLocaleDateString(journalLanguage === 'en' ? 'en-GB' : 'bn-BD', {
+  return d.toLocaleDateString(new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en-GB' : 'bn-BD', {
     day: 'numeric', month: 'long', year: 'numeric'
   });
 };
