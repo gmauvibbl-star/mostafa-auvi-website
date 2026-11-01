@@ -900,7 +900,7 @@
     }
     function hasMeaningfulArticleContent(html) {
       const doc = new DOMParser().parseFromString(String(html || ''), 'text/html');
-      const text = (doc.body.textContent || '').replace(/[\\s\\u00a0]+/g, ' ').trim();
+      const text = (doc.body.textContent || '').replace(/[\s\u00a0]+/g, ' ').trim();
       return !!text || !!doc.body.querySelector('img, video, iframe, audio');
     }
     function formatDate(iso) {
