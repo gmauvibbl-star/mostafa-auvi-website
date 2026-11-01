@@ -1741,9 +1741,9 @@
   <div class="date" id="todayDate">শুক্রবার, ২৮ অক্টোবর ২০২৬</div>
   <div class="lang">
     <span class="lang-label">ভাষা নির্বাচন:</span>
-    <a href="index.html" class="active" title="বাংলায় পড়তে ক্লিক করুন">বাংলা</a>
+    <a id="journalBnLink" href="journal.html?lang=bn" class="active" title="বাংলায় পড়ুন">বাংলা</a>
     <span class="sep">·</span>
-    <a href="index-en.html" title="Click here to read in English">English</a>
+    <a id="journalEnLink" href="journal.html?lang=en" title="Read in English">English</a>
     <span class="sep">·</span>
     <a href="#" title="Deutsch version coming soon">Deutsch</a>
   </div>
@@ -1982,29 +1982,39 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ====== Date in utility bar (Bengali) ====== */
+/* ====== Date in utility bar ====== */
 (function(){
-  const days = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
-  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
   const now = new Date();
-  const dateStr = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
   const el = document.getElementById('todayDate');
-  if (el) el.textContent = dateStr;
+  if (el) el.textContent = now.toLocaleDateString(journalLanguage === 'en' ? 'en-GB' : 'bn-BD', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+  const label = document.querySelector('.utility-bar .lang-label');
+  if (label) label.textContent = journalLanguage === 'en' ? 'Language:' : 'ভাষা নির্বাচন:';
 })();
 
 /* ====== Supabase config + journal fetching ====== */
 const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
+const journalParams = new URLSearchParams(window.location.search);
+const journalLanguage = journalParams.get('lang') === 'en' ? 'en' : 'bn';
+document.documentElement.lang = journalLanguage;
+const bnLink = document.getElementById('journalBnLink');
+const enLink = document.getElementById('journalEnLink');
+if (bnLink && enLink) {
+  bnLink.classList.toggle('active', journalLanguage === 'bn');
+  enLink.classList.toggle('active', journalLanguage === 'en');
+  (journalLanguage === 'bn' ? bnLink : enLink).setAttribute('aria-current', 'page');
+}
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
-const fmtDateBn = (iso) => {
+const fmtJournalDate = (iso) => {
   if (!iso) return '';
   const d = new Date(iso);
   if (isNaN(d)) return '';
-  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-  const toBn = n => String(n).replace(/[0-9]/g, x => '০১২৩৪৫৬৭৮৯'[x]);
-  return `${toBn(d.getDate())} ${months[d.getMonth()]} ${toBn(d.getFullYear())}`;
+  return d.toLocaleDateString(journalLanguage === 'en' ? 'en-GB' : 'bn-BD', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
 };
 const excerptText = (p, len=160) => {
   let txt = String(p.excerpt || '').trim();
@@ -2019,8 +2029,8 @@ const excerptText = (p, len=160) => {
 
 // Categories considered journal-like — নতুন ৭-বিভাগ কাঠামো অনুসারে
 // 'ব্যক্তিগত অনুভূতি' প্যারেন্ট ও তার সব সাবক্যাটাগরি জার্নালে আসবে
-const JOURNAL_CATS = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','ব্যক্তিগত অনুভূতি','আত্মজীবনী','ডায়েরি','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal','স্মৃতিচারণ','আত্মকথন','জীবনস্মৃতি','শৈশবস্মৃতি','অনুভূতি','দিনলিপি','চিঠি'];
-const JOURNAL_TAGS = ['journal','জার্নাল','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal','স্মৃতিচারণ','আত্মকথন'];
+const JOURNAL_CATS = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','ব্যক্তিগত অনুভূতি','আত্মজীবনী','ডায়েরি','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal','personal reflections','memoir','observations','letters','স্মৃতিচারণ','আত্মকথন','জীবনস্মৃতি','শৈশবস্মৃতি','অনুভূতি','দিনলিপি','চিঠি'];
+const JOURNAL_TAGS = ['journal','জার্নাল','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal','personal reflections','memoir','observations','letters','স্মৃতিচারণ','আত্মকথন'];
 const isJournalEntry = (p) => {
   const c = String(p.category || '').trim().toLowerCase();
   if (JOURNAL_CATS.some(j => c === j.toLowerCase())) return true;
@@ -2048,10 +2058,9 @@ async function loadJournal() {
       .order('published_at', { ascending: false, nullsFirst: false })
       .limit(80);
     if (error) throw error;
-    let rows = (data || []);
-    // Prefer entries that look like journal entries; fall back to all recent posts
-    let journalRows = rows.filter(isJournalEntry);
-    if (journalRows.length === 0) journalRows = rows;
+    const rows = (data || []).filter(p => (p.language || 'bn') === journalLanguage);
+    // Show only journal entries in the language selected on this same page.
+    const journalRows = rows.filter(isJournalEntry);
     allJournalPosts = journalRows;
     if (journalRows.length === 0) {
       renderEmpty(gridEl);
@@ -2070,9 +2079,9 @@ function renderCards(gridEl) {
   if (!gridEl) return;
   const slice = allJournalPosts.slice(0, visibleCount);
   gridEl.innerHTML = slice.map(p => {
-    const dateStr = fmtDateBn(p.published_at);
+    const dateStr = fmtJournalDate(p.published_at);
     const excerpt = excerptText(p, 110);
-    const cat = p.category || 'জার্নাল';
+    const cat = p.category || (journalLanguage === 'en' ? 'Journal' : 'জার্নাল');
     const readLink = `read.html?slug=${encodeURIComponent(p.slug)}`;
         const cover = p.cover_image
       ? `<img src="${esc(p.cover_image)}" alt="${esc(p.title || '')}" loading="lazy">
@@ -2087,7 +2096,7 @@ function renderCards(gridEl) {
         <p class="gcard-excerpt">${esc(excerpt)}</p>
         <div class="gcard-foot">
           <span class="gcard-date"><span class="clock">⏰</span> ${esc(dateStr)}</span>
-          <span class="gcard-read">পড়ুন →</span>
+          <span class="gcard-read">${journalLanguage === 'en' ? 'Read →' : 'পড়ুন →'}</span>
         </div>
       </div>
     </a>`;
@@ -2115,8 +2124,8 @@ function renderRecentList(rows) {
 function renderEmpty(container) {
   container.innerHTML = `<div class="state-box" style="grid-column: 1 / -1;">
     <div class="icon">❦</div>
-    <h3>এখনো কোনো জার্নাল এন্ট্রি নেই</h3>
-    <p>নতুন জার্নাল প্রকাশিত হলে এখানে দেখা যাবে।</p>
+    <h3>${journalLanguage === 'en' ? 'No journal entries yet' : 'এখনো কোনো জার্নাল এন্ট্রি নেই'}</h3>
+    <p>${journalLanguage === 'en' ? 'New journal entries will appear here when published.' : 'নতুন জার্নাল প্রকাশিত হলে এখানে দেখা যাবে।'}</p>
   </div>`;
   const wrap = document.getElementById('loadMoreWrap');
   if (wrap) wrap.style.display = 'none';
