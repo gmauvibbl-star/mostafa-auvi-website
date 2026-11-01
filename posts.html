@@ -511,14 +511,14 @@ async function loadPosts(){
     const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
     // Optimization: Removed 'body' from select query to reduce payload size massively!
     const {data,error}=await sb.from('posts')
-      .select('id,group_id,language,slug,title,excerpt,cover_image,category,tags,published_at')
+      .select('id,group_id,language,slug,title,excerpt,cover_image,category,parent_category,subcategory,category_id,subcategory_id,tags,published_at')
       .eq('published',true)
       .eq('language',language)
       .order('published_at',{ascending:false,nullsFirst:false})
       .limit(300);
     if(error)throw error;
     let rows=(data||[]);
-    const labelsForPost=p=>[p.category,...(Array.isArray(p.tags)?p.tags:[])].map(v=>String(v||'').trim()).filter(Boolean);
+    const labelsForPost=p=>[p.category,p.parent_category,p.subcategory,...(Array.isArray(p.tags)?p.tags:[])].map(v=>String(v||'').trim()).filter(Boolean);
     if(category){
       const catInfo=CATEGORIES_MAP[category];
       const aliases=catInfo?catInfo.legacyAliases:[category];
