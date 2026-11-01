@@ -2016,6 +2016,18 @@ if (journalLanguage === 'en') {
     const el = document.querySelector(selector);
     if (el) el.setAttribute(attr, value);
   };
+  const setHeading = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    const icon = el.querySelector('.icon');
+    if (icon) {
+      let label = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+      if (label) label.textContent = ' ' + value;
+      else el.appendChild(document.createTextNode(' ' + value));
+    } else {
+      el.textContent = value;
+    }
+  };
   setAttr('.nav', 'aria-label', 'Main navigation');
   setText('.nav-home a', 'Home');
   setText('.nav-fiction a', 'Fiction');
@@ -2030,7 +2042,6 @@ if (journalLanguage === 'en') {
   setAttr('.subscribe-btn', 'title', 'Get email updates on new writing');
   setText('.vqr-masthead .left strong', 'Mostafa Auvi');
   setText('.vqr-masthead .left span:last-child', 'Literary Journal');
-  setText('.compact-portrait .caption', 'Mostafa Auvi — Writer & Literary Critic');
   setText('.compact-quote', 'Literature often questions the very eyes through which an age sees itself.');
   setText('.gp-section-title', 'Published Journal');
   setText('.view-all-btn', 'View all →');
@@ -2039,23 +2050,22 @@ if (journalLanguage === 'en') {
   setText('#loadingState h3', 'Loading journal…');
   setText('#loadingState p', 'Please wait a moment.');
   setText('#loadMoreBtn', 'Load more ↓');
-  setText('.sidebar .sidebox:nth-child(1) h3', '❖ Recent Entries');
-  setText('.sidebar .sidebox:nth-child(2) h3', '◆ Browse by Category');
+  setHeading('.sidebar .sidebox:nth-child(1) h3', 'Recent Entries');
+  setHeading('.sidebar .sidebox:nth-child(2) h3', 'Browse by Category');
   setText('.cat-quicklist a:nth-child(1)', 'Personal');
   setText('.cat-quicklist a:nth-child(2)', 'Travel');
   setText('.cat-quicklist a:nth-child(3)', 'Essays');
   setText('.cat-quicklist a:nth-child(4)', 'Literary Studies');
   setText('.cat-quicklist a:nth-child(5)', 'Law');
   setText('.cat-quicklist a:nth-child(6)', 'All Writing');
-  setText('.sidebar .sidebox:nth-child(3) h3', '⌕ Search the Journal');
+  setHeading('.sidebar .sidebox:nth-child(3) h3', 'Search the Journal');
   setAttr('#journalSearchInput', 'placeholder', 'Title, subject or tag...');
   setAttr('#journalSearchInput', 'aria-label', 'Search the Journal');
   setText('.search-form button', 'Search');
   setText('.sidebar .sidebox:nth-child(3) p', 'Search the journal by title or subject.');
-  setText('.sidebar .sidebox:nth-child(4) h3', '✦ Email Updates');
+  setHeading('.sidebar .sidebox:nth-child(4) h3', 'Email Updates');
   setText('.sidebar .sidebox:nth-child(4) p', 'Subscribe to receive new journal entries directly by email.');
   setText('.subscribe-link', 'Subscribe →');
-  setText('.footer-strip .left', 'Mostafa Auvi — Writing makes us a little more human.');
   setText('#authorLoginLabel', 'Author Login');
   setText('.footer-strip .right a:nth-child(1)', 'Subscribe');
   setText('.footer-strip .right a:nth-child(2)', 'Sitemap');
