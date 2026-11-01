@@ -141,7 +141,7 @@
   .book-archive-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin:30px auto;max-width:900px;align-items:start}
   .book-archive-card{overflow:hidden;border:1px solid var(--paper-dark);border-radius:12px;background:var(--paper,#faf8f2);box-shadow:0 6px 20px rgba(0,0,0,.07);display:flex;flex-direction:column}
   .book-archive-card .book-cover-frame{width:100%;aspect-ratio:0.78;display:flex;align-items:center;justify-content:center;background:#eee5d2;overflow:hidden;padding:18px 22px}
-  .book-archive-card .book-cover-frame img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;filter:drop-shadow(0 5px 8px rgba(35,25,15,.22))}
+  .book-archive-card .book-cover-frame img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;filter:drop-shadow(0 5px 8px rgba(35,25,15,.22))}.book-cover-missing{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;color:#756b5b;font-size:14px;background:#eee5d2}
   .book-archive-card .book-info{padding:14px 15px 4px;text-align:center}
   .book-archive-card .book-info strong{display:block;font-family:inherit;font-size:17px;line-height:1.5}
   .book-archive-card .book-info span{display:block;color:var(--ink-soft);font-size:13px;margin-top:5px}
@@ -224,17 +224,17 @@
 <!-- Book Archive Template -->
 <template id="bookArchiveTemplate">
 <article class="book-archive-card">
-          <div class="book-cover-frame"><img src="./book1.jpg" alt="বাজপাখির পুনর্জন্ম বইয়ের প্রচ্ছদ" loading="lazy" width="300" height="400"></div>
+          <div class="book-cover-frame"><img src="./book1.jpg" alt="বাজপাখির পুনর্জন্ম বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="180" height="240"></div>
           <div class="book-info"><strong>বাজপাখির পুনর্জন্ম</strong><span>গল্পগ্রন্থ · প্রথম প্রকাশ ২০১৭</span></div>
           <div class="book-year">২০১৭</div>
         <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/160979/bajpakhir-punorjonmo" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div></article>
 <article class="book-archive-card">
-          <div class="book-cover-frame"><img src="./book2.jpg" alt="সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত বইয়ের প্রচ্ছদ" loading="lazy" width="300" height="400"></div>
+          <div class="book-cover-frame"><img src="./book2.jpg" alt="সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="180" height="240"></div>
           <div class="book-info"><strong>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</strong><span>আইন ও সমাজজীবন</span></div>
           <div class="book-year">২০১৯</div>
         <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/205441/cs-khotiyan-o-ekti-mamlar-itibrityo" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div></article>
 <article class="book-archive-card">
-          <div class="book-cover-frame"><img src="./book3.jpg" alt="বেড়ালের কোয়ারেন্টাইন বইয়ের প্রচ্ছদ" loading="lazy" width="300" height="400"></div>
+          <div class="book-cover-frame"><img src="./book3.jpg" alt="বেড়ালের কোয়ারেন্টাইন বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="180" height="240"></div>
           <div class="book-info"><strong>বেড়ালের কোয়ারেন্টাইন</strong><span>মহামারিকালীন জীবনচিত্র</span></div>
           <div class="book-year">২০২২</div>
         <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/224409/beraler-quarantine" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div></article>
@@ -499,7 +499,20 @@ function renderBookArchive(){
  const template=document.getElementById('bookArchiveTemplate');
  if(!template){ statusEl.textContent='বইয়ের তালিকা দেখানো যাচ্ছে না।'; return; }
  statusEl.innerHTML='প্রকাশিত বই: <span class="count">৩</span>টি';
- grid.replaceChildren(template.content.cloneNode(true));
+ const fragment=template.content.cloneNode(true);
+ document.querySelectorAll('#bookArchiveTemplate img').forEach(()=>{});
+ fragment.querySelectorAll('.book-cover-frame img').forEach(img=>{
+   img.loading='eager'; img.fetchPriority='high'; img.decoding='async';
+   img.addEventListener('error',()=>{
+     const fallback=document.createElement('div');
+     fallback.className='book-cover-missing';
+     fallback.textContent='প্রচ্ছদ পাওয়া যায়নি';
+     fallback.setAttribute('role','img');
+     fallback.setAttribute('aria-label',img.alt);
+     img.replaceWith(fallback);
+   },{once:true});
+ });
+ grid.replaceChildren(fragment);
 }
 
 async function loadPosts(){
