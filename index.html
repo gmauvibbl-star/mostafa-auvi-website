@@ -2456,5 +2456,119 @@
 })();
 </script>
 
+
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get('lang') === 'en' ? 'en' : 'bn';
+  const en = lang === 'en';
+  document.documentElement.lang = lang;
+  const setText = (selector, value) => { const el = document.querySelector(selector); if (el) el.textContent = value; };
+  const setLead = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    const node = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+    if (node) node.textContent = value + ' ';
+    else el.insertBefore(document.createTextNode(value + ' '), el.firstChild);
+  };
+  const setAttr = (selector, name, value) => { const el = document.querySelector(selector); if (el) el.setAttribute(name, value); };
+  const addLang = href => {
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || /^https?:/i.test(href)) return href;
+    const url = new URL(href, location.href);
+    if (url.pathname.endsWith('posts.html') || url.pathname.endsWith('journal.html')) {
+      url.searchParams.set('lang', lang);
+      return url.pathname.split('/').pop() + url.search + url.hash;
+    }
+    return href;
+  };
+  const bnLink = document.querySelector('.utility-bar .lang a[href="index.html"]');
+  const enLink = document.querySelector('.utility-bar .lang a[href="index-en.html"]');
+  if (bnLink) { bnLink.href = 'index.html?lang=bn'; bnLink.classList.toggle('active', !en); bnLink.title = 'বাংলায় পড়ুন'; }
+  if (enLink) { enLink.href = 'index.html?lang=en'; enLink.classList.toggle('active', en); enLink.title = 'Read in English'; }
+  setText('.utility-bar .lang-label', en ? 'Language:' : 'ভাষা নির্বাচন:');
+  const date = document.querySelector('.utility-bar .date');
+  if (date) date.textContent = new Date().toLocaleDateString(en ? 'en-GB' : 'bn-BD', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  if (en) {
+    document.title = 'MOSTAFA AUVI | Fiction Writer & Literary Critic';
+    setAttr('meta[name="description"]','content','Official website of Mostafa Auvi, fiction writer and literary critic. Explore fiction, essays, literary criticism, law, travel, banking and economics.');
+    setAttr('meta[property="og:description"]','content','Fiction, essays, literary criticism, law, travel, banking and economics by Mostafa Auvi.');
+    setAttr('meta[name="twitter:description"]','content','Fiction, essays, literary criticism, law, travel, banking and economics by Mostafa Auvi.');
+    setAttr('meta[property="og:locale"]','content','en_US');
+    setAttr('meta[property="og:locale:alternate"]','content','bn_BD');
+    setAttr('.share-fb','title','Share on Facebook');
+    setAttr('.share-tw','title','Share on X / Twitter');
+    setAttr('.share-wa','title','Share on WhatsApp');
+    setAttr('.share-ig','title','Share on Telegram');
+    setAttr('a[aria-label="Email"]','title','Share by email');
+    setAttr('a[aria-label="Copy Link"]','title','Copy link');
+    setText('.share .label','Share —');
+    setText('.subscribe-btn span','Subscribe');
+    setAttr('.subscribe-btn','title','Get email updates on new writing');
+    setLead('.nav-fiction a','Fiction');
+    setLead('.nav-essay a','Essays & Literary Criticism');
+    setLead('.nav-law a','Law & Judiciary');
+    setLead('.nav-travel a','Travel & Translation');
+    setLead('.nav-journal a','Journal');
+    setAttr('.nav','aria-label','Main navigation');
+    setAttr('.search-box input','placeholder','Search...');
+    setText('.hero-title-bn','MOSTAFA AUVI');
+    setText('.hero-title-en:last-of-type','Life within history, stories within life');
+    setText('.hero-subtitle','Fiction Writer · Reader of History and World Literature');
+    setText('.label-bar .meta','November 2026');
+    setText('.top-text .b-name','Chandradwip');
+    const journalLabel = document.querySelector('.lower .section-label .bn');
+    if (journalLabel) journalLabel.textContent = 'Recent Journal';
+    const journalDate = document.querySelector('.journal-meta .date');
+    if (journalDate) journalDate.textContent = '27 October 2026';
+    setText('.journal-meta .tag','Notebook');
+    setText('.journal-more .read-link','Read the full entry →');
+    setText('.journal-more .stats','5 min read · 42 comments');
+    setText('.features-header h2','Explore the Writing');
+    const featureCards = [
+      ['Fiction','A world of novels, stories and prose',['Novels','Stories','Novellas','Prose']],
+      ['Essays & Literary Criticism','Literary thought, essays and analysis'],
+      ['Law & Judiciary','Law, justice and constitutional principles'],
+      ['Travel & Translation','Journeys and memories from home and abroad'],
+      ['Personal Reflections','Personal experiences and observations'],
+      ['Banking & Economics','Banking, finance and economic thought'],
+      ['Publications & PDF','Books and digital publications']
+    ];
+    document.querySelectorAll('.feat-card').forEach((card,i)=>{
+      const item=featureCards[i]; if(!item)return;
+      setTextFrom(card,'.title',item[0]); setTextFrom(card,'.sub',item[1]);
+      if(item[2]) card.querySelectorAll('.tags .tag').forEach((tag,j)=>{if(item[2][j])tag.textContent=item[2][j];});
+    });
+    setText('.author-intro .label','About the Author');
+    setText('.author-intro h3','Mostafa Auvi');
+    setText('.author-intro .bio','Mostafa Auvi is a fiction writer, literary critic, and an avid reader of history and world literature. His writing reflects close observations of rural Bengal, explorations of the human inner world, and historical, regional, and cultural contexts. His published books include Bajpakhir Punorjonmo (2017), CS Khotiyan O Ekti Mamlar Itibritto (2019), and Beraler Quarantine (2022). He writes fiction, essays, and literary criticism.');
+    const footerQuote = document.querySelector('.footer-strip .left');
+    if (footerQuote) { const node=Array.from(footerQuote.childNodes).find(n=>n.nodeType===Node.TEXT_NODE&&n.textContent.trim()); if(node) node.textContent=' “Writing makes us a little more human.”'; }
+    setAttr('#authorLoginBtn','aria-label','Author login');
+    setText('#authorLoginLabel','Author Login');
+    setText('.footer-strip .right a:nth-child(1)','Subscribe');
+    setText('.footer-strip .right a:nth-child(2)','Sitemap');
+    setText('.footer-strip .right a:nth-child(3)','Privacy');
+    setText('.footer-strip .right a:nth-child(4)','© 2026');
+    setAttr('.modal-close','aria-label','Close');
+    setText('#loginModalTitle','Author Login');
+    setText('.modal-sub','Sign in with your email and password');
+    setText('label[for="modalEmail"]','Email');
+    setText('label[for="modalPassword"]','Password');
+    setAttr('#modalPassword','placeholder','Enter your password');
+    setText('#modalLoginBtn','Sign in →');
+    setText('.btn.secondary','Cancel');
+    setText('#forgotPasswordLink','Forgot your password?');
+    setText('#signupLink','Create an account');
+    const signupWrap=document.querySelector('#signupLink')?.parentElement;
+    if(signupWrap){const n=Array.from(signupWrap.childNodes).find(x=>x.nodeType===Node.TEXT_NODE);if(n)n.textContent='New author? ';}
+    setText('label[for="resetEmail"]','Enter your email to reset your password');
+    setText('#sendResetBtn','Send reset link');
+    setText('#cancelResetBtn','Cancel');
+    document.querySelectorAll('a[href]').forEach(a=>{const href=a.getAttribute('href');if(href && (href.startsWith('posts.html')||href.startsWith('journal.html')))a.setAttribute('href',addLang(href));});
+  }
+  function setTextFrom(root,selector,value){const el=root.querySelector(selector);if(el)el.textContent=value;}
+  window.__homeLanguage = lang;
+})();
+</script>
 </body>
 </html>
