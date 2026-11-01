@@ -2255,27 +2255,27 @@
   modalPassword.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
 
   modalLoginBtn.onclick = async () => {
-    if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
+    if (!sb) { showStatus(window.__homeLanguage === 'en' ? 'Setup error — Supabase did not load.' : 'সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
     const email = modalEmail.value.trim();
     const password = modalPassword.value;
-    if (!email || !password) { showStatus('ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
-    showStatus('লগইন করা হচ্ছে…', 'warning');
+    if (!email || !password) { showStatus(window.__homeLanguage === 'en' ? 'Enter your email and password.' : 'ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
+    showStatus(window.__homeLanguage === 'en' ? 'Signing in…' : 'লগইন করা হচ্ছে…', 'warning');
     modalLoginBtn.disabled = true;
     try {
       const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) { showStatus('লগইন ব্যর্থ: ' + error.message, 'error'); modalLoginBtn.disabled = false; return; }
+      if (error) { showStatus((window.__homeLanguage === 'en' ? 'Sign-in failed: ' : 'লগইন ব্যর্থ: ') + error.message, 'error'); modalLoginBtn.disabled = false; return; }
       // Check admin
       const { data: admin, error: adminErr } = await sb.from('admin_users').select('user_id').eq('user_id', data.user.id).maybeSingle();
       if (adminErr || !admin) {
-        showStatus('অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
+        showStatus(window.__homeLanguage === 'en' ? 'This account is not approved as an administrator.' : 'অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
         await sb.auth.signOut();
         modalLoginBtn.disabled = false;
         return;
       }
-      showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
+      showStatus(window.__homeLanguage === 'en' ? 'Signed in. Opening the dashboard…' : 'লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
       setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
     } catch (e) {
-      showStatus('সমস্যা: ' + e.message, 'error');
+      showStatus((window.__homeLanguage === 'en' ? 'Error: ' : 'সমস্যা: ') + e.message, 'error');
       modalLoginBtn.disabled = false;
     }
   };
@@ -2290,7 +2290,7 @@
         const { data: admin } = await sb.from('admin_users').select('user_id').eq('user_id', session.user.id).maybeSingle();
         if (admin) {
           loginBtn.classList.add('logged-in');
-          loginLabel.textContent = 'ড্যাশবোর্ড খুলুন →';
+          loginLabel.textContent = window.__homeLanguage === 'en' ? 'Open Dashboard →' : 'ড্যাশবোর্ড খুলুন →';
         }
       }
     } catch (e) {}
@@ -2323,19 +2323,19 @@
   sendResetBtn.addEventListener('click', async () => {
     if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
     const email = resetEmailInput.value.trim();
-    if (!email) { showStatus('ইমেইল দিন।', 'error'); return; }
-    showStatus('রিসেট লিংক পাঠানো হচ্ছে…', 'warning');
+    if (!email) { showStatus(window.__homeLanguage === 'en' ? 'Enter your email.' : 'ইমেইল দিন।', 'error'); return; }
+    showStatus(window.__homeLanguage === 'en' ? 'Sending password reset link…' : 'রিসেট লিংক পাঠানো হচ্ছে…', 'warning');
     sendResetBtn.disabled = true;
     try {
       const { error } = await sb.auth.resetPasswordForEmail(email, {
         redirectTo: window.location.origin + window.location.pathname.replace(/[^/]*$/, '') + 'dashboard.html'
       });
       if (error) {
-        showStatus('ত্রুটি: ' + error.message, 'error');
+        showStatus((window.__homeLanguage === 'en' ? 'Error: ' : 'ত্রুটি: ') + error.message, 'error');
         sendResetBtn.disabled = false;
         return;
       }
-      showStatus('পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে! ইমেইল চেক করুন।', 'success');
+      showStatus(window.__homeLanguage === 'en' ? 'Password reset link sent. Please check your email.' : 'পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে! ইমেইল চেক করুন।', 'success');
       setTimeout(() => {
         forgotForm.style.display = 'none';
         resetEmailInput.value = '';
@@ -2355,7 +2355,7 @@
   const signupLink = document.getElementById('signupLink');
   signupLink.addEventListener('click', (e) => {
     e.preventDefault();
-    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন। শুধুমাত্র অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে লগইন করা যাবে।', 'warning');
+    showStatus(window.__homeLanguage === 'en' ? 'Please contact the site administrator. Only approved author accounts can sign in.' : 'অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন। শুধুমাত্র অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে লগইন করা যাবে।', 'warning');
   });
 })();
 </script>
@@ -2366,7 +2366,7 @@
   // Get current page URL (works on both Bengali and English versions)
   var pageUrl = window.location.href.split('?')[0].split('#')[0];
   var pageTitle = document.title || 'Mostafa Auvi — Fiction Writer & Literary Critic';
-  var pageText = 'মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।';
+  var pageText = window.__homeLanguage === 'en' ? 'Mostafa Auvi — Fiction Writer & Literary Critic. Life within history, stories within life.' : 'মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।';
 
   // Build share URLs
   window.sharePage = function(platform) {
@@ -2411,7 +2411,7 @@
     var pageUrlCopy = window.location.href.split('?')[0].split('#')[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pageUrlCopy).then(function() {
-        showToast('লিংক কপি হয়েছে: ' + pageUrlCopy);
+        showToast((window.__homeLanguage === 'en' ? 'Link copied: ' : 'লিংক কপি হয়েছে: ') + pageUrlCopy);
       }).catch(function() {
         fallbackCopy(pageUrlCopy);
       });
@@ -2430,9 +2430,9 @@
     textarea.select();
     try {
       document.execCommand('copy');
-      showToast('লিংক কপি হয়েছে: ' + text);
+      showToast((window.__homeLanguage === 'en' ? 'Link copied: ' : 'লিংক কপি হয়েছে: ') + text);
     } catch (err) {
-      showToast('কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।');
+      showToast(window.__homeLanguage === 'en' ? 'Could not copy the link. Please copy it manually.' : 'কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।');
     }
     document.body.removeChild(textarea);
   }
