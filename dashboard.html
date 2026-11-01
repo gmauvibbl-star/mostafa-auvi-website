@@ -347,7 +347,7 @@
       background-size: 400px 400px;
       background-position: center;
     }
-    .main-inner { max-width: 1200px; margin: 0 auto; }
+    .main-inner { width: 100%; max-width: none; margin: 0; }
 
     /* Page header (within main) */
     .page-head {
@@ -816,7 +816,7 @@
     // ============================================================
     const state = {
       session: null, user: null, userEmail: null,
-      view: 'new', editingId: null,
+      view: 'stats', editingId: null,
       categories: CATEGORIES,
       selectedParentCategory: '', tags: [], writings: [],
       pagination: { page: 1, limit: 10, total: 0, totalPages: 1 },
@@ -1246,7 +1246,11 @@
         .select('id, title, slug, group_id, published, featured, updated_at, category, cover_image')
         .eq('language', 'bn')
         .order('updated_at', { ascending: false }).limit(5);
+      const { data: siteStats, error: siteStatsError } = await supabase.rpc('get_author_dashboard_stats');
+      if (siteStatsError) throw new Error('সাইটের পরিসংখ্যান লোড হয়নি: ' + siteStatsError.message);
       return {
+        totalViews: Number(siteStats?.total_views || 0),
+        followers: Number(siteStats?.followers || 0),
         total: totalBn || 0,
         totalEn: totalEn || 0,
         drafts: drafts || 0,
@@ -2674,12 +2678,14 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         spinnerWrap.remove();
 
         const cards = [
+          { label: 'Total Views', value: stats.totalViews, icon: 'eye', cls: 'badge-default' },
+          { label: 'Published', value: stats.published, icon: 'check-circle-2', cls: 'badge-default' },
+          { label: 'Followers', value: stats.followers, icon: 'users', cls: 'badge-default' },
           { label: 'মোট লেখা (বাংলা)', value: stats.total, icon: 'file-text', cls: 'badge-default' },
           { label: 'মোট লেখা (English)', value: stats.totalEn, icon: 'languages', cls: 'badge-default' },
-          { label: 'প্রকাশিত', value: stats.published, icon: 'check-circle-2', cls: 'badge-default' },
           { label: 'খসড়া', value: stats.drafts, icon: 'file-edit', cls: 'badge-warning' },
         ];
-        const cardsGrid = el('div', { class: 'grid grid-4 mb-4' });
+        const cardsGrid = el('div', { class: 'grid grid-4 mb-4', style: { gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))' } });
         cards.forEach(c => {
           cardsGrid.appendChild(el('div', { class: 'card' },
             el('div', { class: 'flex items-center justify-between' },
