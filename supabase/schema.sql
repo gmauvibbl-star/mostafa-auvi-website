@@ -50,6 +50,7 @@ create table if not exists public.subscribers (
   created_at timestamptz not null default now()
 );
 alter table public.subscribers add column if not exists unsubscribe_token_hash text;
+alter table public.subscribers add column if not exists unsubscribed_at timestamptz;
 
 alter table public.admin_users enable row level security;
 alter table public.posts enable row level security;
