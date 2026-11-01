@@ -1986,7 +1986,8 @@
 (function(){
   const now = new Date();
   const el = document.getElementById('todayDate');
-  if (el) el.textContent = now.toLocaleDateString(new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en-GB' : 'bn-BD', {
+  const isEnglish = new URLSearchParams(window.location.search).get('lang') === 'en';
+  if (el) el.textContent = now.toLocaleDateString(isEnglish ? 'en-GB' : 'bn-BD', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   });
   const label = document.querySelector('.utility-bar .lang-label');
@@ -2070,6 +2071,22 @@ if (journalLanguage === 'en') {
   setText('.footer-strip .right a:nth-child(1)', 'Subscribe');
   setText('.footer-strip .right a:nth-child(2)', 'Sitemap');
   setText('.footer-strip .right a:nth-child(3)', 'Privacy');
+  setAttr('.modal-close', 'aria-label', 'Close');
+  setText('#loginModalTitle', 'Author Login');
+  setText('.modal-sub', 'Sign in with your email and password');
+  setText('label[for="modalEmail"]', 'Email');
+  setText('label[for="modalPassword"]', 'Password');
+  setAttr('#modalPassword', 'placeholder', 'Enter your password');
+  setText('#modalLoginBtn', 'Sign in →');
+  setText('.btn.secondary', 'Cancel');
+  setText('#forgotPasswordLink', 'Forgot your password?');
+  const signup = document.querySelector('#signupLink');
+  if (signup) signup.textContent = 'Create an account';
+  const signupWrap = document.querySelector('#signupLink')?.parentElement;
+  const signupPrefix = signupWrap && Array.from(signupWrap.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+  if (signupPrefix) signupPrefix.textContent = 'New author? ';
+  setAttr('.lang a[href="journal.html?lang=bn"]', 'title', 'Read in Bengali');
+  [['.share-fb','Share on Facebook'],['.share-tw','Share on X / Twitter'],['.share-wa','Share on WhatsApp'],['.share-ig','Share on Telegram'],['.share-em[aria-label="Email"]','Share by email'],['.share-em[aria-label="Copy Link"]','Copy link']].forEach(([selector,title]) => setAttr(selector,'title',title));
 }
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
 const fmtJournalDate = (iso) => {
@@ -2080,6 +2097,18 @@ const fmtJournalDate = (iso) => {
     day: 'numeric', month: 'long', year: 'numeric'
   });
 };
+const JOURNAL_TERM_EN = {
+  'জার্নাল':'Journal','ব্যক্তিগত রচনা':'Personal Writing','ব্যক্তিগত':'Personal',
+  'ব্যক্তিগত অনুভূতি':'Personal Reflections','আত্মজীবনী':'Memoir','স্মৃতিকথা':'Memoir',
+  'স্মৃতিচারণ':'Reminiscences','ডায়েরি':'Diary','দিনলিপি':'Diary','নোটবুক':'Notebook',
+  'চিঠি':'Letters','পর্যবেক্ষণ':'Observations','চিন্তা':'Reflections','ভ্রমণ':'Travel',
+  'ভ্রমণকাহিনি':'Travel Writing','প্রবন্ধ':'Essays','সাহিত্যালোচনা':'Literary Criticism',
+  'সাহিত্যচর্চা':'Literary Studies','আইন':'Law','আইন-আদালত':'Law & Judiciary',
+  'আইন ও আদালত':'Law & Judiciary','কথাসাহিত্য':'Fiction',
+  'ব্যাংকিং ও অর্থনীতি':'Banking & Economics','প্রকাশনা ও PDF':'Publications & PDF'
+};
+const journalTermLabel = value => JOURNAL_TERM_EN[String(value || '').trim()] || value || 'Journal';
+
 const excerptText = (p, len=160) => {
   let txt = String(p.excerpt || '').trim();
   if (!txt) {
@@ -2145,7 +2174,7 @@ function renderCards(gridEl) {
   gridEl.innerHTML = slice.map(p => {
     const dateStr = fmtJournalDate(p.published_at);
     const excerpt = excerptText(p, 110);
-    const cat = p.category || (journalLanguage === 'en' ? 'Journal' : 'জার্নাল');
+    const cat = journalLanguage === 'en' ? journalTermLabel(p.category) : (p.category || 'জার্নাল');
     const readLink = `read.html?slug=${encodeURIComponent(p.slug)}`;
         const cover = p.cover_image
       ? `<img src="${esc(p.cover_image)}" alt="${esc(p.title || '')}" loading="lazy">
@@ -2292,26 +2321,26 @@ function journalSearch(e) {
   modalPassword.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
 
   modalLoginBtn.onclick = async () => {
-    if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
+    if (!sb) { showStatus(journalLanguage === 'en' ? 'Setup error — Supabase did not load.' : 'সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
     const email = modalEmail.value.trim();
     const password = modalPassword.value;
-    if (!email || !password) { showStatus('ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
-    showStatus('লগইন করা হচ্ছে…', 'warning');
+    if (!email || !password) { showStatus(journalLanguage === 'en' ? 'Enter your email and password.' : 'ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
+    showStatus(journalLanguage === 'en' ? 'Signing in…' : 'লগইন করা হচ্ছে…', 'warning');
     modalLoginBtn.disabled = true;
     try {
       const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) { showStatus('লগইন ব্যর্থ: ' + error.message, 'error'); modalLoginBtn.disabled = false; return; }
+      if (error) { showStatus((journalLanguage === 'en' ? 'Sign-in failed: ' : 'লগইন ব্যর্থ: ') + error.message, 'error'); modalLoginBtn.disabled = false; return; }
       const { data: admin, error: adminErr } = await sb.from('admin_users').select('user_id').eq('user_id', data.user.id).maybeSingle();
       if (adminErr || !admin) {
-        showStatus('অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
+        showStatus(journalLanguage === 'en' ? 'This account is not approved as an administrator.' : 'অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
         await sb.auth.signOut();
         modalLoginBtn.disabled = false;
         return;
       }
-      showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
+      showStatus(journalLanguage === 'en' ? 'Signed in. Opening the dashboard…' : 'লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
       setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
     } catch (e) {
-      showStatus('সমস্যা: ' + e.message, 'error');
+      showStatus((journalLanguage === 'en' ? 'Error: ' : 'সমস্যা: ') + e.message, 'error');
       modalLoginBtn.disabled = false;
     }
   };
@@ -2324,7 +2353,7 @@ function journalSearch(e) {
         const { data: admin } = await sb.from('admin_users').select('user_id').eq('user_id', session.user.id).maybeSingle();
         if (admin) {
           loginBtn.classList.add('logged-in');
-          loginLabel.textContent = 'ড্যাশবোর্ড খুলুন →';
+          loginLabel.textContent = journalLanguage === 'en' ? 'Open Dashboard →' : 'ড্যাশবোর্ড খুলুন →';
         }
       }
     } catch (e) {}
@@ -2334,11 +2363,11 @@ function journalSearch(e) {
   const forgotLink = document.getElementById('forgotPasswordLink');
   forgotLink?.addEventListener('click', (e) => {
     e.preventDefault();
-    showStatus('পাসওয়ার্ড রিসেট করতে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন অথবা ড্যাশবোর্ড লিংক থেকে রিসেট করুন।', 'warning');
+    showStatus(journalLanguage === 'en' ? 'Contact the site administrator to reset your password.' : 'পাসওয়ার্ড রিসেট করতে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন অথবা ড্যাশবোর্ড লিংক থেকে রিসেট করুন।', 'warning');
   });
   document.getElementById('signupLink')?.addEventListener('click', (e) => {
     e.preventDefault();
-    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।', 'warning');
+    showStatus(journalLanguage === 'en' ? 'Contact the site administrator to request an account.' : 'অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।', 'warning');
   });
 })();
 
