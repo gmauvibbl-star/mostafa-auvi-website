@@ -1,7 +1,7 @@
 {
-  "name": "মোস্তফা অভির সাহিত্যাঙ্গন — Author MOSTAFA AUVI",
-  "short_name": "মোস্তফা অভি",
-  "description": "Author MOSTAFA AUVI — লেখক মোস্তফা অভির সাহিত্যাঙ্গন। বাংলা কথাসাহিত্য, প্রবন্ধ, সাহিত্যসমালোচনা, জার্নাল ও আসন্ন উপন্যাস চন্দ্রদ্বীপ।",
+  "name": "Mostafa Auvi",
+  "short_name": "Mostafa Auvi",
+  "description": "Fiction, literary criticism, essays, travel writing and reflections on law, society and culture.",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
