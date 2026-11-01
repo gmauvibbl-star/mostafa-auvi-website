@@ -404,9 +404,10 @@ if(introEl && introEl.parentNode){
 const pillStyle=document.createElement('style');
 pillStyle.textContent=`
 .subcategory-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0;padding:0.5rem 0;}
-.subcategory-pills .sub-pill{display:inline-block;padding:0.4rem 0.85rem;border-radius:999px;background:var(--paper,#f5efe2);color:var(--ink,#333);font-size:0.85rem;border:1px solid var(--border,#d8c9a8);text-decoration:none;transition:all 0.15s;white-space:nowrap;font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;}
-.subcategory-pills .sub-pill:hover{background:var(--teal-deep,#0e7a6f);color:#fff;border-color:var(--teal-deep,#0e7a6f);}
-.subcategory-pills .sub-pill.active{background:var(--teal-deep,#0e7a6f);color:#fff;border-color:var(--teal-deep,#0e7a6f);font-weight:600;}
+.subcategory-pills .sub-pill{display:inline-block;padding:0.4rem 0.85rem;border-radius:999px;background:#174E48;color:#FFFFFF;font-size:0.85rem;border:1px solid #0F3D3E;text-decoration:none;transition:all 0.15s;white-space:nowrap;font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;font-weight:600;box-shadow:0 2px 5px rgba(15,61,62,.14);}
+.subcategory-pills .sub-pill:hover{background:#713D23;color:#FFFFFF;border-color:#542B18;}
+.subcategory-pills .sub-pill.active{background:#0F3D3E;color:#FFFFFF;border-color:#D4B468;font-weight:700;box-shadow:0 0 0 2px rgba(212,180,104,.28);}
+.subcategory-pills .sub-pill:focus-visible{outline:3px solid #A85A12;outline-offset:2px;}
 @media(max-width:680px){
   .subcategory-pills{gap:0.35rem;}
   .subcategory-pills .sub-pill{padding:0.3rem 0.65rem;font-size:0.78rem;}
