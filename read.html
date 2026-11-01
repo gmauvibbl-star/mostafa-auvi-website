@@ -666,6 +666,24 @@
   }
   .tag-pill::before { content: "#"; color: var(--gold-dim); margin-right: 2px; }
 
+  /* ====== READER COUNT ====== */
+  .reader-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 24px 0 2px;
+    padding: 10px 14px;
+    border-top: 1px solid var(--paper-dark);
+    color: var(--ink-mute);
+    font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .reader-count[hidden] { display: none !important; }
+  .reader-count svg { width: 17px; height: 17px; color: var(--gold-dim); flex: 0 0 auto; }
+  .reader-count strong { color: var(--teal-deep); font-weight: 700; }
+
   /* ====== SHARE SECTION (under article) ====== */
   .share-section {
     max-width: 800px;
@@ -1382,7 +1400,7 @@ function buildShareButtons(title, isEn) {
     '</div></div>';
 }
 
-function renderArticle(post, sibling) {
+function renderArticle(post, sibling, sb) {
   const lang = post.language || 'bn';
   const isEn = lang === 'en';
   applyReadShellLanguage(lang);
@@ -1474,11 +1492,19 @@ function renderArticle(post, sibling) {
       '</header>' +
       coverHtml +
       '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
+      '<div class="reader-count" id="readerCount" hidden aria-live="polite">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
+        '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
+        '<strong class="reader-count-value">0</strong>' +
+      '</div>' +
       (tags.length
         ? '<div class="a4-tags"><span class="a4-tags-label">' + (isEn ? 'Tags' : 'ট্যাগ') + '</span>' + tags.map(t => '<span class="tag-pill">' + esc(readTermLabel(t, lang)) + '</span>').join('') + '</div>'
         : '') +
     '</div>' +
     buildShareButtons(post.title || '', isEn);
+
+  // Public reader count is recorded only after a visitor reaches 50% of the article.
+  setupReaderCount(post, sb, isEn);
 
   // Bottom back link bar
   const bb = document.getElementById('bottomBackBar');
@@ -1509,6 +1535,65 @@ function renderArticle(post, sibling) {
       } catch (e) { prompt(isEn ? 'Copy this link:' : 'লিংক কপি করুন:', shareUrl); }
     };
   }
+}
+
+async function setupReaderCount(post, sb, isEn) {
+  const counter = document.getElementById('readerCount');
+  const valueEl = counter?.querySelector('.reader-count-value');
+  const body = document.getElementById('articleBody');
+  if (!counter || !valueEl || !body || !post?.published || !sb) return;
+
+  const formatCount = value => {
+    const n = Math.max(0, Number(value) || 0);
+    return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
+  };
+
+  // Show the public count only when the database migration is available.
+  const { data: initialCount, error: countError } = await sb.rpc('get_post_reader_count', {
+    p_slug: post.slug
+  });
+  if (countError) {
+    console.warn('Reader count is not available yet:', countError.message);
+    return;
+  }
+  valueEl.textContent = formatCount(initialCount);
+  counter.hidden = false;
+
+  let recording = false;
+  const onArticleScroll = async () => {
+    const rect = body.getBoundingClientRect();
+    const articleMidpoint = rect.top + window.scrollY + (rect.height * 0.5);
+    if (window.scrollY + window.innerHeight < articleMidpoint || recording) return;
+
+    recording = true;
+    window.removeEventListener('scroll', onArticleScroll);
+    try {
+      let visitorId = localStorage.getItem('mostafa_reader_id_v1');
+      if (!visitorId) {
+        if (window.crypto?.randomUUID) {
+          visitorId = window.crypto.randomUUID();
+        } else {
+          const bytes = new Uint8Array(16);
+          window.crypto.getRandomValues(bytes);
+          visitorId = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+        }
+        localStorage.setItem('mostafa_reader_id_v1', visitorId);
+      }
+      const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(visitorId));
+      const visitorHash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
+      const { data: totalReaders, error } = await sb.rpc('record_post_reader', {
+        p_slug: post.slug,
+        p_visitor_hash: visitorHash
+      });
+      if (error) throw error;
+      valueEl.textContent = formatCount(totalReaders);
+    } catch (error) {
+      console.warn('Reader count could not be updated:', error);
+      recording = false;
+      window.addEventListener('scroll', onArticleScroll, { passive: true });
+    }
+  };
+  window.addEventListener('scroll', onArticleScroll, { passive: true });
 }
 
 async function loadPost() {
@@ -1577,7 +1662,7 @@ async function loadPost() {
         .maybeSingle();
       if (sib && sib.slug && sib.slug !== activePost.slug) sibling = sib;
     }
-    renderArticle(activePost, sibling);
+    renderArticle(activePost, sibling, sb);
   } catch (e) {
     console.error('Article loading failed:', e);
     const detail = e && (e.message || e.details || e.hint || e.code);
