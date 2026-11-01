@@ -1028,8 +1028,10 @@
     async function loadWritings() {
       const page = state.pagination.page;
       const limit = state.pagination.limit;
+      // প্রতিটি bilingual লেখাকে তালিকায় একবারই দেখাই: বাংলা row হলো মূল record।
       let query = supabase.from('posts')
-        .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, featured, updated_at, tags', { count: 'exact' });
+        .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, featured, updated_at, tags', { count: 'exact' })
+        .eq('language', 'bn');
       if (state.filter.status === 'draft') query = query.eq('published', false);
       else if (state.filter.status === 'published') query = query.eq('published', true);
       if (state.filter.search) {
@@ -1038,7 +1040,21 @@
       query = query.order('updated_at', { ascending: false }).range((page - 1) * limit, page * limit - 1);
       const { data, error, count } = await query;
       if (error) { console.error(error); toast('তালিকা লোড ব্যর্থ', error.message, 'error'); return; }
-      state.writings = data || [];
+      const rows = data || [];
+      const groupIds = rows.map(w => w.group_id).filter(Boolean);
+      let englishByGroup = {};
+      if (groupIds.length) {
+        const { data: englishRows, error: englishError } = await supabase.from('posts')
+          .select('group_id, title').eq('language', 'en').in('group_id', groupIds);
+        if (!englishError) {
+          englishByGroup = Object.fromEntries((englishRows || []).map(row => [row.group_id, row.title]));
+        }
+      }
+      state.writings = rows.map(w => ({
+        ...w,
+        hasEnglish: !!(w.group_id && englishByGroup[w.group_id]),
+        englishTitle: w.group_id ? (englishByGroup[w.group_id] || '') : '',
+      }));
       state.pagination.total = count || 0;
       state.pagination.totalPages = Math.max(Math.ceil((count || 0) / limit), 1);
     }
@@ -2653,6 +2669,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           el('div', { class: 'flex items-center gap-2 flex-wrap' },
             el('h3', { class: 'title bn-font truncate', style: { flex: 1, minWidth: 0 } }, w.title),
             w.featured && el('span', { class: 'badge badge-default' }, '★ ফিচার্ড'),
+            el('span', { class: `badge ${w.hasEnglish ? 'badge-info' : ''}`, title: w.hasEnglish ? (w.englishTitle || 'English translation added') : 'English translation not added' },
+              w.hasEnglish ? 'বাংলা + EN' : 'শুধু বাংলা'),
             el('span', {
               class: `badge ${w.published ? 'badge-default' : 'badge-warning'}`,
               style: { cursor: 'pointer' },
