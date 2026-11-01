@@ -2114,8 +2114,8 @@ function renderRecentList(rows) {
   const ul = document.getElementById('recentList');
   if (!ul) return;
   ul.innerHTML = rows.slice(0, 6).map((p) => {
-    const dateStr = fmtDateBn(p.published_at);
-    const cat = p.category || 'জার্নাল';
+    const dateStr = fmtJournalDate(p.published_at);
+    const cat = p.category || (journalLanguage === 'en' ? 'Journal' : 'জার্নাল');
     const href = `read.html?slug=${encodeURIComponent(p.slug)}`;
     return `<li><a href="${href}">${esc(p.title || '(শিরোনামহীন)')}</a><div class="meta">${esc(dateStr)} · ${esc(cat)}</div></li>`;
   }).join('');
