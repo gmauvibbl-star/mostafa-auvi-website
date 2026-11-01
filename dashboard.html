@@ -2244,6 +2244,14 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         <h3 class="card-h"><i data-lucide="tag" style="width:14px;height:14px;"></i> ট্যাগ</h3>
         <p class="text-muted text-sm mb-2">ট্যাগ লিখে Enter চাপুন। একাধিক ট্যাগ যোগ করতে পারেন।</p>
       `;
+      const journalToggle = el('label', {
+        class: 'flex items-center gap-2 mb-3 bn-font',
+        style: { padding: '10px 12px', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', background: 'var(--card-cream)' }
+      },
+        el('input', { type: 'checkbox', id: 'f-journal-entry', style: { width: '17px', height: '17px', accentColor: 'var(--accent)' } }),
+        el('span', {}, 'জার্নালে প্রকাশ করুন'),
+        el('span', { class: 'text-xs text-muted' }, '— জার্নাল পৃষ্ঠায় দেখাবে')
+      );
       const tagInputWrap = el('div', { class: 'tag-input-wrap' });
       const tagInput = el('input', { type: 'text', placeholder: 'ট্যাগ লিখুন, Enter চাপুন...' });
       tagInputWrap.appendChild(tagInput);
@@ -2273,7 +2281,12 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           renderTags();
         }
       });
-      tagsCard.appendChild(tagInputWrap);
+      tagsCard.append(journalToggle, tagInputWrap);
+      $('#f-journal-entry', tagsCard).addEventListener('change', e => {
+        formData.tags = formData.tags.filter(t => String(t).trim().toLowerCase() !== 'জার্নাল');
+        if (e.target.checked) formData.tags.push('জার্নাল');
+        renderTags();
+      });
       tagsTab.append(catCard, tagsCard);
 
       // ===== SEO SETTINGS TAB CONTENT =====
@@ -2543,6 +2556,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           sb.textContent = formData.status === 'published' ? 'প্রকাশিত' : 'খসড়া';
           sb.className = `badge ${formData.status === 'published' ? 'badge-default' : 'badge-warning'}`;
           renderTags();
+           $('#f-journal-entry').checked = formData.tags.some(t => String(t).trim().toLowerCase() === 'জার্নাল');
         } catch (e) {
           toast('লেখা লোড ব্যর্থ', e.message, 'error');
         }
