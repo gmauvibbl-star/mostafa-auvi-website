@@ -1325,19 +1325,20 @@ const articleEl = document.getElementById('article');
 const shareUrl = location.href;
 
 function renderError(title, msg) {
-  articleEl.innerHTML = '<div class="error-state"><div class="icon">❦</div><h2>' + esc(title) + '</h2><p>' + esc(msg) + '</p><a href="./posts.html">← সব লেখায় ফিরুন</a></div>';
+  const backLabel = document.documentElement.lang === 'en' ? '← Back to all writing' : '← সব লেখায় ফিরুন';
+  articleEl.innerHTML = '<div class="error-state"><div class="icon">❦</div><h2>' + esc(title) + '</h2><p>' + esc(msg) + '</p><a href="./posts.html">' + backLabel + '</a></div>';
   const bb = document.getElementById('bottomBackBar');
   if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">← সব লেখা</a>';
 }
 
-function buildShareButtons(title) {
+function buildShareButtons(title, isEn) {
   const u = encodeURIComponent(shareUrl);
   const facebookPreviewUrl = 'https://voswrndbxrsaqfzwffhh.supabase.co/functions/v1/share?slug=' + encodeURIComponent(slug || '');
   const fu = encodeURIComponent(facebookPreviewUrl);
   const t = encodeURIComponent(title || '');
-  const txt = encodeURIComponent('মোস্তফা অভি — ' + (title || ''));
+  const txt = encodeURIComponent((isEn ? 'Mostafa Auvi — ' : 'মোস্তফা অভি — ') + (title || ''));
   return '<div class="share-section">' +
-    '<div class="share-section-title">এই লেখাটি শেয়ার করুন · Share</div>' +
+    '<div class="share-section-title">' + (isEn ? 'Share this article' : 'এই লেখাটি শেয়ার করুন') + '</div>' +
     '<div class="share-buttons">' +
       '<a class="share-btn share-fb" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=' + fu + '"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>' +
       '<a class="share-btn share-x" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url=' + u + '&text=' + t + '"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 5.1-6.9zm-1.3 19.6h2L6.5 3.2H4.3l13.3 17.6z"/></svg>X</a>' +
@@ -1445,7 +1446,7 @@ function renderArticle(post, sibling) {
         ? '<div class="a4-tags"><span class="a4-tags-label">' + (isEn ? 'Tags' : 'ট্যাগ') + '</span>' + tags.map(t => '<span class="tag-pill">' + esc(readTermLabel(t, lang)) + '</span>').join('') + '</div>'
         : '') +
     '</div>' +
-    buildShareButtons(post.title || '');
+    buildShareButtons(post.title || '', isEn);
 
   // Bottom back link bar
   const bb = document.getElementById('bottomBackBar');
@@ -1558,7 +1559,7 @@ async function loadPost() {
 (function() {
   var pageUrl = window.location.href.split('#')[0];
   var pageTitle = document.title || 'Mostafa Auvi — Fiction Writer & Literary Critic';
-  var pageText = 'মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।';
+  var pageText = document.documentElement.lang === 'en' ? 'Mostafa Auvi — Fiction Writer & Literary Critic.' : 'মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।';
 
   window.sharePage = function(platform) {
     var url = '';
@@ -1583,7 +1584,7 @@ async function loadPost() {
     var pageUrlCopy = window.location.href.split('#')[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pageUrlCopy).then(function() {
-        showToast('লিংক কপি হয়েছে: ' + pageUrlCopy);
+        showToast((document.documentElement.lang === 'en' ? 'Link copied: ' : 'লিংক কপি হয়েছে: ') + pageUrlCopy);
       }).catch(function() { fallbackCopy(pageUrlCopy); });
     } else { fallbackCopy(pageUrlCopy); }
     return false;
@@ -1596,8 +1597,8 @@ async function loadPost() {
     textarea.style.opacity = '0';
     document.body.appendChild(textarea);
     textarea.select();
-    try { document.execCommand('copy'); showToast('লিংক কপি হয়েছে: ' + text); }
-    catch (err) { showToast('কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।'); }
+    try { document.execCommand('copy'); showToast((document.documentElement.lang === 'en' ? 'Link copied: ' : 'লিংক কপি হয়েছে: ') + text); }
+    catch (err) { showToast(document.documentElement.lang === 'en' ? 'Could not copy the link. Please copy it manually.' : 'কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।'); }
     document.body.removeChild(textarea);
   }
 
