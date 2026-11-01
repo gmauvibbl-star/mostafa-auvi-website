@@ -1132,6 +1132,28 @@
   .feat-card.brown  { background: linear-gradient(135deg, #966C33 0%, #6F4F22 100%); }
   .feat-card.teal   { background: linear-gradient(135deg, #1F7A70 0%, #155952 100%); }
   .feat-card.orange { background: linear-gradient(135deg, #C46A2B 0%, #8E4D1E 100%); }
+
+
+  /* Readability fix — text only, scoped to the seven feature cards */
+  .features .feat-card,
+  .features .feat-card .title,
+  .features .feat-card .sub,
+  .features .feat-card .icon,
+  .features .feat-card .tags .tag {
+    color: #FFFFFF !important;
+  }
+  .features .feat-card .title {
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+  }
+  .features .feat-card .sub {
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+  .features .feat-card .icon {
+    opacity: 0.9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  }
   /* ====== AUTHOR INTRO SECTION ====== */
   .author-intro {
     background: linear-gradient(135deg, #EEF2F2 0%, #E4ECEC 100%);
