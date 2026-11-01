@@ -1047,7 +1047,27 @@
       const { data: main, error } = await supabase.from('posts').select('*').eq('id', id).single();
       if (error) throw new Error(error.message);
       if (!main.group_id) {
-        return { ...main, tags: main.tags || [] };
+        // পুরোনো একক-ভাষার পোস্টকে একই editor-এ সম্পাদনাযোগ্য রাখি;
+        // নইলে save করার সময় পুরোনো row update না হয়ে নতুন row তৈরি হতো।
+        if ((main.language || 'bn') === 'en') {
+          return {
+            group_id: null, bn_id: null, en_id: main.id,
+            title: '', slug: '', excerpt: '', body: '',
+            title_en: main.title || '', slug_en: main.slug || '',
+            excerpt_en: main.excerpt || '', body_en: main.body || '',
+            category: main.category || '', parent_category: main.parent_category || main.category || '',
+            subcategory: main.subcategory || '', category_id: main.category_id || null,
+            subcategory_id: main.subcategory_id || null, cover_image: main.cover_image || null,
+            tags: main.tags || [], featured: !!main.featured, published: !!main.published,
+            published_at: main.published_at || null, hasEnglish: true,
+          };
+        }
+        return {
+          ...main, group_id: null, bn_id: main.id, en_id: null,
+          title: main.title || '', slug: main.slug || '', excerpt: main.excerpt || '',
+          body: main.body || '', title_en: '', slug_en: '', excerpt_en: '', body_en: '',
+          tags: main.tags || [], hasEnglish: false,
+        };
       }
       const otherLang = main.language === 'bn' ? 'en' : 'bn';
       const { data: sibling } = await supabase.from('posts')
@@ -1140,6 +1160,12 @@
         body: formData.body || '',
       };
 
+      // ইংরেজি শিরোনাম দিলে পূর্ণ ইংরেজি লেখা থাকা আবশ্যক।
+      const englishText = String(formData.body_en || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').trim();
+      if (formData.title_en && formData.title_en.trim() && !englishText) {
+        throw new Error('English title দেওয়া হয়েছে, কিন্তু English content খালি। অনুবাদ সম্পাদনা করে সম্পূর্ণ লেখা দিন অথবা English title ফাঁকা রাখুন।');
+      }
+
       // English row (শুধু যদি title_en থাকে)
       const enPayload = formData.title_en && formData.title_en.trim() ? {
         ...commonFields,
@@ -1151,12 +1177,15 @@
       } : null;
 
       // Update or insert bn row
+      formData.group_id = groupId;
       if (formData.bn_id) {
         const { error } = await supabase.from('posts').update(bnPayload).eq('id', formData.bn_id);
         if (error) throw new Error('বাংলা row আপডেট ব্যর্থ: ' + error.message);
       } else {
-        const { error } = await supabase.from('posts').insert({ ...bnPayload, created_at: now });
+        const { data: insertedBn, error } = await supabase.from('posts')
+          .insert({ ...bnPayload, created_at: now }).select('id').single();
         if (error) throw new Error('বাংলা row ইনসার্ট ব্যর্থ: ' + error.message);
+        formData.bn_id = insertedBn.id;
       }
 
       // Update or insert en row
@@ -1165,8 +1194,10 @@
           const { error } = await supabase.from('posts').update(enPayload).eq('id', formData.en_id);
           if (error) throw new Error('English row আপডেট ব্যর্থ: ' + error.message);
         } else {
-          const { error } = await supabase.from('posts').insert({ ...enPayload, created_at: now });
+          const { data: insertedEn, error } = await supabase.from('posts')
+            .insert({ ...enPayload, created_at: now }).select('id').single();
           if (error) throw new Error('English row ইনসার্ট ব্যর্থ: ' + error.message);
+          formData.en_id = insertedEn.id;
         }
       } else if (formData.en_id) {
         const { error } = await supabase.from('posts').delete().eq('id', formData.en_id);
@@ -2136,7 +2167,11 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         </div>
       `;
 
-      topicTab.append(langTabs, bnFields, enFields);
+      const bilingualNote = el('p', {
+        class: 'text-xs text-muted',
+        style: { margin: '0 0 12px', padding: '9px 12px', border: '1px solid var(--border)', borderRadius: '6px', background: 'var(--card-cream)' }
+      }, 'বাংলা লেখা বাধ্যতামূলক। English Version ঐচ্ছিক—Claude-এর রাফ ভাবানুবাদ নিজে সম্পাদনা ও অনুমোদনের পর এখানে দিন। English শিরোনাম দিলে সম্পূর্ণ English content-ও দিতে হবে।');
+      topicTab.append(langTabs, bilingualNote, bnFields, enFields);
 
       // Language tab switching
       [bnTabBtn, enTabBtn].forEach(b => {
