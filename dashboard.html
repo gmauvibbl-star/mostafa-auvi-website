@@ -1178,8 +1178,8 @@
 
       // ইংরেজি শিরোনাম দিলে পূর্ণ ইংরেজি লেখা থাকা আবশ্যক।
       const englishText = String(formData.body_en || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').trim();
-      if (formData.title_en && formData.title_en.trim() && !englishText) {
-        throw new Error('English title দেওয়া হয়েছে, কিন্তু English content খালি। অনুবাদ সম্পাদনা করে সম্পূর্ণ লেখা দিন অথবা English title ফাঁকা রাখুন।');
+      if (published && formData.title_en && formData.title_en.trim() && !englishText) {
+        throw new Error('প্রকাশের আগে English title-এর সঙ্গে সম্পূর্ণ English content দিন। খসড়া হিসেবে অসম্পূর্ণ অনুবাদ সেভ করা যাবে।');
       }
 
       // English row (শুধু যদি title_en থাকে)
