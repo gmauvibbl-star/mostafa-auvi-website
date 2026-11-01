@@ -242,6 +242,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
 const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -337,29 +338,32 @@ const statusEl=document.getElementById('status');
 // ============================================================
 let loadedSubcategories = [];
 
+let loadedCategoryId = null;
 async function loadSubcategoriesForCategory(catSlugVal){
+  loadedCategoryId = null;
+  loadedSubcategories = [];
   if(!catSlugVal || !CATEGORIES_MAP[catSlugVal]) {
-    loadedSubcategories = [];
     renderSubcategoryPills();
-    return;
+    return [];
   }
   try {
     const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
     const { data: catRow, error: catErr } = await sb.from('categories')
       .select('id,name_bn,name_en,slug,icon')
-      .eq('slug', catSlugVal).eq('is_active', true).single();
-    if(catErr || !catRow){ loadedSubcategories = []; renderSubcategoryPills(); return; }
+      .eq('slug', catSlugVal).eq('is_active', true).maybeSingle();
+    if(catErr) throw catErr;
+    if(!catRow){ renderSubcategoryPills(); return []; }
+    loadedCategoryId = catRow.id;
     const { data: subs, error: subErr } = await sb.from('subcategories')
       .select('id,category_id,name_bn,name_en,slug,sort_order')
       .eq('category_id', catRow.id).eq('is_active', true).order('sort_order');
     if(subErr) throw subErr;
     loadedSubcategories = subs || [];
-    renderSubcategoryPills();
   } catch(e){
-    console.warn('Subcategory load failed', e);
-    loadedSubcategories = [];
-    renderSubcategoryPills();
+    console.warn('Category/subcategory lookup failed; legacy category names will be used', e);
   }
+  renderSubcategoryPills();
+  return loadedSubcategories;
 }
 function renderSubcategoryPills(){
   const pillsContainer=document.getElementById('subcategoryPills');
@@ -506,8 +510,8 @@ async function loadPosts(){
   }
   try{
     const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-    // সাব-ক্যাটাগরি পিল লোড করি (প্যারালালে চলবে)
-    loadSubcategoriesForCategory(category);
+    // ক্যাটাগরি ও সাব-ক্যাটাগরির ID আগে লোড করি, যাতে নতুন FK এবং পুরোনো লেখা—দুটিই মেলে।
+    await loadSubcategoriesForCategory(category);
     // Optimization: Removed 'body' from select query to reduce payload size massively!
     const {data,error}=await sb.from('posts')
       .select('id,group_id,language,slug,title,excerpt,cover_image,category,parent_category,subcategory,category_id,subcategory_id,tags,published_at')
@@ -524,15 +528,18 @@ async function loadPosts(){
         const leaf=String(p.subcategory||p.category||'').trim();
         const parent=String(p.parent_category||'').trim();
         const cat=String(p.category||'').trim();
-        return cat===category || leaf===category || parent===category ||
+        const idMatch=loadedCategoryId && String(p.category_id||'')===String(loadedCategoryId);
+        return idMatch || cat===category || leaf===category || parent===category ||
                allowedAliases.includes(leaf) || allowedAliases.includes(parent) || allowedAliases.includes(cat);
       });
-      // সাব-ক্যাটাগরি ফিল্টার
+      // সাব-ক্যাটাগরি: নতুন FK, slug এবং পুরোনো বাংলা/ইংরেজি নাম—সব মিলিয়ে দেখি।
       if(subcategory){
+        const subMatch = loadedSubcategories.find(item=>item.slug===subcategory);
         rows=rows.filter(p=>{
           const sub=String(p.subcategory||'').trim();
-          const subMatch = loadedSubcategories.find(s=>s.slug===subcategory);
-          return sub===subcategory || (subMatch && (sub===subMatch.name_bn || sub===subMatch.name_en));
+          const idMatch=subMatch && p.subcategory_id && String(p.subcategory_id)===String(subMatch.id);
+          return !!idMatch || sub===subcategory ||
+            (subMatch && (sub===subMatch.name_bn || sub===subMatch.name_en));
         });
       }
     }
