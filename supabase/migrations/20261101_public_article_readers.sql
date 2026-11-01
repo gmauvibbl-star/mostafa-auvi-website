@@ -4,7 +4,7 @@
 
 create table if not exists public.post_readers (
   id bigint generated always as identity primary key,
-  post_id uuid not null references public.posts(id) on delete cascade,
+  post_id bigint not null references public.posts(id) on delete cascade,
   visitor_hash text not null check (visitor_hash ~ '^[0-9a-f]{64}$'),
   read_at timestamptz not null default now(),
   constraint post_readers_post_visitor_unique unique (post_id, visitor_hash)
@@ -36,7 +36,7 @@ security definer
 set search_path = ''
 as $$
 declare
-  v_post_id uuid;
+  v_post_id bigint;
   v_total bigint;
 begin
   if p_slug is null or length(p_slug) > 180
