@@ -161,12 +161,12 @@
     </div>
     <nav class="nav" aria-label="প্রধান নেভিগেশন">
       <a href="./">প্রচ্ছদ</a>
-      <a href="posts.html" class="current">প্রকাশিত বই</a>
-      <a href="posts.html?category=গল্প">গল্প</a>
-      <a href="posts.html?category=উপন্যাস">উপন্যাস</a>
-      <a href="posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
-      <a href="posts.html?category=ভ্রমণকাহিনি">ভ্রমণকাহিনি</a>
-      <a href="posts.html?category=আইন-আদালত">আইন ও আদালত</a>
+      <a href="posts.html" class="current">প্রকাশিত লেখা</a>
+      <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
+      <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
+      <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
+      <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
+      <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা ও PDF</a>
       <a href="journal.html">Journal</a>
     </nav>
   </header>
@@ -178,9 +178,9 @@
 
   <!-- Intro -->
   <div class="intro">
-    <div class="eyebrow">Published Books · প্রকাশিত বই</div>
-    <h1 class="page-title" id="pageTitle">প্রকাশিত বই</h1>
-    <p class="page-subtitle" id="pageSubtitle">প্রকাশিত বইয়ের প্রচ্ছদ, পরিচিতি ও প্রকাশনার তথ্য।</p>
+    <div class="eyebrow">Published Writing · প্রকাশিত লেখা</div>
+    <h1 class="page-title" id="pageTitle">প্রকাশিত লেখা</h1>
+    <p class="page-subtitle" id="pageSubtitle">প্রকাশিত লেখার তালিকা ও পাঠের সুবিধা।</p>
   </div>
 
   <!-- Main category and subcategory cards -->
@@ -211,10 +211,12 @@
     <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
     <nav class="footer-nav">
       <a href="./">প্রচ্ছদ</a>
-      <a href="./posts.html">প্রকাশিত বই</a>
-      <a href="./posts.html?category=গল্প">গল্প</a>
-      <a href="./posts.html?category=উপন্যাস">উপন্যাস</a>
-      <a href="./posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
+      <a href="./posts.html">প্রকাশিত লেখা</a>
+      <a href="./posts.html?category=kothasahitya">কথাসাহিত্য</a>
+      <a href="./posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
+      <a href="./posts.html?category=ain-oadalot">আইন ও আদালত</a>
+      <a href="./posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
+      <a href="./posts.html?category=prokashona-o-pdf">প্রকাশনা ও PDF</a>
       <a href="./journal.html">Journal</a>
     </nav>
     <div class="footer-copy">© Mostafa Auvi · Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
@@ -259,13 +261,51 @@ const fmtDate=(iso,lang)=>{
 // legacyAliases: পুরোনো সব Bengali নাম যা এই বিভাগের অধীনে ছিল
 // ============================================================
 const CATEGORIES_MAP = {
-  'kothasahitya':                { bn:'কথাসাহিত্য',                  en:'Fiction',                    icon:'❦', legacyAliases:['কথাসাহিত্য','গল্প','ছোটগল্প','বড় গল্প','বড়গল্প','অনূদিত গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত উপন্যাস','অনুবাদ সাহিত্য','নভেলা','গদ্য','ভ্রমণকাহিনি','অনুবাদ কথাসাহিত্য','ম্যাজিক রিয়ালিজম'] },
-  'probandho-sahityasamalochona':{ bn:'প্রবন্ধ ও সাহিত্যসমালোচনা',  en:'Essays & Literary Criticism', icon:'§',  legacyAliases:['প্রবন্ধ ও সাহিত্যসমালোচনা','প্রবন্ধ-সাহিত্যালোচনা','প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','সাহিত্য প্রবন্ধ','বই আলোচনা','বই পর্যালোচনা','উপন্যাস আলোচনা','কবিতা আলোচনা','প্রবন্ধ আলোচনা','শিল্প সমালোচনা','বিশ্বসাহিত্য','শিল্প ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','সমাজ ও রাজনীতি','দর্শন ও চিন্তা','বিজ্ঞান ও প্রযুক্তি','শিক্ষা ও গবেষণা','ব্যক্তিত্ব ও জীবন','অনুবাদ সাহিত্য আলোচনা','নির্ধারিত গল্প আলোচনা','বিশেষ লেখকের লেখা','লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যিক বিশ্লেষণ'] },
-  'ain-oadalot':                 { bn:'আইন ও আদালত',                en:'Law & Judiciary',             icon:'⚖', legacyAliases:['আইন ও আদালত','আইন-আদালত','বৃটিশ ল\' ও প্রথা ও নৈতিকতার কথা','আইনি বিশ্লেষণ','আদালতের ঘটনা','মামলার ইতিবৃত্ত','সাংবিধানিক আইন','ফৌজদারি আইন','দেওয়ানি আইন','ভূমি আইন','উত্তরাধিকার আইন','বিচারব্যবস্থা','বিশেষ প্রস্তাব','কেসস্টাডি','বাংলাদেশের জুরিসপ্রুডেন্স','সিভিল আদালতের কড়চা','আইন বিষয়ক প্রবন্ধ'] },
-  'bhromonkahini':               { bn:'ভ্রমণকাহিনি',                en:'Travel Writing',              icon:'🧭', legacyAliases:['ভ্রমণকাহিনি','ভ্রমণকাহিঁনি','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','দেশীয় ভ্রমণ','বিদেশ ভ্রমণ','তীর্থ ভ্রমণ','পাহাড়ি ভ্রমণ','সমুদ্র তীর','জঙ্গল ভ্রমণ','ঐতিহাসিক স্থান','আমাদের সোনার দেশ','দেশে-বিদেশে','সুদূরের অদূর দুয়ার','সমুদ্রের ডাক','পাহাড়ের আহ্বান'] },
-  'byaktigoto-onubhuti':         { bn:'ব্যক্তিগত অনুভূতি',         en:'Personal Reflections',        icon:'✦', legacyAliases:['ব্যক্তিগত অনুভূতি','ব্যক্তিগত রচনা','স্মৃতিকথা','স্মৃতিচারণ','দিনলিপি','আমার কথা','ব্যক্তিগত ভাবনা','আত্মকথন','আত্মজীবনী','জীবনস্মৃতি','শৈশবস্মৃতি','ব্যক্তিগত অভিজ্ঞতা','ভ্রমণস্মৃতি','অনুভূতি','জীবনের গল্প','পরিবার ও সম্পর্ক','ফেলে আসা দিন','ডায়েরি','চিঠি'] },
-  'banking-o-orthoniti':         { bn:'ব্যাংকিং ও অর্থনীতি',        en:'Banking & Economics',         icon:'◐', legacyAliases:['ব্যাংকিং ও অর্থনীতি','ব্যাকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা','ব্যাংকিং','অর্থনীতি','কর ব্যবস্থা','কৃষিঋণ','এসএমই ব্যাংকিং','ডিজিটাল ব্যাংকিং','ক্ষুদ্রঋণ','আর্থিক অন্তর্ভুক্তি','সমাজনীতি','বীমা','বৈদেশিক বাণিজ্য','মুদ্রাবাজার'] },
-  'prokashona-o-pdf':            { bn:'প্রকাশনা ও PDF',             en:'Publications & PDF',          icon:'▤', legacyAliases:['প্রকাশনা ও PDF','পিডিএফ','আমার বই','পিডিএফ বই','ই-উপন্যাস','ই-প্রবন্ধ','বই','জার্নাল','সাহিত্য পত্রিকা','ই-বুক','PDF সংগ্রহ','প্রকাশিত গ্রন্থ','লেখক পরিচিতি','ম্যাগাজিন','সংকলন','গবেষণাপত্র'] },
+  'kothasahitya': { bn:'কথাসাহিত্য', en:'Fiction', icon:'❦', legacyAliases:['কথাসাহিত্য','গল্প','ছোটগল্প','বড় গল্প','বড়গল্প','বড়গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত গল্প','অনূদিত উপন্যাস','অনুবাদ সাহিত্য','ভ্রমণ ও অনুবাদ সাহিত্য','ভ্রমণকাহিনি','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','স্মৃতির ভাণ্ডার','ফেলে আসা দিন','নভেলা','ম্যাজিক রিয়ালিজম'] },
+  'probandho-sahityasamalochona': { bn:'প্রবন্ধ ও সাহিত্যসমালোচনা', en:'Essays & Literary Criticism', icon:'§', legacyAliases:['প্রবন্ধ ও সাহিত্যসমালোচনা','প্রবন্ধ-সাহিত্যালোচনা','প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','সাহিত্য প্রবন্ধ','বই আলোচনা','বই পর্যালোচনা','উপন্যাস আলোচনা','কবিতা আলোচনা','প্রবন্ধ আলোচনা','শিল্প সমালোচনা','বিশ্বসাহিত্য','শিল্প ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','সমাজ ও রাজনীতি','দর্শন ও চিন্তা','বিজ্ঞান ও প্রযুক্তি','শিক্ষা ও গবেষণা','ব্যক্তিত্ব ও জীবন','অনুবাদ সাহিত্য আলোচনা','নির্ধারিত গল্প আলোচনা','বিশেষ লেখকের লেখা','লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যিক বিশ্লেষণ'] },
+  'ain-oadalot': { bn:'আইন ও আদালত', en:'Law & Judiciary', icon:'⚖', legacyAliases:['আইন ও আদালত','আইন-আদালত','বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স','ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা','আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','সিভিল আদালতের কড়চা','সিভিল আদালতের কর্চা','কেসস্টাডি','আইনি বিশ্লেষণ','আদালতের ঘটনা','মামলার ইতিবৃত্ত','সাংবিধানিক আইন','ফৌজদারি আইন','দেওয়ানি আইন','ভূমি আইন','উত্তরাধিকার আইন','বিচারব্যবস্থা'] },
+  'banking-o-orthoniti': { bn:'ব্যাংকিং ও অর্থনীতি', en:'Banking & Economics', icon:'◐', legacyAliases:['ব্যাংকিং ও অর্থনীতি','ব্যাকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা','ব্যাংকিং','অর্থনীতি','কর ব্যবস্থা','কৃষিঋণ','এসএমই ব্যাংকিং','ডিজিটাল ব্যাংকিং','ক্ষুদ্রঋণ','আর্থিক অন্তর্ভুক্তি','বীমা','বৈদেশিক বাণিজ্য','মুদ্রাবাজার'] },
+  'prokashona-o-pdf': { bn:'প্রকাশনা ও PDF', en:'Publications & PDF', icon:'▤', legacyAliases:['প্রকাশনা ও PDF','পিডিএফ','আমার বই','পিডিএফ বই','ই-উপন্যাস','ই-প্রবন্ধ','বই','ই-বুক','PDF সংগ্রহ','প্রকাশিত গ্রন্থ','ম্যাগাজিন','সংকলন','গবেষণাপত্র'] }
+};
+
+const SUBCATEGORY_MAP = {
+  'kothasahitya': [
+    {slug:'chotogolpo',bn:'ছোটগল্প',en:'Short Stories',aliases:['ছোটগল্প','ছোট গল্প']},
+    {slug:'borogolpo',bn:'বড়গল্প',en:'Long Stories',aliases:['বড়গল্প','বড়গল্প','বড় গল্প','বড় গল্প']},
+    {slug:'purno-upanyas',bn:'সম্পূর্ণ উপন্যাস',en:'Complete Novels',aliases:['সম্পূর্ণ উপন্যাস']},
+    {slug:'dharabahik-upanyas',bn:'ধারাবাহিক উপন্যাস',en:'Serialised Novels',aliases:['ধারাবাহিক উপন্যাস','ধারাবাহিক']},
+    {slug:'bangladesh-bhraman',bn:'বাংলাদেশ ভ্রমণ',en:'Travel in Bangladesh',aliases:['বাংলাদেশ ভ্রমণ']},
+    {slug:'bidesh-bhraman',bn:'বিদেশ ভ্রমণ',en:'Travel Abroad',aliases:['বিদেশ ভ্রমণ']},
+    {slug:'smritir-bhandar',bn:'স্মৃতির ভাণ্ডার',en:'Memoirs',aliases:['স্মৃতির ভাণ্ডার','স্মৃতিভাণ্ডার']},
+    {slug:'fele-asha-din',bn:'ফেলে আসা দিন',en:'Days Gone By',aliases:['ফেলে আসা দিন']},
+    {slug:'onubad-sahitya',bn:'অনুবাদ সাহিত্য',en:'Translated Literature',aliases:['অনুবাদ সাহিত্য','অনুবাদ কথাসাহিত্য','অনূদিত গল্প','অনূদিত উপন্যাস']}
+  ],
+  'probandho-sahityasamalochona': [
+    {slug:'literary-essays',bn:'সাহিত্য প্রবন্ধ',en:'Literary Essays',aliases:['সাহিত্য প্রবন্ধ','প্রবন্ধ']},
+    {slug:'art-culture',bn:'শিল্প ও সংস্কৃতি',en:'Art & Culture',aliases:['শিল্প ও সংস্কৃতি']},
+    {slug:'history-heritage',bn:'ইতিহাস ও ঐতিহ্য',en:'History & Heritage',aliases:['ইতিহাস ও ঐতিহ্য']},
+    {slug:'society-politics',bn:'সমাজ ও রাজনীতি',en:'Society & Politics',aliases:['সমাজ ও রাজনীতি']},
+    {slug:'philosophy-thought',bn:'দর্শন ও চিন্তা',en:'Philosophy & Thought',aliases:['দর্শন ও চিন্তা']},
+    {slug:'science-technology',bn:'বিজ্ঞান ও প্রযুক্তি',en:'Science & Technology',aliases:['বিজ্ঞান ও প্রযুক্তি']},
+    {slug:'education-research',bn:'শিক্ষা ও গবেষণা',en:'Education & Research',aliases:['শিক্ষা ও গবেষণা']},
+    {slug:'book-discussion',bn:'বই আলোচনা',en:'Book Discussion',aliases:['বই আলোচনা','বই পর্যালোচনা']},
+    {slug:'world-literature',bn:'বিশ্বসাহিত্য',en:'World Literature',aliases:['বিশ্বসাহিত্য']}
+  ],
+  'ain-oadalot': [
+    {slug:'bangladesher-jurisprudence',bn:'বাংলাদেশের জুরিসপ্রুডেন্স',en:'Jurisprudence of Bangladesh',aliases:['বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স']},
+    {slug:'british-law-ethics',bn:'ব্রিটিশ ল ও নৈতিকতার কথকতা',en:'British Law & Ethics',aliases:['ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল’ ও প্রথা ও নৈতিকতার কথা']},
+    {slug:'law-essays',bn:'আইন বিষয়ক প্রবন্ধ',en:'Legal Essays',aliases:['আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','আইনি বিশ্লেষণ']},
+    {slug:'civil-court',bn:'সিভিল আদালতের কড়চা',en:'Civil Court Notes',aliases:['সিভিল আদালতের কড়চা','সিভিল আদালতের কড়চা']},
+    {slug:'case-studies',bn:'কেসস্টাডি',en:'Case Studies',aliases:['কেসস্টাডি','কেস স্টাডি']}
+  ],
+  'banking-o-orthoniti': [
+    {slug:'amar-banking-jibon',bn:'আমার ব্যাংকিং জীবন',en:'My Banking Life',aliases:['আমার ব্যাংকিং জীবন']},
+    {slug:'sme-banking',bn:'এসএমই ব্যাংকিং নিয়ে যত কথা',en:'SME Banking',aliases:['এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং']}
+  ],
+  'prokashona-o-pdf': [
+    {slug:'amar-boi',bn:'আমার বই',en:'My Books',aliases:['আমার বই','বই','প্রকাশিত গ্রন্থ']},
+    {slug:'pdf-boi',bn:'পিডিএফ বই',en:'PDF Books',aliases:['পিডিএফ বই','পিডিএফ','PDF সংগ্রহ','ই-বুক']}
+  ]
 };
 
 // রিভার্স লুকআপ: যেকোনো legacy নাম → slug
@@ -306,9 +346,9 @@ const language=params.get('lang')==='en'?'en':'bn';
 document.documentElement.lang=language;
 if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
-  const navLabels=['Home','Published Writing','Stories','Novels','Essays','Travel Writing','Law & Judiciary','Journal'];
+  const navLabels=['Home','Published Writing','Fiction','Essays & Literary Criticism','Law & Judiciary','Banking & Economics','Publications & PDF','Journal'];
   document.querySelectorAll('.nav a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
-  const footerLabels=['Home','Published Writing','Stories','Novels','Essays','Journal'];
+  const footerLabels=['Home','Published Writing','Fiction','Essays & Literary Criticism','Law & Judiciary','Banking & Economics','Publications & PDF','Journal'];
   document.querySelectorAll('.footer-nav a').forEach((a,i)=>{if(footerLabels[i])a.textContent=footerLabels[i];});
   const eyebrow=document.querySelector('.eyebrow');
   if(eyebrow) eyebrow.textContent='Published Writing';
@@ -350,94 +390,25 @@ document.querySelectorAll('.nav a[href*="posts.html"], #filters a[href*="posts.h
 });
 const statusEl=document.getElementById('status');
 
-// ============================================================
-// Subcategory তালিকা লোড করি (Supabase থেকে) — Pills/Tags UI তৈরির জন্য
-// ============================================================
-let loadedSubcategories = [];
-
-let loadedCategoryId = null;
-async function loadSubcategoriesForCategory(catSlugVal){
-  loadedCategoryId = null;
-  loadedSubcategories = [];
-  if(!catSlugVal || !CATEGORIES_MAP[catSlugVal]) {
-    renderSubcategoryPills();
-    return [];
-  }
-  try {
-    const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-    const { data: catRow, error: catErr } = await sb.from('categories')
-      .select('id,name_bn,name_en,slug,icon')
-      .eq('slug', catSlugVal).eq('is_active', true).maybeSingle();
-    if(catErr) throw catErr;
-    if(!catRow){ renderSubcategoryPills(); return []; }
-    loadedCategoryId = catRow.id;
-    const { data: subs, error: subErr } = await sb.from('subcategories')
-      .select('id,category_id,name_bn,name_en,slug,sort_order')
-      .eq('category_id', catRow.id).eq('is_active', true).order('sort_order');
-    if(subErr) throw subErr;
-    loadedSubcategories = subs || [];
-  } catch(e){
-    console.warn('Category/subcategory lookup failed; legacy category names will be used', e);
-  }
-  renderSubcategoryPills();
-  return loadedSubcategories;
-}
+// উপবিভাগগুলো স্থানীয় নির্ধারিত তালিকা থেকে দেখানো হয়; Supabase categories টেবিলের প্রয়োজন নেই।
 function renderSubcategoryPills(){
-  const pillsContainer=document.getElementById('subcategoryPills');
-  if(!pillsContainer) return;
-  if(!loadedSubcategories || loadedSubcategories.length===0){
-    pillsContainer.style.display='none';
-    pillsContainer.innerHTML='';
-    return;
-  }
-  pillsContainer.style.display='flex';
-  const allLabel = language==='en' ? 'All' : 'সব লেখা';
-  const allUrl = subcategoryUrl('', category);
-  const allActive = !subcategory ? ' active' : '';
-  pillsContainer.innerHTML =
-    '<a class="sub-pill'+allActive+'" href="'+esc(allUrl)+'">'+esc(allLabel)+'</a>' +
-    loadedSubcategories.map(s=>{
-      const subName = language==='en' ? s.name_en : s.name_bn;
-      const url = subcategoryUrl(s.slug, category);
-      const active = subcategory===s.slug ? ' active' : '';
-      return '<a class="sub-pill'+active+'" href="'+esc(url)+'">'+esc(subName)+'</a>';
-    }).join('');
+  const hub=document.getElementById('essayHub');
+  const hubGrid=document.getElementById('essayHubGrid');
+  if(!hub || !hubGrid) return;
+  const items=category ? (SUBCATEGORY_MAP[category]||[]) : Object.entries(CATEGORIES_MAP).map(([slug,info])=>({slug,bn:info.bn,en:info.en,aliases:info.legacyAliases}));
+  if(!items.length){ hub.classList.remove('visible'); hubGrid.innerHTML=''; return; }
+  hub.classList.add('visible');
+  hubGrid.innerHTML=items.map(item=>{
+    const label=language==='en'?item.en:item.bn;
+    const url=category?subcategoryUrl(item.slug,category):languageUrl(language,item.slug,'');
+    const active=subcategory===item.slug?' active':'';
+    return '<a class="essay-hub-card'+active+'" href="'+esc(url)+'"><strong>'+esc(label)+'</strong><span>'+(language==='en'?'Browse writing':'লেখা দেখুন')+'</span></a>';
+  }).join('');
 }
-
-// ============================================================
-// Subcategory পিল কন্টেইনার DOM-এ ইনজেক্ট করি
-// ============================================================
-const subPillsDiv=document.createElement('div');
-subPillsDiv.id='subcategoryPills';
-subPillsDiv.className='subcategory-pills';
-const introEl=document.querySelector('.intro, #intro');
-if(introEl && introEl.parentNode){
-  introEl.parentNode.insertBefore(subPillsDiv, introEl.nextSibling);
-}else{
-  const main=document.querySelector('main')||document.body;
-  main.insertBefore(subPillsDiv, grid);
-}
-// ডায়নামিক CSS ইনজেক্ট করি (mobile + desktop responsive)
-const pillStyle=document.createElement('style');
-pillStyle.textContent=`
-.subcategory-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0;padding:0.5rem 0;}
-.subcategory-pills .sub-pill{display:inline-block;padding:0.4rem 0.85rem;border-radius:999px;background:#174E48;color:#FFFFFF;font-size:0.85rem;border:1px solid #0F3D3E;text-decoration:none;transition:all 0.15s;white-space:nowrap;font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;font-weight:600;box-shadow:0 2px 5px rgba(15,61,62,.14);}
-.subcategory-pills .sub-pill:hover{background:#713D23;color:#FFFFFF;border-color:#542B18;}
-.subcategory-pills .sub-pill.active{background:#0F3D3E;color:#FFFFFF;border-color:#D4B468;font-weight:700;box-shadow:0 0 0 2px rgba(212,180,104,.28);}
-.subcategory-pills .sub-pill:focus-visible{outline:3px solid #A85A12;outline-offset:2px;}
-@media(max-width:680px){
-  .subcategory-pills{gap:0.35rem;}
-  .subcategory-pills .sub-pill{padding:0.3rem 0.65rem;font-size:0.78rem;}
-}`;
-document.head.appendChild(pillStyle);
-
-// পুরোনো essayHub লুকাই — নতুন Pills UI দিয়ে প্রতিস্থাপিত
-const essayHubOld=document.getElementById('essayHub');
-if(essayHubOld) essayHubOld.classList.remove('visible');
+// Mark active filter (legacy nav-pill marking)
 const filtersOld=document.getElementById('filters');
 if(filtersOld) filtersOld.style.display='none';
 
-// Mark active filter (legacy nav-pill marking)
 function markFilter(){
   document.querySelectorAll('#filters .filter-pill').forEach(a=>{
     const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
@@ -533,15 +504,14 @@ function renderBookArchive(){
 }
 
 async function loadPosts(){
-  if(!category||category==='আমার বই'){ renderBookArchive(); return; }
+  // বইয়ের আর্কাইভ শুধু প্রকাশনা বিভাগে দেখাই; মূল Published Writing পেজে সব লেখা থাকবে।
+  if(category === 'prokashona-o-pdf' && (!subcategory || subcategory==='amar-boi')){ renderBookArchive(); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
     statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;
   }
   try{
     const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-    // ক্যাটাগরি ও সাব-ক্যাটাগরির ID আগে লোড করি, যাতে নতুন FK এবং পুরোনো লেখা—দুটিই মেলে।
-    await loadSubcategoriesForCategory(category);
     // Optimization: Removed 'body' from select query to reduce payload size massively!
     const {data,error}=await sb.from('posts')
       .select('id,group_id,language,slug,title,excerpt,cover_image,category,parent_category,subcategory,category_id,subcategory_id,tags,published_at')
@@ -551,26 +521,15 @@ async function loadPosts(){
       .limit(300);
     if(error)throw error;
     let rows=(data||[]);
+    const labelsForPost=p=>[p.category,p.parent_category,p.subcategory,...(Array.isArray(p.tags)?p.tags:[])].map(v=>String(v||'').trim()).filter(Boolean);
     if(category){
-      const catInfo = CATEGORIES_MAP[category];
-      const allowedAliases = catInfo ? catInfo.legacyAliases : [category];
-      rows=rows.filter(p=>{
-        const leaf=String(p.subcategory||p.category||'').trim();
-        const parent=String(p.parent_category||'').trim();
-        const cat=String(p.category||'').trim();
-        const idMatch=loadedCategoryId && String(p.category_id||'')===String(loadedCategoryId);
-        return idMatch || cat===category || leaf===category || parent===category ||
-               allowedAliases.includes(leaf) || allowedAliases.includes(parent) || allowedAliases.includes(cat);
-      });
-      // সাব-ক্যাটাগরি: নতুন FK, slug এবং পুরোনো বাংলা/ইংরেজি নাম—সব মিলিয়ে দেখি।
+      const catInfo=CATEGORIES_MAP[category];
+      const aliases=catInfo?catInfo.legacyAliases:[category];
+      rows=rows.filter(p=>labelsForPost(p).some(v=>v===category||aliases.includes(v)));
       if(subcategory){
-        const subMatch = loadedSubcategories.find(item=>item.slug===subcategory);
-        rows=rows.filter(p=>{
-          const sub=String(p.subcategory||'').trim();
-          const idMatch=subMatch && p.subcategory_id && String(p.subcategory_id)===String(subMatch.id);
-          return !!idMatch || sub===subcategory ||
-            (subMatch && (sub===subMatch.name_bn || sub===subMatch.name_en));
-        });
+        const subItem=(SUBCATEGORY_MAP[category]||[]).find(item=>item.slug===subcategory);
+        const subAliases=subItem?subItem.aliases:[subcategory];
+        rows=rows.filter(p=>labelsForPost(p).some(v=>v===subcategory||subAliases.includes(v)));
       }
     }
     renderCards(rows);
@@ -582,6 +541,7 @@ async function loadPosts(){
 }
 
 updateIntro();
+renderSubcategoryPills();
 loadPosts();
 </script>
 </body>

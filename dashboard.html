@@ -998,45 +998,11 @@
     // CATEGORIES — Supabase থেকে লোড (fallback: hardcoded)
     // ============================================================
     async function loadCategories() {
-      if (!supabase) {
-        state.categories = CATEGORIES;
-        return Promise.resolve();
-      }
-      try {
-        const [{ data: cats, error: catErr }, { data: subs, error: subErr }] = await Promise.all([
-          supabase.from('categories').select('id,name_bn,name_en,slug,icon,sort_order,is_active').eq('is_active', true).order('sort_order'),
-          supabase.from('subcategories').select('id,category_id,name_bn,name_en,slug,sort_order,is_active').eq('is_active', true).order('sort_order'),
-        ]);
-        if (catErr || subErr) throw (catErr || subErr);
-        if (!cats || cats.length === 0) {
-          state.categories = CATEGORIES;
-          return Promise.resolve();
-        }
-        const subByCat = {};
-        (subs || []).forEach(s => {
-          if (!subByCat[s.category_id]) subByCat[s.category_id] = [];
-          subByCat[s.category_id].push(s);
-        });
-        state.categories = cats.map(c => ({
-          id: c.id,
-          name: c.name_bn,
-          nameEn: c.name_en,
-          slug: c.slug,
-          icon: c.icon,
-          sort_order: c.sort_order,
-          is_active: c.is_active,
-          subs: (subByCat[c.id] || []).map(s => ({
-            id: s.id,
-            name: s.name_bn,
-            nameEn: s.name_en,
-            slug: s.slug,
-            sort_order: s.sort_order,
-          })),
-        }));
-      } catch (e) {
-        console.warn('loadCategories: Supabase থেকে লোড ব্যর্থ, hardcoded fallback', e);
-        state.categories = CATEGORIES;
-      }
+      // লেখার বিভাগগুলো সাইটের নির্ধারিত taxonomy থেকে আসে।
+      // Supabase schema-তে categories/subcategories-এর প্রত্যাশিত কলাম নেই;
+      // তাই অনুপস্থিত টেবিল/কলাম query করে permission error তৈরি না করে
+      // একই স্থির তালিকা থেকেই editor-এর বিভাগ নির্বাচন চালু রাখা হচ্ছে।
+      state.categories = CATEGORIES;
       return Promise.resolve();
     }
     function getParentCategories() { return state.categories; }
@@ -1100,6 +1066,7 @@
           cover_image: main.cover_image,
           featured: main.featured,
           published: main.published,
+          published_at: main.published_at || sibling?.published_at || null,
           bn_id: main.id,
           title: main.title || '',
           slug: main.slug || '',
@@ -1125,6 +1092,7 @@
           cover_image: main.cover_image,
           featured: main.featured,
           published: main.published,
+          published_at: main.published_at || sibling?.published_at || null,
           bn_id: sibling?.id || null,
           title: sibling?.title || '',
           slug: sibling?.slug || '',
@@ -1156,7 +1124,7 @@
         cover_image: formData.cover_image || null,
         featured: formData.featured || false,
         published,
-        published_at: published ? now : null,
+        published_at: published ? (formData.published_at || now) : null,
         updated_at: now,
         tags: tagsArray,
         group_id: groupId,
@@ -2069,7 +2037,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         group_id: null, bn_id: null, en_id: null,
         title: '', slug: '', excerpt: '', body: '',
         title_en: '', slug_en: '', excerpt_en: '', body_en: '',
-        category: '', subcategory: '', category_id: null, subcategory_id: null, category_slug: null, tags: [], featured: false, status: 'draft', cover_image: null,
+        category: '', subcategory: '', category_id: null, subcategory_id: null, category_slug: null, tags: [], featured: false, status: 'draft', published_at: null, cover_image: null,
       };
 
       // Active top tab — default 'topic'
@@ -2466,6 +2434,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           formData.tags = w.tags || [];
           formData.featured = w.featured || false;
           formData.status = w.published ? 'published' : 'draft';
+          formData.published_at = w.published_at || null;
           formData.cover_image = w.cover_image || null;
           // Populate UI
           $('#f-title').value = formData.title;
