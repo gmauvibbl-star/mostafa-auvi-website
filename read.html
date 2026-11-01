@@ -385,6 +385,7 @@
     border-radius: 2px;
     margin-bottom: 18px;
   }
+  /* Keep the title clean and separate from the article's decorative first letter. */
   .a4-title {
     font-family: 'Noto Serif Bengali', serif;
     font-size: clamp(23px, 3vw, 29px);
@@ -514,6 +515,7 @@
     hyphens: auto;
     -webkit-hyphens: auto;
   }
+  /* Preserve deliberate formatting added in the author's rich-text editor. */
   .a4-body, .a4-body * { background-image: none; }
   .a4-body.en { font-family: 'EB Garamond', serif; }
   .a4-body p { margin: 0 0 1.15em; }
@@ -1119,8 +1121,233 @@
   <div class="back-bar bottom" id="bottomBackBar" style="margin-top:24px;"></div>
 </main>
 
-<!-- Reader comments -->
+<!-- Reader comments: placed directly above the footer -->
 <section class="reader-comments" id="readerComments" aria-labelledby="commentsTitle">
+  <div class="reader-comments-inner">
+    <div class="comments-heading">
+      <span class="comments-kicker">Readers' voices</span>
+      <h2 id="commentsTitle">পাঠকের কথা</h2>
+      <p>লেখাটি নিয়ে আপনার ভাবনা জানাতে পারেন। শুধু নাম লিখুন, সাইন ইন লাগবে না।</p>
+    </div>
+    <form id="commentForm" class="comment-form">
+      <label for="commentName">আপনার নাম</label>
+      <input id="commentName" name="name" type="text" maxlength="60" autocomplete="name" required placeholder="নাম লিখুন">
+      <label for="commentText">আপনার মন্তব্য</label>
+      <textarea id="commentText" name="comment" rows="4" maxlength="2000" required placeholder="লেখাটি পড়ে আপনার মতামত লিখুন…"></textarea>
+      <div class="comment-help-row"><span>শালীন ও বিষয়ভিত্তিক মন্তব্য করুন।</span><span id="commentCount">০ / ২০০০</span></div>
+      <label class="comment-honeypot" aria-hidden="true" for="commentWebsite">ওয়েবসাইট</label>
+      <input class="comment-honeypot" id="commentWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="comment-form-bottom">
+        <span id="commentStatus" role="status" aria-live="polite"></span>
+        <button type="submit" id="commentSubmit">মন্তব্য প্রকাশ করুন</button>
+      </div>
+    </form>
+    <div class="comments-list" aria-live="polite">
+      <h3 class="comments-list-title">পাঠকদের মন্তব্য</h3>
+      <div id="commentsList"><p class="comments-loading">মন্তব্য লোড হচ্ছে…</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer strip -->
+<div class="footer-strip">
+  <div class="left">
+    <span class="author">Mostafa Auvi</span>
+    « লেখা মানুষকে আরেকটু মানুষ করে »
+  </div>
+  <div class="center">
+    <button id="authorLoginBtn" class="author-login-btn" aria-label="লেখক লগইন">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span id="authorLoginLabel">লেখক লগইন</span>
+    </button>
+  </div>
+  <div class="right">
+    <a href="subscribe.html">পত্র বক্স</a>
+    <a href="index.html">সাইটম্যাপ</a>
+    <a href="about.html">গোপনীয়তা</a>
+    <a href="#">© ২০২৬</a>
+  </div>
+</div>
+
+</div><!-- /.page-wrap -->
+
+<!-- Author login modal -->
+<div id="loginModalOverlay" class="login-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+  <div class="login-modal">
+    <button type="button" class="modal-close" aria-label="বন্ধ করুন" onclick="closeLoginModal()">×</button>
+    <div class="eyebrow">Author Access</div>
+    <h3 id="loginModalTitle">লেখক লগইন</h3>
+    <div class="modal-sub">ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন</div>
+    <div id="modalStatus" class="modal-status"></div>
+    <div class="form-group">
+      <label for="modalEmail">ইমেইল</label>
+      <input id="modalEmail" type="email" autocomplete="email" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label for="modalPassword">পাসওয়ার্ড</label>
+      <input id="modalPassword" type="password" autocomplete="current-password" placeholder="আপনার পাসওয়ার্ড">
+    </div>
+    <div class="btn-row">
+      <button type="button" id="modalLoginBtn" class="btn btn-primary">লগইন করুন →</button>
+      <button type="button" class="btn secondary" onclick="closeLoginModal()">বাতিল</button>
+    </div>
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);text-align:center;font-family:'EB Garamond',serif;font-size:13px;">
+      <a href="#" id="forgotPasswordLink" style="color:var(--blood);text-decoration:none;font-style:italic;font-weight:600;">পাসওয়ার্ড ভুলে গেছেন?</a>
+      <span style="color:var(--paper-dark);margin:0 8px;">·</span>
+      <span style="color:var(--ink-soft);">নতুন লেখক? <a href="#" id="signupLink" style="color:var(--teal-deep);text-decoration:none;font-weight:600;font-style:italic;">অ্যাকাউন্ট তৈরি করুন</a></span>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ====== Date in utility bar (Bengali) ====== */
+(function(){
+  const days = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
+  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  const now = new Date();
+  const dateStr = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
+  const el = document.getElementById('todayDate');
+  if (el) el.textContent = dateStr;
+})();
+
+/* ====== Supabase config ====== */
+const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
+const fmtDate = (iso, lang) => {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  if (lang === 'en') {
+    try { return d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }); }
+    catch { return d.toLocaleDateString(); }
+  }
+  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  const toBn = n => String(n).replace(/[0-9]/g, x => '০১২৩৪৫৬৭৮৯'[x]);
+  return `${toBn(d.getDate())} ${months[d.getMonth()]} ${toBn(d.getFullYear())}`;
+};
+// catLabel — নতুন ৭-বিভাগ কাঠামো সমর্থন
+// legacy aliases ও slug দুটোই সাপোর্ট করে। পোস্টের category ফিল্ড যা-ই আসুক,
+// সঠিক প্রদর্শন নাম দেখাবে।
+const CATEGORIES_MAP_READ = {
+  'kothasahitya':                { bn:'কথাসাহিত্য',                  en:'Fiction',                    icon:'❦', aliases:['কথাসাহিত্য','গল্প','ছোটগল্প','বড় গল্প','বড়গল্প','উপন্যাস','অনুবাদ সাহিত্য','নভেলা','গদ্য','ভ্রমণকাহিনি','অনুবাদ কথাসাহিত্য','ম্যাজিক রিয়ালিজম','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত গল্প','অনূদিত উপন্যাস','অনূদিত প্রবন্ধ','কিশোর গল্প','রূপকথা','লোকগল্প','বিজ্ঞান কল্পকাহিনী','গোয়েন্দা গল্প','ঐতিহাসিক গল্প','হাসির গল্প','ভৌতিক গল্প'] },
+  'probandho-sahityasamalochona':{ bn:'প্রবন্ধ ও সাহিত্যসমালোচনা',  en:'Essays & Literary Criticism', icon:'§',  aliases:['প্রবন্ধ ও সাহিত্যসমালোচনা','প্রবন্ধ-সাহিত্যালোচনা','প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','সাহিত্য প্রবন্ধ','বই আলোচনা','বই পর্যালোচনা','উপন্যাস আলোচনা','কবিতা আলোচনা','প্রবন্ধ আলোচনা','শিল্প সমালোচনা','বিশ্বসাহিত্য','শিল্প ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','সমাজ ও রাজনীতি','দর্শন ও চিন্তা','বিজ্ঞান ও প্রযুক্তি','শিক্ষা ও গবেষণা','ব্যক্তিত্ব ও জীবন','অনুবাদ সাহিত্য আলোচনা','নির্ধারিত গল্প আলোচনা','বিশেষ লেখকের লেখা','লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যিক বিশ্লেষণ'] },
+  'ain-oadalot':                 { bn:'আইন ও আদালত',                en:'Law & Judiciary',             icon:'⚖', aliases:['আইন ও আদালত','আইন-আদালত','বৃটিশ ল\' ও প্রথা ও নৈতিকতার কথা','আইনি বিশ্লেষণ','আদালতের ঘটনা','মামলার ইতিবৃত্ত','সাংবিধানিক আইন','ফৌজদারি আইন','দেওয়ানি আইন','ভূমি আইন','উত্তরাধিকার আইন','বিচারব্যবস্থা','বিশেষ প্রস্তাব','কেসস্টাডি','বাংলাদেশের জুরিসপ্রুডেন্স','সিভিল আদালতের কড়চা','আইন বিষয়ক প্রবন্ধ'] },
+  'bhromonkahini':               { bn:'ভ্রমণকাহিনি',                en:'Travel Writing',              icon:'🧭', aliases:['ভ্রমণকাহিনি','ভ্রমণকাহিঁনি','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','আমাদের সোনার দেশ','দেশে-বিদেশে','সুদূরের অদূর দুয়ার','সমুদ্রের ডাক','পাহাড়ের আহ্বান','দেশীয় ভ্রমণ','পাহাড়ি ভ্রমণ','সমুদ্র তীর','জঙ্গল ভ্রমণ','ঐতিহাসিক স্থান'] },
+  'byaktigoto-onubhuti':         { bn:'ব্যক্তিগত অনুভূতি',         en:'Personal Reflections',        icon:'✦', aliases:['ব্যক্তিগত অনুভূতি','ব্যক্তিগত রচনা','স্মৃতিকথা','স্মৃতিচারণ','দিনলিপি','আমার কথা','ব্যক্তিগত ভাবনা','আত্মকথন','আত্মজীবনী','জীবনস্মৃতি','শৈশবস্মৃতি','ব্যক্তিগত অভিজ্ঞতা','ভ্রমণস্মৃতি','অনুভূতি','জীবনের গল্প','পরিবার ও সম্পর্ক','ফেলে আসা দিন','ডায়েরি','চিঠি','নোটবুক','জার্নাল'] },
+  'banking-o-orthoniti':         { bn:'ব্যাংকিং ও অর্থনীতি',        en:'Banking & Economics',         icon:'◐', aliases:['ব্যাংকিং ও অর্থনীতি','ব্যাকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা','ব্যাংকিং','অর্থনীতি','কর ব্যবস্থা','কৃষিঋণ','এসএমই ব্যাংকিং','ডিজিটাল ব্যাংকিং','ক্ষুদ্রঋণ','আর্থিক অন্তর্ভুক্তি','সমাজনীতি','বীমা','বৈদেশিক বাণিজ্য','মুদ্রাবাজার'] },
+  'prokashona-o-pdf':            { bn:'প্রকাশনা ও PDF',             en:'Publications & PDF',          icon:'▤', aliases:['প্রকাশনা ও PDF','পিডিএফ','আমার বই','পিডিএফ বই','ই-উপন্যাস','ই-প্রবন্ধ','বই','জার্নাল','সাহিত্য পত্রিকা','ই-বুক','PDF সংগ্রহ','প্রকাশিত গ্রন্থ','লেখক পরিচিতি','ম্যাগাজিন','সংকলন','গবেষণাপত্র'] },
+};
+// রিভার্স লুকআপ map: alias → slug
+const CAT_ALIAS_LOOKUP = {};
+Object.entries(CATEGORIES_MAP_READ).forEach(([slug, info]) => {
+  info.aliases.forEach(a => { CAT_ALIAS_LOOKUP[a] = slug; });
+  CAT_ALIAS_LOOKUP[info.bn] = slug;
+  CAT_ALIAS_LOOKUP[info.en] = slug;
+  CAT_ALIAS_LOOKUP[slug] = slug;
+});
+
+const catLabel = cat => {
+  if(!cat) return 'লেখা';
+  // slug ম্যাচ
+  if(CATEGORIES_MAP_READ[cat]) return CATEGORIES_MAP_READ[cat].bn;
+  // alias ম্যাচ
+  const slug = CAT_ALIAS_LOOKUP[cat];
+  if(slug && CATEGORIES_MAP_READ[slug]) return CATEGORIES_MAP_READ[slug].bn;
+  return cat || 'লেখা';
+};
+
+const params = new URLSearchParams(location.search);
+const slug = params.get('slug');
+const previewRequested = params.get('preview') === '1';
+const articleEl = document.getElementById('article');
+const shareUrl = location.href;
+
+function renderError(title, msg) {
+  articleEl.innerHTML = '<div class="error-state"><div class="icon">❦</div><h2>' + esc(title) + '</h2><p>' + esc(msg) + '</p><a href="./posts.html">← সব লেখায় ফিরুন</a></div>';
+  const bb = document.getElementById('bottomBackBar');
+  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">← সব লেখা</a>';
+}
+
+function buildShareButtons(title) {
+  const u = encodeURIComponent(shareUrl);
+  const facebookPreviewUrl = 'https://voswrndbxrsaqfzwffhh.supabase.co/functions/v1/share?slug=' + encodeURIComponent(slug || '');
+  const fu = encodeURIComponent(facebookPreviewUrl);
+  const t = encodeURIComponent(title || '');
+  const txt = encodeURIComponent('মোস্তফা অভি — ' + (title || ''));
+  return '<div class="share-section">' +
+    '<div class="share-section-title">এই লেখাটি শেয়ার করুন · Share</div>' +
+    '<div class="share-buttons">' +
+      '<a class="share-btn share-fb" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=' + fu + '"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>' +
+      '<a class="share-btn share-x" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?url=' + u + '&text=' + t + '"><svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 5.1-6.9zm-1.3 19.6h2L6.5 3.2H4.3l13.3 17.6z"/></svg>X</a>' +
+      '<a class="share-btn share-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=' + t + '%20' + u + '"><svg viewBox="0 0 24 24"><path d="M.06 24l1.68-6.16A11.87 11.87 0 0 1 .14 11.9C.14 5.34 5.48 0 12.05 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.49 8.42c0 6.57-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.7-1.45L.06 24zM6.6 20.13l.36.21a9.86 9.86 0 0 0 5.03 1.38h.01c5.46 0 9.9-4.44 9.9-9.9a9.86 9.86 0 0 0-2.9-7A9.82 9.82 0 0 0 12.06 2c-5.46 0-9.9 4.44-9.9 9.9a9.86 9.86 0 0 0 1.51 5.26l.24.38-1 3.63 3.7-.97zM17.5 14.4c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.9-2.2-.24-.57-.48-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42z"/></svg>WhatsApp</a>' +
+      '<a class="share-btn share-tg" target="_blank" rel="noopener noreferrer" href="https://t.me/share/url?url=' + u + '&text=' + t + '"><svg viewBox="0 0 24 24"><path d="M23.9 1.6l-3.6 17.1c-.3 1.2-1 1.5-2 .9l-5.5-4-2.7 2.6c-.3.3-.55.55-1.1.55l.4-5.6 10.3-9.3c.4-.4-.1-.6-.7-.2L6.2 13.4.9 11.7c-1.2-.4-1.2-1.2.3-1.8L22.4.2c1-.4 1.9.2 1.5 1.4z"/></svg>Telegram</a>' +
+      '<a class="share-btn share-li" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=' + u + '"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>' +
+      '<a class="share-btn share-em" href="mailto:?subject=' + t + '&body=' + txt + '%0A%0A' + u + '"><svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.714-9.518-7.714h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>Email</a>' +
+      '<button class="share-btn share-copy" id="copyLinkBtn" type="button"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link</button>' +
+    '</div></div>';
+}
+
+function renderArticle(post, sibling) {
+  const lang = post.language || 'bn';
+  const isEn = lang === 'en';
+  document.documentElement.lang = lang;
+  document.title = (post.title || 'লেখা') + ' | Mostafa Auvi';
+  const plainArticleText = String(post.excerpt || post.body || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+  const seoDescription = (plainArticleText || 'মোস্তফা অভির প্রকাশিত লেখা।').slice(0, 155);
+  const canonicalUrl = location.origin + location.pathname + '?slug=' + encodeURIComponent(post.slug || slug);
+  const setSeoMeta = (selector, attr, key, value) => {
+    let node = document.head.querySelector(selector);
+    if (!node) { node = document.createElement('meta'); node.setAttribute(attr, key); document.head.appendChild(node); }
+    node.setAttribute('content', value);
+  };
+  setSeoMeta('meta[name="description"]', 'name', 'description', seoDescription);
+  setSeoMeta('meta[property="og:type"]', 'property', 'og:type', 'article');
+  setSeoMeta('meta[property="og:title"]', 'property', 'og:title', (post.title || 'লেখা') + ' | Mostafa Auvi');
+  setSeoMeta('meta[property="og:description"]', 'property', 'og:description', seoDescription);
+  setSeoMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+  setSeoMeta('meta[property="og:site_name"]', 'property', 'og:site_name', 'Mostafa Auvi');
+  setSeoMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary');
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+  canonical.href = canonicalUrl;
+  const existingArticleSchema = document.getElementById('articleStructuredData');
+  if (existingArticleSchema) existingArticleSchema.remove();
+  const articleSchema = document.createElement('script');
+  articleSchema.type = 'application/ld+json';
+  articleSchema.id = 'articleStructuredData';
+  articleSchema.textContent = JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: post.title || 'Mostafa Auvi',
+    description: seoDescription,
+    author: {'@type':'Person', name:'Mostafa Auvi', alternateName:'মোস্তফা অভি'},
+    datePublished: post.published_at || undefined,
+    inLanguage: lang,
+    mainEntityOfPage: canonicalUrl,
+    publisher: {'@type':'Person', name:'Mostafa Auvi'}
+  });
+  document.head.appendChild(articleSchema);
+
+  const dateStr = fmtDate(post.published_at, lang);
+  const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean)
+    : (post.tags ? String(post.tags).split(',').map(t => t.trim()).filter(Boolean) : []);
+  // Sanitize stored rich text while retaining the editor's deliberate inline formatting.
+  const rawBodyHtml = String(post.body || '').trim();
+  const bodyDoc = new DOMParser().parseFromString(rawBodyHtml, 'text/html');
+  bodyDoc.body.querySelectorAll('script,style,object,embed,form,input,button,textarea,select').forEach(el => el.remove());
+  const safeStyle = new Set(['color','background-color','font-size','font-family','line-height','text-align','margin','margin-bottom','margin-left','margin-right','text-indent','width','max-width','height','float','display']);
+  bodyDoc.body.querySelectorAll('*').forEach((el) => {
+    el.removeAttribute('bgcolor');
+    Array.from(el.attributes).forEach(attr => {
+      if (/^on/i.test(attr.name) || attr.name === 'srcdoc') el.removeAttribute(attr.name);
+      if (['href','src','xlink:href'].includes(attr.name.toLowerCase()) && /^\s*javascript:/i.test(attr.value)) el.removeAttribute(attr.name);
+    });
+    if (el.hasAttribute('style')) {
+      Array.from(el.style).forEach(prop => {
+        const value = el.style.getPropertyValue(prop);
         if (!safeStyle.has(prop) || /url\s*\(|expression|javascript|@import/i.test(value)) el.style.removeProperty(prop);
       });
       if (!el.style.cssText.trim()) el.removeAttribute('style');
@@ -1465,12 +1692,12 @@ loadPost();
   }
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
-    if (!postSlug) { showStatus('একটি নির্দিষ্ট লেখার পেজে গিয়ে মন্তব্য করুন।', true); return; }
+    if (!postSlug) { showStatus('একটি নির্দিষ্ট লেখার পেজে গিয়ে মন্তব্য করুন।', true); return; }
     const authorName = nameInput.value.trim();
     const commentText = textInput.value.trim();
     if (websiteInput.value.trim()) { form.reset(); return; }
     if (!authorName || !commentText) { showStatus('নাম ও মন্তব্য দুটোই লিখুন।', true); return; }
-    if (authorName.length > 60 || commentText.length > 2000) { showStatus('নামের বা মন্তব্যের দৈর্ঘ্য সীমা ছাড়িয়েছে।', true); return; }
+    if (authorName.length > 60 || commentText.length > 2000) { showStatus('নামের বা মন্তব্যের দৈর্ঘ্য সীমা ছাড়িয়েছে।', true); return; }
     submit.disabled = true;
     showStatus('মন্তব্য পাঠানো হচ্ছে…', false);
     try {
@@ -1481,16 +1708,16 @@ loadPost();
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
-        showStatus(result.error || 'মন্তব্য পাঠানো যায়নি। পরে আবার চেষ্টা করুন।', true);
+        showStatus(result.error || 'মন্তব্য পাঠানো যায়নি। পরে আবার চেষ্টা করুন।', true);
         return;
       }
       textInput.value = '';
       countLabel.textContent = '০ / ২০০০';
-      showStatus(result.message || 'আপনার মন্তব্য প্রকাশিত হয়েছে। ধন্যবাদ!', false);
+      showStatus(result.message || 'আপনার মন্তব্য প্রকাশিত হয়েছে। ধন্যবাদ!', false);
       await loadComments();
     } catch (error) {
       console.error('Comment submit error:', error);
-      showStatus('সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।', true);
+      showStatus('সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।', true);
     } finally {
       submit.disabled = false;
     }
