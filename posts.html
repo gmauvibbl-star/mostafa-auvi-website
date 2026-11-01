@@ -166,7 +166,6 @@
       <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
       <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
       <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা ও PDF</a>
-      <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
       <a href="journal.html">Journal</a>
     </nav>
   </header>
@@ -386,7 +385,7 @@ function renderSubcategoryPills(){
   hub.classList.add('visible');
   hubGrid.innerHTML=items.map(item=>{
     const label=language==='en'?item.en:item.bn;
-    const url=subcategoryUrl(item.slug,category||item.slug);
+    const url=category?subcategoryUrl(item.slug,category):languageUrl(language,item.slug,'');
     const active=subcategory===item.slug?' active':'';
     return '<a class="essay-hub-card'+active+'" href="'+esc(url)+'"><strong>'+esc(label)+'</strong><span>'+(language==='en'?'Browse writing':'লেখা দেখুন')+'</span></a>';
   }).join('');
@@ -488,7 +487,7 @@ function renderBookArchive(){
 
 async function loadPosts(){
   // বইয়ের আর্কাইভ শুধু প্রকাশনা বিভাগে দেখাই; মূল Published Writing পেজে সব লেখা থাকবে।
-  if(category === 'prokashona-o-pdf' || category === 'আমার বই'){ renderBookArchive(); return; }
+  if(category === 'prokashona-o-pdf' && (!subcategory || subcategory==='amar-boi')){ renderBookArchive(); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
     statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;
