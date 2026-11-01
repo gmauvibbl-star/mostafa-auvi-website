@@ -713,40 +713,41 @@
     ::-webkit-scrollbar-thumb:hover { background: var(--muted-fg); }
     .sidebar ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
   
-    /* Dashboard typography readability; no layout or spacing changes */
-    body { font-size: 16px; }
-    .btn { font-size: 15px; }
-    .btn-sm { font-size: 14px; }
-    .btn-lg { font-size: 16px; }
-    .input, .textarea, .select { font-size: 15px; }
-    .label { font-size: 14px; }
-    .label-hint { font-size: 13px; }
-    .card-h { font-size: 16px; }
-    .badge { font-size: 13px; }
-    .badge-count { font-size: 12px; }
-    .text-sm { font-size: 14px; }
-    .text-xs { font-size: 13px; }
-    .breadcrumb { font-size: 14px; }
-    .sidebar-brand .name { font-size: 16px; }
-    .sidebar-brand .sub { font-size: 13px; }
-    .sidebar-section-title { font-size: 12px; }
-    .nav-item { font-size: 15px; }
-    .nav-item .count { font-size: 12px; }
-    .sidebar-footer .name { font-size: 14px; }
-    .sidebar-footer .email { font-size: 12px; }
+    /* Dashboard typography: slightly larger for comfortable reading */
+    body { font-size: 17px; }
+    .btn { font-size: 16px; }
+    .btn-sm { font-size: 15px; }
+    .btn-lg { font-size: 17px; }
+    .input, .textarea, .select { font-size: 16px; }
+    .label { font-size: 15px; }
+    .label-hint { font-size: 14px; }
+    .card-h { font-size: 17px; }
+    .badge { font-size: 14px; }
+    .badge-count { font-size: 13px; }
+    .text-sm { font-size: 15px; }
+    .text-xs { font-size: 14px; }
+    .breadcrumb { font-size: 15px; }
+    .sidebar-brand .name { font-size: 17px; }
+    .sidebar-brand .sub { font-size: 14px; }
+    .sidebar-section-title { font-size: 13px; }
+    .nav-item { font-size: 16px; }
+    .nav-item .count { font-size: 13px; }
+    .sidebar-footer .name { font-size: 15px; }
+    .sidebar-footer .email { font-size: 13px; }
     .page-title { font-size: 24px; }
-    .page-subtitle { font-size: 15px; }
-    .tab-btn { font-size: 15px; }
-    .sub-tab { font-size: 14px; }
-    .stats-card > .flex > div:first-child p:first-child { font-size: 15px !important; }
+    .page-subtitle { font-size: 16px; }
+    .tab-btn { font-size: 16px; }
+    .sub-tab { font-size: 15px; }
+    .editor-content { font-size: 18px; line-height: 1.85; }
+    .stats-card > .flex > div:first-child p:first-child { font-size: 16px !important; }
     .stats-card > .flex > div:first-child p:last-child { font-size: 32px !important; line-height: 1.2; }
-    .writing-item .title { font-size: 15px; }
-    .writing-item .meta { font-size: 13px; }
-    .tag-chip { font-size: 13px; }
-    .modal h3 { font-size: 18px; }
-    .modal p { font-size: 15px; }
-    .toast { font-size: 14px; }
-    .toast .t-desc { font-size: 13px; }
+    .writing-item .title { font-size: 16px; }
+    .writing-item .meta { font-size: 14px; }
+    .tag-chip { font-size: 14px; }
+    .modal h3 { font-size: 19px; }
+    .modal p { font-size: 16px; }
+    .toast { font-size: 15px; }
+    .toast .t-desc { font-size: 14px; }
     @media (max-width: 768px) {
       .stats-card > .flex > div:first-child p:last-child { font-size: 29px !important; }
       .page-title { font-size: 22px; }
@@ -1993,17 +1994,20 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         { id: 'list', label: 'আমার লেখাসমূহ', icon: 'list-ordered' },
       ];
       mainNav.forEach(item => {
-        const isActive = state.view === item.id || (item.id === 'new' && state.view === 'new');
-        const btn = el('button', { class: `nav-item bn-font ${isActive ? 'active' : ''}`, type: 'button' },
-          icon(item.icon),
-          el('span', {}, item.label)
-        );
-        btn.addEventListener('click', () => {
+        const isActive = state.view === item.id;
+        const link = el('a', {
+          class: `nav-item bn-font ${isActive ? 'active' : ''}`,
+          href: `#${item.id}`,
+          'aria-current': isActive ? 'page' : null,
+          title: item.label,
+        }, icon(item.icon), el('span', {}, item.label));
+        link.addEventListener('click', event => {
+          event.preventDefault();
           state.view = item.id;
           if (item.id === 'new') state.editingId = null;
           renderApp();
         });
-        mainSection.appendChild(btn);
+        mainSection.appendChild(link);
       });
 
       // SITE DATA section — ক্যাটাগরি ম্যানেজমেন্ট এখন সক্রিয়
@@ -2015,25 +2019,23 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         { label: 'মিডিয়া লাইব্রেরি', icon: 'image', action: null, enabled: false },
       ];
       siteNav.forEach(item => {
-        const btn = el('button', {
-          class: 'nav-item bn-font' + (state.view === item.action ? ' active' : ''),
-          type: 'button',
-          disabled: !item.enabled,
-          style: item.enabled ? {} : { opacity: '0.5', cursor: 'not-allowed' }
-        },
-          icon(item.icon),
-          el('span', {}, item.label)
-        );
+        const isActive = item.enabled && state.view === item.action;
+        const link = el(item.enabled && item.action ? 'a' : 'div', {
+          class: 'nav-item bn-font' + (isActive ? ' active' : ''),
+          href: item.enabled && item.action ? `#${item.action}` : null,
+          title: item.enabled ? item.label : 'শীঘ্রই আসছে',
+          style: item.enabled ? {} : { opacity: '0.5', cursor: 'not-allowed' },
+          'aria-current': isActive ? 'page' : null,
+        }, icon(item.icon), el('span', {}, item.label));
         if (item.enabled && item.action) {
-          btn.addEventListener('click', () => {
+          link.addEventListener('click', event => {
+            event.preventDefault();
             state.view = item.action;
             state.editingId = null;
             renderApp();
           });
-        } else {
-          btn.title = 'শীঘ্রই আসছে';
         }
-        siteSection.appendChild(btn);
+        siteSection.appendChild(link);
       });
 
       // EXTRA section
