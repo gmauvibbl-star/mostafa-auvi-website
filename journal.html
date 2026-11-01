@@ -2056,6 +2056,8 @@ if (journalLanguage === 'en') {
   setText('#loadingState p', 'Please wait a moment.');
   setText('#loadMoreBtn', 'Load more ↓');
   setHeading('.sidebar .sidebox:nth-child(1) h3', 'Recent Entries');
+  const recentPlaceholder = document.getElementById('recentList');
+  if (recentPlaceholder) recentPlaceholder.innerHTML = '<li class="meta">Recent entries will appear here.</li>';
   setHeading('.sidebar .sidebox:nth-child(2) h3', 'Browse by Category');
   setText('.cat-quicklist a:nth-child(1)', 'Personal');
   setText('.cat-quicklist a:nth-child(2)', 'Travel');
