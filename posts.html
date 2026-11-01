@@ -177,9 +177,9 @@
 
   <!-- Intro -->
   <div class="intro">
-    <div class="eyebrow">Published Books · প্রকাশিত লেখা</div>
+    <div class="eyebrow">Published Writing · প্রকাশিত লেখা</div>
     <h1 class="page-title" id="pageTitle">প্রকাশিত লেখা</h1>
-    <p class="page-subtitle" id="pageSubtitle">প্রকাশিত লেখায়ের প্রচ্ছদ, পরিচিতি ও প্রকাশনার তথ্য।</p>
+    <p class="page-subtitle" id="pageSubtitle">প্রকাশিত লেখার তালিকা ও পাঠের সুবিধা।</p>
   </div>
 
   <!-- Main category and subcategory cards -->
@@ -211,9 +211,10 @@
     <nav class="footer-nav">
       <a href="./">প্রচ্ছদ</a>
       <a href="./posts.html">প্রকাশিত লেখা</a>
-      <a href="./posts.html?category=গল্প">গল্প</a>
-      <a href="./posts.html?category=উপন্যাস">উপন্যাস</a>
-      <a href="./posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
+      <a href="./posts.html?category=kothasahitya">কথাসাহিত্য</a>
+      <a href="./posts.html?category=ain-oadalot">আইন ও আদালত</a>
+      <a href="./posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
+      <a href="./posts.html?category=prokashona-o-pdf">প্রকাশনা ও PDF</a>
       <a href="./journal.html">Journal</a>
     </nav>
     <div class="footer-copy">© Mostafa Auvi · Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
@@ -469,7 +470,7 @@ function renderCards(rows){
 function renderBookArchive(){
  const template=document.getElementById('bookArchiveTemplate');
  if(!template){ statusEl.textContent=language==='en'?'The book archive is unavailable.':'বইয়ের তালিকা দেখানো যাচ্ছে না।'; return; }
- statusEl.innerHTML=language==='en'?'Published books: <span class="count">3</span>':'প্রকাশিত লেখা: <span class="count">৩</span>টি';
+ statusEl.innerHTML=language==='en'?'Published books: <span class="count">3</span>':'প্রকাশিত বই: <span class="count">৩</span>টি';
  const fragment=template.content.cloneNode(true);
  fragment.querySelectorAll('.book-cover-frame img').forEach(img=>{
    img.loading='eager'; img.fetchPriority='high'; img.decoding='async';
