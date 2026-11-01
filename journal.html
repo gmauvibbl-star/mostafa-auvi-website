@@ -2017,15 +2017,16 @@ const excerptText = (p, len=160) => {
   return txt.length > len ? txt.slice(0, len) + '…' : txt;
 };
 
-// Categories considered journal-like (per spec: Journal, জার্নাল, ব্যক্তিগত রচনা, আত্মজীবনী, ডায়েরি, নোটবুক + sensible extras)
-const JOURNAL_CATS = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','আত্মজীবনী','ডায়েরি','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal'];
+// Categories considered journal-like — নতুন ৭-বিভাগ কাঠামো অনুসারে
+// 'ব্যক্তিগত অনুভূতি' প্যারেন্ট ও তার সব সাবক্যাটাগরি জার্নালে আসবে
+const JOURNAL_CATS = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','ব্যক্তিগত অনুভূতি','আত্মজীবনী','ডায়েরি','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal','স্মৃতিচারণ','আত্মকথন','জীবনস্মৃতি','শৈশবস্মৃতি','অনুভূতি','দিনলিপি','চিঠি'];
+const JOURNAL_TAGS = ['journal','জার্নাল','নোটবুক','দৈনন্দিন','পর্যবেক্ষণ','diary','notebook','personal','স্মৃতিচারণ','আত্মকথন'];
 const isJournalEntry = (p) => {
   const c = String(p.category || '').trim().toLowerCase();
   if (JOURNAL_CATS.some(j => c === j.toLowerCase())) return true;
-  // Also include featured posts or those tagged with journal-related tags
   const tags = Array.isArray(p.tags) ? p.tags : [];
-  if (tags.some(t => JOURNAL_CATS.includes(String(t).toLowerCase()))) return true;
-  if (p.featured === true) return true;
+  if (tags.some(t => JOURNAL_TAGS.includes(String(t).toLowerCase()))) return true;
+  // ⚠️ featured === true সরিয়ে দেওয়া হয়েছে — এটি যেকোনো ফিচার্ড পোস্ট জার্নালে লিক করছিল
   return false;
 };
 
@@ -2042,7 +2043,7 @@ async function loadJournal() {
   try {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const { data, error } = await sb.from('posts')
-      .select('id,slug,title,body,excerpt,cover_image_url,category,tags,published_at,featured,language')
+          .select('id,slug,title,body,excerpt,cover_image,category,parent_category,subcategory,category_id,tags,published_at,featured,language')
       .eq('published', true)
       .order('published_at', { ascending: false, nullsFirst: false })
       .limit(80);
@@ -2073,8 +2074,8 @@ function renderCards(gridEl) {
     const excerpt = excerptText(p, 110);
     const cat = p.category || 'জার্নাল';
     const readLink = `read.html?slug=${encodeURIComponent(p.slug)}`;
-    const cover = p.cover_image_url
-      ? `<img src="${esc(p.cover_image_url)}" alt="${esc(p.title || '')}" loading="lazy">`
+        const cover = p.cover_image
+      ? `<img src="${esc(p.cover_image)}" alt="${esc(p.title || '')}" loading="lazy">
       : `<div class="gcard-cover-fallback">❦</div>`;
     return `<a class="gcard" href="${readLink}" aria-label="${esc(p.title || 'জার্নাল এন্ট্রি')}">
       <div class="gcard-cover">
