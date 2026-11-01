@@ -533,7 +533,8 @@ function renderBookArchive(){
 }
 
 async function loadPosts(){
-  if(!category||category==='আমার বই'){ renderBookArchive(); return; }
+  // বইয়ের আর্কাইভ শুধু প্রকাশনা বিভাগে দেখাই; মূল Published Writing পেজে সব লেখা থাকবে।
+  if(category === 'prokashona-o-pdf' || category === 'আমার বই'){ renderBookArchive(); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
     statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;
