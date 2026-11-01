@@ -1336,7 +1336,7 @@ function renderError(title, msg) {
   const backLabel = document.documentElement.lang === 'en' ? '← Back to all writing' : '← সব লেখায় ফিরুন';
   articleEl.innerHTML = '<div class="error-state"><div class="icon">❦</div><h2>' + esc(title) + '</h2><p>' + esc(msg) + '</p><a href="./posts.html">' + backLabel + '</a></div>';
   const bb = document.getElementById('bottomBackBar');
-  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">← সব লেখা</a>';
+  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">' + backLabel + '</a>';
 }
 
 function buildShareButtons(title, isEn) {
@@ -1458,11 +1458,11 @@ function renderArticle(post, sibling) {
 
   // Bottom back link bar
   const bb = document.getElementById('bottomBackBar');
-  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">← সব লেখা</a><span class="crumb">Mostafa Auvi · ' + esc(catLabel(post.category)) + '</span>';
+  if (bb) bb.innerHTML = '<a href="posts.html" class="back-link">' + (isEn ? '← All Writing' : '← সব লেখা') + '</a><span class="crumb">Mostafa Auvi · ' + esc(catLabel(post.category, lang)) + '</span>';
 
   // Update crumb at top
   const crumb = document.getElementById('crumb');
-  if (crumb) crumb.textContent = 'Mostafa Auvi · ' + esc(catLabel(post.category));
+  if (crumb) crumb.textContent = 'Mostafa Auvi · ' + esc(catLabel(post.category, lang));
 
   // Language toggle handler
   if (sibling) {
@@ -1523,7 +1523,7 @@ async function loadPost() {
           loadedPost = draft;
           if (loadedPost && !loadedPost.published) {
             const previewNotice = document.createElement('div');
-            previewNotice.textContent = 'লেখাটির খসড়া প্রিভিউ — এটি এখনো প্রকাশিত নয়।';
+            previewNotice.textContent = (loadedPost.language === 'en' ? 'Draft preview — this article has not been published yet.' : 'লেখাটির খসড়া প্রিভিউ — এটি এখনো প্রকাশিত নয়।');
             previewNotice.style.cssText = 'max-width:900px;margin:12px auto;padding:10px 16px;background:#fff0c9;border-left:4px solid #b89248;color:#3d2e22;font-family:serif;';
             articleEl.parentNode.insertBefore(previewNotice, articleEl);
           }
