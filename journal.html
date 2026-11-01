@@ -2007,6 +2007,60 @@ if (bnLink && enLink) {
   enLink.classList.toggle('active', journalLanguage === 'en');
   (journalLanguage === 'bn' ? bnLink : enLink).setAttribute('aria-current', 'page');
 }
+if (journalLanguage === 'en') {
+  const setText = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = value;
+  };
+  const setAttr = (selector, attr, value) => {
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  };
+  setAttr('.nav', 'aria-label', 'Main navigation');
+  setText('.nav-home a', 'Home');
+  setText('.nav-fiction a', 'Fiction');
+  setText('.nav-essay a', 'Essays & Literary Criticism');
+  setText('.nav-law a', 'Law & Courts');
+  setText('.nav-journal a', 'Journal');
+  setText('.nav-author a', 'About the Author');
+  setText('.nav-all a', 'All Writing');
+  setAttr('#navSearch', 'placeholder', 'Search...');
+  setAttr('#navSearch', 'aria-label', 'Search');
+  setText('.subscribe-btn span', 'Subscribe');
+  setAttr('.subscribe-btn', 'title', 'Get email updates on new writing');
+  setText('.vqr-masthead .left strong', 'Mostafa Auvi');
+  setText('.vqr-masthead .left span:last-child', 'Literary Journal');
+  setText('.compact-portrait .caption', 'Mostafa Auvi — Writer & Literary Critic');
+  setText('.compact-quote', 'Literature often questions the very eyes through which an age sees itself.');
+  setText('.gp-section-title', 'Published Journal');
+  setText('.view-all-btn', 'View all →');
+  setAttr('.view-all-btn', 'title', 'View all journal entries');
+  setText('.gp-section-sub', 'Thoughts, reflections and observations — seeing life anew through writing. Open a card to read the full piece.');
+  setText('#loadingState h3', 'Loading journal…');
+  setText('#loadingState p', 'Please wait a moment.');
+  setText('#loadMoreBtn', 'Load more ↓');
+  setText('.sidebar .sidebox:nth-child(1) h3', '❖ Recent Entries');
+  setText('.sidebar .sidebox:nth-child(2) h3', '◆ Browse by Category');
+  setText('.cat-quicklist a:nth-child(1)', 'Personal');
+  setText('.cat-quicklist a:nth-child(2)', 'Travel');
+  setText('.cat-quicklist a:nth-child(3)', 'Essays');
+  setText('.cat-quicklist a:nth-child(4)', 'Literary Studies');
+  setText('.cat-quicklist a:nth-child(5)', 'Law');
+  setText('.cat-quicklist a:nth-child(6)', 'All Writing');
+  setText('.sidebar .sidebox:nth-child(3) h3', '⌕ Search the Journal');
+  setAttr('#journalSearchInput', 'placeholder', 'Title, subject or tag...');
+  setAttr('#journalSearchInput', 'aria-label', 'Search the Journal');
+  setText('.search-form button', 'Search');
+  setText('.sidebar .sidebox:nth-child(3) p', 'Search the journal by title or subject.');
+  setText('.sidebar .sidebox:nth-child(4) h3', '✦ Email Updates');
+  setText('.sidebar .sidebox:nth-child(4) p', 'Subscribe to receive new journal entries directly by email.');
+  setText('.subscribe-link', 'Subscribe →');
+  setText('.footer-strip .left', 'Mostafa Auvi — Writing makes us a little more human.');
+  setText('#authorLoginLabel', 'Author Login');
+  setText('.footer-strip .right a:nth-child(1)', 'Subscribe');
+  setText('.footer-strip .right a:nth-child(2)', 'Sitemap');
+  setText('.footer-strip .right a:nth-child(3)', 'Privacy');
+}
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
 const fmtJournalDate = (iso) => {
   if (!iso) return '';
