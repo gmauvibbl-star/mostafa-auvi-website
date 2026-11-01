@@ -500,7 +500,6 @@ function renderBookArchive(){
  if(!template){ statusEl.textContent='বইয়ের তালিকা দেখানো যাচ্ছে না।'; return; }
  statusEl.innerHTML='প্রকাশিত বই: <span class="count">৩</span>টি';
  const fragment=template.content.cloneNode(true);
- document.querySelectorAll('#bookArchiveTemplate img').forEach(()=>{});
  fragment.querySelectorAll('.book-cover-frame img').forEach(img=>{
    img.loading='eager'; img.fetchPriority='high'; img.decoding='async';
    img.addEventListener('error',()=>{

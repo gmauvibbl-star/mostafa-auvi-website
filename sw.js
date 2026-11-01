@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mostafa-auvi-v4';
+const CACHE_NAME = 'mostafa-auvi-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -9,7 +9,9 @@ const ASSETS = [
   './about.html',
   './subscribe.html',
   './dashboard.html',
-  './manifest.json'
+  './manifest.json',
+  './book1.jpg',
+  './book2.jpg'
 ];
 
 self.addEventListener('install', e => {
