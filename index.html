@@ -2519,10 +2519,11 @@
     const journalLabel = document.querySelector('.lower .section-label .bn');
     if (journalLabel) journalLabel.textContent = 'Recent Journal';
     const journalDate = document.querySelector('.journal-meta .date');
-    if (journalDate) journalDate.textContent = '27 October 2026';
+    if (journalDate) { const day = journalDate.querySelector('.day'); if (day) day.textContent = '27'; const rest = Array.from(journalDate.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim()); if (rest) rest.textContent = ' October, 2026'; }
     setText('.journal-meta .tag','Notebook');
-    setText('.journal-more .read-link','Read the full entry →');
-    setText('.journal-more .stats','5 min read · 42 comments');
+    setLead('.journal-more .read-link','Read the full entry');
+    const journalStats = document.querySelector('.journal-more .stats');
+    if (journalStats) journalStats.innerHTML = '5 min read <span class="dot">◆</span> 42 comments';
     setText('.features-header h2','Explore the Writing');
     const featureCards = [
       ['Fiction','A world of novels, stories and prose',['Novels','Stories','Novellas','Prose']],
@@ -2540,7 +2541,8 @@
     });
     setText('.author-intro .label','About the Author');
     setText('.author-intro h3','Mostafa Auvi');
-    setText('.author-intro .bio','Mostafa Auvi is a fiction writer, literary critic, and an avid reader of history and world literature. His writing reflects close observations of rural Bengal, explorations of the human inner world, and historical, regional, and cultural contexts. His published books include Bajpakhir Punorjonmo (2017), CS Khotiyan O Ekti Mamlar Itibritto (2019), and Beraler Quarantine (2022). He writes fiction, essays, and literary criticism.');
+    const authorBio = document.querySelector('.author-intro .bio');
+    if (authorBio) authorBio.innerHTML = 'Mostafa Auvi is a fiction writer, literary critic, and an avid reader of history and world literature. His writing reflects close observations of rural Bengal, explorations of the human inner world, and historical, regional, and cultural contexts. His published books include <em>Bajpakhir Punorjonmo</em> (2017), <em>CS Khotiyan O Ekti Mamlar Itibritto</em> (2019), and <em>Beraler Quarantine</em> (2022). He writes fiction, essays, and literary criticism.';
     const footerQuote = document.querySelector('.footer-strip .left');
     if (footerQuote) { const node=Array.from(footerQuote.childNodes).find(n=>n.nodeType===Node.TEXT_NODE&&n.textContent.trim()); if(node) node.textContent=' “Writing makes us a little more human.”'; }
     setAttr('#authorLoginBtn','aria-label','Author login');
