@@ -2077,6 +2077,7 @@ if (journalLanguage === 'en') {
   setText('.footer-strip .right a:nth-child(1)', 'Subscribe');
   setText('.footer-strip .right a:nth-child(2)', 'Sitemap');
   setText('.footer-strip .right a:nth-child(3)', 'Privacy');
+  setText('.footer-strip .right a:nth-child(4)', '© 2026');
   setAttr('.modal-close', 'aria-label', 'Close');
   setText('#loginModalTitle', 'Author Login');
   setText('.modal-sub', 'Sign in with your email and password');
@@ -2091,6 +2092,7 @@ if (journalLanguage === 'en') {
   const signupWrap = document.querySelector('#signupLink')?.parentElement;
   const signupPrefix = signupWrap && Array.from(signupWrap.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
   if (signupPrefix) signupPrefix.textContent = 'New author? ';
+  setText('#journalBnLink', 'Bengali');
   setAttr('.lang a[href="journal.html?lang=bn"]', 'title', 'Read in Bengali');
   [['.share-fb','Share on Facebook'],['.share-tw','Share on X / Twitter'],['.share-wa','Share on WhatsApp'],['.share-ig','Share on Telegram'],['.share-em[aria-label="Email"]','Share by email'],['.share-em[aria-label="Copy Link"]','Copy link']].forEach(([selector,title]) => setAttr(selector,'title',title));
 }
