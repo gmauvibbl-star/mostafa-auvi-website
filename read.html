@@ -409,6 +409,13 @@
     letter-spacing: 0;
     line-height: 1.45;
   }
+  .a4-title:not(.bn) {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(30px, 4vw, 36px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+  }
   .a4-meta {
     display: flex;
     flex-wrap: wrap;
@@ -517,7 +524,23 @@
   }
   /* Preserve deliberate formatting added in the author's rich-text editor. */
   .a4-body, .a4-body * { background-image: none; }
-  .a4-body.en { font-family: 'EB Garamond', serif; }
+  .a4-body.en {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.88;
+    letter-spacing: 0.005em;
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .a4-body.en p { margin: 0 0 1.08em; }
+  .a4-body.en p:first-of-type::first-letter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3.8em;
+    line-height: 0.88;
+    margin: 5px 10px 0 0;
+  }
+  .a4-body.en blockquote { font-family: 'EB Garamond', Georgia, serif; font-size: 1.08em; }
   .a4-body p { margin: 0 0 1.15em; }
   .a4-body p:first-of-type::first-letter {
     font-family: 'Playfair Display', serif;
@@ -981,6 +1004,7 @@
     .a4-page { padding: 24px 20px 22px; }
     .a4-title { font-size: 24px; }
     .a4-body { font-size: 16px; line-height: 1.95; }
+    .a4-body.en { font-size: 17px; line-height: 1.82; }
     .a4-body p:first-of-type::first-letter { font-size: 3.6em; }
     .a4-meta { font-size: 13px; gap: 6px 12px; }
     .a4-cover { max-height: 280px; }
