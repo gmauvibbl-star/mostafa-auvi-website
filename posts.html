@@ -225,19 +225,19 @@
 <template id="bookArchiveTemplate">
 <article class="book-archive-card">
           <div class="book-cover-frame"><img src="./book1.jpg" alt="বাজপাখির পুনর্জন্ম বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="180" height="240"></div>
-          <div class="book-info"><strong>বাজপাখির পুনর্জন্ম</strong><span>গল্পগ্রন্থ · প্রথম প্রকাশ ২০১৭</span></div>
+          <div class="book-info"><strong>বাজপাখির পুনর্জন্ম</strong><span>Story collection · First published 2017</span></div>
           <div class="book-year">২০১৭</div>
-        <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/160979/bajpakhir-punorjonmo" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div></article>
+        <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/160979/bajpakhir-punorjonmo" target="_blank" rel="noopener noreferrer">View this book on Rokomari ↗</a></div></article>
 <article class="book-archive-card">
           <div class="book-cover-frame"><img src="./book2.jpg" alt="সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="180" height="240"></div>
-          <div class="book-info"><strong>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</strong><span>আইন ও সমাজজীবন</span></div>
+          <div class="book-info"><strong>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</strong><span>Law and society</span></div>
           <div class="book-year">২০১৯</div>
-        <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/205441/cs-khotiyan-o-ekti-mamlar-itibrityo" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div></article>
+        <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/205441/cs-khotiyan-o-ekti-mamlar-itibrityo" target="_blank" rel="noopener noreferrer">View this book on Rokomari ↗</a></div></article>
 <article class="book-archive-card">
           <div class="book-cover-frame"><img src="https://rokbucket.rokomari.io/ProductNew20190903/260X372/Beraler_Quarantine-Mostofa_Ovi-0c719-224409.jpg" alt="বেড়ালের কোয়ারেন্টাইন বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="180" height="240" referrerpolicy="no-referrer"></div>
-          <div class="book-info"><strong>বেড়ালের কোয়ারেন্টাইন</strong><span>মহামারিকালীন জীবনচিত্র</span></div>
+          <div class="book-info"><strong>বেড়ালের কোয়ারেন্টাইন</strong><span>Life during the pandemic</span></div>
           <div class="book-year">২০২২</div>
-        <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/224409/beraler-quarantine" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div></article>
+        <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/224409/beraler-quarantine" target="_blank" rel="noopener noreferrer">View this book on Rokomari ↗</a></div></article>
 </template>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -303,6 +303,23 @@ const rawCategory=params.get('category')||"";
 const category=catSlug(rawCategory);
 const subcategory=params.get('subcategory')||"";
 const language=params.get('lang')==='en'?'en':'bn';
+document.documentElement.lang=language;
+if(language==='en'){
+  document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
+  const navLabels=['Home','Published Writing','Stories','Novels','Essays','Travel Writing','Law & Judiciary','Journal'];
+  document.querySelectorAll('.nav a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
+  const footerLabels=['Home','Published Writing','Stories','Novels','Essays','Journal'];
+  document.querySelectorAll('.footer-nav a').forEach((a,i)=>{if(footerLabels[i])a.textContent=footerLabels[i];});
+  const eyebrow=document.querySelector('.eyebrow');
+  if(eyebrow) eyebrow.textContent='Published Writing';
+  const hub=document.getElementById('hubLabel');
+  if(hub) hub.textContent='Browse by category';
+  const archiveBn=document.getElementById('archiveBnLink');
+  if(archiveBn) archiveBn.title='View in Bengali';
+  document.title='Published Writing | Mostafa Auvi';
+  const description=document.querySelector('meta[name="description"]');
+  if(description) description.content='Published writing by Mostafa Auvi — fiction, essays, literary criticism, law, travel, banking and economics.';
+}
 const grid=document.getElementById('grid');
 
 function languageUrl(lang, cat=category, sub=subcategory){
@@ -433,7 +450,7 @@ function updateIntro(){
   // ডায়নামিক canonical + document.title (SEO ফিক্স)
   const catInfo = CATEGORIES_MAP[category];
   const titleBase = catInfo ? (language==='en' ? catInfo.en : catInfo.bn) : (language==='en'?'Published Writing':'প্রকাশিত লেখা');
-  document.title = (catInfo ? (titleBase + ' | Mostafa Auvi') : 'প্রকাশিত লেখা | Mostafa Auvi');
+  document.title = (catInfo ? (titleBase + ' | Mostafa Auvi') : (language==='en'?'Published Writing | Mostafa Auvi':'প্রকাশিত লেখা | Mostafa Auvi'));
 
   let canonical = document.querySelector('link[rel="canonical"]');
   if(!canonical){
@@ -449,7 +466,7 @@ function updateIntro(){
     document.getElementById('pageSubtitle').textContent=category?('Published writing in '+titleBase+'.'):'Stories, novels, essays and literary criticism.';
   }else if(category){
     document.getElementById('pageTitle').textContent=titleBase;
-    document.getElementById('pageSubtitle').textContent=titleBase+' বিভাগের প্রকাশিত বই।';
+    document.getElementById('pageSubtitle').textContent=titleBase+' বিভাগের প্রকাশিত লেখা।';
     document.querySelector('.nav a.current')?.classList.remove('current');
     document.querySelectorAll('.nav a').forEach(a=>{
       const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
@@ -469,11 +486,11 @@ function excerptText(p){
 
 function renderCards(rows){
   if(!rows.length){
-    grid.innerHTML='<div class="empty"><div class="icon">❦</div><h3>এখনো কোনো লেখা প্রকাশ করা হয়নি</h3><p>এই বিভাগে লেখা প্রকাশিত হলে এখানে দেখা যাবে।</p></div>';
-    statusEl.textContent='এই বিভাগে কোনো প্রকাশিত লেখা নেই।';
+    grid.innerHTML='<div class="empty"><div class="icon">❦</div><h3>'+(language==='en'?'No writing has been published yet':'এখনো কোনো লেখা প্রকাশ করা হয়নি')+'</h3><p>'+(language==='en'?'Published writing in this category will appear here.':'এই বিভাগে লেখা প্রকাশিত হলে এখানে দেখা যাবে।')+'</p></div>';
+    statusEl.textContent=language==='en'?'There are no published articles in this category.':'এই বিভাগে কোনো প্রকাশিত লেখা নেই।';
     return;
   }
-  statusEl.innerHTML='মোট <span class="count">'+rows.length+'</span>টি লেখা পাওয়া গেছে।';
+  statusEl.innerHTML=language==='en'?'<span class="count">'+rows.length+'</span> published article(s) found.':'মোট <span class="count">'+rows.length+'</span>টি লেখা পাওয়া গেছে।';
   grid.innerHTML=rows.map(p=>{
     const isEn=(p.language||'bn')==='en';
     const dateStr=fmtDate(p.published_at,p.language||'bn');
@@ -481,7 +498,7 @@ function renderCards(rows){
       ?'<img class="card-cover" src="'+esc(p.cover_image)+'" alt="'+esc(p.title||'')+'" loading="lazy" width="400" height="225">'
       :'<div class="card-cover-fallback">❦</div>';
     const excerpt=excerptText(p);
-    return '<a class="card" href="./read.html?slug='+encodeURIComponent(p.slug)+'">'+
+    return '<a class="card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang='+language+'">'+
       cover+
       '<div class="card-body">'+
         '<div class="card-badges">'+
@@ -498,15 +515,15 @@ function renderCards(rows){
 
 function renderBookArchive(){
  const template=document.getElementById('bookArchiveTemplate');
- if(!template){ statusEl.textContent='বইয়ের তালিকা দেখানো যাচ্ছে না।'; return; }
- statusEl.innerHTML='প্রকাশিত বই: <span class="count">৩</span>টি';
+ if(!template){ statusEl.textContent=language==='en'?'The book archive is unavailable.':'বইয়ের তালিকা দেখানো যাচ্ছে না।'; return; }
+ statusEl.innerHTML=language==='en'?'Published books: <span class="count">3</span>':'প্রকাশিত বই: <span class="count">৩</span>টি';
  const fragment=template.content.cloneNode(true);
  fragment.querySelectorAll('.book-cover-frame img').forEach(img=>{
    img.loading='eager'; img.fetchPriority='high'; img.decoding='async';
    img.addEventListener('error',()=>{
      const fallback=document.createElement('div');
      fallback.className='book-cover-missing';
-     fallback.textContent='প্রচ্ছদ পাওয়া যায়নি';
+     fallback.textContent=language==='en'?'Cover unavailable':'প্রচ্ছদ পাওয়া যায়নি';
      fallback.setAttribute('role','img');
      fallback.setAttribute('aria-label',img.alt);
      img.replaceWith(fallback);
@@ -518,7 +535,7 @@ function renderBookArchive(){
 async function loadPosts(){
   if(!category||category==='আমার বই'){ renderBookArchive(); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
-    statusEl.textContent='Supabase কনফিগার করা হয়নি।';
+    statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;
   }
   try{
@@ -559,8 +576,8 @@ async function loadPosts(){
     renderCards(rows);
   }catch(e){
     console.error(e);
-    statusEl.textContent='লেখার তালিকা লোড করা যায়নি।';
-    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>লোড করা যায়নি</h3><p>ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।</p></div>';
+    statusEl.textContent=language==='en'?'Could not load the writing list.':'লেখার তালিকা লোড করা যায়নি।';
+    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>'+(language==='en'?'Unable to load':'লোড করা যায়নি')+'</h3><p>'+(language==='en'?'A database connection error occurred. Please try again later.':'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।')+'</p></div>';
   }
 }
 
