@@ -1201,15 +1201,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ====== Date in utility bar (Bengali) ====== */
+/* ====== Date in utility bar ====== */
 (function(){
-  const days = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
-  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-  const toBn = n => String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
   const now = new Date();
-  const dateStr = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
+  const isEnglish = new URLSearchParams(location.search).get('lang') === 'en';
   const el = document.getElementById('todayDate');
-  if (el) el.textContent = dateStr;
+  if (el) el.textContent = now.toLocaleDateString(isEnglish ? 'en-GB' : 'bn-BD', {
+    weekday:'long', day:'numeric', month:'long', year:'numeric'
+  });
 })();
 
 /* ====== Supabase config ====== */
@@ -1250,19 +1249,77 @@ Object.entries(CATEGORIES_MAP_READ).forEach(([slug, info]) => {
   CAT_ALIAS_LOOKUP[slug] = slug;
 });
 
-const catLabel = cat => {
-  if(!cat) return 'লেখা';
-  // slug ম্যাচ
-  if(CATEGORIES_MAP_READ[cat]) return CATEGORIES_MAP_READ[cat].bn;
-  // alias ম্যাচ
-  const slug = CAT_ALIAS_LOOKUP[cat];
-  if(slug && CATEGORIES_MAP_READ[slug]) return CATEGORIES_MAP_READ[slug].bn;
-  return cat || 'লেখা';
+const READ_TERM_EN = {
+  'ছোটগল্প':'Short Story','বড় গল্প':'Long Story','বড়গল্প':'Long Story',
+  'সম্পূর্ণ উপন্যাস':'Complete Novel','ধারাবাহিক উপন্যাস':'Serialised Novel',
+  'বাংলাদেশ ভ্রমণ':'Travel in Bangladesh','বিদেশ ভ্রমণ':'Travel Abroad',
+  'ফেলে আসা দিন':'Days Gone By','স্মৃতির ভাণ্ডার':'Memories',
+  'কেসস্টাডি':'Case Study','আইন বিষয়ক প্রবন্ধ':'Legal Essays',
+  'সিভিল আদালতের কড়চা':'Civil Court Notes','আমার ব্যাংকিং জীবন':'My Banking Life',
+  'এসএমই ব্যাংকিং নিয়ে যত কথা':'Reflections on SME Banking',
+  'ব্যক্তিগত রচনা':'Personal Writing','স্মৃতিকথা':'Memoir','স্মৃতিচারণ':'Reminiscences',
+  'ডায়েরি':'Diary','দিনলিপি':'Diary','চিঠি':'Letters','নোটবুক':'Notebook',
+  'পর্যবেক্ষণ':'Observations','প্রবন্ধ':'Essay','সাহিত্যালোচনা':'Literary Criticism',
+  'বাংলা':'Bengali','ইংরেজি':'English'
+};
+const readTermLabel = (term, lang) => {
+  if (!term) return lang === 'en' ? 'Writing' : 'লেখা';
+  if (lang !== 'en') return term;
+  const exact = READ_TERM_EN[String(term).trim()];
+  if (exact) return exact;
+  const mappedSlug = CAT_ALIAS_LOOKUP[term];
+  if (mappedSlug && CATEGORIES_MAP_READ[mappedSlug]) return CATEGORIES_MAP_READ[mappedSlug].en;
+  return term;
+};
+const catLabel = (cat, lang = 'bn') => {
+  if (!cat) return lang === 'en' ? 'Writing' : 'লেখা';
+  if (CATEGORIES_MAP_READ[cat]) return lang === 'en' ? CATEGORIES_MAP_READ[cat].en : CATEGORIES_MAP_READ[cat].bn;
+  const mappedSlug = CAT_ALIAS_LOOKUP[cat];
+  if (mappedSlug && CATEGORIES_MAP_READ[mappedSlug]) return lang === 'en' ? CATEGORIES_MAP_READ[mappedSlug].en : CATEGORIES_MAP_READ[mappedSlug].bn;
+  return readTermLabel(cat, lang);
 };
 
 const params = new URLSearchParams(location.search);
 const slug = params.get('slug');
 const previewRequested = params.get('preview') === '1';
+const requestedLanguage = params.get('lang') === 'en' ? 'en' : 'bn';
+function applyReadShellLanguage(lang) {
+  const en = lang === 'en';
+  document.documentElement.lang = en ? 'en' : 'bn';
+  const setText = (selector, value) => { const el = document.querySelector(selector); if (el) el.textContent = value; };
+  const setAttr = (selector, attr, value) => { const el = document.querySelector(selector); if (el) el.setAttribute(attr, value); };
+  if (en) {
+    setText('.utility-bar .lang-label','Language:');
+    setAttr('.lang a[href="index.html"]','title','Read in Bengali');
+    setAttr('.lang a[href="index-en.html"]','title','Read in English');
+    setText('.nav-home a','Home'); setText('.nav-fiction a','Fiction');
+    setText('.nav-essay a','Essays & Literary Criticism'); setText('.nav-law a','Law & Judiciary');
+    setText('.nav-journal a','Journal'); setText('.nav-author a','About the Author');
+    setText('.nav-all a','All Writing'); setAttr('.nav','aria-label','Main navigation');
+    setAttr('#navSearch','placeholder','Search...'); setAttr('#navSearch','aria-label','Search');
+    setText('.subscribe-btn span','Subscribe'); setAttr('.subscribe-btn','title','Get email updates on new writing');
+    setText('.back-link','← All Writing'); setAttr('.back-link','title','Back to all writing');
+    setText('#articleLoading h2','Loading article…'); setText('#articleLoading p','Please wait a moment.');
+    setText('#commentsTitle','Reader Responses');
+    const intro=document.querySelector('#commentsSection > p'); if(intro) intro.textContent='Share your thoughts on this piece. Enter your name; no sign-in is required.';
+    setText('label[for="commentName"]','Your name'); setAttr('#commentName','placeholder','Enter your name');
+    setText('label[for="commentText"]','Your comment'); setAttr('#commentText','placeholder','Write your response to the piece…');
+    const help=document.querySelector('.comment-help-row > span:first-child'); if(help) help.textContent='Please keep comments respectful and relevant.';
+    setText('label[for="commentWebsite"]','Website'); setText('#commentSubmit','Post Comment');
+    setText('.comments-list-title','Comments'); setText('#authorLoginLabel','Author Login');
+    setText('.footer-strip .right a:nth-child(1)','Subscribe'); setText('.footer-strip .right a:nth-child(2)','Sitemap'); setText('.footer-strip .right a:nth-child(3)','Privacy');
+    setText('#loginModalTitle','Author Login'); setText('.modal-sub','Sign in with your email and password');
+    setText('label[for="modalEmail"]','Email'); setText('label[for="modalPassword"]','Password');
+    setAttr('#modalPassword','placeholder','Enter your password'); setText('#modalLoginBtn','Sign in →');
+    setText('.btn.secondary','Cancel'); setText('#forgotPasswordLink','Forgot your password?');
+    setText('#signupLink','Create an account');
+    const signupText=document.querySelector('#signupLink')?.parentElement;
+    const prefix=signupText && Array.from(signupText.childNodes).find(n=>n.nodeType===Node.TEXT_NODE);
+    if(prefix) prefix.textContent='New author? ';
+    setAttr('.modal-close','aria-label','Close');
+  }
+}
+applyReadShellLanguage(requestedLanguage);
 const articleEl = document.getElementById('article');
 const shareUrl = location.href;
 
@@ -1367,7 +1424,7 @@ function renderArticle(post, sibling) {
   articleEl.innerHTML =
     '<div class="a4-page">' +
       '<header class="a4-header">' +
-        '<span class="a4-cat-badge">' + esc(catLabel(post.category)) + '</span>' +
+        '<span class="a4-cat-badge">' + esc(catLabel(post.category, lang)) + '</span>' +
         '<h1 class="a4-title' + (isEn ? '' : ' bn') + '">' + esc(post.title || '') + '</h1>' +
         '<div class="a4-meta-row">' +
           '<div class="a4-meta">' +
@@ -1384,7 +1441,7 @@ function renderArticle(post, sibling) {
       coverHtml +
       '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
       (tags.length
-        ? '<div class="a4-tags"><span class="a4-tags-label">ট্যাগ</span>' + tags.map(t => '<span class="tag-pill">' + esc(t) + '</span>').join('') + '</div>'
+        ? '<div class="a4-tags"><span class="a4-tags-label">' + (isEn ? 'Tags' : 'ট্যাগ') + '</span>' + tags.map(t => '<span class="tag-pill">' + esc(readTermLabel(t, lang)) + '</span>').join('') + '</div>'
         : '') +
     '</div>' +
     buildShareButtons(post.title || '');
@@ -1400,7 +1457,7 @@ function renderArticle(post, sibling) {
   // Language toggle handler
   if (sibling) {
     document.getElementById('langToggle').onclick = () => {
-      const newUrl = './read.html?slug=' + encodeURIComponent(sibling.slug);
+      const newUrl = './read.html?slug=' + encodeURIComponent(sibling.slug) + '&lang=' + (sibling.language === 'en' ? 'en' : 'bn');
       location.href = newUrl;
     };
   }
@@ -1411,22 +1468,22 @@ function renderArticle(post, sibling) {
     copyBtn.onclick = async () => {
       try {
         await navigator.clipboard.writeText(shareUrl);
-        copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/></svg>কপি হয়েছে!';
+        copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/></svg>' + (isEn ? 'Copied!' : 'কপি হয়েছে!');
         setTimeout(() => {
           copyBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7C4.2 7 2 9.2 2 12s2.2 5 5 5h4v-1.9H7C5.3 15.1 3.9 13.7 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>Copy Link';
         }, 1800);
-      } catch (e) { prompt('লিংক কপি করুন:', shareUrl); }
+      } catch (e) { prompt(isEn ? 'Copy this link:' : 'লিংক কপি করুন:', shareUrl); }
     };
   }
 }
 
 async function loadPost() {
   if (!slug) {
-    renderError('লেখা পাওয়া যায়নি', 'কোনো লেখার লিংক নির্বাচন করা হয়নি।');
+    renderError(requestedLanguage === 'en' ? 'Article not found' : 'লেখা পাওয়া যায়নি', requestedLanguage === 'en' ? 'No article link was selected.' : 'কোনো লেখার লিংক নির্বাচন করা হয়নি।');
     return;
   }
   if (!SUPABASE_URL.startsWith('https://') || SUPABASE_ANON_KEY.includes('YOUR_')) {
-    renderError('সেটআপ বাকি', 'Supabase কনফিগার করা হয়নি।');
+    renderError(requestedLanguage === 'en' ? 'Setup required' : 'সেটআপ বাকি', requestedLanguage === 'en' ? 'Supabase has not been configured.' : 'Supabase কনফিগার করা হয়নি।');
     return;
   }
   try {
@@ -1464,7 +1521,7 @@ async function loadPost() {
       }
     }
     if (!loadedPost) {
-      renderError('লেখাটি পাওয়া যায়নি', previewRequested ? 'খসড়া দেখতে লেখক হিসেবে লগইন থাকতে হবে।' : 'এই লিংকে কোনো প্রকাশিত লেখা নেই।');
+      renderError(requestedLanguage === 'en' ? 'Article not found' : 'লেখাটি পাওয়া যায়নি', requestedLanguage === 'en' ? (previewRequested ? 'Sign in as the author to preview this draft.' : 'No published article was found at this link.') : (previewRequested ? 'খসড়া দেখতে লেখক হিসেবে লগইন থাকতে হবে।' : 'এই লিংকে কোনো প্রকাশিত লেখা নেই।'));
       return;
     }
     // Use the loaded post whether published or author-previewed.
@@ -1490,9 +1547,9 @@ async function loadPost() {
   } catch (e) {
     console.error('Article loading failed:', e);
     const detail = e && (e.message || e.details || e.hint || e.code);
-    renderError('লোড করা যায়নি', detail
-      ? 'লেখা লোড করতে সমস্যা: ' + String(detail)
-      : 'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।');
+    renderError(requestedLanguage === 'en' ? 'Unable to load article' : 'লোড করা যায়নি', detail
+      ? (requestedLanguage === 'en' ? 'Article loading error: ' : 'লেখা লোড করতে সমস্যা: ') + String(detail)
+      : (requestedLanguage === 'en' ? 'A database connection error occurred. Please try again later.' : 'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।'));
   }
 }
 
