@@ -2042,8 +2042,10 @@ if (journalLanguage === 'en') {
   setText('.subscribe-btn span', 'Subscribe');
   setAttr('.subscribe-btn', 'title', 'Get email updates on new writing');
   setText('.vqr-masthead .left strong', 'Mostafa Auvi');
-  setText('.compact-portrait figcaption', 'Mostafa Auvi — Writer & Literary Critic');
-  setText('.footer-strip .left', 'Mostafa Auvi · “Writing makes us a little more human.”');
+  const portraitCaption = document.querySelector('.compact-portrait figcaption');
+  if (portraitCaption) { const captionText = Array.from(portraitCaption.childNodes).find(n => n.nodeType === Node.TEXT_NODE); if (captionText) captionText.textContent = ' — Writer & Literary Critic'; }
+  const footerLeft = document.querySelector('.footer-strip .left');
+  if (footerLeft) { const author = footerLeft.querySelector('.author'); if (author) { const quote = Array.from(footerLeft.childNodes).find(n => n.nodeType === Node.TEXT_NODE); if (quote) quote.textContent = ' · “Writing makes us a little more human.”'; } }
   setText('.vqr-masthead .left span:last-child', 'Literary Journal');
   setText('.compact-quote', 'Literature often questions the very eyes through which an age sees itself.');
   setText('.gp-section-title', 'Published Journal');
