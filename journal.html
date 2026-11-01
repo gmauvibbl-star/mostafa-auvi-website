@@ -2175,7 +2175,7 @@ function renderCards(gridEl) {
     const dateStr = fmtJournalDate(p.published_at);
     const excerpt = excerptText(p, 110);
     const cat = journalLanguage === 'en' ? journalTermLabel(p.category) : (p.category || 'জার্নাল');
-    const readLink = `read.html?slug=${encodeURIComponent(p.slug)}`;
+    const readLink = `read.html?slug=${encodeURIComponent(p.slug)}&lang=${journalLanguage}`;
         const cover = p.cover_image
       ? `<img src="${esc(p.cover_image)}" alt="${esc(p.title || '')}" loading="lazy">
       : `<div class="gcard-cover-fallback">❦</div>`;
@@ -2209,7 +2209,7 @@ function renderRecentList(rows) {
   ul.innerHTML = rows.slice(0, 6).map((p) => {
     const dateStr = fmtJournalDate(p.published_at);
     const cat = p.category || (journalLanguage === 'en' ? 'Journal' : 'জার্নাল');
-    const href = `read.html?slug=${encodeURIComponent(p.slug)}`;
+    const href = `read.html?slug=${encodeURIComponent(p.slug)}&lang=${journalLanguage}`;
     return `<li><a href="${href}">${esc(p.title || '(শিরোনামহীন)')}</a><div class="meta">${esc(dateStr)} · ${esc(cat)}</div></li>`;
   }).join('');
 }
@@ -2225,44 +2225,19 @@ function renderEmpty(container) {
 }
 
 function renderFallback(gridEl) {
-  // Sample Galpopath-style journal cards for when Supabase is unavailable
-  const samples = [
-    { title: 'একাকীত্ব, বই আর বৃষ্টির বিকেল', cat: 'ব্যক্তিগত রচনা', date: '১৫ জুন ২০২৫', excerpt: 'আজ সারাদিন বৃষ্টি হয়েছে। এমন বৃষ্টি, যা শহরের কোলাহলকে আরও দূরে সরিয়ে দেয়।', href: 'posts/ekakitto-boi-bristi.html', img: 'https://images.unsplash.com/photo-1502444330042-904bdd7e8764?w=600&q=70&auto=format&fit=crop' },
-    { title: 'নদীর ধারে এক বিকেল', cat: 'ভ্রমণকাহিনি', date: '২৫ এপ্রিল ২০২৫', excerpt: 'নদীর ধারে বসে থাকা — সময়ের কাছে সময় ধার করা, যেন এক অদৃশ্য আলিঙ্গন।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=600&q=70&auto=format&fit=crop' },
-    { title: 'শহরের ভেতর হারিয়ে যাওয়া মানুষ', cat: 'পর্যবেক্ষণ', date: '০৫ এপ্রিল ২০২৫', excerpt: 'শহর কত মানুষকে নিজের করে নেয়, আবার কত মানুষকে একা রেখে দেয় নিজের সাথেই।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70&auto=format&fit=crop' },
-    { title: 'নৈঃশব্দ্যের গল্প', cat: 'চিন্তা', date: '২৮ মার্চ ২০২৫', excerpt: 'নীরবতা কখনো কখনো শব্দের চেয়ে অনেক বেশি কিছু বলে দেয়।', href: '#gcardGrid' },
-    { title: 'নিজেকে নতুন করে দেখা', cat: 'আত্মজীবনী', date: '১৫ মার্চ ২০২৫', excerpt: 'নিজেকে দেখা কঠিন, কিন্তু সেই কষ্টিপাথরেই জীবনের আসল রূপ ধরা দেয়।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=70&auto=format&fit=crop' },
-    { title: 'ডায়েরির পাতা থেকে', cat: 'ডায়েরি', date: '০২ মার্চ ২০২৫', excerpt: 'প্রতিটি দিন লেখার মধ্য দিয়ে আমি নিজেকেই আবার খুঁজে পাই।', href: '#gcardGrid' },
-    { title: 'নোটবুক: পড়ার পরে', cat: 'নোটবুক', date: '১৮ ফেব্রুয়ারি ২০২৫', excerpt: 'ভালো বই পড়া শেষ হলে কিছুক্ষণ চুপ করে থাকা প্রয়োজন।', href: '#gcardGrid' },
-    { title: 'ভোরের হাওয়ায় একটা চিঠি', cat: 'ব্যক্তিগত রচনা', date: '০৫ ফেব্রুয়ারি ২০২৫', excerpt: 'ভোরের নীরবতা কানে এমন এক সুর তোলে যা দিনের বেলায় শোনা যায় না।', href: '#gcardGrid', img: 'https://images.unsplash.com/photo-1494806812800-a3291630a29b?w=600&q=70&auto=format&fit=crop' },
-    { title: 'বইয়ের তাকে সময়', cat: 'জার্নাল', date: '২২ জানুয়ারি ২০২৫', excerpt: 'বইয়ের তাক সাজাতে সাজাতে মনে হলো, আসলে আমি নিজের অতীতকেই গুছিয়ে নিচ্ছি।', href: '#gcardGrid' },
-  ];
-  gridEl.innerHTML = samples.map(s => {
-    const cover = s.img
-      ? `<img src="${esc(s.img)}" alt="${esc(s.title)}" loading="lazy">`
-      : `<div class="gcard-cover-fallback">❦</div>`;
-    return `<a class="gcard" href="${esc(s.href)}">
-      <div class="gcard-cover">
-        ${cover}
-        <span class="gcard-cat">${esc(s.cat)}</span>
-      </div>
-      <div class="gcard-body">
-        <h3 class="gcard-title">${esc(s.title)}</h3>
-        <p class="gcard-excerpt">${esc(s.excerpt)}</p>
-        <div class="gcard-foot">
-          <span class="gcard-date"><span class="clock">⏰</span> ${esc(s.date)}</span>
-          <span class="gcard-read">পড়ুন →</span>
-        </div>
-      </div>
-    </a>`;
-  }).join('');
+  if (!gridEl) return;
+  gridEl.innerHTML = `<div class="state-box" style="grid-column: 1 / -1;">
+    <div class="icon">❦</div>
+    <h3>${journalLanguage === 'en' ? 'The journal could not be loaded' : 'জার্নাল লোড করা যায়নি'}</h3>
+    <p>${journalLanguage === 'en' ? 'Please check your connection and refresh the page.' : 'ইন্টারনেট সংযোগ পরীক্ষা করে পৃষ্ঠাটি আবার খুলুন।'}</p>
+  </div>`;
   const wrap = document.getElementById('loadMoreWrap');
   if (wrap) wrap.style.display = 'none';
 }
 
 function shareCurrent(slug, title) {
   const base = window.location.href.split('?')[0].split('#')[0].replace(/[^/]*$/, '');
-  const url = base + 'read.html?slug=' + encodeURIComponent(slug);
+  const url = base + 'read.html?slug=' + encodeURIComponent(slug) + '&lang=' + journalLanguage;
   if (navigator.share) {
     navigator.share({ title: title + ' | মোস্তফা অভি', url }).catch(() => {});
   } else {
