@@ -829,6 +829,22 @@
       return { parent, sub };
     }
 
+    function getWritingCategoryLabels(w) {
+      const rawParent = w.parent_category || '';
+      const rawCategory = w.category || '';
+      const rawSub = w.subcategory || '';
+      const parentMatch = rawParent ? findCategoryByName(rawParent) : null;
+      const categoryMatch = rawCategory ? findCategoryByName(rawCategory) : null;
+      const parent = parentMatch?.parent || categoryMatch?.parent;
+      const sub = rawSub
+        ? (parent?.subs || []).find(s => s.name === rawSub || s.slug === rawSub) || null
+        : categoryMatch?.sub || (rawParent && rawCategory !== rawParent ? categoryMatch?.sub : null);
+      return {
+        parent: parent?.name || rawParent || rawCategory,
+        sub: sub?.name || rawSub || (rawParent && rawCategory !== rawParent ? rawCategory : ''),
+      };
+    }
+
     // ============================================================
     // State
     // ============================================================
@@ -1099,11 +1115,12 @@
       } else {
         return {
           group_id: main.group_id,
-          category: main.category,
-          parent_category: main.parent_category || main.category,
-          subcategory: main.subcategory || '',
-          category_id: main.category_id || null,
-          subcategory_id: main.subcategory_id || null,
+          // বাংলা row-কে bilingual pair-এর canonical category ধরি; English row edit করলেও classification এক থাকে।
+          category: sibling?.category || main.category,
+          parent_category: sibling?.parent_category || sibling?.category || main.parent_category || main.category,
+          subcategory: sibling?.subcategory || main.subcategory || '',
+          category_id: sibling?.category_id || main.category_id || null,
+          subcategory_id: sibling?.subcategory_id || main.subcategory_id || null,
           cover_image: main.cover_image,
           featured: main.featured,
           published: main.published,
@@ -2658,8 +2675,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           w.tags && w.tags.length > 0 && el('p', { class: 'text-xs text-muted truncate' },
             icon('tag'), ' ' + w.tags.slice(0, 4).join(', ') + (w.tags.length > 4 ? ` +${w.tags.length - 4}` : '')),
           el('div', { class: 'meta' },
-            (w.parent_category || w.category) && el('span', {}, icon('folder'), w.parent_category || w.category),
-            (w.subcategory || (w.parent_category && w.category !== w.parent_category ? w.category : '')) && el('span', { class: 'text-xs text-muted' }, '↳ ' + (w.subcategory || w.category)),
+            getWritingCategoryLabels(w).parent && el('span', {}, icon('folder'), getWritingCategoryLabels(w).parent),
+            getWritingCategoryLabels(w).sub && el('span', { class: 'text-xs text-muted' }, '↳ ' + getWritingCategoryLabels(w).sub),
             el('span', {}, icon('calendar'), formatDate(w.updated_at))
           )
         );
