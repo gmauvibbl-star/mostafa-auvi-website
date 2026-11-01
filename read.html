@@ -1469,6 +1469,12 @@ async function loadPost() {
     }
     // Use the loaded post whether published or author-previewed.
     const activePost = loadedPost;
+    // Count only real public article visits; draft previews are excluded.
+    if (activePost.published) {
+      sb.rpc('record_post_view', { p_slug: activePost.slug }).then(({ error }) => {
+        if (error) console.warn('Post view count was not recorded:', error.message);
+      });
+    }
     // Fetch sibling in other language by group_id for language toggle
     let sibling = null;
     if (activePost.group_id && activePost.published) {
