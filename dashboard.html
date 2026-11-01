@@ -772,93 +772,42 @@
     // ক্যাটাগরি তালিকা — নতুন ৭-বিভাগ কাঠামো (Supabase-এ categories ও subcategories টেবিল)
     // এই hardcoded তালিকা শুধু fallback হিসেবে কাজ করে। লাইভ ডেটা Supabase থেকে আসবে।
     const CATEGORIES = [
-      { name: 'কথাসাহিত্য',                 nameEn: 'Fiction',                     icon: '❦', slug: 'kothasahitya', subs: [
-        { name: 'ছোটগল্প',           nameEn: 'Short Story' },
-        { name: 'বড় গল্প',            nameEn: 'Long Story' },
-        { name: 'নভেলা',              nameEn: 'Novella' },
-        { name: 'উপন্যাস',            nameEn: 'Novel' },
+      { name: 'কথাসাহিত্য', nameEn: 'Fiction', icon: '❦', slug: 'kothasahitya', subs: [
+        { name: 'ছোটগল্প', nameEn: 'Short Story' },
+        { name: 'বড়গল্প', nameEn: 'Long Story' },
+        { name: 'সম্পূর্ণ উপন্যাস', nameEn: 'Complete Novel' },
         { name: 'ধারাবাহিক উপন্যাস', nameEn: 'Serialised Novel' },
-        { name: 'গদ্য',               nameEn: 'Prose' },
-        { name: 'ভ্রমণকাহিনি',        nameEn: 'Travelogue' },
-        { name: 'অনুবাদ কথাসাহিত্য', nameEn: 'Translated Fiction' },
-        { name: 'ম্যাজিক রিয়ালিজম',  nameEn: 'Magic Realism' },
+        { name: 'বাংলাদেশ ভ্রমণ', nameEn: 'Travel in Bangladesh' },
+        { name: 'বিদেশ ভ্রমণ', nameEn: 'Travel Abroad' },
+        { name: 'স্মৃতির ভাণ্ডার', nameEn: 'Memoirs' },
+        { name: 'ফেলে আসা দিন', nameEn: 'Days Gone By' },
+        { name: 'অনুবাদ সাহিত্য', nameEn: 'Translated Literature' },
       ]},
       { name: 'প্রবন্ধ ও সাহিত্যসমালোচনা', nameEn: 'Essays & Literary Criticism', icon: '§', slug: 'probandho-sahityasamalochona', subs: [
-        { name: 'সাহিত্য প্রবন্ধ',          nameEn: 'Literary Essay' },
-        { name: 'শিল্প ও সংস্কৃতি',        nameEn: 'Art & Culture' },
-        { name: 'ইতিহাস ও ঐতিহ্য',         nameEn: 'History & Heritage' },
-        { name: 'সমাজ ও রাজনীতি',         nameEn: 'Society & Politics' },
-        { name: 'দর্শন ও চিন্তা',           nameEn: 'Philosophy & Thought' },
-        { name: 'বিজ্ঞান ও প্রযুক্তি',       nameEn: 'Science & Technology' },
-        { name: 'শিক্ষা ও গবেষণা',          nameEn: 'Education & Research' },
-        { name: 'ব্যক্তিত্ব ও জীবন',       nameEn: 'Personality & Life' },
-        { name: 'বই আলোচনা',                nameEn: 'Book Discussion' },
-        { name: 'উপন্যাস আলোচনা',           nameEn: 'Novel Discussion' },
-        { name: 'নির্ধারিত গল্প আলোচনা',    nameEn: 'Designated Story Review' },
-        { name: 'কবিতা আলোচনা',             nameEn: 'Poetry Discussion' },
-        { name: 'প্রবন্ধ আলোচনা',           nameEn: 'Essay Discussion' },
-        { name: 'অনুবাদ সাহিত্য আলোচনা',    nameEn: 'Translation Discussion' },
-        { name: 'শিল্প সমালোচনা',            nameEn: 'Art Criticism' },
-        { name: 'বিশ্বসাহিত্য',              nameEn: 'World Literature' },
-        { name: 'বিশেষ লেখকের লেখা',       nameEn: 'Featured Author' },
+        { name: 'সাহিত্য প্রবন্ধ', nameEn: 'Literary Essays' },
+        { name: 'শিল্প ও সংস্কৃতি', nameEn: 'Art & Culture' },
+        { name: 'ইতিহাস ও ঐতিহ্য', nameEn: 'History & Heritage' },
+        { name: 'সমাজ ও রাজনীতি', nameEn: 'Society & Politics' },
+        { name: 'দর্শন ও চিন্তা', nameEn: 'Philosophy & Thought' },
+        { name: 'বিজ্ঞান ও প্রযুক্তি', nameEn: 'Science & Technology' },
+        { name: 'শিক্ষা ও গবেষণা', nameEn: 'Education & Research' },
+        { name: 'বই আলোচনা', nameEn: 'Book Discussion' },
+        { name: 'বিশ্বসাহিত্য', nameEn: 'World Literature' },
       ]},
       { name: 'আইন ও আদালত', nameEn: 'Law & Judiciary', icon: '⚖', slug: 'ain-oadalot', subs: [
-        { name: 'বৃটিশ ল\' ও প্রথা ও নৈতিকতার কথা', nameEn: 'British Law & Tradition' },
-        { name: 'আইনি বিশ্লেষণ',     nameEn: 'Legal Analysis' },
-        { name: 'আদালতের ঘটনা',     nameEn: 'Court Stories' },
-        { name: 'মামলার ইতিবৃত্ত',   nameEn: 'Case Narrative' },
-        { name: 'সাংবিধানিক আইন',   nameEn: 'Constitutional Law' },
-        { name: 'ফৌজদারি আইন',      nameEn: 'Criminal Law' },
-        { name: 'দেওয়ানি আইন',     nameEn: 'Civil Law' },
-        { name: 'ভূমি আইন',          nameEn: 'Land Law' },
-        { name: 'উত্তরাধিকার আইন', nameEn: 'Inheritance Law' },
-        { name: 'বিচারব্যবস্থা',    nameEn: 'Judiciary' },
-        { name: 'বিশেষ প্রস্তাব',    nameEn: 'Special Proposal' },
-        { name: 'কেসস্টাডি',         nameEn: 'Case Study' },
-      ]},
-      { name: 'ভ্রমণকাহিনি', nameEn: 'Travel Writing', icon: '🧭', slug: 'bhromonkahini', subs: [
-        { name: 'আমাদের সোনার দেশ',   nameEn: 'Our Golden Land' },
-        { name: 'দেশে-বিদেশে',         nameEn: 'Home & Abroad' },
-        { name: 'সুদূরের অদূর দুয়ার', nameEn: 'Distant Yet Near' },
-        { name: 'সমুদ্রের ডাক',        nameEn: 'Call of the Sea' },
-        { name: 'পাহাড়ের আহ্বান',     nameEn: 'Mountain Call' },
-      ]},
-      { name: 'ব্যক্তিগত অনুভূতি', nameEn: 'Personal Reflections', icon: '✦', slug: 'byaktigoto-onubhuti', subs: [
-        { name: 'ডায়েরি',            nameEn: 'Diary' },
-        { name: 'চিঠি',              nameEn: 'Letters' },
-        { name: 'আত্মজীবনী',        nameEn: 'Autobiography' },
-        { name: 'জীবনস্মৃতি',        nameEn: 'Life Memoir' },
-        { name: 'শৈশবস্মৃতি',        nameEn: 'Childhood Memoir' },
-        { name: 'ব্যক্তিগত অভিজ্ঞতা', nameEn: 'Personal Experience' },
-        { name: 'স্মৃতিচারণ',        nameEn: 'Memoir' },
-        { name: 'আত্মকথন',           nameEn: 'Self-Narrative' },
-        { name: 'ভ্রমণস্মৃতি',       nameEn: 'Travel Memoir' },
-        { name: 'অনুভূতি',           nameEn: 'Feelings' },
-        { name: 'ব্যক্তিগত ভাবনা',   nameEn: 'Personal Thoughts' },
-        { name: 'জীবনের গল্প',       nameEn: 'Life Story' },
-        { name: 'পরিবার ও সম্পর্ক',  nameEn: 'Family & Relations' },
-        { name: 'দিনলিপি',           nameEn: 'Daybook' },
+        { name: 'বাংলাদেশের জুরিসপ্রুডেন্স', nameEn: 'Bangladesh Jurisprudence' },
+        { name: 'ব্রিটিশ ল ও নৈতিকতার কথকতা', nameEn: 'British Law & Ethics' },
+        { name: 'আইন বিষয়ক প্রবন্ধ', nameEn: 'Legal Essays' },
+        { name: 'সিভিল আদালতের কড়চা', nameEn: 'Civil Court Chronicles' },
+        { name: 'কেসস্টাডি', nameEn: 'Case Studies' },
       ]},
       { name: 'ব্যাংকিং ও অর্থনীতি', nameEn: 'Banking & Economics', icon: '◐', slug: 'banking-o-orthoniti', subs: [
-        { name: 'ব্যাংকিং',         nameEn: 'Banking' },
-        { name: 'অর্থনীতি',         nameEn: 'Economics' },
-        { name: 'কর ব্যবস্থা',     nameEn: 'Taxation' },
-        { name: 'কৃষিঋণ',          nameEn: 'Agricultural Loan' },
-        { name: 'এসএমই ব্যাংকিং',  nameEn: 'SME Banking' },
-        { name: 'ডিজিটাল ব্যাংকিং', nameEn: 'Digital Banking' },
-        { name: 'ক্ষুদ্রঋণ',         nameEn: 'Microfinance' },
-        { name: 'আর্থিক অন্তর্ভুক্তি', nameEn: 'Financial Inclusion' },
+        { name: 'আমার ব্যাংকিং জীবন', nameEn: 'My Banking Life' },
+        { name: 'এসএমই ব্যাংকিং নিয়ে যত কথা', nameEn: 'Perspectives on SME Banking' },
       ]},
       { name: 'প্রকাশনা ও PDF', nameEn: 'Publications & PDF', icon: '▤', slug: 'prokashona-o-pdf', subs: [
-        { name: 'ই-উপন্যাস',     nameEn: 'E-Novel' },
-        { name: 'ই-প্রবন্ধ',     nameEn: 'E-Essay' },
-        { name: 'বই',           nameEn: 'Books' },
-        { name: 'জার্নাল',      nameEn: 'Journal' },
-        { name: 'সাহিত্য পত্রিকা', nameEn: 'Literary Magazine' },
-        { name: 'ই-বুক',        nameEn: 'E-Book' },
-        { name: 'PDF সংগ্রহ',    nameEn: 'PDF Collection' },
-        { name: 'প্রকাশিত গ্রন্থ', nameEn: 'Published Books' },
-        { name: 'লেখক পরিচিতি',  nameEn: 'Author Profile' },
+        { name: 'আমার বই', nameEn: 'My Books' },
+        { name: 'পিডিএফ বই', nameEn: 'PDF Books' },
       ]},
     ];
 
@@ -1097,7 +1046,7 @@
       const page = state.pagination.page;
       const limit = state.pagination.limit;
       let query = supabase.from('posts')
-        .select('id, title, slug, group_id, language, category, cover_image, published, featured, updated_at, tags', { count: 'exact' });
+        .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, featured, updated_at, tags', { count: 'exact' });
       if (state.filter.status === 'draft') query = query.eq('published', false);
       else if (state.filter.status === 'published') query = query.eq('published', true);
       if (state.filter.search) {
@@ -1127,6 +1076,10 @@
         return {
           group_id: main.group_id,
           category: main.category,
+          parent_category: main.parent_category || main.category,
+          subcategory: main.subcategory || '',
+          category_id: main.category_id || null,
+          subcategory_id: main.subcategory_id || null,
           cover_image: main.cover_image,
           featured: main.featured,
           published: main.published,
@@ -1147,6 +1100,10 @@
         return {
           group_id: main.group_id,
           category: main.category,
+          parent_category: main.parent_category || main.category,
+          subcategory: main.subcategory || '',
+          category_id: main.category_id || null,
+          subcategory_id: main.subcategory_id || null,
           cover_image: main.cover_image,
           featured: main.featured,
           published: main.published,
@@ -2364,7 +2321,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         });
       });
 
-      // Populate categories — নতুন: value = slug, data-id = id
+      // Populate categories — value = বাংলা নাম; id ও slug data attributes-এ রাখা হয়
       const catSel = $('#f-category');
       getParentCategories().forEach(c => {
         const opt = el('option', { value: c.name }, `${c.icon ? c.icon + ' ' : ''}${c.name} / ${c.nameEn}`);
@@ -2547,9 +2504,12 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           }
           if (formData.category) {
             catSel.value = formData.category;
+            // Parent category first; then restore the saved subcategory and its FK.
             catSel.dispatchEvent(new Event('change'));
             if (formData.subcategory) {
-              $('#f-sub-category').value = formData.subcategory;
+              const subSel = $('#f-sub-category');
+              subSel.value = formData.subcategory;
+              subSel.dispatchEvent(new Event('change'));
             }
             updateCatBadge();
           }
@@ -2698,7 +2658,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           w.tags && w.tags.length > 0 && el('p', { class: 'text-xs text-muted truncate' },
             icon('tag'), ' ' + w.tags.slice(0, 4).join(', ') + (w.tags.length > 4 ? ` +${w.tags.length - 4}` : '')),
           el('div', { class: 'meta' },
-            w.category && el('span', {}, icon('file-text'), w.category),
+            (w.parent_category || w.category) && el('span', {}, icon('folder'), w.parent_category || w.category),
+            (w.subcategory || (w.parent_category && w.category !== w.parent_category ? w.category : '')) && el('span', { class: 'text-xs text-muted' }, '↳ ' + (w.subcategory || w.category)),
             el('span', {}, icon('calendar'), formatDate(w.updated_at))
           )
         );
