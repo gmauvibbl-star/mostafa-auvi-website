@@ -17,7 +17,7 @@ create table if not exists public.posts (
   cover_image_url text,
   language text not null default 'bn' check (language in ('bn','en')),
   featured boolean not null default false,
-  slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
+  slug text not null unique,
   body text not null,
   title_en text,
   body_en text,
