@@ -351,6 +351,33 @@
     }
     .main-inner { width: 100%; max-width: none; margin: 0; }
 
+    /* Statistics cards — color only; preserve existing card layout */
+    .stats-card { border-width: 1px; }
+    .stats-card-0 { background: #EAF3FF; border-color: #B8D4F7; color: #123B73; }
+    .stats-card-1 { background: #EDF8E8; border-color: #BFE0AE; color: #245B24; }
+    .stats-card-2 { background: #FFF3DB; border-color: #F1D19A; color: #7A3E00; }
+    .stats-card-3 { background: #F3E9FF; border-color: #D8BDF7; color: #4B2185; }
+    .stats-card-4 { background: #E3F7F5; border-color: #A9E2DC; color: #075B58; }
+    .stats-card-5 { background: #FFE9EC; border-color: #F2B9C1; color: #8B2635; }
+    .stats-card .text-muted { color: inherit; opacity: .88; }
+    .stats-card > .flex > div:first-child p:last-child { color: inherit; }
+    .stats-card > .flex > .badge {
+      background: rgba(255,255,255,.58);
+      color: inherit;
+      border: 1px solid currentColor;
+    }
+    .dark .stats-card-0 { background: #172B43; border-color: #31577F; color: #D7E9FF; }
+    .dark .stats-card-1 { background: #1D3523; border-color: #426B45; color: #DDF5D9; }
+    .dark .stats-card-2 { background: #3D2B17; border-color: #76552B; color: #FFE7BE; }
+    .dark .stats-card-3 { background: #30213F; border-color: #62458A; color: #EBD9FF; }
+    .dark .stats-card-4 { background: #173A39; border-color: #36716D; color: #D0F5F1; }
+    .dark .stats-card-5 { background: #40232A; border-color: #80434F; color: #FFDDE2; }
+    .dark .stats-card > .flex > .badge { background: rgba(0,0,0,.18); }
+    .stats-featured-card { background: #F7F0E5; border-color: #E7D4B6; color: #65451F; }
+    .stats-featured-card .text-muted { color: #765F45; }
+    .dark .stats-featured-card { background: #332A20; border-color: #66513A; color: #F1DFC4; }
+    .dark .stats-featured-card .text-muted { color: #D0BFA5; }
+
     /* Page header (within main) */
     .page-head {
       display: flex; align-items: center; justify-content: space-between;
@@ -2690,8 +2717,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           { label: 'খসড়া', value: stats.drafts, icon: 'file-edit', cls: 'badge-warning' },
         ];
         const cardsGrid = el('div', { class: 'grid grid-4 mb-4', style: { gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))' } });
-        cards.forEach(c => {
-          cardsGrid.appendChild(el('div', { class: 'card' },
+        cards.forEach((c, index) => {
+          cardsGrid.appendChild(el('div', { class: `card stats-card stats-card-${index}` },
             el('div', { class: 'flex items-center justify-between' },
               el('div', {},
                 el('p', { class: 'text-xs text-muted' }, c.label),
@@ -2704,7 +2731,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         mount.appendChild(cardsGrid);
 
         // Total featured
-        mount.appendChild(el('div', { class: 'card mb-4' },
+        mount.appendChild(el('div', { class: 'card mb-4 stats-featured-card' },
           el('div', { class: 'flex items-center justify-between' },
             el('div', {},
               el('p', { class: 'text-xs text-muted' }, 'ফিচার্ড লেখা'),
