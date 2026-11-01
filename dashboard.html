@@ -351,28 +351,28 @@
     }
     .main-inner { width: 100%; max-width: none; margin: 0; }
 
-    /* Statistics cards — color only; preserve existing card layout */
+    /* Statistics cards — stronger colors; preserve existing card layout */
     .stats-card { border-width: 1px; }
-    .stats-card-0 { background: #EAF3FF; border-color: #B8D4F7; color: #123B73; }
-    .stats-card-1 { background: #EDF8E8; border-color: #BFE0AE; color: #245B24; }
-    .stats-card-2 { background: #FFF3DB; border-color: #F1D19A; color: #7A3E00; }
-    .stats-card-3 { background: #F3E9FF; border-color: #D8BDF7; color: #4B2185; }
-    .stats-card-4 { background: #E3F7F5; border-color: #A9E2DC; color: #075B58; }
-    .stats-card-5 { background: #FFE9EC; border-color: #F2B9C1; color: #8B2635; }
-    .stats-card .text-muted { color: inherit; opacity: .88; }
+    .stats-card-0 { background: #245B9E; border-color: #174477; color: #FFFFFF; }
+    .stats-card-1 { background: #287A45; border-color: #1D6035; color: #FFFFFF; }
+    .stats-card-2 { background: #A85A12; border-color: #85430B; color: #FFFFFF; }
+    .stats-card-3 { background: #6741A5; border-color: #4D2E83; color: #FFFFFF; }
+    .stats-card-4 { background: #087E78; border-color: #075F5B; color: #FFFFFF; }
+    .stats-card-5 { background: #AD4059; border-color: #873046; color: #FFFFFF; }
+    .stats-card .text-muted { color: inherit; opacity: 1; }
     .stats-card > .flex > div:first-child p:last-child { color: inherit; }
     .stats-card > .flex > .badge {
-      background: rgba(255,255,255,.58);
+      background: rgba(255,255,255,.18);
       color: inherit;
-      border: 1px solid currentColor;
+      border: 1px solid rgba(255,255,255,.28);
     }
-    .dark .stats-card-0 { background: #172B43; border-color: #31577F; color: #D7E9FF; }
-    .dark .stats-card-1 { background: #1D3523; border-color: #426B45; color: #DDF5D9; }
-    .dark .stats-card-2 { background: #3D2B17; border-color: #76552B; color: #FFE7BE; }
-    .dark .stats-card-3 { background: #30213F; border-color: #62458A; color: #EBD9FF; }
-    .dark .stats-card-4 { background: #173A39; border-color: #36716D; color: #D0F5F1; }
-    .dark .stats-card-5 { background: #40232A; border-color: #80434F; color: #FFDDE2; }
-    .dark .stats-card > .flex > .badge { background: rgba(0,0,0,.18); }
+    .dark .stats-card-0 { background: #173B63; border-color: #31577F; color: #F3F8FF; }
+    .dark .stats-card-1 { background: #194A2B; border-color: #426B45; color: #F0FFF2; }
+    .dark .stats-card-2 { background: #66370D; border-color: #93602D; color: #FFF4E5; }
+    .dark .stats-card-3 { background: #3D2867; border-color: #62458A; color: #F7F0FF; }
+    .dark .stats-card-4 { background: #104E4A; border-color: #36716D; color: #E8FFFC; }
+    .dark .stats-card-5 { background: #642638; border-color: #80434F; color: #FFF0F3; }
+    .dark .stats-card > .flex > .badge { background: rgba(255,255,255,.12); color: inherit; border-color: rgba(255,255,255,.22); }
     .stats-featured-card { background: #F7F0E5; border-color: #E7D4B6; color: #65451F; }
     .stats-featured-card .text-muted { color: #765F45; }
     .dark .stats-featured-card { background: #332A20; border-color: #66513A; color: #F1DFC4; }
@@ -712,7 +712,47 @@
     ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--muted-fg); }
     .sidebar ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
-  </style>
+  
+    /* Dashboard typography readability; no layout or spacing changes */
+    body { font-size: 16px; }
+    .btn { font-size: 15px; }
+    .btn-sm { font-size: 14px; }
+    .btn-lg { font-size: 16px; }
+    .input, .textarea, .select { font-size: 15px; }
+    .label { font-size: 14px; }
+    .label-hint { font-size: 13px; }
+    .card-h { font-size: 16px; }
+    .badge { font-size: 13px; }
+    .badge-count { font-size: 12px; }
+    .text-sm { font-size: 14px; }
+    .text-xs { font-size: 13px; }
+    .breadcrumb { font-size: 14px; }
+    .sidebar-brand .name { font-size: 16px; }
+    .sidebar-brand .sub { font-size: 13px; }
+    .sidebar-section-title { font-size: 12px; }
+    .nav-item { font-size: 15px; }
+    .nav-item .count { font-size: 12px; }
+    .sidebar-footer .name { font-size: 14px; }
+    .sidebar-footer .email { font-size: 12px; }
+    .page-title { font-size: 24px; }
+    .page-subtitle { font-size: 15px; }
+    .tab-btn { font-size: 15px; }
+    .sub-tab { font-size: 14px; }
+    .stats-card > .flex > div:first-child p:first-child { font-size: 15px !important; }
+    .stats-card > .flex > div:first-child p:last-child { font-size: 32px !important; line-height: 1.2; }
+    .writing-item .title { font-size: 15px; }
+    .writing-item .meta { font-size: 13px; }
+    .tag-chip { font-size: 13px; }
+    .modal h3 { font-size: 18px; }
+    .modal p { font-size: 15px; }
+    .toast { font-size: 14px; }
+    .toast .t-desc { font-size: 13px; }
+    @media (max-width: 768px) {
+      .stats-card > .flex > div:first-child p:last-child { font-size: 29px !important; }
+      .page-title { font-size: 22px; }
+    }
+
+</style>
 </head>
 <body>
   <div id="toast-host"></div>
