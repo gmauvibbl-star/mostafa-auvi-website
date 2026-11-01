@@ -1321,3 +1321,182 @@ async function loadPost() {
     setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 3500);
   }
 })();
+
+/* ====== Author login modal ====== */
+(function() {
+  const loginBtn = document.getElementById('authorLoginBtn');
+  const loginLabel = document.getElementById('authorLoginLabel');
+  const overlay = document.getElementById('loginModalOverlay');
+  const modalStatus = document.getElementById('modalStatus');
+  const modalEmail = document.getElementById('modalEmail');
+  const modalPassword = document.getElementById('modalPassword');
+  const modalLoginBtn = document.getElementById('modalLoginBtn');
+
+  let sb = null;
+  try {
+    if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (e) { console.warn('Supabase init failed:', e); }
+
+  function showStatus(msg, type) {
+    if (!msg) { modalStatus.className = 'modal-status'; modalStatus.textContent = ''; return; }
+    modalStatus.className = 'modal-status show ' + type;
+    modalStatus.textContent = msg;
+  }
+  function openLoginModal() { overlay.classList.add('open'); setTimeout(() => modalEmail.focus(), 100); }
+  window.closeLoginModal = function() { overlay.classList.remove('open'); modalPassword.value = ''; showStatus('', ''); };
+
+  if (loginBtn) {
+    loginBtn.onclick = () => {
+      if (loginBtn.classList.contains('logged-in')) { window.location.href = 'admin.html'; return; }
+      openLoginModal();
+    };
+  }
+  if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) window.closeLoginModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) window.closeLoginModal(); });
+  if (modalEmail) modalEmail.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalPassword.focus(); } });
+  if (modalPassword) modalPassword.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
+
+  if (modalLoginBtn) {
+    modalLoginBtn.onclick = async () => {
+      if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
+      const email = modalEmail.value.trim();
+      const password = modalPassword.value;
+      if (!email || !password) { showStatus('ইমেইল ও পাসওয়ার্ড দিন।', 'error'); return; }
+      showStatus('লগইন করা হচ্ছে…', 'warning');
+      modalLoginBtn.disabled = true;
+      try {
+        const { data, error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) { showStatus('লগইন ব্যর্থ: ' + error.message, 'error'); modalLoginBtn.disabled = false; return; }
+        const { data: admin, error: adminErr } = await sb.from('admin_users').select('user_id').eq('user_id', data.user.id).maybeSingle();
+        if (adminErr || !admin) {
+          showStatus('অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।', 'error');
+          await sb.auth.signOut();
+          modalLoginBtn.disabled = false;
+          return;
+        }
+        showStatus('লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…', 'success');
+        setTimeout(() => { window.location.href = 'admin.html'; }, 800);
+      } catch (e) {
+        showStatus('সমস্যা: ' + e.message, 'error');
+        modalLoginBtn.disabled = false;
+      }
+    };
+  }
+
+  async function checkSession() {
+    if (!sb) return;
+    try {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        const { data: admin } = await sb.from('admin_users').select('user_id').eq('user_id', session.user.id).maybeSingle();
+        if (admin) {
+          loginBtn.classList.add('logged-in');
+          loginLabel.textContent = 'ড্যাশবোর্ড খুলুন →';
+        }
+      }
+    } catch (e) {}
+  }
+  checkSession();
+
+  const forgotLink = document.getElementById('forgotPasswordLink');
+  forgotLink?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showStatus('পাসওয়ার্ড রিসেট করতে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন অথবা ড্যাশবোর্ড লিংক থেকে রিসেট করুন।', 'warning');
+  });
+  document.getElementById('signupLink')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।', 'warning');
+  });
+})();
+
+/* ====== Trigger article load ====== */
+loadPost();
+</script>
+<script>
+/* ====== Public comments — spam protection via honeypot + server-side rate limit ====== */
+(function () {
+  const form = document.getElementById('commentForm');
+  if (!form || !window.supabase) return;
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const list = document.getElementById('commentsList');
+  const status = document.getElementById('commentStatus');
+  const submit = document.getElementById('commentSubmit');
+  const nameInput = document.getElementById('commentName');
+  const textInput = document.getElementById('commentText');
+  const websiteInput = document.getElementById('commentWebsite');
+  const countLabel = document.getElementById('commentCount');
+  const toBnDigits = value => String(value).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+  textInput.addEventListener('input', () => { countLabel.textContent = toBnDigits(textInput.value.length) + ' / ২০০০'; });
+  const postSlug = new URLSearchParams(location.search).get('slug') || '';
+
+  function dateLabel(value) {
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.toLocaleDateString(document.documentElement.lang === 'en' ? 'en-GB' : 'bn-BD', {year:'numeric', month:'short', day:'numeric'});
+  }
+  function showStatus(message, isError) {
+    status.textContent = message;
+    status.style.color = isError ? '#9b2c2c' : 'var(--ink-mute)';
+  }
+  async function loadComments() {
+    if (!postSlug) {
+      list.innerHTML = '<p class="comments-empty">নির্দিষ্ট লেখার পেজে এলে এখানে মন্তব্য দেখা যাবে।</p>';
+      return;
+    }
+    const { data, error } = await client.from('comments')
+      .select('id,author_name,comment_text,created_at')
+      .eq('post_slug', postSlug)
+      .order('created_at', {ascending:false})
+      .limit(100);
+    if (error) {
+      console.error('Comment list error:', error);
+      list.innerHTML = '<p class="comments-empty">মন্তব্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।</p>';
+      return;
+    }
+    if (!data || !data.length) {
+      list.innerHTML = '<p class="comments-empty">এখনো কোনো মন্তব্য নেই। প্রথম মন্তব্যটি আপনিই করুন।</p>';
+      return;
+    }
+    list.innerHTML = data.map(c =>
+      '<article class="reader-comment"><div class="reader-comment-head"><span class="reader-comment-name">' +
+      esc(c.author_name) + '</span><time class="reader-comment-date">' + esc(dateLabel(c.created_at)) +
+      '</time></div><div class="reader-comment-text">' + esc(c.comment_text) + '</div></article>'
+    ).join('');
+  }
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    if (!postSlug) { showStatus('একটি নির্দিষ্ট লেখার পেজে গিয়ে মন্তব্য করুন।', true); return; }
+    const authorName = nameInput.value.trim();
+    const commentText = textInput.value.trim();
+    if (websiteInput.value.trim()) { form.reset(); return; }
+    if (!authorName || !commentText) { showStatus('নাম ও মন্তব্য দুটোই লিখুন।', true); return; }
+    if (authorName.length > 60 || commentText.length > 2000) { showStatus('নামের বা মন্তব্যের দৈর্ঘ্য সীমা ছাড়িয়েছে।', true); return; }
+    submit.disabled = true;
+    showStatus('মন্তব্য পাঠানো হচ্ছে…', false);
+    try {
+      const response = await fetch(SUPABASE_URL + '/functions/v1/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY },
+        body: JSON.stringify({ slug: postSlug, name: authorName, comment: commentText, website: websiteInput.value })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        showStatus(result.error || 'মন্তব্য পাঠানো যায়নি। পরে আবার চেষ্টা করুন।', true);
+        return;
+      }
+      textInput.value = '';
+      countLabel.textContent = '০ / ২০০০';
+      showStatus(result.message || 'আপনার মন্তব্য প্রকাশিত হয়েছে। ধন্যবাদ!', false);
+      await loadComments();
+    } catch (error) {
+      console.error('Comment submit error:', error);
+      showStatus('সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।', true);
+    } finally {
+      submit.disabled = false;
+    }
+  });
+  loadComments();
+})();
+</script>
+</body>
+</html>
