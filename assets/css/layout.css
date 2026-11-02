@@ -549,3 +549,46 @@
 .brand .tagline .dot { color: var(--gold); margin: 0 4px; font-size: 14px; }
 .nav ul li.nav-travel a { color: #C46A2B; }
 .nav ul li.nav-banking a { color: #6F4F22; }
+
+/* Language buttons — distinct colors so they're visible */
+.utility-bar .lang a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 4px 14px;
+  border: 1.5px solid var(--gold);
+  border-radius: 14px;
+  color: var(--gold-bright);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  transition: all .2s;
+  cursor: pointer;
+  background: rgba(184,146,72,0.15);
+}
+.utility-bar .lang a:hover {
+  background: var(--gold-bright);
+  color: var(--teal-deep);
+  border-color: var(--gold-bright);
+}
+.utility-bar .lang a.active {
+  background: var(--gold-bright);
+  color: var(--teal-deep);
+  border-color: var(--gold-bright);
+  font-weight: 700;
+}
+.utility-bar .lang span[lang] {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  border: 1.5px dashed rgba(184,146,72,0.4);
+  border-radius: 14px;
+  color: rgba(212,180,104,0.5);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+.utility-bar .lang a[style*="opacity"] {
+  border-style: dashed;
+  background: transparent;
+}
