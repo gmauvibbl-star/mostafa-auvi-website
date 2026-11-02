@@ -58,6 +58,7 @@
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 <link rel="stylesheet" href="assets/css/explore.css">
+<link rel="stylesheet" href="assets/css/header-new.css">
 
 <!-- ─── PROTECTED stylesheets (carried over VERBATIM from original) ───
      hero.css  : hero banner styles (DO NOT TOUCH) — original lines 388-630 + hero responsive
@@ -72,74 +73,42 @@
 
 <div class="page-wrap">
 
-<!-- ====== TOP UTILITY BAR (modifiable) ====== -->
-<div class="utility-bar">
-  <div class="date">শুক্রবার, ২৮ অক্টোবর ২০২৬</div>
-  <div class="lang">
-    <span class="lang-label">ভাষা নির্বাচন:</span>
-    <a href="index.html" class="active" lang="bn" title="বাংলায় পড়তে ক্লিক করুন">বাংলা</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="index-en.html" lang="en" title="Click here to read in English" hreflang="en">English</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="#" lang="de" title="Deutsch version coming soon">Deutsch</a>
-  </div>
-</div>
-
-<!-- ====== HEADER (border-bottom is PROTECTED — see layout.css) ====== -->
-<header class="header">
-  <div class="header-row">
-    <div class="brand">
-      <div class="name"><span class="first">মোস্তফা</span><span class="sep-brand">|</span><span class="second">অভি</span></div>
-      <div class="tagline">Mostafa<span class="dot" aria-hidden="true">|</span>Auvi</div>
-    </div>
-    <div class="header-right">
-      <div class="share">
-        <span class="label">Share —</span>
-        <a href="#" onclick="return sharePage('facebook')" class="share-fb" title="Facebook-এ শেয়ার করুন" aria-label="Facebook-এ শেয়ার করুন">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-        </a>
-        <a href="#" onclick="return sharePage('twitter')" class="share-tw" title="X / Twitter-এ শেয়ার করুন" aria-label="X / Twitter-এ শেয়ার করুন">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="#" onclick="return sharePage('whatsapp')" class="share-wa" title="WhatsApp-এ শেয়ার করুন" aria-label="WhatsApp-এ শেয়ার করুন">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        </a>
-        <a href="#" onclick="return sharePage('email')" class="share-em" title="ইমেইলে পাঠান" aria-label="ইমেইলে পাঠান">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
+<!-- ====== HEADER (user's exact design — replaces utility-bar + header + nav) ====== -->
+<header class="site-header">
+  <div class="top">
+    <a class="logo" href="index.html" aria-label="মোস্তফা অভি · Mostafa Auvi">
+      <span class="bn">মোস্তফা <span class="lite">অভি</span></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="en"><b>Mostafa</b> | Auvi</span>
+    </a>
+    <div class="actions">
+      <div class="share" role="group" aria-label="শেয়ার করুন">
+        <span class="label">Share</span>
+        <a href="#" onclick="return sharePage('facebook')" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.5H8v3.2h2.7v8z"/></svg></a>
+        <a href="#" onclick="return sharePage('twitter')" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.2 2h3.4l-7.4 8.5L23 22h-6.8l-5.3-7-6.1 7H1.4l7.9-9L1 2h7l4.8 6.4L18.2 2zm-1.2 18h1.9L7.1 3.9H5.1L17 20z"/></svg></a>
+        <a href="#" onclick="return sharePage('whatsapp')" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 21l1.3-4.6A9 9 0 1 1 8 19.9L3 21z"/></svg></a>
+        <a href="mailto:gmauvibbl@gmail.com" aria-label="ইমেইল"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
       </div>
-      <a class="subscribe-btn" href="subscribe.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-2c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
-        সাবস্ক্রাইব করুন
-      </a>
+      <a class="subscribe" href="subscribe.html">সাবস্ক্রাইব করুন</a>
     </div>
   </div>
+  <nav class="nav" aria-label="প্রধান মেনু">
+    <ul>
+      <li><a href="index.html" class="active">হোম</a></li>
+      <li><a href="posts.html?category=kothasahitya">কথাসাহিত্য</a></li>
+      <li><a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
+      <li><a href="posts.html?category=ain-oadalot">আইন ও আদালত</a></li>
+      <li><a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a></li>
+      <li><a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a></li>
+      <li><a href="index.html#chandradwip">চন্দ্রদ্বীপ</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a></li>
+      <li><a href="about.html">লেখক পরিচিতি</a></li>
+      <li><a href="posts.html">সব লেখা</a></li>
+    </ul>
+  </nav>
+  <div class="strip" aria-hidden="true"></div>
 </header>
-
-<!-- ====== NAVIGATION (modifiable — hamburger toggle added) ====== -->
-<nav class="nav" aria-label="প্রধান নেভিগেশন">
-  <button class="nav-toggle" type="button" aria-label="মেনু" aria-expanded="false" aria-controls="primary-menu">
-    <svg class="icon-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-  </button>
-  <ul id="primary-menu">
-    <li class="nav-home"><a href="index.html">হোম</a></li>
-    <li class="nav-fiction"><a href="posts.html?category=kothasahitya">কথাসাহিত্য</a></li>
-    <li class="nav-essay"><a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
-    <li class="nav-law"><a href="posts.html?category=ain-oadalot">আইন ও আদালত</a></li>
-    <li class="nav-travel"><a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a></li>
-    <li class="nav-banking"><a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a></li>
-    <li class="nav-chandradwip"><a href="index.html#chandradwip">চন্দ্রদ্বীপ</a></li>
-    <li class="nav-journal"><a href="journal.html">Journal</a></li>
-    <li class="nav-pub"><a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a></li>
-    <li class="nav-author"><a href="about.html">লেখক পরিচিতি</a></li>
-    <li class="nav-all"><a href="posts.html">সব লেখা</a></li>
-  </ul>
-  <form class="search-box" role="search" action="posts.html" method="get">
-    <span class="icon" aria-hidden="true">⌕</span>
-    <input type="search" name="q" placeholder="খুঁজুন…" aria-label="সাইটে খুঁজুন" maxlength="100">
-  </form>
-</nav>
 
 <main id="main">
 
