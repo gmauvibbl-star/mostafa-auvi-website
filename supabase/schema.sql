@@ -28,6 +28,8 @@ create table if not exists public.posts (
 );
 alter table public.posts add column if not exists subtitle text;
 alter table public.posts add column if not exists excerpt text;
+alter table public.posts add column if not exists scheduled_at timestamptz;
+alter table public.posts add column if not exists subcategory_id uuid;
 alter table public.posts add column if not exists category text;
 alter table public.posts add column if not exists tags text[] not null default '{}';
 alter table public.posts add column if not exists cover_image_url text;
@@ -109,3 +111,29 @@ for each row execute function public.set_posts_updated_at();
 
 -- Subscriber records are only accessed by trusted Edge Functions.
 revoke all on public.subscribers from anon, authenticated;
+
+-- Revision History table
+create table if not exists public.post_revisions (
+  id uuid primary key default gen_random_uuid(),
+  post_id uuid not null references public.posts(id) on delete cascade,
+  body text,
+  body_en text,
+  title text,
+  title_en text,
+  saved_at timestamptz not null default now(),
+  saved_by uuid
+);
+alter table public.post_revisions enable row level security;
+create policy "admin_read_revisions" on public.post_revisions for select to authenticated using (
+  exists (select 1 from public.admin_users where user_id = auth.uid())
+);
+create policy "admin_insert_revisions" on public.post_revisions for insert to authenticated with check (
+  exists (select 1 from public.admin_users where user_id = auth.uid())
+);
+create policy "admin_delete_revisions" on public.post_revisions for delete to authenticated using (
+  exists (select 1 from public.admin_users where user_id = auth.uid())
+);
+create index if not exists idx_post_revisions_post_id on public.post_revisions(post_id);
+create index if not exists idx_post_revisions_saved_at on public.post_revisions(saved_at desc);
+
+create index if not exists idx_posts_scheduled_at on public.posts(scheduled_at) where scheduled_at is not null;

@@ -16,7 +16,113 @@
   <link href="https://fonts.maateen.me/siyam-rupali/font.css" rel="stylesheet" />
 
   <!-- Supabase JS v2 (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js">
+// ====== Site Preview — opens read.html with current draft content ======
+function openSitePreview() {
+  const editor = document.getElementById('editor');
+  if (!editor) return;
+  const titleEl = document.querySelector('#title-input, input[name="title"]');
+  const title = titleEl ? titleEl.value : 'প্রিভিউ';
+  const body = editor.innerHTML;
+  const previewData = { title, body, timestamp: Date.now() };
+  try {
+    localStorage.setItem('mauvi_preview_post', JSON.stringify(previewData));
+    window.open('read.html?preview=1', '_blank');
+  } catch(e) {
+    alert('প্রিভিউ খোলা যায়নি।');
+  }
+}
+
+
+// ====== PDF Upload ======
+async function uploadPDF(file, language) {
+  if (!file) return null;
+  if (file.type !== 'application/pdf') { toast('ত্রুটি', 'শুধু PDF ফাইল আপলোড করা যাবে।', 'error'); return null; }
+  if (file.size > 20 * 1024 * 1024) { toast('ত্রুটি', 'PDF ফাইল ২০MB-এর কম হতে হবে।', 'error'); return null; }
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const ext = '.pdf';
+    const path = 'pdf-' + language + '/' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + ext;
+    const { data, error } = await sb.storage.from('covers').upload(path, file, { contentType: 'application/pdf', upsert: false });
+    if (error) throw error;
+    const { data: urlData } = sb.storage.from('covers').getPublicUrl(path);
+    return urlData.publicUrl;
+  } catch(e) { toast('ত্রুটি', 'PDF আপলোড ব্যর্থ: ' + e.message, 'error'); return null; }
+}
+
+
+// ====== Video Upload ======
+async function uploadVideo(file, language) {
+  if (!file) return null;
+  if (!file.type.match(/^video\/(mp4|webm|ogg)$/)) { toast('ত্রুটি', 'শুধু MP4, WebM, OGG ভিডিও আপলোড করা যাবে।', 'error'); return null; }
+  if (file.size > 50 * 1024 * 1024) { toast('ত্রুটি', 'ভিডিও ফাইল ৫০MB-এর কম হতে হবে।', 'error'); return null; }
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const ext = '.' + file.name.split('.').pop();
+    const path = 'video-' + language + '/' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + ext;
+    const { data, error } = await sb.storage.from('covers').upload(path, file, { contentType: file.type, upsert: false });
+    if (error) throw error;
+    const { data: urlData } = sb.storage.from('covers').getPublicUrl(path);
+    return urlData.publicUrl;
+  } catch(e) { toast('ত্রুটি', 'ভিডিও আপলোড ব্যর্থ: ' + e.message, 'error'); return null; }
+}
+
+
+// ====== Scheduled Publishing ======
+function getScheduledAt() {
+  const el = document.getElementById('scheduled-at');
+  if (!el || !el.value) return null;
+  const dt = new Date(el.value);
+  if (isNaN(dt.getTime())) return null;
+  return dt.toISOString();
+}
+function clearSchedule() {
+  const el = document.getElementById('scheduled-at');
+  if (el) el.value = '';
+  const hint = document.getElementById('schedule-hint');
+  if (hint) hint.textContent = '';
+}
+
+
+// ====== Revision History ======
+async function saveRevision(postId) {
+  if (!postId) return;
+  try {
+    const editor = document.getElementById('editor');
+    const titleEl = document.querySelector('#title-input, input[name="title"]');
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    await sb.from('post_revisions').insert({
+      post_id: postId,
+      body: editor ? editor.innerHTML : '',
+      title: titleEl ? titleEl.value : '',
+      saved_at: new Date().toISOString()
+    });
+  } catch(e) { console.warn('Revision save failed:', e); }
+}
+
+async function showRevisionHistory(postId) {
+  if (!postId) { toast('তথ্য', 'পুরোনো লেখা তৈরির পর রিভিশন দেখা যাবে।', 'info'); return; }
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data, error } = await sb.from('post_revisions').select('id,body,title,saved_at').eq('post_id', postId).order('saved_at', { ascending: false }).limit(20);
+    if (error) throw error;
+    if (!data || data.length === 0) { toast('তথ্য', 'কোনো পুরোনো সংস্করণ নেই।', 'info'); return; }
+    const choice = prompt('সংস্করণ নির্বাচন করুন (১-' + data.length + '):\n' + data.map((r, i) => (i+1) + '. ' + new Date(r.saved_at).toLocaleString('bn-BD') + ' — ' + (r.title || '(শিরোনামহীন)')).join('\n'));
+    const idx = parseInt(choice) - 1;
+    if (isNaN(idx) || idx < 0 || idx >= data.length) return;
+    const rev = data[idx];
+    if (confirm('এই সংস্করণ ফিরিয়ে আনবেন? বর্তমান লেখা সংরক্ষিত থাকবে (নতুন রিভিশন হিসেবে)।')) {
+      const editor = document.getElementById('editor');
+      const titleEl = document.querySelector('#title-input, input[name="title"]');
+      if (editor) { editor.innerHTML = rev.body || ''; }
+      if (titleEl && rev.title) { titleEl.value = rev.title; }
+      if (state.editingId && state.editingId.id) saveRevision(state.editingId.id);
+      toast('সফল', 'পুরোনো সংস্করণ ফিরিয়ে আনা হয়েছে। সংরক্ষণ করুন।', 'success');
+    }
+  } catch(e) { toast('ত্রুটি', 'রিভিশন লোড ব্যর্থ: ' + e.message, 'error'); }
+}
+
+</script>
 
   <!-- Lucide icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -764,7 +870,7 @@
     // ============================================================
     const SUPABASE_URL  = 'https://voswrndbxrsaqfzwffhh.supabase.co';
     const SUPABASE_KEY  = 'sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I';
-    const STORAGE_BUCKET = 'post-covers';
+    const STORAGE_BUCKET = 'covers';
     const COVER_FOLDER_BN = 'cover-bn';
     const COVER_FOLDER_EN = 'cover-en';
     const INLINE_FOLDER_BN = 'inline-bn';
@@ -1029,7 +1135,7 @@
       // প্রতিটি bilingual লেখাকে তালিকায় একবারই দেখাই: বাংলা row হলো মূল record।
       let query = supabase.from('posts')
         .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, featured, updated_at, tags', { count: 'exact' })
-        .eq('language', 'bn');
+        .order('updated_at', { ascending: false });
       if (state.filter.status === 'draft') query = query.eq('published', false);
       else if (state.filter.status === 'published') query = query.eq('published', true);
       if (state.filter.search) {
@@ -1295,16 +1401,16 @@
         .eq('language', 'bn');
       const { count: drafts } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
-        .eq('language', 'bn').eq('published', false);
+        .eq('published', false);
       const { count: published } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
-        .eq('language', 'bn').eq('published', true);
+        .eq('published', true);
       const { count: featured } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
-        .eq('language', 'bn').eq('featured', true);
+        .eq('featured', true);
       const { count: totalEn } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
-        .eq('language', 'en');
+        ; // EN count merged with BN
       const { data: recent } = await supabase.from('posts')
         .select('id, title, slug, group_id, published, featured, updated_at, category, cover_image')
         .eq('language', 'bn')
@@ -1444,6 +1550,10 @@
           if (opts.onChange) opts.onChange(state.history[state.historyIdx]);
           updateCounts();
         }
+      }));
+      toolbar.append(tbBtn('রিভিশন ইতিহাস', ic('<path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/>'), () => {
+        const id = state.editingId ? state.editingId.id : null;
+        showRevisionHistory(id);
       }));
       toolbar.append(el('div', { class: 'tb-divider' }));
 
@@ -1620,6 +1730,24 @@
         const url = prompt('ছবির URL দিন:');
         if (url) { exec('insertImage', url); }
       }));
+      toolbar.append(tbBtn('ছবি ক্যাপশন', ic('<path d="M4 4h16v12H4z"/><path d="M2 20h20"/><path d="M8 8h8"/>'), () => {
+        const sel = window.getSelection();
+        const img = sel.anchorNode && sel.anchorNode.nodeType === 1 ? sel.anchorNode.querySelector('img') : (sel.anchorNode && sel.anchorNode.parentElement ? sel.anchorNode.parentElement.querySelector('img') : null);
+        if (!img) { toast('ত্রুটি', 'প্রথমে একটি ছবি নির্বাচন করুন।', 'error'); return; }
+        const caption = prompt('ক্যাপশন লিখুন:');
+        if (!caption) return;
+        const attribution = prompt('উৎস/আলোকচিত্রী (ঐচ্ছিক):') || '';
+        const fig = document.createElement('figure');
+        fig.style.cssText = 'margin:16px auto;text-align:center;max-width:100%;';
+        const imgClone = img.cloneNode(true);
+        imgClone.style.cssText = 'max-width:100%;height:auto;border-radius:6px;';
+        fig.appendChild(imgClone);
+        const figcap = document.createElement('figcaption');
+        figcap.style.cssText = 'font-size:13px;color:#666;font-style:italic;margin-top:6px;';
+        figcap.textContent = caption + (attribution ? ' · উৎস: ' + attribution : '');
+        fig.appendChild(figcap);
+        img.replaceWith(fig);
+      }));
       toolbar.append(tbBtn('ছবি আপলোড', ic('<rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>'), async () => {
         const fi = el('input', { type: 'file', accept: 'image/jpeg,image/png,image/webp' });
         fi.style.display = 'none';
@@ -1635,6 +1763,41 @@
           fi.remove();
         });
         fi.click();
+      }));
+      toolbar.append(tbBtn('PDF আপলোড', ic('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/>'), () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/pdf';
+        input.onchange = async () => {
+          const file = input.files[0];
+          if (!file) return;
+          toast('আপলোড', 'PDF আপলোড হচ্ছে…', 'info');
+          const url = await uploadPDF(file, state.language || 'bn');
+          if (url) {
+            const title = prompt('PDF-এর নাম:') || file.name;
+            const html = '<div style="margin:12px 0;padding:12px 16px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:8px;"><a href="' + url + '" target="_blank" download style="color:#0F3D3E;text-decoration:none;font-weight:600;">📄 ' + title + '</a> <span style="font-size:12px;color:#666;margin-left:8px;">(' + Math.round(file.size/1024) + ' KB)</span></div>';
+            document.execCommand('insertHTML', false, html);
+            toast('সফল', 'PDF আপলোড হয়েছে।', 'success');
+          }
+        };
+        input.click();
+      }));
+      toolbar.append(tbBtn('ভিডিও আপলোড', ic('<path d="M23 7l-7 5 7 5z"/><path d="M1 5h15v14H1z"/>'), () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'video/mp4,video/webm,video/ogg';
+        input.onchange = async () => {
+          const file = input.files[0];
+          if (!file) return;
+          toast('আপলোড', 'ভিডিও আপলোড হচ্ছে…', 'info');
+          const url = await uploadVideo(file, state.language || 'bn');
+          if (url) {
+            const html = '<div style="margin:12px 0;"><video controls style="width:100%;max-width:640px;border-radius:8px;" src="' + url + '"></video><div style="font-size:12px;color:#666;margin-top:4px;"><a href="' + url + '" target="_blank" download>ডাউনলোড ⬇</a></div></div>';
+            document.execCommand('insertHTML', false, html);
+            toast('সফল', 'ভিডিও আপলোড হয়েছে।', 'success');
+          }
+        };
+        input.click();
       }));
       toolbar.append(tbBtn('লিংক', ic('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'), () => {
         const sel = window.getSelection();
@@ -1679,6 +1842,14 @@
         try { document.execCommand('insertHTML', false, html); } catch {}
         syncContent();
       }));
+      toolbar.append(tbBtn('Facebook', ic('<path d="M14 8h2.5V4H14c-2 0-3 1-3 3v2H9v4h2v8h4v-8h2.5l.5-4H15V7c0-.5.5-1 1-1z"/>'), () => {
+        const url = prompt('Facebook পোস্ট বা ভিডিওর লিংক দিন:');
+        if (!url) return;
+        const fbUrl = url.trim();
+        if (!fbUrl.match(/facebook\.com|fb\.watch|fb\.com/)) { toast('ত্রুটি', 'সঠিক Facebook লিংক দিন।', 'error'); return; }
+        const iframe = '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin:12px 0;"><iframe src="https://www.facebook.com/plugins/post.php?href=' + encodeURIComponent(fbUrl) + '&show_text=true&width=500" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" loading="lazy"></iframe></div>';
+        document.execCommand('insertHTML', false, iframe);
+      }));
 
       toolbar.append(el('div', { class: 'tb-divider' }));
 
@@ -1714,6 +1885,7 @@
         if (state.isPreview) content.style.background = 'var(--muted)';
         else content.style.background = '';
       }));
+      rightWrap.append(tbBtn('সাইট প্রিভিউ ↗', ic('<path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M21 14v7H3V3h7"/>'), () => { openSitePreview(); }));
       rightWrap.append(tbBtn('পূর্ণ পর্দা', ic('<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/>'), () => {
         state.isFullscreen = !state.isFullscreen;
         shell.classList.toggle('fullscreen', state.isFullscreen);
@@ -1731,7 +1903,36 @@
       content.addEventListener('keyup', updateCounts);
       content.addEventListener('mouseup', updateCounts);
 
-      // Auto-save (debounced)
+      // Auto-save (debounced) — saves to localStorage AND server
+  var _autoSaveTimer = null;
+  var _lastSavedAt = null;
+  function autoSaveToServer() {
+    if (!state.editingId || !state.editingId.id) return; // Only if editing existing post
+    var editor = document.getElementById('editor');
+    if (!editor) return;
+    var titleEl = document.querySelector('#title-input, input[name="title"]');
+    var data = {
+      body: editor.innerHTML,
+      title: titleEl ? titleEl.value : '',
+      updated_at: new Date().toISOString()
+    };
+    // Save to server (published stays false for drafts)
+    try {
+      var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      sb.from('posts').update(data).eq('id', state.editingId.id).then(function(res) {
+        if (res.error) {
+          console.warn('Auto-save to server failed:', res.error.message);
+        } else {
+          _lastSavedAt = new Date();
+          var indicator = document.getElementById('autosave-indicator');
+          if (indicator) {
+            indicator.textContent = 'স্বয়ংক্রিয় সংরক্ষিত: ' + _lastSavedAt.toLocaleTimeString('bn-BD');
+            indicator.style.color = 'var(--green)';
+          }
+        }
+      });
+    } catch(e) { console.warn('Auto-save error:', e); }
+  }
       let saveTimer = null;
       const onChangeDebounced = (html) => {
         if (!state.storageKey) return;

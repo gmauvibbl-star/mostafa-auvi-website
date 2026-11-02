@@ -1407,6 +1407,32 @@ const catLabel = (cat, lang = 'bn') => {
 };
 
 const params = new URLSearchParams(location.search);
+
+// ====== Preview Mode — shows draft content from localStorage ======
+if (new URLSearchParams(location.search).get('preview') === '1') {
+  try {
+    var pData = JSON.parse(localStorage.getItem('mauvi_preview_post') || '{}');
+    if (pData.title && pData.body) {
+      document.title = 'প্রিভিউ: ' + pData.title + ' | Mostafa Auvi';
+      var article = document.getElementById('article');
+      if (article) {
+        article.innerHTML = '<div class="a4-page"><header class="a4-header">' +
+          '<span class="a4-cat-badge">প্রিভিউ · Draft</span>' +
+          '<h1 class="a4-title bn">' + (pData.title || 'প্রিভিউ') + '</h1>' +
+          '<div class="a4-meta-row"><div class="a4-meta"><span class="meta-author">✎ মোস্তফা অভি</span><span class="meta-sep">·</span><span class="meta-lang">প্রিভিউ</span></div></div>' +
+          '<hr class="a4-divider"></header>' +
+          '<div class="a4-body bn">' + pData.body + '</div></div>';
+      }
+      // Hide loading state, comments, etc.
+      var ls = document.getElementById('loadingState'); if (ls) ls.remove();
+      var rc = document.getElementById('readerComments'); if (rc) rc.style.display = 'none';
+      var bb = document.getElementById('bottomBackBar'); if (bb) bb.innerHTML = '<a href="dashboard.html" class="back-link">← সম্পাদনায় ফিরুন</a>';
+      // Clear preview data after use
+      localStorage.removeItem('mauvi_preview_post');
+    }
+  } catch(e) { console.warn('Preview load error:', e); }
+}
+
 const slug = params.get('slug');
 const previewRequested = params.get('preview') === '1';
 const requestedLanguage = params.get('lang') === 'en' ? 'en' : 'bn';
@@ -1719,6 +1745,7 @@ function renderArticle(post, sibling, sb) {
   document.head.appendChild(articleSchema);
 
   const dateStr = fmtDate(post.published_at, lang);
+    const updatedStr = post.updated_at && post.updated_at !== post.published_at ? fmtDate(post.updated_at, lang) : null;
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean)
     : (post.tags ? String(post.tags).split(',').map(t => t.trim()).filter(Boolean) : []);
   // Sanitize stored rich text while retaining the editor's deliberate inline formatting.
@@ -1759,6 +1786,7 @@ function renderArticle(post, sibling, sb) {
         '<div class="a4-meta-row">' +
           '<div class="a4-meta">' +
             '<span>' + esc(dateStr) + '</span>' +
+          (updatedStr ? '<span class="meta-sep">·</span><span style="font-style:italic;color:var(--ink-mute);">' + (isEn ? 'Updated: ' : 'সংশোধন: ') + esc(updatedStr) + '</span>' : '') +
             '<span class="meta-sep">·</span>' +
             '<span class="meta-author">✎ ' + (isEn ? 'Mostafa Auvi' : 'মোস্তফা অভি') + '</span>' +
             '<span class="meta-sep">·</span>' +

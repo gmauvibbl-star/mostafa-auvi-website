@@ -12,3 +12,6 @@ verify_jwt = false
 
 [functions.comments]
 verify_jwt = false
+
+[functions.publish-scheduled]
+verify_jwt = false
