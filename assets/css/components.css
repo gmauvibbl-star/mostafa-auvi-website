@@ -847,11 +847,11 @@
 /* ====== USER DESIGN — .lower-grid two-column (চন্দ্রদ্বীপ + জার্নাল) ====== */
 .lower-grid {
   background: var(--paper);
-  padding: 40px 50px 30px;
+  padding: 30px 30px 20px;  /* চওড়া কমানো হলো */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 36px;
-  align-items: start;
+  gap: 30px;
+  align-items: stretch;  /* দুই কলাম সমান সারিতে — কোনোটা নিচে কোনোটা উপরে নয় */
 }
 
 /* --- Left: Novel card (চন্দ্রদ্বীপ) --- */
@@ -862,33 +862,16 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 .novel-title {
-  padding: 18px 24px 14px;
+  padding: 14px 20px 10px;
   text-align: center;
-}
-.novel-title .by {
-  font-family: 'Playfair Display', serif;
-  font-size: 11px;
-  color: var(--gold-bright);
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 6px;
 }
 .novel-title h3 {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--cream);
-  line-height: 1.1;
-  margin: 0 0 4px;
-}
-.novel-title .sub {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 13px;
-  color: var(--gold-bright);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 .novel-body {
   background: #FFFFFF;
