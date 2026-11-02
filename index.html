@@ -49,7 +49,7 @@
 <!-- Fonts: preconnect + single combined request (optimised) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 
 <!-- ─── Modifiable stylesheets (load order matters: tokens → base → layout → components → responsive) ─── -->
 <link rel="stylesheet" href="assets/css/tokens.css">
@@ -57,6 +57,7 @@
 <link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/explore.css">
 
 <!-- ─── PROTECTED stylesheets (carried over VERBATIM from original) ───
      hero.css  : hero banner styles (DO NOT TOUCH) — original lines 388-630 + hero responsive
@@ -222,163 +223,90 @@
 
 </div>
 
-<!-- ====== রচনার বিভিন্ন দিগন্ত — full-width row below the two-column section ====== -->
-<section class="features">
-  <div class="features-header">
-    <div class="eyebrow">Explore the Work</div>
-    <h2>রচনার বিভিন্ন দিগন্ত</h2>
-    <div class="sub">Seven Worlds of Mostafa Auvi's Writing</div>
-  </div>
-  <div class="features-grid">
-    <a class="feat-card maroon" href="posts.html?category=kothasahitya">
-      <div>
-        <div class="icon" aria-hidden="true">❦</div>
-        <div class="title">কথাসাহিত্য</div>
-        <div class="sub">উপন্যাস, গল্প ও গদ্যের জগৎ</div>
-      </div>
-      <div class="tags">
-        <span class="tag">উপন্যাস</span>
-        <span class="tag">গল্প</span>
-        <span class="tag">নভেলা</span>
-        <span class="tag">গদ্য</span>
-      </div>
-    </a>
-    <a class="feat-card blue" href="posts.html?category=probandho-sahityasamalochona">
-      <div>
-        <div class="icon" aria-hidden="true">§</div>
-        <div class="title">প্রবন্ধ ও সাহিত্যসমালোচনা</div>
-        <div class="sub">চর্চা, গদ্য ও বিশ্লেষণ</div>
-      </div>
-    </a>
-    <a class="feat-card green" href="posts.html?category=ain-oadalot">
-      <div>
-        <div class="icon" aria-hidden="true">⚖</div>
-        <div class="title">আইন ও আদালত</div>
-        <div class="sub">আইন, বিচার ও সাংবিধানিক প্রবচন</div>
-      </div>
-    </a>
-    <a class="feat-card orange" href="posts.html?category=bhromonkahini">
-      <div>
-        <div class="icon" aria-hidden="true">🧭</div>
-        <div class="title">ভ্রমণকাহিনি</div>
-        <div class="sub">দেশ-বিদেশের পথ চিহ্নিত স্মৃতি</div>
-      </div>
-    </a>
-    <a class="feat-card purple" href="posts.html?category=byaktigoto-onubhuti">
-      <div>
-        <div class="icon" aria-hidden="true">✦</div>
-        <div class="title">ব্যক্তিগত অনুভূতি</div>
-        <div class="sub">নিজস্ব অভিজ্ঞতা ও বর্ণনা</div>
-      </div>
-    </a>
-    <a class="feat-card brown" href="posts.html?category=banking-o-orthoniti">
-      <div>
-        <div class="icon" aria-hidden="true">▤</div>
-        <div class="title">ব্যাংকিং ও অর্থনীতি</div>
-        <div class="sub">অর্থনীতি ও সমাজনীতি অভিজ্ঞতা</div>
-      </div>
-    </a>
-    <a class="feat-card teal" href="posts.html?category=prokashona-o-pdf">
-      <div>
-        <div class="icon" aria-hidden="true">📚</div>
-        <div class="title">প্রকাশনা ও PDF</div>
-        <div class="sub">ই-উপন্যাস/প্রবন্ধ সংগ্রহ</div>
-      </div>
-    </a>
-  </div>
-
-  <!-- ====== LATEST WRITINGS (Part 2: auto-display latest published articles) ======
-       main.js fetches the 3 most recent published posts from Supabase and
-       renders them here. If Supabase is unreachable or there are no published
-       posts, the section hides itself gracefully (no empty block shown). -->
-  <section class="latest-writings" aria-label="সাম্প্রতিক লেখা" hidden>
-    <div class="latest-header">
-      <div class="eyebrow">Recent</div>
-      <h2>সাম্প্রতিক লেখা</h2>
-      <a class="latest-all" href="posts.html">সব লেখা <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-    <div class="latest-grid" id="latestGrid"><!-- populated by main.js --></div>
-  </section>
-
-  <!-- Author Intro (photo now lazy-loaded from a file, not inlined base64) -->
-  <div class="author-intro">
-    <div class="photo">
-      <img src="assets/img/author-intro.jpg"
-           alt="মোস্তফা অভি — কথাসাহিত্যিক ও সাহিত্যসমালোচক"
-           width="200" height="200" loading="lazy" decoding="async">
-    </div>
-    <div class="text">
-      <div class="label">লেখক পরিচিতি · About the Author</div>
-      <h3>মোস্তফা অভি</h3>
-      <div class="role">Fiction Writer &amp; Literary Critic</div>
-      <p class="bio">মোস্তফা অভি — কথাসাহিত্যিক, সাহিত্যসমালোচক এবং ইতিহাস ও বিশ্বসাহিত্যের অনুরাগী পাঠক। তাঁর লেখায় ফুটে ওঠে বাংলার গ্রামীণ জীবনের নিবিড় পর্যবেক্ষণ, মানুষের অন্তর্জগতের অনুসন্ধান এবং ঐতিহাসিক, আঞ্চলিক ও সাংস্কৃতিক অনুষঙ্গের পাঠ। তাঁর প্রকাশিত গল্পগ্রন্থের মধ্যে রয়েছে <em>বাজপাখির পুনর্জন্ম</em> (২০১৭), <em>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</em> (২০১৯) এবং <em>বেড়ালের কোয়ারেন্টাইন</em> (২০২২)। তিনি উপন্যাস, গল্প, প্রবন্ধ ও সাহিত্যসমালোচনা নিয়ে লেখালেখি করেন।</p>
-    </div>
-  </div>
-</section>
-
 </main>
 
-<!-- ====== FOOTER (rebuilt — full footer; carries the PROTECTED login button) ====== -->
-<footer class="site-footer">
-  <div class="footer-top">
-    <div class="footer-col footer-about">
-      <div class="footer-brand"><span class="first">Mostafa</span>Auvi</div>
-      <div class="footer-tagline">Fiction Writer ◆ Literary Critic</div>
-      <p class="footer-bio">কথাসাহিত্যিক, সাহিত্যসমালোচক এবং ইতিহাস ও বিশ্বসাহিত্যের অনুরাগী পাঠক। ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।</p>
-    </div>
-    <div class="footer-col footer-links">
-      <h4>রচনার বিভিন্ন দিগন্ত</h4>
-      <ul>
-        <li><a href="posts.html?category=kothasahitya">কথাসাহিত্য</a></li>
-        <li><a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
-        <li><a href="posts.html?category=ain-oadalot">আইন ও আদালত</a></li>
-        <li><a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a></li>
-        <li><a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a></li>
-        <li><a href="journal.html">Journal</a></li>
-      </ul>
-    </div>
-    <div class="footer-col footer-social">
-      <h4>সংযোগ</h4>
-      <div class="footer-share">
-        <a href="#" onclick="return sharePage('facebook')" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
-        <a href="#" onclick="return sharePage('twitter')" aria-label="Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="#" onclick="return sharePage('whatsapp')" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
-        <a href="#" onclick="return copyLink()" aria-label="লিংক কপি করুন"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a>
-      </div>
-      <a class="footer-subscribe" href="subscribe.html">পত্র বক্স</a>
-    </div>
-  </div>
+<div class="wrap">
 
-  <div class="footer-bottom">
-    <div class="footer-meta">
-      <span class="copy">© ২০২৬ Mostafa Auvi</span>
-      <a href="subscribe.html">পত্র বক্স</a>
-      <a href="index.html">সাইটম্যাপ</a>
-      <a href="about.html">গোপনীয়তা</a>
+  <section class="explore" aria-labelledby="explore-title">
+    <div class="eyebrow">Explore the work</div>
+    <h2 id="explore-title">রচনার বিভিন্ন দিগন্ত</h2>
+    <p class="sub">Seven worlds of Mostafa Auvi's writing</p>
+    <nav class="tiles" aria-label="রচনার বিভাগ · Categories">
+      <a class="tile t1" href="posts.html?category=kothasahitya"><span class="num">01</span><div><h3>কথাসাহিত্য</h3><span class="en">Fiction</span></div></a>
+      <a class="tile t2" href="posts.html?category=probandho-sahityasamalochona"><span class="num">02</span><div><h3>প্রবন্ধ ও সাহিত্যসমালোচনা</h3><span class="en">Essays &amp; Criticism</span></div></a>
+      <a class="tile t3" href="posts.html?category=ain-oadalot"><span class="num">03</span><div><h3>আইন-আদালত</h3><span class="en">Law &amp; Justice</span></div></a>
+      <a class="tile t4" href="posts.html?category=bhromonkahini"><span class="num">04</span><div><h3>ভ্রমণকাহিনি</h3><span class="en">Travel Writing</span></div></a>
+      <a class="tile t5" href="posts.html?category=banking-o-orthoniti"><span class="num">05</span><div><h3>ব্যাংকিং ও অর্থনীতি</h3><span class="en">Banking &amp; Economics</span></div></a>
+      <a class="tile t6" href="index.html#chandradwip"><span class="num">06</span><div><h3>চন্দ্রদ্বীপ</h3><span class="en">Novel</span></div></a>
+      <a class="tile t7" href="journal.html"><span class="num">07</span><div><h3>Journal</h3><span class="en">Literary Journal</span></div></a>
+      <a class="tile t8" href="posts.html?category=prokashona-o-pdf"><span class="num">08</span><div><h3>প্রকাশনা</h3><span class="en">Publications &amp; PDF</span></div></a>
+    </nav>
+  </section>
+
+  <section class="recent" aria-labelledby="recent-title">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Recent writing</div>
+        <h2 id="recent-title">সাম্প্রতিক লেখা</h2>
+      </div>
+      <a class="all" href="posts.html">সব লেখা →</a>
     </div>
-    <!-- ======================================================================
-         ⚠️  AUTHOR DASHBOARD — PROTECTED — DO NOT TOUCH
-         The login button element below is carried over VERBATIM from the
-         original (lines 1852-1855). ID, class, inner SVG and label span are
-         unchanged so assets/js/auth.js binds to it exactly as before.
-         ====================================================================== -->
-    <button id="authorLoginBtn" class="author-login-btn" aria-label="লেখক লগইন">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-      <span id="authorLoginLabel">লেখক লগইন</span>
-    </button>
+    <div class="cards">
+      <a class="card" href="posts.html">
+        <div class="thumb plain" aria-hidden="true">অ</div>
+        <div class="body">
+          <span class="cat">ব্যক্তিগত</span>
+          <h3>পরিশিষ্টের দ্বিভাষিক লেখা</h3>
+          <span class="meta">2 November 2026</span>
+        </div>
+      </a>
+      <a class="card" href="posts.html">
+        <div class="thumb"><img src="assets/img/explore-img-1.jpg" alt="পাথরের মূর্তির ছবি, সাহিত্য ও শিল্পের প্রতীক" loading="lazy"></div>
+        <div class="body">
+          <span class="cat">সাহিত্যসমালোচনা</span>
+          <h3>‘আমার জীবন’: স্মৃতি, শিল্প, বিপ্লব ও মানুষের মুক্তির আকাঙ্ক্ষা</h3>
+          <span class="meta">1 November 2026</span>
+        </div>
+      </a>
+      <a class="card" href="posts.html">
+        <div class="thumb"><img src="assets/img/explore-img-2.jpg" alt="সমুদ্রতীরের উপর দিয়ে উড়ে যাওয়া একটি ঈগল" loading="lazy"></div>
+        <div class="body">
+          <span class="cat">গল্প</span>
+          <h3>বাজপাখির পুনর্জন্ম</h3>
+          <span class="meta">1 November 2026</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="author" aria-labelledby="author-name">
+    <div class="photo"><img src="assets/img/explore-img-3.jpg" alt="মোস্তফা অভি" loading="lazy"></div>
+    <div>
+      <div class="eyebrow">লেখক পরিচিতি · About the author</div>
+      <h2 id="author-name">মোস্তফা অভি</h2>
+      <p class="role">Fiction Writer &amp; Literary Critic</p>
+      <p>কথাসাহিত্যিক ও সাহিত্যসমালোচক। ইতিহাস ও বিশ্বসাহিত্যের অনুরাগী পাঠক। প্রবন্ধ, উপন্যাস, গল্প ও সাহিত্যসমালোচনা নিয়ে লেখালেখি করেন।</p>
+      <p class="en">Mostafa Auvi writes fiction, essays and literary criticism in Bengali, with a long-standing interest in history and world literature.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap fbar">
+    <span>© 2026 Mostafa Auvi</span>
+    <span class="contact">লেখকের সাথে যোগাযোগ : <a href="mailto:gmauvi@yahoo.com">gmauvi@yahoo.com</a></span>
+    <span class="legal"><a href="about.html">শর্তাবলি</a> · <a href="about.html">গোপনীয়তা নীতি</a><a class="dash" id="authorLoginBtn" href="#" aria-label="লেখক লগইন"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span id="authorLoginLabel">ড্যাশবোর্ড খুলুন</span><span aria-hidden="true">→</span></a></span>
   </div>
 </footer>
 
 </div><!-- /.page-wrap -->
 
-<!-- Back-to-top (accessibility/UX addition — does not touch any protected zone) -->
+<!-- Back-to-top -->
 <button class="back-to-top" type="button" aria-label="উপরে যান" title="উপরে যান">↑</button>
 
 <!-- ======================================================================
      ⚠️  AUTHOR DASHBOARD — PROTECTED — DO NOT TOUCH
-     The login modal below is carried over VERBATIM from the original
-     (lines 1867-1905). All element IDs are preserved so assets/js/auth.js
-     (also verbatim) binds correctly.
      ====================================================================== -->
 <div id="loginModalOverlay" class="login-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
   <div class="login-modal">
@@ -420,18 +348,8 @@
 
 
 <!-- ====== SCRIPTS ====== -->
-
-<!-- Supabase SDK — kept as a classic <script> (matches original wiring).
-     auth.js binds window.supabase, so the SDK must load before auth.js. -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- PROTECTED: auth.js — carried over VERBATIM from original (lines 1908-2069).
-     Handles login, session check, forgot-password, signup gating. -->
 <script src="assets/js/auth.js"></script>
-
-<!-- Modifiable: main.js — share/copy/toast (carried over) + nav toggle,
-     back-to-top, dynamic date, aria-current, modal focus-trap wrapper,
-     Chandradwip image placeholder. -->
 <script src="assets/js/main.js"></script>
 
 </body>
