@@ -13,7 +13,7 @@
 html, body {
   width: 100%;
   min-height: 100%;
-  background: #5A6B3F;            /* olive green for sides */
+  background: #5a6b2a;            /* olive green for sides — matches header palette */
   font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
