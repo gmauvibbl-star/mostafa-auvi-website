@@ -51,7 +51,7 @@
 
 <!-- Utility bar -->
 <div class="utility-bar">
-  <div class="date-en">Friday, November 2026</div>
+  <div class="date-en" id="today-date-en" aria-live="polite" aria-atomic="true">Loading date…</div>
   <div class="lang">
     <span class="lang-label">Language:</span>
     <a href="index.html" lang="bn" title="Read in Bengali" style="opacity:.6">Bengali</a>
@@ -142,7 +142,7 @@
     <div class="novel-body">
       <p>A century of riverine life. The lowlands of Barisal, the Chandradwip tidal zone, where the boundary between land and water is redrawn every day. In this water-world lies a village called Bighai, and around it this tale is born.</p>
       <p>The villagers know that the river that gives can also take away. After a storm, after a collapse, standing under the shadow of a dark zamindari, they decide to leave their settlement and float on boats in search of new land. Thirteen boats, thirteen families, and before them an unknown river, an unknown sea, an unknown future. The boatman of this journey is Keramat, and beside him stands Manikjan, whom the river knows in its own language.</p>
-      <p>Alongside people, this novel walks with folklore, dreams, amulets and land records. Baul songs fill the air, on eclipse nights Hindus and Muslims together recite their own protective mantras, and a boat buried underground wakes. Here the supernatural and the real sit in the same courtyard and share tobacco — no one questions. 1850 to 1950, this century of history does not appear in speeches. It appears in people's language, their clothing, their fear, their love.</p>
+      <p>Alongside people, this novel walks with folklore, dreams, amulets and land records. Baul songs fill the air, on eclipse nights Hindus and Muslims together recite their own protective mantras, and a boat buried underground wakes. Here the supernatural and the real sit in the same courtyard and share tobacco — no one questions. 1850 to 14 August 1947, this century of history does not appear in speeches. It appears in people's language, their clothing, their fear, their love.</p>
       <p class="closing">This is the chronicle of a settlement's birth, of a displacement, and of those people who, losing everything, did not lose their voice.</p>
     </div>
     <div class="chandradwip-subs">
@@ -252,7 +252,7 @@
   <div class="wrap fbar">
     <span class="fbrand">MOSTAFA AUVI <em>« Writing makes one a little more human »</em></span>
     <span class="contact">Author email : <a href="mailto:gmauvibbl@gmail.com">gmauvibbl@gmail.com</a></span>
-    <span class="legal"><a href="index-en.html">Sitemap</a> · <a href="about.html">Contact</a> · © 2026<a class="dash" id="authorLoginBtn" href="#" aria-label="Author Login"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span id="authorLoginLabel">Open Dashboard</span><span aria-hidden="true">→</span></a></span>
+    <span class="legal"><a href="sitemap.xml">Sitemap</a> · <a href="about.html">Contact</a> · © 2026<a class="dash" id="authorLoginBtn" href="#" aria-label="Author Login"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span id="authorLoginLabel">Open Dashboard</span><span aria-hidden="true">→</span></a></span>
   </div>
 </footer>
 
@@ -300,11 +300,32 @@
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
+// ===== Auto English date (no hardcoded day/month/year) =====
+(function () {
+  function setEnDate() {
+    var d = document.getElementById('today-date-en');
+    if (!d) return;
+    var enDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var enMonths = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    try {
+      var now = new Date();
+      d.textContent = enDays[now.getDay()] + ', ' + now.getDate() + ' ' + enMonths[now.getMonth()] + ' ' + now.getFullYear();
+    } catch (e) {
+      try {
+        d.textContent = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+      } catch (e2) { /* keep placeholder */ }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setEnDate);
+  } else {
+    setEnDate();
+  }
+})();
+
 // English page: fix any Bengali injected by main.js/auth.js
 document.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){
-    var d=document.querySelector('.date-en');
-    if(d){try{d.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch(e){}}
     var ms=document.getElementById('modalStatus');
     if(ms&&/[ঀ-৿]/.test(ms.textContent)){ms.textContent=''}
     var lbl=document.getElementById('authorLoginLabel');
