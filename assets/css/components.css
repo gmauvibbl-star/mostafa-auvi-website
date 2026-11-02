@@ -222,13 +222,18 @@
   max-width: 760px;
   border: 8px solid var(--paper-warm);
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  flex: 1;              /* grow to fill available card height — matches journal column */
+  min-height: 280px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
 }
 .chandradwip-cover img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1200 / 670;
+  height: 100%;
   object-fit: cover;
+  aspect-ratio: auto;   /* fill the figure, crop if needed — no distortion */
 }
 .chandradwip-description {
   padding: 4px 24px 28px;
