@@ -1,0 +1,741 @@
+/* ============================================================
+ *  components.css  —  Visual components (modifiable sections)
+ *  -----------------------------------------------------------
+ *  Contains: Coming Soon card, Journal card, Feature cards,
+ *  Author intro details, Chandradwip cover/description,
+ *  + NEW: accordion (for Chandradwip sub-sections),
+ *         .chandradwip-extra figure (for the requested image).
+ *  Values for existing components carried over from original
+ *  (lines 675-891, 892-1014, 1057-1134, 1147-1267, 1559-1566).
+ * ============================================================ */
+
+/* ====== COMING SOON CARD ====== */
+.coming-card {
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(74,154,158,0.25) 0%, transparent 60%),
+    linear-gradient(165deg, #0a2a2c 0%, #103b3d 45%, #0a1f24 100%);
+  color: var(--cream);
+  padding: 0;
+  position: relative;
+  border: 1px solid var(--teal-deep);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 16px 40px rgba(10,30,32,0.45),
+    0 4px 10px rgba(0,0,0,0.15);
+}
+.coming-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/></svg>");
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+.coming-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+.coming-card .label-bar {
+  position: relative;
+  z-index: 5;
+  background: linear-gradient(to right, var(--gold-bright), var(--gold));
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(15,61,62,0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.coming-card .label-bar .label {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--teal-deep);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+.coming-card .label-bar .meta {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--teal-deep);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+.coming-card .top-text {
+  position: relative;
+  z-index: 6;
+  padding: 26px 28px 14px;
+  text-align: center;
+}
+.coming-card .eyebrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.coming-card .eyebrow::before,
+.coming-card .eyebrow::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--gold-bright);
+  opacity: 0.6;
+}
+.coming-card .b-name {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.05;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.coming-card .b-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold-bright);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.coming-card .book-illust {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+  height: 290px;
+  padding: 0 18px;
+  margin: 4px 0 8px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.coming-card .book-illust::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(212,180,104,0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+.coming-card .book-illust svg {
+  width: 100%;
+  height: 100%;
+  filter:
+    drop-shadow(0 0 16px rgba(212,180,104,0.4))
+    drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+}
+.coming-card .bottom-cta {
+  position: relative;
+  z-index: 6;
+  padding: 4px 28px 22px;
+  text-align: center;
+  border-top: 1px solid rgba(212,180,104,0.18);
+  padding-top: 16px;
+  margin: 0 14px;
+}
+.coming-card .author-line {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.coming-card .author-line .by {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  color: rgba(250,244,232,0.55);
+  text-transform: none;
+  letter-spacing: 0.1em;
+  margin-right: 6px;
+  font-weight: 400;
+}
+.coming-card .cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: var(--gold-bright);
+  color: var(--teal-deep);
+  text-decoration: none;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--gold-bright);
+  border-radius: 2px;
+  transition: all var(--t-base);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.coming-card .cta-btn:hover {
+  background: var(--cream);
+  border-color: var(--cream);
+  transform: translateY(-2px);
+}
+.coming-card .cta-btn .arrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+.coming-card .url-footer {
+  margin-top: 12px;
+  font-family: 'EB Garamond', serif;
+  font-size: 10px;
+  color: rgba(250,244,232,0.45);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.coming-card .url-footer .url {
+  color: var(--gold-bright);
+  border-bottom: 1px dotted rgba(212,180,104,0.4);
+  padding-bottom: 1px;
+}
+
+/* ====== CHANDRADWIP COVER + DESCRIPTION (original lines 1559-1566) ====== */
+.chandradwip-cover {
+  margin: 0 auto 24px;
+  max-width: 760px;
+  border: 8px solid var(--paper-warm);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.chandradwip-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 670;
+  object-fit: cover;
+}
+.chandradwip-description {
+  padding: 4px 24px 28px;
+  color: var(--ink-soft);
+  font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
+  font-size: 17px;
+  line-height: 1.85;
+}
+.chandradwip-description p { margin: 0 0 16px; }
+.chandradwip-description h3 {
+  margin: 28px 0 8px;
+  color: var(--teal-deep);
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+}
+.chandradwip-description h4 {
+  margin: 8px 0 12px;
+  color: var(--blood);
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+}
+.chandradwip-description a {
+  color: var(--blood);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ====== NEW: .chandradwip-extra figure ======
+   Requested by the site owner: an image placed directly beneath the
+   Chandradwip section. Drop the image file at:
+       assets/img/chandradwip-extra.jpg
+   The <figure> below references that path. Visual language mirrors
+   .chandradwip-cover (warm paper border, soft shadow) for cohesion. */
+.chandradwip-extra {
+  margin: 0 auto 28px;
+  max-width: 820px;
+  border: 8px solid var(--paper-warm);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: var(--paper-warm);
+}
+.chandradwip-extra img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.chandradwip-extra figcaption {
+  padding: 12px 18px;
+  font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: center;
+  border-top: 1px solid var(--paper-dark);
+}
+/* Placeholder state shown until the image file is dropped in */
+.chandradwip-extra.is-placeholder {
+  border-style: dashed;
+  border-color: var(--paper-dark);
+  background: var(--cream);
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: none;
+}
+.chandradwip-extra.is-placeholder img { display: none; }
+.chandradwip-extra .placeholder-note {
+  display: none;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold-dim);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+.chandradwip-extra.is-placeholder .placeholder-note { display: block; }
+
+/* ====== NEW: accordion (Chandradwip sub-sections) ======
+   Wraps the Historical Setting / Publication Status / Characters blocks
+   so the long description reads more easily. Progressive enhancement:
+   if JS is off, the <details> elements render open as normal text. */
+.accordion details {
+  border-bottom: 1px solid var(--paper-dark);
+  padding: 4px 0;
+}
+.accordion details > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 12px 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--teal-deep);
+  font-weight: 700;
+  transition: color var(--t-fast);
+}
+.accordion details > summary::-webkit-details-marker { display: none; }
+.accordion details > summary::after {
+  content: "+";
+  margin-left: auto;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gold-dim);
+  font-weight: 400;
+  transition: transform var(--t-base);
+}
+.accordion details[open] > summary::after {
+  content: "−";
+}
+.accordion details > summary:hover { color: var(--blood); }
+.accordion details[open] > summary { border-bottom: 1px dashed var(--paper-dark); margin-bottom: 12px; }
+.accordion details h4 { margin-top: 0; }
+
+/* ====== JOURNAL CARD ====== */
+.journal-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  border: 1px solid var(--paper-dark);
+  padding: 26px 28px;
+  position: relative;
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+  cursor: pointer;
+  flex: 1;
+}
+.journal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--teal-mid);
+}
+.journal-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--teal-deep), var(--gold), var(--teal-deep));
+}
+.journal-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--paper-dark);
+}
+.journal-meta .date {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: var(--teal-deep);
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+.journal-meta .date .day {
+  font-size: 26px;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--blood);
+  margin-right: 4px;
+}
+.journal-meta .tag {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: 1px solid var(--paper-dark);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.journal-title {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 24px;
+  color: var(--teal-deep);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+.journal-body {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.9;
+  text-align: justify;
+  flex: 1;
+}
+.journal-body p { margin-bottom: 12px; }
+.journal-body .dropcap {
+  float: left;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  line-height: 0.85;
+  color: var(--teal-deep);
+  margin: 6px 10px 0 0;
+  font-weight: 900;
+}
+.journal-more {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--paper-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.journal-more a,
+.journal-more .read-link {
+  color: var(--teal-deep);
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color var(--t-fast);
+}
+.journal-card:hover .read-link { color: var(--blood); }
+.journal-more a:hover { color: var(--blood); }
+.journal-more a .arrow,
+.journal-more .read-link .arrow { color: var(--gold-dim); margin-left: 6px; }
+.journal-more .stats {
+  font-family: 'EB Garamond', serif;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.1em;
+}
+.journal-more .stats .dot { color: var(--gold-dim); margin: 0 8px; }
+/* Inner elements reset for the <a> wrapper */
+.journal-card .journal-meta,
+.journal-card .journal-title,
+.journal-card .journal-body,
+.journal-card .journal-more { text-decoration: none; }
+
+/* ====== FEATURE CARDS ====== */
+.feat-card {
+  border-radius: 5px;
+  padding: 14px 10px 12px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+  transition: transform var(--t-base), box-shadow var(--t-base);
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+.feat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1);
+}
+.feat-card::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 50px; height: 50px;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.feat-card .icon {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 900;
+  opacity: 0.65;
+  margin-bottom: 6px;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.feat-card .title {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+.feat-card .sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+.feat-card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 6px;
+}
+.feat-card .tags .tag {
+  display: inline-block;
+  padding: 1px 6px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: #fff;
+}
+/* Card colors */
+.feat-card.maroon { background: linear-gradient(135deg, #8B2E4B 0%, #6A1F38 100%); }
+.feat-card.blue   { background: linear-gradient(135deg, #2B5F7E 0%, #1E4860 100%); }
+.feat-card.green  { background: linear-gradient(135deg, #2D5F52 0%, #1F4538 100%); }
+.feat-card.purple { background: linear-gradient(135deg, #6A4C93 0%, #4E3870 100%); }
+.feat-card.brown  { background: linear-gradient(135deg, #966C33 0%, #6F4F22 100%); }
+.feat-card.teal   { background: linear-gradient(135deg, #1F7A70 0%, #155952 100%); }
+.feat-card.orange { background: linear-gradient(135deg, #C46A2B 0%, #8E4D1E 100%); }
+
+/* ====== LATEST WRITINGS (Part 2: auto-display latest published articles) ======
+   main.js fetches the 3 most recent published posts from Supabase.
+   The <section> starts hidden; main.js reveals it only when cards render. */
+.latest-writings {
+  padding: 8px 50px 32px;
+  background: linear-gradient(to bottom, var(--paper-warm) 0%, var(--paper) 100%);
+  border-top: 1px solid var(--paper-dark);
+}
+.latest-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.latest-header .eyebrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.latest-header h2 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--teal-deep);
+  line-height: 1.15;
+}
+.latest-header .latest-all {
+  margin-left: auto;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--teal-deep);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--t-fast);
+}
+.latest-header .latest-all:hover { color: var(--blood); }
+.latest-header .latest-all .arrow { color: var(--gold-dim); margin-left: 6px; }
+.latest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.latest-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+  position: relative;
+}
+.latest-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--teal-deep), var(--gold), var(--teal-deep));
+}
+.latest-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--teal-mid);
+}
+.latest-card .lc-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: var(--paper-warm);
+}
+.latest-card .lc-cover-fallback {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  color: var(--gold);
+  background: linear-gradient(135deg, var(--paper-warm), var(--paper-dark));
+  opacity: 0.5;
+}
+.latest-card .lc-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.latest-card .lc-badge {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.latest-card .lc-title {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--teal-deep);
+  line-height: 1.3;
+}
+.latest-card .lc-excerpt {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.latest-card .lc-date {
+  margin-top: auto;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ====== AUTHOR INTRO DETAILS ====== */
+.author-intro .photo {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  position: relative;
+}
+.author-intro .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.author-intro .photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  pointer-events: none;
+}
+.author-intro .text .label {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.author-intro .text h3 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--teal-deep);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.author-intro .text .role {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+.author-intro .text .bio {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.75;
+  text-align: justify;
+}
+.author-intro .text .bio em {
+  font-style: italic;
+  color: var(--maroon-deep);
+  font-weight: 600;
+}
+.author-intro .text .bio .dropcap-2 {
+  float: left;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 46px;
+  line-height: 1.1;
+  color: var(--blood);
+  margin: 2px 10px 0 0;
+  font-weight: 800;
+  padding: 4px 0 0 0;
+}

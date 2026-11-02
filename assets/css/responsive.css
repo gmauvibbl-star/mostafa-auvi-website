@@ -1,0 +1,129 @@
+/* ============================================================
+ *  responsive.css  —  Consolidated, mobile-first breakpoints
+ *  -----------------------------------------------------------
+ *  Covers ONLY modifiable elements. The hero banner and author
+ *  dashboard (login button + modal) have their OWN responsive
+ *  rules preserved verbatim inside hero.css and auth.css, so
+ *  they are intentionally NOT redefined here.
+ *
+ *  Breakpoints: 480 / 768 / 1024 / 1280  (mobile-first)
+ *  The original site's duplicated 900px/480px blocks are merged
+ *  into this single, de-duplicated set.
+ * ============================================================ */
+
+/* ====== ≤ 1280px : page-wrap edge handling ====== */
+@media (max-width: 1300px) {
+  html, body { width: 100%; }
+  .header, .nav, .lower, .features, .site-footer, .footer-top, .footer-bottom {
+    box-sizing: border-box;
+  }
+}
+
+/* ====== ≤ 1024px : tablet — features 3-col, footer tightens ====== */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(4, 1fr); }      /* 7 -> 4 then 3 */
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-top .footer-col:first-child { grid-column: 1 / -1; }   /* bio spans full width */
+}
+
+/* ====== ≤ 900px : small tablet / large phone — single columns ====== */
+@media (max-width: 900px) {
+  /* Utility bar */
+  .utility-bar { flex-direction: column; gap: 6px; padding: 8px 16px; font-size: 12px; }
+  .utility-bar .lang { gap: 8px; }
+  .utility-bar .lang a { padding: 3px 8px; font-size: 11px; }
+  .utility-bar .lang .lang-label { font-size: 10px; }
+
+  /* Header (border-bottom is PROTECTED — only padding/layout adjusted) */
+  .header { padding: 16px 16px 12px; }
+  .header-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .brand .name { font-size: 32px; }
+  .brand .tagline { font-size: 12px; letter-spacing: 0.2em; margin-top: 6px; }
+  .header-right { width: 100%; justify-content: flex-start; }
+  .share { gap: 6px; flex-wrap: wrap; }
+  .share a { width: 32px; height: 32px; }
+  .share a svg { width: 14px; height: 14px; }
+  .share .label { font-size: 12px; }
+  .subscribe-btn { font-size: 11px; padding: 7px 14px; margin-left: 0; }
+
+  /* Navigation — hamburger disclosure */
+  .nav { padding: 10px 16px; flex-wrap: wrap; gap: 10px; }
+  .nav-toggle { display: inline-flex; }
+  .nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0 12px;
+    order: 3;
+  }
+  .nav ul.is-open { display: flex; }
+  .nav ul li a { font-size: 14px; padding: 6px 0; }
+  .nav .search-box { width: 100%; order: 2; }
+  .nav .search-box input { width: 100%; }
+
+  /* Lower — single column */
+  .lower { grid-template-columns: 1fr; gap: 20px; padding: 30px 16px 20px; }
+  .coming-card .book-illust { height: 240px; }
+  .coming-card .b-name { font-size: 24px; }
+
+  /* Features — 2 columns */
+  .features { padding: 30px 16px 24px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+  /* Latest writings — 2 columns on tablet, 1 on phone */
+  .latest-writings { padding: 8px 16px 28px; }
+  .latest-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .feat-card { min-height: 120px; padding: 12px 10px; }
+  .feat-card .title { font-size: 15px; }
+  .feat-card .sub { font-size: 12px; }
+  .feat-card .icon { font-size: 22px; }
+
+  /* Author intro — stack */
+  .author-intro { grid-template-columns: 1fr; gap: 16px; padding: 20px; text-align: center; }
+  .author-intro .photo { width: 140px; height: 140px; margin: 0 auto; }
+  .author-intro .text .bio { font-size: 13px; line-height: 1.7; text-align: justify; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 24px; padding: 32px 16px 20px; }
+  .footer-bottom { flex-direction: column; gap: 12px; padding: 14px 16px; text-align: center; }
+  .footer-meta { justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+  /* Chandradwip */
+  .chandradwip-description { padding: 4px 14px 22px; font-size: 16px; }
+  .chandradwip-cover, .chandradwip-extra { max-width: 100%; }
+}
+
+/* ====== ≤ 480px : small phone ====== */
+@media (max-width: 480px) {
+  .brand .name { font-size: 28px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .latest-grid { grid-template-columns: 1fr; }
+  .feat-card {
+    min-height: 90px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  .feat-card .icon { font-size: 26px; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; }
+  .feat-card > div { flex: 1; min-width: 0; }
+  .share a { width: 28px; height: 28px; }
+  .share a svg { width: 12px; height: 12px; }
+  .nav .search-box { display: none; }
+  .back-to-top { bottom: 84px; right: 16px; }
+}
+
+/* ====== ≤ 640px : chandradwip description tightening (preserved from original) ====== */
+@media (max-width: 640px) {
+  .chandradwip-description { padding: 4px 14px 22px; font-size: 16px; }
+}
+
+/* ====== Reduced motion ====== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .back-to-top { transition: none; }
+}

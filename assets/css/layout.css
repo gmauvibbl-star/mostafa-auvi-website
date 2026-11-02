@@ -1,0 +1,544 @@
+/* ============================================================
+ *  layout.css  —  Structural layout for modifiable sections
+ *  -----------------------------------------------------------
+ *  Contains: top utility bar, header (BORDER PROTECTED), nav,
+ *  lower two-column grid, features grid, author intro grid,
+ *  and the rebuilt full footer.
+ *
+ *  ⚠️  HEADER BORDER PROTECTION:
+ *      The rule  .header { border-bottom: 1px solid var(--paper-dark); }
+ *      is carried over VERBATIM from the original (line 170).
+ *      Do NOT change its style, thickness or colour.
+ * ============================================================ */
+
+/* ====== TOP UTILITY BAR ====== */
+.utility-bar {
+  background: var(--teal-deep);
+  color: rgba(250,244,232,0.7);
+  font-family: 'Noto Serif Bengali', 'EB Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.utility-bar .date {
+  color: var(--gold-bright);
+  font-style: italic;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+  font-weight: 500;
+}
+.utility-bar .lang {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 14px;
+}
+.utility-bar .lang .lang-label {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  color: rgba(250,244,232,0.55);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  margin-right: 4px;
+}
+.utility-bar .lang a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 4px 12px;
+  border: 1px solid rgba(184,146,72,0.35);
+  border-radius: 14px;
+  color: rgba(250,244,232,0.85);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  transition: all var(--t-fast);
+  cursor: pointer;
+}
+.utility-bar .lang a:hover {
+  background: rgba(184,146,72,0.18);
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+}
+.utility-bar .lang a.active {
+  background: var(--gold-bright);
+  color: var(--teal-deep);
+  border-color: var(--gold-bright);
+  font-weight: 700;
+}
+.utility-bar .lang .sep { color: rgba(184,146,72,0.3); margin: 0 -8px; }
+
+/* ====== MAIN HEADER ====== */
+.header {
+  background: var(--paper);
+  padding: 30px 50px 24px;
+  position: relative;
+  /* ⚠️ PROTECTED — Header Border — DO NOT TOUCH (original line 170) */
+  border-bottom: 1px solid var(--paper-dark);
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  font-family: 'Playfair Display', serif;
+  line-height: 0.95;
+}
+.brand .name {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--teal-deep);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  display: flex;
+  align-items: baseline;
+}
+.brand .name .first {
+  font-style: italic;
+  color: var(--blood);
+  font-weight: 900;
+  margin-right: 6px;
+}
+.brand .tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--blood);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  font-weight: 700;
+}
+.brand .tagline .dot {
+  color: var(--gold);
+  margin: 0 10px;
+  font-size: 12px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.share {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.share .label {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  margin-right: 6px;
+  font-weight: 600;
+}
+.share a {
+  display: inline-flex;
+  width: 40px; height: 40px;
+  border: 1.5px solid var(--teal-deep);
+  border-radius: 50%;
+  text-decoration: none;
+  color: var(--teal-deep);
+  background: var(--cream);
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t-base);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+.share a svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: block;
+}
+.share a:hover {
+  background: var(--teal-deep);
+  color: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15,61,62,0.3);
+}
+/* Brand-specific colors on hover */
+.share a.share-fb:hover  { background: #1877F2; border-color: #1877F2; color: #fff; }
+.share a.share-tw:hover  { background: #000000; border-color: #000000; color: #fff; }
+.share a.share-ig:hover  { background: #C13584; border-color: #C13584; color: #fff; }
+.share a.share-wa:hover  { background: #25D366; border-color: #25D366; color: #fff; }
+.share a.share-em:hover  { background: #8B1818; border-color: #8B1818; color: #fff; }
+
+/* ====== READER SUBSCRIBE BUTTON (in header) ====== */
+.subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  margin-left: 18px;
+  background: var(--blood);
+  color: var(--cream);
+  border: 1.5px solid var(--blood);
+  border-radius: var(--radius-pill);
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--t-base);
+  box-shadow: 0 3px 10px rgba(138,24,24,0.3);
+  white-space: nowrap;
+}
+.subscribe-btn:hover {
+  background: var(--cream);
+  color: var(--blood);
+  border-color: var(--blood);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(138,24,24,0.4);
+}
+.subscribe-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ====== NAVIGATION ====== */
+.nav {
+  background: var(--paper);
+  padding: 14px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--teal-deep);
+  gap: 30px;
+}
+.nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.nav ul li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  color: var(--teal-deep);
+  text-decoration: none;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: all var(--t-base);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+.nav ul li a:hover {
+  color: var(--blood);
+  border-bottom-color: var(--gold);
+}
+.nav ul li a .caret {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  opacity: 0.55;
+  margin-left: 3px;
+}
+.nav ul li.active a {
+  color: var(--blood);
+  border-bottom-color: var(--blood);
+  font-weight: 800;
+}
+/* Each nav item gets its own signature color */
+.nav ul li.nav-home    a { color: #8B1818; }  /* maroon */
+.nav ul li.nav-fiction a { color: #1B5E6B; }  /* teal-blue */
+.nav ul li.nav-essay   a { color: #2D5F52; }  /* forest green */
+.nav ul li.nav-law     a { color: #5D3A8A; }  /* purple */
+.nav ul li.nav-travel  a { color: #C46A2B; }  /* orange */
+.nav ul li.nav-journal a { color: #966C33; }  /* gold-brown */
+.nav ul li.nav-author  a { color: #8A1A4A; }  /* rose */
+.nav ul li.nav-all     a { color: #1F7A70; }  /* teal */
+/* NEW nav items (Part 1 refinement) — Chandradwip sits beside Journal */
+.nav ul li.nav-chandradwip a { color: #0F3D3E; }  /* teal-deep — the novel's signature */
+.nav ul li.nav-pub  a { color: #6F4F22; }          /* dark brown — publications */
+.nav ul li.active a {
+  color: var(--blood) !important;
+  border-bottom-color: var(--blood) !important;
+}
+.nav ul li:not(.active) a:hover {
+  border-bottom-color: currentColor;
+  filter: brightness(1.15);
+}
+/* NEW: aria-current marker (accessibility addition) — mirrors .active styling */
+.nav ul li a[aria-current="page"] {
+  color: var(--blood);
+  border-bottom-color: var(--blood);
+  font-weight: 800;
+}
+.nav .search-box {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--paper-dark);
+  padding: 6px 14px;
+  border-radius: 22px;
+  flex-shrink: 0;
+  transition: border-color var(--t-base);
+}
+.nav .search-box:focus-within { border-color: var(--teal-deep); }
+.nav .search-box input {
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  width: 140px;
+  outline: none;
+}
+.nav .search-box input::placeholder { color: var(--ink-soft); opacity: 0.55; }
+.nav .search-box .icon { color: var(--teal-deep); font-size: 14px; }
+
+/* NEW: mobile nav toggle (hidden on desktop, used by main.js) */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  color: var(--teal-deep);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nav-toggle svg { width: 22px; height: 22px; fill: currentColor; }
+.nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+/* ====== LOWER TWO-COLUMN SECTION ====== */
+.lower {
+  background: var(--paper);
+  padding: 50px 50px 36px;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 44px;
+  align-items: stretch;
+}
+.lower > div {
+  display: flex;
+  flex-direction: column;
+}
+.section-label {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--paper-dark);
+}
+.section-label .en {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--teal-deep);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.section-label .bn {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 500;
+}
+.section-label .num {
+  margin-left: auto;
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  letter-spacing: 0.25em;
+}
+
+/* ====== FEATURES SECTION (grid) ====== */
+.features {
+  background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-warm) 100%);
+  padding: 44px 50px 36px;
+  border-top: 1px solid var(--paper-dark);
+}
+.features-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.features-header .eyebrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.features-header h2 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--teal-deep);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.features-header .sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+/* NOTE: original had a stray `}` here (line 1056) — removed in this refactor.
+   The 7-column desktop grid is preserved; responsive.css adjusts column count. */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+/* ====== AUTHOR INTRO SECTION (grid) ====== */
+.author-intro {
+  background: linear-gradient(135deg, #EEF2F2 0%, #E4ECEC 100%);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: center;
+  border: 1px solid #D0DCDC;
+  box-shadow: var(--shadow-card);
+}
+
+/* ====== FOOTER (rebuilt — full footer, replaces .footer-strip) ======
+   The original .footer-strip is preserved as a fallback class so that
+   auth.css rules that reference .footer-strip (none do, but kept for safety)
+   still resolve. The PROTECTED #authorLoginBtn lives inside .footer-bottom. */
+.site-footer {
+  background: var(--teal-deep);
+  color: rgba(250,244,232,0.75);
+  border-top: 3px double var(--gold);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  padding: 40px 50px 28px;
+  font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
+}
+.footer-col h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+.footer-brand .first { font-style: italic; color: var(--gold-bright); margin-right: 4px; }
+.footer-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  color: var(--gold-bright);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 6px 0 14px;
+}
+.footer-bio {
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(250,244,232,0.72);
+  max-width: 38ch;
+}
+.footer-links ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+.footer-links a {
+  color: rgba(250,244,232,0.78);
+  text-decoration: none;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  transition: color var(--t-fast);
+}
+.footer-links a:hover { color: var(--gold-bright); }
+.footer-share {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.footer-share a {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(184,146,72,0.4);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-bright);
+  background: transparent;
+  transition: all var(--t-fast);
+}
+.footer-share a svg { width: 15px; height: 15px; fill: currentColor; }
+.footer-share a:hover { background: var(--gold-bright); color: var(--teal-deep); border-color: var(--gold-bright); }
+.footer-subscribe {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--blood);
+  color: var(--cream);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all var(--t-base);
+}
+.footer-subscribe:hover { background: var(--cream); color: var(--blood); }
+
+/* Footer bottom bar — carries copyright, meta links AND the PROTECTED login button */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 16px 50px;
+  border-top: 1px solid rgba(184,146,72,0.25);
+  font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.footer-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: rgba(250,244,232,0.6);
+}
+.footer-meta a {
+  color: var(--gold-bright);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+.footer-meta a:hover { color: var(--cream); }
+.footer-meta .copy { color: var(--cream); font-weight: 600; }
+/* .footer-strip kept as an alias so any legacy reference still resolves */
+.footer-strip { background: var(--teal-deep); color: rgba(250,244,232,0.65); }
