@@ -413,7 +413,7 @@
   text-decoration: none;
   transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
   cursor: pointer;
-  flex: 1;
+  /* flex:1 removed — card grows naturally with the full article */
 }
 .journal-card:hover {
   transform: translateY(-3px);
@@ -469,11 +469,11 @@
 }
 .journal-body {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink-soft);
-  line-height: 1.9;
+  line-height: 1.95;
   text-align: justify;
-  flex: 1;
+  /* flex:1 removed — footer follows the body naturally */
 }
 .journal-body p { margin-bottom: 12px; }
 .journal-body .dropcap {
