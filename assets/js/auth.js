@@ -11,7 +11,7 @@
  *    #authorLoginBtn  #authorLoginLabel  #loginModalOverlay
  *    #modalEmail  #modalPassword  #modalLoginBtn  #modalStatus
  *    #forgotPasswordLink  #forgotPasswordForm  #resetEmail
- *    #sendResetBtn  #cancelResetBtn  #signupLink
+ *    #sendResetBtn  #cancelResetBtn
  *  Exposes: window.closeLoginModal()
  * ============================================================ */
 
@@ -169,10 +169,5 @@
     if (e.key === 'Enter') { e.preventDefault(); sendResetBtn.click(); }
   });
 
-  // ====== Signup (create account) ======
-  const signupLink = document.getElementById('signupLink');
-  signupLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন। শুধুমাত্র অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে লগইন করা যাবে।', 'warning');
-  });
+  // Signup link removed — public registration disabled
 })();

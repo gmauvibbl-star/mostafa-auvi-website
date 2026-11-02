@@ -1989,8 +1989,6 @@
     </div>
     <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);text-align:center;font-family:'EB Garamond',serif;font-size:13px;">
       <a href="#" id="forgotPasswordLink" style="color:var(--blood);text-decoration:none;font-style:italic;font-weight:600;">পাসওয়ার্ড ভুলে গেছেন?</a>
-      <span style="color:var(--paper-dark);margin:0 8px;">·</span>
-      <span style="color:var(--ink-soft);">নতুন লেখক? <a href="#" id="signupLink" style="color:var(--teal-deep);text-decoration:none;font-weight:600;font-style:italic;">অ্যাকাউন্ট তৈরি করুন</a></span>
     </div>
   </div>
 </div>
@@ -2109,11 +2107,7 @@ if (journalLanguage === 'en') {
   setText('#modalLoginBtn', 'Sign in →');
   setText('.btn.secondary', 'Cancel');
   setText('#forgotPasswordLink', 'Forgot your password?');
-  const signup = document.querySelector('#signupLink');
-  if (signup) signup.textContent = 'Create an account';
-  const signupWrap = document.querySelector('#signupLink')?.parentElement;
   const signupPrefix = signupWrap && Array.from(signupWrap.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
-  if (signupPrefix) signupPrefix.textContent = 'New author? ';
   setText('#journalBnLink', 'Bengali');
   setAttr('.lang a[href="journal.html?lang=bn"]', 'title', 'Read in Bengali');
   [['.share-fb','Share on Facebook'],['.share-tw','Share on X / Twitter'],['.share-wa','Share on WhatsApp'],['.share-ig','Share on Telegram'],['.share-em[aria-label="Email"]','Share by email'],['.share-em[aria-label="Copy Link"]','Copy link']].forEach(([selector,title]) => setAttr(selector,'title',title));
@@ -2368,10 +2362,6 @@ function journalSearch(e) {
   forgotLink?.addEventListener('click', (e) => {
     e.preventDefault();
     showStatus(journalLanguage === 'en' ? 'Contact the site administrator to reset your password.' : 'পাসওয়ার্ড রিসেট করতে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন অথবা ড্যাশবোর্ড লিংক থেকে রিসেট করুন।', 'warning');
-  });
-  document.getElementById('signupLink')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    showStatus(journalLanguage === 'en' ? 'Contact the site administrator to request an account.' : 'অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।', 'warning');
   });
 })();
 

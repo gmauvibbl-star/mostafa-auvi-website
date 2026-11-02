@@ -1052,8 +1052,6 @@
     </div>
     <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);text-align:center;font-family:'EB Garamond',serif;font-size:13px;">
       <a href="#" id="forgotPasswordLink" style="color:var(--blood);text-decoration:none;font-style:italic;font-weight:600;">পাসওয়ার্ড ভুলে গেছেন?</a>
-      <span style="color:var(--paper-dark);margin:0 8px;">·</span>
-      <span style="color:var(--ink-soft);">নতুন লেখক? <a href="#" id="signupLink" style="color:var(--teal-deep);text-decoration:none;font-weight:600;font-style:italic;">অ্যাকাউন্ট তৈরি করুন</a></span>
     </div>
   </div>
 </div>
@@ -1150,10 +1148,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
     e.preventDefault();
     showStatus('পাসওয়ার্ড রিসেট করতে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন অথবা ড্যাশবোর্ড লিংক থেকে রিসেট করুন।', 'warning');
   });
-  document.getElementById('signupLink')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    showStatus('অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।', 'warning');
-  });
+  // Signup link removed — public registration disabled
 })();
 
 /* ====== Share functionality ====== */

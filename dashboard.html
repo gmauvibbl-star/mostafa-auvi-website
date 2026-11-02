@@ -972,15 +972,8 @@
     }
 
     async function signUp(email, password) {
-      const { data, error } = await supabase.auth.signUp({ email, password });
-      if (error) throw new Error(error.message);
-      if (data.user && !data.session) {
-        throw new Error('ইমেইল ভেরিফিকেশন প্রয়োজন। ইমেইল চেক করুন।');
-      }
-      if (data.user) {
-        await supabase.from('admin_users').insert({ user_id: data.user.id });
-      }
-      return checkSession();
+      // Public signup disabled — only authorized admin can login
+      throw new Error('পাবলিক রেজিস্ট্রেশন বন্ধ। অনুগ্রহ করে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন।');
     }
 
     async function resetPassword(email) {
@@ -1832,15 +1825,10 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         <div class="card">
           <div class="tab-strip">
             <button data-mode="login" class="active">লগইন</button>
-            <button data-mode="signup">নতুন অ্যাকাউন্ট</button>
             <button data-mode="reset">রিসেট</button>
           </div>
           <form id="login-form" class="flex flex-col gap-3">
-            <div id="signup-fields" class="hidden">
-              <label class="label">নাম (বাংলা)</label>
-              <input class="input" name="name" placeholder="যেমন: মোস্তফা অভি" />
-            </div>
-            <div>
+                        <div>
               <label class="label">ইমেইল</label>
               <input class="input" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
             </div>
@@ -1866,9 +1854,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       const updateMode = (m) => {
         mode = m;
         $$('.tab-strip button').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
-        $('#signup-fields').classList.toggle('hidden', m !== 'signup');
-        $('#pw-label').textContent = m === 'reset' ? 'নতুন পাসওয়ার্ড (ইমেইলে রিসেট লিংক যাবে)' : 'পাসওয়ার্ড';
-        $('#submit-btn').textContent = m === 'login' ? 'লগইন করুন' : m === 'signup' ? 'অ্যাকাউন্ট তৈরি করুন' : 'রিসেট লিংক পাঠান';
+                $('#pw-label').textContent = m === 'reset' ? 'নতুন পাসওয়ার্ড (ইমেইলে রিসেট লিংক যাবে)' : 'পাসওয়ার্ড';
+        $('#submit-btn').textContent = m === 'login' ? 'লগইন করুন' : 'রিসেট লিংক পাঠান';
       };
       $$('.tab-strip button').forEach(b => b.addEventListener('click', () => updateMode(b.dataset.mode)));
 
@@ -1884,9 +1871,6 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           if (mode === 'login') {
             const ok = await signIn(email, password);
             if (ok) { toast('স্বাগতম!', 'লগইন সফল', 'success'); await afterAuth(); }
-          } else if (mode === 'signup') {
-            await signUp(email, password);
-            toast('অ্যাকাউন্ট তৈরি হয়েছে', 'ইমেইল ভেরিফাই করে admin_users টেবিলে যোগ করুন', 'success', 5000);
           } else if (mode === 'reset') {
             await resetPassword(email);
             toast('রিসেট লিংক পাঠানো হয়েছে', 'ইমেইল চেক করুন', 'success');
