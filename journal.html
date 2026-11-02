@@ -1917,10 +1917,12 @@
     <section class="sidebox">
       <h3><span class="icon">◆</span> বিভাগ অনুযায়ী</h3>
       <div class="cat-quicklist">
-        <a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
+        <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
         <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
         <a href="posts.html?category=ain-oadalot">আইন-আদালত</a>
+        <a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
         <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
+        <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
         <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
         <a href="posts.html">সব লেখা</a>
       </div>
@@ -2076,12 +2078,14 @@ if (journalLanguage === 'en') {
   const recentPlaceholder = document.getElementById('recentList');
   if (recentPlaceholder) recentPlaceholder.innerHTML = '<li class="meta">Recent entries will appear here.</li>';
   setHeading('.sidebar .sidebox:nth-child(2) h3', 'Browse by Category');
-  setText('.cat-quicklist a:nth-child(1)', 'Personal');
-  setText('.cat-quicklist a:nth-child(2)', 'Travel');
-  setText('.cat-quicklist a:nth-child(3)', 'Essays');
-  setText('.cat-quicklist a:nth-child(4)', 'Literary Studies');
-  setText('.cat-quicklist a:nth-child(5)', 'Law');
-  setText('.cat-quicklist a:nth-child(6)', 'All Writing');
+  setText('.cat-quicklist a:nth-child(1)', 'Fiction');
+  setText('.cat-quicklist a:nth-child(2)', 'Essays & Criticism');
+  setText('.cat-quicklist a:nth-child(3)', 'Law & Justice');
+  setText('.cat-quicklist a:nth-child(4)', 'Travel Writing');
+  setText('.cat-quicklist a:nth-child(5)', 'Banking & Economics');
+  setText('.cat-quicklist a:nth-child(6)', 'Chandradwip');
+  setText('.cat-quicklist a:nth-child(7)', 'Publications');
+  setText('.cat-quicklist a:nth-child(8)', 'All Writings');
   setHeading('.sidebar .sidebox:nth-child(3) h3', 'Search the Journal');
   setAttr('#journalSearchInput', 'placeholder', 'Title, subject or tag...');
   setAttr('#journalSearchInput', 'aria-label', 'Search the Journal');
@@ -2131,7 +2135,7 @@ const JOURNAL_TERM_EN = {
   'ভ্রমণকাহিনি':'Travel Writing','প্রবন্ধ':'Essays','সাহিত্যালোচনা':'Literary Criticism',
   'আইন-আদালত':'Law & Judiciary',
   'আইন-আদালত':'Law & Judiciary','কথাসাহিত্য':'Fiction',
-  'ব্যাংকিং ও অর্থনীতি':'Banking & Economics','প্রকাশনা ও PDF':'Publications & PDF'
+  'ব্যাংকিং ও অর্থনীতি':'Banking & Economics','প্রকাশনা ও PDF':'Publications & PDF','প্রকাশনা':'Publications','চন্দ্রদ্বীপ':'Chandradwip'
 };
 const journalTermLabel = value => JOURNAL_TERM_EN[String(value || '').trim()] || value || 'Journal';
 
