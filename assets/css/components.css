@@ -222,7 +222,8 @@
   max-width: 760px;
   border: 8px solid var(--paper-warm);
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  /* flex:1 removed — natural aspect ratio, no stretch */
+  position: relative;
+  z-index: 5;  /* above the card's overlays */
 }
 .chandradwip-cover img {
   display: block;
@@ -237,6 +238,8 @@
   font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
   font-size: 17px;
   line-height: 1.85;
+  position: relative;
+  z-index: 5;  /* above the card's ::before texture + ::after vignette overlays */
 }
 .chandradwip-description p { margin: 0 0 16px; }
 .chandradwip-description h3 {
@@ -262,10 +265,12 @@
   margin: 0 auto 20px;
   max-width: 760px;
   padding: 16px 20px 18px;
-  background: var(--cream);
-  border-left: 3px solid var(--gold);
+  background: #FFFFFF;  /* pure white — ঝকঝকে, maximum text crispness */
+  border-left: 3px solid var(--gold-bright);  /* brighter gold accent */
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   position: relative;
+  z-index: 6;  /* above all card overlays */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);  /* subtle lift for crispness */
 }
 .novel-synopsis::before {
   content: "❦";
