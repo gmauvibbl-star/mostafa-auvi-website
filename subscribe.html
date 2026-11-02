@@ -263,26 +263,41 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   const btn = document.getElementById('subscribeBtn');
   const email = emailInput.value.trim();
 
+  // Empty email check
   if (!email) {
-    showStatus('subscribeStatus', 'ইমেইল ঠিকানা লিখুন।', 'error');
+    showStatus('subscribeStatus', 'অনুগ্রহ করে আপনার ইমেইল ঠিকানা লিখুন।', 'error');
+    emailInput.focus();
     return;
   }
 
+  // Client-side email format validation
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showStatus('subscribeStatus', 'একটি বৈধ ইমেইল ঠিকানা দিন।', 'error');
+    emailInput.focus();
+    return;
+  }
+
+  // Prevent double submission
+  if (btn.disabled) return;
   btn.disabled = true;
+  const origText = btn.textContent;
+  btn.textContent = 'পাঠানো হচ্ছে…';
   showStatus('subscribeStatus', '<span class="spinner"></span> পাঠানো হচ্ছে…', 'processing');
 
   try {
-    const { ok, data } = await callSubscription('subscribe', { email });
+    const { ok, data } = await callSubscription('subscribe', { email: email.toLowerCase() });
     if (ok) {
-      showStatus('subscribeStatus', data.message || '✅ আপনার ইমেইলে confirmation লিংক পাঠানো হয়েছে। ইনবক্স ও Spam ফোল্ডার চেক করুন।', 'success');
+      showStatus('subscribeStatus', data.message || 'সাবস্ক্রিপশনের জন্য ধন্যবাদ। আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।', 'success');
       emailInput.value = '';
     } else {
-      showStatus('subscribeStatus', data.error || 'এখন সাবস্ক্রাইব করা যায়নি। পরে চেষ্টা করুন।', 'error');
+      // Handle specific error messages from server (including "already subscribed")
+      showStatus('subscribeStatus', data.error || 'সাবস্ক্রিপশন সম্পন্ন হয়নি। আবার চেষ্টা করুন।', 'error');
     }
   } catch (err) {
-    showStatus('subscribeStatus', 'সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।', 'error');
+    showStatus('subscribeStatus', 'সাবস্ক্রিপশন সম্পন্ন হয়নি। আবার চেষ্টা করুন।', 'error');
   } finally {
     btn.disabled = false;
+    btn.textContent = origText;
   }
 });
 

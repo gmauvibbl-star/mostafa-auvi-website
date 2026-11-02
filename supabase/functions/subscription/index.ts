@@ -36,6 +36,12 @@ Deno.serve(async(req)=>{
   if(body.action!=="subscribe")return json(400,{error:"Invalid action"});
   const email=String(body.email||"").trim().toLowerCase();
   if(email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return json(400,{error:"একটি সঠিক ইমেইল ঠিকানা দিন।"});
+  // Check if email is already confirmed (active subscriber)
+  const {data:existing,error:checkErr}=await db.from("subscribers").select("id,confirmed_at,unsubscribed_at").eq("email",email).maybeSingle();
+  if(checkErr)throw checkErr;
+  if(existing&&existing.confirmed_at&&!existing.unsubscribed_at){
+    return json(409,{error:"এই ইমেইলটি ইতিমধ্যে সাবস্ক্রাইব করা আছে।"});
+  }
   const token=crypto.randomUUID()+crypto.randomUUID(),tokenHash=await hash(token);
   const {error}=await db.from("subscribers").upsert({email,confirmation_token_hash:tokenHash,confirmed_at:null,unsubscribed_at:null,unsubscribe_token_hash:null},{onConflict:"email"});
   if(error)throw error;
