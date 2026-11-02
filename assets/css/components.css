@@ -218,12 +218,12 @@
 
 /* ====== CHANDRADWIP COVER + DESCRIPTION (original lines 1559-1566) ====== */
 .chandradwip-cover {
-  margin: 0 auto 24px;
-  max-width: 760px;
-  border: 8px solid var(--paper-warm);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  margin: 0 0 20px;
+  width: 100%;              /* full card width — edge to edge */
+  max-width: none;          /* remove 760px cap */
+  /* border removed — image goes edge to edge across the full teal card */
   position: relative;
-  z-index: 5;  /* above the card's overlays */
+  z-index: 5;
 }
 .chandradwip-cover img {
   display: block;
@@ -233,13 +233,13 @@
   aspect-ratio: auto;
 }
 .chandradwip-description {
-  padding: 4px 24px 28px;
+  padding: 0 0 20px;        /* removed 24px side padding — synopsis matches cover width */
   color: var(--ink-soft);
   font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
   font-size: 17px;
   line-height: 1.85;
   position: relative;
-  z-index: 5;  /* above the card's ::before texture + ::after vignette overlays */
+  z-index: 5;
 }
 .chandradwip-description p { margin: 0 0 16px; }
 .chandradwip-description h3 {
@@ -262,15 +262,15 @@
 
 /* ====== NOVEL SYNOPSIS (Bengali description below the Chandradwip cover) ====== */
 .novel-synopsis {
-  margin: 0 auto 20px;
-  max-width: 760px;
+  margin: 0 0 20px;
+  max-width: none;          /* remove 760px cap — fill full card width */
   padding: 16px 20px 18px;
-  background: #FFFFFF;  /* pure white — ঝকঝকে, maximum text crispness */
-  border-left: 3px solid var(--gold-bright);  /* brighter gold accent */
+  background: #FFFFFF;
+  border-left: 3px solid var(--gold-bright);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   position: relative;
-  z-index: 6;  /* above all card overlays */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);  /* subtle lift for crispness */
+  z-index: 6;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .novel-synopsis::before {
   content: "❦";
