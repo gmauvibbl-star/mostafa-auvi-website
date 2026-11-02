@@ -149,6 +149,100 @@
   @media(max-width:900px){.book-archive-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}}@media(max-width:650px){.book-archive-grid{grid-template-columns:1fr;gap:22px;padding:0 8px}.book-archive-card{width:100%;max-width:430px;margin:0 auto}.book-archive-card .book-cover-frame{aspect-ratio:.82;padding:14px 26px}.book-archive-card .book-info strong{font-size:16px}}
   .book-rokomari-link{display:inline-block;padding:9px 14px;border:1px solid var(--teal-deep,#286b68);border-radius:7px;color:var(--teal-deep,#286b68);font-size:13px;text-decoration:none;font-weight:600}
   .book-rokomari-link:hover{background:var(--teal-deep,#286b68);color:#fff}
+
+  /* ============================================================
+     Chandradwip sub-section reading view (.cwip-read)
+     Rendered into #grid by renderChandradwipContent().
+     ============================================================ */
+  .cwip-read{
+    max-width:780px;
+    margin:0 auto;
+    background:var(--paper,#faf8f2);
+    border:1px solid rgba(212,180,104,0.35);
+    border-left:4px solid var(--gold-bright,#D4B468);
+    border-radius:10px;
+    box-shadow:0 6px 22px rgba(35,25,15,0.08);
+    overflow:hidden;
+  }
+  .cwip-read-head{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:22px 28px;
+    background:var(--teal-deep,#0F3D3E);
+    color:var(--cream,#f5efe1);
+  }
+  .cwip-read-icon{
+    font-size:34px;
+    color:var(--gold-bright,#D4B468);
+    line-height:1;
+    flex-shrink:0;
+  }
+  .cwip-read-head > div{flex:1;min-width:0;}
+  .cwip-read-title{
+    margin:0;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:24px;
+    font-weight:700;
+    color:var(--cream,#f5efe1);
+    line-height:1.25;
+  }
+  .cwip-read-sub{
+    display:block;
+    margin-top:4px;
+    font-family:'EB Garamond',serif;
+    font-size:14px;
+    font-style:italic;
+    color:rgba(212,180,104,0.88);
+    letter-spacing:0.4px;
+  }
+  .cwip-read-body{
+    padding:28px 36px 34px;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:17px;
+    line-height:1.95;
+    color:var(--ink,#2a1d10);
+  }
+  .cwip-read-body p{margin:0 0 16px;text-align:justify;}
+  .cwip-read-body p:last-child{margin-bottom:0;}
+  .cwip-read-foot{
+    margin-top:22px !important;
+    padding-top:16px;
+    border-top:1px dashed rgba(212,180,104,0.45);
+    font-style:italic;
+    color:var(--ink-soft,#6b5a44);
+    font-size:15px;
+    text-align:right;
+  }
+  .cwip-character-list{
+    list-style:none;
+    padding:0;
+    margin:0 0 16px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:14px 22px;
+  }
+  .cwip-character-list li{
+    padding:14px 16px 14px 20px;
+    background:rgba(212,180,104,0.08);
+    border-left:3px solid var(--gold-bright,#D4B468);
+    border-radius:4px;
+    font-size:15.5px;
+    line-height:1.75;
+    color:var(--ink,#2a1d10);
+  }
+  .cwip-character-list li strong{
+    display:inline;
+    font-weight:700;
+    color:var(--teal-deep,#0F3D3E);
+    font-family:'Noto Serif Bengali',serif;
+  }
+  @media(max-width:720px){
+    .cwip-read-head{padding:16px 18px;gap:12px;}
+    .cwip-read-title{font-size:19px;}
+    .cwip-read-body{padding:18px 20px 22px;font-size:16px;line-height:1.8;}
+    .cwip-character-list{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
@@ -245,6 +339,69 @@
   </article>
 </template>
 
+<!-- ============================================================
+     Chandradwip sub-section content templates (Bengali)
+     Rendered by renderChandradwipContent() when category === 'chandradwip'
+     ============================================================ -->
+<template id="chandradwipWritingTemplate">
+  <article class="cwip-read">
+    <header class="cwip-read-head">
+      <span class="cwip-read-icon" aria-hidden="true">✍</span>
+      <div>
+        <h2 class="cwip-read-title">চন্দ্রদ্বীপ লেখার অভিজ্ঞতা</h2>
+        <span class="cwip-read-sub">Writing Experience · উপন্যাসটি লিখতে গিয়ে যা শিখেছি</span>
+      </div>
+    </header>
+    <div class="cwip-read-body">
+      <p>এই উপন্যাসের পেছনের সবচেয়ে বড় প্রশ্ন ছিল — কীভাবে একশো বছরের একটা জনপদকে এক বইয়ে ধরা যায়? যখন আমি প্রথম বরিশালের ভাটি অঞ্চলে গিয়েছিলাম, তখন আমার হাতে ছিল শুধু একটা রুগ্ণ নোটবুক আর কয়েকজন বৃদ্ধ মানুষের নাম। তাঁদের কথা শুনতে শুনতে আমি বুঝতে পেরেছিলাম, এই অঞ্চলের ইতিহাস কোনো রাজকীয় দলিলে নয়, নদীর ভাঙনে লেখা।</p>
+      <p>লেখার সময় সবচেয়ে কষ্ট হয়েছে ভাষা বেছে নেওয়া। এই জনপদের মানুষ যে তালে কথা বলে, সেই তাল যদি বইয়ে না আসে, তাহলে উপন্যাসটি একটা সাজানো-গোজানো ভূগোল হয়েই থেকে যাবে। আমি প্রথম পাণ্ডুলিপির প্রায় অর্ধেক ফেলে দিয়ে আবার নতুন করে শুরু করেছিলাম, কারণ ভাষাটা আমার কাছে মনে হয়েছিল খুব সাহিত্যিক, খুব শহুরে।</p>
+      <p>তৃতীয় যে অভিজ্ঞতাটা গভীর কাজ করেছে, সেটা হলো নদীর সঙ্গে নিজের একটা অদ্ভুত আপনজন ভাব। আমি দেখেছি, এই নদী কেবল প্রাকৃতিক সত্তা নয় — সে একটা চরিত্র। তিনি দেয়, নেয়, রাগ করে, স্মরণ রাখে। এই উপলব্ধি না থাকলে চন্দ্রদ্বীপের আখ্যান কেবল একটা সমাজতাত্ত্বিক গবেষণাপত্র হয়ে থাকত।</p>
+      <p class="cwip-read-foot">— মোস্তফা অভি, পাণ্ডুলিপি চূড়ান্ত করার পর লেখা নোট, ২০২৬</p>
+    </div>
+  </article>
+</template>
+
+<template id="chandradwipCharactersTemplate">
+  <article class="cwip-read">
+    <header class="cwip-read-head">
+      <span class="cwip-read-icon" aria-hidden="true">❦</span>
+      <div>
+        <h2 class="cwip-read-title">চরিত্রের কথা</h2>
+        <span class="cwip-read-sub">Characters · যাঁরা এই আখ্যানে বেঁচে আছেন</span>
+      </div>
+    </header>
+    <div class="cwip-read-body">
+      <ul class="cwip-character-list">
+        <li><strong>কেরামত</strong> — তেরোটি নৌকার মাঝি। নদীর ভাষা পড়তে পারেন, কিন্তু মানুষের ভাষা পড়তে কাঁচেন। উপন্যাসজুড়ে তাঁর চুপ থাকাটাই তাঁর সবচেয়ে বড় কথা।</li>
+        <li><strong>মানিকজান</strong> — কেরামতের পাশের নৌকার যুবক, যাকে নদী নিজের ভাষায় চেনে। সে নৌকা চালায় না, নদীকে অনুসরণ করে।</li>
+        <li><strong>দলান মিয়া</strong> — বিঘাই গ্রামের জমিদারি প্রতিনিধি, যাঁর উচ্ছেদের আদেশেই সেই তেরোটি নৌকা ছেড়ে যায় বসতি। উপন্যাসে তাঁকে কেবল খলনায়ক হিসেবে নয়, নিজের সময়ের বন্দি হিসেবে দেখানো হয়েছে।</li>
+        <li><strong>কালীবালা</strong> — হিন্দু পরিবারের বিধবা, যিনি গ্রহণের রাতে মুসলমান প্রতিবেশীর সঙ্গে নিজের রক্ষামন্ত্র আওড়ান। তাঁর চরিত্রটি দেখায় যে ভাঙনের সময় ধর্মের সীমানা নদীর মতোই সর্বদা পরিবর্তনশীল।</li>
+        <li><strong>বয়াতি শফি</strong> — যাঁর গানে আসর জমে। উপন্যাসে তাঁর কণ্ঠ একটা সতর্কবার্তা — ইতিহাস কেবল লিখিত হয় না, গাওয়াও হয়।</li>
+        <li><strong>ছোট আজিম</strong> — তেরোটি নৌকার সবচেয়ে ছোট যাত্রী, যার চোখ দিয়ে আমরা এই বিশ শতকের শেষ ভাগটা দেখি। সে বড় হয়ে ওঠে ঠিক সেই জনপদে, যে জনপদ তার জন্মের আগেই ছেড়ে এসেছিল।</li>
+      </ul>
+      <p class="cwip-read-foot">প্রতিটি চরিত্র একটি জনপদের মুখ — কেউ কেউ কথা বলে, কেউ কেউ চুপ থাকে, সবাই মিলে একটা যুগ তৈরি করে।</p>
+    </div>
+  </article>
+</template>
+
+<template id="chandradwipSettlementTemplate">
+  <article class="cwip-read">
+    <header class="cwip-read-head">
+      <span class="cwip-read-icon" aria-hidden="true">⌂</span>
+      <div>
+        <h2 class="cwip-read-title">জনপদের কথা</h2>
+        <span class="cwip-read-sub">The Settlement · এক গ্রামের জন্ম ও উচ্ছেদের আখ্যান</span>
+      </div>
+    </header>
+    <div class="cwip-read-body">
+      <p>বিঘাই গ্রামটি আর মানচিত্রে নেই। নদী তাকে গিলে ফেলেছে বহু বছর আগেই, কিন্তু একশো বছর ধরে সে একটা স্মৃতিতে বেঁচে আছে — যাঁরা সেই গ্রাম ছেড়েছিলেন, তাঁদের স্মৃতিতে। এই উপন্যাসের উদ্দেশ্য সেই স্মৃতিকে ভাষায় ফিরিয়ে আনা।</p>
+      <p>১৮৫০ সালের দিকে এই জনপদের গোড়াপত্তন। তখন নদীটি একটা শান্ত বাঁক নিয়ে বরিশালের ভাটি অঞ্চলে একটা চর জাগিয়েছিল। সেই চরে প্রথম কুঁড়েঘর ওঠে, তারপর ধীরে ধীরে একটা গ্রাম। মানুষ জানত না, যে নদী তাদের এই মাটি দিয়েছে, সে একদিন সেটাই ফিরিয়ে নেবে।</p>
+      <p>উচ্ছেদের রাতটি আসে ১৯৪৭-এর দিকে। জমিদারি প্রথার শেষ দশকে দলান মিয়ার আদেশে গ্রামটিকে খালি করতে বলা হয়, কারণ নদীর ভাঙন আর জমিদারি সীমানা দুটোই নতুন করে কাটতে চায়। সেই রাতে তেরোটি নৌকা ছেড়ে যায় বসতি, আর তার সঙ্গে যায় একটা জনপদের শেষ স্মৃতি।</p>
+      <p>আজ, প্রায় আশি বছর পর, বিঘাই গ্রামের নাম শুধু একটা খতিয়ানের পুরোনো পাতায় আর কয়েকজন বৃদ্ধের কথায় বেঁচে আছে। এই উপন্যাস সেই নামকে আবার মানুষের মুখে ফিরিয়ে আনতে চায়। কারণ একটা জনপদ তখনই মরে না, যখন তার মাটি যায় — সে মরে তখন, যখন তার নাম ভুলে যাওয়া হয়।</p>
+    </div>
+  </article>
+</template>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
@@ -268,6 +425,7 @@ const CATEGORIES_MAP = {
   'probandho-sahityasamalochona': { bn:'প্রবন্ধ ও সাহিত্যসমালোচনা', en:'Essays & Literary Criticism', icon:'§', legacyAliases:['প্রবন্ধ ও সাহিত্যসমালোচনা','প্রবন্ধ-সাহিত্যালোচনা','প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','সাহিত্য প্রবন্ধ','বই আলোচনা','বই পর্যালোচনা','উপন্যাস আলোচনা','কবিতা আলোচনা','প্রবন্ধ আলোচনা','শিল্প সমালোচনা','বিশ্বসাহিত্য','শিল্প ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','সমাজ ও রাজনীতি','দর্শন ও চিন্তা','বিজ্ঞান ও প্রযুক্তি','শিক্ষা ও গবেষণা','ব্যক্তিত্ব ও জীবন','অনুবাদ সাহিত্য আলোচনা','নির্ধারিত গল্প আলোচনা','বিশেষ লেখকের লেখা','লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যিক বিশ্লেষণ'] },
   'ain-oadalot': { bn:'আইন-আদালত', en:'Law & Judiciary', icon:'⚖', legacyAliases:['আইন-আদালত','আইন-আদালত','বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স','ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা','আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','সিভিল আদালতের কড়চা','সিভিল আদালতের কর্চা','কেসস্টাডি','আইনি বিশ্লেষণ','আদালতের ঘটনা','মামলার ইতিবৃত্ত','সাংবিধানিক আইন','ফৌজদারি আইন','দেওয়ানি আইন','ভূমি আইন','উত্তরাধিকার আইন','বিচারব্যবস্থা'] },
   'bhromonkahini': { bn:'ভ্রমণকাহিনি', en:'Travel Writing', icon:'🧭', legacyAliases:['ভ্রমণকাহিনি','ভ্রমণ','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','ভ্রমণ ও অনুবাদ সাহিত্য','দেশ ভ্রমণ','travel','ভ্রমণকথা'] },
+  'chandradwip': { bn:'চন্দ্রদ্বীপ', en:'Chandradwip', icon:'❀', legacyAliases:['চন্দ্রদ্বীপ','চন্দ্রদ্বিপ','Chandradwip','chandradwip','চন্দ্রদ্বীপ উপন্যাস','নদীমাতৃক জীবন'] },
   'banking-o-orthoniti': { bn:'ব্যাংকিং ও অর্থনীতি', en:'Banking & Economics', icon:'◐', legacyAliases:['ব্যাংকিং ও অর্থনীতি','ব্যাকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা','ব্যাংকিং','অর্থনীতি','কর ব্যবস্থা','কৃষিঋণ','এসএমই ব্যাংকিং','ডিজিটাল ব্যাংকিং','ক্ষুদ্রঋণ','আর্থিক অন্তর্ভুক্তি','বীমা','বৈদেশিক বাণিজ্য','মুদ্রাবাজার'] },
   'prokashona-o-pdf': { bn:'প্রকাশনা', en:'Publications', icon:'▤', legacyAliases:['প্রকাশনা','পিডিএফ','আমার বই','পিডিএফ বই','ই-উপন্যাস','ই-প্রবন্ধ','বই','ই-বুক','PDF সংগ্রহ','প্রকাশিত গ্রন্থ','ম্যাগাজিন','সংকলন','গবেষণাপত্র'] }
 };
@@ -285,6 +443,11 @@ const SUBCATEGORY_MAP = {
   'bhromonkahini': [
     {slug:'pothe-prantore',bn:'পথে-প্রান্তরে',en:'Paths & Horizons',aliases:['পথে-প্রান্তরে','বাংলাদেশ ভ্রমণ','দেশ ভ্রমণ']},
     {slug:'sudurer-potthe',bn:'সুদূরের পথে',en:'Distant Roads',aliases:['সুদূরের পথে','বিদেশ ভ্রমণ','বিদেশ ভ্রমণ']}
+  ],
+  'chandradwip': [
+    {slug:'chandradwip-writing',bn:'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা',en:'Writing Experience',aliases:['চন্দ্রদ্বীপ লেখার অভিজ্ঞতা','লেখার অভিজ্ঞতা','Writing Experience']},
+    {slug:'chandradwip-characters',bn:'চরিত্রের কথা',en:'Characters',aliases:['চরিত্রের কথা','চরিত্র','Characters']},
+    {slug:'chandradwip-settlement',bn:'জনপদের কথা',en:'The Settlement',aliases:['জনপদের কথা','জনপদ','The Settlement']}
   ],
   'probandho-sahityasamalochona': [
     {slug:'literary-essays',bn:'সাহিত্য প্রবন্ধ',en:'Literary Essays',aliases:['সাহিত্য প্রবন্ধ','প্রবন্ধ']},
@@ -449,10 +612,10 @@ function updateIntro(){
 
   if(language==='en'){
     document.getElementById('pageTitle').textContent=category?(category==='prokashona-o-pdf'?'Publications':' '+titleBase.trim()):'Published Writing';
-    document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published story collections by Mostafa Auvi.':'Published writing in '+titleBase+'.'):'Stories, novels, essays and literary criticism.';
+    document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published story collections by Mostafa Auvi.':(category==='chandradwip'?'The forthcoming novel — a century of riverine life in the Barisal tidal belt.':'Published writing in '+titleBase+'.')):'Stories, novels, essays and literary criticism.';
   }else if(category){
     document.getElementById('pageTitle').textContent=category==='prokashona-o-pdf'?'প্রকাশনা':titleBase;
-    document.getElementById('pageSubtitle').textContent=category==='prokashona-o-pdf'?'মোস্তফা অভির প্রকাশিত তিনটি গল্পগ্রন্থ।':titleBase+' বিভাগের প্রকাশিত লেখা।';
+    document.getElementById('pageSubtitle').textContent=category==='prokashona-o-pdf'?'মোস্তফা অভির প্রকাশিত তিনটি গল্পগ্রন্থ।':(category==='chandradwip'?'আসন্ন উপন্যাস — বরিশালের ভাটি অঞ্চলের নদীমাতৃক এক শতকের আখ্যান।':titleBase+' বিভাগের প্রকাশিত লেখা।');
     document.querySelector('.nav a.current')?.classList.remove('current');
     document.querySelectorAll('.nav a').forEach(a=>{
       const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
@@ -518,9 +681,37 @@ function renderBookArchive(){
  grid.replaceChildren(fragment);
 }
 
+// Chandradwip sub-section renderer — static content (no Supabase).
+// When category === 'chandradwip' with a subcategory, renders the corresponding
+// long-form article from the matching <template>.
+function renderChandradwipContent(sub){
+  const map = {
+    'chandradwip-writing':    'chandradwipWritingTemplate',
+    'chandradwip-characters': 'chandradwipCharactersTemplate',
+    'chandradwip-settlement': 'chandradwipSettlementTemplate'
+  };
+  const tid = map[sub];
+  if(!tid){
+    statusEl.innerHTML = language==='en'
+      ? 'Three sub-sections explore the novel: Writing Experience, Characters, and The Settlement.'
+      : 'এই উপন্যাসের তিনটি উপবিভাগ রয়েছে — চন্দ্রদ্বীপ লেখার অভিজ্ঞতা, চরিত্রের কথা ও জনপদের কথা। উপরের যেকোনো বোতামে ক্লিক করে পড়া শুরু করুন।';
+    grid.innerHTML='';
+    return;
+  }
+  const template = document.getElementById(tid);
+  if(!template){ statusEl.textContent=language==='en'?'Content unavailable.':'কনটেন্ট পাওয়া যাচ্ছে না।'; return; }
+  statusEl.innerHTML = language==='en'
+    ? 'Chandradwip &middot; <span class="count">'+esc(catLabel(category))+'</span>'
+    : 'চন্দ্রদ্বীপ &middot; <span class="count">'+esc(catLabel(category))+'</span>';
+  const fragment = template.content.cloneNode(true);
+  grid.replaceChildren(fragment);
+}
+
 async function loadPosts(){
   // বইয়ের আর্কাইভ শুধু প্রকাশনা বিভাগে দেখাই; মূল Published Writing পেজে সব লেখা থাকবে।
   if(category === 'prokashona-o-pdf'){ renderBookArchive(); return; }
+  // চন্দ্রদ্বীপ বিভাগ — স্ট্যাটিক কনটেন্ট (Supabase-মুক্ত)
+  if(category === 'chandradwip'){ renderChandradwipContent(subcategory); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
     statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;
