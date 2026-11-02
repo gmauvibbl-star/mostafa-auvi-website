@@ -228,7 +228,7 @@
 .chandradwip-cover img {
   display: block;
   width: 100%;
-  height: 200px;
+  height: 270px;
   object-fit: cover;
   aspect-ratio: auto;
 }
@@ -295,11 +295,11 @@
 .novel-synopsis p {
   font-family: 'Noto Serif Bengali', serif;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--ink);
   text-align: justify;
   text-justify: inter-character;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 .novel-synopsis p:last-child {
   margin-bottom: 0;
