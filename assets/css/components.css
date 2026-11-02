@@ -222,18 +222,14 @@
   max-width: 760px;
   border: 8px solid var(--paper-warm);
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  flex: 1;              /* grow to fill available card height — matches journal column */
-  min-height: 280px;
-  overflow: hidden;
-  display: flex;
-  align-items: stretch;
+  /* flex:1 removed — natural aspect ratio, no stretch */
 }
 .chandradwip-cover img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 670;
   object-fit: cover;
-  aspect-ratio: auto;   /* fill the figure, crop if needed — no distortion */
 }
 .chandradwip-description {
   padding: 4px 24px 28px;
@@ -263,10 +259,10 @@
 
 /* ====== NOVEL SYNOPSIS (Bengali description below the Chandradwip cover) ====== */
 .novel-synopsis {
-  margin: 0 auto 32px;
+  margin: 0 auto 24px;
   max-width: 760px;
-  padding: 28px 32px 30px;
-  background: var(--cream);  /* solid opaque — text fully clear, no hazy overlay */
+  padding: 20px 24px 22px;            /* tightened from 28/32/30 */
+  background: var(--cream);
   border-left: 3px solid var(--gold);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   position: relative;
@@ -284,21 +280,21 @@
 }
 .novel-synopsis-title {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 26px;
+  font-size: 22px;                    /* tightened from 26 */
   font-weight: 800;
   color: var(--teal-deep);
-  margin: 0 0 16px;
+  margin: 0 0 12px;                   /* tightened from 16 */
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 .novel-synopsis p {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 16px;
-  line-height: 1.95;
+  font-size: 14px;                    /* tightened from 16 */
+  line-height: 1.7;                   /* tightened from 1.95 */
   color: var(--ink);
   text-align: justify;
   text-justify: inter-character;
-  margin: 0 0 14px;
+  margin: 0 0 10px;                   /* tightened from 14 */
 }
 .novel-synopsis p:last-child {
   margin-bottom: 0;
@@ -308,9 +304,9 @@
   font-weight: 600;
   color: var(--maroon-deep);
   border-top: 1px solid var(--paper-dark);
-  padding-top: 14px;
-  margin-top: 18px;
-  font-size: 16px;
+  padding-top: 10px;                  /* tightened from 14 */
+  margin-top: 12px;                   /* tightened from 18 */
+  font-size: 14px;                    /* tightened from 16 */
 }
 @media (max-width: 640px) {
   .novel-synopsis { padding: 20px 18px 22px; margin-bottom: 24px; }
@@ -418,7 +414,7 @@
   text-decoration: none;
   transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
   cursor: pointer;
-  flex: 1;  /* stretch to fill column height — matches Chandradwip card */
+  /* flex:1 removed — natural height, no empty space inside card */
 }
 .journal-card:hover {
   transform: translateY(-3px);
@@ -478,7 +474,7 @@
   color: var(--ink-soft);
   line-height: 1.95;
   text-align: justify;
-  flex: 1;  /* push footer to bottom of stretched card */
+  /* flex:1 removed — footer follows naturally, no empty gap */
 }
 .journal-body p { margin-bottom: 12px; }
 .journal-body .dropcap {
