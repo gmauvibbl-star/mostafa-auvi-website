@@ -309,8 +309,7 @@ const SUBCATEGORY_MAP = {
     {slug:'sme-banking',bn:'এসএমই ব্যাংকিং নিয়ে যত কথা',en:'SME Banking',aliases:['এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং']}
   ],
   'prokashona-o-pdf': [
-    {slug:'amar-boi',bn:'আমার বই',en:'My Books',aliases:['আমার বই','বই','প্রকাশিত গ্রন্থ']},
-    {slug:'pdf-boi',bn:'পিডিএফ বই',en:'PDF Books',aliases:['পিডিএফ বই','পিডিএফ','PDF সংগ্রহ','ই-বুক']}
+    {slug:'amar-boi',bn:'আমার বই',en:'My Books',aliases:['আমার বই','বই','প্রকাশিত গ্রন্থ','পিডিএফ বই','পিডিএফ','PDF সংগ্রহ','ই-বুক','ই-উপন্যাস','ই-প্রবন্ধ','ই-বুক','ম্যাগাজিন','সংকলন','গবেষণাপত্র']}
   ]
 };
 
@@ -521,7 +520,7 @@ function renderBookArchive(){
 
 async function loadPosts(){
   // বইয়ের আর্কাইভ শুধু প্রকাশনা বিভাগে দেখাই; মূল Published Writing পেজে সব লেখা থাকবে।
-  if(category === 'prokashona-o-pdf' && (!subcategory || subcategory==='amar-boi')){ renderBookArchive(); return; }
+  if(category === 'prokashona-o-pdf'){ renderBookArchive(); return; }
   if(!SUPABASE_URL.startsWith('https://')||SUPABASE_ANON_KEY.includes('YOUR_')){
     statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;

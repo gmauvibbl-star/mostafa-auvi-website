@@ -331,6 +331,47 @@
   }
 
   /* ====================================================================
+   *  9. CHANDRADWIP SUB-SECTION ACCORDIONS
+   *     #chandradwip-writing, #chandradwip-characters, #chandradwip-settlement
+   *     Each panel toggles open/closed when its header button is clicked.
+   *     When an anchor link (e.g. index.html#chandradwip-characters) is
+   *     followed, the matching panel is auto-opened and scrolled to.
+   * ==================================================================== */
+  function initChandradwipPanels() {
+    var panels = document.querySelectorAll(".cwip-panel");
+    if (!panels.length) return;
+
+    panels.forEach(function (panel) {
+      var btn = panel.querySelector(".cwip-panel-toggle");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var expanded = btn.getAttribute("aria-expanded") === "true";
+        if (expanded) {
+          btn.setAttribute("aria-expanded", "false");
+          panel.classList.add("collapsed");
+        } else {
+          btn.setAttribute("aria-expanded", "true");
+          panel.classList.remove("collapsed");
+        }
+      });
+    });
+
+    // If page was loaded with a #chandradwip-* hash, make sure that
+    // panel is open (in case CSS or future logic hides it).
+    var hash = window.location.hash;
+    if (hash) {
+      var target = document.getElementById(hash.slice(1));
+      if (target && target.classList.contains("cwip-panel")) {
+        var tBtn = target.querySelector(".cwip-panel-toggle");
+        if (tBtn) {
+          tBtn.setAttribute("aria-expanded", "true");
+          target.classList.remove("collapsed");
+        }
+      }
+    }
+  }
+
+  /* ====================================================================
    *  INIT
    * ==================================================================== */
   function init() {
@@ -341,6 +382,7 @@
     initModalFocusTrap();
     initChandradwipExtra();
     initLatestWritings();
+    initChandradwipPanels();
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

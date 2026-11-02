@@ -1083,3 +1083,139 @@
 @media (max-width: 640px) {
   .chandradwip-subs { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+ *  Chandradwip sub-section panels — anchor-target accordions
+ *  Linked from index.html#chandradwip-writing/-characters/-settlement
+ *  Default open; user can collapse by clicking the toggle button.
+ * ============================================================ */
+.cwip-panel {
+  max-width: 980px;
+  margin: 32px auto;
+  background: var(--paper, #faf8f2);
+  border: 1px solid rgba(212,180,104,0.35);
+  border-left: 4px solid var(--gold-bright, #D4B468);
+  border-radius: 10px;
+  box-shadow: 0 6px 22px rgba(35,25,15,0.08);
+  overflow: hidden;
+  scroll-margin-top: 90px; /* leave room for sticky header when anchor jumps */
+}
+.cwip-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--teal-deep, #0F3D3E);
+  color: var(--cream, #f5efe1);
+}
+.cwip-panel-icon {
+  font-size: 28px;
+  color: var(--gold-bright, #D4B468);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.cwip-panel-head > div {
+  flex: 1;
+  min-width: 0;
+}
+.cwip-panel-head h3 {
+  margin: 0;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cream, #f5efe1);
+  line-height: 1.25;
+}
+.cwip-panel-sub {
+  display: block;
+  margin-top: 3px;
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(212,180,104,0.85);
+  letter-spacing: 0.4px;
+}
+.cwip-panel-toggle {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212,180,104,0.15);
+  border: 1px solid rgba(212,180,104,0.4);
+  border-radius: 50%;
+  color: var(--gold-bright, #D4B468);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  padding: 0;
+}
+.cwip-panel-toggle:hover {
+  background: rgba(212,180,104,0.3);
+}
+.cwip-panel-toggle-icon {
+  font-size: 16px;
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+.cwip-panel-toggle[aria-expanded="false"] .cwip-panel-toggle-icon {
+  transform: rotate(-90deg);
+}
+.cwip-panel-body {
+  padding: 22px 28px 26px;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink, #2a1d10);
+}
+.cwip-panel-body p {
+  margin: 0 0 14px;
+}
+.cwip-panel-body p:last-child {
+  margin-bottom: 0;
+}
+.cwip-panel-foot {
+  margin-top: 18px !important;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(212,180,104,0.45);
+  font-style: italic;
+  color: var(--ink-soft, #6b5a44);
+  font-size: 14px;
+}
+.cwip-character-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px 22px;
+}
+.cwip-character-list li {
+  position: relative;
+  padding: 12px 14px 12px 18px;
+  background: rgba(212,180,104,0.08);
+  border-left: 3px solid var(--gold-bright, #D4B468);
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink, #2a1d10);
+}
+.cwip-character-list li strong {
+  display: inline;
+  font-weight: 700;
+  color: var(--teal-deep, #0F3D3E);
+  font-family: 'Noto Serif Bengali', serif;
+}
+/* Collapsed state */
+.cwip-panel.collapsed .cwip-panel-body {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .cwip-panel { margin: 22px 14px; }
+  .cwip-panel-head { padding: 14px 16px; gap: 12px; }
+  .cwip-panel-head h3 { font-size: 18px; }
+  .cwip-panel-body { padding: 16px 18px 20px; font-size: 15px; line-height: 1.75; }
+  .cwip-character-list { grid-template-columns: 1fr; }
+}
+
