@@ -1026,3 +1026,13 @@
     padding: 30px 16px 20px;
   }
 }
+
+/* Equal bottoms — both cards stretch to fill their section */
+.lower-grid > section {
+  display: flex;
+  flex-direction: column;
+}
+.lower-grid .novel-card,
+.lower-grid .journal {
+  flex: 1;
+}
