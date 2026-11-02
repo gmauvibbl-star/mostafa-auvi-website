@@ -227,9 +227,9 @@
 .chandradwip-cover img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1200 / 670;
+  height: 220px;
   object-fit: cover;
+  aspect-ratio: auto;
 }
 .chandradwip-description {
   padding: 4px 24px 28px;
@@ -259,9 +259,9 @@
 
 /* ====== NOVEL SYNOPSIS (Bengali description below the Chandradwip cover) ====== */
 .novel-synopsis {
-  margin: 0 auto 24px;
+  margin: 0 auto 20px;
   max-width: 760px;
-  padding: 20px 24px 22px;            /* tightened from 28/32/30 */
+  padding: 16px 20px 18px;
   background: var(--cream);
   border-left: 3px solid var(--gold);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
@@ -289,12 +289,12 @@
 }
 .novel-synopsis p {
   font-family: 'Noto Serif Bengali', serif;
-  font-size: 14px;                    /* tightened from 16 */
-  line-height: 1.7;                   /* tightened from 1.95 */
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--ink);
   text-align: justify;
   text-justify: inter-character;
-  margin: 0 0 10px;                   /* tightened from 14 */
+  margin: 0 0 8px;
 }
 .novel-synopsis p:last-child {
   margin-bottom: 0;
