@@ -324,7 +324,7 @@
   display: grid;
   grid-template-columns: 1fr 1.15fr;
   gap: 44px;
-  align-items: start;  /* natural heights — features-inline fills the right column below the journal */
+  align-items: stretch;  /* both columns match height — no empty gap */
 }
 .lower > div {
   display: flex;

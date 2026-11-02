@@ -413,7 +413,7 @@
   text-decoration: none;
   transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
   cursor: pointer;
-  /* flex:1 removed — natural height; features-inline fills the column below */
+  flex: 1;  /* stretch to fill column height — matches Chandradwip card */
 }
 .journal-card:hover {
   transform: translateY(-3px);
@@ -473,7 +473,7 @@
   color: var(--ink-soft);
   line-height: 1.95;
   text-align: justify;
-  /* flex:1 removed — footer follows naturally */
+  flex: 1;  /* push footer to bottom of stretched card */
 }
 .journal-body p { margin-bottom: 12px; }
 .journal-body .dropcap {
