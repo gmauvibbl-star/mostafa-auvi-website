@@ -346,6 +346,8 @@ const rawCategory=params.get('category')||"";
 const category=catSlug(rawCategory);
 const subcategory=params.get('subcategory')||"";
 const language=params.get('lang')==='en'?'en':'bn';
+// ── Search support (Part 2): read ?q= and filter results client-side ──
+const searchQuery=(params.get('q')||params.get('search')||'').trim();
 document.documentElement.lang=language;
 if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
@@ -421,6 +423,13 @@ function markFilter(){
 
 // Update intro + nav active state based on category
 function updateIntro(){
+  // ── Search-aware heading (Part 2) ──
+  if(searchQuery){
+    const qHeadline=document.querySelector('.page-headline, h1');
+    if(qHeadline) qHeadline.textContent=language==='en'?('Search results for: \u201c'+searchQuery+'\u201d'):('অনুসন্ধান: \u201c'+searchQuery+'\u201d');
+    document.title=(language==='en'?'Search: ':'অনুসন্ধান: ')+searchQuery+' | Mostafa Auvi';
+    return;
+  }
   // ডায়নামিক canonical + document.title (SEO ফিক্স)
   const catInfo = CATEGORIES_MAP[category];
   const titleBase = catInfo ? (language==='en' ? catInfo.en : catInfo.bn) : (language==='en'?'Published Writing':'প্রকাশিত লেখা');
@@ -534,6 +543,15 @@ async function loadPosts(){
         const subAliases=subItem?subItem.aliases:[subcategory];
         rows=rows.filter(p=>labelsForPost(p).some(v=>v===subcategory||subAliases.includes(v)));
       }
+    }
+    // ── Search filter (Part 2): narrow by ?q= against title/excerpt/tags/category ──
+    if(searchQuery){
+      const ql=searchQuery.toLowerCase();
+      rows=rows.filter(p=>{
+        const hay=[p.title,p.excerpt,p.category,p.parent_category,p.subcategory,...(Array.isArray(p.tags)?p.tags:[])]
+          .map(v=>String(v||'').toLowerCase());
+        return hay.some(v=>v.includes(ql));
+      });
     }
     renderCards(rows);
   }catch(e){
