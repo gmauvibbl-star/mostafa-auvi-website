@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mostafa-auvi-v12';
+const CACHE_NAME = 'mostafa-auvi-v13';
 const ASSETS = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const ASSETS = [
   './subscribe.html',
   './dashboard.html',
   './manifest.json',
+  './chandradwip-landscape.webp',
   './book1.jpg',
   './book2.jpg'
 ];
@@ -26,6 +27,26 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+
+  // Network-first for navigation requests (HTML pages) — always get the latest version.
+  // This prevents the old design from showing up on first visit.
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request)
+        .then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(e.request).then(cached => cached || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // Stale-while-revalidate for static assets (CSS, JS, images, fonts).
+  // Return cached immediately for speed, update cache in background.
   e.respondWith(
     caches.match(e.request).then(cached => {
       const fetchPromise = fetch(e.request).then(response => {

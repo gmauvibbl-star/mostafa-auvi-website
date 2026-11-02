@@ -636,6 +636,11 @@ async function loadPosts(){
     statusEl.textContent=language==='en'?'The content service is not configured.':'Supabase কনফিগার করা হয়নি।';
     return;
   }
+  if(typeof window.supabase==='undefined'||!window.supabase.createClient){
+    statusEl.textContent=language==='en'?'Content service library failed to load. Please refresh.':'কনটেন্ট লাইব্রেরি লোড হয়নি। অনুগ্রহ করে পেজ রিফ্রেশ করুন।';
+    grid.innerHTML='<div class="empty"><div class="icon">❦</div><h3>'+(language==='en'?'Library Error':'লাইব্রেরি ত্রুটি')+'</h3><p>'+(language==='en'?'The content service library could not be loaded from the network. Please refresh the page.':'কনটেন্ট সার্ভিস লাইব্রেরি নেটওয়ার্ক থেকে লোড করা যায়নি। অনুগ্রহ করে পেজ রিফ্রেশ করুন।')+'</p></div>';
+    return;
+  }
   try{
     const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
     // Optimization: Removed 'body' from select query to reduce payload size massively!
@@ -677,7 +682,22 @@ async function loadPosts(){
 
 updateIntro();
 renderSubcategoryPills();
+// Loading timeout — if loadPosts doesn't complete within 20 seconds, show error
+var _loadTimeout=setTimeout(function(){
+  if(statusEl && statusEl.textContent.indexOf('লোড হচ্ছে')!==-1){
+    statusEl.textContent=language==='en'?'Loading is taking longer than expected. Please refresh.':'লোড হতে বেশি সময় লাগছে। অনুগ্রহ করে পেজ রিফ্রেশ করুন।';
+    grid.innerHTML='<div class="empty"><div class="icon">⏳</div><h3>'+(language==='en'?'Slow Response':'ধীরগতি')+'</h3><p>'+(language==='en'?'The server is taking too long to respond. Please check your connection and try again.':'সার্ভার সাড়া দিতে বেশি সময় নিচ্ছে। আপনার ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।')+'</p></div>';
+  }
+},20000);
 loadPosts();
+clearTimeout(_loadTimeout);
 </script>
+
+/* ====== Service Worker registration ====== */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function() {});
+  });
+}
 </body>
 </html>
