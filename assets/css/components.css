@@ -413,7 +413,7 @@
   text-decoration: none;
   transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
   cursor: pointer;
-  flex: 1;  /* fill column height — matches Chandradwip card, no empty gap */
+  /* flex:1 removed — natural height; features-inline fills the column below */
 }
 .journal-card:hover {
   transform: translateY(-3px);
@@ -473,7 +473,7 @@
   color: var(--ink-soft);
   line-height: 1.95;
   text-align: justify;
-  flex: 1;  /* push journal-more footer to the bottom of the stretched card */
+  /* flex:1 removed — footer follows naturally */
 }
 .journal-body p { margin-bottom: 12px; }
 .journal-body .dropcap {
@@ -599,6 +599,46 @@
 .feat-card.brown  { background: linear-gradient(135deg, #966C33 0%, #6F4F22 100%); }
 .feat-card.teal   { background: linear-gradient(135deg, #1F7A70 0%, #155952 100%); }
 .feat-card.orange { background: linear-gradient(135deg, #C46A2B 0%, #8E4D1E 100%); }
+
+/* ====== FEATURES INLINE (moved into the right column below the journal) ======
+   2-column grid fills the space that was empty. No full-width background —
+   sits transparently on the .lower section's paper background. */
+.features-inline {
+  margin-top: 24px;
+}
+.features-inline .features-header {
+  text-align: center;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--paper-dark);
+}
+.features-inline .features-header h2 {
+  font-size: 22px;
+}
+.features-inline .features-header .eyebrow {
+  font-size: 10px;
+}
+.features-inline .features-header .sub {
+  font-size: 12px;
+}
+.features-grid--inline {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+  margin-bottom: 0 !important;
+}
+.features-grid--inline .feat-card {
+  min-height: 110px;
+  padding: 12px 10px;
+}
+.features-grid--inline .feat-card .title {
+  font-size: 14px;
+}
+.features-grid--inline .feat-card .sub {
+  font-size: 11px;
+}
+.features-grid--inline .feat-card .icon {
+  font-size: 20px;
+}
 
 /* ====== LATEST WRITINGS (Part 2: auto-display latest published articles) ======
    main.js fetches the 3 most recent published posts from Supabase.
