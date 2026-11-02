@@ -261,7 +261,7 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   e.preventDefault();
   const emailInput = document.getElementById('email');
   const btn = document.getElementById('subscribeBtn');
-  const email = emailInput.value.trim();
+  const email = emailInput.value.trim().toLowerCase();
 
   // Empty email check
   if (!email) {
@@ -271,9 +271,18 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   }
 
   // Client-side email format validation
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
     showStatus('subscribeStatus', 'একটি বৈধ ইমেইল ঠিকানা দিন।', 'error');
     emailInput.focus();
+    return;
+  }
+
+  // Client-side duplicate check via localStorage
+  // Tracks emails submitted from this browser to prevent re-submission
+  var submitted = [];
+  try { submitted = JSON.parse(localStorage.getItem('mauvi_subscribed_emails') || '[]'); } catch(_) {}
+  if (submitted.indexOf(email) !== -1) {
+    showStatus('subscribeStatus', 'এই ইমেইলটি ইতিমধ্যে সাবস্ক্রাইব করা আছে।', 'error');
     return;
   }
 
@@ -285,7 +294,33 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   showStatus('subscribeStatus', '<span class="spinner"></span> পাঠানো হচ্ছে…', 'processing');
 
   try {
-    const { ok, data } = await callSubscription('subscribe', { email: email.toLowerCase() });
+    const { ok, data } = await callSubscription('subscribe', { email: email });
+    if (ok) {
+      // Save email to localStorage to prevent future duplicate submissions
+      try {
+        submitted.push(email);
+        localStorage.setItem('mauvi_subscribed_emails', JSON.stringify(submitted));
+      } catch(_) {}
+      showStatus('subscribeStatus', data.message || 'সাবস্ক্রিপশনের জন্য ধন্যবাদ। আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।', 'success');
+      emailInput.value = '';
+    } else {
+      // Check if server says "already subscribed" (from Edge Function duplicate check)
+      if (data.error && data.error.indexOf('ইতিমধ্যে') !== -1) {
+        // Save to localStorage so future attempts are caught client-side
+        try {
+          submitted.push(email);
+          localStorage.setItem('mauvi_subscribed_emails', JSON.stringify(submitted));
+        } catch(_) {}
+      }
+      showStatus('subscribeStatus', data.error || 'সাবস্ক্রিপশন সম্পন্ন হয়নি। আবার চেষ্টা করুন।', 'error');
+    }
+  } catch (err) {
+    showStatus('subscribeStatus', 'সাবস্ক্রিপশন সম্পন্ন হয়নি। আবার চেষ্টা করুন।', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = origText;
+  }
+});
     if (ok) {
       showStatus('subscribeStatus', data.message || 'সাবস্ক্রিপশনের জন্য ধন্যবাদ। আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।', 'success');
       emailInput.value = '';
