@@ -9,7 +9,7 @@
 :root[data-theme="dark"]{--bg:#17150f;--page:#100e0a;--bronze:#c4a95a;--green:#86b873;--menu:#ecd9cf;--rule:#4a453a;--box:#2a251a;--ink:#ecd9cf}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--page);color:var(--ink);font-family:'Anek Bangla','Noto Sans Bengali','Hind Siliguri',sans-serif}
+body{font-family:'Anek Bangla','Noto Sans Bengali','Hind Siliguri',sans-serif}
 .page{max-width:1400px;margin:0 auto;padding:20px 16px 50px}
 .label{font-size:15px;margin:26px 0 8px;color:var(--ink)}
 .label b{color:var(--bronze)}
