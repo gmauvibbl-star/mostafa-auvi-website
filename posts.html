@@ -10,6 +10,9 @@
 <meta name="keywords" content="Mostafa Auvi, মোস্তফা অভি, প্রকাশিত লেখা, বাংলা গল্প, বাংলা উপন্যাস, সাহিত্যসমালোচনা, আইন-আদালত, ব্যাংকিং ও অর্থনীতি">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/posts.html">
+<link rel="alternate" hreflang="bn" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/posts.html" />
+<link rel="alternate" hreflang="x-default" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/index.html" />
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mostafa Auvi">
 <meta property="og:title" content="প্রকাশিত লেখা | Mostafa Auvi">
@@ -508,10 +511,22 @@ function updateIntro(){
   // ── Search-aware heading (Part 2) ──
   if(searchQuery){
     const qHeadline=document.querySelector('.page-headline, h1');
-    if(qHeadline) qHeadline.textContent=language==='en'?('Search results for: \u201c'+searchQuery+'\u201d'):('অনুসন্ধান: \u201c'+searchQuery+'\u201d');
-    document.title=(language==='en'?'Search: ':'অনুসন্ধান: ')+searchQuery+' | Mostafa Auvi';
-    return;
-  }
+    if(qHeadline){
+      qHeadline.textContent=language==='en'?('Search results for: \u201c'+searchQuery+'\u201d'):('অনুসন্ধান: \u201c'+searchQuery+'\u201d');
+      // Add category filter for search results
+      var filterBar=document.createElement('div');
+      filterBar.style.cssText='padding:10px 0;display:flex;gap:8px;flex-wrap:wrap;';
+      filterBar.innerHTML='<select id="search-cat-filter" style="padding:6px 10px;border:1px solid var(--paper-dark);border-radius:6px;font-size:13px;"><option value="">'+(language==='en'?'All categories':'সব বিভাগ')+'</option>'+
+        Object.entries(CATEGORIES_MAP).map(([slug,info])=>'<option value="'+slug+'">'+(language==='en'?info.en:info.bn)+'</option>').join('')+
+        '</select>';
+      qHeadline.appendChild(filterBar);
+      var catFilter=document.getElementById('search-cat-filter');
+      if(catFilter) catFilter.addEventListener('change',function(){
+        var val=this.value;
+        if(val){location.href='posts.html?category='+val+'&q='+encodeURIComponent(searchQuery)+(language==='en'?'&lang=en':'');
+        }else{location.href='posts.html?q='+encodeURIComponent(searchQuery)+(language==='en'?'&lang=en':'');}
+      });
+    }
   // ডায়নামিক canonical + document.title (SEO ফিক্স)
   const catInfo = CATEGORIES_MAP[category];
   const titleBase = catInfo ? (language==='en' ? catInfo.en : catInfo.bn) : (language==='en'?'Published Writing':'প্রকাশিত লেখা');
