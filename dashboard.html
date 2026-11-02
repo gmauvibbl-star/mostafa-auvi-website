@@ -122,6 +122,115 @@ async function showRevisionHistory(postId) {
   } catch(e) { toast('ত্রুটি', 'রিভিশন লোড ব্যর্থ: ' + e.message, 'error'); }
 }
 
+
+// ====== Scheduled Publishing wiring ======
+(function() {
+  const schedInput = document.getElementById('scheduled-at');
+  const clearBtn = document.getElementById('clear-schedule-btn');
+  const statusEl = document.getElementById('schedule-status');
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    if (schedInput) schedInput.value = '';
+    if (statusEl) statusEl.textContent = '';
+  });
+  if (schedInput) schedInput.addEventListener('change', () => {
+    if (statusEl && schedInput.value) {
+      const dt = new Date(schedInput.value);
+      statusEl.textContent = 'নির্ধারিত: ' + dt.toLocaleString('bn-BD');
+    } else if (statusEl) {
+      statusEl.textContent = '';
+    }
+  });
+})();
+
+function getScheduledAt() {
+  const el = document.getElementById('scheduled-at');
+  if (!el || !el.value) return null;
+  const dt = new Date(el.value);
+  if (isNaN(dt.getTime())) return null;
+  return dt.toISOString();
+}
+
+
+// ====== Media Library ======
+async function openMediaLibrary(callback) {
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data, error } = await sb.storage.from('covers').list('', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
+    if (error) throw error;
+    if (!data || data.length === 0) { toast('তথ্য', 'কোনো ছবি বা ফাইল নেই। আগে আপলোড করুন।', 'info'); return; }
+    
+    // Build gallery modal
+    const modal = document.createElement('div');
+    modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    const inner = document.createElement('div');
+    inner.style.cssText = 'background:#fff;border-radius:12px;max-width:700px;width:100%;max-height:80vh;overflow-y:auto;padding:20px;';
+    inner.innerHTML = '<h3 style="margin:0 0 12px;font-size:18px;">Media Library</h3><div id="media-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;"></div><button id="media-close" style="margin-top:12px;padding:8px 16px;background:var(--teal-deep);color:#fff;border:none;border-radius:6px;cursor:pointer;">বন্ধ</button>';
+    modal.appendChild(inner);
+    document.body.appendChild(modal);
+    
+    const grid = inner.querySelector('#media-grid');
+    const baseUrl = SUPABASE_URL + '/storage/v1/object/public/covers/';
+    data.filter(f => !f.id.endsWith('.emptyFolderPlaceholder')).forEach(file => {
+      const url = baseUrl + file.name;
+      const isImage = file.metadata && file.metadata.mimetype && file.metadata.mimetype.startsWith('image/');
+      const item = document.createElement('div');
+      item.style.cssText = 'cursor:pointer;border:2px solid transparent;border-radius:8px;overflow:hidden;text-align:center;';
+      if (isImage) {
+        item.innerHTML = '<img src="' + url + '" style="width:100%;height:100px;object-fit:cover;" /><div style="font-size:10px;padding:4px;color:#666;">' + file.name.slice(0, 15) + '</div>';
+      } else {
+        item.innerHTML = '<div style="height:100px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;font-size:24px;">📄</div><div style="font-size:10px;padding:4px;color:#666;">' + file.name.slice(0, 15) + '</div>';
+      }
+      item.onclick = () => {
+        if (callback) callback(url, file.name);
+        document.body.removeChild(modal);
+      };
+      grid.appendChild(item);
+    });
+    
+    inner.querySelector('#media-close').onclick = () => document.body.removeChild(modal);
+    modal.onclick = (e) => { if (e.target === modal) document.body.removeChild(modal); };
+  } catch(e) { toast('ত্রুটি', 'Media Library লোড ব্যর্থ: ' + e.message, 'error'); }
+}
+
+
+// ====== SEO Checklist ======
+function updateSEOChecklist() {
+  const title = (document.querySelector('#f-title') || {}).value || '';
+  const body = document.getElementById('editor');
+  const bodyText = body ? body.innerText : '';
+  const metaDesc = (document.querySelector('#f-meta-description') || {}).value || '';
+  const coverImg = document.querySelector('#cover-preview img');
+  const slug = (document.querySelector('#f-slug') || {}).value || '';
+  const items = [];
+  items.push((title.length > 0 ? '✅' : '❌') + ' শিরোনাম (' + title.length + ' অক্ষর)');
+  items.push((bodyText.length > 100 ? '✅' : '❌') + ' মূল লেখা (' + bodyText.length + ' অক্ষর)');
+  items.push((metaDesc.length > 0 ? '✅' : '❌') + ' Meta Description (' + metaDesc.length + '/১৫৫)');
+  items.push((slug.length > 0 ? '✅' : '❌') + ' URL Slug');
+  items.push((coverImg ? '✅' : '❌') + ' প্রচ্ছদ ছবি');
+  const hasAlt = body && body.querySelector('img[alt]:not([alt=""])');
+  items.push((hasAlt ? '✅' : '❌') + ' ছবির Alt Text');
+  const el = document.getElementById('seo-check-items');
+  if (el) el.innerHTML = items.map(i => '<div style="margin:2px 0;">' + i + '</div>').join('');
+}
+
+
+// ====== Most Read Posts ======
+async function loadMostRead() {
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data, error } = await sb.rpc('get_most_read_posts', { limit_count: 10 });
+    if (error) throw error;
+    if (!data || data.length === 0) return;
+    const container = document.getElementById('most-read-list');
+    if (!container) return;
+    container.innerHTML = data.map((p, i) => 
+      '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">' +
+      '<span><strong>' + (i+1) + '.</strong> ' + (p.title || '(শিরোনামহীন)') + ' <span style="font-size:11px;color:var(--muted-fg);">' + (p.language === 'en' ? 'EN' : 'বাংলা') + '</span></span>' +
+      '<span style="color:var(--teal-deep);font-weight:600;">' + (p.view_count || 0) + ' পাঠ</span></div>'
+    ).join('');
+  } catch(e) { console.warn('Most Read load failed:', e); }
+}
+
 </script>
 
   <!-- Lucide icons -->
@@ -916,7 +1025,20 @@ async function showRevisionHistory(postId) {
         { name: 'আমার বই', nameEn: 'My Books' },
         { name: 'পিডিএফ বই', nameEn: 'PDF Books' },
       ]},
-    ];
+    { bn: 'ভ্রমণকাহিনি', en: 'Travel Writing', slug: 'bhromonkahini', icon: '🧭',
+      subs: [
+        { slug: 'pothe-prantore', bn: 'পথে-প্রান্তরে', en: 'Paths & Horizons' },
+        { slug: 'sudurer-potthe', bn: 'সুদূরের পথে', en: 'Distant Roads' }
+      ]
+    },
+    { bn: 'চন্দ্রদ্বীপ', en: 'Chandradwip', slug: 'chandradwip', icon: '❀',
+      subs: [
+        { slug: 'chandradwip-writing', bn: 'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা', en: 'Writing Experience' },
+        { slug: 'chandradwip-characters', bn: 'চরিত্রের কথা', en: 'Characters' },
+        { slug: 'chandradwip-settlement', bn: 'জনপদের কথা', en: 'The Settlement' }
+      ]
+    }
+];
 
     function findCategoryByName(name) {
       const cats = state.categories && state.categories.length ? state.categories : CATEGORIES;
@@ -1062,7 +1184,7 @@ async function showRevisionHistory(postId) {
       state.user = data.session.user;
       state.userEmail = data.session.user.email;
       // Verify admin
-      const { data: adminRec } = await supabase.from('admin_users').select('user_id').eq('user_id', state.user.id).maybeSingle();
+      const { data: adminRec } = await supabase.from('admin_users').select('user_id,role').eq('user_id', state.user.id).maybeSingle();
       if (!adminRec) {
         toast('অ্যাক্সেস নেই', 'এই অ্যাকাউন্ট লেখক ড্যাশবোর্ড ব্যবহার করতে পারবে না। প্রথমে admin_users টেবিলে যোগ করুন।', 'error', 6000);
         await supabase.auth.signOut();
@@ -1136,7 +1258,8 @@ async function showRevisionHistory(postId) {
       let query = supabase.from('posts')
         .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, featured, updated_at, tags', { count: 'exact' })
         .order('updated_at', { ascending: false });
-      if (state.filter.status === 'draft') query = query.eq('published', false);
+      if (state.filter.status === 'scheduled') query = query.not('scheduled_at', 'is', null).eq('published', false);
+      else if (state.filter.status === 'draft') query = query.eq('published', false);
       else if (state.filter.status === 'published') query = query.eq('published', true);
       if (state.filter.search) {
         query = query.ilike('title', `%${state.filter.search}%`);
@@ -1764,6 +1887,11 @@ async function showRevisionHistory(postId) {
         });
         fi.click();
       }));
+      toolbar.append(tbBtn('Media Library', ic('<path d="M4 4h16v12H4z"/><path d="M2 20h20"/><circle cx="8" cy="9" r="1.5"/><path d="M12 6l3 4 2-2 3 4"/>'), () => {
+        openMediaLibrary(function(url, name) {
+          document.execCommand('insertImage', false, url);
+        });
+      }));
       toolbar.append(tbBtn('PDF আপলোড', ic('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/>'), () => {
         const input = document.createElement('input');
         input.type = 'file';
@@ -2277,6 +2405,9 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
     // ============================================================
     async function renderEditorView(mount) {
       const formData = {
+    scheduled_at: getScheduledAt(),
+    meta_description: (document.getElementById('f-meta-description') || {}).value || null,
+    canonical_url: (document.getElementById('f-canonical-url') || {}).value || null,
         group_id: null, bn_id: null, en_id: null,
         title: '', slug: '', excerpt: '', body: '',
         title_en: '', slug_en: '', excerpt_en: '', body_en: '',
@@ -2477,6 +2608,17 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       tagsTab.append(catCard, tagsCard);
 
       // ===== SEO SETTINGS TAB CONTENT =====
+      // Scheduled publishing input
+      var scheduleRow = el('div', { style: { padding: '12px 16px', borderTop: '1px solid var(--border)', marginBottom: '0', background: 'var(--muted)' } }, [
+        el('label', { style: { fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' } }, 'নির্ধারিত প্রকাশ (Scheduled Publishing)'),
+        el('div', { style: { display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' } }, [
+          (() => { const inp = el('input', { type: 'datetime-local', id: 'scheduled-at', style: { padding: '6px 10px', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '13px', flex: '1', minWidth: '200px' } }); return inp; })(),
+          (() => { const btn = el('button', { type: 'button', style: { fontSize: '12px', padding: '6px 12px', background: 'transparent', border: '1px solid var(--border)', borderRadius: '4px', cursor: 'pointer' } }, 'বাতিল'); btn.addEventListener('click', () => { const inp = document.getElementById('scheduled-at'); if (inp) inp.value = ''; const st = document.getElementById('schedule-status'); if (st) st.textContent = ''; }); return btn; })(),
+          el('span', { id: 'schedule-status', style: { fontSize: '11px', color: 'var(--muted-fg)', fontStyle: 'italic' } })
+        ]),
+        el('p', { style: { fontSize: '11px', color: 'var(--muted-fg)', margin: '6px 0 0' } }, 'নির্ধারিত সময়ে লেখা স্বয়ংক্রিয়ভাবে প্রকাশিত হবে। Edge Function ডিপ্লয় করা প্রয়োজন।')
+      ]);
+      
       const seoTab = el('div', { class: activeTopTab === 'seo' ? '' : 'hidden' });
       const seoCard = el('div', { class: 'card' });
       seoCard.innerHTML = `
@@ -2680,7 +2822,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           formData.subcategory = w.subcategory || '';
           formData.tags = w.tags || [];
           formData.featured = w.featured || false;
-          formData.status = w.published ? 'published' : 'draft';
+          formData.status = w.published ? 'published' : (w.scheduled_at ? 'scheduled' : 'draft')
+        if (w.scheduled_at) { const sa = document.getElementById('scheduled-at'); if (sa) { const d = new Date(w.scheduled_at); sa.value = d.toISOString().slice(0,16); } } ? 'published' : 'draft';
           formData.published_at = w.published_at || null;
           formData.cover_image = w.cover_image || null;
           // Populate UI
@@ -2817,6 +2960,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         el('select', { class: 'select', id: 'status-filter', style: { width: 'auto' } },
           el('option', { value: 'all' }, 'সব'),
           el('option', { value: 'draft' }, 'খসড়া'),
+          el('option', { value: 'scheduled' }, 'নির্ধারিত'),
           el('option', { value: 'published' }, 'প্রকাশিত')
         )
       );
@@ -2880,7 +3024,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
                 try { await toggleWritingStatus(w); await loadWritings(); renderListItems(); toast('স্ট্যাটাস পরিবর্তিত'); }
                 catch (e) { toast('ত্রুটি', e.message, 'error'); }
               }
-            }, w.published ? 'প্রকাশিত' : 'খসড়া'),
+            }, w.row.scheduled_at && !row.published ? 'নির্ধারিত' : (published ? 'প্রকাশিত' : 'খসড়া')),
             w.language === 'en' && el('span', { class: 'badge' }, 'EN')
           ),
           w.tags && w.tags.length > 0 && el('p', { class: 'text-xs text-muted truncate' },
@@ -2971,7 +3115,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
 
         // Recent
         const recentCard = el('div', { class: 'card' },
-          el('h3', { class: 'card-h' }, 'সাম্প্রতিক লেখা')
+          el('h3', { class: 'card-h' }, 'সর্বাধিক পঠিত' + '</h3><div id="most-read-list" style="margin-bottom:20px;"></div>' + 'সাম্প্রতিক লেখা')
         );
         if (stats.recent.length === 0) {
           recentCard.appendChild(el('p', { class: 'text-sm text-muted' }, 'এখনো কোনো লেখা নেই'));

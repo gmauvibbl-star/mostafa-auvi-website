@@ -137,3 +137,11 @@ create index if not exists idx_post_revisions_post_id on public.post_revisions(p
 create index if not exists idx_post_revisions_saved_at on public.post_revisions(saved_at desc);
 
 create index if not exists idx_posts_scheduled_at on public.posts(scheduled_at) where scheduled_at is not null;
+
+-- ============================================================
+-- Dashboard Enhancement Phase 2: RBAC + SEO + Most Read
+-- ============================================================
+alter table public.admin_users add column if not exists role text default 'author';
+alter table public.posts add column if not exists meta_description text;
+alter table public.posts add column if not exists canonical_url text;
+create index if not exists idx_admin_users_role on public.admin_users(role) where role is not null;
