@@ -142,13 +142,7 @@ async function showRevisionHistory(postId) {
   });
 })();
 
-function getScheduledAt() {
-  const el = document.getElementById('scheduled-at');
-  if (!el || !el.value) return null;
-  const dt = new Date(el.value);
-  if (isNaN(dt.getTime())) return null;
-  return dt.toISOString();
-}
+
 
 
 // ====== Media Library ======
@@ -231,6 +225,7 @@ async function loadMostRead() {
   } catch(e) { console.warn('Most Read load failed:', e); }
 }
 
+setInterval(updateSEOChecklist, 3000);
 </script>
 
   <!-- Lucide icons -->
@@ -1025,17 +1020,17 @@ async function loadMostRead() {
         { name: 'আমার বই', nameEn: 'My Books' },
         { name: 'পিডিএফ বই', nameEn: 'PDF Books' },
       ]},
-    { bn: 'ভ্রমণকাহিনি', en: 'Travel Writing', slug: 'bhromonkahini', icon: '🧭',
+    { name: 'ভ্রমণকাহিনি', nameEn: 'Travel Writing', slug: 'bhromonkahini', icon: '🧭',
       subs: [
-        { slug: 'pothe-prantore', bn: 'পথে-প্রান্তরে', en: 'Paths & Horizons' },
-        { slug: 'sudurer-potthe', bn: 'সুদূরের পথে', en: 'Distant Roads' }
+        { name: 'পথে-প্রান্তরে', nameEn: 'Paths & Horizons', slug: 'pothe-prantore' },
+        { name: 'সুদূরের পথে', nameEn: 'Distant Roads', slug: 'sudurer-potthe' }
       ]
     },
-    { bn: 'চন্দ্রদ্বীপ', en: 'Chandradwip', slug: 'chandradwip', icon: '❀',
+    { name: 'চন্দ্রদ্বীপ', nameEn: 'Chandradwip', slug: 'chandradwip', icon: '❀',
       subs: [
-        { slug: 'chandradwip-writing', bn: 'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা', en: 'Writing Experience' },
-        { slug: 'chandradwip-characters', bn: 'চরিত্রের কথা', en: 'Characters' },
-        { slug: 'chandradwip-settlement', bn: 'জনপদের কথা', en: 'The Settlement' }
+        { name: 'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা', nameEn: 'Writing Experience', slug: 'chandradwip-writing' },
+        { name: 'চরিত্রের কথা', nameEn: 'Characters', slug: 'chandradwip-characters' },
+        { name: 'জনপদের কথা', nameEn: 'The Settlement', slug: 'chandradwip-settlement' }
       ]
     }
 ];
@@ -1300,7 +1295,9 @@ async function loadMostRead() {
             excerpt_en: main.excerpt || '', body_en: main.body || '',
             category: main.category || '', parent_category: main.parent_category || main.category || '',
             subcategory: main.subcategory || '', category_id: main.category_id || null,
-            subcategory_id: main.subcategory_id || null, cover_image: main.cover_image || null,
+            subcategory_id: main.subcategory_id || null, meta_description: formData.meta_description || null,
+        canonical_url: formData.canonical_url || null,
+        cover_image: main.cover_image || null,
             tags: main.tags || [], featured: !!main.featured, published: !!main.published,
             published_at: main.published_at || null, hasEnglish: true,
           };
@@ -1518,7 +1515,8 @@ async function loadMostRead() {
     // ============================================================
     // STATS
     // ============================================================
-    async function loadStats() {
+    async function loadStats();
+    loadMostRead() {
       const { count: totalBn } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
         .eq('language', 'bn');
@@ -2823,7 +2821,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           formData.tags = w.tags || [];
           formData.featured = w.featured || false;
           formData.status = w.published ? 'published' : (w.scheduled_at ? 'scheduled' : 'draft')
-        if (w.scheduled_at) { const sa = document.getElementById('scheduled-at'); if (sa) { const d = new Date(w.scheduled_at); sa.value = d.toISOString().slice(0,16); } } ? 'published' : 'draft';
+        if (w.scheduled_at) { const sa = document.getElementById('scheduled-at'); if (sa) { const d = new Date(w.scheduled_at); sa.value = d.toISOString().slice(0,16); } }
           formData.published_at = w.published_at || null;
           formData.cover_image = w.cover_image || null;
           // Populate UI
