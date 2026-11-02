@@ -843,3 +843,203 @@
   font-weight: 800;
   padding: 4px 0 0 0;
 }
+
+/* ====== USER DESIGN — .lower-grid two-column (চন্দ্রদ্বীপ + জার্নাল) ====== */
+.lower-grid {
+  background: var(--paper);
+  padding: 40px 50px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+/* --- Left: Novel card (চন্দ্রদ্বীপ) --- */
+.novel-card {
+  background: #0F3D3E;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.novel-title {
+  padding: 18px 24px 14px;
+  text-align: center;
+}
+.novel-title .by {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  color: var(--gold-bright);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.novel-title h3 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+.novel-title .sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold-bright);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.novel-body {
+  background: #FFFFFF;
+  padding: 18px 22px 22px;
+}
+.novel-body p {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  text-align: justify;
+  margin: 0 0 10px;
+}
+.novel-body .closing {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--maroon-deep);
+  border-top: 1px solid var(--paper-dark);
+  padding-top: 10px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+/* --- Right: Journal --- */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--paper-dark);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--teal-deep);
+  margin: 0;
+}
+.section-title small {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 500;
+  margin-left: 8px;
+}
+.section-no {
+  margin-left: auto;
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+}
+.journal {
+  background: var(--cream);
+  border: 1px solid var(--paper-dark);
+  border-radius: 6px;
+  padding: 24px 26px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.journal::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--teal-deep), var(--gold), var(--teal-deep));
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--paper-dark);
+}
+.date-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--blood);
+  line-height: 1;
+}
+.date-big small {
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--teal-deep);
+  letter-spacing: 0.06em;
+  margin-left: 4px;
+}
+.pill {
+  font-family: 'EB Garamond', serif;
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: 1px solid var(--paper-dark);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.journal h4 {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--teal-deep);
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+.journal p {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  text-align: justify;
+  margin: 0 0 12px;
+}
+.journal .lead {
+  color: var(--ink);
+}
+.journal-foot {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--paper-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.read-more {
+  color: var(--teal-deep);
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color var(--t-fast);
+}
+.read-more:hover {
+  color: var(--blood);
+}
+.journal-foot span {
+  font-family: 'EB Garamond', serif;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+@media (max-width: 900px) {
+  .lower-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 30px 16px 20px;
+  }
+}
