@@ -1556,6 +1556,15 @@
     .share a { width: 28px; height: 28px; }
     .brand .name { font-size: 28px; }
   }
+  .chandradwip-cover { margin:0 auto 24px; max-width:760px; border:8px solid var(--paper-warm); box-shadow:0 8px 24px rgba(0,0,0,.2); }
+  .chandradwip-cover img { display:block; width:100%; height:auto; aspect-ratio:1200/670; object-fit:cover; }
+  .chandradwip-description { padding:4px 24px 28px; color:var(--ink-soft); font-family:'EB Garamond','Noto Serif Bengali',serif; font-size:17px; line-height:1.85; }
+  .chandradwip-description p { margin:0 0 16px; }
+  .chandradwip-description h3 { margin:28px 0 8px; color:var(--teal-deep); font-family:'Playfair Display',serif; font-size:22px; }
+  .chandradwip-description h4 { margin:8px 0 12px; color:var(--blood); font-family:'Playfair Display',serif; font-size:18px; }
+  .chandradwip-description a { color:var(--blood); text-decoration:underline; text-underline-offset:3px; }
+  @media (max-width:640px) { .chandradwip-description { padding:4px 14px 22px; font-size:16px; } }
+
 </style>
 </head>
 <body>
@@ -1684,302 +1693,24 @@
         <div class="b-sub">— A Novel —</div>
       </div>
 
-      <!-- Book cover illustration — vibrant vertical cover -->
-      <div class="book-illust">
-        <svg viewBox="0 0 400 540" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <!-- ===== Cover scene gradients ===== -->
-            <linearGradient id="skyG3" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#2a3a5a"/>
-              <stop offset="40%" stop-color="#6a4a5a"/>
-              <stop offset="70%" stop-color="#d4885a"/>
-              <stop offset="100%" stop-color="#f5c878"/>
-            </linearGradient>
-            <linearGradient id="waterG3" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#3a5060"/>
-              <stop offset="100%" stop-color="#0a2030"/>
-            </linearGradient>
-            <linearGradient id="forestG3" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#0a2818"/>
-              <stop offset="100%" stop-color="#1a4828"/>
-            </linearGradient>
-            <radialGradient id="moonHalo3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#fff8d8" stop-opacity="0.95"/>
-              <stop offset="40%" stop-color="#f5e0a0" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="#f5e0a0" stop-opacity="0"/>
-            </radialGradient>
-
-            <!-- ===== Book materials ===== -->
-            <!-- Cover (front) — deep teal cloth binding -->
-            <linearGradient id="coverFrontG" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0a2a2c"/>
-              <stop offset="50%" stop-color="#103b3d"/>
-              <stop offset="100%" stop-color="#082022"/>
-            </linearGradient>
-            <!-- Spine (left side, slightly darker) -->
-            <linearGradient id="spineG3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#06181a"/>
-              <stop offset="50%" stop-color="#0a2a2c"/>
-              <stop offset="100%" stop-color="#082224"/>
-            </linearGradient>
-            <!-- Page edges (cream/aged paper) -->
-            <linearGradient id="pagesG3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#e8d8a8"/>
-              <stop offset="50%" stop-color="#f0e0b8"/>
-              <stop offset="100%" stop-color="#d8c898"/>
-            </linearGradient>
-            <!-- Top edge of pages -->
-            <linearGradient id="pagesTopG" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f0e0b8"/>
-              <stop offset="100%" stop-color="#c8b888"/>
-            </linearGradient>
-            <!-- Gold foil for title -->
-            <linearGradient id="goldFoil3" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#e8c878"/>
-              <stop offset="50%" stop-color="#d4a848"/>
-              <stop offset="100%" stop-color="#8a6818"/>
-            </linearGradient>
-            <!-- Bookmark ribbon -->
-            <linearGradient id="ribbonG3" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#a52020"/>
-              <stop offset="100%" stop-color="#6a1010"/>
-            </linearGradient>
-            <!-- Shadow under book -->
-            <radialGradient id="bookShadow3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#000" stop-opacity="0.55"/>
-              <stop offset="70%" stop-color="#000" stop-opacity="0.15"/>
-              <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="bookDropS" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
-              <feOffset dx="6" dy="10"/>
-              <feComponentTransfer><feFuncA type="linear" slope="0.7"/></feComponentTransfer>
-              <feMerge>
-                <feMergeNode/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          <!-- ====== SHADOW UNDER BOOK (on surface) ====== -->
-          <ellipse cx="200" cy="500" rx="160" ry="14" fill="url(#bookShadow3)"/>
-
-          <!-- ====== THE 3D BOOK ====== -->
-          <g filter="url(#bookDropS)">
-
-            <!-- ====== SPINE (left side, vertical) ====== -->
-            <!-- Spine front face -->
-            <path d="M 70 80 L 90 75 L 90 470 L 70 475 Z" fill="url(#spineG3)" stroke="#06181a" stroke-width="0.8"/>
-            <!-- Spine gold bands (top and bottom) -->
-            <path d="M 71 110 L 90 105 L 90 118 L 71 123 Z" fill="url(#goldFoil3)" opacity="0.8"/>
-            <path d="M 71 430 L 90 425 L 90 438 L 71 443 Z" fill="url(#goldFoil3)" opacity="0.8"/>
-            <!-- Spine title (vertical Bengali) -->
-            <text x="80" y="280" text-anchor="middle"
-                  font-family="'Noto Serif Bengali', serif"
-                  font-size="14" font-weight="800"
-                  fill="#e8c878"
-                  letter-spacing="2"
-                  transform="rotate(-90 80 280)">চন্দ্রদ্বীপ</text>
-            <!-- Spine author -->
-            <text x="80" y="380" text-anchor="middle"
-                  font-family="'Playfair Display', serif"
-                  font-size="6" font-weight="700"
-                  fill="#b89248"
-                  letter-spacing="3"
-                  transform="rotate(-90 80 380)">MOSTAFA  AUVI</text>
-
-            <!-- ====== PAGE BLOCK (right side, thickness) ====== -->
-            <!-- Pages right edge -->
-            <path d="M 330 75 L 350 80 L 350 475 L 330 470 Z" fill="url(#pagesG3)" stroke="#9a8858" stroke-width="0.5"/>
-            <!-- Page lines (horizontal striations for stacked pages) -->
-            <g stroke="#a89878" stroke-width="0.3" opacity="0.65">
-              <line x1="332" y1="100" x2="349" y2="105"/>
-              <line x1="332" y1="120" x2="349" y2="125"/>
-              <line x1="332" y1="140" x2="349" y2="145"/>
-              <line x1="332" y1="160" x2="349" y2="165"/>
-              <line x1="332" y1="180" x2="349" y2="185"/>
-              <line x1="332" y1="200" x2="349" y2="205"/>
-              <line x1="332" y1="220" x2="349" y2="225"/>
-              <line x1="332" y1="240" x2="349" y2="245"/>
-              <line x1="332" y1="260" x2="349" y2="265"/>
-              <line x1="332" y1="280" x2="349" y2="285"/>
-              <line x1="332" y1="300" x2="349" y2="305"/>
-              <line x1="332" y1="320" x2="349" y2="325"/>
-              <line x1="332" y1="340" x2="349" y2="345"/>
-              <line x1="332" y1="360" x2="349" y2="365"/>
-              <line x1="332" y1="380" x2="349" y2="385"/>
-              <line x1="332" y1="400" x2="349" y2="405"/>
-              <line x1="332" y1="420" x2="349" y2="425"/>
-              <line x1="332" y1="440" x2="349" y2="445"/>
-              <line x1="332" y1="460" x2="349" y2="465"/>
-            </g>
-
-            <!-- ====== TOP EDGE OF PAGES (visible thickness) ====== -->
-            <path d="M 90 75 L 330 75 L 350 80 L 110 80 Z" fill="url(#pagesTopG)" stroke="#9a8858" stroke-width="0.4" opacity="0.95"/>
-            <!-- Top page lines -->
-            <g stroke="#a89878" stroke-width="0.3" opacity="0.6">
-              <line x1="100" y1="76" x2="345" y2="76"/>
-              <line x1="105" y1="77.5" x2="348" y2="77.5"/>
-              <line x1="100" y1="79" x2="345" y2="79"/>
-            </g>
-
-            <!-- ====== FRONT COVER (main face) ====== -->
-            <path d="M 90 80 L 330 80 L 330 470 L 90 470 Z" fill="url(#coverFrontG)" stroke="#06181a" stroke-width="1"/>
-
-            <!-- Cover gold inner border (decorative frame) -->
-            <rect x="100" y="90" width="220" height="370" fill="none" stroke="url(#goldFoil3)" stroke-width="1.2" opacity="0.85"/>
-            <rect x="104" y="94" width="212" height="362" fill="none" stroke="#b89248" stroke-width="0.4" opacity="0.5"/>
-
-            <!-- ====== COVER ART PANEL (scene inside frame) ====== -->
-            <!-- Sky -->
-            <rect x="110" y="105" width="200" height="110" fill="url(#skyG3)"/>
-            <!-- Stars -->
-            <g fill="#fff8d8" opacity="0.85">
-              <circle cx="135" cy="125" r="0.8"/>
-              <circle cx="170" cy="118" r="1"/>
-              <circle cx="200" cy="130" r="0.8"/>
-              <circle cx="240" cy="120" r="0.9"/>
-              <circle cx="280" cy="128" r="0.8"/>
-              <circle cx="155" cy="150" r="0.7"/>
-              <circle cx="225" cy="148" r="0.8"/>
-            </g>
-            <!-- Moon halo + moon -->
-            <circle cx="275" cy="138" r="28" fill="url(#moonHalo3)"/>
-            <circle cx="275" cy="138" r="11" fill="#fff8d8" opacity="0.97"/>
-            <circle cx="271" cy="134" r="1.6" fill="#d8c098" opacity="0.4"/>
-            <!-- Birds -->
-            <g fill="none" stroke="#1a2a3a" stroke-width="0.7" opacity="0.7">
-              <path d="M 155 145 Q 158 142 161 145 Q 164 142 167 145"/>
-              <path d="M 215 158 Q 218 155 221 158 Q 224 155 227 158"/>
-            </g>
-            <!-- Forest treeline back -->
-            <path d="M 110 195 L 130 175 L 145 188 L 165 168 L 185 190 L 205 172 L 225 192 L 250 175 L 275 192 L 300 175 L 310 188 L 310 215 L 110 215 Z"
-                  fill="url(#forestG3)" opacity="0.85"/>
-            <!-- Forest front layer -->
-            <path d="M 110 215 L 125 175 L 138 200 L 152 170 L 170 200 L 188 175 L 205 200 L 225 172 L 245 200 L 265 175 L 285 200 L 305 175 L 310 195 L 310 215 L 110 215 Z"
-                  fill="#0a2818"/>
-            <!-- Water -->
-            <rect x="110" y="215" width="200" height="70" fill="url(#waterG3)"/>
-            <!-- Moon reflection -->
-            <ellipse cx="275" cy="225" rx="10" ry="1.6" fill="#fff8d8" opacity="0.5"/>
-            <ellipse cx="275" cy="238" rx="7" ry="1.2" fill="#fff8d8" opacity="0.32"/>
-            <ellipse cx="275" cy="252" rx="4.5" ry="0.9" fill="#fff8d8" opacity="0.22"/>
-            <!-- Water ripples -->
-            <g stroke="#a0b8c8" stroke-width="0.4" fill="none" opacity="0.5">
-              <path d="M 120 232 Q 145 230 170 232 Q 195 234 220 232"/>
-              <path d="M 150 248 Q 175 246 200 248 Q 225 250 250 248"/>
-              <path d="M 120 265 Q 150 263 180 265 Q 210 267 240 265"/>
-            </g>
-            <!-- Boat with fisherman -->
-            <g transform="translate(155 230)">
-              <path d="M 0 7 Q 4 0 18 0 L 55 0 Q 70 0 74 7 L 71 12 Q 67 16 58 16 L 16 16 Q 6 16 3 12 Z"
-                    fill="#3a2410" stroke="#1a1008" stroke-width="0.4"/>
-              <path d="M 6 7 Q 9 4 18 4 L 55 4 Q 65 4 68 7 L 66 10 Q 63 12 58 12 L 18 12 Q 10 12 8 10 Z"
-                    fill="#6a4220" opacity="0.7"/>
-              <g fill="#0a0805">
-                <ellipse cx="38" cy="-2" rx="2" ry="3"/>
-                <circle cx="38" cy="-7" r="1.5"/>
-                <line x1="38" y1="-4" x2="46" y2="2" stroke="#0a0805" stroke-width="1" stroke-linecap="round"/>
-                <line x1="46" y1="2" x2="52" y2="13" stroke="#3a2410" stroke-width="1"/>
-              </g>
-            </g>
-            <!-- Foreground bank -->
-            <rect x="110" y="285" width="200" height="22" fill="#1a1208"/>
-            <rect x="110" y="285" width="200" height="6" fill="#3a2814" opacity="0.7"/>
-            <!-- Reeds -->
-            <g stroke="#1a3018" stroke-width="0.6" fill="none" opacity="0.85">
-              <line x1="120" y1="285" x2="119" y2="278"/>
-              <line x1="128" y1="285" x2="127" y2="276"/>
-              <line x1="148" y1="285" x2="147" y2="278"/>
-              <line x1="180" y1="285" x2="179" y2="277"/>
-              <line x1="220" y1="285" x2="219" y2="278"/>
-              <line x1="260" y1="285" x2="259" y2="276"/>
-              <line x1="290" y1="285" x2="289" y2="278"/>
-            </g>
-            <!-- Thatched hut (small, on bank) -->
-            <g transform="translate(225 260)">
-              <ellipse cx="22" cy="25" rx="26" ry="2" fill="#000" opacity="0.5"/>
-              <rect x="3" y="16" width="1.5" height="9" fill="#2a1810"/>
-              <rect x="40" y="16" width="1.5" height="9" fill="#2a1810"/>
-              <path d="M -2 18 Q 22 4 46 18 L 42 20 Q 22 9 2 20 Z" fill="#4a3018" stroke="#1a1008" stroke-width="0.3"/>
-              <rect x="4" y="18" width="38" height="9" fill="#5a3018" stroke="#1a1008" stroke-width="0.3"/>
-              <g stroke="#2a1810" stroke-width="0.25" opacity="0.6">
-                <line x1="4" y1="22" x2="42" y2="22"/>
-                <line x1="14" y1="18" x2="14" y2="27"/>
-                <line x1="24" y1="18" x2="24" y2="27"/>
-                <line x1="34" y1="18" x2="34" y2="27"/>
-              </g>
-              <rect x="20" y="22" width="7" height="5" fill="#0a0805"/>
-              <rect x="32" y="22" width="4" height="3" fill="#d4885a" opacity="0.85"/>
-              <path d="M 35 14 Q 37 8 35 2" stroke="#9a9a9a" stroke-width="0.7" fill="none" opacity="0.55"/>
-            </g>
-            <!-- People silhouettes -->
-            <g transform="translate(195 277)" fill="#0a0805">
-              <circle cx="0" cy="0" r="1.5"/>
-              <path d="M -2 1.5 L 2 1.5 L 2.5 8 L -2.5 8 Z"/>
-              <rect x="-2" y="8" width="1.5" height="4"/>
-              <rect x="0.5" y="8" width="1.5" height="4"/>
-            </g>
-            <g transform="translate(135 282)" fill="#0a0805">
-              <circle cx="0" cy="0" r="1.3"/>
-              <path d="M -2 1.5 L 2 1.5 L 2.5 6 L -2.5 6 Z"/>
-              <path d="M -2.5 6 L -4 8 L -2 8 Z"/>
-              <path d="M 2.5 6 L 4 8 L 2 8 Z"/>
-            </g>
-            <g transform="translate(165 283)" fill="#0a0805">
-              <circle cx="0" cy="0" r="1"/>
-              <path d="M -1.5 1 L 1.5 1 L 2 4.5 L -2 4.5 Z"/>
-              <rect x="-1.5" y="4.5" width="1.2" height="3"/>
-              <rect x="0.3" y="4.5" width="1.2" height="3"/>
-            </g>
-
-            <!-- ====== COVER TITLE BLOCK (bottom of cover) ====== -->
-            <rect x="110" y="315" width="200" height="135" fill="#0a1f24" opacity="0.92"/>
-            <line x1="125" y1="328" x2="295" y2="328" stroke="url(#goldFoil3)" stroke-width="0.5" opacity="0.7"/>
-            <line x1="125" y1="438" x2="295" y2="438" stroke="url(#goldFoil3)" stroke-width="0.5" opacity="0.7"/>
-
-            <!-- A NOVEL ornament -->
-            <text x="210" y="345" text-anchor="middle"
-                  font-family="'Playfair Display', serif"
-                  font-size="7" font-weight="600"
-                  fill="#b89248"
-                  letter-spacing="4"
-                  opacity="0.9">&#10022;  A  NOVEL  &#10022;</text>
-
-            <!-- Bengali title (gold foil) -->
-            <text x="210" y="385" text-anchor="middle"
-                  font-family="'Noto Serif Bengali', serif"
-                  font-size="26" font-weight="800"
-                  fill="url(#goldFoil3)"
-                  letter-spacing="1.5">চন্দ্রদ্বীপ</text>
-
-            <!-- English transliteration -->
-            <text x="210" y="403" text-anchor="middle"
-                  font-family="'Playfair Display', serif"
-                  font-style="italic"
-                  font-size="8"
-                  fill="#b89248"
-                  letter-spacing="3.5"
-                  opacity="0.9">CHANDRADWIP</text>
-
-            <!-- Author -->
-            <text x="210" y="425" text-anchor="middle"
-                  font-family="'Playfair Display', serif"
-                  font-size="9" font-weight="800"
-                  fill="#e8c878"
-                  letter-spacing="4">MOSTAFA  AUVI</text>
-
-            <!-- ====== BOOKMARK RIBBON (hanging from top) ====== -->
-            <path d="M 220 75 L 220 165 L 226 158 L 232 165 L 232 75 Z" fill="url(#ribbonG3)"/>
-            <path d="M 220 75 L 232 75 L 232 82 L 220 82 Z" fill="#5a0e0e"/>
-
-          </g>
-
-          <!-- Subtle highlight on top edge of cover (lighting from above) -->
-          <path d="M 90 80 L 330 80 L 330 84 L 90 84 Z" fill="#ffffff" opacity="0.08"/>
-        </svg>
+      <!-- Chandradwip landscape image -->
+      <figure class="chandradwip-cover">
+        <img src="chandradwip-landscape.webp" alt="The riverine landscape of southern Bengal, the setting of Chandradwip" loading="lazy">
+      </figure>
+      <div class="chandradwip-description">
+        <p><em>Chandradwip</em> is a historical novel rooted in the riverine landscape of southern Bengal, where the lives of ordinary people unfold against a changing world of land, power, memory and resistance. Centred on Bighai village, the story moves through the waterways, forests and settlements of the old Bakerganj region, tracing the arrival of a timber company, the growth of its sawmill, the migration of labourers and the changing relationship between people and the land they inhabit.</p>
+        <p>Set within the historical boundaries of 1850 to 14 August 1947, the novel explores the struggles of rural communities under the weight of exploitation, debt, dispossession and colonial-era power. Through the lives and memories of its people, <em>Chandradwip</em> seeks to recover a vanished world of southern Bengal — its rivers, mud, forests, livelihoods and forgotten histories.</p>
+        <p><em>The novel is currently in progress. Updates and excerpts will be shared in the Literary Journal as the manuscript nears completion.</em></p>
+        <h3>Historical Setting</h3><h4>South Bengal, 1850 – 14 August 1947</h4>
+        <p>Centred on Bighai village in the old Bakerganj region, the novel follows the lives of ordinary people through the waterways, forests and settlements of southern Bengal, tracing the arrival of a timber company, the growth of its sawmill, the migration of labourers and the changing relationship between people and the land they live on.</p>
+        <p>Across the period it explores the struggles of rural communities under the weight of exploitation, debt, dispossession and colonial-era power — and through its people and their memories it seeks to recover a vanished world of rivers, mud, forests and forgotten histories.</p>
+        <h3>Publication Status</h3><p><strong>Work in progress</strong></p>
+        <p>The manuscript is being written as a historical narrative. As chapters and excerpts are ready, they are shared here and in the Literary Journal.</p>
+        <p><a href="journal.html">Chapters &amp; Excerpts</a></p>
+        <h3>Characters</h3><h4>The people of Chandradwip</h4>
+        <p>Portraits of the people whose lives carry the novel — drawn from the world of the rivers, forests and settlements of southern Bengal.</p>
+        <p>Character profiles will appear here as the author adds them for the novel.</p>
       </div>
-
       <!-- Bottom CTA -->
       <div class="bottom-cta">
         <div class="author-line"><span class="by">by</span>Mostafa Auvi</div>
