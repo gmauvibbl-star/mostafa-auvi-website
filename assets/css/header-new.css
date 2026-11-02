@@ -1,51 +1,67 @@
 
-  :root {
-    --bg: #fbf8ef;
-    --olive: #5a6b2a;
-    --olive-dark: #3e4c1c;
-    --brown: #8a6a34;
-    --ink: #2d3a16;
-    --share-bg: #efe6cf;
-    --share-line: #d9cba6;
-    --btn-bg: #7d5d2c;
-    --btn-ink: #fffaf0;
-    --sans: "Hind Siliguri", "Noto Sans Bengali", "Segoe UI", system-ui, sans-serif;
-    --serif: "Tiro Bangla", "Noto Serif Bengali", Georgia, serif;
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #141b12; --olive: #b6c97a; --olive-dark: #d9e5a6; --brown: #c9a866;
-      --ink: #e8eed0; --share-bg: #232b1c; --share-line: #3b4730; --btn-bg: #b08a45;
-      --btn-ink: #1a1408; color-scheme: dark;
-    }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
-  a { color: inherit; }
-  a:focus-visible, button:focus-visible { outline: 3px solid var(--brown); outline-offset: 3px; border-radius: 4px; }
-  .site-header { background: var(--bg); border-bottom: 0; }
-  .top { max-width: 1280px; margin: 0 auto; padding: 14px 28px 8px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo .bn { font-family: var(--serif); font-size: 30px; font-weight: 700; color: var(--olive); line-height: 1; }
-  .logo .bn .lite { font-weight: 400; color: var(--olive); }
-  .logo .sep { width: 1px; height: 22px; background: var(--olive); opacity: .55; }
-  .logo .en { font-size: 15px; letter-spacing: 4px; color: #6a7a52; font-weight: 500; text-transform: uppercase; }
-  .logo .en b { font-weight: 600; color: var(--olive); }
-  .actions { display: flex; align-items: center; gap: 12px; }
-  .share { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 12px; background: var(--share-bg); border: 1px solid var(--share-line); border-radius: 4px; }
-  .share .label { font-size: 12px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; color: #5a6b4a; }
-  .share a { display: inline-grid; place-items: center; width: 22px; height: 22px; color: #6c7a52; }
-  .share a:hover { color: var(--olive-dark); }
-  .share svg { width: 15px; height: 15px; display: block; }
-  .subscribe { display: inline-flex; align-items: center; height: 36px; padding: 0 18px; border-radius: 4px; background: var(--btn-bg); color: var(--btn-ink); font-weight: 700; font-size: 14px; text-decoration: none; font-family: var(--sans); white-space: nowrap; }
-  .subscribe:hover { filter: brightness(1.08); }
-  .nav { max-width: 1280px; margin: 0 auto; padding: 4px 28px 14px; }
-  .nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 18px; overflow-x: auto; scrollbar-width: thin; white-space: nowrap; }
-  .nav a { display: inline-block; padding: 4px 0; font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 2px solid transparent; }
-  .nav a:hover { border-bottom-color: var(--brown); }
-  .nav a.active { font-weight: 700; border-bottom-color: var(--olive); }
-  .strip { height: 12px; background: linear-gradient(90deg, var(--olive-dark) 0%, var(--olive) 35%, var(--brown) 100%); }
-  @media (max-width: 900px) { .top { padding: 12px 18px 6px; } .nav { padding: 2px 18px 12px; } }
-  @media (max-width: 640px) { .logo .en { display: none; } .share .label { display: none; } .actions { width: 100%; justify-content: space-between; } }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+:root{
+  --bg:#ffffff; --page:#f1eee6; --bronze:#8b7239; --green:#4a7c34; --menu:#2b0f08; --rule:#cfcac0; --box:#ece3d0; --ink:#2b0f08;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#17150f;--page:#100e0a;--bronze:#c4a95a;--green:#86b873;--menu:#ecd9cf;--rule:#4a453a;--box:#2a251a;--ink:#ecd9cf}
+}
+:root[data-theme="dark"]{--bg:#17150f;--page:#100e0a;--bronze:#c4a95a;--green:#86b873;--menu:#ecd9cf;--rule:#4a453a;--box:#2a251a;--ink:#ecd9cf}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Anek Bangla','Noto Sans Bengali','Hind Siliguri',sans-serif}
+.page{max-width:1400px;margin:0 auto;padding:20px 16px 50px}
+.label{font-size:15px;margin:26px 0 8px;color:var(--ink)}
+.label b{color:var(--bronze)}
+.label small{opacity:.7;font-size:13px}
+.hero{position:relative;height:210px;background:linear-gradient(115deg,#2c3a2a,#6a5a3c 60%,#8a7a55);overflow:hidden}
+.hero .txt{position:absolute;left:24px;bottom:16px;color:#fff;opacity:.85;font-size:15px}
+
+/* ---- সাধারণ উপাদান ---- */
+.hdr{background:var(--bg);border-bottom:1px solid var(--rule);padding:0 24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap}
+.logo .bar{width:2px;height:.8em;background:var(--rule);display:inline-block}
+.bn,.en{display:inline-flex;align-items:center;gap:10px}
+.bn span{font-family:'Anek Bangla',sans-serif;font-variation-settings:'wdth' 75;font-weight:500;font-size:42px;line-height:1.15}
+.en span{font-family:'Oswald','Anek Bangla',sans-serif;font-weight:400;font-size:17px;letter-spacing:4px;text-transform:uppercase}
+.a{color:var(--bronze)} .b{color:var(--green)}
+.menu{display:flex;gap:0 15px;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.menu::-webkit-scrollbar{display:none}
+.menu a{flex:none;font-family:'Anek Bangla',sans-serif;font-variation-settings:'wdth' 78;font-size:17px;line-height:1.5;color:var(--menu);text-decoration:none}
+.menu a:hover{color:var(--bronze);text-decoration:underline}
+.menu a.j{font-family:'Oswald',sans-serif;font-size:16px;letter-spacing:.5px}
+.tools{display:flex;align-items:center;gap:10px;flex:none}
+.share{background:var(--box);padding:3px 8px;display:flex;align-items:center;gap:8px}
+.share em{font-family:'Oswald',sans-serif;font-style:normal;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--menu)}
+.share a{color:var(--bronze);display:grid;place-items:center;width:22px;height:22px}
+.share a:hover{color:var(--green)}
+.share svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sub{background:var(--bronze);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:6px 14px;white-space:nowrap}
+.sub:hover{background:var(--green)}
+
+/* ---- নমুনা ১: এক সারি (সবচেয়ে কম উচ্চতা) ---- */
+.v1 .hdr{display:flex;align-items:center;gap:26px;padding-top:4px;padding-bottom:4px}
+.v1 .en{display:none}
+.v1 .bn span{font-size:38px}
+.v1 .menu{flex:1;min-width:0;justify-content:center}
+
+/* ---- নমুনা ২: দুই সারি, ছোট লোগো ---- */
+.v2 .hdr{display:grid;grid-template-columns:1fr auto;align-items:center;row-gap:0;padding-top:6px;padding-bottom:6px}
+.v2 .logo{gap:18px}
+.v2 .bn span{font-size:34px}
+.v2 .menu{grid-column:1 / -1}
+
+/* ---- নমুনা ৩: ব্যানারের ওপর ভাসমান, নিজের কোনো উচ্চতা নেই ---- */
+.v3 .hdr{position:absolute;inset:0 0 auto 0;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,0));border:0;
+  display:grid;grid-template-columns:1fr auto;align-items:center;padding-top:6px;
+  --menu:#fff;--bronze:#e2c982;--green:#b4dc9e;--rule:rgba(255,255,255,.5);--box:rgba(255,255,255,.14)}
+.v3 .logo{gap:18px}
+.v3 .bn span{font-size:34px}
+.v3 .menu{grid-column:1 / -1}
+.v3 .sub{background:#e2c982;color:#2b0f08}
+
+@media(max-width:820px){
+  .v1 .hdr{flex-wrap:wrap}
+  .v1 .menu{order:3;flex:1 1 100%;justify-content:flex-start}
+  .tools .share em{display:none}
+}

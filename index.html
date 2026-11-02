@@ -49,7 +49,7 @@
 <!-- Fonts: preconnect + single combined request (optimised) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla:ital@0;1&family=Anek+Bangla:wdth,wght@75..100,100..800&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
 
 <!-- ─── Modifiable stylesheets (load order matters: tokens → base → layout → components → responsive) ─── -->
 <link rel="stylesheet" href="assets/css/tokens.css">
@@ -73,42 +73,37 @@
 
 <div class="page-wrap">
 
-<!-- ====== HEADER (user's exact design — replaces utility-bar + header + nav) ====== -->
-<header class="site-header">
-  <div class="top">
-    <a class="logo" href="index.html" aria-label="মোস্তফা অভি · Mostafa Auvi">
-      <span class="bn">মোস্তফা <span class="lite">অভি</span></span>
-      <span class="sep" aria-hidden="true"></span>
-      <span class="en"><b>Mostafa</b> | Auvi</span>
+<!-- ====== HEADER (নমুনা ২ — user's exact design) ====== -->
+<div class="v2">
+<header class="hdr">
+    <a class="logo" href="index.html">
+      <span class="bn"><span class="a">মোস্তফা</span><i class="bar"></i><span class="b">অভি</span></span>
+      <span class="en"><span class="a">Mostafa</span><i class="bar"></i><span class="b">Auvi</span></span>
     </a>
-    <div class="actions">
-      <div class="share" role="group" aria-label="শেয়ার করুন">
-        <span class="label">Share</span>
-        <a href="#" onclick="return sharePage('facebook')" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.5H8v3.2h2.7v8z"/></svg></a>
-        <a href="#" onclick="return sharePage('twitter')" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.2 2h3.4l-7.4 8.5L23 22h-6.8l-5.3-7-6.1 7H1.4l7.9-9L1 2h7l4.8 6.4L18.2 2zm-1.2 18h1.9L7.1 3.9H5.1L17 20z"/></svg></a>
-        <a href="#" onclick="return sharePage('whatsapp')" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 21l1.3-4.6A9 9 0 1 1 8 19.9L3 21z"/></svg></a>
-        <a href="mailto:gmauvibbl@gmail.com" aria-label="ইমেইল"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+    <div class="tools">
+      <div class="share"><em>Share</em>
+        <a href="#" onclick="return sharePage('facebook')" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h2.5V4.5H14C11.8 4.5 10.5 5.9 10.5 8v2H8v3.5h2.5V20H14v-6.5h2.4l.6-3.5H14V8.6c0-.4.2-.6.6-.6z"/></svg></a>
+        <a href="#" onclick="return sharePage('twitter')" aria-label="X"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></a>
+        <a href="#" onclick="return sharePage('whatsapp')" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4.5 19.5l1.2-4A8 8 0 1 1 9 18.6z"/><path d="M9.5 9c.5 2.5 2.5 4.5 5 5"/></svg></a>
+        <a href="mailto:gmauvibbl@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M4.5 7.5l7.5 6 7.5-6"/></svg></a>
       </div>
-      <a class="subscribe" href="subscribe.html">সাবস্ক্রাইব করুন</a>
+      <a class="sub" href="subscribe.html">সাবস্ক্রাইব করুন</a>
     </div>
-  </div>
-  <nav class="nav" aria-label="প্রধান মেনু">
-    <ul>
-      <li><a href="index.html" class="active">হোম</a></li>
-      <li><a href="posts.html?category=kothasahitya">কথাসাহিত্য</a></li>
-      <li><a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
-      <li><a href="posts.html?category=ain-oadalot">আইন ও আদালত</a></li>
-      <li><a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a></li>
-      <li><a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a></li>
-      <li><a href="index.html#chandradwip">চন্দ্রদ্বীপ</a></li>
-      <li><a href="journal.html">Journal</a></li>
-      <li><a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a></li>
-      <li><a href="about.html">লেখক পরিচিতি</a></li>
-      <li><a href="posts.html">সব লেখা</a></li>
-    </ul>
-  </nav>
-  <div class="strip" aria-hidden="true"></div>
-</header>
+    <nav class="menu">
+      <a href="index.html">হোম</a>
+      <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
+      <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
+      <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
+      <a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
+      <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
+      <a href="index.html#chandradwip">চন্দ্রদ্বীপ</a>
+      <a class="j" href="journal.html">Journal</a>
+      <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
+      <a href="about.html">লেখক পরিচিতি</a>
+      <a href="posts.html">সব লেখা</a>
+    </nav>
+  </header>
+</div>
 
 <main id="main">
 
