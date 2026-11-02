@@ -927,7 +927,7 @@
   letter-spacing: 0.2em;
 }
 .journal {
-  background: var(--cream);
+  background: #FFFFFF;
   border: 1px solid var(--paper-dark);
   border-radius: 6px;
   padding: 24px 26px;
