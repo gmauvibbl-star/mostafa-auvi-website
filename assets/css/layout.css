@@ -542,3 +542,10 @@
 .footer-meta .copy { color: var(--cream); font-weight: 600; }
 /* .footer-strip kept as an alias so any legacy reference still resolves */
 .footer-strip { background: var(--teal-deep); color: rgba(250,244,232,0.65); }
+
+/* Brand separator + nav colors for new items */
+.brand .sep-brand { color: var(--gold); margin: 0 4px; font-weight: 400; }
+.brand .second { color: var(--teal-deep); font-style: italic; font-weight: 900; }
+.brand .tagline .dot { color: var(--gold); margin: 0 4px; font-size: 14px; }
+.nav ul li.nav-travel a { color: #C46A2B; }
+.nav ul li.nav-banking a { color: #6F4F22; }
