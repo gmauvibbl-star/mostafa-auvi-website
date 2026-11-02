@@ -243,7 +243,7 @@
     </nav>
   </section>
 
-  <section class="recent" aria-labelledby="recent-title">
+  <section class="recent latest-writings" aria-labelledby="recent-title" hidden>
     <div class="head">
       <div>
         <div class="eyebrow">Recent writing</div>
@@ -251,31 +251,8 @@
       </div>
       <a class="all" href="posts.html">সব লেখা →</a>
     </div>
-    <div class="cards">
-      <a class="card" href="posts.html">
-        <div class="thumb plain" aria-hidden="true">অ</div>
-        <div class="body">
-          <span class="cat">ব্যক্তিগত</span>
-          <h3>পরিশিষ্টের দ্বিভাষিক লেখা</h3>
-          <span class="meta">2 November 2026</span>
-        </div>
-      </a>
-      <a class="card" href="posts.html">
-        <div class="thumb"><img src="assets/img/explore-img-1.jpg" alt="পাথরের মূর্তির ছবি, সাহিত্য ও শিল্পের প্রতীক" loading="lazy"></div>
-        <div class="body">
-          <span class="cat">সাহিত্যসমালোচনা</span>
-          <h3>‘আমার জীবন’: স্মৃতি, শিল্প, বিপ্লব ও মানুষের মুক্তির আকাঙ্ক্ষা</h3>
-          <span class="meta">1 November 2026</span>
-        </div>
-      </a>
-      <a class="card" href="posts.html">
-        <div class="thumb"><img src="assets/img/explore-img-2.jpg" alt="সমুদ্রতীরের উপর দিয়ে উড়ে যাওয়া একটি ঈগল" loading="lazy"></div>
-        <div class="body">
-          <span class="cat">গল্প</span>
-          <h3>বাজপাখির পুনর্জন্ম</h3>
-          <span class="meta">1 November 2026</span>
-        </div>
-      </a>
+    <div class="cards" id="latestGrid">
+      <div class="latest-loading" style="grid-column:1/-1;text-align:center;padding:30px;color:var(--gold-dim);font-style:italic;font-size:14px;">সাম্প্রতিক লেখা লোড হচ্ছে…</div>
     </div>
   </section>
 
