@@ -16,7 +16,8 @@
   <link href="https://fonts.maateen.me/siyam-rupali/font.css" rel="stylesheet" />
 
   <!-- Supabase JS v2 (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+<script>
 // ====== Site Preview — opens read.html with current draft content ======
 function openSitePreview() {
   const editor = document.getElementById('editor');
@@ -988,8 +989,6 @@ setInterval(updateSEOChecklist, 3000);
         { name: 'বড়গল্প', nameEn: 'Long Story' },
         { name: 'সম্পূর্ণ উপন্যাস', nameEn: 'Complete Novel' },
         { name: 'ধারাবাহিক উপন্যাস', nameEn: 'Serialised Novel' },
-        { name: 'বাংলাদেশ ভ্রমণ', nameEn: 'Travel in Bangladesh' },
-        { name: 'বিদেশ ভ্রমণ', nameEn: 'Travel Abroad' },
         { name: 'স্মৃতির ভাণ্ডার', nameEn: 'Memoirs' },
         { name: 'ফেলে আসা দিন', nameEn: 'Days Gone By' },
         { name: 'অনুবাদ সাহিত্য', nameEn: 'Translated Literature' },
@@ -1515,8 +1514,7 @@ setInterval(updateSEOChecklist, 3000);
     // ============================================================
     // STATS
     // ============================================================
-    async function loadStats();
-    loadMostRead() {
+    async function loadStats() {
       const { count: totalBn } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
         .eq('language', 'bn');
@@ -1531,7 +1529,7 @@ setInterval(updateSEOChecklist, 3000);
         .eq('featured', true);
       const { count: totalEn } = await supabase.from('posts')
         .select('*', { count: 'exact', head: true })
-        ; // EN count merged with BN
+        .eq('language', 'en');
       const { data: recent } = await supabase.from('posts')
         .select('id, title, slug, group_id, published, featured, updated_at, category, cover_image')
         .eq('language', 'bn')
