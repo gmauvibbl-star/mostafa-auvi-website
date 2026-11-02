@@ -261,7 +261,7 @@
   margin: 0 auto 32px;
   max-width: 760px;
   padding: 28px 32px 30px;
-  background: linear-gradient(180deg, rgba(244,236,216,0.55) 0%, rgba(237,226,198,0.35) 100%);
+  background: var(--cream);  /* solid opaque — text fully clear, no hazy overlay */
   border-left: 3px solid var(--gold);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   position: relative;
