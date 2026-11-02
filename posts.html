@@ -222,14 +222,17 @@
       <div class="tagline">Fiction Writer &amp; Literary Critic<br>Literature Beyond Borders</div>
     </div>
     <nav class="nav" aria-label="প্রধান নেভিগেশন">
-      <a href="./">প্রচ্ছদ</a>
-      <a href="posts.html" class="current">প্রকাশিত লেখা</a>
+      <a href="./">হোম</a>
       <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
       <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
       <a href="posts.html?category=ain-oadalot">আইন-আদালত</a>
+      <a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
       <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
-      <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
+      <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
       <a href="journal.html">Journal</a>
+      <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
+      <a href="about.html">লেখক পরিচিতি</a>
+      <a href="posts.html" class="current">সব লেখা</a>
     </nav>
   </header>
 
@@ -272,14 +275,17 @@
   <footer class="site-footer">
     <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
     <nav class="footer-nav">
-      <a href="./">প্রচ্ছদ</a>
-      <a href="./posts.html">প্রকাশিত লেখা</a>
+      <a href="./">হোম</a>
       <a href="./posts.html?category=kothasahitya">কথাসাহিত্য</a>
       <a href="./posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
       <a href="./posts.html?category=ain-oadalot">আইন-আদালত</a>
+      <a href="./posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
       <a href="./posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
-      <a href="./posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
+      <a href="./posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
       <a href="./journal.html">Journal</a>
+      <a href="./posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
+      <a href="./about.html">লেখক পরিচিতি</a>
+      <a href="./posts.html">সব লেখা</a>
     </nav>
     <div class="footer-copy">© Mostafa Auvi · Fiction Writer &amp; Literary Critic · Literature Beyond Borders</div>
   </footer>
@@ -422,9 +428,9 @@ const searchQuery=(params.get('q')||params.get('search')||'').trim();
 document.documentElement.lang=language;
 if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
-  const navLabels=['Home','Published Writing','Fiction','Essays & Literary Criticism','Law & Judiciary','Banking & Economics','Publications','Journal'];
+  const navLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Journal','Publications','About Author','All Writings'];
   document.querySelectorAll('.nav a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
-  const footerLabels=['Home','Published Writing','Fiction','Essays & Literary Criticism','Law & Judiciary','Banking & Economics','Publications','Journal'];
+  const footerLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Journal','Publications','About Author','All Writings'];
   document.querySelectorAll('.footer-nav a').forEach((a,i)=>{if(footerLabels[i])a.textContent=footerLabels[i];});
   const eyebrow=document.querySelector('.eyebrow');
   if(eyebrow) eyebrow.textContent='Published Writing';
