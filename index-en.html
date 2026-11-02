@@ -280,5 +280,71 @@
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/main.js"></script>
 
+
+<script>
+// English page override — fix any Bengali text injected by main.js/auth.js
+(function(){
+  // Fix date to English
+  var dateEl = document.querySelector('.utility-bar .date');
+  if (dateEl) {
+    try { dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday:'long', day:'numeric', month:'long', year:'numeric' }); }
+    catch(e) { dateEl.textContent = 'November 2026'; }
+  }
+  // Fix auth status messages — override showStatus to use English
+  var modalStatus = document.getElementById('modalStatus');
+  if (modalStatus) {
+    var observer = new MutationObserver(function(){
+      var txt = modalStatus.textContent;
+      var en = {
+        'লগইন করা হচ্ছে…': 'Logging in…',
+        'লগইন সফল! ড্যাশবোর্ডে নিয়ে যাওয়া হচ্ছে…': 'Login successful! Redirecting…',
+        'সেটআপ সমস্যা — Supabase লোড হয়নি।': 'Setup error — Supabase not loaded.',
+        'ইমেইল ও পাসওয়ার্ড দিন।': 'Enter email and password.',
+        'লগইন ব্যর্থ': 'Login failed',
+        'অ্যাকাউন্ট অ্যাডমিন হিসেবে অনুমোদিত নয়।': 'Account not authorized as admin.',
+        'সমস্যা:': 'Error:',
+        'রিসেট লিংক পাঠানো হচ্ছে…': 'Sending reset link…',
+        'পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে! ইমেইল চেক করুন।': 'Reset link sent! Check your email.',
+        'ত্রুটি:': 'Error:',
+        'নিশ্চিত করা যায়নি।': 'Could not confirm.',
+        'সংযোগে সমস্যা। আবার চেষ্টা করুন।': 'Connection error. Try again.',
+        'অ্যাকাউন্ট তৈরি করতে হলে সাইট অ্যাডমিনের সাথে যোগাযোগ করুন। শুধুমাত্র অনুমোদিত অ্যাডমিন অ্যাকাউন্ট দিয়ে লগইন করা যাবে।': 'Contact the site admin to create an account.'
+      };
+      if (en[txt]) modalStatus.textContent = en[txt];
+    });
+    observer.observe(modalStatus, { childList: true, characterData: true, subtree: true });
+  }
+  // Fix author login label if it shows Bengali
+  var lbl = document.getElementById('authorLoginLabel');
+  if (lbl && /[ঀ-৿]/.test(lbl.textContent)) lbl.textContent = 'Open Dashboard';
+  // Fix toast messages
+  var origToast = window.showToast;
+  if (origToast) {
+    window.showToast = function(msg) {
+      var en = { 'লিংক কপি হয়েছে:': 'Link copied:', 'কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।': 'Copy failed. Please copy manually.' };
+      for (var bn in en) msg = msg.replace(bn, en[bn]);
+      origToast(msg);
+    };
+  }
+  // Remove any Bengali text that might appear in dynamic content
+  setInterval(function(){
+    document.querySelectorAll('*').forEach(function(el){
+      if (el.children.length === 0 && /[ঀ-৿]/.test(el.textContent)) {
+        // Skip if it's the hero (protected)
+        if (el.closest('.hero')) return;
+        // Try to translate common Bengali words
+        var txt = el.textContent.trim();
+        var dict = {
+          'শুক্রবার': 'Friday', 'শনিবার': 'Saturday', 'রবিবার': 'Sunday',
+          'অক্টোবর': 'October', 'নভেম্বর': 'November',
+        };
+        for (var bn in dict) txt = txt.replace(bn, dict[bn]);
+        if (!/[ঀ-৿]/.test(txt)) el.textContent = txt;
+      }
+    });
+  }, 500);
+})();
+</script>
+
 </body>
 </html>
