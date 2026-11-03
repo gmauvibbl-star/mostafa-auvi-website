@@ -294,7 +294,7 @@
         "prokashona-o-pdf": "প্রকাশনা",
         bhromonkahini: "ভ্রমণকাহিনি",
         chandradwip: "চন্দ্রদ্বীপ",
-        "byaktigoto-onubhuti": "ব্যক্তিগত অনুভূতি",
+        "byaktigoto-onubhuti": "প্রবন্ধ ও সাহিত্যসমালোচনা",
       };
       return map[c] || c || "";
     }
@@ -373,7 +373,80 @@
   }
 
   /* ====================================================================
-   *  8. LATEST JOURNAL ENTRY — fetch from Supabase
+   *  8. LATEST ENGLISH WRITINGS — fetch from Supabase
+   *     Same as initLatestWritings() but fetches English-language posts
+   *     for the English homepage (index-en.html).
+   *     Reveals <section class="latest-writings"> only when cards render.
+   * ==================================================================== */
+  function initLatestWritingsEn() {
+    var section = document.querySelector(".latest-writings");
+    var grid = document.getElementById("latestGridEn");
+    if (!section || !grid) return;
+    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+    if (!window.supabase || !SUPABASE_URL.startsWith("https://")) return;
+
+    function esc(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+    function fmtDate(iso) {
+      if (!iso) return "";
+      try {
+        var d = new Date(iso);
+        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+      } catch (e) { return ""; }
+    }
+    function catLabelEn(c) {
+      var map = {
+        kothasahitya: "Fiction",
+        "probandho-sahityasamalochona": "Essays & Criticism",
+        "ain-oadalot": "Law & Justice",
+        "banking-o-orthoniti": "Banking & Economics",
+        "prokashona-o-pdf": "Publications",
+        bhromonkahini: "Travel Writing",
+        chandradwip: "Chandradwip",
+      };
+      return map[c] || c || "";
+    }
+
+    try {
+      var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      sb.from("posts")
+        .select("slug,title,excerpt,cover_image,category,published_at,language")
+        .eq("published", true)
+        .eq("language", "en")
+        .order("published_at", { ascending: false, nullsFirst: false })
+        .limit(3)
+        .then(function (res) {
+          var rows = (res && res.data) || [];
+          if (!rows.length) return; // leave section hidden
+          grid.innerHTML = rows.map(function (p) {
+            var cover = p.cover_image
+              ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
+              : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
+            var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
+            if (excerpt.length > 140) excerpt = excerpt.slice(0, 140) + "…";
+            return '<a class="latest-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=en">' +
+              cover +
+              '<div class="lc-body">' +
+                '<span class="lc-cat">' + esc(catLabelEn(p.category)) + '</span>' +
+                '<h3 class="lc-title">' + esc(p.title || "") + '</h3>' +
+                (excerpt ? '<p class="lc-excerpt">' + esc(excerpt) + '</p>' : '') +
+                '<span class="lc-date">' + esc(fmtDate(p.published_at)) + '</span>' +
+              '</div>' +
+            '</a>';
+          }).join("");
+          section.hidden = false;
+        })
+        .catch(function () { /* leave section hidden on error */ });
+    } catch (e) { /* leave section hidden */ }
+  }
+
+  /* ====================================================================
+   *  9. LATEST JOURNAL ENTRY — fetch from Supabase (DISABLED)
    *     Replaces the static hardcoded Journal card on the homepage with
    *     the most recent published journal entry. Falls back to static
    *     content if Supabase is unreachable or no journal entries exist.
@@ -485,7 +558,7 @@
     initChandradwipExtra();
     initLatestWritings();
     initChandradwipPanels();
-    initLatestJournal();
+    initLatestWritingsEn();
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
