@@ -11,6 +11,18 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: cors });
   }
 
+  // Auth check: require valid anon key in apikey header or Authorization
+  // This prevents unauthorized users from triggering scheduled publishing
+  const expectedKey = Deno.env.get("SUPABASE_ANON_KEY") || Deno.env.get("SUPABASE_URL");
+  const apiKey = req.headers.get("apikey") || "";
+  const authHeader = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
+  if (!apiKey || !expectedKey || (apiKey !== expectedKey && authHeader !== expectedKey)) {
+    return new Response(
+      JSON.stringify({ error: "Unauthorized" }),
+      { status: 401, headers: { ...cors, "Content-Type": "application/json" } }
+    );
+  }
+
   const url = Deno.env.get("SUPABASE_URL")!;
   const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const db = createClient(url, key);
