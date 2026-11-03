@@ -1,17 +1,16 @@
 /* Approved literary homepage redesign — scoped to homepage only */
 .home-redesign{background:#f7f0e3;color:#173b31;font-family:'Noto Serif Bengali','Playfair Display',serif}
-.auvi-hero{position:relative;isolation:isolate;min-height:455px;display:flex;align-items:center;overflow:hidden;background:#153d35 url('../img/hero-banner.jpg') center 52%/cover no-repeat}
-.auvi-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,30,25,.88) 0%,rgba(5,30,25,.66) 42%,rgba(5,30,25,.10) 72%),linear-gradient(0deg,rgba(4,24,20,.22),transparent 45%)}
-.auvi-hero-copy{position:relative;z-index:2;width:58%;padding:70px 5.5%;color:#fff}
-.hero-kicker,.section-kicker{display:block;color:#cda85b;font:600 12px 'EB Garamond',serif;letter-spacing:.22em;text-transform:uppercase;margin:0 0 14px}
-.auvi-hero h1{font:700 clamp(42px,5.3vw,76px)/1.05 'Playfair Display',serif;letter-spacing:.025em;margin:0 0 10px;color:#fff}
-.hero-role{font:italic 500 clamp(19px,2.2vw,29px) 'Cormorant Garamond',serif;margin:0;color:#f7ead1}
-.gold-rule{display:block;width:70px;height:3px;background:#d6ad57;margin:22px 0}
-.hero-line{font:italic 500 clamp(18px,2vw,25px) 'Cormorant Garamond',serif;color:#fff;margin:0 0 26px}
+.auvi-hero{position:relative;isolation:isolate;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:120px 20px;background:#0F3D3E url('../img/hero-banner.jpg') center center/cover no-repeat;color:#FAF4E8}
+.auvi-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(rgba(8,39,42,.62),rgba(8,39,42,.62))}
+.auvi-hero-copy{position:relative;z-index:2;width:100%;max-width:700px;margin:0 auto 0 0;padding:0;color:#FAF4E8}
+.hero-kicker,.section-kicker{display:block;color:#d6ad57;font:600 15px 'EB Garamond',serif;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}
+.auvi-hero h1{font:700 clamp(60px,8vw,110px)/.95 'Noto Serif Bengali',serif;letter-spacing:0;margin:14px 0 22px;color:#FAF4E8}
+.hero-role{font:500 clamp(24px,3vw,32px)/1.8 'Noto Serif Bengali',serif;margin:0 0 12px;color:#FAF4E8}
+.gold-rule{display:block;width:70px;height:3px;background:#d6ad57;margin:22px 0 24px}
+.hero-line{font:400 1.08rem/2 'Noto Serif Bengali',serif;color:#FAF4E8;max-width:600px;opacity:.92;margin:0 0 30px}
 .hero-action{display:inline-flex;align-items:center;gap:14px;padding:12px 23px;border:1px solid #d6ad57;border-radius:30px;color:#fff;text-decoration:none;font:600 15px 'Noto Serif Bengali','EB Garamond',serif;transition:.2s;background:rgba(9,40,32,.18)}
 .hero-action:hover{background:#d6ad57;color:#173b31}
-.auvi-portrait{position:absolute;right:3.5%;bottom:0;height:108%;width:46%;max-width:520px;z-index:3;display:flex;align-items:flex-end;justify-content:flex-end;overflow:visible;pointer-events:none;filter:drop-shadow(0 20px 35px rgba(0,0,0,.28)) drop-shadow(0 0 12px rgba(212,175,55,.16))}
-.auvi-portrait img{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;object-position:right bottom;filter:brightness(1.015) saturate(.96) contrast(.98);-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,#000 82%,transparent 100%)}
+.auvi-portrait{display:none!important}
 .author-intro-redesign,.featured-book-redesign{display:grid;grid-template-columns:.78fr 1.22fr;gap:42px;align-items:center;padding:48px max(5%,calc((100% - 1220px)/2));border-bottom:1px solid #e6dcc9}
 .intro-copy h2,.book-copy h2,.section-heading h2,.journal-feature h2,.newsletter-strip h2{font:600 clamp(27px,3vw,38px)/1.2 'Playfair Display','Noto Serif Bengali',serif;margin:0 0 16px;color:#173b31}
 .intro-copy p,.book-copy p,.journal-feature p,.newsletter-strip p{font:400 16px/1.85 'Noto Serif Bengali',serif;color:#514b40;margin:0 0 16px}
@@ -48,5 +47,5 @@
 .home-redesign~footer,body:has(.home-redesign) footer{background:#103a30;color:#f7f0e3;border-top:3px solid #cda85b}
 body:has(.home-redesign) footer .fbar{padding-top:28px;padding-bottom:28px}
 body:has(.home-redesign) footer a{color:#e4c77f}
-@media(max-width:900px){.auvi-hero{min-height:390px}.auvi-hero-copy{width:62%;padding:52px 5%}.auvi-portrait{right:1%;width:46%;height:100%;max-width:420px}.author-intro-redesign,.featured-book-redesign{gap:24px;padding:34px 5%}.world-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.auvi-hero{min-height:550px;align-items:flex-start;background-position:55% center}.auvi-hero:before{background:linear-gradient(90deg,rgba(5,30,25,.82),rgba(5,30,25,.25)),linear-gradient(0deg,rgba(4,24,20,.35),transparent 55%)}.auvi-hero-copy{width:100%;padding:38px 22px 0}.auvi-hero h1{font-size:39px}.hero-role{font-size:19px}.hero-line{font-size:19px;max-width:260px}.auvi-portrait{width:76%;height:72%;max-width:360px;right:0;bottom:0;justify-content:flex-end}.auvi-portrait img{height:100%;width:auto;max-width:100%;object-position:right bottom;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,#000 82%,transparent 100%)}.author-intro-redesign,.featured-book-redesign{grid-template-columns:1fr;padding:30px 22px;gap:20px}.intro-landscape{height:190px}.book-image{height:210px}.writing-worlds{padding:36px 18px}.world-grid{grid-template-columns:1fr;gap:10px}.world-card{min-height:118px}.journal-feature{margin:0 18px 24px;padding:22px;grid-template-columns:1fr}.journal-art{min-height:115px}.newsletter-strip{margin:0 18px 30px;padding:22px;align-items:flex-start;flex-direction:column}.newsletter-strip h2{font-size:22px}}
+@media(max-width:900px){.auvi-hero{min-height:82vh;padding:100px 28px}.auvi-hero-copy{max-width:700px}.author-intro-redesign,.featured-book-redesign{gap:24px;padding:34px 5%}.world-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.auvi-hero{min-height:78vh;padding:92px 22px 70px;background-position:center center}.auvi-hero-copy{width:100%;padding:0}.auvi-hero h1{font-size:clamp(44px,12vw,64px)}.hero-role{font-size:22px;line-height:1.55}.hero-line{font-size:18px;line-height:1.85;max-width:100%}.author-intro-redesign,.featured-book-redesign{grid-template-columns:1fr;padding:30px 22px;gap:20px}.intro-landscape{height:190px}.book-image{height:210px}.writing-worlds{padding:36px 18px}.world-grid{grid-template-columns:1fr;gap:10px}.world-card{min-height:118px}.journal-feature{margin:0 18px 24px;padding:22px;grid-template-columns:1fr}.journal-art{min-height:115px}.newsletter-strip{margin:0 18px 30px;padding:22px;align-items:flex-start;flex-direction:column}.newsletter-strip h2{font-size:22px}}
