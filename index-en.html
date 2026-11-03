@@ -50,6 +50,17 @@ section{position:relative;z-index:2;}
 .nav__lang a.active{color:var(--terracotta);}
 .nav__lang a:hover{color:var(--ink);}
 .nav__lang span{color:var(--rule-strong);font-size:10px;}
+/* Dropdown navigation — mirrors the Bengali homepage without changing its layout. */
+.nav__dropdown{position:relative;display:inline-flex;align-items:center;}
+.nav__dropdown summary{list-style:none;cursor:pointer;font-family:var(--font-ui);font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;transition:color 280ms var(--ease-quiet);}
+.nav__dropdown summary::-webkit-details-marker{display:none;}
+.nav__dropdown summary::after{content:" ▾";font-size:10px;color:var(--terracotta);}
+.nav__dropdown summary:hover,.nav__dropdown[open] summary{color:var(--terracotta);}
+.nav__dropdown-panel{position:absolute;top:calc(100% + 0.85rem);left:0;min-width:240px;padding:0.55rem 0;background:var(--paper);border:1px solid var(--rule-strong);box-shadow:0 12px 28px rgba(43,41,36,0.14);display:none;flex-direction:column;z-index:80;}
+.nav__dropdown[open]>.nav__dropdown-panel{display:flex;}
+.nav__dropdown-panel a{display:block;padding:0.55rem 1rem;font-family:var(--font-ui);font-size:11px;letter-spacing:0.06em;color:var(--ink-soft);white-space:nowrap;transition:background 180ms ease,color 180ms ease;}
+.nav__dropdown-panel a:hover{background:rgba(184,107,70,0.08);color:var(--terracotta);}
+@media(max-width:880px){.nav__links{gap:0.75rem;}.nav__dropdown summary{font-size:9px;letter-spacing:0.08em;}.nav__dropdown-panel{left:auto;right:0;}.nav__links .nav__link{display:none;}}
 @media(max-width:880px){.nav__links .nav__link{display:none;}.nav__brand{font-size:17px;}}
 
 /* Hero — screenshot layout */
@@ -143,9 +154,25 @@ section{position:relative;z-index:2;}
   <div class="nav__inner">
     <a href="index-en.html" class="nav__brand">Mostafa <em>Auvi</em></a>
     <div class="nav__links">
-      <a href="posts.html?lang=en" class="nav__link">Writings</a>
-      <a href="journal.html?lang=en" class="nav__link">Journal</a>
+      <details class="nav__dropdown">
+        <summary>Selected Writings</summary>
+        <div class="nav__dropdown-panel">
+          <a href="posts.html?category=kothasahitya&amp;lang=en">Fiction</a>
+          <a href="posts.html?category=probandho-sahityasamalochona&amp;lang=en">Essays &amp; Literary Criticism</a>
+          <a href="posts.html?category=ain-oadalot&amp;lang=en">Law &amp; Justice</a>
+          <a href="posts.html?category=bhromonkahini&amp;lang=en">Travel Writing</a>
+          <a href="posts.html?category=banking-o-orthoniti&amp;lang=en">Banking &amp; Economics</a>
+        </div>
+      </details>
+      <details class="nav__dropdown">
+        <summary>Upcoming Books</summary>
+        <div class="nav__dropdown-panel">
+          <a href="posts.html?category=chandradwip&amp;lang=en">Chandradwip</a>
+        </div>
+      </details>
+      <a href="posts.html?category=prokashona-o-pdf&amp;lang=en" class="nav__link">Publications</a>
       <a href="about-en.html" class="nav__link">About</a>
+      <a href="posts.html?lang=en" class="nav__link">All Writings</a>
       <div class="nav__lang">
         <a href="index.html">বাংলা</a>
         <span>/</span>
@@ -244,6 +271,28 @@ document.querySelectorAll('.fade-up,.fade-stagger').forEach(el => observer.obser
 window.addEventListener('load', () => { setTimeout(() => { const t = document.getElementById('hero-text'); if (t) t.classList.add('is-in'); }, 200); });
 document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const h = a.getAttribute('href'); if (h.length > 1) { const t = document.querySelector(h); if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 50, behavior: 'smooth' }); } } }); });
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); }
+</script>
+
+<script>
+/* Keep navigation dropdowns predictable on touch and desktop. */
+(function () {
+  var dropdowns = document.querySelectorAll('.nav__links details.nav__dropdown');
+  if (!dropdowns.length) return;
+  dropdowns.forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (!item.open) return;
+      dropdowns.forEach(function (other) { if (other !== item) other.open = false; });
+    });
+  });
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('.nav__links details.nav__dropdown')) {
+      dropdowns.forEach(function (item) { item.open = false; });
+    }
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') dropdowns.forEach(function (item) { item.open = false; });
+  });
+})();
 </script>
 </body>
 </html>
