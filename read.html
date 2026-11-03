@@ -1475,6 +1475,7 @@ function applyReadShellLanguage(lang) {
     setAttr('.back-link','href','posts.html?lang=en');
     setAttr('#navSearch','placeholder','Search...'); setAttr('#navSearch','aria-label','Search');
     setText('.subscribe-btn span','Subscribe'); setAttr('.subscribe-btn','title','Get email updates on new writing');
+    setAttr('.subscribe-btn','href','subscribe-en.html');
     setText('.back-link','← All Writing'); setAttr('.back-link','title','Back to all writing');
     setText('#loadingState h2','Loading article…'); setText('#loadingState p','Please wait a moment.');
     setText('#commentsTitle','Reader Responses');
@@ -1491,6 +1492,8 @@ function applyReadShellLanguage(lang) {
     const footerLeft = document.querySelector('.footer-strip .left');
     if (footerLeft) { const quote = Array.from(footerLeft.childNodes).find(n => n.nodeType === Node.TEXT_NODE); if (quote) quote.textContent = ' · “Writing makes us a little more human.”'; }
     setText('.footer-strip .right a:nth-child(1)','Subscribe'); setText('.footer-strip .right a:nth-child(2)','Sitemap'); setText('.footer-strip .right a:nth-child(3)','Privacy'); setText('.footer-strip .right a:nth-child(4)','© 2026');
+    // Update footer subscribe link to English version
+    setAttr('.footer-strip .right a:nth-child(1)','href','subscribe-en.html');
     setText('#loginModalTitle','Author Login'); setText('.modal-sub','Sign in with your email and password');
     setText('label[for="modalEmail"]','Email'); setText('label[for="modalPassword"]','Password');
     setAttr('#modalPassword','placeholder','Enter your password'); setText('#modalLoginBtn','Sign in →');
