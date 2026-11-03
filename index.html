@@ -130,6 +130,34 @@
     font-size: 15px;
   }
 }
+
+/* Final dropdown visibility and stacking safeguard */
+.hdr, .v2 .hdr {
+  position: relative;
+  z-index: 50;
+  overflow: visible !important;
+}
+.menu {
+  position: relative;
+  z-index: 51;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+.menu .dropdown { z-index: 52; }
+.menu .dropdown[open] { z-index: 60; }
+.menu .dropdown-panel {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.menu .dropdown[open] > .dropdown-panel {
+  display: flex !important;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 </style>
 </head>
 <body>
