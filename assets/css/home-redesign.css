@@ -1,0 +1,52 @@
+/* Approved literary homepage redesign — scoped to homepage only */
+.home-redesign{background:#f7f0e3;color:#173b31;font-family:'Noto Serif Bengali','Playfair Display',serif}
+.auvi-hero{position:relative;isolation:isolate;min-height:455px;display:flex;align-items:center;overflow:hidden;background:#153d35 url('../img/hero-banner.jpg') center 52%/cover no-repeat}
+.auvi-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,30,25,.88) 0%,rgba(5,30,25,.66) 42%,rgba(5,30,25,.10) 72%),linear-gradient(0deg,rgba(4,24,20,.22),transparent 45%)}
+.auvi-hero-copy{position:relative;z-index:2;width:58%;padding:70px 5.5%;color:#fff}
+.hero-kicker,.section-kicker{display:block;color:#cda85b;font:600 12px 'EB Garamond',serif;letter-spacing:.22em;text-transform:uppercase;margin:0 0 14px}
+.auvi-hero h1{font:700 clamp(42px,5.3vw,76px)/1.05 'Playfair Display',serif;letter-spacing:.025em;margin:0 0 10px;color:#fff}
+.hero-role{font:italic 500 clamp(19px,2.2vw,29px) 'Cormorant Garamond',serif;margin:0;color:#f7ead1}
+.gold-rule{display:block;width:70px;height:3px;background:#d6ad57;margin:22px 0}
+.hero-line{font:italic 500 clamp(18px,2vw,25px) 'Cormorant Garamond',serif;color:#fff;margin:0 0 26px}
+.hero-action{display:inline-flex;align-items:center;gap:14px;padding:12px 23px;border:1px solid #d6ad57;border-radius:30px;color:#fff;text-decoration:none;font:600 15px 'Noto Serif Bengali','EB Garamond',serif;transition:.2s;background:rgba(9,40,32,.18)}
+.hero-action:hover{background:#d6ad57;color:#173b31}
+.auvi-portrait{position:absolute;right:3.5%;bottom:0;height:96%;width:38%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.auvi-portrait img{height:100%;width:100%;object-fit:contain;object-position:center bottom;filter:brightness(1.015) saturate(.96) contrast(.98);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 17%);mask-image:linear-gradient(to right,transparent 0%,#000 17%)}
+.author-intro-redesign,.featured-book-redesign{display:grid;grid-template-columns:.78fr 1.22fr;gap:42px;align-items:center;padding:48px max(5%,calc((100% - 1220px)/2));border-bottom:1px solid #e6dcc9}
+.intro-copy h2,.book-copy h2,.section-heading h2,.journal-feature h2,.newsletter-strip h2{font:600 clamp(27px,3vw,38px)/1.2 'Playfair Display','Noto Serif Bengali',serif;margin:0 0 16px;color:#173b31}
+.intro-copy p,.book-copy p,.journal-feature p,.newsletter-strip p{font:400 16px/1.85 'Noto Serif Bengali',serif;color:#514b40;margin:0 0 16px}
+.text-link{display:inline-flex;gap:9px;align-items:center;color:#765b27;text-decoration:none;border-bottom:1px solid #cda85b;padding-bottom:4px;font-weight:600}
+.text-link:hover{color:#173b31}
+.intro-landscape{display:block;height:230px;overflow:hidden}
+.intro-landscape img,.book-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.intro-landscape:hover img{transform:scale(1.025)}
+.featured-book-redesign{grid-template-columns:.8fr 1.2fr;background:#f2e8d6}
+.book-subtitle{font-style:italic;color:#8a6c35!important}
+.book-image{position:relative;height:260px;overflow:hidden}
+.book-image span{position:absolute;left:0;bottom:0;background:#173b31;color:#f8eedc;padding:10px 16px;font:600 12px 'EB Garamond',serif;letter-spacing:.12em}
+.writing-worlds{padding:52px max(5%,calc((100% - 1220px)/2));}
+.section-heading{text-align:center;margin-bottom:26px}
+.world-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.world-card{position:relative;min-height:150px;padding:23px 24px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:#fff;overflow:hidden;background:#315c4d}
+.world-card:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,29,24,.88),rgba(6,29,24,.10))}
+.world-card>*{position:relative}
+.world-card>span{font:500 12px 'EB Garamond',serif;color:#e3c47d;letter-spacing:.15em;margin-bottom:auto}
+.world-card h3{font:600 22px 'Playfair Display','Noto Serif Bengali',serif;margin:16px 0 4px}
+.world-card p{font:14px 'Noto Serif Bengali',serif;margin:0;color:#f2e8d6}
+.world-fiction{background:linear-gradient(135deg,#385f4d,#9b8251)}
+.world-essays{background:linear-gradient(135deg,#8a6943,#263f35)}
+.world-law{background:linear-gradient(135deg,#344c49,#8a7656)}
+.world-travel{background:linear-gradient(135deg,#456e59,#a58c58)}
+.world-banking{background:linear-gradient(135deg,#344e49,#6c6247)}
+.world-publishing{background:linear-gradient(135deg,#283f36,#9a7542)}
+.world-card:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.journal-feature{margin:0 max(5%,calc((100% - 1220px)/2)) 38px;padding:30px 36px;background:#e9dfca;display:grid;grid-template-columns:1fr .7fr;align-items:center;gap:24px}
+.journal-art{min-height:150px;background:linear-gradient(130deg,#345b4c,#b38c4c);display:flex;flex-direction:column;justify-content:center;padding:22px 30px;color:#fff}
+.journal-art span{font:80px/.7 Georgia,serif;color:#e3c47d}.journal-art p{font:italic 26px/1.2 'Cormorant Garamond',serif;color:#fff;margin:0}
+.newsletter-strip{margin:0 max(5%,calc((100% - 1220px)/2)) 48px;padding:24px 30px;background:#eee4d2;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.newsletter-strip h2{font-size:25px;margin-bottom:5px}.newsletter-strip p{margin:0}
+.home-redesign~footer,body:has(.home-redesign) footer{background:#103a30;color:#f7f0e3;border-top:3px solid #cda85b}
+body:has(.home-redesign) footer .fbar{padding-top:28px;padding-bottom:28px}
+body:has(.home-redesign) footer a{color:#e4c77f}
+@media(max-width:900px){.auvi-hero{min-height:390px}.auvi-hero-copy{width:62%;padding:52px 5%}.auvi-portrait{right:0;width:43%;height:88%}.author-intro-redesign,.featured-book-redesign{gap:24px;padding:34px 5%}.world-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.auvi-hero{min-height:550px;align-items:flex-start;background-position:55% center}.auvi-hero:before{background:linear-gradient(90deg,rgba(5,30,25,.82),rgba(5,30,25,.25)),linear-gradient(0deg,rgba(4,24,20,.35),transparent 55%)}.auvi-hero-copy{width:100%;padding:38px 22px 0}.auvi-hero h1{font-size:39px}.hero-role{font-size:19px}.hero-line{font-size:19px;max-width:260px}.auvi-portrait{width:72%;height:62%;right:-2%;bottom:0}.auvi-portrait img{object-position:center bottom;-webkit-mask-image:linear-gradient(to top,transparent 0%,#000 12%);mask-image:linear-gradient(to top,transparent 0%,#000 12%)}.author-intro-redesign,.featured-book-redesign{grid-template-columns:1fr;padding:30px 22px;gap:20px}.intro-landscape{height:190px}.book-image{height:210px}.writing-worlds{padding:36px 18px}.world-grid{grid-template-columns:1fr;gap:10px}.world-card{min-height:118px}.journal-feature{margin:0 18px 24px;padding:22px;grid-template-columns:1fr}.journal-art{min-height:115px}.newsletter-strip{margin:0 18px 30px;padding:22px;align-items:flex-start;flex-direction:column}.newsletter-strip h2{font-size:22px}}
