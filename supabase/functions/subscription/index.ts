@@ -1,6 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const cors={"Access-Control-Allow-Origin":"*","Access-Control-Allow-Headers":"authorization, apikey, content-type","Access-Control-Allow-Methods":"GET, POST, OPTIONS","Content-Type":"text/html; charset=utf-8"};
 const html=(status:number,title:string,message:string)=>new Response("<!doctype html><html lang=\"bn\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>"+title+"</title><body style=\"font:18px/1.7 system-ui;max-width:650px;margin:40px auto;padding:0 18px\"><h1>"+title+"</h1><p>"+message+"</p><a href=\""+(Deno.env.get("SITE_URL")||"https://gmauvibbl-star.github.io/mostafa-auvi-website")+"\">মূল ওয়েবসাইটে ফিরুন</a></body></html>",{status,headers:cors});
+const actionPage=(title:string,message:string,action:string,token:string)=>new Response("<!doctype html><html lang=\"bn\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>"+title+"</title><body style=\"font:18px/1.7 system-ui;max-width:650px;margin:40px auto;padding:0 18px\"><h1>"+title+"</h1><p>"+message+"</p><form method=\"post\" action=\""+(Deno.env.get("SUPABASE_URL")||"")+"/functions/v1/subscription\"><input type=\"hidden\" name=\"action\" value=\""+action+"\"><input type=\"hidden\" name=\"token\" value=\""+token+"\"><button type=\"submit\" style=\"padding:12px 20px;font-size:16px;cursor:pointer\">"+(action==="confirm"?"সাবস্ক্রিপশন নিশ্চিত করুন":"আনসাবস্ক্রাইব নিশ্চিত করুন")+"</button></form><p><a href=\""+(Deno.env.get("SITE_URL")||"https://gmauvibbl-star.github.io/mostafa-auvi-website")+"\">মূল ওয়েবসাইটে ফিরুন</a></p></body></html>",{status:200,headers:cors});
 const json=(status:number,body:Record<string,unknown>)=>new Response(JSON.stringify(body),{status,headers:{...cors,"Content-Type":"application/json"}});
 const hex=(b:ArrayBuffer)=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
 async function hash(s:string){return hex(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)))}
@@ -17,23 +18,43 @@ Deno.serve(async(req)=>{
    if(action==="confirm"){
     const {data:sub,error}=await db.from("subscribers").select("id").eq("confirmation_token_hash",tokenHash).maybeSingle();
     if(error||!sub)return html(400,"লিংকের মেয়াদ শেষ","এই নিশ্চিতকরণ লিংকটি ভুল বা ইতিমধ্যে ব্যবহার করা হয়েছে। আবার সাবস্ক্রাইব করতে পারেন।");
-    const {error:updateError}=await db.from("subscribers").update({confirmed_at:new Date().toISOString(),confirmation_token_hash:null}).eq("id",sub.id);
-    if(updateError)throw updateError;
-    return html(200,"সাবস্ক্রিপশন নিশ্চিত হয়েছে","ধন্যবাদ! নতুন লেখা প্রকাশিত হলে আপনার ইমেইলে আপডেট পাঠানো হবে। প্রতিটি আপডেট ইমেইলে আনসাবস্ক্রাইব লিংক থাকবে।");
+    return actionPage("সাবস্ক্রিপশন নিশ্চিত করুন","নিচের বোতামে ক্লিক করে আপনার ইমেইল সাবস্ক্রিপশন নিশ্চিত করুন।","confirm",token);
    }
    if(action==="unsubscribe"){
     const {data:sub,error}=await db.from("subscribers").select("id").eq("unsubscribe_token_hash",tokenHash).maybeSingle();
     if(error||!sub)return html(400,"লিংকটি কাজ করছে না","এই আনসাবস্ক্রাইব লিংকটি ভুল বা ইতিমধ্যে ব্যবহার করা হয়েছে।");
-    const {error:updateError}=await db.from("subscribers").update({unsubscribed_at:new Date().toISOString(),unsubscribe_token_hash:null}).eq("id",sub.id);
-    if(updateError)throw updateError;
-    return html(200,"সাবস্ক্রিপশন বন্ধ হয়েছে","আপনাকে আর নতুন লেখার ইমেইল আপডেট পাঠানো হবে না।");
+    return actionPage("ইমেইল আপডেট বন্ধ করুন","আপনি কি সত্যিই নতুন লেখার ইমেইল আপডেট বন্ধ করতে চান?","unsubscribe",token);
    }
    return html(400,"অনুরোধটি বোঝা যায়নি","সঠিক ইমেইল লিংক ব্যবহার করুন।");
   }
   if(req.method!=="POST")return json(405,{error:"Method not allowed"});
-  if(!mailKey)return json(503,{error:"Email service is not configured yet."});
-  const body=await req.json();
+  const contentType=req.headers.get("content-type")||"";
+  let body:any;
+  if(contentType.includes("application/x-www-form-urlencoded")){
+   const form=new URLSearchParams(await req.text());
+   body={action:form.get("action"),token:form.get("token")};
+  }else{
+   body=await req.json();
+  }
+  if(body.action==="confirm"||body.action==="unsubscribe"){
+   const rawToken=String(body.token||"");
+   if(!rawToken||rawToken.length>200)return html(400,"লিংকটি সঠিক নয়","অনুগ্রহ করে ইমেইলে পাওয়া সম্পূর্ণ লিংক ব্যবহার করুন।");
+   const tokenHash=await hash(rawToken);
+   if(body.action==="confirm"){
+    const {data:sub,error}=await db.from("subscribers").select("id").eq("confirmation_token_hash",tokenHash).maybeSingle();
+    if(error||!sub)return html(400,"লিংকের মেয়াদ শেষ","এই নিশ্চিতকরণ লিংকটি ভুল বা ইতিমধ্যে ব্যবহার করা হয়েছে। আবার সাবস্ক্রাইব করতে পারেন।");
+    const {error:updateError}=await db.from("subscribers").update({confirmed_at:new Date().toISOString(),confirmation_token_hash:null}).eq("id",sub.id);
+    if(updateError)throw updateError;
+    return html(200,"সাবস্ক্রিপশন নিশ্চিত হয়েছে","ধন্যবাদ! নতুন লেখা প্রকাশিত হলে আপনার ইমেইলে আপডেট পাঠানো হবে। প্রতিটি আপডেট ইমেইলে আনসাবস্ক্রাইব লিংক থাকবে।");
+   }
+   const {data:sub,error}=await db.from("subscribers").select("id").eq("unsubscribe_token_hash",tokenHash).maybeSingle();
+   if(error||!sub)return html(400,"লিংকটি কাজ করছে না","এই আনসাবস্ক্রাইব লিংকটি ভুল বা ইতিমধ্যে ব্যবহার করা হয়েছে।");
+   const {error:updateError}=await db.from("subscribers").update({unsubscribed_at:new Date().toISOString(),unsubscribe_token_hash:null}).eq("id",sub.id);
+   if(updateError)throw updateError;
+   return html(200,"সাবস্ক্রিপশন বন্ধ হয়েছে","আপনাকে আর নতুন লেখার ইমেইল আপডেট পাঠানো হবে না।");
+  }
   if(body.action!=="subscribe")return json(400,{error:"Invalid action"});
+  if(!mailKey)return json(503,{error:"Email service is not configured yet."});
   const email=String(body.email||"").trim().toLowerCase();
   if(email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return json(400,{error:"একটি সঠিক ইমেইল ঠিকানা দিন।"});
   // Check if email is already confirmed (active subscriber)
