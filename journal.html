@@ -2018,6 +2018,14 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 const journalParams = new URLSearchParams(window.location.search);
 const journalLanguage = journalParams.get('lang') === 'en' ? 'en' : 'bn';
 document.documentElement.lang = journalLanguage;
+// Dynamic canonical URL — separate for Bengali and English
+(function(){
+  var canonicalEl = document.querySelector('link[rel="canonical"]');
+  if (canonicalEl) {
+    var base = 'https://gmauvibbl-star.github.io/mostafa-auvi-website/journal.html';
+    canonicalEl.href = base + (journalLanguage === 'en' ? '?lang=en' : '');
+  }
+})();
 const bnLink = document.getElementById('journalBnLink');
 const enLink = document.getElementById('journalEnLink');
 if (bnLink && enLink) {
