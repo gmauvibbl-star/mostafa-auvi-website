@@ -432,9 +432,62 @@ document.documentElement.lang=language;
 if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
   const navLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Journal','Publications','About Author','All Writings'];
-  document.querySelectorAll('.nav a').forEach((a,i)=>{if(navLabels[i])a.textContent=navLabels[i];});
+  // English hrefs for nav (preserve lang=en)
+  const navHrefs=[
+    'index-en.html',
+    'posts.html?category=kothasahitya&lang=en',
+    'posts.html?category=probandho-sahityasamalochona&lang=en',
+    'posts.html?category=ain-oadalot&lang=en',
+    'posts.html?category=bhromonkahini&lang=en',
+    'posts.html?category=banking-o-orthoniti&lang=en',
+    'posts.html?category=chandradwip&lang=en',
+    'journal.html?lang=en',
+    'posts.html?category=prokashona-o-pdf&lang=en',
+    'about-en.html',
+    'posts.html?lang=en'
+  ];
+  document.querySelectorAll('.nav a').forEach((a,i)=>{
+    if(navLabels[i])a.textContent=navLabels[i];
+    if(navHrefs[i])a.setAttribute('href',navHrefs[i]);
+  });
   const footerLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Journal','Publications','About Author','All Writings'];
-  document.querySelectorAll('.footer-nav a').forEach((a,i)=>{if(footerLabels[i])a.textContent=footerLabels[i];});
+  // English hrefs for footer-nav (use ./ prefix as in original)
+  const footerHrefs=[
+    './index-en.html',
+    './posts.html?category=kothasahitya&lang=en',
+    './posts.html?category=probandho-sahityasamalochona&lang=en',
+    './posts.html?category=ain-oadalot&lang=en',
+    './posts.html?category=bhromonkahini&lang=en',
+    './posts.html?category=banking-o-orthoniti&lang=en',
+    './posts.html?category=chandradwip&lang=en',
+    './journal.html?lang=en',
+    './posts.html?category=prokashona-o-pdf&lang=en',
+    './about-en.html',
+    './posts.html?lang=en'
+  ];
+  document.querySelectorAll('.footer-nav a').forEach((a,i)=>{
+    if(footerLabels[i])a.textContent=footerLabels[i];
+    if(footerHrefs[i])a.setAttribute('href',footerHrefs[i]);
+  });
+  // Update filter pills to English labels and add lang=en to hrefs
+  const filterMap=[
+    {label:'All Writing',href:'posts.html?lang=en'},
+    {label:'Stories',href:'posts.html?category=kothasahitya&lang=en'},
+    {label:'Short Stories',href:'posts.html?category=kothasahitya&lang=en'},
+    {label:'Novels',href:'posts.html?category=kothasahitya&lang=en'},
+    {label:'Translated Literature',href:'posts.html?category=kothasahitya&lang=en'},
+    {label:'Travel Writing',href:'posts.html?category=bhromonkahini&lang=en'},
+    {label:'Essays',href:'posts.html?category=probandho-sahityasamalochona&lang=en'},
+    {label:'Criticism',href:'posts.html?category=probandho-sahityasamalochona&lang=en'},
+    {label:'Law & Justice',href:'posts.html?category=ain-oadalot&lang=en'},
+    {label:'Banking & Economics',href:'posts.html?category=banking-o-orthoniti&lang=en'}
+  ];
+  document.querySelectorAll('#filters .filter-pill').forEach((a,i)=>{
+    if(filterMap[i]){
+      a.textContent=filterMap[i].label;
+      a.setAttribute('href',filterMap[i].href);
+    }
+  });
   const eyebrow=document.querySelector('.eyebrow');
   if(eyebrow) eyebrow.textContent='Published Writing';
   const hub=document.getElementById('hubLabel');
