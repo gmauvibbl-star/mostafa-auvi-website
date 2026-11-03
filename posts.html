@@ -659,9 +659,9 @@ function renderBookArchive(){
    },{once:true});
  });if(language==='en'){
     const translations=[
-      {title:'The Rebirth of the Hawk',kind:'Short-story collection',alt:'The Rebirth of the Hawk book cover'},
-      {title:'The CS Record of Rights and the History of a Case',kind:'Legal narrative',alt:'The CS Record of Rights and the History of a Case book cover'},
-      {title:"The Cat's Quarantine",kind:'Short-story collection',alt:"The Cat's Quarantine book cover"}
+      {title:'The Rebirth of the Hawk',kind:'Published book',alt:'The Rebirth of the Hawk book cover'},
+      {title:'The CS Record of Rights and the History of a Case',kind:'Published book',alt:'The CS Record of Rights and the History of a Case book cover'},
+      {title:"The Cat's Quarantine",kind:'Published book',alt:"The Cat's Quarantine book cover"}
     ];
     fragment.querySelectorAll('.book-archive-card').forEach((card,i)=>{
       const item=translations[i]; if(!item)return;
