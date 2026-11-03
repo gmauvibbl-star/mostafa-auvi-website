@@ -231,7 +231,6 @@
       <a href="posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
       <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
       <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
-      <a href="journal.html">Journal</a>
       <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
       <a href="about.html">লেখক পরিচিতি</a>
       <a href="posts.html" class="current">সব লেখা</a>
@@ -284,7 +283,6 @@
       <a href="./posts.html?category=bhromonkahini">ভ্রমণকাহিনি</a>
       <a href="./posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
       <a href="./posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
-      <a href="./journal.html">Journal</a>
       <a href="./posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
       <a href="./about.html">লেখক পরিচিতি</a>
       <a href="./posts.html">সব লেখা</a>
@@ -334,10 +332,10 @@ const fmtDate=(iso,lang)=>{
 // legacyAliases: পুরোনো সব Bengali নাম যা এই বিভাগের অধীনে ছিল
 // ============================================================
 const CATEGORIES_MAP = {
-  'kothasahitya': { bn:'কথাসাহিত্য', en:'Fiction', icon:'❦', legacyAliases:['কথাসাহিত্য','গল্প','ছোটগল্প','বড় গল্প','বড়গল্প','বড়গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত গল্প','অনূদিত উপন্যাস','অনুবাদ সাহিত্য','ভ্রমণ ও অনুবাদ সাহিত্য','ভ্রমণকাহিনি','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','স্মৃতির ভাণ্ডার','ফেলে আসা দিন','নভেলা','ম্যাজিক রিয়ালিজম'] },
+  'kothasahitya': { bn:'কথাসাহিত্য', en:'Fiction', icon:'❦', legacyAliases:['কথাসাহিত্য','গল্প','ছোটগল্প','বড় গল্প','বড়গল্প','বড়গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত গল্প','অনূদিত উপন্যাস','অনুবাদ সাহিত্য','নভেলা','ম্যাজিক রিয়ালিজম'] },
   'probandho-sahityasamalochona': { bn:'প্রবন্ধ ও সাহিত্যসমালোচনা', en:'Essays & Literary Criticism', icon:'§', legacyAliases:['প্রবন্ধ ও সাহিত্যসমালোচনা','প্রবন্ধ-সাহিত্যালোচনা','প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','সাহিত্য প্রবন্ধ','বই আলোচনা','বই পর্যালোচনা','উপন্যাস আলোচনা','কবিতা আলোচনা','প্রবন্ধ আলোচনা','শিল্প সমালোচনা','বিশ্বসাহিত্য','শিল্প ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','সমাজ ও রাজনীতি','দর্শন ও চিন্তা','বিজ্ঞান ও প্রযুক্তি','শিক্ষা ও গবেষণা','ব্যক্তিত্ব ও জীবন','অনুবাদ সাহিত্য আলোচনা','নির্ধারিত গল্প আলোচনা','বিশেষ লেখকের লেখা','লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যিক বিশ্লেষণ'] },
   'ain-oadalot': { bn:'আইন-আদালত', en:'Law & Judiciary', icon:'⚖', legacyAliases:['আইন-আদালত','আইন ও আদালত','বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স','ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা','আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','সিভিল আদালতের কড়চা','সিভিল আদালতের কর্চা','কেসস্টাডি','আইনি বিশ্লেষণ','আদালতের ঘটনা','মামলার ইতিবৃত্ত','সাংবিধানিক আইন','ফৌজদারি আইন','দেওয়ানি আইন','ভূমি আইন','উত্তরাধিকার আইন','বিচারব্যবস্থা'] },
-  'bhromonkahini': { bn:'ভ্রমণকাহিনি', en:'Travel Writing', icon:'🧭', legacyAliases:['ভ্রমণকাহিনি','ভ্রমণ','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','ভ্রমণ ও অনুবাদ সাহিত্য','দেশ ভ্রমণ','travel','ভ্রমণকথা'] },
+  'bhromonkahini': { bn:'ভ্রমণকাহিনি', en:'Travel Writing', icon:'🧭', legacyAliases:['ভ্রমণকাহিনি','ভ্রমণ','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','ভ্রমণ ও অনুবাদ সাহিত্য','দেশ ভ্রমণ','travel','ভ্রমণকথা','স্মৃতির ভাণ্ডার','ফেলে আসা দিন'] },
   'chandradwip': { bn:'চন্দ্রদ্বীপ', en:'Chandradwip', icon:'❀', legacyAliases:['চন্দ্রদ্বীপ','চন্দ্রদ্বিপ','Chandradwip','chandradwip','চন্দ্রদ্বীপ উপন্যাস','নদীমাতৃক জীবন'] },
   'banking-o-orthoniti': { bn:'ব্যাংকিং ও অর্থনীতি', en:'Banking & Economics', icon:'◐', legacyAliases:['ব্যাংকিং ও অর্থনীতি','ব্যাকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা','ব্যাংকিং','অর্থনীতি','কর ব্যবস্থা','কৃষিঋণ','এসএমই ব্যাংকিং','ডিজিটাল ব্যাংকিং','ক্ষুদ্রঋণ','আর্থিক অন্তর্ভুক্তি','বীমা','বৈদেশিক বাণিজ্য','মুদ্রাবাজার'] },
   'prokashona-o-pdf': { bn:'প্রকাশনা', en:'Publications', icon:'▤', legacyAliases:['প্রকাশনা','পিডিএফ','আমার বই','পিডিএফ বই','ই-উপন্যাস','ই-প্রবন্ধ','বই','ই-বুক','PDF সংগ্রহ','প্রকাশিত গ্রন্থ','ম্যাগাজিন','সংকলন','গবেষণাপত্র'] }
@@ -430,7 +428,7 @@ const searchQuery=(params.get('q')||params.get('search')||'').trim();
 document.documentElement.lang=language;
 if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
-  const navLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Journal','Publications','About Author','All Writings'];
+  const navLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
   // English hrefs for nav (preserve lang=en)
   const navHrefs=[
     'index-en.html',
@@ -440,7 +438,6 @@ if(language==='en'){
     'posts.html?category=bhromonkahini&lang=en',
     'posts.html?category=banking-o-orthoniti&lang=en',
     'posts.html?category=chandradwip&lang=en',
-    'journal.html?lang=en',
     'posts.html?category=prokashona-o-pdf&lang=en',
     'about-en.html',
     'posts.html?lang=en'
@@ -449,7 +446,7 @@ if(language==='en'){
     if(navLabels[i])a.textContent=navLabels[i];
     if(navHrefs[i])a.setAttribute('href',navHrefs[i]);
   });
-  const footerLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Journal','Publications','About Author','All Writings'];
+  const footerLabels=['Home','Fiction','Essays & Criticism','Law & Justice','Travel Writing','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
   // English hrefs for footer-nav (use ./ prefix as in original)
   const footerHrefs=[
     './index-en.html',
@@ -459,7 +456,6 @@ if(language==='en'){
     './posts.html?category=bhromonkahini&lang=en',
     './posts.html?category=banking-o-orthoniti&lang=en',
     './posts.html?category=chandradwip&lang=en',
-    './journal.html?lang=en',
     './posts.html?category=prokashona-o-pdf&lang=en',
     './about-en.html',
     './posts.html?lang=en'
@@ -510,7 +506,7 @@ function subcategoryUrl(sub, cat=category){
   // Chandradwip sub-sections render as proper A4 reading articles on read.html
   // (same as other stories / essays) — so the reading experience matches the rest of the site.
   if(cat === 'chandradwip' && sub){
-    return './read.html?slug=' + encodeURIComponent(sub);
+    return './read.html?slug=' + encodeURIComponent(sub) + (language==='en' ? '&lang=en' : '');
   }
   const q=new URLSearchParams();
   q.set('lang',language);
@@ -661,7 +657,21 @@ function renderBookArchive(){
      fallback.setAttribute('aria-label',img.alt);
      img.replaceWith(fallback);
    },{once:true});
- });
+ });if(language==='en'){
+    const translations=[
+      {title:'The Rebirth of the Hawk',kind:'Short-story collection',alt:'The Rebirth of the Hawk book cover'},
+      {title:'The CS Record of Rights and the History of a Case',kind:'Legal narrative',alt:'The CS Record of Rights and the History of a Case book cover'},
+      {title:"The Cat's Quarantine",kind:'Short-story collection',alt:"The Cat's Quarantine book cover"}
+    ];
+    fragment.querySelectorAll('.book-archive-card').forEach((card,i)=>{
+      const item=translations[i]; if(!item)return;
+      const img=card.querySelector('img'); if(img)img.alt=item.alt;
+      const title=card.querySelector('.book-info strong'); if(title)title.textContent=item.title;
+      const kind=card.querySelector('.book-info span'); if(kind)kind.textContent=item.kind;
+      const link=card.querySelector('.book-rokomari-link'); if(link)link.textContent='View book on Rokomari ↗';
+    });
+  }
+  
  grid.replaceChildren(fragment);
 }
 
