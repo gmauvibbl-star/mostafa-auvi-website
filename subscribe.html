@@ -238,7 +238,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 function showStatus(elemId, message, type) {
   const el = document.getElementById(elemId);
   el.className = 'status visible ' + type;
-  el.innerHTML = message;
+  el.textContent = message;
 }
 
 function showView(viewName) {
@@ -295,7 +295,7 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   btn.disabled = true;
   const origText = btn.textContent;
   btn.textContent = 'পাঠানো হচ্ছে…';
-  showStatus('subscribeStatus', '<span class="spinner"></span> পাঠানো হচ্ছে…', 'processing');
+  showStatus('subscribeStatus', 'পাঠানো হচ্ছে…', 'processing');
 
   try {
     const { ok, data } = await callSubscription('subscribe', { email: email });
