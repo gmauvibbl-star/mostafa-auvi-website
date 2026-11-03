@@ -131,6 +131,13 @@
   }
 }
 
+/* Keep the entire header stacking context above the page content.
+   .page-wrap > * otherwise gives the header wrapper and main equal z-index,
+   allowing the following main section to cover an opened dropdown. */
+.page-wrap > .v2 {
+  position: relative;
+  z-index: 20 !important;
+}
 /* Final dropdown visibility and stacking safeguard */
 .hdr, .v2 .hdr {
   position: relative;
