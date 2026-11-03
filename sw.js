@@ -1,9 +1,8 @@
-const CACHE_NAME = 'mostafa-auvi-v18';
+const CACHE_NAME = 'mostafa-auvi-v19';
 const ASSETS = [
   './',
   './index.html',
   './index-en.html',
-  './journal.html',
   './posts.html',
   './read.html',
   './about.html',
@@ -29,7 +28,7 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).catch(() => {}));
+  e.waitUntil(caches.open(CACHE_NAME).then(cache => Promise.all(ASSETS.map(url => cache.add(url).catch(() => null)))));
   self.skipWaiting();
 });
 

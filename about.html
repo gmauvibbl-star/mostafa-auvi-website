@@ -782,7 +782,7 @@
 
 <!-- Top utility bar -->
 <div class="utility-bar">
-  <div class="date" id="todayDate">শুক্রবার, ২৮ অক্টোবর ২০২৬</div>
+  <div class="date" id="todayDate"></div>
   <div class="lang">
     <span class="lang-label">ভাষা নির্বাচন:</span>
     <a href="index.html" class="active" title="বাংলায় পড়তে ক্লিক করুন">বাংলা</a>
@@ -860,10 +860,10 @@
     <h1>মোস্তফা অভি</h1>
     <div class="role">Fiction Writer &amp; Literary Critic</div>
     <div class="hero-divider"><span class="line"></span><span class="diamond">◆</span><span class="line"></span></div>
-    <p class="lead">বাংলাদেশের পটুয়াখালীর জনপদে জন্ম. ব্যাংক কর্মকর্তা পেশায়, সাহিত্যচর্চায় নিয়মিত ২০১৬ সাল থেকে। ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প — এই সন্ধানে তাঁর লেখনী।</p>
+    <p class="lead">বাংলাদেশের পটুয়াখালীর জনপদে জন্ম। ব্যাংক কর্মকর্তা পেশায়, সাহিত্যচর্চায় নিয়মিত ২০১৬ সাল থেকে। ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প — এই সন্ধানে তাঁর লেখনী।</p>
   </div>
   <div class="author-photo-wrap">
-    <img class="author-photo" src="https://raw.githubusercontent.com/gmauvibbl-star/mostafa-auvi-website/main/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%B0%20%E0%A6%9B%E0%A6%AC%E0%A6%BF.jpg" alt="লেখক মোস্তফা অভি" loading="eager" onerror="this.onerror=null;this.src='auvi_photo.jpg';">
+    <img class="author-photo" src="assets/img/author-portrait.jpg" width="1024" height="1536" alt="লেখক মোস্তফা অভি" loading="eager">
     <div class="photo-credit">Portrait · Mostafa Auvi</div>
   </div>
 </section>
@@ -874,7 +874,7 @@
     <article class="bio-article">
       <div class="bio-eyebrow">জীবন ও সাহিত্যচর্চা · Life &amp; Craft</div>
 
-      <h2><span class="ornament">❦</span>জীবনী</h2>
+      <h2 id="bio"><span class="ornament">❦</span>জীবনী</h2>
       <div class="bio-body">
         <p class="dropcap">মোস্তফা অভি বাংলাদেশের পটুয়াখালী সদর উপজেলার বড় বিঘাই গ্রামে জন্মগ্রহণ করেন। পেশায় তিনি একজন ব্যাংক কর্মকর্তা। তিনি বাংলা ভাষা ও সাহিত্য বিষয়ে পড়াশোনা করেছেন। পরবর্তী সময়ে আইন বিষয়েও অধ্যয়ন করেন। ২০১৬ সাল থেকে তিনি নিয়মিত সাহিত্যচর্চা করছেন। তাঁর আগ্রহের বিষয় বাংলার গ্রামীণ জীবন, জনপদের ইতিহাস, মানুষের স্মৃতি, নিঃসঙ্গতা, প্রেম, জাদুবাস্তবতা, পৌরাণিক মিথ, ধর্মীয় অনুষঙ্গ এবং বাস্তবতার সঙ্গে কল্পনার মেলবন্ধন।</p>
         <p>তাঁর লেখায় ইতিহাস পাঠ্যবইয়ের বিবরণ না হয়ে; মানুষের জীবন, সম্পর্ক, লোকস্মৃতি ও সময়ের পরিবর্তনের মধ্য দিয়ে ইতিহাসের নানা অভিজ্ঞতা ফুটে ওঠে। গল্প ও উপন্যাসের পাশাপাশি তিনি প্রবন্ধ, সাহিত্যসমালোচনা এবং সমাজজীবনের নানা প্রসঙ্গ নিয়ে লেখেন।</p>
@@ -884,23 +884,23 @@
 
       <hr class="bio-divider">
 
-      <h2><span class="ornament">❦</span>প্রকাশিত গ্রন্থ</h2>
+      <h2 id="books"><span class="ornament">❦</span>প্রকাশিত গ্রন্থ</h2>
       <div class="bio-body" style="margin-bottom:8px;">
         <p>তিনটি প্রকাশিত বই এবং একটি চলমান ঐতিহাসিক আখ্যানের পাণ্ডুলিপি নিয়ে মোস্তফা অভির সাহিত্যযাত্রা এগিয়ে চলছে।</p>
       </div>
       <div class="books-list">
         <article class="book-item">
-          <div class="book-cover-frame"><img src="assets/img/books/bajpakhir-punorjonmo.jpg" alt="বাজপাখির পুনর্জন্ম বইয়ের প্রচ্ছদ" referrerpolicy="no-referrer" loading="eager" fetchpriority="high" decoding="async" width="120" height="160"></div>
+          <div class="book-cover-frame"><img src="assets/img/books/bajpakhir-punorjonmo.jpg" alt="বাজপাখির পুনর্জন্ম বইয়ের প্রচ্ছদ" referrerpolicy="no-referrer" loading="lazy" decoding="async" width="120" height="160"></div>
           <div class="book-info"><strong>বাজপাখির পুনর্জন্ম</strong><span>গল্পগ্রন্থ · প্রথম প্রকাশ ২০১৭</span></div>
           <div class="book-year">২০১৭</div>
         </article>
         <article class="book-item">
-          <div class="book-cover-frame"><img src="assets/img/books/cs-khotiyan.jpg" alt="সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত বইয়ের প্রচ্ছদ" referrerpolicy="no-referrer" loading="eager" fetchpriority="high" decoding="async" width="120" height="160"></div>
+          <div class="book-cover-frame"><img src="assets/img/books/cs-khotiyan.jpg" alt="সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত বইয়ের প্রচ্ছদ" referrerpolicy="no-referrer" loading="lazy" decoding="async" width="120" height="160"></div>
           <div class="book-info"><strong>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</strong><span>আইন ও সমাজজীবন</span></div>
           <div class="book-year">২০১৯</div>
         </article>
         <article class="book-item">
-          <div class="book-cover-frame"><img src="assets/img/books/beraler-quarantine.jpg" alt="বেড়ালের কোয়ারেন্টাইন বইয়ের প্রচ্ছদ" loading="eager" fetchpriority="high" decoding="async" width="120" height="160" referrerpolicy="no-referrer"></div>
+          <div class="book-cover-frame"><img src="assets/img/books/beraler-quarantine.jpg" alt="বেড়ালের কোয়ারেন্টাইন বইয়ের প্রচ্ছদ" loading="lazy" decoding="async" width="120" height="160" referrerpolicy="no-referrer"></div>
           <div class="book-info"><strong>বেড়ালের কোয়ারেন্টাইন</strong><span>মহামারিকালীন গল্পগ্রন্থ</span></div>
           <div class="book-year">২০২২</div>
         </article>
@@ -911,19 +911,19 @@
 
       <hr class="bio-divider">
 
-      <h2><span class="ornament">❦</span>স্বীকৃতি ও প্রকাশনা</h2>
+      <h2 id="recognition"><span class="ornament">❦</span>স্বীকৃতি ও প্রকাশনা</h2>
       <ul class="recog-list">
         <li><strong>প্রথম প্রকাশ (২০১৭):</strong> দৈনিক সোনার দেশ ও দৈনিক সংবাদ-এ গল্প “বাজপাখির পুনর্জন্ম” প্রকাশিত — সাহিত্যজীবনের সূচনা।</li>
         <li><strong>প্রথম বই (২০১৭):</strong> বাজপাখির পুনর্জন্ম — গল্পগ্রন্থ।</li>
         <li><strong>আইন-সাহিত্য (২০১৯):</strong> সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত — আইনি বিষয়ে সাহিত্যিক আখ্যান।</li>
-        <li><strong>মহামারীকাল (২০২২):</strong> বেড়ালের কোয়ারেন্টাইন — কোভিড-কালীন জীবনচিত্র ও পর্যবেক্ষণ।</li>
+        <li><strong>মহামারিকাল (২০২২):</strong> বেড়ালের কোয়ারেন্টাইন — কোভিড-কালীন জীবনচিত্র ও পর্যবেক্ষণ।</li>
         <li><strong>চলমান প্রকল্প:</strong> চন্দ্রদ্বীপ আখ্যান — দক্ষিণ বাংলার ঐতিহাসিক উপন্যাস।</li>
         <li><strong>নিয়মিত লেখা:</strong> গল্প, প্রবন্ধ, সাহিত্যসমালোচনা।</li>
       </ul>
 
       <hr class="bio-divider">
 
-      <h2><span class="ornament">❦</span>এই ওয়েবসাইটে</h2>
+      <h2 id="site"><span class="ornament">❦</span>এই ওয়েবসাইটে</h2>
       <div class="bio-body">
         <p>এই সাইটে গল্প, উপন্যাস, প্রবন্ধ, সাহিত্যালোচনা, ভ্রমণকাহিনি, প্রকাশনা এবং আইন-আদালত ও ব্যাংকিং-অর্থনীতিবিষয়ক লেখা একত্রে সাজানো হচ্ছে। নতুন লেখা প্রকাশিত হলে সাম্প্রতিক লেখা ও আর্কাইভ থেকে সেগুলো খুঁজে পাওয়া যাবে।</p>
         <p>নতুন লেখা প্রকাশিত হলে তার খবর পেতে ইমেইল সাবস্ক্রিপশনে যুক্ত হতে পারেন।</p>
@@ -937,19 +937,19 @@
       <h3><span class="icon">❖</span> প্রকাশিত গ্রন্থ</h3>
       <ul>
         <li>
-          <a href="posts.html?category=গল্প">বাজপাখির পুনর্জন্ম</a>
+          <a href="posts.html?category=kothasahitya">বাজপাখির পুনর্জন্ম</a>
           <span class="desc">গল্পগ্রন্থ · ২০১৭</span>
         </li>
         <li>
-          <a href="posts.html?category=আইন-আদালত">সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</a>
+          <a href="posts.html?category=ain-oadalot">সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</a>
           <span class="desc">আইন ও সমাজ · ২০১৯</span>
         </li>
         <li>
           <a href="posts.html?category=kothasahitya">বেড়ালের কোয়ারেন্টাইন</a>
-          <span class="desc">মহামারীকালীন গল্পগ্রন্থ · ২০২২</span>
+          <span class="desc">মহামারিকালীন গল্পগ্রন্থ · ২০২২</span>
         </li>
         <li>
-          <a href="posts.html">চন্দ্রদ্বীপ আখ্যান</a>
+          <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ আখ্যান</a>
           <span class="desc">চলমান প্রকল্প · ঐতিহাসিক আখ্যান</span>
         </li>
       </ul>
@@ -989,11 +989,11 @@
           <span class="desc">গল্প, উপন্যাস, প্রবন্ধের আর্কাইভ</span>
         </li>
         <li>
-          <a href="posts.html?category=সাহিত্যালোচনা">সাহিত্যসমালোচনা</a>
+          <a href="posts.html?category=probandho-sahityasamalochona">সাহিত্যসমালোচনা</a>
           <span class="desc">সাহিত্য ও সংস্কৃতির পাঠ</span>
         </li>
         <li>
-          <a href="posts.html?category=আইন-আদালত">আইন-আদালত</a>
+          <a href="posts.html?category=ain-oadalot">আইন-আদালত</a>
           <span class="desc">আইনি বিষয়ে সাহিত্যিক আখ্যান</span>
         </li>
         <li>
@@ -1006,11 +1006,10 @@
     <section class="sidebox">
       <h3><span class="icon">⌕</span> এই পাতায়</h3>
       <ul>
-        <li><a href="#">জীবনী</a></li>
-        <li><a href="#">প্রকাশিত গ্রন্থ</a></li>
-        <li><a href="#">সাহিত্যচর্চা ও দর্শন</a></li>
-        <li><a href="#">স্বীকৃতি ও প্রকাশনা</a></li>
-        <li><a href="#">এই ওয়েবসাইটে</a></li>
+        <li><a href="#bio">জীবনী</a></li>
+        <li><a href="#books">প্রকাশিত গ্রন্থ</a></li>
+        <li><a href="#recognition">স্বীকৃতি ও প্রকাশনা</a></li>
+        <li><a href="#site">এই ওয়েবসাইটে</a></li>
       </ul>
     </section>
   </aside>
@@ -1030,8 +1029,8 @@
   </div>
   <div class="right">
     <a href="subscribe.html">পত্র বক্স</a>
-    <a href="index.html">সাইটম্যাপ</a>
-    <a href="about.html">গোপনীয়তা</a>
+    <a href="sitemap.xml">সাইটম্যাপ</a>
+    <a href="privacy.html">গোপনীয়তা</a>
     <a href="#">© ২০২৬</a>
   </div>
 </div>
@@ -1220,11 +1219,13 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 </script>
 
 
+<script>
 /* ====== Service Worker registration ====== */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('sw.js').catch(function() {});
   });
 }
+</script>
 </body>
 </html>
