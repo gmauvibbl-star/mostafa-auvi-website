@@ -13,7 +13,7 @@
     position: relative;
     height: 520px;
     background:
-      url("url("assets/img/hero-banner.jpg")") center center / cover no-repeat;
+      url("../img/hero-banner.jpg") center center / cover no-repeat;
     overflow: hidden;
     display: flex;
   }
