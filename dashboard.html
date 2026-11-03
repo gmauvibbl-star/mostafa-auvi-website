@@ -1483,7 +1483,7 @@ setInterval(updateSEOChecklist, 3000);
     }
 
     // ============================================================
-    // IMAGE UPLOAD (Supabase Storage — post-covers bucket)
+    // IMAGE UPLOAD (Supabase Storage — covers bucket)
     // ============================================================
     async function uploadCover(file, language = 'bn') {
       if (file.size > 5 * 1024 * 1024) throw new Error('ফাইল ৫MB এর বেশি');
