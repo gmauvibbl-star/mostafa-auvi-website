@@ -2078,6 +2078,7 @@ if (journalLanguage === 'en') {
   setAttr('#navSearch', 'aria-label', 'Search');
   setText('.subscribe-btn span', 'Subscribe');
   setAttr('.subscribe-btn', 'title', 'Get email updates on new writing');
+  setAttr('.subscribe-btn', 'href', 'subscribe-en.html');
   setText('.vqr-masthead .left strong', 'Mostafa Auvi');
   const portraitCaption = document.querySelector('.compact-portrait figcaption');
   if (portraitCaption) { const captionText = Array.from(portraitCaption.childNodes).find(n => n.nodeType === Node.TEXT_NODE); if (captionText) captionText.textContent = ' — Writer & Literary Critic'; }
@@ -2112,9 +2113,11 @@ if (journalLanguage === 'en') {
   setHeading('.sidebar .sidebox:nth-child(4) h3', 'Email Updates');
   setText('.sidebar .sidebox:nth-child(4) p', 'Subscribe to receive new journal entries directly by email.');
   setText('.subscribe-link', 'Subscribe →');
+  setAttr('.subscribe-link', 'href', 'subscribe-en.html');
   setText('#authorLoginLabel', 'Write for the Journal');
   setAttr('#authorLoginBtn', 'aria-label', 'Write for the Journal');
   setText('.footer-strip .right a:nth-child(1)', 'Subscribe');
+  setAttr('.footer-strip .right a:nth-child(1)', 'href', 'subscribe-en.html');
   setText('.footer-strip .right a:nth-child(2)', 'Sitemap');
   setText('.footer-strip .right a:nth-child(3)', 'Privacy');
   setText('.footer-strip .right a:nth-child(4)', '© 2026');
