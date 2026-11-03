@@ -101,6 +101,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://gmauvibbl-star.github.io/mostafa-auvi-website/subscribe-en.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://gmauvibbl-star.github.io/mostafa-auvi-website/read.html?slug=chandradwip-writing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
