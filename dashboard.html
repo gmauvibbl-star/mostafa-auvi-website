@@ -2423,7 +2423,8 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         el('div', { class: 'flex gap-2' },
           el('button', { class: 'btn', onclick: () => { state.view = 'list'; state.editingId = null; renderApp(); } }, 'বাতিল'),
           el('button', { class: 'btn', id: 'save-draft-btn' }, icon('save'), 'খসড়া সেভ'),
-          el('button', { class: 'btn btn-primary', id: 'publish-btn' }, icon('file-text'), 'প্রকাশ করুন')
+          el('button', { class: 'btn btn-primary', id: 'publish-btn' }, icon('file-text'), 'প্রকাশ করুন'),
+          el('button', { class: 'btn', id: 'notify-btn', style: { display: 'none' } }, icon('mail'), 'সাবস্ক্রাইবারদের জানান')
         )
       );
 
@@ -2884,6 +2885,9 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           sb.className = `badge ${formData.status === 'published' ? 'badge-default' : 'badge-warning'}`;
           renderTags();
            $('#f-journal-entry').checked = formData.tags.some(t => String(t).trim().toLowerCase() === 'জার্নাল');
+          // Show notify button only for published posts
+          const notifyBtn = $('#notify-btn');
+          if (notifyBtn) notifyBtn.style.display = formData.status === 'published' ? '' : 'none';
         } catch (e) {
           toast('লেখা লোড ব্যর্থ', e.message, 'error');
         }
@@ -2931,6 +2935,45 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       };
       $('#save-draft-btn').addEventListener('click', () => save('draft'));
       $('#publish-btn').addEventListener('click', () => save('published'));
+
+      // Notify Subscribers — calls publish-notification Edge Function
+      const notifyBtn = $('#notify-btn');
+      if (notifyBtn) {
+        notifyBtn.addEventListener('click', async () => {
+          if (!state.editingId || !state.editingId.id) {
+            toast('ত্রুটি', 'প্রথমে লেখা সংরক্ষণ করুন।', 'error');
+            return;
+          }
+          if (!confirm('নিশ্চিত করুন: সকল নিশ্চিতকৃত সাবস্ক্রাইবারকে এই লেখার বিজ্ঞপ্তি পাঠাতে চান?')) return;
+          notifyBtn.disabled = true;
+          const origText = notifyBtn.innerHTML;
+          notifyBtn.innerHTML = '<span class="spinner" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:6px;"></span> পাঠানো হচ্ছে...';
+          try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) throw new Error('সেশন নেই — আবার লগইন করুন।');
+            const resp = await fetch(SUPABASE_URL + '/functions/v1/publish-notification', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + session.access_token
+              },
+              body: JSON.stringify({ post_id: state.editingId.id })
+            });
+            const result = await resp.json();
+            if (resp.ok) {
+              toast('বিজ্ঞপ্তি পাঠানো হয়েছে', `${result.sent || 0} জনকে ইমেইল পাঠানো হয়েছে${result.failed ? ', ' + result.failed + 'টি ব্যর্থ' : ''}।`, 'success');
+            } else {
+              throw new Error(result.error || 'বিজ্ঞপ্তি ব্যর্থ');
+            }
+          } catch (e) {
+            toast('বিজ্ঞপ্তি ব্যর্থ', e.message, 'error');
+          } finally {
+            notifyBtn.disabled = false;
+            notifyBtn.innerHTML = origText;
+            refreshIcons();
+          }
+        });
+      }
 
       refreshIcons();
     }
