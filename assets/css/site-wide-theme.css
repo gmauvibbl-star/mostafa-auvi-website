@@ -1,0 +1,78 @@
+/* Shared visual language aligned with the current Bengali homepage.
+   Layout, content, navigation targets and application behaviour remain page-owned. */
+:root{
+  --site-bg:#f4f1ea;
+  --site-paper:#fffdf8;
+  --site-ink:#1a1a1a;
+  --site-muted:#68645d;
+  --site-accent:#c5a059;
+  --site-dark:#1a1a1a;
+  --site-border:#ded8cc;
+  --site-shadow:0 12px 34px rgba(26,26,26,.07);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--site-bg)!important;
+  color:var(--site-ink)!important;
+  font-family:"Hind Siliguri","Noto Serif Bengali",Georgia,serif!important;
+  line-height:1.75;
+}
+h1,h2,h3,h4,.section-title,.page-title{
+  color:var(--site-ink);
+  font-family:"Playfair Display","Noto Serif Bengali",Georgia,serif;
+}
+p,li,label,small,.muted,.meta,.description{color:inherit}
+a{transition:color .2s ease,background-color .2s ease,border-color .2s ease}
+a:not(.button):not(.btn):not([class*="button"]){color:#79551f}
+a:not(.button):not(.btn):not([class*="button"]):hover{color:#a4772f}
+button,.button,.btn,[class*="btn-"],input[type="submit"]{
+  border-radius:3px;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+}
+button:hover,.button:hover,.btn:hover,[class*="btn-"]:hover,input[type="submit"]:hover{transform:translateY(-1px)}
+input,select,textarea{
+  font:inherit;
+  color:var(--site-ink);
+  background:#fffefa;
+  border:1px solid #cfc7b9;
+  border-radius:3px;
+}
+input:focus,select:focus,textarea:focus{
+  outline:2px solid rgba(197,160,89,.32);
+  border-color:var(--site-accent);
+}
+article,.paper,.card,.post-card,.journal-card,.content-card,.profile-card,.work-card,.subscribe-card,.form-card{
+  border-color:var(--site-border);
+}
+.paper,.card,.post-card,.journal-card,.content-card,.profile-card,.work-card,.subscribe-card,.form-card{
+  background:var(--site-paper);
+  box-shadow:var(--site-shadow);
+}
+hr,.rule{border-color:var(--site-border)}
+nav,.topnav,.main-nav,.navbar{
+  background:rgba(244,241,234,.97);
+  border-color:var(--site-border);
+}
+nav a,.topnav a,.main-nav a,.navbar a{
+  color:var(--site-ink);
+  text-decoration:none;
+}
+nav a:hover,.topnav a:hover,.main-nav a:hover,.navbar a:hover,
+nav a.active,.topnav a.active,.main-nav a.active,.navbar a.active{
+  color:#936d2d;
+}
+header:not(.hero):not(.banner):not(.profile-hero),footer,.site-footer{
+  border-color:var(--site-border);
+}
+footer,.site-footer{
+  background:#1a1a1a;
+  color:#f4f1ea;
+}
+footer p,footer li,footer a,.site-footer p,.site-footer li,.site-footer a{color:#eee8dc}
+footer a:hover,.site-footer a:hover{color:#d7b66f}
+::selection{background:rgba(197,160,89,.28);color:#1a1a1a}
+img{max-width:100%;height:auto}
+@media(max-width:768px){
+  body{line-height:1.72}
+  input,select,textarea,button,.button,.btn{max-width:100%}
+}
