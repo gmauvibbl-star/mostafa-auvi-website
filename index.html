@@ -297,6 +297,16 @@
     <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--paper-dark);text-align:center;font-family:'EB Garamond',serif;font-size:13px;">
       <a href="#" id="forgotPasswordLink" style="color:var(--blood);text-decoration:none;font-style:italic;font-weight:600;">পাসওয়ার্ড ভুলে গেছেন?</a>
     </div>
+    <div id="forgotPasswordForm" style="display:none;margin-top:14px;text-align:left;">
+      <div class="form-group">
+        <label for="resetEmail">রিসেট লিংক পাঠানোর ইমেইল</label>
+        <input id="resetEmail" type="email" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="btn-row">
+        <button type="button" id="sendResetBtn" class="btn" style="background:var(--gold-bright);color:var(--teal-deep);border-color:var(--gold-bright);">রিসেট লিংক পাঠান</button>
+        <button type="button" id="cancelResetBtn" class="btn secondary">বাতিল</button>
+      </div>
+    </div>
   </div>
 </div>
 
