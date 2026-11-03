@@ -103,6 +103,33 @@
   .v2 .menu { column-gap:12px; row-gap:7px; }
   .menu .dropdown summary,.menu > a { font-size:15px; }
 }
+/* Plain category directory: one Selected Writings section, not eight tiles. */
+.selected-writing-list {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:860px; margin:18px auto 0; text-align:left;
+  border-top:1px solid var(--paper-dark,#C8B898);
+}
+.selected-writing-list a {
+  display:flex; flex-direction:column; gap:1px; padding:12px 18px;
+  border-bottom:1px solid var(--paper-dark,#C8B898);
+  color:var(--ink-soft,#3D2E22); text-decoration:none;
+  transition:background .2s,color .2s;
+}
+.selected-writing-list a:hover {
+  background:rgba(184,146,72,.09); color:var(--teal-deep,#0F3D3E);
+}
+.selected-writing-title {
+  font-family:'EB Garamond','Cormorant Garamond',serif;
+  font-size:21px; font-weight:600; line-height:1.2;
+}
+.selected-writing-sub {
+  font-family:'EB Garamond','Cormorant Garamond',serif;
+  font-size:15px; font-style:italic; color:var(--gold-dim,#92733D);
+}
+@media(max-width:600px) {
+  .selected-writing-list { grid-template-columns:1fr; margin-top:14px; }
+  .selected-writing-list a { padding:11px 12px; }
+}
 </style>
 </head>
 <body>
@@ -269,19 +296,19 @@
 <!-- Explore + Recent + Footer -->
 <div class="wrap">
 
-  <section class="explore" aria-labelledby="explore-title">
+  <section class="explore selected-writings" aria-labelledby="explore-title">
     <div class="eyebrow">Explore the work</div>
-    <h2 id="explore-title">Eight Worlds of Writing</h2>
-    <p class="sub">Explore Mostafa Auvi's literary horizons</p>
-    <nav class="tiles" aria-label="Categories">
-      <a class="tile t1" href="posts.html?category=kothasahitya&lang=en"><span class="num">01</span><div><h3>Fiction</h3><span class="en">Novels &amp; Stories</span></div></a>
-      <a class="tile t2" href="posts.html?category=probandho-sahityasamalochona&lang=en"><span class="num">02</span><div><h3>Essays &amp; Criticism</h3><span class="en">Literary Analysis</span></div></a>
-      <a class="tile t3" href="posts.html?category=ain-oadalot&lang=en"><span class="num">03</span><div><h3>Law &amp; Justice</h3><span class="en">Legal Writing</span></div></a>
-      <a class="tile t4" href="posts.html?category=bhromonkahini&lang=en"><span class="num">04</span><div><h3>Travel Writing</h3><span class="en">Journeys &amp; Places</span></div></a>
-      <a class="tile t5" href="posts.html?category=banking-o-orthoniti&lang=en"><span class="num">05</span><div><h3>Banking &amp; Economics</h3><span class="en">Finance &amp; Society</span></div></a>
-      <a class="tile t6" href="posts.html?category=chandradwip&lang=en"><span class="num">06</span><div><h3>Chandradwip</h3><span class="en">Novel</span></div></a>
-      <a class="tile t7" href="journal.html?lang=en"><span class="num">07</span><div><h3>Journal</h3><span class="en">Literary Journal</span></div></a>
-      <a class="tile t8" href="posts.html?category=prokashona-o-pdf&lang=en"><span class="num">08</span><div><h3>Publications</h3><span class="en">Published Books</span></div></a>
+    <h2 id="explore-title">Selected Writings</h2>
+    <p class="sub">Browse the different fields of writing</p>
+    <nav class="selected-writing-list" aria-label="Selected writings and sections">
+      <a href="posts.html?category=kothasahitya&amp;lang=en"><span class="selected-writing-title">Fiction</span><span class="selected-writing-sub">Novels &amp; Stories</span></a>
+      <a href="posts.html?category=probandho-sahityasamalochona&amp;lang=en"><span class="selected-writing-title">Essays &amp; Criticism</span><span class="selected-writing-sub">Literary Analysis</span></a>
+      <a href="posts.html?category=ain-oadalot&amp;lang=en"><span class="selected-writing-title">Law &amp; Justice</span><span class="selected-writing-sub">Legal Writing</span></a>
+      <a href="posts.html?category=bhromonkahini&amp;lang=en"><span class="selected-writing-title">Travel Writing</span><span class="selected-writing-sub">Journeys &amp; Places</span></a>
+      <a href="posts.html?category=banking-o-orthoniti&amp;lang=en"><span class="selected-writing-title">Banking &amp; Economics</span><span class="selected-writing-sub">Finance &amp; Society</span></a>
+      <a href="posts.html?category=chandradwip&amp;lang=en"><span class="selected-writing-title">Chandradwip</span><span class="selected-writing-sub">Novel</span></a>
+      <a href="journal.html?lang=en"><span class="selected-writing-title">Journal</span><span class="selected-writing-sub">Literary Journal</span></a>
+      <a href="posts.html?category=prokashona-o-pdf&amp;lang=en"><span class="selected-writing-title">Publications</span><span class="selected-writing-sub">Published Books</span></a>
     </nav>
   </section>
 
