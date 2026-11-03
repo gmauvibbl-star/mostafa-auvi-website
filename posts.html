@@ -11,7 +11,8 @@
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/posts.html">
 <link rel="alternate" hreflang="bn" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/posts.html" />
-<link rel="alternate" hreflang="x-default" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/index.html" />
+<link rel="alternate" hreflang="en" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/posts.html?lang=en" />
+<link rel="alternate" hreflang="x-default" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/posts.html" />
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mostafa Auvi">
@@ -166,21 +167,19 @@
     border-radius:10px;
     box-shadow:0 6px 22px rgba(35,25,15,0.08);
     overflow:hidden;
-    display:grid;
-    grid-template-columns:200px 1fr;
-    gap:0;
+    grid-column:1 / -1;
   }
   .cwip-landing-cover{
     overflow:hidden;
     background:#0F3D3E;
+    width:100%;
   }
   .cwip-landing-cover img{
     display:block;
     width:100%;
-    height:100%;
+    height:320px;
     object-fit:cover;
     object-position:center;
-    min-height:160px;
   }
   .cwip-landing-body{
     padding:22px 28px 24px;
@@ -209,8 +208,7 @@
     font-size:14px;
   }
   @media(max-width:640px){
-    .cwip-landing{grid-template-columns:1fr;}
-    .cwip-landing-cover img{min-height:180px;}
+    .cwip-landing-cover img{height:220px;}
     .cwip-landing-body{padding:18px 20px 20px;}
     .cwip-landing-title{font-size:21px;}
   }
