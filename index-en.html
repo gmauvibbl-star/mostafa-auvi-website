@@ -42,6 +42,66 @@
 <link rel="stylesheet" href="assets/css/header-new.css">
 <link rel="stylesheet" href="assets/css/hero.css">
 <link rel="stylesheet" href="assets/css/auth.css">
+<!-- Dropdown navigation styled to match the Bengali homepage -->
+<style>
+.menu { position:relative; overflow:visible !important; }
+.menu .dropdown { position:relative; display:inline-block; flex:0 0 auto; }
+.menu .dropdown summary {
+  list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:2px;
+  min-height:36px; padding:4px 0; font-family:'EB Garamond','Cormorant Garamond',serif;
+  font-size:17px; font-weight:600; letter-spacing:.02em; transition:all .25s;
+  border-bottom:2px solid transparent; white-space:nowrap;
+}
+.menu .dropdown summary::-webkit-details-marker { display:none; }
+.menu .dropdown summary:hover { border-bottom-color:var(--gold,#B89248); }
+.menu .dropdown[open] summary { border-bottom-color:var(--gold,#B89248); color:var(--teal-deep,#0F3D3E); }
+.menu .dropdown-panel {
+  display:none; position:absolute; top:calc(100% + 7px); left:0;
+  min-width:250px; max-width:min(320px,calc(100vw - 32px));
+  max-height:min(65vh,420px); overflow-y:auto; overscroll-behavior:contain;
+  white-space:normal; background:var(--cream,#FAF4E8);
+  border:1px solid var(--paper-dark,#C8B898); border-radius:4px;
+  box-shadow:0 12px 30px rgba(15,61,62,.20); padding:6px 0; z-index:1000;
+  flex-direction:column;
+}
+.menu .dropdown[open] > .dropdown-panel { display:flex; }
+.menu .dropdown-panel a {
+  display:block; padding:10px 18px; font-family:'EB Garamond','Cormorant Garamond',serif;
+  font-size:17px; font-weight:500; line-height:1.45; color:var(--ink-soft,#3D2E22);
+  text-decoration:none; transition:all .2s; white-space:normal;
+}
+.menu .dropdown-panel a:hover {
+  background:var(--paper-warm,#EDE2C6); color:var(--teal-deep,#0F3D3E); padding-left:22px;
+}
+.menu .dropdown:last-of-type > .dropdown-panel { left:auto; right:0; }
+.page-wrap > .v2 { position:relative; z-index:20 !important; }
+.hdr,.v2 .hdr { position:relative; z-index:50; overflow:visible !important; }
+.menu { position:relative; z-index:51; overflow-x:visible !important; overflow-y:visible !important; }
+.menu .dropdown { z-index:52; }
+.menu .dropdown[open] { z-index:60; }
+.menu .dropdown-panel { visibility:hidden; opacity:0; pointer-events:none; }
+.menu .dropdown[open] > .dropdown-panel {
+  display:flex !important; visibility:visible; opacity:1; pointer-events:auto;
+}
+@media(max-width:900px) {
+  .v2 .menu {
+    display:flex; flex-wrap:wrap; align-items:center; gap:5px 16px;
+    overflow:visible; white-space:normal; padding:8px 0 4px;
+  }
+  .menu .dropdown-panel {
+    position:absolute; top:calc(100% + 5px); left:0; right:auto;
+    min-width:min(270px,calc(100vw - 36px)); max-width:calc(100vw - 36px);
+    padding:6px 0; border:1px solid var(--paper-dark,#C8B898); border-radius:4px;
+    box-shadow:0 12px 30px rgba(15,61,62,.22); background:var(--cream,#FAF4E8);
+  }
+  .menu .dropdown:last-of-type > .dropdown-panel { left:auto; right:0; }
+  .menu .dropdown-panel a { padding:11px 16px; }
+}
+@media(max-width:480px) {
+  .v2 .menu { column-gap:12px; row-gap:7px; }
+  .menu .dropdown summary,.menu > a { font-size:15px; }
+}
+</style>
 </head>
 <body>
 
@@ -80,14 +140,27 @@
     </div>
     <nav class="menu">
       <a href="index-en.html">Home</a>
-      <a href="posts.html?category=kothasahitya&lang=en">Fiction</a>
-      <a href="posts.html?category=probandho-sahityasamalochona&lang=en">Essays &amp; Criticism</a>
-      <a href="posts.html?category=ain-oadalot&lang=en">Law &amp; Justice</a>
-      <a href="posts.html?category=bhromonkahini&lang=en">Travel Writing</a>
-      <a href="posts.html?category=banking-o-orthoniti&lang=en">Banking &amp; Economics</a>
-      <a href="posts.html?category=chandradwip&lang=en">Chandradwip</a>
+
+      <details class="dropdown">
+        <summary>Selected Writings ▾</summary>
+        <div class="dropdown-panel">
+          <a href="posts.html?category=kothasahitya&amp;lang=en">Fiction</a>
+          <a href="posts.html?category=probandho-sahityasamalochona&amp;lang=en">Essays &amp; Criticism</a>
+          <a href="posts.html?category=ain-oadalot&amp;lang=en">Law &amp; Justice</a>
+          <a href="posts.html?category=bhromonkahini&amp;lang=en">Travel Writing</a>
+          <a href="posts.html?category=banking-o-orthoniti&amp;lang=en">Banking &amp; Economics</a>
+        </div>
+      </details>
+
+      <details class="dropdown">
+        <summary>Upcoming Books ▾</summary>
+        <div class="dropdown-panel">
+          <a href="posts.html?category=chandradwip&amp;lang=en">Chandradwip</a>
+        </div>
+      </details>
+
       <a class="j" href="journal.html?lang=en">Journal</a>
-      <a href="posts.html?category=prokashona-o-pdf&lang=en">Publications</a>
+      <a href="posts.html?category=prokashona-o-pdf&amp;lang=en">Publications</a>
       <a href="about-en.html">About Author</a>
       <a href="posts.html?lang=en">All Writings</a>
     </nav>
@@ -320,6 +393,31 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(function() {});
   });
 }
+</script>
+<script>
+/* Keep English navigation dropdowns predictable on touch and desktop. */
+(function () {
+  var dropdowns = document.querySelectorAll('.menu details.dropdown');
+  if (!dropdowns.length) return;
+  dropdowns.forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (!item.open) return;
+      dropdowns.forEach(function (other) {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('.menu details.dropdown')) {
+      dropdowns.forEach(function (item) { item.open = false; });
+    }
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      dropdowns.forEach(function (item) { item.open = false; });
+    }
+  });
+})();
 </script>
 </body>
 </html>
