@@ -527,6 +527,7 @@ function updateIntro(){
         }else{location.href='posts.html?q='+encodeURIComponent(searchQuery)+(language==='en'?'&lang=en':'');}
       });
     }
+  }
   // ডায়নামিক canonical + document.title (SEO ফিক্স)
   const catInfo = CATEGORIES_MAP[category];
   const titleBase = catInfo ? (language==='en' ? catInfo.en : catInfo.bn) : (language==='en'?'Published Writing':'প্রকাশিত লেখা');
