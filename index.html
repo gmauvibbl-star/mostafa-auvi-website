@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official website of Mostafa Auvi, International Fiction Writer.">
-    <title>Mostafa Auvi | International Fiction Writer</title>
+    <meta name="description" content="মোস্তফা অভি - আন্তর্জাতিক কথাসাহিত্যিক। তার বই, লেখা এবং জীবনীর আনুষ্ঠানিক ওয়েবসাইট।">
+    <title>মোস্তফা অভি | আন্তর্জাতিক কথাসাহিত্যিক</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Bengali Font Added -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -19,7 +20,7 @@
             --secondary-bg: #1a1a1a;
             --secondary-text: #e0e0e0;
             --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Lato', sans-serif;
+            --font-bangla: 'Hind Siliguri', sans-serif; /* Bengali readable font */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,8 +29,8 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: var(--font-sans);
-            line-height: 1.6;
+            font-family: var(--font-bangla);
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
@@ -38,21 +39,21 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 4%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(244, 241, 234, 0.85);
+            background: rgba(244, 241, 234, 0.95);
             backdrop-filter: blur(10px);
             transition: padding 0.3s ease;
         }
 
-        header.scrolled { padding: 1rem 5%; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        header.scrolled { padding: 0.8rem 4%; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: 1px;
             color: var(--text-color);
@@ -60,13 +61,23 @@
         }
         .logo span { color: var(--accent-color); }
 
-        nav ul { list-style: none; display: flex; gap: 2rem; }
+        nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 2.5rem; 
+        }
+
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            gap: 1.8rem; 
+        }
+        
         nav a {
             text-decoration: none;
             color: var(--text-color);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            font-size: 0.95rem;
+            font-weight: 500;
             position: relative;
             transition: color 0.3s ease;
         }
@@ -80,6 +91,33 @@
         }
         nav a:hover { color: var(--accent-color); }
         nav a:hover::after { width: 100%; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .lang-switch {
+            font-size: 0.9rem;
+            color: #666;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-subscribe {
+            padding: 0.6rem 1.5rem;
+            background-color: var(--text-color);
+            color: #fff !important;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 2px;
+            transition: background 0.3s ease;
+        }
+        .btn-subscribe:hover {
+            background-color: var(--accent-color);
+        }
 
         .menu-toggle {
             display: none;
@@ -113,7 +151,7 @@
         }
 
         .hero-content {
-            max-width: 550px;
+            max-width: 600px;
             z-index: 2;
             opacity: 0;
             transform: translateY(20px);
@@ -121,18 +159,18 @@
         }
 
         .hero-tag {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            font-size: 1rem;
+            letter-spacing: 1px;
             color: var(--accent-color);
             margin-bottom: 1rem;
             display: block;
+            font-weight: 600;
         }
 
         .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 1.1;
+            font-family: var(--font-bangla);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
             margin-bottom: 1.5rem;
             font-weight: 700;
         }
@@ -145,14 +183,13 @@
 
         .btn {
             display: inline-block;
-            padding: 1rem 2.5rem;
+            padding: 0.8rem 2.2rem;
             text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1rem;
             transition: all 0.3s ease;
             border: 1px solid var(--text-color);
             cursor: pointer;
+            font-family: var(--font-bangla);
         }
         .btn-primary { background-color: var(--text-color); color: var(--bg-color); }
         .btn-primary:hover { background-color: var(--accent-color); border-color: var(--accent-color); }
@@ -180,64 +217,52 @@
         }
 
         /* Section Styles */
-        section { padding: 0; } /* Removed default padding to allow full-width about section */
-        
+        section { padding: 0; }
         .section-header { text-align: center; margin-bottom: 4rem; padding: 6rem 5% 0; }
         .section-title {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1rem;
-        }
-        .section-subtitle { color: #666; font-style: italic; font-family: var(--font-serif); }
-
-        /* Featured Book */
-        .featured-book { background-color: var(--secondary-bg); color: var(--secondary-text); padding: 6rem 5%; }
-        .book-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .book-cover {
-            box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s ease;
-            width: 100%;
-            max-width: 350px;
-            margin: 0 auto;
-            display: block;
-        }
-        .book-cover:hover { transform: perspective(1000px) rotateY(0deg); }
-        .book-details h3 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
+            font-family: var(--font-bangla);
+            font-size: clamp(2rem, 4vw, 2.8rem);
             margin-bottom: 0.5rem;
-            color: #fff;
+            font-weight: 700;
         }
-        .book-details .author { color: var(--accent-color); margin-bottom: 2rem; font-style: italic; }
-        .book-details p { margin-bottom: 2rem; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
-        .reviews { margin-top: 2rem; border-left: 3px solid var(--accent-color); padding-left: 1.5rem; }
-        .reviews p { font-style: italic; margin-bottom: 0.5rem; }
-        .reviews cite { color: var(--accent-color); font-size: 0.9rem; }
+        .section-subtitle { color: #666; font-style: italic; }
 
-        /* Bibliography */
+        /* Books (Bibliography) */
         .bibliography { padding: 6rem 5%; }
         .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
         .book-card { position: relative; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; }
         .book-card:hover { transform: translateY(-10px); }
         .book-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .book-info { padding-top: 1rem; text-align: center; }
-        .book-info h4 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.25rem; }
-        .book-info span { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .book-info h4 { font-size: 1.2rem; margin-bottom: 0.25rem; font-weight: 600; }
+        .book-info span { font-size: 0.9rem; color: #666; }
+
+        /* Generic Sections (Writings, Journal, Media) */
+        .generic-section {
+            padding: 4rem 5%;
+            text-align: center;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+        }
+        .generic-section h2 {
+            font-family: var(--font-bangla);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .generic-section p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #555;
+            font-size: 1.1rem;
+        }
 
         /* Elif Shafak Style Biography Section */
         .about-section {
             display: grid;
             grid-template-columns: 1fr 1.4fr;
             min-height: 80vh;
-            background-color: #fff; /* Clean white background like Elif's site */
+            background-color: #f4f1ea; 
             align-items: stretch;
         }
 
@@ -262,14 +287,14 @@
         }
 
         .about-text-content {
-            padding: 4rem 5rem;
+            padding: 4rem 4rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         .about-text-content h2 {
-            font-family: var(--font-serif);
+            font-family: var(--font-bangla);
             font-size: 3rem;
             margin-bottom: 1.5rem;
             font-weight: 700;
@@ -277,13 +302,11 @@
         }
 
         .about-text-content .intro-tag {
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            font-size: 1rem;
             color: var(--accent-color);
             margin-bottom: 1rem;
             display: block;
+            font-weight: 600;
         }
 
         .about-text-content p {
@@ -301,9 +324,7 @@
             border: 1px solid var(--text-color);
             color: var(--text-color);
             text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
@@ -312,22 +333,22 @@
             color: #fff;
         }
 
-        /* Newsletter */
+        /* Contact / Subscribe */
         .newsletter { background-color: var(--secondary-bg); color: var(--secondary-text); text-align: center; padding: 6rem 5%; }
-        .newsletter h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+        .newsletter h2 { font-family: var(--font-bangla); font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
         .newsletter p { max-width: 600px; margin: 0 auto 2rem; color: #ccc; }
         .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 0; }
         .newsletter-form input {
             flex: 1; padding: 1rem; border: none;
             background: rgba(255,255,255,0.1);
-            color: #fff; font-family: var(--font-sans);
+            color: #fff; font-family: var(--font-bangla);
             border: 1px solid rgba(255,255,255,0.2);
         }
         .newsletter-form input:focus { outline: none; border-color: var(--accent-color); }
         .newsletter-form button {
             padding: 1rem 2rem; background-color: var(--accent-color);
             color: var(--text-color); border: none; cursor: pointer;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 600; font-family: var(--font-bangla); font-size: 1rem;
             transition: background 0.3s ease;
         }
         .newsletter-form button:hover { background-color: #fff; }
@@ -363,9 +384,17 @@
                 width: 70%; height: 100vh; background: var(--bg-color);
                 flex-direction: column; justify-content: center; align-items: center;
                 transition: right 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                gap: 2.5rem;
             }
             nav ul.active { right: 0; }
             .menu-toggle { display: block; z-index: 1001; }
+            
+            .nav-right .lang-switch, .nav-right .btn-subscribe {
+                display: none; /* Hidden, moved inside mobile menu if needed, or kept outside */
+            }
+            .nav-right {
+                gap: 1rem;
+            }
 
             .hero { 
                 min-height: auto; 
@@ -400,11 +429,18 @@
         <a href="#" class="logo">Mostafa<span>.</span> Auvi</a>
         <nav>
             <ul id="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#works">Works</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Newsletter</a></li>
+                <li><a href="#home">চন্দ্রদ্বীপ</a></li>
+                <li><a href="#books">বই</a></li>
+                <li><a href="#writings">নির্বাচিত লেখা</a></li>
+                <li><a href="#journal">জার্নাল</a></li>
+                <li><a href="#media">মিডিয়া</a></li>
+                <li><a href="#about">লেখক পরিচিতি</a></li>
+                <li><a href="#contact">যোগাযোগ</a></li>
             </ul>
+            <div class="nav-right">
+                <span class="lang-switch">বাং · EN</span>
+                <a href="#contact" class="btn-subscribe">সাবস্ক্রাইব</a>
+            </div>
         </nav>
         <button class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></button>
     </header>
@@ -414,85 +450,86 @@
         <div class="hero-bg-texture"></div>
         
         <div class="hero-content">
-            <span class="hero-tag">International Fiction Writer</span>
-            <h1>Stories That Cross Borders & Bind Humanity</h1>
-            <p>Explore the literary world of Mostafa Auvi. From the bustling streets of South Asia to the quiet, snow-covered landscapes of the North—discover characters that linger in the soul long after the final page.</p>
-            <a href="#works" class="btn btn-primary">Explore Works</a>
+            <span class="hero-tag">আন্তর্জাতিক কথাসাহিত্যিক</span>
+            <h1>গল্পগুলো সীমানা পেরিয়ে মানুষকে এক সুতোয় বাঁধে</h1>
+            <p>মোস্তফা অভির সাহিত্যের জগতে আপনাকে স্বাগতম। দক্ষিণ এশিয়ার ব্যস্ত রাজপথ থেকে শুরু করে উত্তরের শান্ত তুষারঢাকা প্রান্তর—প্রতিটি চরিত্র যেন শেষ পৃষ্ঠা বুঝতে না দিয়েই মনে রেখে যায় এক অন্যরকম ছায়া।</p>
+            <a href="#books" class="btn btn-primary">বই দেখুন</a>
         </div>
 
         <div class="author-photo-container">
+            <!-- 'author.png' ট্রান্সপারেন্ট ছবি গিটহাবে আপলোড করতে হবে -->
             <img src="author.png" alt="Mostafa Auvi" class="author-photo">
         </div>
     </section>
 
-    <!-- Featured Book -->
-    <section id="featured" class="featured-book">
-        <div class="book-container reveal">
-            <div>
-                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1887&auto=format&fit=crop" alt="Featured Book Cover" class="book-cover">
-            </div>
-            <div class="book-details">
-                <h3>The Cartographer of Lost Voices</h3>
-                <p class="author">A Novel by Mostafa Auvi</p>
-                <p>In a world where borders are drawn by the victors, one man attempts to map the memories of the defeated. A sweeping historical fiction spanning three generations, exploring the meaning of home, exile, and the stories we tell to survive.</p>
-                <div class="reviews">
-                    <p>"Auvi writes with a poet's grace and a historian's weight. A masterpiece of modern international fiction."</p>
-                    <cite>— The Literary Review</cite>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bibliography / Works -->
-    <section id="works" class="bibliography">
+    <!-- বই (Bibliography) -->
+    <section id="books" class="bibliography">
         <div class="section-header reveal">
-            <h2 class="section-title">Selected Bibliography</h2>
-            <p class="section-subtitle">A journey through words and worlds</p>
+            <h2 class="section-title">বই</h2>
+            <p class="section-subtitle">শব্দ আর পৃথিবীর এক অদ্ভুত ভ্রমণ</p>
         </div>
         <div class="books-grid">
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1589998059171-988dafa730fc?q=80&w=1887&auto=format&fit=crop" alt="Book 1">
-                <div class="book-info"><h4>Beneath the Pomegranate Tree</h4><span>2018 - Novel</span></div>
+                <div class="book-info"><h4>ডালিম গাছের ছায়া</h4><span>২০১৮ - উপন্যাস</span></div>
             </div>
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=1887&auto=format&fit=crop" alt="Book 2">
-                <div class="book-info"><h4>Letters to the North Wind</h4><span>2020 - Short Stories</span></div>
+                <div class="book-info"><h4>উত্তর বায়ুর চিঠি</h4><span>২০২০ - ছোটগল্প</span></div>
             </div>
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1887&auto=format&fit=crop" alt="Book 3">
-                <div class="book-info"><h4>The Weight of Water</h4><span>2022 - Novel</span></div>
+                <div class="book-info"><h4>জলের ওজন</h4><span>২০২২ - উপন্যাস</span></div>
             </div>
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1531072901889-3db2db7c485f?q=80&w=1887&auto=format&fit=crop" alt="Book 4">
-                <div class="book-info"><h4>Echoes of the City</h4><span>2024 - Anthology Editor</span></div>
+                <div class="book-info"><h4>নগরীর প্রতিধ্বনি</h4><span>২০২৪ - সম্পাদিত সংকলন</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Elif Shafak Style Biography Section -->
+    <!-- নির্বাচিত লেখা -->
+    <section id="writings" class="generic-section reveal">
+        <h2>নির্বাচিত লেখা</h2>
+        <p>এই সেকশনে লেখকের বিভিন্ন পত্র-পত্রিকায় প্রকাশিত প্রবন্ধ, নিবন্ধ এবং ছোটগল্পগুলোর একটি নির্বাচিত তালিকা যুক্ত করা হবে।</p>
+    </section>
+
+    <!-- জার্নাল -->
+    <section id="journal" class="generic-section reveal" style="background-color: #f4f1ea;">
+        <h2>জার্নাল</h2>
+        <p>লেখকের দৈনন্দিন জীবন, ভ্রমণের অভিজ্ঞতা এবং লেখার পেছনের চিন্তাভাবনার লেখাপড়ার জার্নাল।</p>
+    </section>
+
+    <!-- মিডিয়া -->
+    <section id="media" class="generic-section reveal">
+        <h2>মিডিয়া</h2>
+        <p>সাক্ষাৎকার, বক্তৃতা, এবং বিভিন্ন আলোচনার ভিডিও ও অডিও রিসোর্স এখানে থাকবে।</p>
+    </section>
+
+    <!-- লেখক পরিচিতি (About) -->
     <section id="about" class="about-section reveal">
         <div class="about-image-wrapper">
-            <!-- Image with Bengali quotes to be uploaded as author-bio.jpg -->
+            <!-- 'author-bio.jpg' ছবিটি গিটহাবে আপলোড করতে হবে -->
             <img src="author-bio.jpg" alt="Mostafa Auvi in his study">
         </div>
         <div class="about-text-content">
-            <span class="intro-tag">Biography</span>
-            <h2>Mostafa Auvi</h2>
-            <p>Mostafa Auvi is an award-winning international fiction writer whose work explores the intersections of culture, memory, and displacement. Born in Dhaka and raised across three continents, his narratives are woven from the threads of his global experiences.</p>
-            <p>He is the author of numerous books, including <em>The Cartographer of Lost Voices</em>, <em>Beneath the Pomegranate Tree</em>, and <em>Letters to the North Wind</em>. His works have been translated into over fifteen languages and have received multiple international literary awards.</p>
-            <p>When he is not writing, Auvi spends his time lecturing on creative writing and advocating for freedom of expression through literature. He believes that writing illuminates the human soul and connects us deeply to the world around us.</p>
-            <a href="#" class="btn-read-more">Read More</a>
+            <span class="intro-tag">লেখক পরিচিতি</span>
+            <h2>মোস্তফা অভি</h2>
+            <p>মোস্তফা অভি একজন আন্তর্জাতিক খ্যাতিসম্পন্ন কথাসাহিত্যিক, যাঁর লেখনী সংস্কৃতি, স্মৃতি এবং প্রবাসের সংযোগস্থল নিয়ে কাজ করে। ঢাকায় জন্ম নেওয়া এই লেখক তিনটি মহাদেশের বিভিন্ন দেশে বেড়ে ওঠা তাঁর অভিজ্ঞতাগুলোকে তাঁর গল্পের মূল খাত হিসেবে ব্যবহার করেন।</p>
+            <p>তিনি বহু বইয়ের লেখক, যার মধ্যে <em>হারিয়ে যাওয়া কণ্ঠস্বরের মানচিত্র</em>, <em>ডালিম গাছের ছায়া</em>, এবং <em>উত্তর বায়ুর চিঠি</em> উল্লেখযোগ্য। তাঁর রচনাবলি পনেরোটিরও বেশি ভাষায় অনূদিত হয়েছে এবং বিভিন্ন আন্তর্জাতিক পুরস্কার অর্জন করেছে।</p>
+            <p>লেখালেখির বাইরে অভি সৃজনশীল লেখা শেখানো এবং সাহিত্যের মাধ্যমে মতপ্রকাশের স্বাধীনতার পক্ষে কাজ করেন। তিনি বিশ্বাস করেন, লেখা মানুষকে আলোকিত করে এবং মানুষের পাশে প্রাণ ফিরিয়ে আনে।</p>
+            <a href="#" class="btn-read-more">আরও পড়ুন</a>
         </div>
     </section>
 
-    <!-- Newsletter -->
+    <!-- যোগাযোগ (Contact/Newsletter) -->
     <section id="contact" class="newsletter">
         <div class="reveal">
-            <h2>Join the Literary Journey</h2>
-            <p>Subscribe to receive updates on upcoming book releases, exclusive short stories, and tour dates.</p>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
-                <input type="email" placeholder="Your Email Address" required>
-                <button type="submit">Subscribe</button>
+            <h2>সাহিত্যের যাত্রায় যুক্ত হোন</h2>
+            <p>আসন্ন বইয়ের প্রকাশনা, এক্সক্লুসিভ গল্প এবং লেখকের সফরসূচির আপডেট পেতে সাবস্ক্রাইব করুন।</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('সাবস্ক্রাইব করার জন্য ধন্যবাদ!');">
+                <input type="email" placeholder="আপনার ইমেইল ঠিকানা" required>
+                <button type="submit">সাবস্ক্রাইব</button>
             </form>
         </div>
     </section>
@@ -505,7 +542,7 @@
             <a href="#" aria-label="Goodreads"><i class="fab fa-goodreads-g"></i></a>
         </div>
         <div class="footer-text">
-            <p>&copy; 2024 Mostafa Auvi. All rights reserved.</p>
+            <p>&copy; ২০২৪ মোস্তফা অভি। সর্বস্বত্ব সংরক্ষিত।</p>
         </div>
     </footer>
 
