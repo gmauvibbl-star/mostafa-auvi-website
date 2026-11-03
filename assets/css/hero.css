@@ -270,3 +270,53 @@
   .hero-title-en { font-size: 18px !important; }
   .hero-title-bn { font-size: 36px !important; }
 }
+
+
+/* ===== iPhone / narrow-screen refinement: preserve the existing design ===== */
+@media (max-width: 640px) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+  }
+  .hero-left {
+    flex: none;
+    width: 100%;
+    padding: 42px 22px 30px;
+  }
+  .hero-title-bn {
+    font-size: clamp(34px, 10vw, 46px) !important;
+    line-height: 1.2;
+  }
+  .hero-author-en {
+    font-size: 13px !important;
+    letter-spacing: .12em;
+    line-height: 1.5;
+  }
+  .hero-title-en {
+    font-size: 17px !important;
+    line-height: 1.5;
+  }
+  .hero-subtitle {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .hero-divider { margin: 12px 0 16px; }
+  .hero-divider .line { width: 64px; }
+  .hero-ornament { font-size: 48px; }
+  .hero-ornament.tl { top: 10px; left: 12px; }
+  .hero-ornament.br { bottom: 12px; right: 14px; }
+  .hero-right {
+    flex: none;
+    width: 100%;
+    height: min(72vw, 300px);
+    min-height: 220px;
+  }
+  .hero-photo { object-position: center 24%; }
+}
+
+@media (max-width: 420px) {
+  .hero-left { padding: 38px 18px 26px; }
+  .hero-author-en { font-size: 12px !important; letter-spacing: .08em; }
+  .hero-title-en { font-size: 16px !important; }
+}
