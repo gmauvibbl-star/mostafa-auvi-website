@@ -1499,8 +1499,7 @@ function applyReadShellLanguage(lang) {
     setText('label[for="modalEmail"]','Email'); setText('label[for="modalPassword"]','Password');
     setAttr('#modalPassword','placeholder','Enter your password'); setText('#modalLoginBtn','Sign in →');
     setText('.btn.secondary','Cancel'); setText('#forgotPasswordLink','Forgot your password?');
-    // Signup link removed
-    const prefix=signupText && Array.from(signupText.childNodes).find(n=>n.nodeType===Node.TEXT_NODE);
+    // Signup link removed — signupText reference removed (was causing ReferenceError in English mode)
     setAttr('.modal-close','aria-label','Close');
   }
 }
