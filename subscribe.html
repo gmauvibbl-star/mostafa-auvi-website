@@ -10,6 +10,9 @@
 <meta name="keywords" content="Mostafa Auvi, newsletter, ইমেইল সাবস্ক্রিপশন, নিউজলেটার, লেখকের আপডেট, Bengali writer newsletter">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/subscribe.html">
+<link rel="alternate" hreflang="bn" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/subscribe.html" />
+<link rel="alternate" hreflang="en" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/subscribe-en.html" />
+<link rel="alternate" hreflang="x-default" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/subscribe.html" />
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mostafa Auvi">
 <meta property="og:title" content="ইমেইল সাবস্ক্রিপশন | Mostafa Auvi">
@@ -295,32 +298,6 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
 
   try {
     const { ok, data } = await callSubscription('subscribe', { email: email });
-    if (ok) {
-      // Save email to localStorage to prevent future duplicate submissions
-      try {
-        submitted.push(email);
-        localStorage.setItem('mauvi_subscribed_emails', JSON.stringify(submitted));
-      } catch(_) {}
-      showStatus('subscribeStatus', data.message || 'সাবস্ক্রিপশনের জন্য ধন্যবাদ। আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।', 'success');
-      emailInput.value = '';
-    } else {
-      // Check if server says "already subscribed" (from Edge Function duplicate check)
-      if (data.error && data.error.indexOf('ইতিমধ্যে') !== -1) {
-        // Save to localStorage so future attempts are caught client-side
-        try {
-          submitted.push(email);
-          localStorage.setItem('mauvi_subscribed_emails', JSON.stringify(submitted));
-        } catch(_) {}
-      }
-      showStatus('subscribeStatus', data.error || 'সাবস্ক্রিপশন সম্পন্ন হয়নি। আবার চেষ্টা করুন।', 'error');
-    }
-  } catch (err) {
-    showStatus('subscribeStatus', 'সাবস্ক্রিপশন সম্পন্ন হয়নি। আবার চেষ্টা করুন।', 'error');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = origText;
-  }
-});
     if (ok) {
       showStatus('subscribeStatus', data.message || 'সাবস্ক্রিপশনের জন্য ধন্যবাদ। আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।', 'success');
       emailInput.value = '';
