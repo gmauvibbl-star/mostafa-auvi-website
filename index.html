@@ -3,37 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Official website of Mostafa Auvi, International Fiction Writer. Explore novels, short stories, and literary works.">
+    <meta name="description" content="Official website of Mostafa Auvi, International Fiction Writer.">
     <title>Mostafa Auvi | International Fiction Writer</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #f4f1ea; /* Warm Parchment */
-            --text-color: #1a1a1a; /* Deep Charcoal */
-            --accent-color: #c5a059; /* Muted Gold */
+            --bg-color: #f4f1ea;
+            --text-color: #1a1a1a;
+            --accent-color: #c5a059;
             --secondary-bg: #1a1a1a;
             --secondary-text: #e0e0e0;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Lato', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
@@ -58,10 +48,7 @@
             transition: padding 0.3s ease;
         }
 
-        header.scrolled {
-            padding: 1rem 5%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
+        header.scrolled { padding: 1rem 5%; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
 
         .logo {
             font-family: var(--font-serif);
@@ -71,17 +58,9 @@
             color: var(--text-color);
             text-decoration: none;
         }
+        .logo span { color: var(--accent-color); }
 
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
+        nav ul { list-style: none; display: flex; gap: 2rem; }
         nav a {
             text-decoration: none;
             color: var(--text-color);
@@ -91,25 +70,16 @@
             position: relative;
             transition: color 0.3s ease;
         }
-
         nav a::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
+            width: 0; height: 2px;
+            bottom: -5px; left: 0;
             background-color: var(--accent-color);
             transition: width 0.3s ease;
         }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
+        nav a:hover { color: var(--accent-color); }
+        nav a:hover::after { width: 100%; }
 
         .menu-toggle {
             display: none;
@@ -120,19 +90,31 @@
             color: var(--text-color);
         }
 
-        /* Hero Section */
+        /* Hero Section - Landscape & Blended */
         .hero {
-            height: 100vh;
-            min-height: 600px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 0 10%;
+            padding: 8rem 5% 4rem;
             position: relative;
             overflow: hidden;
+            background-color: var(--bg-color);
+        }
+
+        /* Subtle background texture for blending */
+        .hero-bg-texture {
+            position: absolute;
+            top: 0; right: 0;
+            width: 60%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+            opacity: 0.15; /* Blends into background */
+            mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+            z-index: 0;
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 550px;
             z-index: 2;
             opacity: 0;
             transform: translateY(20px);
@@ -150,7 +132,7 @@
 
         .hero h1 {
             font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
             line-height: 1.1;
             margin-bottom: 1.5rem;
             font-weight: 700;
@@ -160,7 +142,6 @@
             font-size: 1.2rem;
             margin-bottom: 2.5rem;
             color: #444;
-            max-width: 500px;
         }
 
         .btn {
@@ -174,76 +155,44 @@
             border: 1px solid var(--text-color);
             cursor: pointer;
         }
+        .btn-primary { background-color: var(--text-color); color: var(--bg-color); }
+        .btn-primary:hover { background-color: var(--accent-color); border-color: var(--accent-color); }
 
-        .btn-primary {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--bg-color);
-            border-color: var(--bg-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        .hero-image {
+        /* Author Image - Portrait Rectangle (Tall & Narrow) */
+        .author-photo-container {
             position: absolute;
-            right: 0;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--bg-color) 40%, rgba(244, 241, 234, 0) 60%);
+            right: 5%;
+            bottom: 0;
+            height: 85%; /* Big top to bottom */
+            width: 350px; /* Small right to left */
+            max-width: 40vw;
             z-index: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 1.5s 0.3s ease forwards;
+        }
+
+        .author-photo {
+            max-height: 100%;
+            width: 100%;
+            object-fit: contain; /* Keeps aspect ratio, fits perfectly */
+            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.15));
         }
 
         /* Section Styles */
-        section {
-            padding: 6rem 10%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
+        section { padding: 6rem 5%; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
         .section-title {
             font-family: var(--font-serif);
             font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1rem;
         }
-
-        .section-subtitle {
-            color: #666;
-            font-style: italic;
-            font-family: var(--font-serif);
-        }
+        .section-subtitle { color: #666; font-style: italic; font-family: var(--font-serif); }
 
         /* Featured Book */
-        .featured-book {
-            background-color: var(--secondary-bg);
-            color: var(--secondary-text);
-        }
-
+        .featured-book { background-color: var(--secondary-bg); color: var(--secondary-text); }
         .book-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -252,7 +201,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .book-cover {
             box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
             transform: perspective(1000px) rotateY(-5deg);
@@ -262,119 +210,33 @@
             margin: 0 auto;
             display: block;
         }
-
-        .book-cover:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-
+        .book-cover:hover { transform: perspective(1000px) rotateY(0deg); }
         .book-details h3 {
             font-family: var(--font-serif);
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             color: #fff;
         }
-
-        .book-details .author {
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .book-details p {
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            color: #ccc;
-        }
-
-        .reviews {
-            margin-top: 2rem;
-            border-left: 3px solid var(--accent-color);
-            padding-left: 1.5rem;
-        }
-
-        .reviews p {
-            font-style: italic;
-            margin-bottom: 0.5rem;
-        }
-
-        .reviews cite {
-            color: var(--accent-color);
-            font-size: 0.9rem;
-        }
+        .book-details .author { color: var(--accent-color); margin-bottom: 2rem; font-style: italic; }
+        .book-details p { margin-bottom: 2rem; line-height: 1.8; font-size: 1.1rem; color: #ccc; }
+        .reviews { margin-top: 2rem; border-left: 3px solid var(--accent-color); padding-left: 1.5rem; }
+        .reviews p { font-style: italic; margin-bottom: 0.5rem; }
+        .reviews cite { color: var(--accent-color); font-size: 0.9rem; }
 
         /* Bibliography */
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .book-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .book-card img {
-            width: 100%;
-            aspect-ratio: 2/3;
-            object-fit: cover;
-            display: block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .book-info {
-            padding-top: 1rem;
-            text-align: center;
-        }
-
-        .book-info h4 {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .book-info span {
-            font-size: 0.85rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .book-card { position: relative; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; }
+        .book-card:hover { transform: translateY(-10px); }
+        .book-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .book-info { padding-top: 1rem; text-align: center; }
+        .book-info h4 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.25rem; }
+        .book-info span { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
         /* About Author */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .author-img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            filter: grayscale(30%);
-            transition: filter 0.3s ease;
-        }
-
-        .author-img:hover {
-            filter: grayscale(0%);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
+        .about-container { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .author-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; filter: grayscale(30%); transition: filter 0.3s ease; }
+        .author-img:hover { filter: grayscale(0%); }
+        .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8; }
         .about-text .quote {
             font-family: var(--font-serif);
             font-size: 1.5rem;
@@ -386,182 +248,67 @@
         }
 
         /* Newsletter */
-        .newsletter {
-            background-color: var(--secondary-bg);
-            color: var(--secondary-text);
-            text-align: center;
-        }
-
-        .newsletter h2 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .newsletter p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            color: #ccc;
-        }
-
-        .newsletter-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 0;
-        }
-
+        .newsletter { background-color: var(--secondary-bg); color: var(--secondary-text); text-align: center; }
+        .newsletter h2 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+        .newsletter p { max-width: 600px; margin: 0 auto 2rem; color: #ccc; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 0; }
         .newsletter-form input {
-            flex: 1;
-            padding: 1rem;
-            border: none;
+            flex: 1; padding: 1rem; border: none;
             background: rgba(255,255,255,0.1);
-            color: #fff;
-            font-family: var(--font-sans);
+            color: #fff; font-family: var(--font-sans);
             border: 1px solid rgba(255,255,255,0.2);
         }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
+        .newsletter-form input:focus { outline: none; border-color: var(--accent-color); }
         .newsletter-form button {
-            padding: 1rem 2rem;
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            border: none;
-            cursor: pointer;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 1rem 2rem; background-color: var(--accent-color);
+            color: var(--text-color); border: none; cursor: pointer;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
             transition: background 0.3s ease;
         }
-
-        .newsletter-form button:hover {
-            background-color: #fff;
-        }
+        .newsletter-form button:hover { background-color: #fff; }
 
         /* Footer */
-        footer {
-            background-color: #0f0f0f;
-            color: #888;
-            padding: 3rem 10%;
-            text-align: center;
-        }
-
-        .footer-social {
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-social a {
-            color: #888;
-            margin: 0 1rem;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-text p {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
+        footer { background-color: #0f0f0f; color: #888; padding: 3rem 5%; text-align: center; }
+        .footer-social { margin-bottom: 1.5rem; }
+        .footer-social a { color: #888; margin: 0 1rem; font-size: 1.2rem; transition: color 0.3s ease; }
+        .footer-social a:hover { color: var(--accent-color); }
 
         /* Animations */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* Responsive */
         @media (max-width: 768px) {
             nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: var(--bg-color);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: right 0.4s ease;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                position: fixed; top: 0; right: -100%;
+                width: 70%; height: 100vh; background: var(--bg-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                transition: right 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.1);
             }
+            nav ul.active { right: 0; }
+            .menu-toggle { display: block; z-index: 1001; }
 
-            nav ul.active {
-                right: 0;
-            }
-
-            .menu-toggle {
-                display: block;
-                z-index: 1001;
-            }
-
-            .hero {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                padding-top: 6rem;
-            }
-
-            .hero-content {
-                margin-bottom: 3rem;
-            }
-
-            .hero-image {
+            .hero { flex-direction: column; justify-content: center; text-align: center; padding-top: 6rem; }
+            .hero-content { margin-bottom: 2rem; }
+            .author-photo-container {
                 position: relative;
-                width: 100%;
+                right: auto;
                 height: 50vh;
-                clip-path: none;
+                width: 250px;
+                max-width: 80%;
                 margin-top: 2rem;
             }
+            .hero-bg-texture { width: 100%; opacity: 0.1; }
 
-            .hero-overlay {
-                background: linear-gradient(180deg, var(--bg-color) 20%, rgba(244, 241, 234, 0) 50%);
-            }
-
-            .book-container, .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .reviews {
-                text-align: left;
-            }
-
-            .about-text .quote {
-                text-align: left;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-                gap: 1rem;
-            }
+            .book-container, .about-container { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .reviews, .about-text .quote { text-align: left; }
+            .newsletter-form { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <header id="header">
         <a href="#" class="logo">Mostafa<span>.</span> Auvi</a>
         <nav>
@@ -577,13 +324,19 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-image"></div>
+        <div class="hero-bg-texture"></div>
+        
         <div class="hero-content">
             <span class="hero-tag">International Fiction Writer</span>
             <h1>Stories That Cross Borders & Bind Humanity</h1>
             <p>Explore the literary world of Mostafa Auvi. From the bustling streets of South Asia to the quiet, snow-covered landscapes of the North—discover characters that linger in the soul long after the final page.</p>
             <a href="#works" class="btn btn-primary">Explore Works</a>
+        </div>
+
+        <!-- Author Transparent Image -->
+        <div class="author-photo-container">
+            <!-- 'author.png' is the transparent image you will upload to GitHub -->
+            <img src="author.png" alt="Mostafa Auvi" class="author-photo">
         </div>
     </section>
 
@@ -612,37 +365,21 @@
             <p class="section-subtitle">A journey through words and worlds</p>
         </div>
         <div class="books-grid">
-            <!-- Book 1 -->
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1589998059171-988dafa730fc?q=80&w=1887&auto=format&fit=crop" alt="Book 1">
-                <div class="book-info">
-                    <h4>Beneath the Pomegranate Tree</h4>
-                    <span>2018 - Novel</span>
-                </div>
+                <div class="book-info"><h4>Beneath the Pomegranate Tree</h4><span>2018 - Novel</span></div>
             </div>
-            <!-- Book 2 -->
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=1887&auto=format&fit=crop" alt="Book 2">
-                <div class="book-info">
-                    <h4>Letters to the North Wind</h4>
-                    <span>2020 - Short Stories</span>
-                </div>
+                <div class="book-info"><h4>Letters to the North Wind</h4><span>2020 - Short Stories</span></div>
             </div>
-            <!-- Book 3 -->
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1887&auto=format&fit=crop" alt="Book 3">
-                <div class="book-info">
-                    <h4>The Weight of Water</h4>
-                    <span>2022 - Novel</span>
-                </div>
+                <div class="book-info"><h4>The Weight of Water</h4><span>2022 - Novel</span></div>
             </div>
-            <!-- Book 4 -->
             <div class="book-card reveal">
                 <img src="https://images.unsplash.com/photo-1531072901889-3db2db7c485f?q=80&w=1887&auto=format&fit=crop" alt="Book 4">
-                <div class="book-info">
-                    <h4>Echoes of the City</h4>
-                    <span>2024 - Anthology Editor</span>
-                </div>
+                <div class="book-info"><h4>Echoes of the City</h4><span>2024 - Anthology Editor</span></div>
             </div>
         </div>
     </section>
@@ -670,7 +407,7 @@
     <section id="contact" class="newsletter">
         <div class="reveal">
             <h2>Join the Literary Journey</h2>
-            <p>Subscribe to receive updates on upcoming book releases, exclusive short stories, and tour dates. No spam, just literature.</p>
+            <p>Subscribe to receive updates on upcoming book releases, exclusive short stories, and tour dates.</p>
             <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
                 <input type="email" placeholder="Your Email Address" required>
                 <button type="submit">Subscribe</button>
@@ -678,7 +415,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-social">
             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -688,23 +424,19 @@
         </div>
         <div class="footer-text">
             <p>&copy; 2024 Mostafa Auvi. All rights reserved.</p>
-            <p>Designed with care for the written word.</p>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
-        
         mobileMenu.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             const icon = mobileMenu.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
         });
-
-        // Close mobile menu when link is clicked
         document.querySelectorAll('#nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -714,19 +446,13 @@
             });
         });
 
-        // Header shadow on scroll
-        const header = document.getElementById('header');
+        // Header Scroll
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Scroll Reveal Animations
+        // Reveal Animations
         const reveals = document.querySelectorAll('.reveal');
-
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -734,13 +460,8 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.15
-        });
-
-        reveals.forEach(reveal => {
-            revealObserver.observe(reveal);
-        });
+        }, { threshold: 0.15 });
+        reveals.forEach(reveal => revealObserver.observe(reveal));
     </script>
 </body>
 </html>
