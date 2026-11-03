@@ -590,7 +590,7 @@ function updateIntro(){
     canonical.rel='canonical';
     document.head.appendChild(canonical);
   }
-  const canonicalUrl = location.origin + location.pathname + (category ? '?category='+encodeURIComponent(category) : '');
+  const canonicalUrl = location.origin + location.pathname + (category ? '?category='+encodeURIComponent(category) : '') + (language==='en' ? (category ? '&' : '?') + 'lang=en' : '');
   canonical.href = canonicalUrl;
 
   if(language==='en'){
