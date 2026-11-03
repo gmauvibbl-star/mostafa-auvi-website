@@ -1505,7 +1505,7 @@ function applyReadShellLanguage(lang) {
 }
 applyReadShellLanguage(requestedLanguage);
 const articleEl = document.getElementById('article');
-const shareUrl = location.href;
+const shareUrl = slug ? ('https://voswrndbxrsaqfzwffhh.supabase.co/functions/v1/share?slug=' + encodeURIComponent(slug)) : location.href;
 
 function renderError(title, msg) {
   const backLabel = document.documentElement.lang === 'en' ? '← Back to all writing' : '← সব লেখায় ফিরুন';
