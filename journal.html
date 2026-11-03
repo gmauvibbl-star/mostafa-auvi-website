@@ -1752,7 +1752,7 @@
     <span class="sep">·</span>
     <a id="journalEnLink" href="journal.html?lang=en" title="Read in English">English</a>
     <span class="sep">·</span>
-    <a href="#" title="Deutsch version coming soon">Deutsch</a>
+    <a href="#" title="Deutsch version coming soon" style="display:none">Deutsch</a>
   </div>
 </div>
 
@@ -2057,6 +2057,23 @@ if (journalLanguage === 'en') {
   setText('.nav-publications a', 'Publications');
   setText('.nav-author a', 'About Author');
   setText('.nav-all a', 'All Writings');
+  // Update nav hrefs to preserve lang=en
+  setAttr('.nav-home a', 'href', 'index-en.html');
+  setAttr('.nav-fiction a', 'href', 'posts.html?category=kothasahitya&lang=en');
+  setAttr('.nav-essay a', 'href', 'posts.html?category=probandho-sahityasamalochona&lang=en');
+  setAttr('.nav-law a', 'href', 'posts.html?category=ain-oadalot&lang=en');
+  setAttr('.nav-travel a', 'href', 'posts.html?category=bhromonkahini&lang=en');
+  setAttr('.nav-banking a', 'href', 'posts.html?category=banking-o-orthoniti&lang=en');
+  setAttr('.nav-chandradwip a', 'href', 'posts.html?category=chandradwip&lang=en');
+  setAttr('.nav-journal a', 'href', 'journal.html?lang=en');
+  setAttr('.nav-publications a', 'href', 'posts.html?category=prokashona-o-pdf&lang=en');
+  setAttr('.nav-author a', 'href', 'about-en.html');
+  setAttr('.nav-all a', 'href', 'posts.html?lang=en');
+  // Update sidebar category quicklist hrefs to preserve lang=en
+  document.querySelectorAll('.cat-quicklist a').forEach((a, i) => {
+    const map = ['posts.html?category=kothasahitya&lang=en','posts.html?category=probandho-sahityasamalochona&lang=en','posts.html?category=ain-oadalot&lang=en','posts.html?category=bhromonkahini&lang=en','posts.html?category=banking-o-orthoniti&lang=en','posts.html?category=chandradwip&lang=en','posts.html?category=prokashona-o-pdf&lang=en','posts.html?lang=en'];
+    if (map[i]) a.setAttribute('href', map[i]);
+  });
   setAttr('#navSearch', 'placeholder', 'Search...');
   setAttr('#navSearch', 'aria-label', 'Search');
   setText('.subscribe-btn span', 'Subscribe');
