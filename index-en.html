@@ -37,21 +37,31 @@ a{color:inherit;text-decoration:none;}
 .wrap{max-width:1100px;margin:0 auto;padding:0 2rem;position:relative;z-index:2;}
 section{position:relative;z-index:2;}
 
-/* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:1rem 2rem;background:rgba(241,233,216,0.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule);}
-.nav__inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;}
-.nav__brand{font-family:var(--font-h);font-size:20px;font-style:italic;font-weight:500;}
-.nav__brand em{color:var(--terracotta);font-style:italic;}
-.nav__links{display:flex;gap:1.75rem;align-items:center;}
-.nav__link{font-family:var(--font-ui);font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-soft);transition:transform 280ms var(--ease-quiet),color 280ms var(--ease-quiet);display:inline-block;}
-.nav__link:hover{color:var(--terracotta);transform:translateX(3px);}
-.nav__lang{display:flex;align-items:center;gap:0.4rem;border-left:1px solid var(--rule-strong);padding-left:1rem;}
-.nav__lang a{font-family:var(--font-ui);font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-faint);padding:0.15rem 0.25rem;transition:color 280ms var(--ease-quiet);}
-.nav__lang a.active{color:var(--terracotta);}
-.nav__lang a:hover{color:var(--ink);}
-.nav__lang span{color:var(--rule-strong);font-size:10px;}
-@media(max-width:880px){.nav__links .nav__link{display:none;}.nav__brand{font-size:17px;}}
+<nav class="menu">
+  <a href="index-en.html">Home</a>
 
+  <details class="dropdown">
+    <summary>Selected Writings ▾</summary>
+    <div class="dropdown-panel">
+      <a href="posts.html?category=kothasahitya&lang=en">Fiction</a>
+      <a href="posts.html?category=probandho-sahityasamalochona&lang=en">Essays &amp; Criticism</a>
+      <a href="posts.html?category=ain-oadalot&lang=en">Law &amp; Justice</a>
+      <a href="posts.html?category=bhromonkahini&lang=en">Travel Writing</a>
+      <a href="posts.html?category=banking-o-orthoniti&lang=en">Banking &amp; Economics</a>
+    </div>
+  </details>
+
+  <details class="dropdown">
+    <summary>Upcoming Books ▾</summary>
+    <div class="dropdown-panel">
+      <a href="posts.html?category=chandradwip&lang=en">Chandradwip</a>
+    </div>
+  </details>
+
+  <a href="posts.html?category=prokashona-o-pdf&lang=en">Publications</a>
+  <a href="about-en.html">About Author</a>
+  <a href="posts.html?lang=en">All Writings</a>
+</nav>
 /* Hero — screenshot layout */
 .hero{min-height:100vh;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:clamp(2rem,5vw,4rem);padding:7rem 2rem 3rem;max-width:1100px;margin:0 auto;}
 .hero__text>*{opacity:0;transform:translateY(40px);transition:opacity 900ms var(--ease-quiet),transform 900ms var(--ease-quiet);}
