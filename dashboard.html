@@ -993,14 +993,55 @@ setInterval(updateSEOChecklist, 3000);
     // ক্যাটাগরি তালিকা — নতুন ৭-বিভাগ কাঠামো (Supabase-এ categories ও subcategories টেবিল)
     // এই hardcoded তালিকা শুধু fallback হিসেবে কাজ করে। লাইভ ডেটা Supabase থেকে আসবে।
     // বিভাগ ও উপবিভাগ এখন ডাটাবেস (categories / subcategories) থেকে লোড হয়। স্থির তালিকা নেই।
-    const CATEGORIES = [];
+    // Authoring taxonomy is local and version-controlled. Do not query the
+    // legacy categories/subcategories tables: the live schema does not expose
+    // the columns those queries expected, which previously left this list empty.
+    const CATEGORIES = [
+      { name:'কথাসাহিত্য', nameEn:'Fiction', slug:'kothasahitya', icon:'❦', aliases:['গল্প','ছোটগল্প','বড়গল্প','বড়গল্প','উপন্যাস','অনুবাদ সাহিত্য'], subs:[
+        {name:'ছোটগল্প',nameEn:'Short Stories',slug:'chotogolpo',aliases:['ছোট গল্প']},
+        {name:'বড়গল্প',nameEn:'Long Stories',slug:'bodo-golpo',aliases:['বড় গল্প','বড়গল্প']},
+        {name:'সম্পূর্ণ উপন্যাস',nameEn:'Complete Novels',slug:'uponmas',aliases:['উপন্যাস']},
+        {name:'ধারাবাহিক উপন্যাস',nameEn:'Serialised Novels',slug:'dharabahik-uponmas',aliases:['ধারাবাহিক']}
+      ]},
+      { name:'প্রবন্ধ ও সাহিত্যসমালোচনা', nameEn:'Essays & Literary Criticism', slug:'probandho-sahityasamalochona', icon:'§', aliases:['প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা'], subs:[
+        {name:'প্রবন্ধ',nameEn:'Essays',slug:'probandho',aliases:['সাহিত্য প্রবন্ধ']},
+        {name:'সাহিত্যসমালোচনা',nameEn:'Literary Criticism',slug:'sahitya-samalochona',aliases:['সাহিত্যালোচনা','বই আলোচনা','বই পর্যালোচনা']}
+      ]},
+      { name:'আইন ও আদালত', nameEn:'Law & Judiciary', slug:'ain-oadalot', icon:'⚖', aliases:['আইন-আদালত'], subs:[
+        {name:'বাংলাদেশের জুরিসপ্রুডেন্স',nameEn:'Jurisprudence of Bangladesh',slug:'bangladesher-jurisprudence',aliases:['বাংলাদেশের জুরিসপিন্ডেন্স']},
+        {name:'ব্রিটিশ ল ও নৈতিকতার কথকতা',nameEn:'British Law & Ethics',slug:'british-law-ethics',aliases:['বৃটিশ ল ও নৈতিকতার কথকতা']},
+        {name:'আইনবিষয়ক প্রবন্ধ',nameEn:'Legal Essays',slug:'ain-bishoyok-probandho',aliases:['আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ']},
+        {name:'সিভিল আদালতের কড়চা',nameEn:'Civil Court Notes',slug:'civil-court-kordcha',aliases:['সিভিল আদালতের কর্চা']},
+        {name:'কেস স্টাডি',nameEn:'Case Study',slug:'case-study',aliases:['কেসস্টাডি','মামলার ইতিবৃত্ত']}
+      ]},
+      { name:'ভ্রমণ ও অনুবাদ সাহিত্য', nameEn:'Travel & Translated Literature', slug:'bhromonkahini', icon:'🧭', aliases:['ভ্রমণকাহিনি','ভ্রমণ'], subs:[
+        {name:'বাংলাদেশ ভ্রমণ',nameEn:'Travels in Bangladesh',slug:'bangladesh-bhromon',aliases:['ভ্রমণ','ভ্রমণকাহিনি']},
+        {name:'বিদেশ ভ্রমণ',nameEn:'Travels Abroad',slug:'bidesh-bhromon',aliases:[]},
+        {name:'স্মৃতির ভাণ্ডার',nameEn:'Treasury of Memories',slug:'smritir-bhandar',aliases:['স্মৃতিভাণ্ডার']},
+        {name:'ফেলে আসা দিন',nameEn:'Days Gone By',slug:'fele-asha-din',aliases:[]}
+      ]},
+      { name:'চন্দ্রদ্বীপ', nameEn:'Chandradwip', slug:'chandradwip', icon:'❀', aliases:['চন্দ্রদ্বিপ','Chandradwip'], subs:[
+        {name:'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা',nameEn:'Writing Experience',slug:'chandradwip-writing',aliases:['লেখার অভিজ্ঞতা','Writing Experience']},
+        {name:'চরিত্রের কথা',nameEn:'Characters',slug:'chandradwip-characters',aliases:['চরিত্র','Characters']},
+        {name:'জনপদের কথা',nameEn:'The Settlement',slug:'chandradwip-settlement',aliases:['জনপদ','The Settlement']}
+      ]},
+      { name:'ব্যাংকিং ও অর্থনীতি', nameEn:'Banking & Economics', slug:'banking-o-orthoniti', icon:'◐', aliases:['ব্যাকিং ও অর্থনীতি','ব্যাংকিং','অর্থনীতি'], subs:[
+        {name:'আমার ব্যাংকিং জীবন',nameEn:'My Banking Life',slug:'amar-banking-jibon',aliases:[]},
+        {name:'এসএমই ব্যাংকিং নিয়ে যত কথা',nameEn:'SME Banking Notes',slug:'sme-banking-kotha',aliases:['এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং']}
+      ]},
+      { name:'প্রকাশনা', nameEn:'Publications', slug:'prokashona-o-pdf', icon:'▤', aliases:['প্রকাশনা ও PDF','পিডিএফ','আমার বই'], subs:[
+        {name:'বাজপাখির পুনর্জন্ম',nameEn:'The Rebirth of the Hawk',slug:'bajpakhir-punorjonmo',aliases:[]},
+        {name:'সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত',nameEn:'The CS Record of Rights',slug:'cs-khotiyan',aliases:[]},
+        {name:'বেড়ালের কোয়ারেন্টাইন',nameEn:"The Cat's Quarantine",slug:'beraler-quarantine',aliases:['বেড়ালের কোয়ারেন্টাইন']}
+      ]}
+    ];
 
     function findCategoryByName(name) {
       const cats = state.categories && state.categories.length ? state.categories : CATEGORIES;
       for (const p of cats) {
-        if (p.name === name || p.slug === name) return { parent: p, sub: null };
+        if (p.name === name || p.slug === name || (p.aliases || []).includes(name)) return { parent: p, sub: null };
         for (const s of (p.subs || [])) {
-          if (s.name === name || s.slug === name) return { parent: p, sub: s };
+          if (s.name === name || s.slug === name || (s.aliases || []).includes(name)) return { parent: p, sub: s };
         }
       }
       return null;
@@ -1176,31 +1217,14 @@ setInterval(updateSEOChecklist, 3000);
     }
 
     // ============================================================
-    // CATEGORIES — Supabase থেকে লোড (fallback: hardcoded)
+    // CATEGORIES — stable local taxonomy; no legacy table dependency
     // ============================================================
     async function loadCategories() {
-      try {
-      const [catRes, subRes] = await Promise.all([
-        sb.from('categories').select('id,name_bn,name_en,slug,icon,sort_order').eq('is_active', true).order('sort_order'),
-        sb.from('subcategories').select('id,category_id,name_bn,name_en,slug,sort_order').eq('is_active', true).order('sort_order')
-      ]);
-      if (catRes.error) throw catRes.error;
-      if (subRes.error) throw subRes.error;
-      const allSubs = subRes.data || [];
-      state.categories = (catRes.data || []).map(c => ({
-        id: c.id,
-        name: c.name_bn,
-        nameEn: c.name_en,
-        slug: c.slug,
-        icon: c.icon || '',
-        subs: allSubs
-          .filter(s => String(s.category_id) === String(c.id))
-          .map(s => ({ id: s.id, name: s.name_bn, nameEn: s.name_en, slug: s.slug }))
+      // Clone the constants so editor state cannot mutate the source taxonomy.
+      state.categories = CATEGORIES.map(category => ({
+        ...category,
+        subs: (category.subs || []).map(sub => ({ ...sub }))
       }));
-      } catch (err) {
-        console.error('বিভাগ লোড ব্যর্থ:', err);
-        state.categories = [];
-      }
     }
     function getParentCategories() { return state.categories; }
     function getSubcategories(parentName) {
