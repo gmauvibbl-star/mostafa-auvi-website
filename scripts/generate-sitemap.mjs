@@ -27,7 +27,7 @@ async function fetchPublishedPosts() {
   const rows = [];
   for (let offset = 0; ; offset += PAGE_SIZE) {
     const url = new URL("/rest/v1/posts", SUPABASE_URL);
-    url.searchParams.set("select", "slug,language,group_id,published_at");
+    url.searchParams.set("select", "slug,language,group_id,published_at,updated_at");
     url.searchParams.set("published", "eq.true");
     url.searchParams.set("order", "published_at.asc,slug.asc");
     const response = await fetch(url, {
@@ -64,7 +64,7 @@ function buildSitemap(posts) {
   const staticEntries = staticUrls.map(loc => ({ loc }));
   const articleEntries = posts.map(post => ({
     loc: articleUrl(post),
-    lastmod: dateOnly(post.published_at),
+    lastmod: dateOnly(post.updated_at || post.published_at),
     post
   }));
 
