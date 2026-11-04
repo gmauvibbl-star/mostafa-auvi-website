@@ -42,7 +42,7 @@ async function uploadVideo(file, language) {
   if (!file.type.match(/^video\/(mp4|webm|ogg)$/)) { toast('ত্রুটি', 'শুধু MP4, WebM, OGG ভিডিও আপলোড করা যাবে।', 'error'); return null; }
   if (file.size > 50 * 1024 * 1024) { toast('ত্রুটি', 'ভিডিও ফাইল ৫০MB-এর কম হতে হবে।', 'error'); return null; }
   try {
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const sb = supabase; if (!sb) throw new Error('Supabase client is not initialized');
     const ext = '.' + file.name.split('.').pop();
     const path = 'video-' + language + '/' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + ext;
     const { data, error } = await sb.storage.from('covers').upload(path, file, { contentType: file.type, upsert: false });
@@ -75,7 +75,7 @@ async function saveRevision(postId) {
   try {
     const editor = document.getElementById('editor');
     const titleEl = document.querySelector('#title-input, input[name="title"]');
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const sb = supabase; if (!sb) throw new Error('Supabase client is not initialized');
     await sb.from('post_revisions').insert({
       post_id: postId,
       body: editor ? editor.innerHTML : '',
@@ -88,7 +88,7 @@ async function saveRevision(postId) {
 async function showRevisionHistory(postId) {
   if (!postId) { toast('তথ্য', 'পুরোনো লেখা তৈরির পর রিভিশন দেখা যাবে।', 'info'); return; }
   try {
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const sb = supabase; if (!sb) throw new Error('Supabase client is not initialized');
     const { data, error } = await sb.from('post_revisions').select('id,body,title,saved_at').eq('post_id', postId).order('saved_at', { ascending: false }).limit(20);
     if (error) throw error;
     if (!data || data.length === 0) { toast('তথ্য', 'কোনো পুরোনো সংস্করণ নেই।', 'info'); return; }
@@ -133,7 +133,7 @@ async function showRevisionHistory(postId) {
 // ====== Media Library ======
 async function openMediaLibrary(callback) {
   try {
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const sb = supabase; if (!sb) throw new Error('Supabase client is not initialized');
     const { data, error } = await sb.storage.from('covers').list('', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
     if (error) throw error;
     if (!data || data.length === 0) { toast('তথ্য', 'কোনো ছবি বা ফাইল নেই। আগে আপলোড করুন।', 'info'); return; }
@@ -2002,7 +2002,7 @@ setInterval(updateSEOChecklist, 3000);
     };
     // Save to server (published stays false for drafts)
     try {
-      var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      var sb = supabase; if (!sb) throw new Error('Supabase client is not initialized');
       sb.from('posts').update(data).eq('id', state.editingId.id).then(function(res) {
         if (res.error) {
           console.warn('Auto-save to server failed:', res.error.message);
