@@ -289,12 +289,12 @@
       var map = {
         kothasahitya: "কথাসাহিত্য",
         "probandho-sahityasamalochona": "প্রবন্ধ ও সাহিত্যসমালোচনা",
-        "ain-oadalot": "আইন-আদালত",
+        "ain-oadalot": "আইন ও আদালত",
         "banking-o-orthoniti": "ব্যাংকিং ও অর্থনীতি",
         "prokashona-o-pdf": "প্রকাশনা",
         bhromonkahini: "ভ্রমণকাহিনি",
         chandradwip: "চন্দ্রদ্বীপ",
-        "byaktigoto-onubhuti": "প্রবন্ধ ও সাহিত্যসমালোচনা",
+        "byaktigoto-onubhuti": "ব্যক্তিগত অনুভূতি",
       };
       return map[c] || c || "";
     }
