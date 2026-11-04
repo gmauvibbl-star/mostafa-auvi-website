@@ -26,24 +26,29 @@ function articleUrl(post) {
 async function fetchPublishedPosts() {
   const rows = [];
   for (let offset = 0; ; offset += PAGE_SIZE) {
-    const url = new URL("/rest/v1/posts", SUPABASE_URL);
-    url.searchParams.set("select", "slug,language,group_id,published_at,updated_at");
-    url.searchParams.set("published", "eq.true");
-    url.searchParams.set("order", "published_at.asc,slug.asc");
+    // This narrowly scoped SECURITY DEFINER RPC returns only public sitemap
+    // fields for published posts. It avoids granting anon access to admin_users.
+    const url = new URL("/rest/v1/rpc/get_sitemap_published_posts", SUPABASE_URL);
     const response = await fetch(url, {
+      method: "POST",
       headers: {
         apikey: SUPABASE_PUBLISHABLE_KEY,
         Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        "Content-Type": "application/json",
         "Range-Unit": "items",
         Range: `${offset}-${offset + PAGE_SIZE - 1}`
-      }
+      },
+      body: "{}"
     });
     if (!response.ok) {
       const detail = await response.text();
-      throw new Error(`Supabase posts query failed (${response.status}): ${detail.slice(0, 500)}`);
+      throw new Error(
+        `Supabase sitemap RPC failed (${response.status}). ` +
+        `Confirm migration 20261105_sitemap_public_rpc.sql has been run in Supabase SQL Editor. ${detail.slice(0, 500)}`
+      );
     }
     const batch = await response.json();
-    if (!Array.isArray(batch)) throw new Error("Supabase returned an unexpected posts response.");
+    if (!Array.isArray(batch)) throw new Error("Supabase sitemap RPC returned an unexpected response.");
     rows.push(...batch);
     if (batch.length < PAGE_SIZE) break;
   }
