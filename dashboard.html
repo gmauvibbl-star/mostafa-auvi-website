@@ -984,56 +984,8 @@ setInterval(updateSEOChecklist, 3000);
 
     // ক্যাটাগরি তালিকা — নতুন ৭-বিভাগ কাঠামো (Supabase-এ categories ও subcategories টেবিল)
     // এই hardcoded তালিকা শুধু fallback হিসেবে কাজ করে। লাইভ ডেটা Supabase থেকে আসবে।
-    const CATEGORIES = [
-      { name: 'কথাসাহিত্য', nameEn: 'Fiction', icon: '❦', slug: 'kothasahitya', subs: [
-        { name: 'ছোটগল্প', nameEn: 'Short Story' },
-        { name: 'বড়গল্প', nameEn: 'Long Story' },
-        { name: 'সম্পূর্ণ উপন্যাস', nameEn: 'Complete Novel' },
-        { name: 'ধারাবাহিক উপন্যাস', nameEn: 'Serialised Novel' },
-        { name: 'স্মৃতির ভাণ্ডার', nameEn: 'Memoirs' },
-        { name: 'ফেলে আসা দিন', nameEn: 'Days Gone By' },
-        { name: 'অনুবাদ সাহিত্য', nameEn: 'Translated Literature' },
-      ]},
-      { name: 'প্রবন্ধ ও সাহিত্যসমালোচনা', nameEn: 'Essays & Literary Criticism', icon: '§', slug: 'probandho-sahityasamalochona', subs: [
-        { name: 'সাহিত্য প্রবন্ধ', nameEn: 'Literary Essays' },
-        { name: 'শিল্প ও সংস্কৃতি', nameEn: 'Art & Culture' },
-        { name: 'ইতিহাস ও ঐতিহ্য', nameEn: 'History & Heritage' },
-        { name: 'সমাজ ও রাজনীতি', nameEn: 'Society & Politics' },
-        { name: 'দর্শন ও চিন্তা', nameEn: 'Philosophy & Thought' },
-        { name: 'বিজ্ঞান ও প্রযুক্তি', nameEn: 'Science & Technology' },
-        { name: 'শিক্ষা ও গবেষণা', nameEn: 'Education & Research' },
-        { name: 'বই আলোচনা', nameEn: 'Book Discussion' },
-        { name: 'বিশ্বসাহিত্য', nameEn: 'World Literature' },
-      ]},
-      { name: 'আইন ও আদালত', nameEn: 'Law & Judiciary', icon: '⚖', slug: 'ain-oadalot', subs: [
-        { name: 'বাংলাদেশের জুরিসপ্রুডেন্স', nameEn: 'Bangladesh Jurisprudence' },
-        { name: 'ব্রিটিশ ল ও নৈতিকতার কথকতা', nameEn: 'British Law & Ethics' },
-        { name: 'আইন বিষয়ক প্রবন্ধ', nameEn: 'Legal Essays' },
-        { name: 'সিভিল আদালতের কড়চা', nameEn: 'Civil Court Chronicles' },
-        { name: 'কেসস্টাডি', nameEn: 'Case Studies' },
-      ]},
-      { name: 'ব্যাংকিং ও অর্থনীতি', nameEn: 'Banking & Economics', icon: '◐', slug: 'banking-o-orthoniti', subs: [
-        { name: 'আমার ব্যাংকিং জীবন', nameEn: 'My Banking Life' },
-        { name: 'এসএমই ব্যাংকিং নিয়ে যত কথা', nameEn: 'Perspectives on SME Banking' },
-      ]},
-      { name: 'প্রকাশনা ও PDF', nameEn: 'Publications & PDF', icon: '▤', slug: 'prokashona-o-pdf', subs: [
-        { name: 'আমার বই', nameEn: 'My Books' },
-        { name: 'পিডিএফ বই', nameEn: 'PDF Books' },
-      ]},
-    { name: 'ভ্রমণকাহিনি', nameEn: 'Travel Writing', slug: 'bhromonkahini', icon: '🧭',
-      subs: [
-        { name: 'পথে-প্রান্তরে', nameEn: 'Paths & Horizons', slug: 'pothe-prantore' },
-        { name: 'সুদূরের পথে', nameEn: 'Distant Roads', slug: 'sudurer-potthe' }
-      ]
-    },
-    { name: 'চন্দ্রদ্বীপ', nameEn: 'Chandradwip', slug: 'chandradwip', icon: '❀',
-      subs: [
-        { name: 'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা', nameEn: 'Writing Experience', slug: 'chandradwip-writing' },
-        { name: 'চরিত্রের কথা', nameEn: 'Characters', slug: 'chandradwip-characters' },
-        { name: 'জনপদের কথা', nameEn: 'The Settlement', slug: 'chandradwip-settlement' }
-      ]
-    }
-];
+    // বিভাগ ও উপবিভাগ এখন ডাটাবেস (categories / subcategories) থেকে লোড হয়। স্থির তালিকা নেই।
+    const CATEGORIES = [];
 
     function findCategoryByName(name) {
       const cats = state.categories && state.categories.length ? state.categories : CATEGORIES;
@@ -1219,12 +1171,28 @@ setInterval(updateSEOChecklist, 3000);
     // CATEGORIES — Supabase থেকে লোড (fallback: hardcoded)
     // ============================================================
     async function loadCategories() {
-      // লেখার বিভাগগুলো সাইটের নির্ধারিত taxonomy থেকে আসে।
-      // Supabase schema-তে categories/subcategories-এর প্রত্যাশিত কলাম নেই;
-      // তাই অনুপস্থিত টেবিল/কলাম query করে permission error তৈরি না করে
-      // একই স্থির তালিকা থেকেই editor-এর বিভাগ নির্বাচন চালু রাখা হচ্ছে।
-      state.categories = CATEGORIES;
-      return Promise.resolve();
+      try {
+      const [catRes, subRes] = await Promise.all([
+        sb.from('categories').select('id,name_bn,name_en,slug,icon,sort_order').eq('is_active', true).order('sort_order'),
+        sb.from('subcategories').select('id,category_id,name_bn,name_en,slug,sort_order').eq('is_active', true).order('sort_order')
+      ]);
+      if (catRes.error) throw catRes.error;
+      if (subRes.error) throw subRes.error;
+      const allSubs = subRes.data || [];
+      state.categories = (catRes.data || []).map(c => ({
+        id: c.id,
+        name: c.name_bn,
+        nameEn: c.name_en,
+        slug: c.slug,
+        icon: c.icon || '',
+        subs: allSubs
+          .filter(s => String(s.category_id) === String(c.id))
+          .map(s => ({ id: s.id, name: s.name_bn, nameEn: s.name_en, slug: s.slug }))
+      }));
+      } catch (err) {
+        console.error('বিভাগ লোড ব্যর্থ:', err);
+        state.categories = [];
+      }
     }
     function getParentCategories() { return state.categories; }
     function getSubcategories(parentName) {
@@ -2558,14 +2526,6 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         <h3 class="card-h"><i data-lucide="tag" style="width:14px;height:14px;"></i> ট্যাগ</h3>
         <p class="text-muted text-sm mb-2">ট্যাগ লিখে Enter চাপুন। একাধিক ট্যাগ যোগ করতে পারেন।</p>
       `;
-      const journalToggle = el('label', {
-        class: 'flex items-center gap-2 mb-3 bn-font',
-        style: { padding: '10px 12px', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', background: 'var(--card-cream)' }
-      },
-        el('input', { type: 'checkbox', id: 'f-journal-entry', style: { width: '17px', height: '17px', accentColor: 'var(--accent)' } }),
-        el('span', {}, 'জার্নালে প্রকাশ করুন'),
-        el('span', { class: 'text-xs text-muted' }, '— জার্নাল পৃষ্ঠায় দেখাবে')
-      );
       const tagInputWrap = el('div', { class: 'tag-input-wrap' });
       const tagInput = el('input', { type: 'text', placeholder: 'ট্যাগ লিখুন, Enter চাপুন...' });
       tagInputWrap.appendChild(tagInput);
@@ -2595,12 +2555,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           renderTags();
         }
       });
-      tagsCard.append(journalToggle, tagInputWrap);
-      $('#f-journal-entry', tagsCard).addEventListener('change', e => {
-        formData.tags = formData.tags.filter(t => String(t).trim().toLowerCase() !== 'জার্নাল');
-        if (e.target.checked) formData.tags.push('জার্নাল');
-        renderTags();
-      });
+      tagsCard.append(tagInputWrap);
       tagsTab.append(catCard, tagsCard);
 
       // ===== SEO SETTINGS TAB CONTENT =====
@@ -2883,7 +2838,6 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           sb.textContent = formData.status === 'published' ? 'প্রকাশিত' : 'খসড়া';
           sb.className = `badge ${formData.status === 'published' ? 'badge-default' : 'badge-warning'}`;
           renderTags();
-           $('#f-journal-entry').checked = formData.tags.some(t => String(t).trim().toLowerCase() === 'জার্নাল');
           // Show notify button only for published posts
           const notifyBtn = $('#notify-btn');
           if (notifyBtn) notifyBtn.style.display = formData.status === 'published' ? '' : 'none';

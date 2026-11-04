@@ -294,7 +294,6 @@
         "prokashona-o-pdf": "প্রকাশনা",
         bhromonkahini: "ভ্রমণকাহিনি",
         chandradwip: "চন্দ্রদ্বীপ",
-        "byaktigoto-onubhuti": "ব্যক্তিগত অনুভূতি",
       };
       return map[c] || c || "";
     }
