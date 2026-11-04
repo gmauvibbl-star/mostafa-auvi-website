@@ -11,7 +11,7 @@ ALTER TABLE public.posts ADD COLUMN IF NOT EXISTS subcategory_id uuid;
 -- 3. Create post_revisions table for Revision History
 CREATE TABLE IF NOT EXISTS public.post_revisions (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  post_id uuid NOT NULL REFERENCES public.posts(id) ON DELETE CASCADE,
+  post_id bigint NOT NULL REFERENCES public.posts(id) ON DELETE CASCADE,
   body text,
   body_en text,
   title text,
