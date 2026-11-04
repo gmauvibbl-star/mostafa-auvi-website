@@ -278,6 +278,10 @@
   .nav ul li.nav-fiction a  { color: #1B5E6B; }
   .nav ul li.nav-essay a    { color: #2D5F52; }
   .nav ul li.nav-law a      { color: #5D3A8A; }
+  .nav ul li.nav-travel a   { color: #8B5A2B; }
+  .nav ul li.nav-banking a  { color: #35635B; }
+  .nav ul li.nav-chandradwip a { color: #80652E; }
+  .nav ul li.nav-publications a { color: #8A4F5D; }
   .nav ul li.nav-journal a  { color: #966C33; }
   .nav ul li.nav-author a   { color: #8A1A4A; }
   .nav ul li.nav-all a      { color: #1F7A70; }
@@ -1350,6 +1354,10 @@
     <li class="nav-fiction"><a href="posts.html?category=kothasahitya">কথাসাহিত্য</a></li>
     <li class="nav-essay"><a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
     <li class="nav-law"><a href="posts.html?category=ain-oadalot">আইন ও আদালত</a></li>
+    <li class="nav-travel"><a href="posts.html?category=bhromonkahini">ভ্রমণ ও অনুবাদ সাহিত্য</a></li>
+    <li class="nav-banking"><a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a></li>
+    <li class="nav-chandradwip"><a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ</a></li>
+    <li class="nav-publications"><a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a></li>
     <li class="nav-author"><a href="about.html">লেখক পরিচিতি</a></li>
     <li class="nav-all active"><a href="posts.html">সব লেখা</a></li>
   </ul>
@@ -1580,6 +1588,10 @@ function applyReadShellLanguage(lang) {
     [['.share-fb','Share on Facebook'],['.share-tw','Share on X / Twitter'],['.share-wa','Share on WhatsApp'],['.share-ig','Share on Telegram'],['.share-em[aria-label="Email"]','Share by email'],['.share-em[aria-label="Copy Link"]','Copy link']].forEach(([selector,title]) => setAttr(selector,'title',title));
     setText('.nav-home a','Home'); setText('.nav-fiction a','Fiction');
     setText('.nav-essay a','Essays & Literary Criticism'); setText('.nav-law a','Law & Judiciary');
+    setText('.nav-travel a','Travel & Translated Literature');
+    setText('.nav-banking a','Banking & Economics');
+    setText('.nav-chandradwip a','Chandradwip');
+    setText('.nav-publications a','Publications');
     setText('.nav-author a','About the Author');
     setText('.nav-all a','All Writing'); setAttr('.nav','aria-label','Main navigation');
     // Update nav hrefs to preserve lang=en
@@ -1587,6 +1599,10 @@ function applyReadShellLanguage(lang) {
     setAttr('.nav-fiction a','href','posts.html?category=kothasahitya&lang=en');
     setAttr('.nav-essay a','href','posts.html?category=probandho-sahityasamalochona&lang=en');
     setAttr('.nav-law a','href','posts.html?category=ain-oadalot&lang=en');
+    setAttr('.nav-travel a','href','posts.html?category=bhromonkahini&lang=en');
+    setAttr('.nav-banking a','href','posts.html?category=banking-o-orthoniti&lang=en');
+    setAttr('.nav-chandradwip a','href','posts.html?category=chandradwip&lang=en');
+    setAttr('.nav-publications a','href','posts.html?category=prokashona-o-pdf&lang=en');
     setAttr('.nav-author a','href','about-en.html');
     setAttr('.nav-all a','href','posts.html?lang=en');
     // Update back-link href
