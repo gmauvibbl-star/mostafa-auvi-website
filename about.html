@@ -797,6 +797,68 @@
   @supports (height: 100dvh) { .page-wrap { min-height: 100dvh; } }
   html { scroll-padding-top: 80px; }
   body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
+
+  /* ====== MOBILE HEADER REFINEMENT (2026-11-04) ====== */
+  /* (1) Nav: right-edge fade hint that more items are scrollable */
+  .nav {
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+  .nav::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 32px;
+    background: linear-gradient(to left, var(--paper) 35%, rgba(244,236,216,0));
+    pointer-events: none;
+    z-index: 3;
+    transition: opacity .2s;
+  }
+  @media (min-width: 760px) { .nav::after { display: none; } }
+
+  /* (2) Tagline: smaller + allow wrap on small screens */
+  @media (max-width: 680px) {
+    .brand .tagline {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      line-height: 1.5;
+      max-width: 100%;
+      white-space: normal;
+      word-spacing: 0.2em;
+    }
+    .brand .tagline .dot { margin: 0 6px; font-size: 10px; }
+  }
+  @media (max-width: 480px) {
+    .brand .tagline {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      max-width: 240px;
+      line-height: 1.6;
+    }
+  }
+
+  /* (3) Share icons: smaller + tighter to cut header height */
+  @media (max-width: 680px) {
+    .header-right { gap: 14px; }
+    .share { gap: 6px; }
+    .share .label { font-size: 12px; margin-right: 2px; }
+    .share a { width: 30px; height: 30px; }
+    .share a svg { width: 14px; height: 14px; }
+  }
+  @media (max-width: 480px) {
+    .header-right { gap: 10px; }
+    .share { gap: 5px; }
+    .share .label { display: none; }
+    .share a { width: 26px; height: 26px; }
+    .share a svg { width: 12px; height: 12px; }
+  }
+  @media (max-width: 380px) {
+    .share a { width: 24px; height: 24px; }
+    .share a svg { width: 11px; height: 11px; }
+    .subscribe-btn { padding: 5px 9px; font-size: 9px; }
+    .side-link-btn { padding: 7px 9px; font-size: 10px; }
+  }
 </style>
 
 <script type="application/ld+json">

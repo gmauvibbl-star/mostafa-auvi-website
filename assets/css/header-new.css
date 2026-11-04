@@ -95,15 +95,67 @@ html,body{
   overscroll-behavior-y:none;
   -webkit-text-size-adjust:100%;
 }
-/* iPhone SE / mini (320–380px) — prevent cramped header */
-@media(max-width:380px){
-  .hdr{padding-left:14px !important;padding-right:14px !important;gap:14px}
-  .v1 .bn span{font-size:30px}
-  .v2 .bn span,.v3 .bn span{font-size:28px}
-  .menu{font-size:14px;gap:0 10px}
+/* ====== MOBILE HEADER REFINEMENT (2026-11-04) ====== */
+/* Nav (.menu): right-edge fade hint that more items are scrollable */
+.menu{
+  position:relative;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+}
+.menu::after{
+  content:"";
+  position:absolute;
+  top:0;right:0;bottom:0;
+  width:28px;
+  background:linear-gradient(to left,var(--bg) 35%,rgba(255,255,255,0));
+  pointer-events:none;
+  z-index:2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .menu::after{
+    background:linear-gradient(to left,var(--bg) 35%,rgba(23,21,15,0));
+  }
+}
+:root[data-theme="dark"] .menu::after{
+  background:linear-gradient(to left,var(--bg) 35%,rgba(23,21,15,0));
+}
+@media(min-width:821px){ .menu::after{display:none} }
+
+/* Tagline / brand shrink on small screens */
+@media(max-width:680px){
+  .v1 .bn span{font-size:32px}
+  .v2 .bn span,.v3 .bn span{font-size:30px}
+  .en span{font-size:14px;letter-spacing:3px}
+  .menu{font-size:14px;gap:0 12px}
   .menu a{font-size:14px}
   .menu a.j{font-size:13px}
-  .sub{font-size:12px;padding:5px 10px}
-  .tools .share{padding:2px 6px}
+  .sub{font-size:12px;padding:5px 11px}
   .tools .share svg{width:16px;height:16px}
+  .tools .share{padding:2px 6px;gap:6px}
+}
+@media(max-width:480px){
+  .v1 .bn span{font-size:26px}
+  .v2 .bn span,.v3 .bn span{font-size:24px}
+  .en span{font-size:12px;letter-spacing:2px}
+  .menu{font-size:13px;gap:0 10px}
+  .menu a{font-size:13px}
+  .menu a.j{font-size:12px}
+  .sub{font-size:11px;padding:4px 9px}
+  .tools .share em{display:none}
+  .tools .share svg{width:15px;height:15px}
+  .tools .share a{width:20px;height:20px}
+}
+/* iPhone SE / mini (<=380px) — final shrink, must come AFTER 480px so it wins */
+@media(max-width:380px){
+  .hdr{padding-left:14px !important;padding-right:14px !important;gap:14px}
+  .v1 .bn span{font-size:24px}
+  .v2 .bn span,.v3 .bn span{font-size:22px}
+  .en span{font-size:11px;letter-spacing:1.5px}
+  .menu{font-size:12px;gap:0 9px}
+  .menu a{font-size:12px}
+  .menu a.j{font-size:11px}
+  .sub{font-size:10px;padding:4px 8px}
+  .tools .share{padding:2px 5px;gap:5px}
+  .tools .share svg{width:14px;height:14px}
+  .tools .share a{width:18px;height:18px}
 }
