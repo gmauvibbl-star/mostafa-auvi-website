@@ -175,6 +175,28 @@
     h1 { font-size: 24px; }
     .card { padding: 20px; }
   }
+
+  /* ====== iPHONE / iOS SAFARI FIX ====== */
+  body {
+    padding-top: max(24px, env(safe-area-inset-top, 0px));
+    padding-bottom: max(40px, env(safe-area-inset-bottom, 0px));
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+  .card input, .card select, .card textarea {
+    font-size: 16px; /* prevent iOS auto-zoom */
+  }
+  button, .btn, a, input[type="submit"] {
+    touch-action: manipulation; /* remove 300ms tap delay */
+  }
+  @supports (height: 100dvh) { body { min-height: 100dvh; } }
+  body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
+  html { scroll-padding-top: 80px; }
+  @media (max-width: 380px) {
+    body { padding: 18px 12px 32px; }
+    h1 { font-size: 22px; }
+    .card { padding: 18px; }
+  }
 </style>
 <link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
 </head>

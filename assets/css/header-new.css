@@ -65,3 +65,45 @@ body{font-family:'Anek Bangla','Noto Sans Bengali','Hind Siliguri',sans-serif}
   .v1 .menu{order:3;flex:1 1 100%;justify-content:flex-start}
   .tools .share em{display:none}
 }
+
+/* ====== iPHONE / iOS SAFARI HEADER & NAVIGATION ENHANCEMENT (2026-11-04) ====== */
+/* Safe-area padding for header utility bar & bottom footer */
+.hdr,
+.utility-bar{
+  padding-left:max(24px,env(safe-area-inset-left,0px));
+  padding-right:max(24px,env(safe-area-inset-right,0px));
+  padding-top:max(4px,env(safe-area-inset-top,0px));
+}
+/* Horizontal nav: momentum scroll + snap on iPhone */
+.menu{
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+}
+.menu a{scroll-snap-align:start}
+/* Remove 300ms tap delay */
+a,button,.sub,.share a,.menu a{
+  touch-action:manipulation;
+}
+/* Prevent iOS auto-zoom on input focus */
+input,select,textarea{font-size:16px}
+/* Dynamic viewport height where supported */
+@supports (height:100dvh){
+  body{min-height:100dvh}
+}
+/* Stop bounce that hides fixed header */
+html,body{
+  overscroll-behavior-y:none;
+  -webkit-text-size-adjust:100%;
+}
+/* iPhone SE / mini (320–380px) — prevent cramped header */
+@media(max-width:380px){
+  .hdr{padding-left:14px !important;padding-right:14px !important;gap:14px}
+  .v1 .bn span{font-size:30px}
+  .v2 .bn span,.v3 .bn span{font-size:28px}
+  .menu{font-size:14px;gap:0 10px}
+  .menu a{font-size:14px}
+  .menu a.j{font-size:13px}
+  .sub{font-size:12px;padding:5px 10px}
+  .tools .share{padding:2px 6px}
+  .tools .share svg{width:16px;height:16px}
+}

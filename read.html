@@ -112,7 +112,7 @@
     padding: 4px 12px;
     border: 1px solid rgba(184,146,72,0.35);
     border-radius: 14px;
-    color: rgba(250,244,232,0.85);
+    color: var(--cream);
     font-weight: 600;
     font-size: 13px;
     letter-spacing: 0.05em;
@@ -215,7 +215,7 @@
     gap: 8px;
     padding: 10px 20px;
     background: var(--blood);
-    color: var(--cream);
+    color: #FFFFFF;
     border: 1.5px solid var(--blood);
     border-radius: 999px;
     font-family: 'Noto Serif Bengali', serif;
@@ -1157,6 +1157,61 @@
     .share a { width: 28px; height: 28px; }
     .share a svg { width: 12px; height: 12px; }
   }
+
+  /* ====== iPHONE / iOS SAFARI HEADER & NAV FIX ====== */
+  /* Safe-area padding for notch / Dynamic Island & home indicator */
+  .utility-bar {
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+    padding-left: max(50px, env(safe-area-inset-left, 0px));
+    padding-right: max(50px, env(safe-area-inset-right, 0px));
+  }
+  .header { padding-top: max(30px, env(safe-area-inset-top, 0px)); }
+  .nav {
+    padding-left: max(50px, env(safe-area-inset-left, 0px));
+    padding-right: max(50px, env(safe-area-inset-right, 0px));
+  }
+  .footer-strip {
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  }
+  /* Prevent iOS auto-zoom on input focus (font-size >= 16px) */
+  .nav .search-box input,
+  .login-modal input,
+  .comment-form input,
+  .comment-form textarea {
+    font-size: 16px;
+  }
+  /* Smooth momentum scrolling for horizontal nav on iPhone */
+  .nav {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  .nav ul li { scroll-snap-align: start; }
+  /* Remove 300ms tap delay on iPhone */
+  a, button, .subscribe-btn, .share a, .nav ul li a, .utility-bar .lang a {
+    touch-action: manipulation;
+  }
+  /* iPhone SE / mini viewport tuning */
+  @media (max-width: 380px) {
+    .brand .name { font-size: 26px; }
+    .utility-bar { padding: 8px 14px; gap: 6px; }
+    .utility-bar .lang a { padding: 3px 7px; font-size: 10px; }
+    .nav { padding: 8px 10px; }
+    .nav ul { gap: 10px; }
+    .nav ul li a { font-size: 11px; }
+    .subscribe-btn { padding: 6px 10px; font-size: 10px; }
+    .share a { width: 28px; height: 28px; }
+    .share a svg { width: 12px; height: 12px; }
+    .a4-page { padding: 16px 12px !important; margin: 8px 4px; }
+    .a4-page .article-title { font-size: 18px !important; }
+    .article-body { font-size: 13px !important; line-height: 1.85; }
+  }
+  /* iOS Safari 100vh fix — use dynamic viewport where supported */
+  @supports (height: 100dvh) {
+    .page-wrap { min-height: 100dvh; }
+  }
+  /* Sticky utility-bar should not hide behind iOS Safari URL bar */
+  html { scroll-padding-top: 80px; }
+  body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
 </style>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mostafa Auvi — প্রকাশিত লেখা">

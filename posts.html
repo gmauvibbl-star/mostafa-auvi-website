@@ -79,12 +79,12 @@
   .essay-hub.visible{display:block}
   .essay-hub-label{font:italic 12px 'EB Garamond',serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
   .essay-hub-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-  .essay-hub-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:104px;padding:16px 16px 14px 20px;background:var(--cream);border:1px solid var(--paper-dark);border-radius:8px;text-decoration:none;box-shadow:0 3px 10px rgba(15,61,62,.06);transition:transform .2s,box-shadow .2s,border-color .2s,background .2s;overflow:hidden;--accent:#1B5E6B}
+  .essay-hub-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:104px;padding:16px 16px 14px 20px;background:var(--cream);border:1px solid var(--paper-dark);border-radius:8px;text-decoration:none;box-shadow:0 3px 10px rgba(15,61,62,.06);transition:transform .2s,box-shadow .2s,border-color .2s,background .2s;overflow:hidden;--accent:#0F3D3E}
   .essay-hub-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
-  .essay-hub-card:nth-child(5n+2){--accent:#A85D35}
-  .essay-hub-card:nth-child(5n+3){--accent:#4669A6}
-  .essay-hub-card:nth-child(5n+4){--accent:#A64E7D}
-  .essay-hub-card:nth-child(5n){--accent:#5C6B22}
+  .essay-hub-card:nth-child(5n+2){--accent:#7A3F22}
+  .essay-hub-card:nth-child(5n+3){--accent:#2E4878}
+  .essay-hub-card:nth-child(5n+4){--accent:#7A3458}
+  .essay-hub-card:nth-child(5n){--accent:#404E18}
   .essay-hub-card strong{font-family:'Noto Serif Bengali',serif;font-size:16px;font-weight:700;line-height:1.45;color:var(--teal-deep)}
   .essay-hub-card span{font:italic 12px 'EB Garamond',serif;letter-spacing:.04em;color:var(--accent);margin-top:10px}
   .essay-hub-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(15,61,62,.14);border-color:var(--accent)}
@@ -131,7 +131,7 @@
   .footer-nav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0;font-family:'EB Garamond',serif;font-size:13px}
   .footer-nav a{color:var(--cream);text-decoration:none;opacity:0.85;transition:opacity .2s,color .2s}
   .footer-nav a:hover{color:var(--gold-bright);opacity:1}
-  .footer-copy{font-family:'EB Garamond',serif;font-style:italic;font-size:11px;color:var(--gold-dim);letter-spacing:0.08em;border-top:1px solid rgba(184,146,72,0.25);padding-top:12px;margin-top:6px}
+  .footer-copy{font-family:'EB Garamond',serif;font-style:italic;font-size:11px;color:var(--paper);letter-spacing:0.08em;border-top:1px solid rgba(184,146,72,0.25);padding-top:12px;margin-top:6px}
 
   /* Responsive */
   @media(max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -219,6 +219,43 @@
     .cwip-landing-body{padding:18px 20px 20px;}
     .cwip-landing-title{font-size:21px;}
   }
+
+  /* ====== iPHONE / iOS SAFARI HEADER & NAV FIX ====== */
+  .site-header {
+    padding-top: max(34px, env(safe-area-inset-top, 0px));
+    padding-left: max(50px, env(safe-area-inset-left, 0px));
+    padding-right: max(50px, env(safe-area-inset-right, 0px));
+  }
+  .nav {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .nav a { scroll-snap-align: start; white-space: nowrap; }
+  .site-footer {
+    padding-bottom: max(22px, env(safe-area-inset-bottom, 0px));
+  }
+  .filter-pill, .nav a, .essay-hub-card, .retry-btn, a, button {
+    touch-action: manipulation;
+  }
+  @media (max-width: 380px) {
+    .site-header { padding: 22px 14px 16px; }
+    .brand { font-size: 22px; }
+    .brand .bn { font-size: 13px; }
+    .tagline { font-size: 11px; }
+    .nav { gap: 4px 10px; font-size: 11px; }
+    .intro { padding: 22px 14px 8px; }
+    .page-title { font-size: 26px; }
+    .filters { padding: 14px 14px 4px; }
+    .grid { padding: 0 14px 28px; gap: 14px; }
+    .essay-hub { padding: 14px 14px 6px; }
+    .essay-hub-grid { grid-template-columns: 1fr; }
+    .site-footer { padding: 18px 14px 14px; }
+  }
+  @supports (height: 100dvh) { .page-wrap { min-height: 100dvh; } }
+  html { scroll-padding-top: 80px; }
+  body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
 </style>
 <link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
 </head>

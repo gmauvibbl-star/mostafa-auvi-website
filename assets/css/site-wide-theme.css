@@ -76,3 +76,98 @@ img{max-width:100%;height:auto}
   body{line-height:1.72}
   input,select,textarea,button,.button,.btn{max-width:100%}
 }
+
+/* ==================================================================
+   iPHONE / iOS SAFARI HEADER & NAVIGATION FIX  (added 2026-11-04)
+   Pure-CSS layer — no HTML / JS / Supabase / content touched.
+   Works WITHOUT viewport-fit=cover (degrades gracefully on iOS).
+   ================================================================== */
+
+/* 1. Safe-area aware padding for top header & bottom footer.
+      On non-iOS or without viewport-fit=cover, env() returns 0
+      so the original layout is preserved. */
+header,
+.utility-bar,
+.site-header,
+nav,
+.nav,
+.topnav,
+.main-nav,
+.navbar{
+  padding-top:max(0px,env(safe-area-inset-top,0px));
+}
+header .in,
+.utility-bar{
+  padding-left:max(0px,env(safe-area-inset-left,0px));
+  padding-right:max(0px,env(safe-area-inset-right,0px));
+}
+footer,
+.site-footer{
+  padding-bottom:max(0px,env(safe-area-inset-bottom,0px));
+  padding-left:max(0px,env(safe-area-inset-left,0px));
+  padding-right:max(0px,env(safe-area-inset-right,0px));
+}
+
+/* 2. Prevent iOS Safari auto-zoom on input focus (>=16px font). */
+input,select,textarea{
+  font-size:16px;
+}
+
+/* 3. Horizontal momentum scrolling for nav on iPhone. */
+nav,.nav,.topnav,.main-nav,.navbar{
+  -webkit-overflow-scrolling:touch;
+}
+
+/* 4. Remove 300ms tap delay & disable double-tap-zoom on interactive elements. */
+a,button,.button,.btn,[class*="btn-"],input[type="submit"],
+.nav a,header a,footer a,.site-footer a,
+.utility-bar .lang a,.subscribe-btn,.share a{
+  touch-action:manipulation;
+}
+
+/* 5. iOS Safari 100vh URL-bar jump fix — use dynamic viewport where supported. */
+@supports (height:100dvh){
+  body{min-height:100dvh}
+}
+
+/* 6. Stop rubber-band / overscroll bounce that hides fixed header. */
+html,body{
+  overscroll-behavior-y:none;
+  -webkit-text-size-adjust:100%;
+}
+
+/* 7. Anchor scroll offset so sticky header doesn't cover section tops. */
+html{
+  scroll-padding-top:80px;
+}
+
+/* 8. iPhone SE / mini (320–380px) tuning — prevent header overflow & cramped nav. */
+@media(max-width:380px){
+  body{line-height:1.65}
+  header .in,
+  .utility-bar,
+  .site-header,
+  nav,.nav,.topnav,.main-nav,.navbar{
+    padding-left:14px !important;
+    padding-right:14px !important;
+  }
+  header .brand,
+  .brand{
+    font-size:20px;
+  }
+  nav,.nav,.topnav,.main-nav,.navbar{
+    font-size:12px;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+  }
+  nav a,.nav a,.topnav a,.main-nav a,.navbar a{
+    white-space:nowrap;
+    scroll-snap-align:start;
+  }
+  nav,.nav,.topnav,.main-nav,.navbar{
+    scroll-snap-type:x proximity;
+  }
+  input,select,textarea{
+    font-size:16px;
+  }
+}

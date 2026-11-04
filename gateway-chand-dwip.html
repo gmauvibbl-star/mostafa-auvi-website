@@ -34,6 +34,24 @@
   .login-box button{width:100%;padding:14px;background:var(--pine-green);color:var(--gold-light);border:none;border-radius:8px;cursor:pointer;font-size:16px;font-weight:600;transition:background .2s}
   .login-box button:hover{background:var(--sage-green)}
   #loginError{color:var(--terracotta);margin-top:15px;font-size:14px;min-height:18px}
+
+  /* ====== iPHONE / iOS SAFARI FIX ====== */
+  body{
+    padding-top:max(20px,env(safe-area-inset-top,0px));
+    padding-bottom:max(20px,env(safe-area-inset-bottom,0px));
+    padding-left:max(20px,env(safe-area-inset-left,0px));
+    padding-right:max(20px,env(safe-area-inset-right,0px));
+  }
+  .login-box input{font-size:16px} /* prevent iOS auto-zoom */
+  .login-box button,a{touch-action:manipulation}
+  @supports(height:100dvh){body{min-height:100dvh}}
+  body{overscroll-behavior-y:none;-webkit-text-size-adjust:100%}
+  @media(max-width:380px){
+    .login-box{padding:32px 20px}
+    .login-box h1{font-size:34px}
+    .login-box input{padding:10px 12px;font-size:15px}
+    .login-box button{padding:12px;font-size:15px}
+  }
 </style>
 <link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
 </head>
