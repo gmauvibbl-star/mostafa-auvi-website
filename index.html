@@ -276,23 +276,13 @@
   /* The hero section already gets background-image from hero.css.
      Here we tune object-position so the portrait stays visible. */
   .hero {
-    /* 2026-11-04: contain-ish fit so the entire portrait (incl. head) is
-       visible. We use a percentage size + careful position so the man's
-       head never gets cut, while the river delta still fills the rest. */
-    background-position: 22% center;
+    /* Keep cover (image fills container). Position TOP so the man's
+       head is always visible — bottom of the river delta crops naturally. */
+    background-position: 25% top;
     background-size: cover;
     background-repeat: no-repeat;
-    /* On wide screens, scale the image down slightly so portrait fits.
-       140% means image is 1.4x container width — leaves breathing room. */
     min-height: 320px;
     height: min(38vw, 430px);
-  }
-  /* Desktop fine-tune: position portrait so head is fully visible */
-  @media (min-width: 901px) {
-    .hero {
-      background-size: contain;
-      background-position: center center;
-    }
   }
 
   /* Re-layout the hero grid: text goes RIGHT, left side empty (image has portrait) */
@@ -399,23 +389,23 @@
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
   }
 
-  /* Gentle full-image tint: restores highlight detail and blends the
-     portrait/landscape without changing the banner dimensions or crop. */
+  /* Right-side dark scrim so the white text always reads — but
+     the LEFT 38% (portrait area) stays completely clear so the
+     face is visible. 2026-11-04 fix. */
   .hero::after {
     background: linear-gradient(
       90deg,
-      rgba(5, 18, 20, 0.08) 0%,
-      rgba(5, 18, 20, 0.10) 38%,
-      rgba(5, 18, 20, 0.25) 58%,
+      rgba(5, 18, 20, 0) 0%,
+      rgba(5, 18, 20, 0) 38%,
+      rgba(5, 18, 20, 0.22) 58%,
       rgba(5, 18, 20, 0.55) 100%
     ) !important;
   }
-  /* Balanced tonal layer across the whole image; stronger toward the text
-     side so the left portrait remains natural rather than washed out. */
+  /* Soft vertical vignette ONLY on top + bottom edges — keeps face lit */
   .hero::before {
     background:
-      linear-gradient(90deg, rgba(7, 24, 28, 0.10) 0%, rgba(7, 24, 28, 0.12) 38%, rgba(7, 24, 28, 0.34) 60%, rgba(7, 24, 28, 0.62) 100%),
-      linear-gradient(0deg, rgba(5, 20, 22, 0.18) 0%, transparent 30%, transparent 70%, rgba(5, 20, 22, 0.28) 100%) !important;
+      linear-gradient(90deg, rgba(7, 24, 28, 0) 0%, rgba(7, 24, 28, 0) 38%, rgba(7, 24, 28, 0.32) 60%, rgba(7, 24, 28, 0.62) 100%),
+      linear-gradient(0deg, rgba(5, 20, 22, 0.15) 0%, transparent 30%, transparent 70%, rgba(5, 20, 22, 0.25) 100%) !important;
   }
 
   /* ============ RESPONSIVE ============ */
@@ -424,8 +414,7 @@
   @media (max-width: 900px) {
     .hero {
       height: min(46vw, 380px);
-      background-size: contain;
-      background-position: center center;
+      background-position: 22% top;
     }
     .hero-left {
       width: min(440px, 56%);
@@ -446,9 +435,7 @@
       align-items: stretch;
       height: auto;
       min-height: 360px;
-      /* Mobile: portrait at top, scaled so head + shoulders fit, river below */
-      background-size: contain;
-      background-position: center center;
+      background-position: 30% top;
     }
     .hero-left {
       order: 2;
@@ -465,15 +452,15 @@
     .hero::after {
       background: linear-gradient(
         180deg,
-        rgba(5, 18, 20, 0.10) 0%,
-        rgba(5, 18, 20, 0.10) 30%,
-        rgba(5, 18, 20, 0.38) 60%,
+        rgba(5, 18, 20, 0) 0%,
+        rgba(5, 18, 20, 0) 30%,
+        rgba(5, 18, 20, 0.35) 60%,
         rgba(5, 18, 20, 0.78) 100%
       ) !important;
     }
     .hero::before {
       background:
-        linear-gradient(180deg, rgba(7, 24, 28, 0.10) 0%, rgba(7, 24, 28, 0.12) 30%, rgba(7, 24, 28, 0.28) 60%, rgba(7, 24, 28, 0.64) 100%) !important;
+        linear-gradient(180deg, rgba(7, 24, 28, 0) 0%, rgba(7, 24, 28, 0) 30%, rgba(7, 24, 28, 0.22) 60%, rgba(7, 24, 28, 0.62) 100%) !important;
     }
   }
 
@@ -481,8 +468,7 @@
   @media (max-width: 380px) {
     .hero {
       min-height: 340px;
-      background-size: contain;
-      background-position: center center;
+      background-position: 30% top;
     }
     .hero-left { padding: 0 16px 28px; }
     .hero-title-bn { font-size: 28px !important; }
