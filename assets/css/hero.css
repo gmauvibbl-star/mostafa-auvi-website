@@ -6,12 +6,10 @@
 .hero{
   position:relative;
   isolation:isolate;
-  min-height:500px;
-  height:min(68vw,560px);
   display:flex;
   align-items:center;
   overflow:hidden;
-  background:#123f43 url('../img/hero-banner.jpg') center center / cover no-repeat;
+  background:#123f43 url('../img/hero-banner.jpg') center 35% / cover no-repeat;
   color:#fff;
 }
 .hero-bg{
