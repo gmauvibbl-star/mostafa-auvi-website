@@ -22,7 +22,7 @@
   /* ====================================================================
    *  1. SHARE / COPY-LINK / TOAST  (carried over verbatim)
    * ==================================================================== */
-  var pageUrl = window.location.href.split("?")[0].split("#")[0];
+  var pageUrl = window.location.href.split("#")[0];
   var pageTitle = document.title || "Mostafa Auvi — Fiction Writer & Literary Critic";
   var pageText = "মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।";
 
@@ -49,7 +49,7 @@
   };
 
   window.copyLink = function () {
-    var pageUrlCopy = window.location.href.split("?")[0].split("#")[0];
+    var pageUrlCopy = window.location.href.split("#")[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pageUrlCopy).then(function () {
         showToast("লিংক কপি হয়েছে: " + pageUrlCopy);

@@ -227,7 +227,7 @@
     <!-- Header -->
   <header class="site-header">
     <div class="header-row">
-      <a class="brand" href="./">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></a>
+      <a class="brand" href="./">MOSTAFA AUVI <span class="bn">মোস্তফা অভি</span></a>
       <div class="tagline">Fiction Writer &amp; Literary Critic<br>Literature Beyond Borders</div>
     </div>
     <nav class="nav" aria-label="প্রধান নেভিগেশন">
@@ -281,7 +281,7 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-brand">MOSTAFA AUVI<span class="bn">মোস্তফা অভি</span></div>
+    <div class="footer-brand">MOSTAFA AUVI <span class="bn">মোস্তফা অভি</span></div>
     <nav class="footer-nav">
       <a href="./">হোম</a>
       <a href="./posts.html?category=kothasahitya">কথাসাহিত্য</a>
@@ -764,16 +764,21 @@ async function loadPosts(){
   }
 }
 
-updateIntro();
-renderSubcategoryPills();
-// Loading timeout — if loadPosts doesn't complete within 20 seconds, show error
+// Start the loading timeout FIRST, so no earlier error can leave the page stuck on "লোড হচ্ছে…"
 var _loadTimeout=setTimeout(function(){
   if(statusEl && statusEl.textContent.indexOf('লোড হচ্ছে')!==-1){
     statusEl.innerHTML=(language==='en'?'Loading is taking longer than expected.':'লোড হতে বেশি সময় লাগছে।')+' '+retryButton();
-    grid.innerHTML='<div class="empty"><div class="icon">⏳</div><h3>'+(language==='en'?'Slow Response':'ধীরগতি')+'</h3><p>'+(language==='en'?'The server is taking too long to respond. Please check your connection and try again.':'সার্ভার সাড়া দিতে বেশি সময় নিচ্ছে। আপনার ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।')+'</p></div>';
+    grid.innerHTML='<div class="empty"><div class="icon">⏳</div><h3>'+(language==='en'?'Slow Response':'ধীরগতি')+'</h3><p>'+(language==='en'?'The server is taking too long to respond. Please check your connection and try again.':'সার্ভার সাড়া দিতে দেরি করছে। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')+'</p></div>';
   }
 },20000);
-loadPosts().finally(function(){ clearTimeout(_loadTimeout); });
+try{ updateIntro(); }catch(e){ console.error('updateIntro failed',e); }
+try{ renderSubcategoryPills(); }catch(e){ console.error('renderSubcategoryPills failed',e); }
+loadPosts()
+  .catch(function(e){
+    console.error(e);
+    statusEl.innerHTML=(language==='en'?'Could not load the writing list.':'লেখার তালিকা লোড করা যায়নি।')+' '+retryButton();
+  })
+  .finally(function(){ clearTimeout(_loadTimeout); });
 </script>
 <script>
 /* ====== Service Worker registration ====== */

@@ -997,7 +997,7 @@
           <span class="desc">Literary narratives on legal matters</span>
         </li>
         <li>
-          <a href="subscribe-en.html">Letter Box</a>
+          <a href="subscribe-en.html">Subscribe</a>
           <span class="desc">Email updates of new writing</span>
         </li>
       </ul>
@@ -1028,7 +1028,7 @@
     </button>
   </div>
   <div class="right">
-    <a href="subscribe-en.html">Letter Box</a>
+    <a href="subscribe-en.html">Subscribe</a>
     <a href="sitemap.xml">Sitemap</a>
     <a href="privacy-en.html">Privacy</a>
     <a href="mailto:gmauvibbl@gmail.com">Contact</a>
@@ -1160,7 +1160,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
 /* ====== Share functionality ====== */
 (function() {
-  var pageUrl = window.location.href.split('?')[0].split('#')[0];
+  var pageUrl = window.location.href.split('#')[0];
   var pageTitle = document.title || 'Mostafa Auvi — Fiction Writer & Literary Critic';
   var pageText = 'Mostafa Auvi — Fiction Writer & Literary Critic. Life within history, stories within life.';
 
@@ -1184,7 +1184,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
   };
 
   window.copyLink = function() {
-    var pageUrlCopy = window.location.href.split('?')[0].split('#')[0];
+    var pageUrlCopy = window.location.href.split('#')[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pageUrlCopy).then(function() {
         showToast('Link copied: ' + pageUrlCopy);
