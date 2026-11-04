@@ -201,7 +201,11 @@ async function loadMostRead() {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   try {
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Reuse the authenticated dashboard client. SUPABASE_ANON_KEY is not
+    // defined in this page; the configured key is SUPABASE_KEY and the
+    // existing client already carries the author's signed-in session.
+    const sb = supabase;
+    if (!sb) throw new Error('Supabase client is not initialized');
     const { data, error } = await sb.rpc('get_most_read_posts', { limit_count: 10 });
     if (error) throw error;
     if (!data || !data.length) {
