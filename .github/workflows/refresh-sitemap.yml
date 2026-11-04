@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: refresh-published-writing-sitemap
@@ -33,14 +34,17 @@ jobs:
       - name: Generate sitemap from published posts
         run: node scripts/generate-sitemap.mjs
 
-      - name: Commit sitemap when it changes
-        run: |
-          if git diff --quiet -- sitemap.xml; then
-            echo "Sitemap is already up to date."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sitemap.xml
-          git commit -m "chore: refresh sitemap for published writing"
-          git push origin HEAD:main
+      - name: Open or update sitemap pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/refresh-published-sitemap
+          delete-branch: true
+          commit-message: "chore: refresh sitemap for published writing"
+          title: "chore: refresh published-writing sitemap"
+          body: |
+            Automated update of sitemap.xml from currently published Bengali and English posts.
+
+            Please review and merge this pull request to publish the refreshed sitemap.
+          add-paths: |
+            sitemap.xml
