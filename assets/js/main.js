@@ -445,12 +445,6 @@
   }
 
   /* ====================================================================
-   *  9. LATEST JOURNAL ENTRY — fetch from Supabase (DISABLED)
-   *     Replaces the static hardcoded Journal card on the homepage with
-   *     the most recent published journal entry. Falls back to static
-   *     content if Supabase is unreachable or no journal entries exist.
-   * ==================================================================== */
-  /* ====================================================================
    *  INIT
    * ==================================================================== */
   function init() {
