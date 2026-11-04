@@ -282,15 +282,6 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
     return;
   }
 
-  // Client-side duplicate check via localStorage
-  // Tracks emails submitted from this browser to prevent re-submission
-  var submitted = [];
-  try { submitted = JSON.parse(localStorage.getItem('mauvi_subscribed_emails') || '[]'); } catch(_) {}
-  if (submitted.indexOf(email) !== -1) {
-    showStatus('subscribeStatus', 'This email is already subscribed.', 'error');
-    return;
-  }
-
   // Prevent double submission
   if (btn.disabled) return;
   btn.disabled = true;
@@ -301,23 +292,9 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   try {
     const { ok, data } = await callSubscription('subscribe', { email: email });
     if (ok) {
-      // Save email to localStorage to prevent future duplicate submissions
-      try {
-        submitted.push(email);
-        localStorage.setItem('mauvi_subscribed_emails', JSON.stringify(submitted));
-      } catch(_) {}
       showStatus('subscribeStatus', data.message || 'Thank you for subscribing. A confirmation link has been sent to your email.', 'success');
       emailInput.value = '';
     } else {
-      // Check if server says "already subscribed" (from Edge Function duplicate check)
-      // Match both Bengali "ইতিমধ্যে" and English "already" keywords
-      if (data.error && (data.error.indexOf('ইতিমধ্যে') !== -1 || data.error.toLowerCase().indexOf('already') !== -1)) {
-        // Save to localStorage so future attempts are caught client-side
-        try {
-          submitted.push(email);
-          localStorage.setItem('mauvi_subscribed_emails', JSON.stringify(submitted));
-        } catch(_) {}
-      }
       showStatus('subscribeStatus', data.error || 'Subscription could not be completed. Please try again.', 'error');
     }
   } catch (err) {
