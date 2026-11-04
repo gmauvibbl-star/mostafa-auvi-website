@@ -22,22 +22,22 @@ If the project already has tables or posts, do **not** blindly recreate the sche
 select table_name
 from information_schema.tables
 where table_schema = 'public'
-  and table_name in ('posts','journal_posts','admin_users','profiles','subscribers')
+  and table_name in ('posts','admin_users','profiles','subscribers')
 order by table_name;
 
 select table_name, column_name, data_type
 from information_schema.columns
 where table_schema = 'public'
-  and table_name in ('posts','journal_posts','admin_users','profiles')
+  and table_name in ('posts','admin_users','profiles')
 order by table_name, ordinal_position;
 
 select tablename, policyname, cmd, roles, qual, with_check
 from pg_policies
 where schemaname = 'public'
-  and tablename in ('posts','journal_posts','admin_users','profiles')
+  and tablename in ('posts','admin_users','profiles')
 order by tablename, policyname;
 ```
-If `journal_posts` contains existing writing or `profiles.is_admin` is the existing authorization system, **stop before applying the migration** and review a data-preserving migration from that actual schema. The dashboard code in this PR currently targets `posts` and `admin_users`; creating parallel tables without checking would not make existing records manageable. Only run `supabase/migrations/20261027_secure_author_writing.sql` after confirming `posts` is the intended source of truth and reviewing its current policies. Confirm the SQL Editor reports success before testing the dashboard.
+If `profiles.is_admin` is the existing authorization system, **stop before applying the migration** and review a data-preserving migration from that actual schema. The dashboard code currently targets `posts` and `admin_users`; creating parallel tables without checking would not make existing records manageable. Only run `supabase/migrations/20261027_secure_author_writing.sql` after confirming `posts` is the intended source of truth and reviewing its current policies. Confirm the SQL Editor reports success before testing the dashboard.
 
 Then open **Authentication → Users** and confirm the intended owner account exists. Copy that account's UUID and check whether it is present in `public.admin_users`. If it is missing, add only that specific UUID from SQL Editor:
 ```sql
@@ -59,7 +59,7 @@ Before launch, verify in SQL Editor that RLS is enabled and inspect the policies
 ## 3. Important follow-up before public launch
 - The subscription function currently contains the subscribe-confirmation email flow scaffold; the confirmation handler and unsubscribe endpoint must be completed and tested before collecting real subscribers.
 - The public pages are not yet linked from the very large existing `index.html`. Add visible navigation links to `posts.html` and `subscribe.html` only after configuration and smoke tests.
-- The existing home page and journal have not been replaced. The new article reader uses `read.html?slug=...` as a stable per-article URL.
+- The existing home page remains in place. The article reader uses `read.html?slug=...` as a stable per-article URL.
 - Add an actual unsubscribe link and endpoint before sending production email. Include a privacy notice, data retention policy, and anti-abuse/rate limiting.
 - Test admin isolation in a signed-out/incognito browser: drafts must never be visible, and non-admin users must not be able to insert, edit, or delete posts.
 - Existing articles need to be imported or linked separately; they are not automatically migrated into the new database.
