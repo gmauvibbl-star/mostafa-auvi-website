@@ -1160,7 +1160,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
 /* ====== Share functionality ====== */
 (function() {
-  var pageUrl = window.location.href.split('?')[0].split('#')[0];
+  var pageUrl = window.location.href.split('#')[0];
   var pageTitle = document.title || 'Mostafa Auvi — Fiction Writer & Literary Critic';
   var pageText = 'মোস্তফা অভি — Fiction Writer & Literary Critic. ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প।';
 
@@ -1184,7 +1184,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
   };
 
   window.copyLink = function() {
-    var pageUrlCopy = window.location.href.split('?')[0].split('#')[0];
+    var pageUrlCopy = window.location.href.split('#')[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pageUrlCopy).then(function() {
         showToast('লিংক কপি হয়েছে: ' + pageUrlCopy);
