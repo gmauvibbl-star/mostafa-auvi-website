@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
 <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>মোস্তফা অভি — লেখক ড্যাশবোর্ড | MOSTSFA AUVI Author Dashboard</title>
+  <title>মোস্তফা অভি — লেখক ড্যাশবোর্ড | MOSTAFA AUVI Author Dashboard</title>
   <meta name="description" content="বাংলা ও ইংরেজি দ্বিভাষিক লেখক ব্যবস্থাপনা ড্যাশবোর্ড" />
-  <meta name="author" content="MOSTSFA AUVI" />
+  <meta name="author" content="MOSTAFA AUVI" />
 
   <!-- Bengali fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -155,7 +155,7 @@ async function openMediaLibrary(callback) {
       const item = document.createElement('div');
       item.style.cssText = 'cursor:pointer;border:2px solid transparent;border-radius:8px;overflow:hidden;text-align:center;';
       if (isImage) {
-        item.innerHTML = '<img src="' + url + '" style="width:100%;height:100px;object-fit:cover;" /><div style="font-size:10px;padding:4px;color:#666;">' + file.name.slice(0, 15) + '</div>';
+        item.innerHTML = '<img src="' + url + '" alt="" style="width:100%;height:100px;object-fit:cover;" /><div style="font-size:10px;padding:4px;color:#666;">' + file.name.slice(0, 15) + '</div>';
       } else {
         item.innerHTML = '<div style="height:100px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;font-size:24px;">📄</div><div style="font-size:10px;padding:4px;color:#666;">' + file.name.slice(0, 15) + '</div>';
       }
@@ -2047,7 +2047,7 @@ setInterval(updateSEOChecklist, 3000);
           el('div', { class: 'login-brand' },
             el('div', { class: 'logo-big' }, icon('book-open')),
             el('h1', { class: 'bn-font' }, 'মোস্তফা অভি — লেখক ড্যাশবোর্ড'),
-            el('p', {}, 'MOSTSFA AUVI — Author Dashboard')
+            el('p', {}, 'MOSTAFA AUVI — Author Dashboard')
           ),
           el('div', { class: 'card' },
             el('h3', { style: { marginTop: 0 } }, '⚠️ Supabase কনফিগার করুন'),
@@ -2080,7 +2080,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         <div class="login-brand">
           <div class="logo-big"><i data-lucide="book-open"></i></div>
           <h1 class="bn-font">মোস্তফা অভি — লেখক ড্যাশবোর্ড</h1>
-          <p>MOSTSFA AUVI — Author Dashboard</p>
+          <p>MOSTAFA AUVI — Author Dashboard</p>
         </div>
         <div class="card">
           <div class="tab-strip">
