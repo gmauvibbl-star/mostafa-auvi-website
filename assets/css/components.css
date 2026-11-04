@@ -485,7 +485,7 @@
 .feat-card.teal   { background: linear-gradient(135deg, #1F7A70 0%, #155952 100%); }
 .feat-card.orange { background: linear-gradient(135deg, #C46A2B 0%, #8E4D1E 100%); }
 
-/* ====== FEATURES INLINE (moved into the right column below the journal) ======
+/* ====== FEATURES INLINE ======
    2-column grid fills the space that was empty. No full-width background —
    sits transparently on the .lower section's paper background. */
 .features-inline {
