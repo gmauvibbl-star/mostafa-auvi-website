@@ -130,6 +130,17 @@
   .selected-writing-list { grid-template-columns:1fr; margin-top:14px; }
   .selected-writing-list a { padding:11px 12px; }
 }
+
+/* FINAL HERO CLARITY OVERRIDE: show the original photograph without a haze layer. */
+.hero::before,
+.hero::after {
+  background: none !important;
+  opacity: 0 !important;
+}
+.hero-bg img {
+  filter: none !important;
+  opacity: 1 !important;
+}
 </style>
 </head>
 <body>
