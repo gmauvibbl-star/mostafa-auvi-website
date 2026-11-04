@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mostafa-auvi-v19';
+const CACHE_NAME = 'mostafa-auvi-v20';
 const ASSETS = [
   './',
   './index.html',
@@ -9,7 +9,8 @@ const ASSETS = [
   './about-en.html',
   './subscribe.html',
   './subscribe-en.html',
-  './dashboard.html',
+  './privacy.html',
+  './privacy-en.html',
   './manifest.json',
   './chandradwip-landscape.webp',
   './assets/img/author-hero.jpg',
