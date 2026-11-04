@@ -113,7 +113,7 @@
     text-decoration: none; padding: 4px 12px;
     border: 1px solid rgba(184,146,72,0.35);
     border-radius: 14px;
-    color: rgba(250,244,232,0.85);
+    color: var(--cream);
     font-weight: 600; font-size: 13px;
     letter-spacing: 0.05em;
     transition: all .2s; cursor: pointer;
@@ -151,7 +151,7 @@
 
   .subscribe-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; background: var(--blood); color: var(--cream);
+    padding: 10px 20px; background: var(--blood); color: #FFFFFF;
     border: 1.5px solid var(--blood); border-radius: 999px;
     font-family: 'Noto Serif Bengali', serif; font-size: 13px; font-weight: 700;
     letter-spacing: 0.04em; text-decoration: none; cursor: pointer;
@@ -563,7 +563,7 @@
     margin-top: 12px;
     padding: 10px 14px;
     background: var(--blood);
-    color: var(--cream);
+    color: #FFFFFF;
     text-decoration: none;
     border-radius: 4px;
     font-family: 'Noto Serif Bengali', serif;
@@ -764,6 +764,39 @@
 @media(max-width:700px){.books-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.book-info{padding:10px 9px 6px}.book-info strong{font-size:14px}.book-year{padding-bottom:10px}}
 @media(max-width:420px){.books-list{grid-template-columns:1fr 1fr}.book-item.manuscript{grid-column:1/-1}}
 
+  /* ====== iPHONE / iOS SAFARI HEADER & NAV FIX ====== */
+  .utility-bar {
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+    padding-left: max(50px, env(safe-area-inset-left, 0px));
+    padding-right: max(50px, env(safe-area-inset-right, 0px));
+  }
+  .header { padding-top: max(30px, env(safe-area-inset-top, 0px)); }
+  .nav {
+    padding-left: max(50px, env(safe-area-inset-left, 0px));
+    padding-right: max(50px, env(safe-area-inset-right, 0px));
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  .nav ul li { scroll-snap-align: start; }
+  .login-modal input { font-size: 16px; }
+  a, button, .subscribe-btn, .share a, .side-link-btn, .nav ul li a, .utility-bar .lang a {
+    touch-action: manipulation;
+  }
+  @media (max-width: 380px) {
+    .brand .name { font-size: 26px; }
+    .utility-bar { padding: 8px 14px; gap: 6px; }
+    .utility-bar .lang a { padding: 3px 7px; font-size: 10px; }
+    .nav { padding: 8px 10px; }
+    .nav ul { gap: 10px; }
+    .nav ul li a { font-size: 11px; }
+    .subscribe-btn { padding: 6px 10px; font-size: 10px; }
+    .side-link-btn { padding: 8px 10px; font-size: 11px; }
+    .share a { width: 28px; height: 28px; }
+    .share a svg { width: 12px; height: 12px; }
+  }
+  @supports (height: 100dvh) { .page-wrap { min-height: 100dvh; } }
+  html { scroll-padding-top: 80px; }
+  body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
 </style>
 
 <script type="application/ld+json">
