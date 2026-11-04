@@ -276,12 +276,23 @@
   /* The hero section already gets background-image from hero.css.
      Here we tune object-position so the portrait stays visible. */
   .hero {
-    background-position: 30% center;
+    /* 2026-11-04: contain-ish fit so the entire portrait (incl. head) is
+       visible. We use a percentage size + careful position so the man's
+       head never gets cut, while the river delta still fills the rest. */
+    background-position: 22% center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* 2026-11-04: Reduced height by ~2 inches (≈192px). Tighter, more cinematic. */
+    /* On wide screens, scale the image down slightly so portrait fits.
+       140% means image is 1.4x container width — leaves breathing room. */
     min-height: 320px;
     height: min(38vw, 430px);
+  }
+  /* Desktop fine-tune: position portrait so head is fully visible */
+  @media (min-width: 901px) {
+    .hero {
+      background-size: 132% auto;
+      background-position: 20% center;
+    }
   }
 
   /* Re-layout the hero grid: text goes RIGHT, left side empty (image has portrait) */
@@ -413,7 +424,8 @@
   @media (max-width: 900px) {
     .hero {
       height: min(46vw, 380px);
-      background-position: 25% center;
+      background-size: 150% auto;
+      background-position: 18% center;
     }
     .hero-left {
       width: min(440px, 56%);
@@ -434,8 +446,9 @@
       align-items: stretch;
       height: auto;
       min-height: 360px;
-      background-position: 30% 20%;
-      background-size: cover;
+      /* Mobile: portrait at top, scaled so head + shoulders fit, river below */
+      background-size: 180% auto;
+      background-position: 30% 12%;
     }
     .hero-left {
       order: 2;
@@ -466,7 +479,11 @@
 
   /* iPhone SE / mini */
   @media (max-width: 380px) {
-    .hero { min-height: 340px; background-position: 30% 22%; }
+    .hero {
+      min-height: 340px;
+      background-size: 200% auto;
+      background-position: 30% 12%;
+    }
     .hero-left { padding: 0 16px 28px; }
     .hero-title-bn { font-size: 28px !important; }
     .hero-author-en { font-size: 13px !important; letter-spacing: 0.02em !important; }
