@@ -279,9 +279,9 @@
     background-position: 30% center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* Make sure hero is tall enough to read on desktop */
-    min-height: 500px;
-    height: min(56vw, 620px);
+    /* 2026-11-04: Reduced height by ~2 inches (≈192px). Tighter, more cinematic. */
+    min-height: 320px;
+    height: min(38vw, 430px);
   }
 
   /* Re-layout the hero grid: text goes RIGHT, left side empty (image has portrait) */
@@ -321,7 +321,7 @@
     width: min(440px, 42%);
     margin-right: clamp(24px, 6vw, 76px);
     margin-left: auto;
-    padding: 36px 0;
+    padding: 24px 0;
     text-align: left;
     text-shadow: 0 2px 14px rgba(5, 20, 22, 0.65);
   }
@@ -331,38 +331,80 @@
 
   /* Title tweaks for the new backdrop */
   .hero-title-bn {
-    font-size: clamp(38px, 4.4vw, 64px) !important;
-    line-height: 1.16;
-    margin-bottom: 14px !important;
+    font-size: clamp(32px, 3.6vw, 52px) !important;
+    line-height: 1.14;
+    margin-bottom: 10px !important;
   }
+  /* English subtitle "Fiction Writer & Literary Critic" — premium editorial */
   .hero-author-en {
-    font-size: clamp(13px, 1.3vw, 17px) !important;
-    letter-spacing: 0.18em !important;
-    margin-bottom: 18px;
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(15px, 1.6vw, 21px) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: none !important;
+    color: #f0d28b !important;
+    margin-bottom: 14px !important;
+    line-height: 1.35;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
   }
-  .hero-divider { margin: 14px 0 16px; }
+  .hero-divider {
+    margin: 12px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 260px;
+  }
+  .hero-divider .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 180, 104, 0.7), transparent);
+  }
+  .hero-divider .diamond {
+    color: #d4b468;
+    font-size: 10px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  }
+  /* Tagline below divider — elegant italic, slightly larger */
   .hero-title-en {
-    font-size: clamp(15px, 1.5vw, 20px);
-    color: #f0d28b;
-    margin-bottom: 12px;
-    line-height: 1.5;
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(16px, 1.7vw, 22px) !important;
+    font-weight: 400 !important;
+    color: #f4e3b0 !important;
+    margin-bottom: 10px !important;
+    line-height: 1.4;
+    letter-spacing: 0.005em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   }
   .hero-subtitle {
-    font-size: clamp(14px, 1.3vw, 17px) !important;
-    line-height: 1.7;
-    max-width: 380px;
-    color: rgba(255, 255, 255, 0.92);
+    font-family: 'EB Garamond', 'Cormorant Garamond', serif !important;
+    font-style: italic !important;
+    font-size: clamp(13px, 1.3vw, 17px) !important;
+    line-height: 1.65;
+    max-width: 400px;
+    color: rgba(255, 255, 255, 0.94) !important;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
   }
 
-  /* Right-side dark scrim so the white text always reads,
-     even where the banner image is brightest. */
+  /* Right-side dark scrim so the white text always reads — but
+     the LEFT 38% (portrait area) stays completely clear so the
+     face is visible. 2026-11-04 fix. */
   .hero::after {
     background: linear-gradient(
       90deg,
-      rgba(5, 18, 20, 0.02) 0%,
-      rgba(5, 18, 20, 0.08) 42%,
-      rgba(5, 18, 20, 0.42) 100%
+      rgba(5, 18, 20, 0) 0%,
+      rgba(5, 18, 20, 0) 38%,
+      rgba(5, 18, 20, 0.22) 58%,
+      rgba(5, 18, 20, 0.55) 100%
     ) !important;
+  }
+  /* Soft vertical vignette ONLY on top + bottom edges — keeps face lit */
+  .hero::before {
+    background:
+      linear-gradient(90deg, rgba(7, 24, 28, 0) 0%, rgba(7, 24, 28, 0) 38%, rgba(7, 24, 28, 0.32) 60%, rgba(7, 24, 28, 0.62) 100%),
+      linear-gradient(0deg, rgba(5, 20, 22, 0.15) 0%, transparent 30%, transparent 70%, rgba(5, 20, 22, 0.25) 100%) !important;
   }
 
   /* ============ RESPONSIVE ============ */
@@ -370,15 +412,18 @@
   /* Tablet — text block widens, banner repositions */
   @media (max-width: 900px) {
     .hero {
-      height: min(64vw, 540px);
+      height: min(46vw, 380px);
       background-position: 25% center;
     }
     .hero-left {
-      width: min(420px, 52%);
+      width: min(440px, 56%);
       margin-right: clamp(20px, 5vw, 48px);
       padding: 28px 0;
     }
     .hero-title-bn { font-size: clamp(34px, 5.6vw, 52px) !important; }
+    .hero-author-en { font-size: clamp(15px, 2.4vw, 21px) !important; }
+    .hero-title-en { font-size: clamp(17px, 2.4vw, 23px) !important; }
+    .hero-subtitle { font-size: clamp(14px, 1.7vw, 17px) !important; }
   }
 
   /* Mobile — stack vertically; show only text (banner portrait still visible up top) */
@@ -388,38 +433,44 @@
       justify-content: flex-end;
       align-items: stretch;
       height: auto;
-      min-height: 520px;
-      background-position: 28% 25%;
+      min-height: 360px;
+      background-position: 30% 20%;
       background-size: cover;
     }
     .hero-left {
       order: 2;
       width: 100%;
       margin: 0;
-      padding: 0 22px 36px;
+      padding: 0 22px 22px;
       text-align: left;
     }
     .hero-title-bn { font-size: clamp(30px, 8vw, 44px) !important; }
-    .hero-author-en { font-size: 12px !important; letter-spacing: 0.1em !important; }
-    .hero-title-en { font-size: 15px; }
-    .hero-subtitle { font-size: 14px !important; max-width: 100%; }
-    /* On mobile, darken bottom 55% so text reads over the landscape */
+    .hero-author-en { font-size: clamp(14px, 3.6vw, 18px) !important; letter-spacing: 0.03em !important; }
+    .hero-title-en { font-size: clamp(16px, 4vw, 20px) !important; }
+    .hero-subtitle { font-size: clamp(13px, 3.2vw, 16px) !important; max-width: 100%; }
+    /* Mobile: keep top 35% (portrait area) CLEAR, darken only the bottom for text */
     .hero::after {
       background: linear-gradient(
         180deg,
         rgba(5, 18, 20, 0) 0%,
-        rgba(5, 18, 20, 0.08) 48%,
-        rgba(5, 18, 20, 0.52) 100%
+        rgba(5, 18, 20, 0) 30%,
+        rgba(5, 18, 20, 0.35) 60%,
+        rgba(5, 18, 20, 0.78) 100%
       ) !important;
+    }
+    .hero::before {
+      background:
+        linear-gradient(180deg, rgba(7, 24, 28, 0) 0%, rgba(7, 24, 28, 0) 30%, rgba(7, 24, 28, 0.22) 60%, rgba(7, 24, 28, 0.62) 100%) !important;
     }
   }
 
   /* iPhone SE / mini */
   @media (max-width: 380px) {
-    .hero { min-height: 480px; background-position: 30% 22%; }
+    .hero { min-height: 340px; background-position: 30% 22%; }
     .hero-left { padding: 0 16px 28px; }
     .hero-title-bn { font-size: 28px !important; }
-    .hero-author-en { font-size: 11px !important; }
+    .hero-author-en { font-size: 13px !important; letter-spacing: 0.02em !important; }
+    .hero-title-en { font-size: 15px !important; }
     .hero-subtitle { font-size: 13px !important; }
   }
 
@@ -432,17 +483,6 @@
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .hero { background-image: url('../img/hero-banner.jpg'); }
   }
-
-/* FINAL HERO CLARITY OVERRIDE: show the original photograph without a haze layer. */
-.hero::before,
-.hero::after {
-  background: none !important;
-  opacity: 0 !important;
-}
-.hero-bg img {
-  filter: none !important;
-  opacity: 1 !important;
-}
 </style>
 </head>
 <body>
