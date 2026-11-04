@@ -201,7 +201,7 @@
     <a class="filter-pill" href="../posts.html?category=ছোটগল্প">ছোটগল্প</a>
     <a class="filter-pill" href="../posts.html?category=উপন্যাস">উপন্যাস</a>
     <a class="filter-pill" href="../posts.html?category=অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</a>
-    <a class="filter-pill" href="../posts.html?category=kothasahitya&subcategory=bhromonkahini">ভ্রমণ</a>
+    <a class="filter-pill" href="../posts.html?category=bhromonkahini">ভ্রমণ ও অনুবাদ সাহিত্য</a>
     <a class="filter-pill" href="../posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
     <a class="filter-pill" href="../posts.html?category=সাহিত্যালোচনা">সাহিত্যসমালোচনা</a>
     <a class="filter-pill" href="../posts.html?category=আইন-আদালত">আইন ও আদালত</a>
@@ -278,43 +278,40 @@ const CATEGORIES_MAP = {
 
 const SUBCATEGORY_MAP = {
   'kothasahitya': [
-    {slug:'chotogolpo',bn:'ছোটগল্প',en:'Short Story',aliases:['ছোটগল্প','ছোট গল্প']},
-    {slug:'bodo-golpo',bn:'বড়গল্প',en:'Long Story',aliases:['বড়গল্প','বড় গল্প']},
-    {slug:'uponmas',bn:'উপন্যাস',en:'Novel',aliases:['উপন্যাস','সম্পূর্ণ উপন্যাস']},
-    {slug:'bhromonkahini',bn:'ভ্রমণ',en:'Travel',aliases:['ভ্রমণ','ভ্রমণকাহিনি','ভ্রমণ কাহিনি']},
-    {slug:'onubad-kothasahitya',bn:'অনুবাদ',en:'Translation',aliases:['অনুবাদ','অনুবাদ কথাসাহিত্য','অনুবাদ সাহিত্য','অনূদিত গল্প','অনূদিত উপন্যাস']}
+    {slug:'chotogolpo',bn:'ছোটগল্প',en:'Short Stories',aliases:['ছোটগল্প','ছোট গল্প']},
+    {slug:'bodo-golpo',bn:'বড়গল্প',en:'Long Stories',aliases:['বড়গল্প','বড় গল্প']},
+    {slug:'uponmas',bn:'সম্পূর্ণ উপন্যাস',en:'Complete Novels',aliases:['সম্পূর্ণ উপন্যাস','উপন্যাস']},
+    {slug:'dharabahik-uponmas',bn:'ধারাবাহিক উপন্যাস',en:'Serialised Novels',aliases:['ধারাবাহিক উপন্যাস','ধারাবাহিক']}
   ],
   'probandho-sahityasamalochona': [
-    {slug:'sahityo-probandho',bn:'সাহিত্য প্রবন্ধ',en:'Literary Essay',aliases:['সাহিত্য প্রবন্ধ','প্রবন্ধ']},
-    {slug:'shilpo-o-sanskriti',bn:'শিল্প ও সংস্কৃতি',en:'Art & Culture',aliases:['শিল্প ও সংস্কৃতি']},
-    {slug:'itihash-o-oitihyo',bn:'ইতিহাস ও ঐতিহ্য',en:'History & Heritage',aliases:['ইতিহাস ও ঐতিহ্য']},
-    {slug:'somaj-o-rajniti',bn:'সমাজ ও রাজনীতি',en:'Society & Politics',aliases:['সমাজ ও রাজনীতি']},
-    {slug:'dorshon-o-chinta',bn:'দর্শন ও চিন্তা',en:'Philosophy & Thought',aliases:['দর্শন ও চিন্তা']},
-    {slug:'biggan-o-projukti',bn:'বিজ্ঞান ও প্রযুক্তি',en:'Science & Technology',aliases:['বিজ্ঞান ও প্রযুক্তি']},
-    {slug:'shikkha-o-gobeshona',bn:'শিক্ষা ও গবেষণা',en:'Education & Research',aliases:['শিক্ষা ও গবেষণা']},
-    {slug:'byaktitwo-o-jibon',bn:'ব্যক্তিত্ব ও জীবন',en:'Personality & Life',aliases:['ব্যক্তিত্ব ও জীবন']},
-    {slug:'boi-alochona',bn:'বই আলোচনা',en:'Book Discussion',aliases:['বই আলোচনা','বই পর্যালোচনা']},
-    {slug:'uponmas-alochona',bn:'উপন্যাস আলোচনা',en:'Novel Discussion',aliases:['উপন্যাস আলোচনা']},
-    {slug:'nirodharito-golpo-alochona',bn:'নির্ধারিত গল্প আলোচনা',en:'Designated Story Review',aliases:['নির্ধারিত গল্প আলোচনা']},
-    {slug:'kobita-alochona',bn:'কবিতা আলোচনা',en:'Poetry Discussion',aliases:['কবিতা আলোচনা']},
-    {slug:'probandho-alochona',bn:'প্রবন্ধ আলোচনা',en:'Essay Discussion',aliases:['প্রবন্ধ আলোচনা']},
-    {slug:'onubad-sahityo-alochona',bn:'অনুবাদ সাহিত্য আলোচনা',en:'Translation Discussion',aliases:['অনুবাদ সাহিত্য আলোচনা']},
-    {slug:'shilpo-samalochona',bn:'শিল্প সমালোচনা',en:'Art Criticism',aliases:['শিল্প সমালোচনা']},
-    {slug:'bishwo-sahityo',bn:'বিশ্বসাহিত্য',en:'World Literature',aliases:['বিশ্বসাহিত্য']},
-    {slug:'bishesh-lekhoker-lekha',bn:'বিশেষ লেখকের লেখা',en:'Featured Author',aliases:['বিশেষ লেখকের লেখা']}
+    {slug:'probandho',bn:'প্রবন্ধ',en:'Essays',aliases:['প্রবন্ধ','সাহিত্য প্রবন্ধ']},
+    {slug:'sahitya-samalochona',bn:'সাহিত্যসমালোচনা',en:'Literary Criticism',aliases:['সাহিত্যসমালোচনা','সাহিত্যালোচনা','বই আলোচনা','বই পর্যালোচনা']}
+  ],
+  'ain-oadalot': [
+    {slug:'bangladesher-jurisprudence',bn:'বাংলাদেশের জুরিসপ্রুডেন্স',en:'Jurisprudence of Bangladesh',aliases:['বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স']},
+    {slug:'british-law-ethics',bn:'ব্রিটিশ ল ও নৈতিকতার কথকতা',en:'British Law & Ethics',aliases:['ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা']},
+    {slug:'ain-bishoyok-probandho',bn:'আইনবিষয়ক প্রবন্ধ',en:'Legal Essays',aliases:['আইনবিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','আইনি বিশ্লেষণ']},
+    {slug:'civil-court-kordcha',bn:'সিভিল আদালতের কড়চা',en:'Civil Court Notes',aliases:['সিভিল আদালতের কড়চা']},
+    {slug:'case-study',bn:'কেস স্টাডি',en:'Case Study',aliases:['কেস স্টাডি','কেসস্টাডি','মামলার ইতিবৃত্ত']}
+  ],
+  'bhromonkahini': [
+    {slug:'bangladesh-bhromon',bn:'বাংলাদেশ ভ্রমণ',en:'Travels in Bangladesh',aliases:['বাংলাদেশ ভ্রমণ','ভ্রমণ','ভ্রমণকাহিনি']},
+    {slug:'bidesh-bhromon',bn:'বিদেশ ভ্রমণ',en:'Travels Abroad',aliases:['বিদেশ ভ্রমণ']},
+    {slug:'smritir-bhandar',bn:'স্মৃতির ভাণ্ডার',en:'Treasury of Memories',aliases:['স্মৃতির ভাণ্ডার','স্মৃতিভাণ্ডার']},
+    {slug:'fele-asha-din',bn:'ফেলে আসা দিন',en:'Days Gone By',aliases:['ফেলে আসা দিন']}
+  ],
+  'banking-o-orthoniti': [
+    {slug:'amar-banking-jibon',bn:'আমার ব্যাংকিং জীবন',en:'My Banking Life',aliases:['আমার ব্যাংকিং জীবন']},
+    {slug:'sme-banking-kotha',bn:'এসএমই ব্যাংকিং নিয়ে যত কথা',en:'SME Banking Notes',aliases:['এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং']}
   ],
   'chandradwip': [
     {slug:'chandradwip-writing',bn:'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা',en:'Writing Experience',aliases:['চন্দ্রদ্বীপ লেখার অভিজ্ঞতা','লেখার অভিজ্ঞতা','Writing Experience']},
     {slug:'chandradwip-characters',bn:'চরিত্রের কথা',en:'Characters',aliases:['চরিত্রের কথা','চরিত্র','Characters']},
     {slug:'chandradwip-settlement',bn:'জনপদের কথা',en:'The Settlement',aliases:['জনপদের কথা','জনপদ','The Settlement']}
   ],
-  'ain-oadalot': [
-    {slug:'ain-bishoyok-jato-katha',bn:'আইন বিষয়ক যত কথা',en:'Legal Reflections',aliases:['আইন বিষয়ক যত কথা','আইন বিষয়ক প্রবন্ধ','আইনি বিশ্লেষণ']},
-    {slug:'mamolar-itibritto',bn:'মামলার ইতিবৃত্ত',en:'Case Narrative',aliases:['মামলার ইতিবৃত্ত','কেসস্টাডি','কেস স্টাডি']}
-  ],
   'prokashona-o-pdf': [
     {slug:'bajpakhir-punorjonmo',bn:'বাজপাখির পুনর্জন্ম',en:'The Rebirth of the Hawk',aliases:['বাজপাখির পুনর্জন্ম']},
-    {slug:'cs-khotiyan',bn:'সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত',en:'The CS Record of Rights and the History of a Case',aliases:['সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত']},
+    {slug:'cs-khotiyan',bn:'সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত',en:'The CS Record of Rights',aliases:['সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত']},
     {slug:'beraler-quarantine',bn:'বেড়ালের কোয়ারেন্টাইন',en:"The Cat's Quarantine",aliases:['বেড়ালের কোয়ারেন্টাইন']}
   ]
 };

@@ -36,23 +36,6 @@ function openSitePreview() {
 }
 
 
-// ====== PDF Upload ======
-async function uploadPDF(file, language) {
-  if (!file) return null;
-  if (file.type !== 'application/pdf') { toast('ত্রুটি', 'শুধু PDF ফাইল আপলোড করা যাবে।', 'error'); return null; }
-  if (file.size > 20 * 1024 * 1024) { toast('ত্রুটি', 'PDF ফাইল ২০MB-এর কম হতে হবে।', 'error'); return null; }
-  try {
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    const ext = '.pdf';
-    const path = 'pdf-' + language + '/' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + ext;
-    const { data, error } = await sb.storage.from('covers').upload(path, file, { contentType: 'application/pdf', upsert: false });
-    if (error) throw error;
-    const { data: urlData } = sb.storage.from('covers').getPublicUrl(path);
-    return urlData.publicUrl;
-  } catch(e) { toast('ত্রুটি', 'PDF আপলোড ব্যর্থ: ' + e.message, 'error'); return null; }
-}
-
-
 // ====== Video Upload ======
 async function uploadVideo(file, language) {
   if (!file) return null;
@@ -1857,24 +1840,6 @@ setInterval(updateSEOChecklist, 3000);
         openMediaLibrary(function(url, name) {
           document.execCommand('insertImage', false, url);
         });
-      }));
-      toolbar.append(tbBtn('PDF আপলোড', ic('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/>'), () => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'application/pdf';
-        input.onchange = async () => {
-          const file = input.files[0];
-          if (!file) return;
-          toast('আপলোড', 'PDF আপলোড হচ্ছে…', 'info');
-          const url = await uploadPDF(file, state.language || 'bn');
-          if (url) {
-            const title = prompt('PDF-এর নাম:') || file.name;
-            const html = '<div style="margin:12px 0;padding:12px 16px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:8px;"><a href="' + url + '" target="_blank" download style="color:#0F3D3E;text-decoration:none;font-weight:600;">📄 ' + title + '</a> <span style="font-size:12px;color:#666;margin-left:8px;">(' + Math.round(file.size/1024) + ' KB)</span></div>';
-            document.execCommand('insertHTML', false, html);
-            toast('সফল', 'PDF আপলোড হয়েছে।', 'success');
-          }
-        };
-        input.click();
       }));
       toolbar.append(tbBtn('ভিডিও আপলোড', ic('<path d="M23 7l-7 5 7 5z"/><path d="M1 5h15v14H1z"/>'), () => {
         const input = document.createElement('input');
