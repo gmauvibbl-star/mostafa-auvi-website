@@ -432,6 +432,17 @@
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .hero { background-image: url('../img/hero-banner.jpg'); }
   }
+
+/* FINAL HERO CLARITY OVERRIDE: show the original photograph without a haze layer. */
+.hero::before,
+.hero::after {
+  background: none !important;
+  opacity: 0 !important;
+}
+.hero-bg img {
+  filter: none !important;
+  opacity: 1 !important;
+}
 </style>
 </head>
 <body>
