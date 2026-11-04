@@ -7,7 +7,6 @@ git rm -- "mostafa-auvi-website-main.zip" \
           "workspace-9e7289da-c63e-47bc-9bba-f2b3bca121d2 (1)" \
           "author-bio.jpg.jpg" \
           "কবির ছবি.jpg" \
-          "বইপ্রেমী জানালার ধারে জার্নাল.png" \
           "book1.jpg" "book2.jpg"
 git commit -m "Remove old archives, duplicates and unused files"
 git push
