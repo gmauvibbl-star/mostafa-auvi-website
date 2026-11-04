@@ -130,6 +130,38 @@
   .selected-writing-list { grid-template-columns:1fr; margin-top:14px; }
   .selected-writing-list a { padding:11px 12px; }
 }
+
+/* HERO PORTRAIT LIGHTING FIX — remove the broad dark wash over the face.
+   Keep only a restrained scrim at the text side for readability. */
+.hero-bg img {
+  filter: saturate(1) contrast(1.02) brightness(1.12) !important;
+}
+.hero::before {
+  background:
+    linear-gradient(90deg,
+      rgba(7,24,28,.025) 0%,
+      rgba(7,24,28,.035) 55%,
+      rgba(7,24,28,.10) 100%),
+    linear-gradient(0deg, rgba(5,20,22,.06), transparent 42%) !important;
+}
+.hero::after {
+  background: linear-gradient(90deg,
+    rgba(5,18,20,0) 0%,
+    rgba(5,18,20,.025) 48%,
+    rgba(5,18,20,.24) 100%) !important;
+}
+@media (max-width:640px) {
+  .hero::before {
+    background: linear-gradient(90deg,
+      rgba(5,22,25,.025), rgba(5,22,25,.04)) !important;
+  }
+  .hero::after {
+    background: linear-gradient(180deg,
+      rgba(5,18,20,0) 0%,
+      rgba(5,18,20,.025) 55%,
+      rgba(5,18,20,.30) 100%) !important;
+  }
+}
 </style>
 </head>
 <body>
