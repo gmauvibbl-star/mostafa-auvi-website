@@ -594,10 +594,10 @@ function updateIntro(){
   document.body.classList.toggle('is-publications', category==='prokashona-o-pdf');
   if(language==='en'){
     document.getElementById('pageTitle').textContent=category?(category==='prokashona-o-pdf'?'Publications':' '+titleBase.trim()):'Published Writing';
-    document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published story collections by Mostafa Auvi.':(category==='chandradwip'?'The forthcoming novel — a century of riverine life in the Barisal tidal belt.':'Published writing in '+titleBase+'.')):'Stories, novels, essays and literary criticism.';
+    document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published books by Mostafa Auvi: two story collections and a literary narrative on law.':(category==='chandradwip'?'The forthcoming novel — a century of riverine life in the Barisal tidal belt.':'Published writing in '+titleBase+'.')):'Stories, novels, essays and literary criticism.';
   }else if(category){
     document.getElementById('pageTitle').textContent=category==='prokashona-o-pdf'?'প্রকাশনা':titleBase;
-    document.getElementById('pageSubtitle').textContent=category==='prokashona-o-pdf'?'মোস্তফা অভির প্রকাশিত তিনটি গল্পগ্রন্থ।':(category==='chandradwip'?'আসন্ন উপন্যাস — বরিশালের ভাটি অঞ্চলের নদীমাতৃক এক শতকের আখ্যান।':titleBase+' বিভাগের প্রকাশিত লেখা।');
+    document.getElementById('pageSubtitle').textContent=category==='prokashona-o-pdf'?'মোস্তফা অভির প্রকাশিত তিনটি বই: দুটি গল্পগ্রন্থ ও আইনবিষয়ক একটি সাহিত্যিক আখ্যান।':(category==='chandradwip'?'আসন্ন উপন্যাস — বরিশালের ভাটি অঞ্চলের নদীমাতৃক এক শতকের আখ্যান।':titleBase+' বিভাগের প্রকাশিত লেখা।');
     document.querySelector('.nav a.current')?.classList.remove('current');
     document.querySelectorAll('.nav a').forEach(a=>{
       const c=new URL(a.href,location.origin+location.pathname).searchParams.get('category')||"";
