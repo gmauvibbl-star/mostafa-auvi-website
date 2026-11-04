@@ -30,7 +30,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Noto+Serif+Bengali:wght@400;500;600;700;800&family=Tiro+Bangla:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
     --teal-deep:#0F3D3E; --teal:#1B5E6B; --teal-mid:#2A7A7E;
@@ -58,6 +58,7 @@
   /* Page intro */
   .intro{padding:42px 50px 12px;border-bottom:1px solid var(--paper-dark)}
   .eyebrow{font-family:'EB Garamond',serif;font-style:italic;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+  .is-publications .page-title{font-family:'Playfair Display','Tiro Bangla',serif;font-size:clamp(32px,4.4vw,46px);letter-spacing:.005em}
   .page-title{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--teal-deep);line-height:1.18;margin-bottom:8px}
   .page-subtitle{font-family:'EB Garamond',serif;font-style:italic;font-size:15px;color:var(--ink-mute);max-width:680px}
 
@@ -445,6 +446,7 @@ function updateIntro(){
   const canonicalUrl = location.origin + location.pathname + (category ? '?category='+encodeURIComponent(category) : '');
   canonical.href = canonicalUrl;
 
+  document.body.classList.toggle('is-publications', category==='prokashona-o-pdf');
   if(language==='en'){
     document.getElementById('pageTitle').textContent=category?(category==='prokashona-o-pdf'?'Publications':' '+titleBase.trim()):'Published Writing';
     document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published story collections by Mostafa Auvi.':'Published writing in '+titleBase+'.'):'Stories, novels, essays and literary criticism.';
