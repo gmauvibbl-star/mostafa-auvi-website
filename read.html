@@ -1232,7 +1232,6 @@
     <li class="nav-fiction"><a href="posts.html?category=kothasahitya">কথাসাহিত্য</a></li>
     <li class="nav-essay"><a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a></li>
     <li class="nav-law"><a href="posts.html?category=ain-oadalot">আইন-আদালত</a></li>
-    <li class="nav-journal"><a href="journal.html">Journal</a></li>
     <li class="nav-author"><a href="about.html">লেখক পরিচিতি</a></li>
     <li class="nav-all active"><a href="posts.html">সব লেখা</a></li>
   </ul>
@@ -1470,7 +1469,6 @@ function applyReadShellLanguage(lang) {
     setAttr('.nav-fiction a','href','posts.html?category=kothasahitya&lang=en');
     setAttr('.nav-essay a','href','posts.html?category=probandho-sahityasamalochona&lang=en');
     setAttr('.nav-law a','href','posts.html?category=ain-oadalot&lang=en');
-    setAttr('.nav-journal a','href','journal.html?lang=en');
     setAttr('.nav-author a','href','about-en.html');
     setAttr('.nav-all a','href','posts.html?lang=en');
     // Update back-link href
@@ -2241,11 +2239,13 @@ loadPost();
 })();
 </script>
 
+<script>
 /* ====== Service Worker registration ====== */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('sw.js').catch(function() {});
   });
 }
+</script>
 </body>
 </html>
