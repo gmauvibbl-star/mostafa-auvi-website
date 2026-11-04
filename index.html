@@ -264,6 +264,174 @@
     .tools .share a { width: 18px; height: 18px; }
     .tools .share svg { width: 14px; height: 14px; }
   }
+
+  /* ============================================================
+     HERO BANNER — Ultra-premium literary layout (2026-11-04)
+     Uses assets/img/hero-banner.jpg (1440x720) where the portrait
+     is baked into the LEFT third. We move the text content to the
+     RIGHT (over the negative space) and hide the old portrait img.
+     Overrides hero.css — CSS-only, no HTML structure change.
+     ============================================================ */
+
+  /* The hero section already gets background-image from hero.css.
+     Here we tune object-position so the portrait stays visible. */
+  .hero {
+    background-position: 30% center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* Make sure hero is tall enough to read on desktop */
+    min-height: 500px;
+    height: min(56vw, 620px);
+  }
+
+  /* Re-layout the hero grid: text goes RIGHT, left side empty (image has portrait) */
+  .hero > .hero-left,
+  .hero > .hero-inner,
+  section.hero > div:first-of-type,
+  section.hero > div:last-of-type {
+    /* these utilities are not used in current markup; safe no-op */
+  }
+
+  /* Flip the hero section into a right-aligned text column.
+     The existing structure is: <section class="hero">
+        <div class="hero-ornament tl">…</div>
+        <div class="hero-ornament br">…</div>
+        <div class="hero-left">  TEXT  </div>
+        <div class="hero-right"> PORTRAIT IMG (now redundant) </div>
+     </section> */
+  .hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;     /* push text block to the right */
+    align-items: center;
+    padding: 0;
+  }
+
+  /* Hide the old portrait photo — it is now baked into the banner */
+  .hero-right,
+  .hero-photo-wrap,
+  .hero-photo,
+  .hero-photo-frame {
+    display: none !important;
+  }
+
+  /* Re-style the text block on the right */
+  .hero-left {
+    order: 2;
+    width: min(440px, 42%);
+    margin-right: clamp(24px, 6vw, 76px);
+    margin-left: auto;
+    padding: 36px 0;
+    text-align: left;
+    text-shadow: 0 2px 14px rgba(5, 20, 22, 0.65);
+  }
+
+  /* Hide decorative ornaments — they clash with the photographic banner */
+  .hero-ornament { display: none !important; }
+
+  /* Title tweaks for the new backdrop */
+  .hero-title-bn {
+    font-size: clamp(38px, 4.4vw, 64px) !important;
+    line-height: 1.16;
+    margin-bottom: 14px !important;
+  }
+  .hero-author-en {
+    font-size: clamp(13px, 1.3vw, 17px) !important;
+    letter-spacing: 0.18em !important;
+    margin-bottom: 18px;
+  }
+  .hero-divider { margin: 14px 0 16px; }
+  .hero-title-en {
+    font-size: clamp(15px, 1.5vw, 20px);
+    color: #f0d28b;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .hero-subtitle {
+    font-size: clamp(14px, 1.3vw, 17px) !important;
+    line-height: 1.7;
+    max-width: 380px;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* Right-side dark scrim so the white text always reads,
+     even where the banner image is brightest. */
+  .hero::after {
+    background: linear-gradient(
+      90deg,
+      rgba(5, 18, 20, 0.15) 0%,
+      rgba(5, 18, 20, 0.25) 50%,
+      rgba(5, 18, 20, 0.62) 100%
+    ) !important;
+  }
+
+  /* ============ RESPONSIVE ============ */
+
+  /* Tablet — text block widens, banner repositions */
+  @media (max-width: 900px) {
+    .hero {
+      height: min(64vw, 540px);
+      background-position: 25% center;
+    }
+    .hero-left {
+      width: min(420px, 52%);
+      margin-right: clamp(20px, 5vw, 48px);
+      padding: 28px 0;
+    }
+    .hero-title-bn { font-size: clamp(34px, 5.6vw, 52px) !important; }
+  }
+
+  /* Mobile — stack vertically; show only text (banner portrait still visible up top) */
+  @media (max-width: 640px) {
+    .hero {
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: stretch;
+      height: auto;
+      min-height: 520px;
+      background-position: 28% 25%;
+      background-size: cover;
+    }
+    .hero-left {
+      order: 2;
+      width: 100%;
+      margin: 0;
+      padding: 0 22px 36px;
+      text-align: left;
+    }
+    .hero-title-bn { font-size: clamp(30px, 8vw, 44px) !important; }
+    .hero-author-en { font-size: 12px !important; letter-spacing: 0.1em !important; }
+    .hero-title-en { font-size: 15px; }
+    .hero-subtitle { font-size: 14px !important; max-width: 100%; }
+    /* On mobile, darken bottom 55% so text reads over the landscape */
+    .hero::after {
+      background: linear-gradient(
+        180deg,
+        rgba(5, 18, 20, 0) 0%,
+        rgba(5, 18, 20, 0.15) 40%,
+        rgba(5, 18, 20, 0.78) 100%
+      ) !important;
+    }
+  }
+
+  /* iPhone SE / mini */
+  @media (max-width: 380px) {
+    .hero { min-height: 480px; background-position: 30% 22%; }
+    .hero-left { padding: 0 16px 28px; }
+    .hero-title-bn { font-size: 28px !important; }
+    .hero-author-en { font-size: 11px !important; }
+    .hero-subtitle { font-size: 13px !important; }
+  }
+
+  /* Honor reduced-motion users: no parallax-like background-attachment */
+  @media (prefers-reduced-motion: reduce) {
+    .hero { background-attachment: scroll; }
+  }
+
+  /* High-DPI screens: serve a crisper background */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero { background-image: url('../img/hero-banner.jpg'); }
+  }
 </style>
 </head>
 <body>

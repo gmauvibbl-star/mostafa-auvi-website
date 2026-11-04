@@ -1,4 +1,8 @@
-/* Full-width author hero — portrait-led editorial layout */
+/* Full-width author hero — portrait-led editorial layout
+   2026-11-04: New ultra-premium hero banner (portrait left + river delta +
+   negative space right) replaces old author-hero.jpg. Composition is
+   baked into the image, so we use it as background-cover and overlay
+   text on the right-side negative space. */
 .hero{
   position:relative;
   isolation:isolate;
@@ -7,7 +11,7 @@
   display:flex;
   align-items:center;
   overflow:hidden;
-  background:#123f43;
+  background:#123f43 url('../img/hero-banner.jpg') center center / cover no-repeat;
   color:#fff;
 }
 .hero-bg{
@@ -30,8 +34,17 @@
   inset:0;
   z-index:-1;
   background:
-    linear-gradient(90deg,rgba(7,24,28,.88) 0%,rgba(7,24,28,.72) 34%,rgba(7,24,28,.28) 67%,rgba(7,24,28,.18) 100%),
+    linear-gradient(90deg,rgba(7,24,28,.62) 0%,rgba(7,24,28,.42) 30%,rgba(7,24,28,.28) 55%,rgba(7,24,28,.18) 100%),
     linear-gradient(0deg,rgba(5,20,22,.34),transparent 42%);
+}
+/* New: ensure the dark-left→light-right gradient lets text sit on right */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,18,20,.55) 0%,rgba(5,18,20,.32) 35%,rgba(5,18,20,.10) 60%,rgba(5,18,20,.28) 100%);
 }
 .hero-inner{
   width:min(1200px,100%);
