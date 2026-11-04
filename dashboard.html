@@ -195,19 +195,40 @@ function updateSEOChecklist() {
 
 // ====== Most Read Posts ======
 async function loadMostRead() {
+  const container = document.getElementById('most-read-list');
+  if (!container) return;
+  const safe = value => String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   try {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const { data, error } = await sb.rpc('get_most_read_posts', { limit_count: 10 });
     if (error) throw error;
-    if (!data || data.length === 0) return;
-    const container = document.getElementById('most-read-list');
-    if (!container) return;
-    container.innerHTML = data.map((p, i) => 
-      '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">' +
-      '<span><strong>' + (i+1) + '.</strong> ' + (p.title || '(শিরোনামহীন)') + ' <span style="font-size:11px;color:var(--muted-fg);">' + (p.language === 'en' ? 'EN' : 'বাংলা') + '</span></span>' +
-      '<span style="color:var(--teal-deep);font-weight:600;">' + (p.view_count || 0) + ' পাঠ</span></div>'
-    ).join('');
-  } catch(e) { console.warn('Most Read load failed:', e); }
+    if (!data || !data.length) {
+      container.innerHTML = '<p class="text-sm text-muted">এখনো কোনো পাঠ-তথ্য নেই।</p>';
+      return;
+    }
+    const ids = data.map(p => p.id).filter(Boolean);
+    let covers = {};
+    if (ids.length) {
+      const { data: posts, error: coverError } = await sb.from('posts')
+        .select('id,cover_image').in('id', ids);
+      if (!coverError) (posts || []).forEach(p => { covers[p.id] = p.cover_image || ''; });
+    }
+    container.innerHTML = data.map((p, i) => {
+      const image = covers[p.id]
+        ? '<img src="' + safe(covers[p.id]) + '" alt="' + safe(p.title) + '" loading="lazy" style="width:76px;height:58px;object-fit:cover;border-radius:6px;flex:0 0 76px;">'
+        : '<div aria-hidden="true" style="width:76px;height:58px;display:grid;place-items:center;background:var(--muted);border-radius:6px;flex:0 0 76px;">❦</div>';
+      const href = 'read.html?slug=' + encodeURIComponent(p.slug || '') + '&lang=' + (p.language === 'en' ? 'en' : 'bn');
+      return '<a href="' + safe(href) + '" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);color:inherit;text-decoration:none;">' +
+        image + '<span style="min-width:0;flex:1;"><strong style="display:block;line-height:1.5;">' + (i + 1) + '. ' + safe(p.title || '(শিরোনামহীন)') + '</strong>' +
+        '<small style="color:var(--muted-fg);">' + (p.language === 'en' ? 'English' : 'বাংলা') + '</small></span>' +
+        '<span style="color:var(--teal-deep);font-weight:600;white-space:nowrap;">' + safe(p.view_count || 0) + ' পাঠ</span></a>';
+    }).join('');
+  } catch(e) {
+    console.warn('Most Read load failed:', e);
+    container.innerHTML = '<p class="text-sm text-muted">সর্বাধিক পঠিত লেখা লোড করা যায়নি।</p>';
+  }
 }
 
 setInterval(updateSEOChecklist, 3000);
@@ -3070,22 +3091,31 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           )
         ));
 
-        // Recent
-        const recentCard = el('div', { class: 'card' },
-          el('h3', { class: 'card-h' }, 'সর্বাধিক পঠিত' + '</h3><div id="most-read-list" style="margin-bottom:20px;"></div>' + 'সাম্প্রতিক লেখা')
+        // Most-read and recent writings are separate, properly structured sections.
+        const readingCard = el('div', { class: 'card mb-4' },
+          el('h3', { class: 'card-h' }, 'সর্বাধিক পঠিত'),
+          el('div', { id: 'most-read-list', style: { marginBottom: '8px' } })
         );
-        if (stats.recent.length === 0) {
+        mount.appendChild(readingCard);
+        loadMostRead();
+
+        const recentCard = el('div', { class: 'card' },
+          el('h3', { class: 'card-h' }, 'সাম্প্রতিক লেখা')
+        );
+        if (!stats.recent || stats.recent.length === 0) {
           recentCard.appendChild(el('p', { class: 'text-sm text-muted' }, 'এখনো কোনো লেখা নেই'));
         } else {
           stats.recent.forEach(w => {
-            const row = el('div', { class: 'flex items-center justify-between gap-2', style: { padding: '8px 0', borderBottom: '1px solid var(--border)' } },
-              el('div', { style: { minWidth: 0, flex: 1 } },
-                el('p', { class: 'text-sm bn-font truncate' }, w.title),
-                el('p', { class: 'text-xs text-muted' },
-                  (w.category || '') + ' · ' + formatDate(w.updated_at))
-              ),
-              el('span', { class: `badge ${w.published ? 'badge-default' : 'badge-warning'}` },
-                w.published ? 'প্রকাশিত' : 'খসড়া')
+            const thumb = w.cover_image
+              ? el('img', { src: w.cover_image, alt: w.title || '', loading: 'lazy', style: { width: '76px', height: '58px', objectFit: 'cover', borderRadius: '6px', flex: '0 0 76px' } })
+              : el('div', { style: { width: '76px', height: '58px', display: 'grid', placeItems: 'center', background: 'var(--muted)', borderRadius: '6px', flex: '0 0 76px' } }, '❦');
+            const title = el('p', { class: 'text-sm bn-font', style: { fontWeight: 700, lineHeight: 1.5, margin: 0 } }, w.title || '(শিরোনামহীন)');
+            const meta = el('p', { class: 'text-xs text-muted', style: { margin: '4px 0 0' } },
+              (w.category || '') + ' · ' + formatDate(w.updated_at));
+            const info = el('div', { style: { minWidth: 0, flex: 1 } }, title, meta);
+            const row = el('div', { class: 'flex items-center gap-3', style: { padding: '10px 0', borderBottom: '1px solid var(--border)' } },
+              thumb, info,
+              el('span', { class: `badge ${w.published ? 'badge-default' : 'badge-warning'}` }, w.published ? 'প্রকাশিত' : 'খসড়া')
             );
             recentCard.appendChild(row);
           });
