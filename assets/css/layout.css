@@ -254,10 +254,8 @@
 .nav ul li.nav-essay   a { color: #2D5F52; }  /* forest green */
 .nav ul li.nav-law     a { color: #5D3A8A; }  /* purple */
 .nav ul li.nav-travel  a { color: #C46A2B; }  /* orange */
-.nav ul li.nav-journal a { color: #966C33; }  /* gold-brown */
 .nav ul li.nav-author  a { color: #8A1A4A; }  /* rose */
 .nav ul li.nav-all     a { color: #1F7A70; }  /* teal */
-/* NEW nav items (Part 1 refinement) — Chandradwip sits beside Journal */
 .nav ul li.nav-chandradwip a { color: #0F3D3E; }  /* teal-deep — the novel's signature */
 .nav ul li.nav-pub  a { color: #6F4F22; }          /* dark brown — publications */
 .nav ul li.active a {
