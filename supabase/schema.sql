@@ -115,7 +115,7 @@ revoke all on public.subscribers from anon, authenticated;
 -- Revision History table
 create table if not exists public.post_revisions (
   id uuid primary key default gen_random_uuid(),
-  post_id uuid not null references public.posts(id) on delete cascade,
+  post_id bigint not null references public.posts(id) on delete cascade,
   body text,
   body_en text,
   title text,
