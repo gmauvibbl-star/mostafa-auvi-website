@@ -292,7 +292,7 @@
         "ain-oadalot": "আইন ও আদালত",
         "banking-o-orthoniti": "ব্যাংকিং ও অর্থনীতি",
         "prokashona-o-pdf": "প্রকাশনা",
-        bhromonkahini: "ভ্রমণকাহিনি",
+        bhromonkahini: "ভ্রমণ ও অনুবাদ সাহিত্য",
         chandradwip: "চন্দ্রদ্বীপ",
       };
       return map[c] || c || "";
@@ -405,7 +405,7 @@
         "ain-oadalot": "Law & Justice",
         "banking-o-orthoniti": "Banking & Economics",
         "prokashona-o-pdf": "Publications",
-        bhromonkahini: "Travel Writing",
+        bhromonkahini: "Travel & Translated Literature",
         chandradwip: "Chandradwip",
       };
       return map[c] || c || "";
@@ -450,101 +450,6 @@
    *     the most recent published journal entry. Falls back to static
    *     content if Supabase is unreachable or no journal entries exist.
    * ==================================================================== */
-  function initLatestJournal() {
-    var card = document.getElementById("journalCard");
-    if (!card) return;
-    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
-    if (!window.supabase || !SUPABASE_URL.startsWith("https://")) return;
-
-    // Journal-related category names (same as journal.html JOURNAL_CATS)
-    var journalCats = ['journal','জার্নাল','ব্যক্তিগত রচনা','ব্যক্তিগত','ব্যক্তিগত অনুভূতি','নোটবুক','ডায়েরি','পর্যবেক্ষণ','দৈনন্দিক','diary','notebook','memoir','observations'];
-
-    function esc(s) {
-      return String(s == null ? "" : s)
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-    }
-    function isJournalEntry(p) {
-      var labels = [p.category, p.parent_category, p.subcategory];
-      if (Array.isArray(p.tags)) labels = labels.concat(p.tags);
-      labels = labels.map(function(v) { return String(v || "").trim().toLowerCase(); });
-      return labels.some(function(v) {
-        return journalCats.some(function(jc) { return v === jc.toLowerCase(); });
-      });
-    }
-    function fmtDate(iso, lang) {
-      if (!iso) return "";
-      try {
-        var d = new Date(iso);
-        if (lang === "en") {
-          var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-          return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
-        }
-        return d.toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" });
-      } catch (e) { return ""; }
-    }
-    function fmtDateBig(iso, lang) {
-      if (!iso) return "";
-      try {
-        var d = new Date(iso);
-        if (lang === "en") {
-          var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-          return d.getDate() + '<small>' + months[d.getMonth()] + ' ' + d.getFullYear() + '</small>';
-        }
-        var bnDays = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-        var toBn = function(n) { return String(n).replace(/[0-9]/g, function(d) { return bnDays[d]; }); };
-        var bnMonths = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-        return toBn(d.getDate()) + '<small>' + bnMonths[d.getMonth()] + ' ' + toBn(d.getFullYear()) + '</small>';
-      } catch (e) { return ""; }
-    }
-
-    try {
-      var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      sb.from("posts")
-        .select("slug,title,excerpt,body,category,parent_category,subcategory,tags,published_at,language")
-        .eq("published", true)
-        .order("published_at", { ascending: false, nullsFirst: false })
-        .limit(20)
-        .then(function (res) {
-          var rows = (res && res.data) || [];
-          // Filter for journal entries
-          var journalRows = rows.filter(isJournalEntry);
-          // If no journal entries found, use the most recent post as fallback
-          var post = journalRows[0] || rows[0];
-          if (!post) return; // no posts at all — keep static content
-
-          var lang = post.language || "bn";
-          var isEn = lang === "en";
-          var dateStr = fmtDateBig(post.published_at, isEn ? "en" : "bn");
-          var excerpt = String(post.excerpt || "").replace(/\s+/g, " ").trim();
-          if (!excerpt && post.body) {
-            // Try to extract first paragraph from body
-            var tmp = document.createElement("div");
-            tmp.innerHTML = post.body;
-            var firstP = tmp.querySelector("p");
-            if (firstP) excerpt = firstP.textContent.replace(/\s+/g, " ").trim();
-          }
-          if (excerpt.length > 300) excerpt = excerpt.slice(0, 300) + "…";
-
-          var catLabel = post.category || (isEn ? "Journal" : "জার্নাল");
-          var readUrl = "./read.html?slug=" + encodeURIComponent(post.slug) + "&lang=" + (isEn ? "en" : "bn");
-
-          card.innerHTML =
-            '<div class="meta">' +
-              '<div class="date-big">' + dateStr + '</div>' +
-              '<span class="pill">' + esc(catLabel) + '</span>' +
-            '</div>' +
-            '<h4>' + esc(post.title || "") + '</h4>' +
-            (excerpt ? '<p class="lead">' + esc(excerpt) + '</p>' : '') +
-            '<div class="journal-foot">' +
-              '<a class="read-more" href="' + readUrl + '">' + (isEn ? "Read →" : "পড়ুন →") + '</a>' +
-            '</div>';
-        })
-        .catch(function() { /* keep static content on error */ });
-    } catch (e) { /* keep static content */ }
-  }
-
   /* ====================================================================
    *  INIT
    * ==================================================================== */

@@ -73,6 +73,8 @@
   .filter-pill.selected{background:var(--teal-deep);color:var(--cream);border-color:var(--teal-deep)}
 
   /* Main category hubs */
+  .retry-btn{margin-left:8px;padding:5px 14px;border:1px solid var(--teal-deep);border-radius:20px;background:var(--cream);color:var(--teal-deep);font:inherit;font-size:13px;cursor:pointer}
+  .retry-btn:hover{background:var(--teal-deep);color:var(--cream)}
   .essay-hub{display:none;padding:18px 50px 8px}
   .essay-hub.visible{display:block}
   .essay-hub-label{font:italic 12px 'EB Garamond',serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
@@ -233,7 +235,7 @@
       <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
       <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
       <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
-      <a href="posts.html?category=kothasahitya&subcategory=bhromonkahini">ভ্রমণ</a>
+      <a href="posts.html?category=bhromonkahini">ভ্রমণ ও অনুবাদ সাহিত্য</a>
       <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
       <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
       <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
@@ -267,7 +269,7 @@
     <a class="filter-pill" href="posts.html?category=ছোটগল্প">ছোটগল্প</a>
     <a class="filter-pill" href="posts.html?category=উপন্যাস">উপন্যাস</a>
     <a class="filter-pill" href="posts.html?category=অনুবাদ সাহিত্য">অনুবাদ সাহিত্য</a>
-    <a class="filter-pill" href="posts.html?category=kothasahitya&subcategory=bhromonkahini">ভ্রমণ</a>
+    <a class="filter-pill" href="posts.html?category=bhromonkahini">ভ্রমণ ও অনুবাদ সাহিত্য</a>
     <a class="filter-pill" href="posts.html?category=প্রবন্ধ">প্রবন্ধ</a>
     <a class="filter-pill" href="posts.html?category=সাহিত্যালোচনা">সাহিত্যসমালোচনা</a>
     <a class="filter-pill" href="posts.html?category=আইন-আদালত">আইন ও আদালত</a>
@@ -285,7 +287,7 @@
       <a href="./posts.html?category=kothasahitya">কথাসাহিত্য</a>
       <a href="./posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
       <a href="./posts.html?category=ain-oadalot">আইন ও আদালত</a>
-      <a href="./posts.html?category=kothasahitya&subcategory=bhromonkahini">ভ্রমণ</a>
+      <a href="./posts.html?category=bhromonkahini">ভ্রমণ ও অনুবাদ সাহিত্য</a>
       <a href="./posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
       <a href="./posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
       <a href="./posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
@@ -340,7 +342,7 @@ const CATEGORIES_MAP = {
   'kothasahitya': { bn:'কথাসাহিত্য', en:'Fiction', icon:'❦', legacyAliases:['কথাসাহিত্য','গল্প','ছোটগল্প','বড় গল্প','বড়গল্প','বড়গল্প','উপন্যাস','সম্পূর্ণ উপন্যাস','ধারাবাহিক উপন্যাস','অনূদিত গল্প','অনূদিত উপন্যাস','অনুবাদ সাহিত্য','নভেলা','ম্যাজিক রিয়ালিজম'] },
   'probandho-sahityasamalochona': { bn:'প্রবন্ধ ও সাহিত্যসমালোচনা', en:'Essays & Literary Criticism', icon:'§', legacyAliases:['প্রবন্ধ ও সাহিত্যসমালোচনা','প্রবন্ধ-সাহিত্যালোচনা','প্রবন্ধ','সাহিত্যালোচনা','সাহিত্যসমালোচনা','সাহিত্য প্রবন্ধ','বই আলোচনা','বই পর্যালোচনা','উপন্যাস আলোচনা','কবিতা আলোচনা','প্রবন্ধ আলোচনা','শিল্প সমালোচনা','বিশ্বসাহিত্য','শিল্প ও সংস্কৃতি','ইতিহাস ও ঐতিহ্য','সমাজ ও রাজনীতি','দর্শন ও চিন্তা','বিজ্ঞান ও প্রযুক্তি','শিক্ষা ও গবেষণা','ব্যক্তিত্ব ও জীবন','অনুবাদ সাহিত্য আলোচনা','নির্ধারিত গল্প আলোচনা','বিশেষ লেখকের লেখা','লেখক ও সাহিত্যকর্ম','পাঠ-প্রতিক্রিয়া','সাহিত্যিক বিশ্লেষণ'] },
   'ain-oadalot': { bn:'আইন ও আদালত', en:'Law & Judiciary', icon:'⚖', legacyAliases:['আইন-আদালত','আইন ও আদালত','বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স','ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা','আইন বিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','সিভিল আদালতের কড়চা','সিভিল আদালতের কর্চা','কেসস্টাডি','আইনি বিশ্লেষণ','আদালতের ঘটনা','মামলার ইতিবৃত্ত','সাংবিধানিক আইন','ফৌজদারি আইন','দেওয়ানি আইন','ভূমি আইন','উত্তরাধিকার আইন','বিচারব্যবস্থা'] },
-  'bhromonkahini': { bn:'ভ্রমণকাহিনি', en:'Travel Writing', icon:'🧭', legacyAliases:['ভ্রমণকাহিনি','ভ্রমণ','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','ভ্রমণ ও অনুবাদ সাহিত্য','দেশ ভ্রমণ','travel','ভ্রমণকথা','স্মৃতির ভাণ্ডার','ফেলে আসা দিন'] },
+  'bhromonkahini': { bn:'ভ্রমণ ও অনুবাদ সাহিত্য', en:'Travel & Translated Literature', icon:'🧭', legacyAliases:['ভ্রমণকাহিনি','ভ্রমণ','বাংলাদেশ ভ্রমণ','বিদেশ ভ্রমণ','ভ্রমণ ও অনুবাদ সাহিত্য','দেশ ভ্রমণ','travel','ভ্রমণকথা','স্মৃতির ভাণ্ডার','ফেলে আসা দিন'] },
   'chandradwip': { bn:'চন্দ্রদ্বীপ', en:'Chandradwip', icon:'❀', legacyAliases:['চন্দ্রদ্বীপ','চন্দ্রদ্বিপ','Chandradwip','chandradwip','চন্দ্রদ্বীপ উপন্যাস','নদীমাতৃক জীবন'] },
   'banking-o-orthoniti': { bn:'ব্যাংকিং ও অর্থনীতি', en:'Banking & Economics', icon:'◐', legacyAliases:['ব্যাংকিং ও অর্থনীতি','ব্যাকিং ও অর্থনীতি','আমার ব্যাংকিং জীবন','এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং নিয়ে যত কথা','ব্যাংকিং','অর্থনীতি','কর ব্যবস্থা','কৃষিঋণ','এসএমই ব্যাংকিং','ডিজিটাল ব্যাংকিং','ক্ষুদ্রঋণ','আর্থিক অন্তর্ভুক্তি','বীমা','বৈদেশিক বাণিজ্য','মুদ্রাবাজার'] },
   'prokashona-o-pdf': { bn:'প্রকাশনা', en:'Publications', icon:'▤', legacyAliases:['প্রকাশনা','প্রকাশনা ও PDF','পিডিএফ','আমার বই','পিডিএফ বই','ই-উপন্যাস','ই-প্রবন্ধ','বই','ই-বুক','PDF সংগ্রহ','প্রকাশিত গ্রন্থ','ম্যাগাজিন','সংকলন','গবেষণাপত্র'] }
@@ -348,43 +350,40 @@ const CATEGORIES_MAP = {
 
 const SUBCATEGORY_MAP = {
   'kothasahitya': [
-    {slug:'chotogolpo',bn:'ছোটগল্প',en:'Short Story',aliases:['ছোটগল্প','ছোট গল্প']},
-    {slug:'bodo-golpo',bn:'বড়গল্প',en:'Long Story',aliases:['বড়গল্প','বড় গল্প']},
-    {slug:'uponmas',bn:'উপন্যাস',en:'Novel',aliases:['উপন্যাস','সম্পূর্ণ উপন্যাস']},
-    {slug:'bhromonkahini',bn:'ভ্রমণ',en:'Travel',aliases:['ভ্রমণ','ভ্রমণকাহিনি','ভ্রমণ কাহিনি']},
-    {slug:'onubad-kothasahitya',bn:'অনুবাদ',en:'Translation',aliases:['অনুবাদ','অনুবাদ কথাসাহিত্য','অনুবাদ সাহিত্য','অনূদিত গল্প','অনূদিত উপন্যাস']}
+    {slug:'chotogolpo',bn:'ছোটগল্প',en:'Short Stories',aliases:['ছোটগল্প','ছোট গল্প']},
+    {slug:'bodo-golpo',bn:'বড়গল্প',en:'Long Stories',aliases:['বড়গল্প','বড় গল্প']},
+    {slug:'uponmas',bn:'সম্পূর্ণ উপন্যাস',en:'Complete Novels',aliases:['সম্পূর্ণ উপন্যাস','উপন্যাস']},
+    {slug:'dharabahik-uponmas',bn:'ধারাবাহিক উপন্যাস',en:'Serialised Novels',aliases:['ধারাবাহিক উপন্যাস','ধারাবাহিক']}
   ],
   'probandho-sahityasamalochona': [
-    {slug:'sahityo-probandho',bn:'সাহিত্য প্রবন্ধ',en:'Literary Essay',aliases:['সাহিত্য প্রবন্ধ','প্রবন্ধ']},
-    {slug:'shilpo-o-sanskriti',bn:'শিল্প ও সংস্কৃতি',en:'Art & Culture',aliases:['শিল্প ও সংস্কৃতি']},
-    {slug:'itihash-o-oitihyo',bn:'ইতিহাস ও ঐতিহ্য',en:'History & Heritage',aliases:['ইতিহাস ও ঐতিহ্য']},
-    {slug:'somaj-o-rajniti',bn:'সমাজ ও রাজনীতি',en:'Society & Politics',aliases:['সমাজ ও রাজনীতি']},
-    {slug:'dorshon-o-chinta',bn:'দর্শন ও চিন্তা',en:'Philosophy & Thought',aliases:['দর্শন ও চিন্তা']},
-    {slug:'biggan-o-projukti',bn:'বিজ্ঞান ও প্রযুক্তি',en:'Science & Technology',aliases:['বিজ্ঞান ও প্রযুক্তি']},
-    {slug:'shikkha-o-gobeshona',bn:'শিক্ষা ও গবেষণা',en:'Education & Research',aliases:['শিক্ষা ও গবেষণা']},
-    {slug:'byaktitwo-o-jibon',bn:'ব্যক্তিত্ব ও জীবন',en:'Personality & Life',aliases:['ব্যক্তিত্ব ও জীবন']},
-    {slug:'boi-alochona',bn:'বই আলোচনা',en:'Book Discussion',aliases:['বই আলোচনা','বই পর্যালোচনা']},
-    {slug:'uponmas-alochona',bn:'উপন্যাস আলোচনা',en:'Novel Discussion',aliases:['উপন্যাস আলোচনা']},
-    {slug:'nirodharito-golpo-alochona',bn:'নির্ধারিত গল্প আলোচনা',en:'Designated Story Review',aliases:['নির্ধারিত গল্প আলোচনা']},
-    {slug:'kobita-alochona',bn:'কবিতা আলোচনা',en:'Poetry Discussion',aliases:['কবিতা আলোচনা']},
-    {slug:'probandho-alochona',bn:'প্রবন্ধ আলোচনা',en:'Essay Discussion',aliases:['প্রবন্ধ আলোচনা']},
-    {slug:'onubad-sahityo-alochona',bn:'অনুবাদ সাহিত্য আলোচনা',en:'Translation Discussion',aliases:['অনুবাদ সাহিত্য আলোচনা']},
-    {slug:'shilpo-samalochona',bn:'শিল্প সমালোচনা',en:'Art Criticism',aliases:['শিল্প সমালোচনা']},
-    {slug:'bishwo-sahityo',bn:'বিশ্বসাহিত্য',en:'World Literature',aliases:['বিশ্বসাহিত্য']},
-    {slug:'bishesh-lekhoker-lekha',bn:'বিশেষ লেখকের লেখা',en:'Featured Author',aliases:['বিশেষ লেখকের লেখা']}
+    {slug:'probandho',bn:'প্রবন্ধ',en:'Essays',aliases:['প্রবন্ধ','সাহিত্য প্রবন্ধ']},
+    {slug:'sahitya-samalochona',bn:'সাহিত্যসমালোচনা',en:'Literary Criticism',aliases:['সাহিত্যসমালোচনা','সাহিত্যালোচনা','বই আলোচনা','বই পর্যালোচনা']}
+  ],
+  'ain-oadalot': [
+    {slug:'bangladesher-jurisprudence',bn:'বাংলাদেশের জুরিসপ্রুডেন্স',en:'Jurisprudence of Bangladesh',aliases:['বাংলাদেশের জুরিসপ্রুডেন্স','বাংলাদেশের জুরিসপিন্ডেন্স']},
+    {slug:'british-law-ethics',bn:'ব্রিটিশ ল ও নৈতিকতার কথকতা',en:'British Law & Ethics',aliases:['ব্রিটিশ ল ও নৈতিকতার কথকতা','বৃটিশ ল ও নৈতিকতার কথকতা']},
+    {slug:'ain-bishoyok-probandho',bn:'আইনবিষয়ক প্রবন্ধ',en:'Legal Essays',aliases:['আইনবিষয়ক প্রবন্ধ','আইন বিষয়ক প্রবন্ধ','আইনি বিশ্লেষণ']},
+    {slug:'civil-court-kordcha',bn:'সিভিল আদালতের কড়চা',en:'Civil Court Notes',aliases:['সিভিল আদালতের কড়চা']},
+    {slug:'case-study',bn:'কেস স্টাডি',en:'Case Study',aliases:['কেস স্টাডি','কেসস্টাডি','মামলার ইতিবৃত্ত']}
+  ],
+  'bhromonkahini': [
+    {slug:'bangladesh-bhromon',bn:'বাংলাদেশ ভ্রমণ',en:'Travels in Bangladesh',aliases:['বাংলাদেশ ভ্রমণ','ভ্রমণ','ভ্রমণকাহিনি']},
+    {slug:'bidesh-bhromon',bn:'বিদেশ ভ্রমণ',en:'Travels Abroad',aliases:['বিদেশ ভ্রমণ']},
+    {slug:'smritir-bhandar',bn:'স্মৃতির ভাণ্ডার',en:'Treasury of Memories',aliases:['স্মৃতির ভাণ্ডার','স্মৃতিভাণ্ডার']},
+    {slug:'fele-asha-din',bn:'ফেলে আসা দিন',en:'Days Gone By',aliases:['ফেলে আসা দিন']}
+  ],
+  'banking-o-orthoniti': [
+    {slug:'amar-banking-jibon',bn:'আমার ব্যাংকিং জীবন',en:'My Banking Life',aliases:['আমার ব্যাংকিং জীবন']},
+    {slug:'sme-banking-kotha',bn:'এসএমই ব্যাংকিং নিয়ে যত কথা',en:'SME Banking Notes',aliases:['এসএমই ব্যাংকিং নিয়ে যত কথা','এসএমই ব্যাংকিং']}
   ],
   'chandradwip': [
     {slug:'chandradwip-writing',bn:'চন্দ্রদ্বীপ লেখার অভিজ্ঞতা',en:'Writing Experience',aliases:['চন্দ্রদ্বীপ লেখার অভিজ্ঞতা','লেখার অভিজ্ঞতা','Writing Experience']},
     {slug:'chandradwip-characters',bn:'চরিত্রের কথা',en:'Characters',aliases:['চরিত্রের কথা','চরিত্র','Characters']},
     {slug:'chandradwip-settlement',bn:'জনপদের কথা',en:'The Settlement',aliases:['জনপদের কথা','জনপদ','The Settlement']}
   ],
-  'ain-oadalot': [
-    {slug:'ain-bishoyok-jato-katha',bn:'আইন বিষয়ক যত কথা',en:'Legal Reflections',aliases:['আইন বিষয়ক যত কথা','আইন বিষয়ক প্রবন্ধ','আইনি বিশ্লেষণ']},
-    {slug:'mamolar-itibritto',bn:'মামলার ইতিবৃত্ত',en:'Case Narrative',aliases:['মামলার ইতিবৃত্ত','কেসস্টাডি','কেস স্টাডি']}
-  ],
   'prokashona-o-pdf': [
     {slug:'bajpakhir-punorjonmo',bn:'বাজপাখির পুনর্জন্ম',en:'The Rebirth of the Hawk',aliases:['বাজপাখির পুনর্জন্ম']},
-    {slug:'cs-khotiyan',bn:'সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত',en:'The CS Record of Rights and the History of a Case',aliases:['সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত']},
+    {slug:'cs-khotiyan',bn:'সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত',en:'The CS Record of Rights',aliases:['সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত']},
     {slug:'beraler-quarantine',bn:'বেড়ালের কোয়ারেন্টাইন',en:"The Cat's Quarantine",aliases:['বেড়ালের কোয়ারেন্টাইন']}
   ]
 };
@@ -430,14 +429,14 @@ const searchQuery=(params.get('q')||params.get('search')||'').trim();
 document.documentElement.lang=language;
 if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
-  const navLabels=['Home','Fiction','Essays & Literary Criticism','Law & Judiciary','Travel','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
+  const navLabels=['Home','Fiction','Essays & Literary Criticism','Law & Judiciary','Travel & Translated Literature','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
   // English hrefs for nav (preserve lang=en)
   const navHrefs=[
     'index-en.html',
     'posts.html?category=kothasahitya&lang=en',
     'posts.html?category=probandho-sahityasamalochona&lang=en',
     'posts.html?category=ain-oadalot&lang=en',
-    'posts.html?category=kothasahitya&subcategory=bhromonkahini&lang=en',
+    'posts.html?category=bhromonkahini&lang=en',
     'posts.html?category=banking-o-orthoniti&lang=en',
     'posts.html?category=chandradwip&lang=en',
     'posts.html?category=prokashona-o-pdf&lang=en',
@@ -448,14 +447,14 @@ if(language==='en'){
     if(navLabels[i])a.textContent=navLabels[i];
     if(navHrefs[i])a.setAttribute('href',navHrefs[i]);
   });
-  const footerLabels=['Home','Fiction','Essays & Literary Criticism','Law & Judiciary','Travel','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
+  const footerLabels=['Home','Fiction','Essays & Literary Criticism','Law & Judiciary','Travel & Translated Literature','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
   // English hrefs for footer-nav (use ./ prefix as in original)
   const footerHrefs=[
     './index-en.html',
     './posts.html?category=kothasahitya&lang=en',
     './posts.html?category=probandho-sahityasamalochona&lang=en',
     './posts.html?category=ain-oadalot&lang=en',
-    './posts.html?category=kothasahitya&subcategory=bhromonkahini&lang=en',
+    './posts.html?category=bhromonkahini&lang=en',
     './posts.html?category=banking-o-orthoniti&lang=en',
     './posts.html?category=chandradwip&lang=en',
     './posts.html?category=prokashona-o-pdf&lang=en',
@@ -473,7 +472,7 @@ if(language==='en'){
     {label:'Short Stories',href:'posts.html?category=kothasahitya&lang=en'},
     {label:'Novels',href:'posts.html?category=kothasahitya&lang=en'},
     {label:'Translated Literature',href:'posts.html?category=kothasahitya&lang=en'},
-    {label:'Travel',href:'posts.html?category=kothasahitya&subcategory=bhromonkahini&lang=en'},
+    {label:'Travel & Translated Literature',href:'posts.html?category=bhromonkahini&lang=en'},
     {label:'Essays',href:'posts.html?category=probandho-sahityasamalochona&lang=en'},
     {label:'Criticism',href:'posts.html?category=probandho-sahityasamalochona&lang=en'},
     {label:'Law & Judiciary',href:'posts.html?category=ain-oadalot&lang=en'},
@@ -619,7 +618,7 @@ function excerptText(p){
 function renderCards(rows){
   if(!rows.length){
     grid.innerHTML='<div class="empty"><div class="icon">❦</div><h3>'+(language==='en'?'No writing has been published yet':'এখনো কোনো লেখা প্রকাশ করা হয়নি')+'</h3><p>'+(language==='en'?'Published writing in this category will appear here.':'এই বিভাগে লেখা প্রকাশিত হলে এখানে দেখা যাবে।')+'</p></div>';
-    statusEl.textContent=language==='en'?'There are no published articles in this category.':'এই বিভাগে কোনো প্রকাশিত লেখা নেই।';
+    statusEl.textContent=language==='en'?'No articles have been published in this category yet.':'এই বিভাগে এখনো কোনো লেখা প্রকাশিত হয়নি।';
     return;
   }
   statusEl.innerHTML=language==='en'?'<span class="count">'+rows.length+'</span> published article(s) found.':'মোট <span class="count">'+rows.length+'</span>টি লেখা পাওয়া গেছে।';
@@ -708,6 +707,10 @@ function renderChandradwipContent(sub){
   grid.replaceChildren(intro);
 }
 
+function retryButton(){
+  var label=language==='en'?'Try again':'আবার চেষ্টা করুন';
+  return '<button type="button" class="retry-btn" onclick="location.reload()">'+label+'</button>';
+}
 async function loadPosts(){
   // বইয়ের আর্কাইভ শুধু প্রকাশনা বিভাগে দেখাই; মূল Published Writing পেজে সব লেখা থাকবে।
   if(category === 'prokashona-o-pdf'){ renderBookArchive(); return; }
@@ -756,7 +759,7 @@ async function loadPosts(){
     renderCards(rows);
   }catch(e){
     console.error(e);
-    statusEl.textContent=language==='en'?'Could not load the writing list.':'লেখার তালিকা লোড করা যায়নি।';
+    statusEl.innerHTML=(language==='en'?'Could not load the writing list.':'লেখার তালিকা লোড করা যায়নি।')+' '+retryButton();
     grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>'+(language==='en'?'Unable to load':'লোড করা যায়নি')+'</h3><p>'+(language==='en'?'A database connection error occurred. Please try again later.':'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।')+'</p></div>';
   }
 }
@@ -766,12 +769,11 @@ renderSubcategoryPills();
 // Loading timeout — if loadPosts doesn't complete within 20 seconds, show error
 var _loadTimeout=setTimeout(function(){
   if(statusEl && statusEl.textContent.indexOf('লোড হচ্ছে')!==-1){
-    statusEl.textContent=language==='en'?'Loading is taking longer than expected. Please refresh.':'লোড হতে বেশি সময় লাগছে। অনুগ্রহ করে পেজ রিফ্রেশ করুন।';
+    statusEl.innerHTML=(language==='en'?'Loading is taking longer than expected.':'লোড হতে বেশি সময় লাগছে।')+' '+retryButton();
     grid.innerHTML='<div class="empty"><div class="icon">⏳</div><h3>'+(language==='en'?'Slow Response':'ধীরগতি')+'</h3><p>'+(language==='en'?'The server is taking too long to respond. Please check your connection and try again.':'সার্ভার সাড়া দিতে বেশি সময় নিচ্ছে। আপনার ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।')+'</p></div>';
   }
 },20000);
-loadPosts();
-clearTimeout(_loadTimeout);
+loadPosts().finally(function(){ clearTimeout(_loadTimeout); });
 </script>
 <script>
 /* ====== Service Worker registration ====== */
