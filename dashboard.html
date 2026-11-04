@@ -1202,7 +1202,7 @@ setInterval(updateSEOChecklist, 3000);
       const limit = state.pagination.limit;
       // প্রতিটি bilingual লেখাকে তালিকায় একবারই দেখাই: বাংলা row হলো মূল record।
       let query = supabase.from('posts')
-        .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, featured, updated_at, tags', { count: 'exact' })
+        .select('id, title, slug, group_id, language, category, parent_category, subcategory, category_id, subcategory_id, cover_image, published, scheduled_at, featured, updated_at, tags', { count: 'exact' })
         .or('group_id.is.null,language.eq.bn')
         .order('updated_at', { ascending: false });
       if (state.filter.status === 'scheduled') query = query.not('scheduled_at', 'is', null).eq('published', false);
@@ -2981,7 +2981,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
                 try { await toggleWritingStatus(w); await loadWritings(); renderListItems(); toast('স্ট্যাটাস পরিবর্তিত'); }
                 catch (e) { toast('ত্রুটি', e.message, 'error'); }
               }
-            }, w.row.scheduled_at && !row.published ? 'নির্ধারিত' : (published ? 'প্রকাশিত' : 'খসড়া')),
+            }, w.scheduled_at && !w.published ? 'নির্ধারিত' : (w.published ? 'প্রকাশিত' : 'খসড়া')),
             w.language === 'en' && el('span', { class: 'badge' }, 'EN')
           ),
           w.tags && w.tags.length > 0 && el('p', { class: 'text-xs text-muted truncate' },
