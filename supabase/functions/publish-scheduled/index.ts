@@ -11,21 +11,45 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: cors });
   }
 
-  // Auth check: require valid anon key in apikey header or Authorization
-  // This prevents unauthorized users from triggering scheduled publishing
-  const expectedKey = Deno.env.get("SUPABASE_ANON_KEY") || Deno.env.get("SUPABASE_URL");
-  const apiKey = req.headers.get("apikey") || "";
-  const authHeader = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!apiKey || !expectedKey || (apiKey !== expectedKey && authHeader !== expectedKey)) {
+  // Supabase verifies the caller's JWT because verify_jwt is enabled
+  // for this function. Also require the caller to be an approved author.
+  const url = Deno.env.get("SUPABASE_URL");
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  const authorization = req.headers.get("authorization") || "";
+
+  if (!url || !anonKey || !serviceRoleKey || !authorization.startsWith("Bearer ")) {
     return new Response(
       JSON.stringify({ error: "Unauthorized" }),
       { status: 401, headers: { ...cors, "Content-Type": "application/json" } }
     );
   }
 
-  const url = Deno.env.get("SUPABASE_URL")!;
-  const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-  const db = createClient(url, key);
+  const userClient = createClient(url, anonKey, {
+    global: { headers: { Authorization: authorization } },
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const { data: userData, error: userError } = await userClient.auth.getUser();
+  if (userError || !userData.user) {
+    return new Response(
+      JSON.stringify({ error: "Unauthorized" }),
+      { status: 401, headers: { ...cors, "Content-Type": "application/json" } }
+    );
+  }
+
+  const db = createClient(url, serviceRoleKey);
+  const { data: admin, error: adminError } = await db
+    .from("admin_users")
+    .select("user_id")
+    .eq("user_id", userData.user.id)
+    .maybeSingle();
+
+  if (adminError || !admin) {
+    return new Response(
+      JSON.stringify({ error: "Forbidden" }),
+      { status: 403, headers: { ...cors, "Content-Type": "application/json" } }
+    );
+  }
 
   try {
     // Find all posts that are scheduled and whose time has come
