@@ -408,6 +408,57 @@
   }
 
 
+
+  /* iPhone header visibility: keep the masthead in normal flow above hero. */
+  @media (max-width: 640px) {
+    .page-wrap > .v2 {
+      display: block !important;
+      position: relative !important;
+      z-index: 9999 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+    .v2 .hdr {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto !important;
+      grid-template-rows: auto auto !important;
+      align-items: center !important;
+      gap: 6px 8px !important;
+      position: relative !important;
+      z-index: 9999 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 8px 12px !important;
+      background: #FAF4E8 !important;
+      border-bottom: 1px solid #C8B898 !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    .v2 .logo, .v2 .tools, .v2 .menu {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    .v2 .logo { grid-column: 1; grid-row: 1; min-width: 0; }
+    .v2 .tools { grid-column: 2; grid-row: 1; gap: 6px !important; }
+    .v2 .menu {
+      grid-column: 1 / -1 !important;
+      grid-row: 2 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      padding: 7px 0 2px !important;
+      overflow-x: auto !important;
+      overflow-y: visible !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      background: #FAF4E8 !important;
+    }
+    .v2 .menu::after { display: none !important; }
+    .hero { position: relative !important; z-index: 0 !important; }
+  }
+
   /* iPhone hero: preserve the complete banner artwork and avoid the
      desktop cover-crop that was cutting off the author's face. */
   @media (max-width: 640px) {
