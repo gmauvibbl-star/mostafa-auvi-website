@@ -286,6 +286,30 @@
     }
   }
 
+  /* Keep the author text readable on narrow iPhone screens. */
+  @media (max-width: 640px) {
+    .hero-left {
+      width: min(300px, 64%);
+      margin-right: 16px;
+      padding: 18px 0;
+    }
+    .hero-title-bn {
+      font-size: clamp(28px, 8vw, 36px) !important;
+      line-height: 1.2;
+    }
+    .hero-author-en {
+      font-size: clamp(12px, 3.4vw, 15px) !important;
+      letter-spacing: 0.015em !important;
+    }
+    .hero-title-en {
+      font-size: clamp(14px, 4vw, 17px) !important;
+    }
+    .hero-subtitle {
+      font-size: 12px !important;
+      line-height: 1.55;
+    }
+  }
+
   /* Hide the old portrait photo — it is now baked into the banner */
   .hero-right,
   .hero-photo-wrap,
@@ -385,7 +409,7 @@
 
   /* High-DPI screens: serve a crisper background */
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .hero { background-image: url('../img/hero-banner.jpg'); }
+    .hero { background-image: url('assets/img/hero-banner.jpg'); }
   }
 </style>
 </head>
