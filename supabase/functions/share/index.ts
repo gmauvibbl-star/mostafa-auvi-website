@@ -38,11 +38,11 @@ Deno.serve(async (req) => {
     if (error) throw error;
     if (!post) return page(404, "লেখাটি পাওয়া যায়নি", "এই লেখা প্রকাশিত নয় অথবা লিংকটি সঠিক নয়।");
 
-    const articleUrl = SITE_URL + "/read.html?slug=" + encodeURIComponent(post.slug);
+    const articleUrl = SITE_URL + "/read.html?slug=" + encodeURIComponent(post.slug) + (post.language === "en" ? "&lang=en" : "");
     const title = String(post.title || "মোস্তফা অভি");
     const plainBody = String(post.excerpt || post.body || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
     const description = plainBody.slice(0, 240) || "মোস্তফা অভির সাহিত্যকর্ম ও ভাবনা।";
-    const rawImage = String(post.cover_image || "").trim();
+    const rawImage = String(post.cover_image || "").trim() || (SITE_URL + "/og-image.jpg");
     const image = rawImage.startsWith("https://") || rawImage.startsWith("http://")
       ? rawImage
       : rawImage ? new URL(rawImage.replace(/^\//, ""), SITE_URL + "/").toString() : "";
