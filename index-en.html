@@ -402,6 +402,7 @@
   }
   .page-wrap > .v2 > .hdr > .logo,
   .page-wrap > .v2 > .hdr > .tools,
+  .page-wrap > .v2 > .hdr > .mobile-language-switch,
   .page-wrap > .v2 > .hdr > .menu {
     display: flex !important; visibility: visible !important; opacity: 1 !important;
   }
@@ -409,12 +410,30 @@
   .page-wrap > .v2 > .hdr > .tools {
     grid-column: 1 !important; justify-self: start !important; flex-wrap: wrap !important;
   }
+  .page-wrap > .v2 > .hdr > .mobile-language-switch {
+    grid-column: 1 !important; justify-self: start !important;
+    display: flex !important; align-items: center !important; gap: 9px !important;
+    min-height: 30px; padding: 1px 0 3px; font-size: 13px !important;
+    font-family: inherit; font-weight: 600;
+  }
+  .mobile-language-switch a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 28px; padding: 3px 12px; border: 1px solid var(--paper-dark,#C8B898);
+    border-radius: 16px; color: var(--teal-deep,#0F3D3E) !important;
+    background: transparent; text-decoration: none; line-height: 1.2;
+  }
+  .mobile-language-switch a.is-active {
+    color: var(--cream,#FAF4E8) !important; background: var(--teal-deep,#0F3D3E);
+    border-color: var(--teal-deep,#0F3D3E);
+  }
+  .mobile-language-switch > span { color: var(--gold-dim,#7A6028); }
   .page-wrap > .v2 > .hdr > .menu {
     grid-column: 1 !important; flex-wrap: wrap !important;
     overflow: visible !important; white-space: normal !important; padding: 4px 0 2px !important;
   }
   .page-wrap > .v2 > .hdr .menu::after { display: none !important; }
 }
+.mobile-language-switch { display: none; }
 </style>
 </head>
 <body>
@@ -452,6 +471,7 @@
       </div>
       <a class="sub" href="subscribe-en.html">Subscribe</a>
     </div>
+    <div class="mobile-language-switch" aria-label="Language"><a href="index.html" lang="bn">বাংলা</a><span aria-hidden="true">|</span><a class="is-active" href="index-en.html" lang="en">English</a></div>
     <nav class="menu">
       <a href="index-en.html">Home</a>
       <a class="nav-featured" href="#featured">Featured</a>
