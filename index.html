@@ -431,6 +431,131 @@
     .hero { background-image: url('../img/hero-banner.jpg'); }
   }
 </style>
+
+<!-- Final iPhone Safari correction: keep the header in normal document flow
+     and give the portrait-led banner a single, predictable mobile layout. -->
+<style id="iphone-homepage-final-fix">
+@media (max-width: 640px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .page-wrap > .v2 {
+    display: block !important;
+    position: relative !important;
+    z-index: 100 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .utility-bar {
+    display: flex !important;
+    position: relative !important;
+    z-index: 101 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 6px 10px !important;
+    min-height: 40px;
+    padding: 8px max(14px, env(safe-area-inset-left, 0px)) !important;
+  }
+  .v2 .hdr {
+    display: grid !important;
+    position: relative !important;
+    z-index: 102 !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+    row-gap: 8px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 10px max(16px, env(safe-area-inset-left, 0px)) 8px !important;
+    background: var(--cream, #FAF4E8) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+  .v2 .logo, .v2 .tools, .v2 .menu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .v2 .logo { grid-column: 1 !important; }
+  .v2 .tools {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .v2 .menu {
+    grid-column: 1 !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 5px 12px !important;
+    padding: 7px 0 4px !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+  .v2 .menu::after { display: none !important; }
+  .v2 .menu > a, .v2 .menu .dropdown summary {
+    min-height: 36px;
+    display: inline-flex !important;
+    align-items: center;
+  }
+
+  .hero {
+    display: flex !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: 590px !important;
+    align-items: flex-end !important;
+    overflow: hidden !important;
+    background-color: #0F3D3E !important;
+    background-image: url('assets/img/hero-banner.jpg') !important;
+    background-size: auto 100% !important;
+    background-position: left top !important;
+    background-repeat: no-repeat !important;
+  }
+  .hero-right, .hero-photo-wrap, .hero-photo, .hero-photo-frame {
+    display: none !important;
+  }
+  .hero-left {
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    order: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: auto 0 0 !important;
+    padding: 250px 20px 26px !important;
+    text-align: left !important;
+    background: linear-gradient(to bottom, rgba(8,31,31,0) 0%, rgba(8,31,31,.76) 34%, rgba(8,31,31,.97) 100%) !important;
+  }
+  .hero-title-bn {
+    font-size: clamp(30px, 8.5vw, 42px) !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere;
+  }
+  .hero-author-en {
+    font-size: clamp(13px, 3.6vw, 16px) !important;
+    letter-spacing: .025em !important;
+    line-height: 1.45 !important;
+  }
+  .hero-divider { width: min(240px, 80%); margin: 9px 0 12px; }
+  .hero-title-en { font-size: clamp(16px, 4.5vw, 19px) !important; line-height: 1.5 !important; }
+  .hero-subtitle { font-size: 14px !important; line-height: 1.65 !important; }
+}
+@media (max-width: 380px) {
+  .v2 .hdr { padding-left: 14px !important; padding-right: 14px !important; }
+  .hero { min-height: 560px !important; }
+  .hero-left { padding: 230px 16px 22px !important; }
+  .hero-title-bn { font-size: 30px !important; }
+  .hero-author-en { font-size: 12px !important; }
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">মূল কনটেন্টে যান</a>
