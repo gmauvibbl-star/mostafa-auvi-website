@@ -159,3 +159,58 @@ html,body{
   .tools .share svg{width:14px;height:14px}
   .tools .share a{width:18px;height:18px}
 }
+
+
+/* Final narrow-screen header layout for the v2 site header. */
+@media (max-width: 640px) {
+  .v2 .hdr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    row-gap: 8px;
+    padding: 10px 16px 8px;
+    min-width: 0;
+  }
+  .v2 .logo { grid-column: 1; min-width: 0; max-width: 100%; }
+  .v2 .tools {
+    grid-column: 1;
+    justify-self: start;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .v2 .menu {
+    grid-column: 1;
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    padding: 8px 0 4px;
+    overflow: visible !important;
+    white-space: normal;
+  }
+  .v2 .menu::after { display: none !important; }
+  .v2 .menu > a, .v2 .menu .dropdown summary {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .v2 .menu .dropdown-panel {
+    max-width: calc(100vw - 32px);
+    max-height: min(60vh, 380px);
+  }
+  .utility-bar {
+    padding: 8px max(14px, env(safe-area-inset-left, 0px)) !important;
+    gap: 6px;
+    text-align: center;
+    align-items: center;
+  }
+}
+@media (max-width: 380px) {
+  .v2 .hdr { padding-left: 14px; padding-right: 14px; }
+  .v2 .menu { column-gap: 10px; row-gap: 5px; }
+  .v2 .menu > a, .v2 .menu .dropdown summary { font-size: 13px; }
+}
