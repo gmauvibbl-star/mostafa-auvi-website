@@ -383,6 +383,39 @@
 }
 </style>
 
+<style id="iphone-sticky-site-header">
+/* iPhone: keep site identity and navigation visible while scrolling. */
+@media (max-width: 640px) {
+  .page-wrap > .v2 {
+    position: -webkit-sticky !important; position: sticky !important;
+    top: 0 !important; z-index: 9999 !important;
+    display: block !important; height: auto !important; overflow: visible !important;
+    visibility: visible !important; opacity: 1 !important;
+    background: var(--cream, #FAF4E8) !important;
+    box-shadow: 0 5px 16px rgba(15,61,62,.14) !important;
+  }
+  .page-wrap > .v2 > .hdr {
+    display: grid !important; grid-template-columns: minmax(0,1fr) !important;
+    row-gap: 7px !important; padding: 8px 14px 7px !important; margin: 0 !important;
+    min-height: 0 !important; background: var(--cream, #FAF4E8) !important;
+    border-bottom: 1px solid var(--paper-dark, #C8B898) !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo,
+  .page-wrap > .v2 > .hdr > .tools,
+  .page-wrap > .v2 > .hdr > .menu {
+    display: flex !important; visibility: visible !important; opacity: 1 !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo { grid-column: 1 !important; }
+  .page-wrap > .v2 > .hdr > .tools {
+    grid-column: 1 !important; justify-self: start !important; flex-wrap: wrap !important;
+  }
+  .page-wrap > .v2 > .hdr > .menu {
+    grid-column: 1 !important; flex-wrap: wrap !important;
+    overflow: visible !important; white-space: normal !important; padding: 4px 0 2px !important;
+  }
+  .page-wrap > .v2 > .hdr .menu::after { display: none !important; }
+}
+</style>
 </head>
 <body>
 
