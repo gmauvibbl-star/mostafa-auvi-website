@@ -872,6 +872,148 @@
 }
 </style>
 
+
+<style id="iphone-desktop-match-final-2026-11-07">
+@media (max-width:640px) {
+  .page-wrap > .v2 > .hdr,
+  .v2 .hdr {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) auto !important;
+    grid-template-rows:auto auto auto !important;
+    align-items:center !important;
+    column-gap:8px !important;
+    row-gap:5px !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:8px 13px 7px !important;
+    overflow:visible !important;
+  }
+  .v2 .hdr > .logo {
+    grid-column:1 !important;
+    grid-row:1 !important;
+    justify-self:start !important;
+    min-width:0 !important;
+    display:flex !important;
+    align-items:center !important;
+  }
+  .v2 .hdr > .logo .bn span {
+    font-size:23px !important;
+    line-height:1.05 !important;
+  }
+  .v2 .hdr > .logo > .en { display:none !important; }
+  .v2 .hdr > .tools {
+    grid-column:2 !important;
+    grid-row:1 !important;
+    justify-self:end !important;
+    display:flex !important;
+    align-items:center !important;
+    flex-wrap:nowrap !important;
+    gap:6px !important;
+    min-width:0 !important;
+  }
+  .v2 .hdr .share {
+    display:flex !important;
+    align-items:center !important;
+    gap:3px !important;
+    padding:2px 4px !important;
+  }
+  .v2 .hdr .share a {
+    width:19px !important;
+    height:20px !important;
+    flex:0 0 auto !important;
+  }
+  .v2 .hdr .share svg { width:13px !important; height:13px !important; }
+  .v2 .hdr .sub {
+    white-space:nowrap !important;
+    font-size:11px !important;
+    line-height:1.15 !important;
+    padding:5px 7px !important;
+  }
+  .v2 .hdr > .mobile-language-switch {
+    grid-column:1 / -1 !important;
+    grid-row:2 !important;
+    justify-self:end !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:6px !important;
+    min-height:24px !important;
+    padding:0 !important;
+    margin:0 !important;
+    font-size:12px !important;
+  }
+  .v2 .hdr .mobile-language-switch a {
+    min-height:24px !important;
+    padding:2px 9px !important;
+    font-size:12px !important;
+  }
+  .v2 .hdr > .menu {
+    grid-column:1 / -1 !important;
+    grid-row:3 !important;
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+    gap:0 14px !important;
+    width:100% !important;
+    min-width:0 !important;
+    min-height:29px !important;
+    margin:0 !important;
+    padding:1px 0 2px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+  }
+  .v2 .hdr > .menu::-webkit-scrollbar { display:none !important; }
+  .v2 .hdr > .menu > a,
+  .v2 .hdr > .menu .dropdown summary {
+    flex:0 0 auto !important;
+    min-height:25px !important;
+    font-size:13px !important;
+    padding:1px 0 !important;
+  }
+
+  /* Keep the existing landscape-and-author composite; show its portrait centrally. */
+  .hero {
+    display:flex !important;
+    position:relative !important;
+    height:auto !important;
+    min-height:590px !important;
+    align-items:flex-end !important;
+    overflow:hidden !important;
+    background-image:url('assets/img/hero-banner.jpg') !important;
+    background-size:auto 100% !important;
+    background-position:0% top !important;
+    background-repeat:no-repeat !important;
+    background-color:#0F3D3E !important;
+  }
+  .hero-right, .hero-photo-wrap, .hero-photo, .hero-photo-frame {
+    display:none !important;
+  }
+  .hero-left {
+    display:block !important;
+    position:relative !important;
+    z-index:2 !important;
+    order:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:auto 0 0 !important;
+    padding:250px 20px 26px !important;
+    text-align:left !important;
+    background:linear-gradient(to bottom,rgba(8,31,31,0) 0%,rgba(8,31,31,.72) 36%,rgba(8,31,31,.97) 100%) !important;
+  }
+}
+@media (max-width:380px) {
+  .v2 .hdr { column-gap:5px !important; padding-left:10px !important; padding-right:10px !important; }
+  .v2 .hdr > .logo .bn span { font-size:21px !important; }
+  .v2 .hdr > .tools { gap:4px !important; }
+  .v2 .hdr .share a { width:17px !important; }
+  .v2 .hdr .sub { font-size:10px !important; padding:4px 6px !important; }
+  .hero { min-height:560px !important; }
+  .hero-left { padding:230px 16px 22px !important; }
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">মূল কনটেন্টে যান</a>
