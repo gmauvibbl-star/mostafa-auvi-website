@@ -759,6 +759,117 @@
   .page-wrap > .v2 > .hdr > .menu { column-gap:12px !important; }
   .page-wrap > .v2 > .hdr > .logo .bn span { font-size:23px !important; }
 }
+
+/* Desktop-inspired iPhone header: identity and utility actions share one row. */
+@media (max-width: 640px) {
+  .page-wrap > .v2 > .hdr {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) auto !important;
+    grid-template-rows:auto auto auto !important;
+    align-items:center !important;
+    column-gap:10px !important;
+    row-gap:4px !important;
+    padding:8px 14px 7px !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo {
+    grid-column:1 !important;
+    grid-row:1 !important;
+    justify-self:start !important;
+    min-width:0 !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo .bn span {
+    font-size:23px !important;
+    line-height:1.08 !important;
+  }
+  .page-wrap > .v2 > .hdr > .tools {
+    grid-column:2 !important;
+    grid-row:1 !important;
+    justify-self:end !important;
+    flex-wrap:nowrap !important;
+    gap:6px !important;
+    min-width:0 !important;
+  }
+  .page-wrap > .v2 > .hdr .share {
+    padding:2px 4px !important;
+    gap:3px !important;
+  }
+  .page-wrap > .v2 > .hdr .share a {
+    width:19px !important;
+    height:20px !important;
+  }
+  .page-wrap > .v2 > .hdr .share svg {
+    width:14px !important;
+    height:14px !important;
+  }
+  .page-wrap > .v2 > .hdr .sub {
+    padding:5px 8px !important;
+    font-size:11px !important;
+  }
+  .page-wrap > .v2 > .hdr > .mobile-language-switch {
+    grid-column:1 / -1 !important;
+    grid-row:2 !important;
+    justify-self:end !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:6px !important;
+    min-height:23px !important;
+    padding:0 !important;
+    font-size:12px !important;
+  }
+  .page-wrap > .v2 > .hdr .mobile-language-switch a {
+    min-height:23px !important;
+    padding:2px 9px !important;
+    font-size:12px !important;
+  }
+  .page-wrap > .v2 > .hdr > .menu {
+    grid-column:1 / -1 !important;
+    grid-row:3 !important;
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    align-items:center !important;
+    gap:0 14px !important;
+    min-width:0 !important;
+    width:100% !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+    padding:1px 0 2px !important;
+    margin:0 !important;
+    min-height:27px !important;
+  }
+  .page-wrap > .v2 > .hdr > .menu::-webkit-scrollbar {
+    display:none !important;
+  }
+  .page-wrap > .v2 > .hdr > .menu > a,
+  .page-wrap > .v2 > .hdr > .menu .dropdown summary {
+    flex:0 0 auto !important;
+    min-height:25px !important;
+    font-size:13px !important;
+    padding:1px 0 !important;
+  }
+}
+@media (max-width: 380px) {
+  .page-wrap > .v2 > .hdr {
+    column-gap:6px !important;
+    padding-left:11px !important;
+    padding-right:11px !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo .bn span {
+    font-size:21px !important;
+  }
+  .page-wrap > .v2 > .hdr > .tools {
+    gap:4px !important;
+  }
+  .page-wrap > .v2 > .hdr .share a {
+    width:17px !important;
+  }
+  .page-wrap > .v2 > .hdr .sub {
+    font-size:10px !important;
+    padding:4px 6px !important;
+  }
+}
 </style>
 
 </head>
