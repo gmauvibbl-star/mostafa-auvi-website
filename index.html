@@ -694,6 +694,71 @@
   .hero { min-height:500px !important; background-position:0% top !important; }
   .hero-left { padding:205px 15px 21px !important; }
 }
+
+/* Second-pass iPhone header compaction */
+@media (max-width: 640px) {
+  .page-wrap > .v2 > .hdr {
+    row-gap:2px !important;
+    padding-top:7px !important;
+    padding-bottom:7px !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo .bn span {
+    font-size:24px !important;
+    line-height:1.05 !important;
+  }
+  .page-wrap > .v2 > .hdr > .tools {
+    gap:7px !important;
+    min-height:0 !important;
+  }
+  .page-wrap > .v2 > .hdr .share {
+    padding:2px 5px !important;
+    gap:4px !important;
+  }
+  .page-wrap > .v2 > .hdr .share a {
+    width:20px !important;
+    height:20px !important;
+  }
+  .page-wrap > .v2 > .hdr .share svg {
+    width:14px !important;
+    height:14px !important;
+  }
+  .page-wrap > .v2 > .hdr .sub {
+    padding:5px 9px !important;
+    font-size:11px !important;
+  }
+  .page-wrap > .v2 > .hdr > .mobile-language-switch {
+    min-height:25px !important;
+    gap:7px !important;
+  }
+  .page-wrap > .v2 > .hdr .mobile-language-switch a {
+    min-height:25px !important;
+    padding:2px 10px !important;
+  }
+  .page-wrap > .v2 > .hdr > .menu {
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    gap:0 14px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    white-space:nowrap !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:2px 0 !important;
+    min-height:30px !important;
+  }
+  .page-wrap > .v2 > .hdr > .menu::-webkit-scrollbar { display:none !important; }
+  .page-wrap > .v2 > .hdr > .menu > a,
+  .page-wrap > .v2 > .hdr > .menu .dropdown summary {
+    flex:0 0 auto !important;
+    min-height:26px !important;
+    font-size:12px !important;
+    padding:1px 0 !important;
+  }
+}
+@media (max-width: 380px) {
+  .page-wrap > .v2 > .hdr > .menu { column-gap:12px !important; }
+  .page-wrap > .v2 > .hdr > .logo .bn span { font-size:23px !important; }
+}
 </style>
 
 </head>
