@@ -119,6 +119,7 @@
   button:hover:not(:disabled) { background: var(--teal-mid); }
   button:active:not(:disabled) { transform: translateY(1px); }
   button:disabled { opacity: 0.65; cursor: wait; }
+  .hp-field{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
   .status {
     margin-top: 18px;
     padding: 14px 16px;
@@ -189,6 +190,8 @@
   <p class="intro">Subscribe to receive news by email when new writing is published. A confirmation email will be sent to verify your subscription. You can unsubscribe at any time.</p>
   <div class="card">
     <form id="subscribeForm">
+      <div class="hp-field" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+
       <label for="email">Your email address</label>
       <input id="email" type="email" required autocomplete="email" placeholder="you@example.com" maxlength="254">
       <button type="submit" id="subscribeBtn">Subscribe</button>
@@ -290,7 +293,7 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   showStatus('subscribeStatus', 'Sending…', 'processing');
 
   try {
-    const { ok, data } = await callSubscription('subscribe', { email: email });
+    const { ok, data } = await callSubscription('subscribe', { email: email, website: document.getElementById('website')?.value || '' });
     if (ok) {
       showStatus('subscribeStatus', data.message || 'Thank you for subscribing. A confirmation link has been sent to your email.', 'success');
       emailInput.value = '';
