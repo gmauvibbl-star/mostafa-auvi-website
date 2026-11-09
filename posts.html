@@ -72,6 +72,12 @@
   .filter-pill:hover{border-color:var(--gold);color:var(--teal-deep)}
   .filter-pill.selected{background:var(--teal-deep);color:var(--cream);border-color:var(--teal-deep)}
 
+  .archive-seo-intro{max-width:980px;margin:18px auto 10px;padding:14px 18px;border-top:1px solid var(--paper-dark);border-bottom:1px solid var(--paper-dark);color:var(--ink-soft);font-size:14px;line-height:1.8}
+  .archive-seo-intro h2{font-size:17px;color:var(--teal-deep);margin:0 0 5px}
+  .archive-seo-intro p{margin:4px 0}
+  .archive-seo-intro a{color:var(--teal-deep);text-decoration:underline;text-underline-offset:3px}
+  html[lang="en"] .archive-seo-intro p[lang="bn"]{display:none}
+  html[lang="bn"] .archive-seo-intro p[lang="en"]{display:none}
   /* Main category hubs */
   .retry-btn{margin-left:8px;padding:5px 14px;border:1px solid var(--teal-deep);border-radius:20px;background:var(--cream);color:var(--teal-deep);font:inherit;font-size:13px;cursor:pointer}
   .retry-btn:hover{background:var(--teal-deep);color:var(--cream)}
@@ -360,6 +366,12 @@
   </div>
 
   <div class="status-row" id="status">লেখার তালিকা লোড হচ্ছে…</div>
+  <section class="archive-seo-intro" aria-labelledby="archive-seo-title">
+    <h2 id="archive-seo-title">প্রকাশিত লেখা ও বইয়ের সংগ্রহ</h2>
+    <p lang="bn">এই আর্কাইভে মোস্তফা অভির গল্প, উপন্যাস, প্রবন্ধ, সাহিত্যসমালোচনা, ভ্রমণ ও অনুবাদ, আইন, ব্যাংকিং এবং অর্থনীতি বিষয়ক প্রকাশিত লেখা সাজানো আছে। বইয়ের জন্য আলাদা <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা বিভাগ</a> এবং চন্দ্রদ্বীপ আখ্যানের জন্য <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ বিভাগ</a> দেখুন।</p>
+    <p lang="en">This archive gathers Mostafa Auvi's published stories, fiction, essays, literary criticism, travel and translated writing, and articles on law, banking and economics. See the separate <a href="posts.html?category=prokashona-o-pdf&amp;lang=en">Publications archive</a> for books and the <a href="posts.html?category=chandradwip&amp;lang=en">Chandradwip section</a> for the forthcoming novel.</p>
+  </section>
+
   <section id="grid" class="grid" aria-live="polite"></section>
 
   <!-- Footer -->
@@ -391,7 +403,7 @@
   </article>
   <article class="book-archive-card">
     <div class="book-cover-frame"><img src="assets/img/books/cs-khotiyan.jpg" alt="সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত বইয়ের প্রচ্ছদ" referrerpolicy="no-referrer" loading="eager" fetchpriority="high" decoding="async" width="180" height="240"></div>
-    <div class="book-info"><strong>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</strong><span>গল্পগ্রন্থ</span></div>
+    <div class="book-info"><strong>সিএস খতিয়ান ও একটি মামলার ইতিবৃত্ত</strong><span>আইনবিষয়ক সাহিত্যিক আখ্যান</span></div>
     <div class="book-year">২০১৯</div>
     <div class="book-info" style="padding:0 14px 16px"><a class="book-rokomari-link" href="https://www.rokomari.com/book/205441/cs-khotiyan-o-ekti-mamlar-itibrityo" target="_blank" rel="noopener noreferrer">রকমারিতে বইটি দেখুন ↗</a></div>
   </article>
@@ -677,7 +689,7 @@ function updateIntro(){
   document.body.classList.toggle('is-publications', category==='prokashona-o-pdf');
   if(language==='en'){
     document.getElementById('pageTitle').textContent=category?(category==='prokashona-o-pdf'?'Publications':' '+titleBase.trim()):'Published Writing';
-    document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published books by Mostafa Auvi: two story collections and a literary narrative on law.':(category==='chandradwip'?'The forthcoming novel — a century of riverine life in the Barisal tidal belt.':'Published writing in '+titleBase+'.')):'Stories, novels, essays and literary criticism.';
+    document.getElementById('pageSubtitle').textContent=category?(category==='prokashona-o-pdf'?'Three published books by Mostafa Auvi: two story collections and one literary narrative on law.':(category==='chandradwip'?'The forthcoming novel — a century of riverine life in the Barisal tidal belt.':'Published writing in '+titleBase+'.')):'Stories, novels, essays and literary criticism.';
   }else if(category){
     document.getElementById('pageTitle').textContent=category==='prokashona-o-pdf'?'প্রকাশনা':titleBase;
     document.getElementById('pageSubtitle').textContent=category==='prokashona-o-pdf'?'মোস্তফা অভির প্রকাশিত তিনটি বই: দুটি গল্পগ্রন্থ ও আইনবিষয়ক একটি সাহিত্যিক আখ্যান।':(category==='chandradwip'?'আসন্ন উপন্যাস — বরিশালের ভাটি অঞ্চলের নদীমাতৃক এক শতকের আখ্যান।':titleBase+' বিভাগের প্রকাশিত লেখা।');
