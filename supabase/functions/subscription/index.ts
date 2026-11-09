@@ -54,9 +54,23 @@ Deno.serve(async(req)=>{
    return html(200,"সাবস্ক্রিপশন বন্ধ হয়েছে","আপনাকে আর নতুন লেখার ইমেইল আপডেট পাঠানো হবে না।");
   }
   if(body.action!=="subscribe")return json(400,{error:"Invalid action"});
+  // Quietly discard bot submissions caught by the off-screen honeypot.
+  if(String(body.website||"").trim())return json(200,{message:"আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।"});
   if(!mailKey)return json(503,{error:"Email service is not configured yet."});
   const email=String(body.email||"").trim().toLowerCase();
   if(email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return json(400,{error:"একটি সঠিক ইমেইল ঠিকানা দিন।"});
+
+  // Database-backed limit: at most five subscription attempts per IP per hour.
+  const forwarded=req.headers.get("cf-connecting-ip")
+    || req.headers.get("x-real-ip")
+    || (req.headers.get("x-forwarded-for")||"").split(",")[0].trim()
+    || "unknown";
+  const ipHash=await hash(forwarded+"|"+(Deno.env.get("RATE_LIMIT_SALT")||""));
+  const {data:allowed,error:rateError}=await db.rpc("consume_subscription_rate_limit",{
+    p_ip_hash:ipHash,p_max_attempts:5,p_window_minutes:60
+  });
+  if(rateError)throw rateError;
+  if(allowed!==true)return json(429,{error:"অনেকবার চেষ্টা করা হয়েছে। এক ঘণ্টা পর আবার চেষ্টা করুন।"});
   // Check if email is already confirmed (active subscriber)
   const {data:existing,error:checkErr}=await db.from("subscribers").select("id,confirmed_at,unsubscribed_at").eq("email",email).maybeSingle();
   if(checkErr)throw checkErr;
