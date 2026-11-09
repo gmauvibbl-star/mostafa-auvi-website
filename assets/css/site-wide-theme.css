@@ -23,7 +23,7 @@ h1,h2,h3,h4,.section-title,.page-title{
 }
 p,li,label,small,.muted,.meta,.description{color:inherit}
 a{transition:color .2s ease,background-color .2s ease,border-color .2s ease}
-a:not(.button):not(.btn):not([class*="button"]){color:#79551f}
+a:not(.button):not(.btn):not([class*="button"]):not(.subscribe-btn):not(.sub){color:#79551f}
 a:not(.button):not(.btn):not([class*="button"]):hover{color:#a4772f}
 button,.button,.btn,[class*="btn-"],input[type="submit"]{
   border-radius:3px;
@@ -116,6 +116,20 @@ input,select,textarea{
 /* 3. Horizontal momentum scrolling for nav on iPhone. */
 nav,.nav,.topnav,.main-nav,.navbar{
   -webkit-overflow-scrolling:touch;
+}
+
+
+/* Subscription actions must keep readable text on their dark-red background. */
+a.subscribe-btn,a.sub{
+  color:#fff!important;
+  background:#8b1818!important;
+  border-color:#8b1818!important;
+  text-decoration:none!important;
+}
+a.subscribe-btn:hover,a.sub:hover{
+  color:#8b1818!important;
+  background:#f4ecd9!important;
+  border-color:#8b1818!important;
 }
 
 /* 4. Remove 300ms tap delay & disable double-tap-zoom on interactive elements. */
