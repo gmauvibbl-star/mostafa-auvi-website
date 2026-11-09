@@ -216,6 +216,7 @@
 
       <label for="email">আপনার ইমেইল ঠিকানা</label>
       <input id="email" type="email" required autocomplete="email" placeholder="you@example.com" maxlength="254">
+      <div id="turnstileWidget" class="turnstile-widget" aria-label="CAPTCHA verification"></div>
       <button type="submit" id="subscribeBtn">সাবস্ক্রাইব করুন</button>
     </form>
 <p style="font-size:.92rem;margin-top:14px;opacity:.85">সাবস্ক্রাইব করলে আপনি আমাদের <a href="privacy.html">গোপনীয়তা-নীতি</a> মেনে নিচ্ছেন। আপনার ইমেইল শুধু নতুন লেখার খবর পাঠাতে ব্যবহার হবে।</p>
@@ -260,6 +261,26 @@
 <script>
 const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+// Add the Cloudflare Turnstile public site key here after creating a widget.
+// The matching TURNSTILE_SECRET_KEY must be stored in Supabase Edge Function secrets.
+const TURNSTILE_SITE_KEY = "YOUR_TURNSTILE_SITE_KEY";
+let turnstileWidgetId = null;
+if (TURNSTILE_SITE_KEY && TURNSTILE_SITE_KEY !== "YOUR_TURNSTILE_SITE_KEY") {
+  const turnstileScript = document.createElement('script');
+  turnstileScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  turnstileScript.async = true;
+  turnstileScript.defer = true;
+  turnstileScript.onload = () => {
+    if (window.turnstile) {
+      turnstileWidgetId = window.turnstile.render('#turnstileWidget', {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: 'auto'
+      });
+    }
+  };
+  document.head.appendChild(turnstileScript);
+}
 
 function showStatus(elemId, message, type) {
   const el = document.getElementById(elemId);
@@ -324,7 +345,7 @@ document.getElementById('subscribeForm').addEventListener('submit', async (e) =>
   showStatus('subscribeStatus', 'পাঠানো হচ্ছে…', 'processing');
 
   try {
-    const { ok, data } = await callSubscription('subscribe', { email: email, website: document.getElementById('website')?.value || '' });
+    const { ok, data } = await callSubscription('subscribe', { email: email, website: document.getElementById('website')?.value || '', captchaToken: (window.turnstile && turnstileWidgetId !== null) ? window.turnstile.getResponse(turnstileWidgetId) : '' });
     if (ok) {
       showStatus('subscribeStatus', data.message || 'সাবস্ক্রিপশনের জন্য ধন্যবাদ। আপনার ইমেইলে নিশ্চিতকরণ লিংক পাঠানো হয়েছে।', 'success');
       emailInput.value = '';
