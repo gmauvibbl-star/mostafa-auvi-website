@@ -41,10 +41,10 @@ input:focus,select:focus,textarea:focus{
   outline:2px solid rgba(197,160,89,.32);
   border-color:var(--site-accent);
 }
-article,.paper,.card,.post-card,.journal-card,.content-card,.profile-card,.work-card,.subscribe-card,.form-card{
+article,.paper,.card,.post-card,.content-card,.profile-card,.work-card,.subscribe-card,.form-card{
   border-color:var(--site-border);
 }
-.paper,.card,.post-card,.journal-card,.content-card,.profile-card,.work-card,.subscribe-card,.form-card{
+.paper,.card,.post-card,.content-card,.profile-card,.work-card,.subscribe-card,.form-card{
   background:var(--site-paper);
   box-shadow:var(--site-shadow);
 }
