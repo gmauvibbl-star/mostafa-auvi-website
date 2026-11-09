@@ -1868,9 +1868,9 @@ function renderArticle(post, sibling, sb) {
   setSeoMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
   setSeoMeta('meta[property="og:site_name"]', 'property', 'og:site_name', 'Mostafa Auvi');
   setSeoMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary');
-  let canonical = document.head.querySelector('link[rel="canonical"]');
-  if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
-  canonical.href = canonicalUrl;
+  let canonicalLink = document.head.querySelector('link[rel="canonical"]');
+  if (!canonicalLink) { canonicalLink = document.createElement('link'); canonicalLink.rel = 'canonical'; document.head.appendChild(canonicalLink); }
+  canonicalLink.href = canonicalUrl;
   const existingArticleSchema = document.getElementById('articleStructuredData');
   if (existingArticleSchema) existingArticleSchema.remove();
   const articleSchema = document.createElement('script');
