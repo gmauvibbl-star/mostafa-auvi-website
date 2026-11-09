@@ -1673,7 +1673,7 @@ setInterval(updateSEOChecklist, 3000);
         }
       }));
       toolbar.append(tbBtn('রিভিশন ইতিহাস', ic('<path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/>'), () => {
-        const id = state.editingId ? state.editingId.id : null;
+        const id = state.editingId ?? null;
         showRevisionHistory(id);
       }));
       toolbar.append(el('div', { class: 'tb-divider' }));
@@ -2015,7 +2015,7 @@ setInterval(updateSEOChecklist, 3000);
   var _autoSaveTimer = null;
   var _lastSavedAt = null;
   function autoSaveToServer() {
-    if (!state.editingId || !state.editingId.id) return; // Only if editing existing post
+    if (state.editingId === null || state.editingId === undefined) return; // Only if editing existing post
     var editor = document.getElementById('editor');
     if (!editor) return;
     var titleEl = document.querySelector('#title-input, input[name="title"]');
@@ -2027,7 +2027,7 @@ setInterval(updateSEOChecklist, 3000);
     // Save to server (published stays false for drafts)
     try {
       var sb = supabase; if (!sb) throw new Error('Supabase client is not initialized');
-      sb.from('posts').update(data).eq('id', state.editingId.id).then(function(res) {
+      sb.from('posts').update(data).eq('id', state.editingId).then(function(res) {
         if (res.error) {
           console.warn('Auto-save to server failed:', res.error.message);
         } else {
@@ -2907,7 +2907,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       const notifyBtn = $('#notify-btn');
       if (notifyBtn) {
         notifyBtn.addEventListener('click', async () => {
-          if (!state.editingId || !state.editingId.id) {
+          if (state.editingId === null || state.editingId === undefined) {
             toast('ত্রুটি', 'প্রথমে লেখা সংরক্ষণ করুন।', 'error');
             return;
           }
