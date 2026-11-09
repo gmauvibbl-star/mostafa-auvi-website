@@ -16,7 +16,7 @@ BEGIN
   IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'post_views' AND table_schema = 'public') THEN
     -- Create the Most Read function if post_views exists
     CREATE OR REPLACE FUNCTION public.get_most_read_posts(limit_count int DEFAULT 10)
-    RETURNS TABLE(id uuid, title text, slug text, view_count bigint, language text)
+    RETURNS TABLE(id bigint, title text, slug text, view_count bigint, language text)
     LANGUAGE sql SECURITY DEFINER AS $$
       SELECT p.id, p.title, p.slug, COUNT(pv.id)::bigint as view_count, p.language
       FROM public.posts p
