@@ -6,12 +6,12 @@ on:
     paths-ignore:
       - "sitemap.xml"
   schedule:
+    # Daily at 03:23 UTC (09:23 Bangladesh time).
     - cron: "23 3 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
   group: refresh-published-writing-sitemap
@@ -34,17 +34,27 @@ jobs:
       - name: Generate sitemap from published posts
         run: node scripts/generate-sitemap.mjs
 
-      - name: Open or update sitemap pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: automation/refresh-published-sitemap
-          delete-branch: true
-          commit-message: "chore: refresh sitemap for published writing"
-          title: "chore: refresh published-writing sitemap"
-          body: |
-            Automated update of sitemap.xml from currently published Bengali and English posts.
+      - name: Validate generated XML
+        run: |
+          node --input-type=module -e "
+            import fs from 'node:fs';
+            const xml = fs.readFileSync('sitemap.xml', 'utf8');
+            if (!xml.startsWith('<?xml') || !xml.includes('<urlset') || !xml.includes('</urlset>')) {
+              throw new Error('Generated sitemap.xml is not a valid sitemap document');
+            }
+            const count = (xml.match(/<url>/g) || []).length;
+            if (count < 10) throw new Error('Unexpectedly small sitemap: ' + count + ' URLs');
+            console.log('Validated sitemap.xml:', count, 'URLs');
+          "
 
-            Please review and merge this pull request to publish the refreshed sitemap.
-          add-paths: |
-            sitemap.xml
+      - name: Commit updated sitemap directly to main
+        run: |
+          if git diff --quiet -- sitemap.xml; then
+            echo "Sitemap is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "chore: refresh sitemap from published writing"
+          git push origin HEAD:main
