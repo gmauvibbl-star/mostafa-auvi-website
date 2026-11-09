@@ -101,7 +101,7 @@ async function showRevisionHistory(postId) {
       const titleEl = document.querySelector('#title-input, input[name="title"]');
       if (editor) { editor.innerHTML = rev.body || ''; }
       if (titleEl && rev.title) { titleEl.value = rev.title; }
-      if (state.editingId && state.editingId.id) saveRevision(state.editingId.id);
+      if (state.editingId !== null && state.editingId !== undefined) saveRevision(state.editingId);
       toast('সফল', 'পুরোনো সংস্করণ ফিরিয়ে আনা হয়েছে। সংরক্ষণ করুন।', 'success');
     }
   } catch(e) { toast('ত্রুটি', 'রিভিশন লোড ব্যর্থ: ' + e.message, 'error'); }
@@ -2924,7 +2924,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + session.access_token
               },
-              body: JSON.stringify({ post_id: state.editingId.id })
+              body: JSON.stringify({ post_id: state.editingId })
             });
             const result = await resp.json();
             if (resp.ok) {
