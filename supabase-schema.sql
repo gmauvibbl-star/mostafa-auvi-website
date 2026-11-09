@@ -128,7 +128,7 @@ create policy "admins can manage tags" on public.tags
 -- ৫. post_tags জয়েন টেবিল (many-to-many)
 -- ============================================================
 create table if not exists public.post_tags (
-  post_id uuid references public.posts(id) on delete cascade,
+  post_id bigint references public.posts(id) on delete cascade,
   tag_id uuid references public.tags(id) on delete cascade,
   primary key (post_id, tag_id)
 );
