@@ -1851,7 +1851,10 @@ function renderArticle(post, sibling, sb) {
   applyReadShellLanguage(lang);
   const plainArticleText = String(post.excerpt || post.body || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
   const seoDescription = (plainArticleText || 'মোস্তফা অভির প্রকাশিত লেখা।').slice(0, 155);
-  const canonicalUrl = location.origin + location.pathname + '?slug=' + encodeURIComponent(post.slug || slug);
+  const canonical = new URL(location.pathname, location.origin);
+  canonical.searchParams.set('slug', post.slug || slug);
+  if (isEn) canonical.searchParams.set('lang', 'en');
+  const canonicalUrl = canonical.toString();
   const setSeoMeta = (selector, attr, key, value) => {
     let node = document.head.querySelector(selector);
     if (!node) { node = document.createElement('meta'); node.setAttribute(attr, key); document.head.appendChild(node); }
