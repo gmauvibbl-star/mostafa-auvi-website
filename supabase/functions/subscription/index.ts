@@ -71,6 +71,20 @@ Deno.serve(async(req)=>{
   });
   if(rateError)throw rateError;
   if(allowed!==true)return json(429,{error:"অনেকবার চেষ্টা করা হয়েছে। এক ঘণ্টা পর আবার চেষ্টা করুন।"});
+  // Verify Cloudflare Turnstile when the secret is configured.
+  const turnstileSecret=Deno.env.get("TURNSTILE_SECRET_KEY");
+  if(turnstileSecret){
+    const captchaToken=String(body.captchaToken||"");
+    if(!captchaToken)return json(400,{error:"অনুগ্রহ করে CAPTCHA যাচাই সম্পন্ন করুন।"});
+    const verifyResponse=await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify",{
+      method:"POST",
+      headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:new URLSearchParams({secret:turnstileSecret,response:captchaToken,remoteip:forwarded})
+    });
+    const verification=await verifyResponse.json().catch(()=>({success:false}));
+    if(!verifyResponse.ok||verification.success!==true)return json(403,{error:"CAPTCHA যাচাই করা যায়নি। আবার চেষ্টা করুন।"});
+  }
+
   // Check if email is already confirmed (active subscriber)
   const {data:existing,error:checkErr}=await db.from("subscribers").select("id,confirmed_at,unsubscribed_at").eq("email",email).maybeSingle();
   if(checkErr)throw checkErr;
