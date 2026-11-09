@@ -120,6 +120,12 @@ function buildSitemap(posts) {
 }
 
 const posts = await fetchPublishedPosts();
+if (posts.length === 0) {
+  throw new Error(
+    "Supabase returned zero published posts. Refusing to overwrite sitemap.xml; " +
+    "check the sitemap RPC migration and published rows."
+  );
+}
 const xml = buildSitemap(posts);
 await import("node:fs/promises").then(fs => fs.writeFile("sitemap.xml", xml, "utf8"));
 console.log(`Generated sitemap.xml with ${7 + 3 + posts.length} URLs (${posts.length} published bilingual post records).`);
