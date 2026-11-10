@@ -79,7 +79,7 @@ function render(post, alternates) {
   const category = text(post.category || "");
   const alternateBn = alternates?.bn || "";
   const alternateEn = alternates?.en || "";
-  return `<!doctype html>
+  return `<!-- GENERATED-PUBLISHED-ARTICLE: do not edit by hand -->\n<!doctype html>
 <html lang="${lang}">
 <head>
 <meta charset="utf-8">
