@@ -33,7 +33,6 @@ async function fetchPublishedPosts() {
       method: "POST",
       headers: {
         apikey: SUPABASE_PUBLISHABLE_KEY,
-        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
         "Content-Type": "application/json",
         "Range-Unit": "items",
         Range: `${offset}-${offset + PAGE_SIZE - 1}`
