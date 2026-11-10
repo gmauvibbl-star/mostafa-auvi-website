@@ -65,7 +65,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml posts/
           git commit -m "chore: refresh published article pages and sitemap"
-          git push --force-with-lease origin HEAD:"$BRANCH"
+          git push --force origin HEAD:"$BRANCH"
 
           EXISTING_PR=$(gh pr list --base main --head "$BRANCH" --state open --json number --jq '.[0].number')
           if [ -z "$EXISTING_PR" ]; then
