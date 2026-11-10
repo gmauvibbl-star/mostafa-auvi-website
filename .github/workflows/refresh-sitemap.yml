@@ -31,6 +31,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Generate static crawlable article pages
+        run: node scripts/generate-static-articles.mjs
+
       - name: Generate sitemap from published posts
         run: node scripts/generate-sitemap.mjs
 
