@@ -53,7 +53,7 @@ async function fetchPosts() {
     url.searchParams.set("limit", String(PAGE_SIZE));
     url.searchParams.set("offset", String(offset));
     const response = await fetch(url, {
-      headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}` }
+      headers: { apikey: SUPABASE_PUBLISHABLE_KEY }
     });
     if (!response.ok) throw new Error(`Supabase posts request failed: ${response.status} ${await response.text()}`);
     const batch = await response.json();
