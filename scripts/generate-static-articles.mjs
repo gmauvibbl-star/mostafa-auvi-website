@@ -37,11 +37,15 @@ function langOf(post) {
 function bodyHtml(post) {
   const body = String(post.body || "").trim();
   if (!body) return "<p>এই লেখার পূর্ণ পাঠ এখনো প্রকাশিত হয়নি।</p>";
-  // Existing editor content is stored as HTML. Plain text is wrapped safely.
-  return /<\/?[a-z][\s\S]*>/i.test(body) ? body : body
-    .split(/\n\s*\n/)
-    .map(p => `<p>${esc(p).replaceAll("\n", "<br>")}</p>`)
-    .join("");
+  if (!/<\/?[a-z][\s\S]*>/i.test(body)) {
+    return body.split(/\n\s*\n/).map(p => `<p>${esc(p).replaceAll("\n", "<br>")}</p>`).join("");
+  }
+  // Match the live reader's basic sanitization before publishing stored rich text.
+  return body
+    .replace(/<\s*(script|style|object|embed|form|input|button|textarea|select)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, "")
+    .replace(/<\s*(input|embed|br|hr)\b[^>]*\/?\s*>/gi, "")
+    .replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    .replace(/\s+(href|src|xlink:href)\s*=\s*(["'])\s*javascript:[\s\S]*?\2/gi, "");
 }
 async function fetchPosts() {
   const rows = [];
@@ -66,11 +70,11 @@ async function fetchPosts() {
 function render(post, alternates) {
   const lang = langOf(post);
   const title = String(post.title || "Mostafa Auvi");
-  const description = text(post.excerpt || post.subtitle || post.body).slice(0, 155) || "Mostafa Auvi-এর প্রকাশিত লেখা।";
+  const description = text(post.meta_description || post.excerpt || post.subtitle || post.body).slice(0, 155) || "Mostafa Auvi-এর প্রকাশিত লেখা।";
   const url = articleUrl(post);
   const published = dateOnly(post.published_at || post.created_at);
   const modified = dateOnly(post.updated_at || post.published_at || post.created_at);
-  const cover = post.cover_image || post.cover_image_url || "";
+  const cover = post.cover_image || post.cover_image_url || post.image_url || "";
   const isBn = lang === "bn";
   const category = text(post.category || "");
   const alternateBn = alternates?.bn || "";
@@ -132,7 +136,7 @@ h1{font-size:clamp(28px,4vw,42px);line-height:1.35;margin:0 0 12px;color:var(--t
 .cover{display:block;width:100%;height:auto;max-height:460px;object-fit:cover;margin:0 0 28px}
 .article-body{font-size:18px;line-height:2;text-align:justify}
 .article-body p{margin:0 0 1.1em}.article-body h2,.article-body h3{color:var(--teal);line-height:1.4;margin:1.6em 0 .7em}.article-body img{max-width:100%;height:auto}
-.back{margin-top:36px;padding-top:18px;border-top:1px solid #C8B898}.back a{color:var(--teal)}
+.tags{color:var(--muted);font-size:13px;margin:-16px 0 24px}.back{margin-top:36px;padding-top:18px;border-top:1px solid #C8B898}.back a{color:var(--teal)}
 @media(max-width:640px){.page{padding:0 12px 40px}main{padding:26px 20px}.article-body{font-size:16px;line-height:1.9}.subtitle{font-size:16px}}
 </style>
 </head>
@@ -149,6 +153,7 @@ h1{font-size:clamp(28px,4vw,42px);line-height:1.35;margin:0 0 12px;color:var(--t
 <h1>${esc(title)}</h1>
 ${post.subtitle ? `<div class="subtitle">${esc(post.subtitle)}</div>` : ""}
 <div class="meta">Mostafa Auvi (মোস্তফা অভি)${published ? ` · ${esc(published)}` : ""}</div>
+${Array.isArray(post.tags) && post.tags.length ? `<div class="tags">${post.tags.map(tag => `<span>${esc(tag)}</span>`).join(" · ")}</div>` : ""}
 ${cover ? `<img class="cover" src="${esc(cover)}" alt="${esc(title)}" loading="eager">` : ""}
 <article class="article-body">${bodyHtml(post)}</article>
 <div class="back"><a href="../posts.html">← ${isBn ? "প্রকাশিত লেখায় ফিরুন" : "Back to published writing"}</a></div>
