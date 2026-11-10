@@ -17,10 +17,7 @@ function dateOnly(value) {
   return Number.isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
 }
 function articleUrl(post) {
-  const url = new URL("read.html", SITE + "/");
-  url.searchParams.set("slug", post.slug);
-  if (post.language === "en") url.searchParams.set("lang", "en");
-  return url.toString();
+  return `${SITE}/posts/${encodeURIComponent(post.slug)}.html`;
 }
 
 async function fetchPublishedPosts() {
