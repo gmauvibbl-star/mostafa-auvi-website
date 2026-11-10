@@ -52,7 +52,7 @@ jobs:
 
       - name: Commit updated sitemap directly to main
         run: |
-          if git diff --quiet -- sitemap.xml; then
+          if git diff --quiet -- sitemap.xml posts/; then
             echo "Sitemap is already up to date."
             exit 0
           fi
