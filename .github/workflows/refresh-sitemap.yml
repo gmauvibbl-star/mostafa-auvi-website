@@ -35,6 +35,9 @@ jobs:
       - name: Generate static crawlable article pages
         run: node scripts/generate-static-articles.mjs
 
+      - name: Generate static crawlable Chandradwip pages
+        run: node scripts/generate-static-chandradwip.mjs
+
       - name: Generate sitemap from published posts
         run: node scripts/generate-sitemap.mjs
 

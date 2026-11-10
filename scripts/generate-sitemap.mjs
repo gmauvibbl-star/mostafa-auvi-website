@@ -82,16 +82,12 @@ function buildSitemap(posts) {
     entry.alternates = pair && pair.bn && pair.en ? pair : null;
   }
 
-  // These are static Chandradwip reading pages handled directly by read.html.
+  // Curated Chandradwip articles are published as standalone crawlable HTML.
   const staticArticles = [
     "chandradwip-writing",
     "chandradwip-characters",
     "chandradwip-settlement"
-  ].map(slug => {
-    const url = new URL("read.html", SITE + "/");
-    url.searchParams.set("slug", slug);
-    return { loc: url.toString() };
-  });
+  ].map(slug => ({ loc: `${SITE}/posts/${slug}.html` }));
 
   const entries = [...staticEntries, ...staticArticles, ...articleEntries];
   const seen = new Set();
