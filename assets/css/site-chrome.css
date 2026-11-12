@@ -132,3 +132,27 @@ footer .legal,.fbar .legal{
 @media(prefers-reduced-motion:reduce){
   .hdr a,.header a,.site-header a,footer a,.site-footer a{transition:none!important}
 }
+
+/* Higher-specificity hooks for the homepage's nested v2 shell. */
+.page-wrap > .v2 > .hdr{
+  background:linear-gradient(118deg,var(--chrome-teal) 0%,#164e53 58%,var(--chrome-teal-2) 100%)!important;
+  color:var(--chrome-cream)!important;border-bottom:3px solid var(--chrome-gold)!important;
+  box-shadow:0 8px 24px rgba(12,38,38,.12)!important;
+}
+.page-wrap > .v2 > .hdr .logo,
+.page-wrap > .v2 > .hdr .tools,
+.page-wrap > .v2 > .hdr .menu,
+.page-wrap > .v2 > .hdr .menu a,
+.page-wrap > .v2 > .hdr .menu summary{color:var(--chrome-cream)!important}
+.page-wrap > .v2 > .hdr .logo .bn .b,
+.page-wrap > .v2 > .hdr .logo .en .b{color:var(--chrome-gold-light)!important}
+.page-wrap > .v2 > .hdr .menu a:hover,
+.page-wrap > .v2 > .hdr .menu summary:hover{color:var(--chrome-gold-light)!important}
+.page-wrap > .v2 > footer{
+  background:linear-gradient(118deg,#0d3436,var(--chrome-teal),#174c50)!important;
+  color:var(--chrome-cream)!important;border-top:3px solid var(--chrome-gold)!important;
+}
+.page-wrap > .v2 > footer .fbar,
+.page-wrap > .v2 > footer .fbar a,
+.page-wrap > .v2 > footer .fbar span{color:var(--chrome-cream)!important}
+.page-wrap > .v2 > footer .fbrand{color:var(--chrome-gold-light)!important}
