@@ -156,3 +156,48 @@ footer .legal,.fbar .legal{
 .page-wrap > .v2 > footer .fbar a,
 .page-wrap > .v2 > footer .fbar span{color:var(--chrome-cream)!important}
 .page-wrap > .v2 > footer .fbrand{color:var(--chrome-gold-light)!important}
+
+
+/* Repair the header share icons: visible SVG artwork on a light pill. */
+.page-wrap > .v2 > .hdr .tools .share{
+  display:flex!important;align-items:center!important;gap:7px!important;
+  padding:5px 9px!important;background:#faf4e8!important;
+  border:1px solid #c5a15a!important;border-radius:999px!important;
+  color:#103f40!important;box-shadow:0 2px 8px rgba(0,0,0,.14)!important;
+}
+.page-wrap > .v2 > .hdr .tools .share em{
+  display:inline!important;color:#103f40!important;font-style:normal!important;
+  font-size:11px!important;font-weight:700!important;letter-spacing:.05em!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a{
+  display:grid!important;place-items:center!important;flex:0 0 24px!important;
+  width:24px!important;height:24px!important;min-width:24px!important;
+  padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;
+  background:transparent!important;box-shadow:none!important;opacity:1!important;
+  color:#103f40!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Facebook"]{color:#1877f2!important}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"]{color:#171717!important}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="WhatsApp"]{color:#128c55!important}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Email"]{color:#946323!important}
+.page-wrap > .v2 > .hdr .tools .share a svg{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  width:18px!important;height:18px!important;overflow:visible!important;
+  fill:none!important;stroke:currentColor!important;stroke-width:2!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a svg path,
+.page-wrap > .v2 > .hdr .tools .share a svg rect{
+  fill:none!important;stroke:currentColor!important;stroke-width:2!important;
+  stroke-linecap:round!important;stroke-linejoin:round!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Facebook"] svg path{
+  fill:currentColor!important;stroke:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a:hover{
+  background:rgba(16,63,64,.09)!important;transform:translateY(-1px);
+}
+@media(max-width:480px){
+  .page-wrap > .v2 > .hdr .tools .share{gap:5px!important;padding:4px 7px!important}
+  .page-wrap > .v2 > .hdr .tools .share a{flex-basis:22px!important;width:22px!important;height:22px!important;min-width:22px!important}
+  .page-wrap > .v2 > .hdr .tools .share a svg{width:16px!important;height:16px!important}
+}
