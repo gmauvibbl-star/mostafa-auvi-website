@@ -201,3 +201,21 @@ footer .legal,.fbar .legal{
   .page-wrap > .v2 > .hdr .tools .share a{flex-basis:22px!important;width:22px!important;height:22px!important;min-width:22px!important}
   .page-wrap > .v2 > .hdr .tools .share a svg{width:16px!important;height:16px!important}
 }
+
+
+/* Dropdown/sub-branch links must stay dark on the light submenu panel. */
+.page-wrap > .v2 > .hdr .menu .dropdown-panel,
+.page-wrap > .v2 > .hdr .menu .dropdown .dropdown-panel{
+  background:#f3ead7!important;border:1px solid #c5a15a!important;
+}
+.page-wrap > .v2 > .hdr .menu .dropdown-panel a,
+.page-wrap > .v2 > .hdr .menu .dropdown .dropdown-panel a,
+.hdr .menu .dropdown-panel a{
+  color:#103f40!important;
+  background:transparent!important;
+}
+.page-wrap > .v2 > .hdr .menu .dropdown-panel a:hover,
+.page-wrap > .v2 > .hdr .menu .dropdown .dropdown-panel a:hover,
+.hdr .menu .dropdown-panel a:hover{
+  color:#7b4c18!important;background:#eadfc8!important;
+}
