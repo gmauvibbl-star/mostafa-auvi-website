@@ -1,0 +1,134 @@
+/* Mostafa Auvi — shared site chrome
+   One visual language for public pages: deep teal, warm paper and restrained gold. */
+:root{
+  --chrome-teal:#103f40;
+  --chrome-teal-2:#1b5e66;
+  --chrome-cream:#faf4e8;
+  --chrome-paper:#f3ead7;
+  --chrome-gold:#c5a15a;
+  --chrome-gold-light:#dfc27f;
+  --chrome-ink:#201b16;
+}
+html{scroll-padding-top:88px}
+.hdr,.header,.site-header,body>header:not(.hero):not(.banner):not(.profile-hero){
+  color:var(--chrome-cream)!important;
+  background:linear-gradient(118deg,var(--chrome-teal) 0%,#164e53 58%,var(--chrome-teal-2) 100%)!important;
+  border-bottom:3px solid var(--chrome-gold)!important;
+  box-shadow:0 8px 24px rgba(12,38,38,.12)!important;
+}
+.hdr,.header,.site-header{position:relative}
+.hdr::after,.header::after,.site-header::after{
+  content:"";position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);
+  width:76px;height:3px;background:var(--chrome-gold-light);pointer-events:none;
+}
+.hdr .logo,.hdr .brand,.header .brand,.site-header .brand,
+body>header .in>.brand{
+  color:var(--chrome-cream)!important;
+  text-decoration:none!important;
+}
+.hdr .logo .bn,.hdr .logo .en,.header .name,.header .brand .name,
+.site-header .brand .bn,body>header .in>.brand{
+  color:var(--chrome-gold-light)!important;
+}
+.hdr .logo .bn .a,.hdr .logo .en .a,.header .name .first{
+  color:var(--chrome-cream)!important;
+}
+.hdr .logo .bn .b,.hdr .logo .en .b,.header .tagline,
+.header .brand .tagline,.site-header .tagline{
+  color:var(--chrome-gold-light)!important;
+}
+.hdr .tools,.hdr .share,.header .header-right,.header .share,
+.site-header .header-row{color:var(--chrome-cream)!important}
+.hdr .share em,.hdr .share a,.hdr .tools a,
+.header .share a,.header .header-right a{color:var(--chrome-cream)!important}
+.hdr .share a:hover,.hdr .tools a:hover,
+.header .share a:hover,.header .header-right a:hover{color:var(--chrome-gold-light)!important}
+.hdr .menu,.header .nav,.site-header .nav{
+  color:var(--chrome-cream)!important;
+  border-color:rgba(223,194,127,.35)!important;
+}
+.hdr .menu a,.hdr .menu summary,.header .nav a,
+.header .nav ul li a,.site-header .nav a,
+body>header .in>a:not(.brand){
+  color:var(--chrome-cream)!important;
+  text-decoration:none!important;
+}
+.hdr .menu a:hover,.hdr .menu summary:hover,
+.header .nav a:hover,.header .nav ul li a:hover,
+.header .nav ul li.active a,.site-header .nav a:hover,
+.site-header .nav a.current,body>header .in>a:not(.brand):hover{
+  color:var(--chrome-gold-light)!important;
+  border-color:var(--chrome-gold)!important;
+}
+.hdr .dropdown-panel,.hdr .menu .dropdown-panel{
+  background:var(--chrome-paper)!important;
+  border:1px solid var(--chrome-gold)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.18)!important;
+}
+.hdr .dropdown-panel a,.hdr .menu .dropdown-panel a{
+  color:var(--chrome-teal)!important;
+}
+.hdr .dropdown-panel a:hover,.hdr .menu .dropdown-panel a:hover{
+  color:#7b4c18!important;background:#eadfc8!important;
+}
+.header .nav .search-box input,.hdr input[type="search"]{
+  background:#fffaf0!important;color:var(--chrome-ink)!important;
+  border:1px solid rgba(223,194,127,.65)!important;
+}
+.site-footer,footer,.footer-strip,body>footer{
+  color:var(--chrome-cream)!important;
+  background:linear-gradient(118deg,#0d3436 0%,var(--chrome-teal) 62%,#174c50 100%)!important;
+  border-top:3px solid var(--chrome-gold)!important;
+  box-shadow:0 -8px 24px rgba(12,38,38,.07)!important;
+}
+.site-footer .footer-brand,.footer-brand,.fbrand,
+.footer-strip .left .author{
+  color:var(--chrome-gold-light)!important;
+}
+.site-footer .footer-brand .bn,.site-footer .footer-copy,
+.footer-nav a,.footer-strip,.footer-strip a,
+footer a,footer p,footer span,footer .contact,footer .legal,
+.fbar,.fbar a,.fbar span,.footer-note,.footer-note a{
+  color:var(--chrome-cream)!important;
+}
+.site-footer a:hover,.footer-nav a:hover,.footer-strip a:hover,
+footer a:hover,.fbar a:hover,.footer-note a:hover{
+  color:var(--chrome-gold-light)!important;
+}
+.site-footer .footer-copy,.footer-strip .center,
+footer .legal,.fbar .legal{
+  border-color:rgba(197,161,90,.35)!important;
+}
+.site-footer .footer-nav a,.footer-strip .right a{
+  text-decoration:none!important;
+  text-underline-offset:4px;
+}
+.site-header .nav a:focus-visible,.header .nav a:focus-visible,
+.hdr .menu a:focus-visible,footer a:focus-visible{
+  outline:2px solid var(--chrome-gold-light)!important;
+  outline-offset:4px!important;
+}
+@media(max-width:768px){
+  .hdr,.header,.site-header,body>header:not(.hero):not(.banner):not(.profile-hero){
+    padding-top:max(20px,env(safe-area-inset-top,0px))!important;
+  }
+  .hdr .menu,.header .nav,.site-header .nav{
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .hdr .menu::-webkit-scrollbar,.header .nav::-webkit-scrollbar,
+  .site-header .nav::-webkit-scrollbar{display:none}
+  .site-footer,footer,.footer-strip,body>footer{
+    padding-bottom:max(18px,env(safe-area-inset-bottom,0px))!important;
+  }
+}
+@media(max-width:420px){
+  .hdr .menu,.header .nav,.site-header .nav{
+    flex-wrap:nowrap!important;overflow-x:auto!important;white-space:nowrap;
+  }
+  .hdr .menu a,.header .nav a,.header .nav ul li a,
+  .site-header .nav a{white-space:nowrap}
+}
+@media(prefers-reduced-motion:reduce){
+  .hdr a,.header a,.site-header a,footer a,.site-footer a{transition:none!important}
+}
