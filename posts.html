@@ -309,24 +309,27 @@
     .filter-pill { font-size: 12px; padding: 5px 11px; }
   }
 
-  /* Category archive header: match the cream-and-teal reading-page shell */
+  /* Category archive — preserve the site's deep-teal and antique-gold identity */
   .site-header{
-    background:var(--paper)!important;color:var(--teal-deep)!important;
-    padding:26px 50px 0!important;border-bottom:3px solid var(--teal-deep)!important;box-shadow:none!important;
+    background:linear-gradient(118deg,var(--teal-deep),var(--teal))!important;
+    color:var(--cream)!important;
+    padding:26px 50px 0!important;
+    border-bottom:3px solid var(--gold)!important;
+    box-shadow:0 8px 24px rgba(15,61,62,.12)!important;
   }
-  .site-header::after{display:none!important}
+  .site-header::after{display:block!important}
   .site-header .header-row{align-items:center!important;padding-bottom:20px}
-  .site-header .brand{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;letter-spacing:.01em;color:var(--teal-deep)!important;line-height:1}
-  .site-header .brand .bn{font-family:'Noto Serif Bengali',serif;font-size:15px;color:var(--blood)!important;letter-spacing:0;margin-top:8px}
-  .site-header .tagline{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--blood)!important;letter-spacing:.12em}
+  .site-header .brand{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;letter-spacing:.01em;color:var(--cream)!important;line-height:1}
+  .site-header .brand .bn{font-family:'Noto Serif Bengali',serif;font-size:15px;color:var(--gold-bright)!important;letter-spacing:0;margin-top:8px}
+  .site-header .tagline{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--gold-bright)!important;letter-spacing:.12em}
   .site-header .nav{
     display:flex;flex-wrap:wrap;gap:0 22px;margin:0 -50px;padding:12px 50px 10px;
-    background:var(--paper);border-top:1px solid var(--paper-dark);
+    background:rgba(8,43,44,.22);border-top:1px solid rgba(250,244,232,.18);
     font-family:'Noto Serif Bengali',serif;font-size:14px;letter-spacing:0;
   }
-  .site-header .nav a{color:var(--teal-deep)!important;opacity:1;padding:0 0 5px;border-bottom:2px solid transparent}
-  .site-header .nav a:hover,.site-header .nav a.current{color:var(--blood)!important;border-bottom-color:var(--blood)}
-  .site-footer{background:var(--teal-deep)!important;color:var(--cream)!important;border-top:3px double var(--gold)!important;padding:28px 50px 22px!important}
+  .site-header .nav a{color:var(--cream)!important;opacity:1;padding:0 0 5px;border-bottom:2px solid transparent}
+  .site-header .nav a:hover,.site-header .nav a.current{color:var(--gold-bright)!important;border-bottom-color:var(--gold-bright)}
+  .site-footer{background:linear-gradient(118deg,#0d3436,var(--teal-deep),#174c50)!important;color:var(--cream)!important;border-top:3px solid var(--gold)!important;padding:28px 50px 22px!important}
   .site-footer .footer-brand{color:var(--gold-bright)!important}
   .site-footer .footer-brand .bn,.site-footer .footer-copy{color:var(--cream)!important}
   .site-footer .footer-nav a{color:var(--cream)!important}
@@ -348,6 +351,7 @@
 
 </style>
 <link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
+<link rel="stylesheet" href="assets/css/site-chrome.css?v=20261113-1">
 </head>
 <body>
 <a class="skip-link" href="#main-content">মূল লেখায় যান / Skip to content</a>
@@ -528,7 +532,7 @@ const SUBCATEGORY_MAP = {
 // রিভার্স লুকআপ: যেকোনো legacy নাম → slug
 const LEGACY_TO_SLUG = {};
 Object.entries(CATEGORIES_MAP).forEach(([slug, info]) => {
-  info.legacyAliases.forEach(alias => { LEGACY_TO_SLUG[alias] = slug; });
+  (info.legacyAliases || []).forEach(alias => { LEGACY_TO_SLUG[alias] = slug; });
   LEGACY_TO_SLUG['Adalot'] = 'ain-oadalot';
   LEGACY_TO_SLUG[info.bn] = slug;
   LEGACY_TO_SLUG[info.en] = slug;
@@ -876,7 +880,7 @@ async function loadPosts(){
     const labelsForPost=p=>[p.category,p.parent_category,p.subcategory,...(Array.isArray(p.tags)?p.tags:[])].map(v=>String(v||'').trim()).filter(Boolean);
     if(category){
       const catInfo=CATEGORIES_MAP[category];
-      const aliases=catInfo?catInfo.legacyAliases:[category];
+      const aliases=catInfo?(catInfo.legacyAliases||[]):[category];
       rows=rows.filter(p=>labelsForPost(p).some(v=>v===category||aliases.includes(v)));
       if(subcategory){
         const subItem=(SUBCATEGORY_MAP[category]||[]).find(item=>item.slug===subcategory);
@@ -903,7 +907,7 @@ async function loadPosts(){
 
 // Start the loading timeout FIRST, so no earlier error can leave the page stuck on "লোড হচ্ছে…"
 var _loadTimeout=setTimeout(function(){
-  if(statusEl && statusEl.textContent.indexOf('লোড হচ্ছে')!==-1){
+  if(statusEl && (statusEl.textContent.indexOf('লোড হচ্ছে')!==-1 || statusEl.textContent.toLowerCase().includes('loading'))){
     statusEl.innerHTML=(language==='en'?'Loading is taking longer than expected.':'লোড হতে বেশি সময় লাগছে।')+' '+retryButton();
     grid.innerHTML='<div class="empty"><div class="icon">⏳</div><h3>'+(language==='en'?'Slow Response':'ধীরগতি')+'</h3><p>'+(language==='en'?'The server is taking too long to respond. Please check your connection and try again.':'সার্ভার সাড়া দিতে দেরি করছে। ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।')+'</p></div>';
   }
