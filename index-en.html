@@ -202,11 +202,15 @@ img{max-width:100%;display:block}
 /* Keep the English hero composition identical to the Bengali homepage. */
 .hero{
   position:relative!important;
+  width:calc(100% - 80px)!important;
+  max-width:1440px!important;
   height:520px!important;
   min-height:0!important;
+  margin:28px auto!important;
   display:flex!important;
   align-items:center!important;
   overflow:hidden!important;
+  border-radius:2px!important;
   background:#0F3D3E url('assets/img/hero-banner.jpg?v=20261115') center 35%/cover no-repeat!important;
 }
 .hero-img,.hero-text{display:none!important}
@@ -264,11 +268,13 @@ img{max-width:100%;display:block}
 }
 .hero::before,.hero::after{display:none!important;background:none!important}
 @media(max-width:768px){
-  .hero{height:380px!important;background-position:center 30%!important}
+  .hero{width:calc(100% - 40px)!important;height:380px!important;margin:22px auto!important;background-position:center 30%!important}
 }
 @media(max-width:640px){
   .hero{
+    width:calc(100% - 28px)!important;
     height:auto!important;min-height:570px!important;
+    margin:14px auto!important;
     align-items:flex-end!important;
     background-color:#0F3D3E!important;
     background-image:url('assets/img/hero-banner.jpg?v=20261115')!important;
