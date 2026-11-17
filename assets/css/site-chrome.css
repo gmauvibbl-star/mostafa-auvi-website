@@ -219,3 +219,229 @@ footer .legal,.fbar .legal{
 .hdr .menu .dropdown-panel a:hover{
   color:#7b4c18!important;background:#eadfc8!important;
 }
+
+
+/* FINAL CHROME ICON + HEADER/FOOTER REFINEMENT */
+/* The shared chrome used a generic stroke rule that made filled brand SVGs invisible.
+   These rules intentionally override that earlier rule. */
+.page-wrap > .v2 > .hdr .tools .share,
+.hdr .tools .share,
+.header .header-right .share{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  padding:5px 8px!important;
+  background:#f7f0e5!important;
+  border:1px solid #c7a45f!important;
+  border-radius:999px!important;
+  box-shadow:0 3px 12px rgba(0,0,0,.12)!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share em,
+.hdr .tools .share em,
+.header .header-right .share .label{
+  color:#103f40!important;
+  font-family:'Playfair Display','EB Garamond',serif!important;
+  font-style:italic!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  letter-spacing:.02em!important;
+  margin-right:3px!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a,
+.hdr .tools .share a,
+.header .header-right .share a{
+  display:grid!important;
+  place-items:center!important;
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  flex:0 0 32px!important;
+  padding:0!important;
+  margin:0!important;
+  border:1px solid rgba(16,63,64,.14)!important;
+  border-radius:50%!important;
+  background:#fffaf1!important;
+  color:#103f40!important;
+  opacity:1!important;
+  text-decoration:none!important;
+  box-shadow:0 1px 4px rgba(16,63,64,.10)!important;
+  transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease!important;
+}
+
+/* Filled SVG brands must use fill; X is the one stroke-only mark. */
+.page-wrap > .v2 > .hdr .tools .share a svg,
+.hdr .tools .share a svg,
+.header .header-right .share a svg{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:17px!important;
+  height:17px!important;
+  overflow:visible!important;
+  fill:currentColor!important;
+  stroke:none!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a svg path,
+.page-wrap > .v2 > .hdr .tools .share a svg rect,
+.hdr .tools .share a svg path,
+.hdr .tools .share a svg rect,
+.header .header-right .share a svg path,
+.header .header-right .share a svg rect{
+  fill:currentColor!important;
+  stroke:none!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"] svg,
+.hdr .tools .share a[aria-label="X"] svg,
+.header .header-right .share a[aria-label="X"] svg{
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:2.2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"] svg path,
+.hdr .tools .share a[aria-label="X"] svg path,
+.header .header-right .share a[aria-label="X"] svg path{
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:2.2!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Facebook"],
+.hdr .tools .share a[aria-label="Facebook"],
+.header .header-right .share a[aria-label="Facebook"]{color:#1877f2!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"],
+.hdr .tools .share a[aria-label="X"],
+.header .header-right .share a[aria-label="X"]{color:#111!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="WhatsApp"],
+.hdr .tools .share a[aria-label="WhatsApp"],
+.header .header-right .share a[aria-label="WhatsApp"]{color:#159447!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Telegram"],
+.hdr .tools .share a[aria-label="Telegram"],
+.header .header-right .share a[aria-label="Telegram"]{color:#229ed9!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="LinkedIn"],
+.hdr .tools .share a[aria-label="LinkedIn"],
+.header .header-right .share a[aria-label="LinkedIn"]{color:#0a66c2!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Twitter"],
+.hdr .tools .share a[aria-label="Twitter"],
+.header .header-right .share a[aria-label="Twitter"]{color:#111!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Email"],
+.hdr .tools .share a[aria-label="Email"],
+.header .header-right .share a[aria-label="Email"]{color:#8a6427!important}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Copy Link"],
+.hdr .tools .share a[aria-label="Copy Link"],
+.header .header-right .share a[aria-label="Copy Link"]{
+  color:#103f40!important;
+  background:#d9b56b!important;
+  border-color:#d9b56b!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a:hover,
+.hdr .tools .share a:hover,
+.header .header-right .share a:hover{
+  transform:translateY(-2px)!important;
+  background:#103f40!important;
+  color:#fff!important;
+  border-color:#103f40!important;
+}
+
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Copy Link"]:hover,
+.hdr .tools .share a[aria-label="Copy Link"]:hover,
+.header .header-right .share a[aria-label="Copy Link"]:hover{
+  background:#d9b56b!important;
+  color:#103f40!important;
+  border-color:#d9b56b!important;
+}
+
+/* Header balance: logo, share tools and subscribe button sit on one clean baseline. */
+.page-wrap > .v2 > .hdr{
+  min-height:78px!important;
+}
+.page-wrap > .v2 > .hdr .tools{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:10px!important;
+}
+.page-wrap > .v2 > .hdr .tools .subscribe-btn{
+  min-height:36px!important;
+  padding:8px 16px!important;
+  border-radius:999px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+}
+
+/* Shared footer: cleaner spacing and readable hierarchy on every sub-page. */
+.page-wrap > .v2 > footer,
+.site-footer,
+.footer-strip,
+body > footer{
+  border-top:3px solid var(--chrome-gold)!important;
+}
+.page-wrap > .v2 > footer .fbar,
+.footer-strip{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+  min-height:48px!important;
+}
+.page-wrap > .v2 > footer .fbrand,
+.footer-brand{
+  letter-spacing:.035em!important;
+}
+.page-wrap > .v2 > footer a,
+.footer-strip a,
+.site-footer a{
+  text-decoration:none!important;
+}
+.page-wrap > .v2 > footer a:hover,
+.footer-strip a:hover,
+.site-footer a:hover{
+  color:var(--chrome-gold-light)!important;
+}
+
+@media(max-width:760px){
+  .page-wrap > .v2 > .hdr .tools .share,
+  .hdr .tools .share,
+  .header .header-right .share{
+    gap:5px!important;
+    padding:4px 6px!important;
+  }
+  .page-wrap > .v2 > .hdr .tools .share a,
+  .hdr .tools .share a,
+  .header .header-right .share a{
+    width:29px!important;
+    height:29px!important;
+    min-width:29px!important;
+    flex-basis:29px!important;
+  }
+  .page-wrap > .v2 > .hdr .tools .share a svg,
+  .hdr .tools .share a svg,
+  .header .header-right .share a svg{
+    width:15px!important;
+    height:15px!important;
+  }
+  .page-wrap > .v2 > .hdr .tools .share em,
+  .hdr .tools .share em,
+  .header .header-right .share .label{
+    font-size:12px!important;
+  }
+  .page-wrap > .v2 > footer .fbar,
+  .footer-strip{
+    flex-wrap:wrap!important;
+  }
+}
