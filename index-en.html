@@ -197,6 +197,103 @@ img{max-width:100%;display:block}
   .fbar{flex-direction:column;align-items:flex-start;gap:10px}
 }
 </style>
+
+<style id="hero-language-parity">
+/* Keep the English hero composition identical to the Bengali homepage. */
+.hero{
+  position:relative!important;
+  height:520px!important;
+  min-height:0!important;
+  display:flex!important;
+  align-items:center!important;
+  overflow:hidden!important;
+  background:#0F3D3E url('assets/img/hero-banner.jpg?v=20261115') center 35%/cover no-repeat!important;
+}
+.hero-img,.hero-text{display:none!important}
+.hero-right,.hero-photo-wrap,.hero-photo,.hero-photo-frame,.hero-ornament{display:none!important}
+.hero-left{
+  order:2!important;
+  width:min(440px,42%)!important;
+  max-width:none!important;
+  margin-right:clamp(24px,6vw,76px)!important;
+  margin-left:auto!important;
+  padding:24px 0!important;
+  text-align:left!important;
+  color:#fff!important;
+}
+.hero-title-bn{
+  font-size:clamp(32px,3.6vw,52px)!important;
+  line-height:1.14!important;
+  margin:0 0 10px!important;
+  color:#fff!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.85),0 0 24px rgba(0,0,0,.5)!important;
+}
+.hero-author-en{
+  font-family:'Playfair Display','Cormorant Garamond',serif!important;
+  font-style:italic!important;
+  font-size:clamp(15px,1.6vw,21px)!important;
+  font-weight:500!important;
+  letter-spacing:.04em!important;
+  text-transform:none!important;
+  color:#f8e6b0!important;
+  margin-bottom:14px!important;
+  line-height:1.35!important;
+  text-shadow:0 2px 6px rgba(0,0,0,.95),0 0 16px rgba(0,0,0,.7)!important;
+}
+.hero-divider{
+  display:flex!important;align-items:center!important;gap:12px!important;
+  width:min(260px,80%)!important;margin:12px 0 14px!important;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.9))!important;
+}
+.hero-divider .line{flex:1!important;height:1px!important;background:linear-gradient(90deg,transparent,rgba(244,227,176,.95),transparent)!important}
+.hero-divider .diamond{color:#f4e3b0!important;font-size:10px!important;text-shadow:0 1px 4px rgba(0,0,0,.9)!important}
+.hero-title-en{
+  font-family:'Playfair Display','Cormorant Garamond',serif!important;
+  font-style:italic!important;font-size:clamp(16px,1.7vw,22px)!important;
+  font-weight:400!important;color:#fff5d0!important;
+  margin:0 0 10px!important;line-height:1.4!important;
+  letter-spacing:.005em!important;
+  text-shadow:0 2px 6px rgba(0,0,0,.95),0 0 14px rgba(0,0,0,.7)!important;
+}
+.hero-subtitle{
+  font-family:'EB Garamond','Cormorant Garamond',serif!important;
+  font-style:italic!important;font-size:clamp(13px,1.3vw,17px)!important;
+  line-height:1.65!important;max-width:400px!important;
+  color:#fff!important;letter-spacing:.01em!important;
+  text-shadow:0 2px 6px rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.7)!important;
+}
+.hero::before,.hero::after{display:none!important;background:none!important}
+@media(max-width:768px){
+  .hero{height:380px!important;background-position:center 30%!important}
+}
+@media(max-width:640px){
+  .hero{
+    height:auto!important;min-height:570px!important;
+    align-items:flex-end!important;
+    background-color:#0F3D3E!important;
+    background-image:url('assets/img/hero-banner.jpg?v=20261115')!important;
+    background-size:auto 100%!important;background-position:left top!important;
+    background-repeat:no-repeat!important;
+  }
+  .hero-left{
+    order:0!important;width:100%!important;max-width:none!important;
+    margin:auto 0 0!important;padding:230px 20px 26px!important;
+    text-align:left!important;
+    background:linear-gradient(to bottom,rgba(8,31,31,0) 0%,rgba(8,31,31,.76) 34%,rgba(8,31,31,.97) 100%)!important;
+  }
+  .hero-title-bn{font-size:clamp(30px,8.5vw,42px)!important;line-height:1.2!important}
+  .hero-author-en{font-size:clamp(13px,3.6vw,16px)!important;letter-spacing:.025em!important;line-height:1.45!important}
+  .hero-divider{width:min(240px,80%)!important;margin:9px 0 12px!important}
+  .hero-title-en{font-size:clamp(16px,4.5vw,19px)!important;line-height:1.5!important}
+  .hero-subtitle{font-size:14px!important;line-height:1.65!important}
+}
+@media(max-width:380px){
+  .hero{min-height:550px!important}
+  .hero-left{padding:215px 16px 22px!important}
+  .hero-title-bn{font-size:30px!important}
+  .hero-author-en{font-size:12px!important}
+}
+</style>
 </head>
 <body>
 
@@ -264,17 +361,22 @@ img{max-width:100%;display:block}
 
 <main id="main">
 
-  <!-- Hero -->
+  <!-- HERO BANNER — English counterpart of the Bengali homepage -->
   <section class="hero" aria-label="About the author">
-    <img class="hero-img" src="assets/img/hero-banner.jpg?v=20261115" alt="Mostafa Auvi">
-    <div class="hero-text">
-      <p class="eyebrow" style="color:var(--gold-bright)">Bengali Fiction · Literary Criticism</p>
-      <h1 class="hero-title">Mostafa Auvi</h1>
-      <p class="hero-role">Fiction Writer &amp; Literary Critic</p>
-      <div class="hero-rule" aria-hidden="true"><span class="line"></span><span>◆</span><span class="line"></span></div>
-      <p class="hero-tagline">Life within history, stories within life</p>
-      <p class="hero-sub">Fiction writer · Reader of history and world literature</p>
+    <div class="hero-ornament tl">❦</div>
+    <div class="hero-ornament br">❦</div>
+    <div class="hero-left">
+      <h1 class="hero-title-bn">Mostafa Auvi</h1>
+      <div class="hero-author-en">Fiction Writer &amp; Literary Critic</div>
+      <div class="hero-divider">
+        <span class="line"></span>
+        <span class="diamond">◆</span>
+        <span class="line"></span>
+      </div>
+      <div class="hero-title-en">Life within history, stories within life</div>
+      <p class="hero-subtitle">Fiction writer · Reader of history and world literature</p>
     </div>
+    <div class="hero-right" aria-hidden="true"></div>
   </section>
 
   <!-- Featured: upcoming novel -->
