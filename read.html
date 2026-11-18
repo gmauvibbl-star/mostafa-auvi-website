@@ -1457,6 +1457,41 @@
   </div>
 </div>
 
+<script>
+(function(){
+  if(new URLSearchParams(location.search).get('lang')!=='en') return;
+  document.documentElement.lang='en';
+  const txt=(s,v)=>{const e=document.querySelector(s);if(e)e.textContent=v;};
+  const attr=(s,a,v)=>{const e=document.querySelector(s);if(e)e.setAttribute(a,v);};
+  txt('.utility-bar .lang-label','Language:');
+  const bn=document.querySelector('.lang a[href="index.html"]');if(bn){bn.textContent='Bengali';bn.title='Read in Bengali';}
+  const en=document.querySelector('.lang a[href="index-en.html"]');if(en){en.textContent='English';en.title='Read in English';}
+  txt('.header .tagline','Fiction Writer ◆ Literary Critic');
+  attr('.brand','href','index-en.html');
+  [['.share-fb','Share on Facebook'],['.share-tw','Share on X / Twitter'],['.share-wa','Share on WhatsApp'],['.share-ig','Share on Telegram'],['.share-em[aria-label="LinkedIn"]','Share on LinkedIn'],['.share-em[aria-label="Email"]','Share by email'],['.share-em[aria-label="Copy Link"]','Copy link']].forEach(x=>attr(x[0],'title',x[1]));
+  attr('.subscribe-btn','href','subscribe-en.html');txt('.subscribe-btn span','Subscribe');attr('.subscribe-btn','title','Get email updates on new writing');
+  const nav=[
+    ['.nav-home a','Home','index-en.html'],['.nav-fiction a','Fiction','posts.html?category=kothasahitya&lang=en'],
+    ['.nav-essay a','Essays & Literary Criticism','posts.html?category=probandho-sahityasamalochona&lang=en'],
+    ['.nav-law a','Law & Judiciary','posts.html?category=ain-oadalot&lang=en'],
+    ['.nav-author a','About the Author','about-en.html'],['.nav-all a','All Writing','posts.html?lang=en']];
+  nav.forEach(x=>{txt(x[0],x[1]);attr(x[0],'href',x[2]);});
+  attr('.nav','aria-label','Main navigation');attr('#navSearch','placeholder','Search...');attr('#navSearch','aria-label','Search');
+  txt('.back-link','← All Writing');attr('.back-link','href','posts.html?lang=en');attr('.back-link','title','Back to all writing');
+  txt('.crumb','Mostafa Auvi · Published Writing');
+  txt('#loadingState h2','Loading article…');txt('#loadingState p','Please wait a moment.');
+  txt('#commentsTitle','Reader Responses');txt('.comments-kicker',"Readers' voices");
+  const p=document.querySelector('.comments-heading > p');if(p)p.textContent='Share your thoughts on this piece. Enter your name; no sign-in is required.';
+  txt('label[for="commentName"]','Your name');attr('#commentName','placeholder','Enter your name');
+  txt('label[for="commentText"]','Your comment');attr('#commentText','placeholder','Write your response to the piece…');
+  const help=document.querySelector('.comment-help-row span');if(help)help.textContent='Please keep comments respectful and relevant.';
+  txt('label[for="commentWebsite"]','Website');txt('#commentSubmit','Post Comment');txt('.comments-list-title','Comments');txt('.comments-loading','Loading comments…');txt('#commentCount','0 / 2000');
+  txt('#authorLoginLabel','Author Login');
+  const left=document.querySelector('.footer-strip .left');if(left)left.innerHTML='<span class="author">Mostafa Auvi</span> « Writing makes us a little more human »';
+  const right=document.querySelectorAll('.footer-strip .right a');if(right[0]){right[0].textContent='Subscribe';right[0].href='subscribe-en.html';}if(right[1]){right[1].textContent='Sitemap';right[1].href='index-en.html';}if(right[2]){right[2].textContent='Privacy';right[2].href='privacy-en.html';}if(right[3])right[3].textContent='© 2026';
+  txt('.modal-close','×');attr('.modal-close','aria-label','Close');txt('#loginModalTitle','Author Login');txt('.modal-sub','Sign in with your email and password');txt('label[for="modalEmail"]','Email');txt('label[for="modalPassword"]','Password');attr('#modalPassword','placeholder','Enter your password');txt('#modalLoginBtn','Sign in →');txt('.btn.secondary','Cancel');txt('#forgotPasswordLink','Forgot your password?');
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* ====== Date in utility bar ====== */
