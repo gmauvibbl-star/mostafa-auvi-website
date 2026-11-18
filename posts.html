@@ -569,6 +569,20 @@ const language=params.get('lang')==='en'?'en':'bn';
 const searchQuery=(params.get('q')||params.get('search')||'').trim();
 document.documentElement.lang=language;
 if(language==='en'){
+  const t = {
+    '.brand .bn':'', '.nav a[href*="index.html"]':'Home'
+  };
+  const brandBn=document.querySelector('.brand .bn'); if(brandBn) brandBn.remove();
+  const footerBn=document.querySelector('.footer-brand .bn'); if(footerBn) footerBn.remove();
+  const titleEl=document.getElementById('pageTitle'); if(titleEl && !category) titleEl.textContent='Published Writing';
+  const subEl=document.getElementById('pageSubtitle'); if(subEl && !category) subEl.textContent='Stories, novels, essays and literary criticism.';
+  const eyebrowEl=document.querySelector('.eyebrow'); if(eyebrowEl) eyebrowEl.textContent='Published Writing';
+  const searchEl=document.querySelector('#navSearch'); if(searchEl){searchEl.placeholder='Search...';searchEl.setAttribute('aria-label','Search');}
+  const status=document.getElementById('status'); if(status && !status.textContent.trim()) status.textContent='Loading writing…';
+  document.querySelectorAll('.footer-copy').forEach(el=>{el.textContent='© 2026 Mostafa Auvi · Fiction Writer & Literary Critic · Literature Beyond Borders';});
+}
+
+if(language==='en'){
   document.querySelector('.nav')?.setAttribute('aria-label','Main navigation');
   const navLabels=['Home','Fiction','Essays & Literary Criticism','Law & Judiciary','Travel & Translated Literature','Banking & Economics','Chandradwip','Publications','About Author','All Writings'];
   // English hrefs for nav (preserve lang=en)
