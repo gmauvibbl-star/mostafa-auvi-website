@@ -463,6 +463,35 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+(function(){
+  if(new URLSearchParams(location.search).get('lang')!=='en') return;
+  document.documentElement.lang='en';
+  document.title='Published Writing | Mostafa Auvi';
+  const txt=(s,v)=>{const e=document.querySelector(s);if(e)e.textContent=v;};
+  const attr=(s,a,v)=>{const e=document.querySelector(s);if(e)e.setAttribute(a,v);};
+  const nav=['Home','Fiction','Essays & Literary Criticism','Law & Judiciary','Travel & Translated Literature','Banking & Economics','Chandradwip','Publications','About the Author','All Writing'];
+  const href=['./index-en.html','posts.html?category=kothasahitya&lang=en','posts.html?category=probandho-sahityasamalochona&lang=en','posts.html?category=ain-oadalot&lang=en','posts.html?category=bhromonkahini&lang=en','posts.html?category=banking-o-orthoniti&lang=en','posts.html?category=chandradwip&lang=en','posts.html?category=prokashona-o-pdf&lang=en','about-en.html','posts.html?lang=en'];
+  document.querySelectorAll('.site-header .nav > a').forEach((a,n)=>{if(nav[n])a.textContent=nav[n];if(href[n])a.href=href[n];});
+  document.querySelectorAll('.footer-nav a').forEach((a,n)=>{if(nav[n])a.textContent=nav[n];if(href[n])a.href=href[n];});
+  const bn=document.querySelector('.brand .bn');if(bn)bn.remove();
+  const fbn=document.querySelector('.footer-brand .bn');if(fbn)fbn.remove();
+  txt('.tagline','Fiction Writer & Literary Critic\\nLiterature Beyond Borders');
+  txt('.eyebrow','Published Writing');
+  txt('#pageTitle','Published Writing');
+  txt('#pageSubtitle','Stories, novels, essays and literary criticism.');
+  txt('#hubLabel','Browse by category');
+  const labels=['All Writing','Stories','Short Stories','Novels','Translated Literature','Travel & Translated Literature','Essays','Criticism','Law & Judiciary','Banking & Economics'];
+  const hs=['posts.html?lang=en','posts.html?category=kothasahitya&lang=en','posts.html?category=kothasahitya&lang=en','posts.html?category=kothasahitya&lang=en','posts.html?category=kothasahitya&lang=en','posts.html?category=bhromonkahini&lang=en','posts.html?category=probandho-sahityasamalochona&lang=en','posts.html?category=probandho-sahityasamalochona&lang=en','posts.html?category=ain-oadalot&lang=en','posts.html?category=banking-o-orthoniti&lang=en'];
+  document.querySelectorAll('#filters .filter-pill').forEach((a,n)=>{if(labels[n])a.textContent=labels[n];if(hs[n])a.href=hs[n];});
+  txt('#status','Loading writing…');
+  const seo=document.querySelector('.archive-seo-intro');
+  if(seo){const p=seo.querySelector('p[lang="bn"]');if(p)p.remove();seo.querySelector('h2').textContent='Published Writing & Books';}
+  txt('.footer-copy','© Mostafa Auvi · Fiction Writer & Literary Critic · Literature Beyond Borders');
+  document.querySelectorAll('.book-archive-card').forEach(()=>{});
+  attr('#archiveBnLink','title','View in Bengali');
+})();
+</script>
+<script>
 const SUPABASE_URL="https://voswrndbxrsaqfzwffhh.supabase.co";
 const SUPABASE_ANON_KEY="sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
