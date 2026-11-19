@@ -1689,6 +1689,74 @@
     .read-main{padding:18px 12px 42px;}
   }
 
+
+  /* ====== EXPANDED READER WIDTH ====== */
+  .read-main{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .back-bar,
+  .read-layout{
+    max-width:1240px;
+  }
+  .read-layout{
+    grid-template-columns:minmax(0,880px) 330px;
+    gap:30px;
+  }
+  .a4-page{
+    padding-left:52px;
+    padding-right:52px;
+  }
+  .a4-body,
+  .a4-body.en{
+    max-width:800px;
+  }
+  .reader-side-list{
+    gap:11px;
+  }
+  .reader-side-card{
+    grid-template-columns:100px minmax(0,1fr);
+    gap:12px;
+    padding:9px;
+  }
+  .reader-side-card img,
+  .reader-side-fallback{
+    width:100px;
+    height:76px;
+  }
+  .reader-side-title{
+    font-size:13px;
+    line-height:1.5;
+  }
+  .reader-side-cat{
+    font-size:11px;
+  }
+  .reader-side-date{
+    font-size:11px;
+  }
+  @media(max-width:1000px){
+    .read-layout{
+      grid-template-columns:1fr;
+    }
+    .reader-side-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+  }
+  @media(max-width:600px){
+    .read-main{
+      padding-left:12px;
+      padding-right:12px;
+    }
+    .a4-page{
+      padding-left:18px;
+      padding-right:18px;
+    }
+    .reader-side-list{
+      grid-template-columns:1fr;
+    }
+  }
+
 </style>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mostafa Auvi — প্রকাশিত লেখা">
