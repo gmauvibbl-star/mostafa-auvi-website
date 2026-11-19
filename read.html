@@ -2375,6 +2375,7 @@ const STATIC_CHANDRADWIP = {
 
       + '<h2>একই জনপদের নানা মুখ</h2><p>মানিকজান থেকে মেয়াসাব, হাচনদ্দি থেকে মারোয়ান, গোলাম আলী থেকে নির্মলকণ্ঠ রায়—প্রত্যেকের জীবন আলাদা পথে এগিয়েছে। কারও পৃথিবী নদীর ঘাটে, কারও উঠোনে, কারও দরবারে, কারও কাছারিতে। কেউ ভালোবাসার জন্য পথ পাড়ি দেয়, কেউ জীবিকার জন্য, কেউ জমির মালিকানা নিয়ে আসে, কেউ নতুন মাটিতে ঘর বাঁধে।</p>'
       + '<p>এই মানুষদের জীবন এক জায়গায় এসে মিশেছে বিঘাইয়ে। তাদের কথাবার্তা, কাজ, স্মৃতি, দ্বন্দ্ব ও আকাঙ্ক্ষার মধ্য দিয়েই চন্দ্রদ্বীপের জনপদ ধীরে ধীরে জীবন্ত হয়ে ওঠে।</p>'
+    cover_image: 'assets/img/chandradwip-characters-cover.jpg',
   },
   'chandradwip-settlement': {
     slug: 'chandradwip-settlement',
@@ -2726,33 +2727,26 @@ async function renderReaderSideColumn(post, sb, isEn) {
     }).join('');
   };
 
-  // Static Chandradwip pages: show every available Bengali and English feature page.
+  // Static Chandradwip pages: always show all three feature writings
+  // in both Bengali and English, including the page currently being read.
   if (!sb) {
     const items = [];
-    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP || {})) {
-      if (item && item.slug !== currentSlug) {
+    const addStatic = (source, lang) => {
+      for (const [key, item] of Object.entries(source || {})) {
+        if (!item) continue;
         items.push({
           slug: item.slug || key,
           title: item.title,
           category: item.category || 'chandradwip',
           published_at: item.published_at,
-          cover_image: item.cover_image || item.cover_image_url || '',
-          language: 'bn'
+          cover_image: item.cover_image || item.cover_image_url || 'assets/img/chandradwip-settlement-cover.jpg',
+          language: lang
         });
       }
-    }
-    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP_EN || {})) {
-      if (item && item.slug !== currentSlug) {
-        items.push({
-          slug: item.slug || key,
-          title: item.title,
-          category: item.category || 'chandradwip',
-          published_at: item.published_at,
-          cover_image: item.cover_image || item.cover_image_url || '',
-          language: 'en'
-        });
-      }
-    }
+    };
+
+    addStatic(STATIC_CHANDRADWIP, 'bn');
+    addStatic(STATIC_CHANDRADWIP_EN, 'en');
     renderItems(items);
     return;
   }
