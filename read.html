@@ -1285,6 +1285,20 @@
 <meta property="og:image:alt" content="Mostafa Auvi — Fiction Writer & Literary Critic">
 <link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
 <link rel="stylesheet" href="assets/css/site-chrome.css?v=20261119-2">
+<style id="reader-count-top-2026-11-19">
+.reader-count-top{
+  margin:10px 0 0!important;
+  width:max-content;
+  max-width:100%;
+}
+@media(max-width:640px){
+  .reader-count-top{
+    margin:8px 0 0!important;
+    font-size:12px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main-content">মূল লেখায় যান / Skip to content</a>
@@ -2036,14 +2050,14 @@ function renderArticle(post, sibling, sb) {
           langToggle +
         '</div>' +
         '<hr class="a4-divider">' +
-      '</header>' +
-      coverHtml +
-      '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
-      '<div class="reader-count" id="readerCount" hidden aria-live="polite">' +
+      '<div class="reader-count reader-count-top" id="readerCount" hidden aria-live="polite">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
         '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
         '<strong class="reader-count-value">0</strong>' +
       '</div>' +
+      '</header>' +
+      coverHtml +
+      '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
       (tags.length
         ? '<div class="a4-tags"><span class="a4-tags-label">' + (isEn ? 'Tags' : 'ট্যাগ') + '</span>' + tags.map(t => '<span class="tag-pill">' + esc(readTermLabel(t, lang)) + '</span>').join('') + '</div>'
         : '') +
