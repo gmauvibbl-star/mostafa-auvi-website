@@ -1944,8 +1944,19 @@ function renderStaticChandradwip(slugKey){
   // Hide reader comments section (these are static curated pieces, not Supabase posts)
   const rc = document.getElementById('readerComments');
   if(rc) rc.style.display = 'none';
-  // Reuse the standard article renderer — pass null for sibling + sb
+  // Reuse the standard article renderer, then record/show the same
+  // post_views counter used by the dashboard for these Chandradwip pages.
   renderArticle(post, null, null);
+  try {
+    const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (sb && post.published) {
+      const { error } = await sb.rpc('record_post_view', { p_slug: post.slug });
+      if (error) console.warn('Chandradwip view was not recorded:', error.message);
+      await setupReaderCount(post, sb, isEnglish);
+    }
+  } catch (e) {
+    console.warn('Chandradwip reader count unavailable:', e);
+  }
   // Update the breadcrumb + back link to point to chandradwip category
   const crumb = document.getElementById('crumb');
   if(crumb) crumb.textContent = 'Mostafa Auvi · ' + (post.language === 'en' ? 'Chandradwip' : 'চন্দ্রদ্বীপ');
