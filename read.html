@@ -1274,6 +1274,537 @@
     .share a svg { width: 11px; height: 11px; }
     .subscribe-btn { padding: 5px 9px; font-size: 9px; }
   }
+
+  /* EDITORIAL TRANSPARENT READING STYLE */
+  html, body {
+    background: #ffffff;
+  }
+  .page-wrap {
+    max-width: 1180px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .page-wrap::before {
+    display: none;
+  }
+  .read-main {
+    padding: 42px 52px 80px;
+    background: transparent;
+  }
+  .back-bar {
+    max-width: 900px;
+    margin: 0 auto 24px;
+  }
+  .a4-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 34px 64px 70px;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+  .a4-page::before {
+    display: none;
+  }
+  .a4-header {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+  .a4-cat-badge {
+    background: transparent;
+    color: var(--gold-dim);
+    border: 0;
+    padding: 0;
+    margin-bottom: 14px;
+    font-size: 12px;
+    letter-spacing: .18em;
+  }
+  .a4-title,
+  .a4-title.bn,
+  .a4-title:not(.bn) {
+    text-align: center;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.28;
+    font-weight: 600;
+    margin: 0 auto 14px;
+    max-width: 820px;
+  }
+  .a4-meta-row {
+    justify-content: center;
+  }
+  .a4-meta {
+    justify-content: center;
+    color: #777;
+  }
+  .a4-divider {
+    max-width: 520px;
+    margin: 26px auto 10px;
+    background: linear-gradient(90deg, transparent, #d8d8d8 20%, #d8d8d8 80%, transparent);
+  }
+  .a4-divider::after {
+    background: #fff;
+    color: #b89248;
+  }
+  .a4-cover {
+    max-height: 500px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 18px 0 34px;
+  }
+  .a4-body {
+    font-size: 18px;
+    line-height: 2.05;
+    text-align: left;
+    max-width: 760px;
+    margin: 0 auto;
+    color: #26211c;
+  }
+  .a4-body.en {
+    font-size: 20px;
+    line-height: 1.9;
+    max-width: 760px;
+  }
+  .a4-body p:first-of-type::first-letter {
+    color: var(--blood);
+  }
+  .a4-body h2,
+  .a4-body h3 {
+    max-width: 760px;
+  }
+  .a4-lang-toggle {
+    background: transparent;
+    color: var(--teal-deep);
+    border: 1px solid #d6d0c5;
+  }
+  .a4-lang-toggle:hover {
+    background: #f7f3eb;
+    color: var(--teal-deep);
+    border-color: var(--gold);
+  }
+  @media (max-width: 760px) {
+    .read-main { padding: 26px 18px 54px; }
+    .a4-page { padding: 24px 10px 50px; }
+    .a4-title,
+    .a4-title.bn,
+    .a4-title:not(.bn) { font-size: 29px; }
+    .a4-body { font-size: 17px; line-height: 1.95; }
+    .a4-body.en { font-size: 19px; }
+  }
+
+
+  /* ====== WIDE EDITORIAL READER WITH SIDE COLUMN ====== */
+  .read-main{
+    padding:28px 34px 60px;
+    background:#fff;
+  }
+  .back-bar{
+    max-width:1120px;
+    margin:0 auto 18px;
+  }
+  .read-layout{
+    max-width:1120px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0, 790px) 270px;
+    gap:28px;
+    align-items:start;
+  }
+  .read-layout > #article{
+    min-width:0;
+  }
+  .a4-page{
+    width:100%;
+    max-width:none;
+    box-sizing:border-box;
+    margin:0;
+    padding:42px 54px 58px;
+    background:#fff;
+    border-radius:0;
+    box-shadow:none;
+    overflow:visible;
+  }
+  .a4-page::before{display:none;}
+  .a4-header{
+    margin-bottom:22px;
+  }
+  .a4-title,
+  .a4-title.bn,
+  .a4-title:not(.bn){
+    text-align:left;
+    font-size:clamp(27px,3vw,38px);
+    line-height:1.35;
+    margin-bottom:12px;
+  }
+  .a4-meta-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .a4-meta{font-size:13px;}
+  .a4-divider{
+    margin:20px 0 8px;
+    background:linear-gradient(90deg,#ddd 0%,#ddd 72%,transparent 100%);
+  }
+  .a4-divider::after{
+    display:none;
+  }
+  .a4-cover{
+    max-width:100%;
+    max-height:520px;
+    margin:16px auto 34px;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+  .a4-body{
+    max-width:700px;
+    margin:0 auto;
+    font-size:18px;
+    line-height:2.02;
+    color:#29251f;
+  }
+  .a4-body.en{
+    max-width:700px;
+    font-size:19px;
+    line-height:1.9;
+  }
+  .a4-body p{
+    margin:0 0 1.25em;
+  }
+
+  .reader-side-column{
+    position:sticky;
+    top:18px;
+    min-width:0;
+    padding-top:6px;
+  }
+  .reader-side-head{
+    border-bottom:2px solid #b51d25;
+    margin-bottom:10px;
+    padding:0 0 7px;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:17px;
+    font-weight:700;
+    color:#222;
+  }
+  .reader-side-head span{
+    display:inline-block;
+    background:#f5f1e8;
+    padding:4px 10px;
+    border-left:3px solid #b51d25;
+  }
+  .reader-side-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .reader-side-card{
+    display:grid;
+    grid-template-columns:72px minmax(0,1fr);
+    gap:10px;
+    padding:8px;
+    background:#fff;
+    border:1px solid #ddd7cd;
+    border-radius:4px;
+    text-decoration:none;
+    color:inherit;
+    transition:box-shadow .18s, transform .18s;
+  }
+  .reader-side-card:hover{
+    transform:translateY(-1px);
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+  }
+  .reader-side-card img,
+  .reader-side-fallback{
+    width:72px;
+    height:58px;
+    object-fit:cover;
+    display:block;
+    background:#eee9df;
+    border-radius:2px;
+  }
+  .reader-side-fallback{
+    display:grid;
+    place-items:center;
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    color:#a78a52;
+  }
+  .reader-side-copy{
+    min-width:0;
+  }
+  .reader-side-cat{
+    display:block;
+    color:#b51d25;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:10px;
+    line-height:1.25;
+    margin-bottom:3px;
+  }
+  .reader-side-title{
+    display:block;
+    color:#222;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:12px;
+    line-height:1.45;
+    font-weight:700;
+  }
+  .reader-side-date{
+    display:block;
+    margin-top:3px;
+    color:#888;
+    font-family:'EB Garamond',serif;
+    font-size:10px;
+  }
+  .reader-side-loading{
+    padding:12px 4px;
+    color:#999;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:12px;
+  }
+
+  @media(max-width:900px){
+    .read-main{padding:22px 18px 50px;}
+    .read-layout{
+      grid-template-columns:1fr;
+      gap:28px;
+    }
+    .reader-side-column{
+      position:static;
+    }
+    .reader-side-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .a4-page{
+      padding:30px 26px 48px;
+    }
+  }
+  @media(max-width:600px){
+    .read-main{padding:18px 12px 42px;}
+    .back-bar{margin-bottom:10px;}
+    .a4-page{padding:24px 12px 42px;}
+    .a4-title,
+    .a4-title.bn,
+    .a4-title:not(.bn){font-size:27px;}
+    .a4-body{font-size:17px;line-height:1.95;}
+    .a4-body.en{font-size:18px;}
+    .reader-side-list{grid-template-columns:1fr;}
+  }
+
+
+  /* ====== FINAL READER PALETTE ====== */
+  .read-main{
+    background:#77784a;
+    padding:28px 34px 60px;
+  }
+  .read-layout{
+    max-width:1120px;
+  }
+  .a4-page{
+    background:#f5eedc;
+    color:#2b241b;
+    box-shadow:0 8px 28px rgba(45,38,18,.20);
+    border-radius:1px;
+  }
+  .a4-page .a4-title,
+  .a4-page .a4-title.bn,
+  .a4-page .a4-title:not(.bn),
+  .a4-body h1,
+  .a4-body h2,
+  .a4-body h3,
+  .a4-body h4,
+  .a4-body h5,
+  .a4-body h6{
+    color:#a91920;
+  }
+  .a4-body h2{
+    border-bottom-color:rgba(169,25,32,.25);
+  }
+  .a4-header{
+    display:flex;
+    flex-direction:column;
+  }
+  .a4-header .reader-count-top{
+    order:-1;
+    align-self:flex-start;
+  }
+  .reader-count.reader-count-top{
+    margin:0 0 15px!important;
+    padding:0 0 8px;
+    width:auto;
+    max-width:none;
+    justify-content:flex-start;
+    border-top:0;
+    border-bottom:1px solid rgba(169,25,32,.20);
+    color:#756b5a;
+    font-size:12px;
+  }
+  .reader-count.reader-count-top svg{
+    color:#a91920;
+    width:16px;
+    height:16px;
+  }
+  .reader-count.reader-count-top strong{
+    color:#a91920;
+  }
+  .a4-cat-badge{
+    background:#a91920;
+  }
+  .a4-divider{
+    background:linear-gradient(90deg,rgba(169,25,32,.30),rgba(169,25,32,.16) 70%,transparent);
+  }
+  .a4-body{
+    color:#2b241b;
+  }
+  .reader-side-head{
+    color:#a91920;
+    border-bottom-color:#a91920;
+  }
+  .reader-side-head span{
+    color:#a91920;
+    background:#f5eedc;
+    border-left-color:#a91920;
+  }
+  .reader-side-card{
+    background:#f5eedc;
+    border-color:rgba(245,238,220,.75);
+  }
+  .reader-side-cat{
+    color:#a91920;
+  }
+  .reader-side-title{
+    color:#2b241b;
+  }
+  .reader-side-date{
+    color:#776f62;
+  }
+
+  @media(max-width:900px){
+    .read-main{padding:22px 18px 50px;}
+  }
+  @media(max-width:600px){
+    .read-main{padding:18px 12px 42px;}
+  }
+
+
+  /* ====== EXPANDED READER WIDTH ====== */
+  .read-main{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .back-bar,
+  .read-layout{
+    max-width:1240px;
+  }
+  .read-layout{
+    grid-template-columns:minmax(0,880px) 330px;
+    gap:30px;
+  }
+  .a4-page{
+    padding-left:52px;
+    padding-right:52px;
+  }
+  .a4-body,
+  .a4-body.en{
+    max-width:800px;
+  }
+  .reader-side-list{
+    gap:11px;
+  }
+  .reader-side-card{
+    grid-template-columns:100px minmax(0,1fr);
+    gap:12px;
+    padding:9px;
+  }
+  .reader-side-card img,
+  .reader-side-fallback{
+    width:100px;
+    height:76px;
+  }
+  .reader-side-title{
+    font-size:13px;
+    line-height:1.5;
+  }
+  .reader-side-cat{
+    font-size:11px;
+  }
+  .reader-side-date{
+    font-size:11px;
+  }
+  @media(max-width:1000px){
+    .read-layout{
+      grid-template-columns:1fr;
+    }
+    .reader-side-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+  }
+  @media(max-width:600px){
+    .read-main{
+      padding-left:12px;
+      padding-right:12px;
+    }
+    .a4-page{
+      padding-left:18px;
+      padding-right:18px;
+    }
+    .reader-side-list{
+      grid-template-columns:1fr;
+    }
+  }
+
+
+  /* ====== COMMENTS ALIGN WITH MAIN READING COLUMN ====== */
+  .reader-comments{
+    padding-left:0;
+    padding-right:0;
+  }
+  .reader-comments-inner{
+    width:min(800px, calc(100% - 36px));
+    max-width:800px;
+    margin-left:max(18px, calc((100% - 1240px)/2 + 40px));
+    margin-right:0;
+  }
+  .comments-heading h2,
+  .comments-list-title{
+    color:#a91920;
+  }
+
+  .reader-side-list{
+    max-height:none;
+  }
+  .reader-side-lang{
+    display:block;
+    margin-bottom:2px;
+    color:#a91920;
+    font-family:'EB Garamond',serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.12em;
+  }
+  .reader-side-card{
+    grid-template-columns:100px minmax(0,1fr);
+  }
+
+  @media(max-width:1000px){
+    .reader-comments-inner{
+      width:min(800px, calc(100% - 36px));
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+  @media(max-width:600px){
+    .reader-comments-inner{
+      width:calc(100% - 24px);
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+
 </style>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mostafa Auvi — প্রকাশিত লেখা">
@@ -1382,14 +1913,25 @@
     <span class="crumb" id="crumb">Mostafa Auvi · প্রকাশিত লেখা</span>
   </div>
 
-  <!-- Article container (A4 page) -->
-  <article id="article">
-    <div class="loading-state" id="loadingState">
-      <div class="spinner">❦</div>
-      <h2>লেখা লোড হচ্ছে…</h2>
-      <p>কিছুক্ষণ অপেক্ষা করুন।</p>
-    </div>
-  </article>
+  <!-- Article + narrow reading sidebar -->
+  <div class="read-layout">
+    <article id="article">
+      <div class="loading-state" id="loadingState">
+        <div class="spinner">❦</div>
+        <h2>লেখা লোড হচ্ছে…</h2>
+        <p>কিছুক্ষণ অপেক্ষা করুন।</p>
+      </div>
+    </article>
+
+    <aside class="reader-side-column" id="readerSideColumn" aria-label="আরও লেখা">
+      <div class="reader-side-head">
+        <span>আরও পড়ুন</span>
+      </div>
+      <div class="reader-side-list" id="readerSideList">
+        <div class="reader-side-loading">লেখা লোড হচ্ছে…</div>
+      </div>
+    </aside>
+  </div>
 
   <!-- Bottom back link bar (rendered into by JS) -->
   <div class="back-bar bottom" id="bottomBackBar" style="margin-top:24px;"></div>
@@ -1987,6 +2529,8 @@ function renderStaticChandradwip(slugKey){
   }
 
   // Reader count is optional for static content. It can never prevent rendering.
+  renderReaderSideColumn(post, null, isEnglish);
+
   try {
     const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     if (sb && post.published) {
@@ -2088,6 +2632,11 @@ function renderArticle(post, sibling, sb) {
   articleEl.innerHTML =
     '<div class="a4-page">' +
       '<header class="a4-header">' +
+        '<div class="reader-count reader-count-top" id="readerCount" hidden aria-live="polite">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
+          '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
+          '<strong class="reader-count-value">0</strong>' +
+        '</div>' +
         '<span class="a4-cat-badge">' + esc(catLabel(post.category, lang)) + '</span>' +
         '<h1 class="a4-title' + (isEn ? '' : ' bn') + '">' + esc(post.title || '') + '</h1>' +
         '<div class="a4-meta-row">' +
@@ -2102,11 +2651,6 @@ function renderArticle(post, sibling, sb) {
           langToggle +
         '</div>' +
         '<hr class="a4-divider">' +
-      '<div class="reader-count reader-count-top" id="readerCount" hidden aria-live="polite">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
-        '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
-        '<strong class="reader-count-value">0</strong>' +
-      '</div>' +
       '</header>' +
       coverHtml +
       '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
@@ -2118,6 +2662,7 @@ function renderArticle(post, sibling, sb) {
 
   // Public reader count is recorded only after a visitor reaches 50% of the article.
   setupReaderCount(post, sb, isEn);
+  renderReaderSideColumn(post, sb, isEn);
 
   // Bottom back link bar
   const bb = document.getElementById('bottomBackBar');
@@ -2150,6 +2695,84 @@ function renderArticle(post, sibling, sb) {
   }
 }
 
+async function renderReaderSideColumn(post, sb, isEn) {
+  const list = document.getElementById('readerSideList');
+  const side = document.getElementById('readerSideColumn');
+  if (!list || !side) return;
+
+  const currentSlug = post?.slug || '';
+
+  const renderItems = (items) => {
+    if (!items.length) {
+      side.style.display = 'none';
+      return;
+    }
+
+    list.innerHTML = items.map(item => {
+      const lang = item.language === 'en' ? 'en' : 'bn';
+      const cover = item.cover_image
+        ? '<img src="' + esc(item.cover_image) + '" alt="" loading="lazy">'
+        : '<div class="reader-side-fallback">❦</div>';
+
+      return '<a class="reader-side-card" href="./read.html?slug=' + encodeURIComponent(item.slug) + '&lang=' + lang + '">' +
+        cover +
+        '<span class="reader-side-copy">' +
+          '<span class="reader-side-lang">' + (lang === 'en' ? 'ENGLISH' : 'বাংলা') + '</span>' +
+          '<span class="reader-side-cat">' + esc(catLabel(item.category, lang)) + '</span>' +
+          '<span class="reader-side-title">' + esc(item.title || '') + '</span>' +
+          '<span class="reader-side-date">' + esc(fmtDate(item.published_at, lang)) + '</span>' +
+        '</span>' +
+      '</a>';
+    }).join('');
+  };
+
+  // Static Chandradwip pages: show every available Bengali and English feature page.
+  if (!sb) {
+    const items = [];
+    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP || {})) {
+      if (item && item.slug !== currentSlug) {
+        items.push({
+          slug: item.slug || key,
+          title: item.title,
+          category: item.category || 'chandradwip',
+          published_at: item.published_at,
+          cover_image: item.cover_image || item.cover_image_url || '',
+          language: 'bn'
+        });
+      }
+    }
+    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP_EN || {})) {
+      if (item && item.slug !== currentSlug) {
+        items.push({
+          slug: item.slug || key,
+          title: item.title,
+          category: item.category || 'chandradwip',
+          published_at: item.published_at,
+          cover_image: item.cover_image || item.cover_image_url || '',
+          language: 'en'
+        });
+      }
+    }
+    renderItems(items);
+    return;
+  }
+
+  try {
+    // Fill the entire right column with all published Bengali and English writings.
+    const { data, error } = await sb.from('posts')
+      .select('slug,title,category,published_at,cover_image,language')
+      .eq('published', true)
+      .in('language', ['bn', 'en'])
+      .neq('slug', currentSlug)
+      .order('published_at', { ascending: false });
+
+    if (error) throw error;
+    renderItems(data || []);
+  } catch (e) {
+    console.warn('Reader side list unavailable:', e?.message || e);
+    side.style.display = 'none';
+  }
+}
 async function setupReaderCount(post, sb, isEn) {
   const counter = document.getElementById('readerCount');
   const valueEl = counter?.querySelector('.reader-count-value');
