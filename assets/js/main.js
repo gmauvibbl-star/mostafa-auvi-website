@@ -304,6 +304,7 @@
         .select("slug,title,excerpt,cover_image,category,published_at,language")
         .eq("published", true)
         .eq("language", "bn")
+        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
@@ -417,6 +418,7 @@
         .select("slug,title,excerpt,cover_image,category,published_at,language")
         .eq("published", true)
         .eq("language", "en")
+        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
