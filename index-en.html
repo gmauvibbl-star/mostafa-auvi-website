@@ -1410,6 +1410,55 @@
 }
 </style>
 
+<style id="mobile-language-switch-visible-2026-11-19">
+.mobile-language-switch{display:none}
+@media(max-width:640px){
+  .page-wrap > .v2 > .hdr{
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto auto auto!important;
+  }
+  .page-wrap > .v2 > .hdr > .tools{
+    grid-column:1!important;
+    grid-row:2!important;
+    justify-self:start!important;
+  }
+  .page-wrap > .v2 > .hdr > .mobile-language-switch{
+    grid-column:2!important;
+    grid-row:2!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-self:end!important;
+    gap:6px!important;
+    white-space:nowrap!important;
+    z-index:30020!important;
+  }
+  .page-wrap > .v2 > .hdr > .mobile-language-switch a{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:28px!important;
+    padding:3px 9px!important;
+    border:1px solid #C8B898!important;
+    border-radius:16px!important;
+    text-decoration:none!important;
+    font-size:12px!important;
+    line-height:1!important;
+    color:#2b0f08!important;
+    background:#FAF4E8!important;
+    pointer-events:auto!important;
+  }
+  .page-wrap > .v2 > .hdr > .mobile-language-switch a.is-active{
+    color:#FAF4E8!important;
+    background:#0F3D3E!important;
+    border-color:#0F3D3E!important;
+  }
+  .page-wrap > .v2 > .hdr > .menu{
+    grid-column:1 / -1!important;
+    grid-row:3!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -1442,6 +1491,10 @@
         <a href="mailto:gmauvibbl@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M4.5 7.5l7.5 6 7.5-6"/></svg></a>
       </div>
       <a class="sub" href="https://gmauvibbl-star.github.io/mostafa-auvi-website/subscribe-en.html">Subscribe</a>
+    </div>
+<div class="mobile-language-switch" aria-label="Language switcher">
+      <a href="https://gmauvibbl-star.github.io/mostafa-auvi-website/index.html" lang="bn" title="বাংলা">বাংলা</a>
+      <a href="https://gmauvibbl-star.github.io/mostafa-auvi-website/index-en.html" class="is-active" lang="en" title="English">English</a>
     </div>
 <nav class="menu">
       <a href="https://gmauvibbl-star.github.io/mostafa-auvi-website/index-en.html">Home</a>
