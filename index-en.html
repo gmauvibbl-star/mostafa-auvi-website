@@ -1357,6 +1357,59 @@
 }
 </style>
 
+<style id="mobile-social-no-overlap-2026-11-19">
+@media (max-width:640px){
+  .page-wrap > .v2 > .hdr{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto auto!important;
+    row-gap:6px!important;
+    column-gap:0!important;
+    padding:9px 13px 7px!important;
+  }
+  .page-wrap > .v2 > .hdr > .logo{
+    grid-column:1!important;
+    grid-row:1!important;
+    justify-self:start!important;
+    width:auto!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+  }
+  .page-wrap > .v2 > .hdr > .tools{
+    grid-column:1!important;
+    grid-row:2!important;
+    justify-self:start!important;
+    width:auto!important;
+    max-width:100%!important;
+    min-width:0!important;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    gap:7px!important;
+    position:relative!important;
+    z-index:30010!important;
+  }
+  .page-wrap > .v2 > .hdr > .tools .share{
+    position:relative!important;
+    z-index:30011!important;
+    flex:0 0 auto!important;
+  }
+  .page-wrap > .v2 > .hdr > .tools .share a{
+    position:relative!important;
+    z-index:30012!important;
+  }
+  .page-wrap > .v2 > .hdr > .menu{
+    grid-column:1!important;
+    grid-row:3!important;
+    width:100%!important;
+  }
+}
+@media (max-width:380px){
+  .page-wrap > .v2 > .hdr{padding-left:13px!important;padding-right:13px!important}
+  .page-wrap > .v2 > .hdr > .tools{gap:6px!important}
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
