@@ -352,3 +352,33 @@ footer a { color:#e7c98b; }
   html { scroll-behavior:auto; }
   .home-hero-actions a,.latest-card,.cwip-sub { transition:none; }
 }
+
+
+/* Chandradwip writings on the homepage */
+.chandradwip-home-writings {
+  grid-column:1 / -1;
+  padding:28px 34px 34px;
+  border-top:1px solid #d9cfbb;
+  background:#fbf7ed;
+}
+.chandradwip-home-writings-head { margin-bottom:18px; }
+.chandradwip-home-writings-label {
+  color:var(--home-gold); font-family:'EB Garamond',serif;
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+}
+.chandradwip-home-writings-head h3 {
+  margin:5px 0 0; color:var(--home-teal);
+  font-family:'Noto Serif Bengali',serif; font-size:24px;
+}
+.chandradwip-home-writings-grid {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
+}
+.chandradwip-home-writings .latest-card { background:#fffdf8; }
+@media(max-width:800px){
+  .chandradwip-home-writings { padding:24px 20px 26px; }
+  .chandradwip-home-writings-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:520px){
+  .chandradwip-home-writings { padding:22px 16px 24px; }
+  .chandradwip-home-writings-grid { grid-template-columns:1fr; }
+}
