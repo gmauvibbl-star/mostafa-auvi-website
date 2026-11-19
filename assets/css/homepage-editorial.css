@@ -136,7 +136,7 @@ body { background: var(--home-paper); color: var(--home-ink); }
 footer { margin-top:0; background:#102f30; color:#f7f0df; }
 footer a { color:#e7c98b; }
 @media (max-width:800px) {
-  .hero { min-height:540px; height:70vw; background-position:38% center !important; }
+  .hero { min-height:540px !important; height:70vw !important; background-position:38% center !important; }
   .hero::before { background:linear-gradient(0deg,rgba(7,28,28,.94) 0%,rgba(7,28,28,.48) 48%,rgba(7,28,28,.05) 100%) !important; }
   .hero-left { width:auto; max-width:620px; margin:0; padding:250px 26px 34px; }
   .hero-title-bn { font-size:clamp(36px,8vw,52px) !important; }
@@ -152,8 +152,8 @@ footer a { color:#e7c98b; }
   .latest-writings .cards { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
 }
 @media (max-width:520px) {
-  .hero { min-height:540px; height:auto; background-size:auto 100% !important; background-position:22% top !important; }
-  .hero-left { padding:275px 19px 28px; }
+  .hero { min-height:540px !important; height:auto !important; background-size:auto 100% !important; background-position:22% top !important; }
+  .hero-left { padding:275px 19px 28px !important; }
   .hero-title-bn { font-size:36px !important; }
   .home-hero-actions { gap:9px; margin-top:20px; }
   .home-hero-actions a { min-height:42px; padding:0 13px; font-size:12px; }
