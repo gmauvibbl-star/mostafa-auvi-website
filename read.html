@@ -2726,48 +2726,40 @@ async function renderReaderSideColumn(post, sb, isEn) {
     }).join('');
   };
 
-  // Static Chandradwip pages: show every available Bengali and English feature page.
+  // Chandradwip feature links are kept out of the top of the sidebar.
+  // They are appended after the regular writing links below.
+  const chandradwipLinks = Object.entries(STATIC_CHANDRADWIP || {}).map(([key, item]) => ({
+    slug: item?.slug || key,
+    title: item?.title,
+    category: 'chandradwip',
+    published_at: item?.published_at,
+    cover_image: item?.cover_image || item?.cover_image_url || '',
+    language: 'bn'
+  })).filter(item => item.slug && item.slug !== currentSlug);
+
   if (!sb) {
-    const items = [];
-    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP || {})) {
-      if (item && item.slug !== currentSlug) {
-        items.push({
-          slug: item.slug || key,
-          title: item.title,
-          category: item.category || 'chandradwip',
-          published_at: item.published_at,
-          cover_image: item.cover_image || item.cover_image_url || '',
-          language: 'bn'
-        });
-      }
-    }
-    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP_EN || {})) {
-      if (item && item.slug !== currentSlug) {
-        items.push({
-          slug: item.slug || key,
-          title: item.title,
-          category: item.category || 'chandradwip',
-          published_at: item.published_at,
-          cover_image: item.cover_image || item.cover_image_url || '',
-          language: 'en'
-        });
-      }
-    }
-    renderItems(items);
+    // Static Chandradwip pages do not depend on Supabase. Keep their three
+    // feature links together at the bottom instead of placing them first.
+    renderItems(chandradwipLinks);
     return;
   }
 
   try {
-    // Fill the entire right column with all published Bengali and English writings.
+    // Regular Bengali/English writings come first. Chandradwip is deliberately
+    // excluded here and restored afterward from the site's original static links.
     const { data, error } = await sb.from('posts')
       .select('slug,title,category,published_at,cover_image,language')
       .eq('published', true)
       .in('language', ['bn', 'en'])
+      .neq('category', 'chandradwip')
       .neq('slug', currentSlug)
       .order('published_at', { ascending: false });
 
     if (error) throw error;
-    renderItems(data || []);
+
+    const regularItems = data || [];
+    const combined = regularItems.concat(chandradwipLinks);
+    renderItems(combined);
   } catch (e) {
     console.warn('Reader side list unavailable:', e?.message || e);
     side.style.display = 'none';
