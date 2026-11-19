@@ -2109,52 +2109,17 @@ async function setupReaderCount(post, sb, isEn) {
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  // Show the public count only when the database migration is available.
-  const { data: initialCount, error: countError } = await sb.rpc('get_post_reader_count', {
+  // Use the same post_views source as the author dashboard and Most Read list.
+  const { data: initialCount, error: countError } = await sb.rpc('get_post_view_count', {
     p_slug: post.slug
   });
   if (countError) {
-    console.warn('Reader count is not available yet:', countError.message);
+    console.warn('Article view count is not available yet:', countError.message);
     return;
   }
+
   valueEl.textContent = formatCount(initialCount);
   counter.hidden = false;
-
-  let recording = false;
-  const onArticleScroll = async () => {
-    const rect = body.getBoundingClientRect();
-    const articleMidpoint = rect.top + window.scrollY + (rect.height * 0.5);
-    if (window.scrollY + window.innerHeight < articleMidpoint || recording) return;
-
-    recording = true;
-    window.removeEventListener('scroll', onArticleScroll);
-    try {
-      let visitorId = localStorage.getItem('mostafa_reader_id_v1');
-      if (!visitorId) {
-        if (window.crypto?.randomUUID) {
-          visitorId = window.crypto.randomUUID();
-        } else {
-          const bytes = new Uint8Array(16);
-          window.crypto.getRandomValues(bytes);
-          visitorId = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
-        }
-        localStorage.setItem('mostafa_reader_id_v1', visitorId);
-      }
-      const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(visitorId));
-      const visitorHash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
-      const { data: totalReaders, error } = await sb.rpc('record_post_reader', {
-        p_slug: post.slug,
-        p_visitor_hash: visitorHash
-      });
-      if (error) throw error;
-      valueEl.textContent = formatCount(totalReaders);
-    } catch (error) {
-      console.warn('Reader count could not be updated:', error);
-      recording = false;
-      window.addEventListener('scroll', onArticleScroll, { passive: true });
-    }
-  };
-  window.addEventListener('scroll', onArticleScroll, { passive: true });
 }
 
 async function loadPost() {
@@ -2216,11 +2181,13 @@ async function loadPost() {
     }
     // Use the loaded post whether published or author-previewed.
     const activePost = loadedPost;
-    // Count only real public article visits; draft previews are excluded.
+    // Count each public article view before rendering the counter, so the
+    // number shown here is exactly the same post_views metric used by the dashboard.
     if (activePost.published) {
-      sb.rpc('record_post_view', { p_slug: activePost.slug }).then(({ error }) => {
-        if (error) console.warn('Post view count was not recorded:', error.message);
-      });
+      const { error: viewError } = await sb.rpc('record_post_view', { p_slug: activePost.slug });
+      if (viewError) {
+        console.warn('Post view count was not recorded:', viewError.message);
+      }
     }
     // Fetch sibling in other language by group_id for language toggle
     let sibling = null;
