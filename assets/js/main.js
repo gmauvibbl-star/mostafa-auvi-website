@@ -304,6 +304,7 @@
         .select("slug,title,excerpt,cover_image,category,published_at,language")
         .eq("published", true)
         .eq("language", "bn")
+        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
@@ -328,6 +329,72 @@
         })
         .catch(function () { /* leave section hidden */ });
     } catch (e) { /* leave section hidden */ }
+  }
+
+  /* ====================================================================
+   *  9. CHANDRADWIP WRITINGS — keep Chandradwip posts in their own homepage section
+   * ==================================================================== */
+  function initChandradwipWritings() {
+    var section = document.getElementById("chandradwipWritingSection");
+    var grid = document.getElementById("chandradwipWritingGrid");
+    var sectionEn = document.getElementById("chandradwipWritingSectionEn");
+    var gridEn = document.getElementById("chandradwipWritingGridEn");
+    if ((!section || !grid) && (!sectionEn || !gridEn)) return;
+
+    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+    if (!window.supabase) return;
+
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+    function fmtDate(iso, en) {
+      if (!iso) return "";
+      try {
+        var d = new Date(iso);
+        if (en) {
+          var m = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+          return d.getDate() + " " + m[d.getMonth()] + " " + d.getFullYear();
+        }
+        return d.toLocaleDateString("bn-BD", {day:"numeric", month:"long", year:"numeric"});
+      } catch (e) { return ""; }
+    }
+
+    function render(rows, target, host, en) {
+      if (!host || !target || !rows.length) return;
+      target.innerHTML = rows.map(function(p) {
+        var cover = p.cover_image
+          ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
+          : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
+        var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
+        if (excerpt.length > 150) excerpt = excerpt.slice(0, 150) + "…";
+        return '<a class="latest-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=' + (en ? 'en' : 'bn') + '">' +
+          cover + '<div class="lc-body">' +
+          '<span class="lc-badge">' + esc(en ? 'Chandradwip' : 'চন্দ্রদ্বীপ') + '</span>' +
+          '<h3 class="lc-title">' + esc(p.title || "") + '</h3>' +
+          (excerpt ? '<p class="lc-excerpt">' + esc(excerpt) + '</p>' : '') +
+          (p.published_at ? '<span class="lc-date">' + esc(fmtDate(p.published_at, en)) + '</span>' : '') +
+          '</div></a>';
+      }).join("");
+      host.hidden = false;
+    }
+
+    try {
+      var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      function load(lang, target, host) {
+        if (!target || !host) return;
+        sb.from("posts").select("slug,title,excerpt,cover_image,published_at,category,parent_category,subcategory,tags")
+          .eq("published", true).eq("language", lang)
+          .eq("category", "chandradwip")
+          .order("published_at", {ascending:false, nullsFirst:false}).limit(12)
+          .then(function(res) {
+            render((res && res.data) || [], target, host, lang === "en");
+          }).catch(function() {});
+      }
+      load("bn", grid, section);
+      load("en", gridEn, sectionEn);
+    } catch (e) {}
   }
 
   /* ====================================================================
@@ -417,6 +484,7 @@
         .select("slug,title,excerpt,cover_image,category,published_at,language")
         .eq("published", true)
         .eq("language", "en")
+        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
@@ -455,6 +523,7 @@
     initModalFocusTrap();
     initChandradwipExtra();
     initLatestWritings();
+    initChandradwipWritings();
     initChandradwipPanels();
     initLatestWritingsEn();
   }
