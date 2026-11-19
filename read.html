@@ -2404,7 +2404,22 @@ async function loadPost() {
 })();
 
 /* ====== Trigger article load ====== */
-loadPost();
+/* ====== Trigger article load ====== */
+loadPost().catch(function(error) {
+  console.error('Article loading error:', error);
+
+  const loading = document.getElementById('loadingState');
+
+  if (loading) {
+    loading.innerHTML = `
+      <div style="padding:24px;text-align:center;color:#a33;">
+        <h3>লেখাটি লোড করা যায়নি</h3>
+        <p>কারিগরি সমস্যা হয়েছে। পৃষ্ঠাটি আবার লোড করুন।</p>
+        <button onclick="location.reload()">আবার চেষ্টা করুন</button>
+      </div>
+    `;
+  }
+});
 </script>
 <script>
 /* ====== Public comments — spam protection via honeypot + server-side rate limit ====== */
