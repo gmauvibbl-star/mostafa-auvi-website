@@ -1757,6 +1757,54 @@
     }
   }
 
+
+  /* ====== COMMENTS ALIGN WITH MAIN READING COLUMN ====== */
+  .reader-comments{
+    padding-left:0;
+    padding-right:0;
+  }
+  .reader-comments-inner{
+    width:min(800px, calc(100% - 36px));
+    max-width:800px;
+    margin-left:max(18px, calc((100% - 1240px)/2 + 40px));
+    margin-right:0;
+  }
+  .comments-heading h2,
+  .comments-list-title{
+    color:#a91920;
+  }
+
+  .reader-side-list{
+    max-height:none;
+  }
+  .reader-side-lang{
+    display:block;
+    margin-bottom:2px;
+    color:#a91920;
+    font-family:'EB Garamond',serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.12em;
+  }
+  .reader-side-card{
+    grid-template-columns:100px minmax(0,1fr);
+  }
+
+  @media(max-width:1000px){
+    .reader-comments-inner{
+      width:min(800px, calc(100% - 36px));
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+  @media(max-width:600px){
+    .reader-comments-inner{
+      width:calc(100% - 24px);
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+
 </style>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mostafa Auvi — প্রকাশিত লেখা">
@@ -2653,20 +2701,23 @@ async function renderReaderSideColumn(post, sb, isEn) {
   if (!list || !side) return;
 
   const currentSlug = post?.slug || '';
-  const lang = post?.language || (isEn ? 'en' : 'bn');
 
   const renderItems = (items) => {
     if (!items.length) {
       side.style.display = 'none';
       return;
     }
+
     list.innerHTML = items.map(item => {
+      const lang = item.language === 'en' ? 'en' : 'bn';
       const cover = item.cover_image
         ? '<img src="' + esc(item.cover_image) + '" alt="" loading="lazy">'
         : '<div class="reader-side-fallback">❦</div>';
+
       return '<a class="reader-side-card" href="./read.html?slug=' + encodeURIComponent(item.slug) + '&lang=' + lang + '">' +
         cover +
         '<span class="reader-side-copy">' +
+          '<span class="reader-side-lang">' + (lang === 'en' ? 'ENGLISH' : 'বাংলা') + '</span>' +
           '<span class="reader-side-cat">' + esc(catLabel(item.category, lang)) + '</span>' +
           '<span class="reader-side-title">' + esc(item.title || '') + '</span>' +
           '<span class="reader-side-date">' + esc(fmtDate(item.published_at, lang)) + '</span>' +
@@ -2675,34 +2726,46 @@ async function renderReaderSideColumn(post, sb, isEn) {
     }).join('');
   };
 
+  // Static Chandradwip pages: show every available Bengali and English feature page.
   if (!sb) {
-    const statics = lang === 'en' ? STATIC_CHANDRADWIP_EN : STATIC_CHANDRADWIP;
-    if (post?.category === 'chandradwip' && statics) {
-      const items = Object.entries(statics)
-        .filter(([key, item]) => item && item.slug !== currentSlug)
-        .slice(0, 6)
-        .map(([key, item]) => ({
+    const items = [];
+    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP || {})) {
+      if (item && item.slug !== currentSlug) {
+        items.push({
           slug: item.slug || key,
           title: item.title,
           category: item.category || 'chandradwip',
           published_at: item.published_at,
-          cover_image: item.cover_image || item.cover_image_url || ''
-        }));
-      renderItems(items);
-    } else {
-      side.style.display = 'none';
+          cover_image: item.cover_image || item.cover_image_url || '',
+          language: 'bn'
+        });
+      }
     }
+    for (const [key, item] of Object.entries(STATIC_CHANDRADWIP_EN || {})) {
+      if (item && item.slug !== currentSlug) {
+        items.push({
+          slug: item.slug || key,
+          title: item.title,
+          category: item.category || 'chandradwip',
+          published_at: item.published_at,
+          cover_image: item.cover_image || item.cover_image_url || '',
+          language: 'en'
+        });
+      }
+    }
+    renderItems(items);
     return;
   }
 
   try {
+    // Fill the entire right column with all published Bengali and English writings.
     const { data, error } = await sb.from('posts')
-      .select('slug,title,category,published_at,cover_image')
+      .select('slug,title,category,published_at,cover_image,language')
       .eq('published', true)
-      .eq('language', lang)
+      .in('language', ['bn', 'en'])
       .neq('slug', currentSlug)
-      .order('published_at', { ascending: false })
-      .limit(7);
+      .order('published_at', { ascending: false });
+
     if (error) throw error;
     renderItems(data || []);
   } catch (e) {
@@ -2710,7 +2773,6 @@ async function renderReaderSideColumn(post, sb, isEn) {
     side.style.display = 'none';
   }
 }
-
 async function setupReaderCount(post, sb, isEn) {
   const counter = document.getElementById('readerCount');
   const valueEl = counter?.querySelector('.reader-count-value');
