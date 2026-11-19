@@ -56,6 +56,185 @@ body { background: var(--home-paper); color: var(--home-ink); }
 .home-hero-actions a:hover { transform:translateY(-2px); }
 .home-action-primary { color:#172c28; background:#e6c98d; border:1px solid #e6c98d; }
 .home-action-secondary { color:#fff7e7; background:rgba(255,255,255,.08); border:1px solid rgba(255,247,231,.55); }
+html { scroll-behavior:smooth; }
+body { background:var(--home-paper); color:var(--home-ink); }
+.page-wrap { background:var(--home-paper); }
+#main { max-width:1440px; margin:0 auto; }
+
+.hero{
+  position:relative;
+  min-height:530px;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(48,28,68,.25),rgba(48,28,68,.25)),
+    url('../img/hero-banner.jpg');
+  background-size:cover;
+  background-position:center center;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:5px solid var(--home-gold);
+}
+
+.hero-left{
+  flex:1;
+  position:relative;
+  z-index:2;
+  order:2;
+  padding-right:80px;
+}
+
+.hero-right{
+  flex:1;
+  position:relative;
+  z-index:2;
+  order:1;
+}
+
+.hero-photo-wrap{
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
+  height:100%;
+}
+
+.hero-photo{
+  display:block;
+  width:auto;
+  max-height:75%;
+  transform:translateY(20px) scale(.87);
+  transform-origin:bottom left;
+  filter:
+    drop-shadow(0 20px 40px rgba(0,0,0,.30))
+    saturate(1.04)
+    sepia(.05);
+  transition:.4s ease;
+}
+
+.hero-title-bn{
+  font-family:'Noto Serif Bengali',serif !important;
+  font-size:72px !important;
+  font-weight:700 !important;
+  color:#fff;
+  text-shadow:0 4px 10px rgba(0,0,0,.35);
+  margin-bottom:10px;
+}
+
+.hero-author-en{
+  font-family:'Noto Serif Bengali',serif !important;
+  font-size:28px;
+  color:#F6D88A;
+  margin-bottom:20px;
+}
+
+.hero-divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:18px 0 24px;
+}
+
+.hero-divider .line{
+  width:90px;
+  height:1px;
+  background:#F6D88A;
+  opacity:.45;
+}
+
+.hero-divider .diamond{
+  color:#F6D88A;
+  font-size:12px;
+}
+
+.hero-title-en{
+  font-family:'Noto Serif Bengali',serif !important;
+  font-size:48px !important;
+  line-height:1.3;
+  color:#fff;
+  margin-bottom:15px;
+  text-shadow:0 3px 8px rgba(0,0,0,.30);
+}
+
+.hero-subtitle{
+  font-family:'Noto Serif Bengali',serif !important;
+  font-size:22px !important;
+  color:#fff;
+  line-height:1.8;
+}
+
+.hero-ornament{
+  position:absolute;
+  color:#F6D88A;
+  opacity:.35;
+  font-size:34px;
+}
+
+.hero-ornament.tl{top:20px;left:20px}
+.hero-ornament.br{right:20px;bottom:20px}
+
+.home-hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:26px;
+}
+
+.home-hero-actions a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:46px;
+  padding:0 19px;
+  border-radius:2px;
+  font-family:'Noto Serif Bengali',serif;
+  font-size:14px;
+  font-weight:700;
+  text-decoration:none;
+  transition:transform .2s,background .2s,color .2s;
+}
+
+.home-hero-actions a:hover{transform:translateY(-2px)}
+.home-action-primary{color:#172c28;background:#e6c98d;border:1px solid #e6c98d}
+.home-action-secondary{color:#fff7e7;background:rgba(255,255,255,.08);border:1px solid rgba(255,247,231,.55)}
+
+@media(max-width:991px){
+  .hero{
+    min-height:auto;
+    padding:50px 20px;
+    display:block;
+    text-align:center;
+  }
+  .hero-right{order:1}
+  .hero-left{
+    order:2;
+    padding-right:0;
+    margin-top:20px;
+    text-align:center;
+  }
+  .hero-photo{
+    max-width:90%;
+    max-height:none;
+    transform:translateY(10px) scale(.90);
+  }
+  .hero-title-bn{font-size:48px !important}
+  .hero-title-en{font-size:32px !important}
+  .hero-author-en{font-size:22px}
+  .hero-subtitle{font-size:18px !important}
+  .hero-divider{justify-content:center}
+}
+
+@media(max-width:520px){
+  .hero{padding:38px 14px 28px}
+  .hero-title-bn{font-size:38px !important}
+  .hero-title-en{font-size:28px !important}
+  .hero-author-en{font-size:20px}
+  .hero-subtitle{font-size:16px !important}
+  .hero-photo{max-width:96%;transform:translateY(6px) scale(.92)}
+  .home-hero-actions{justify-content:center}
+  .home-hero-actions a{min-height:42px;padding:0 13px;font-size:12px}
+}
+
 .lower-grid { max-width:1180px; margin:0 auto; padding:76px 28px 42px; }
 #featured { scroll-margin-top:32px; }
 .section-head { margin:0 0 24px; text-align:left; }
