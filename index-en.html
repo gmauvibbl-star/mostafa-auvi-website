@@ -1403,6 +1403,19 @@
         if (other !== item) other.open = false;
       });
     });
+
+    /* Explicit click handler for iOS Safari/touch devices.
+       Native <details> is kept, but the menu is toggled explicitly so
+       the dropdown remains reliable when the header is heavily styled. */
+    var summary = item.querySelector('summary');
+    if (summary) {
+      summary.addEventListener('click', function (event) {
+        event.preventDefault();
+        var willOpen = !item.open;
+        dropdowns.forEach(function (other) { other.open = false; });
+        item.open = willOpen;
+      });
+    }
   });
   document.addEventListener('click', function (event) {
     if (!event.target.closest('.menu details.dropdown')) {
