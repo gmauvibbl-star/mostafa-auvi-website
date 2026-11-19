@@ -1393,6 +1393,207 @@
     .a4-body.en { font-size: 19px; }
   }
 
+
+  /* ====== WIDE EDITORIAL READER WITH SIDE COLUMN ====== */
+  .read-main{
+    padding:28px 34px 60px;
+    background:#fff;
+  }
+  .back-bar{
+    max-width:1120px;
+    margin:0 auto 18px;
+  }
+  .read-layout{
+    max-width:1120px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0, 790px) 270px;
+    gap:28px;
+    align-items:start;
+  }
+  .read-layout > #article{
+    min-width:0;
+  }
+  .a4-page{
+    width:100%;
+    max-width:none;
+    box-sizing:border-box;
+    margin:0;
+    padding:42px 54px 58px;
+    background:#fff;
+    border-radius:0;
+    box-shadow:none;
+    overflow:visible;
+  }
+  .a4-page::before{display:none;}
+  .a4-header{
+    margin-bottom:22px;
+  }
+  .a4-title,
+  .a4-title.bn,
+  .a4-title:not(.bn){
+    text-align:left;
+    font-size:clamp(27px,3vw,38px);
+    line-height:1.35;
+    margin-bottom:12px;
+  }
+  .a4-meta-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .a4-meta{font-size:13px;}
+  .a4-divider{
+    margin:20px 0 8px;
+    background:linear-gradient(90deg,#ddd 0%,#ddd 72%,transparent 100%);
+  }
+  .a4-divider::after{
+    display:none;
+  }
+  .a4-cover{
+    max-width:100%;
+    max-height:520px;
+    margin:16px auto 34px;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+  .a4-body{
+    max-width:700px;
+    margin:0 auto;
+    font-size:18px;
+    line-height:2.02;
+    color:#29251f;
+  }
+  .a4-body.en{
+    max-width:700px;
+    font-size:19px;
+    line-height:1.9;
+  }
+  .a4-body p{
+    margin:0 0 1.25em;
+  }
+
+  .reader-side-column{
+    position:sticky;
+    top:18px;
+    min-width:0;
+    padding-top:6px;
+  }
+  .reader-side-head{
+    border-bottom:2px solid #b51d25;
+    margin-bottom:10px;
+    padding:0 0 7px;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:17px;
+    font-weight:700;
+    color:#222;
+  }
+  .reader-side-head span{
+    display:inline-block;
+    background:#f5f1e8;
+    padding:4px 10px;
+    border-left:3px solid #b51d25;
+  }
+  .reader-side-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .reader-side-card{
+    display:grid;
+    grid-template-columns:72px minmax(0,1fr);
+    gap:10px;
+    padding:8px;
+    background:#fff;
+    border:1px solid #ddd7cd;
+    border-radius:4px;
+    text-decoration:none;
+    color:inherit;
+    transition:box-shadow .18s, transform .18s;
+  }
+  .reader-side-card:hover{
+    transform:translateY(-1px);
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+  }
+  .reader-side-card img,
+  .reader-side-fallback{
+    width:72px;
+    height:58px;
+    object-fit:cover;
+    display:block;
+    background:#eee9df;
+    border-radius:2px;
+  }
+  .reader-side-fallback{
+    display:grid;
+    place-items:center;
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    color:#a78a52;
+  }
+  .reader-side-copy{
+    min-width:0;
+  }
+  .reader-side-cat{
+    display:block;
+    color:#b51d25;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:10px;
+    line-height:1.25;
+    margin-bottom:3px;
+  }
+  .reader-side-title{
+    display:block;
+    color:#222;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:12px;
+    line-height:1.45;
+    font-weight:700;
+  }
+  .reader-side-date{
+    display:block;
+    margin-top:3px;
+    color:#888;
+    font-family:'EB Garamond',serif;
+    font-size:10px;
+  }
+  .reader-side-loading{
+    padding:12px 4px;
+    color:#999;
+    font-family:'Noto Serif Bengali',serif;
+    font-size:12px;
+  }
+
+  @media(max-width:900px){
+    .read-main{padding:22px 18px 50px;}
+    .read-layout{
+      grid-template-columns:1fr;
+      gap:28px;
+    }
+    .reader-side-column{
+      position:static;
+    }
+    .reader-side-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .a4-page{
+      padding:30px 26px 48px;
+    }
+  }
+  @media(max-width:600px){
+    .read-main{padding:18px 12px 42px;}
+    .back-bar{margin-bottom:10px;}
+    .a4-page{padding:24px 12px 42px;}
+    .a4-title,
+    .a4-title.bn,
+    .a4-title:not(.bn){font-size:27px;}
+    .a4-body{font-size:17px;line-height:1.95;}
+    .a4-body.en{font-size:18px;}
+    .reader-side-list{grid-template-columns:1fr;}
+  }
+
 </style>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mostafa Auvi — প্রকাশিত লেখা">
@@ -1501,14 +1702,25 @@
     <span class="crumb" id="crumb">Mostafa Auvi · প্রকাশিত লেখা</span>
   </div>
 
-  <!-- Article container (A4 page) -->
-  <article id="article">
-    <div class="loading-state" id="loadingState">
-      <div class="spinner">❦</div>
-      <h2>লেখা লোড হচ্ছে…</h2>
-      <p>কিছুক্ষণ অপেক্ষা করুন।</p>
-    </div>
-  </article>
+  <!-- Article + narrow reading sidebar -->
+  <div class="read-layout">
+    <article id="article">
+      <div class="loading-state" id="loadingState">
+        <div class="spinner">❦</div>
+        <h2>লেখা লোড হচ্ছে…</h2>
+        <p>কিছুক্ষণ অপেক্ষা করুন।</p>
+      </div>
+    </article>
+
+    <aside class="reader-side-column" id="readerSideColumn" aria-label="আরও লেখা">
+      <div class="reader-side-head">
+        <span>আরও পড়ুন</span>
+      </div>
+      <div class="reader-side-list" id="readerSideList">
+        <div class="reader-side-loading">লেখা লোড হচ্ছে…</div>
+      </div>
+    </aside>
+  </div>
 
   <!-- Bottom back link bar (rendered into by JS) -->
   <div class="back-bar bottom" id="bottomBackBar" style="margin-top:24px;"></div>
@@ -2106,6 +2318,8 @@ function renderStaticChandradwip(slugKey){
   }
 
   // Reader count is optional for static content. It can never prevent rendering.
+  renderReaderSideColumn(post, null, isEnglish);
+
   try {
     const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     if (sb && post.published) {
@@ -2237,6 +2451,7 @@ function renderArticle(post, sibling, sb) {
 
   // Public reader count is recorded only after a visitor reaches 50% of the article.
   setupReaderCount(post, sb, isEn);
+  renderReaderSideColumn(post, sb, isEn);
 
   // Bottom back link bar
   const bb = document.getElementById('bottomBackBar');
@@ -2266,6 +2481,70 @@ function renderArticle(post, sibling, sb) {
         }, 1800);
       } catch (e) { prompt(isEn ? 'Copy this link:' : 'লিংক কপি করুন:', shareUrl); }
     };
+  }
+}
+
+async function renderReaderSideColumn(post, sb, isEn) {
+  const list = document.getElementById('readerSideList');
+  const side = document.getElementById('readerSideColumn');
+  if (!list || !side) return;
+
+  const currentSlug = post?.slug || '';
+  const lang = post?.language || (isEn ? 'en' : 'bn');
+
+  const renderItems = (items) => {
+    if (!items.length) {
+      side.style.display = 'none';
+      return;
+    }
+    list.innerHTML = items.map(item => {
+      const cover = item.cover_image
+        ? '<img src="' + esc(item.cover_image) + '" alt="" loading="lazy">'
+        : '<div class="reader-side-fallback">❦</div>';
+      return '<a class="reader-side-card" href="./read.html?slug=' + encodeURIComponent(item.slug) + '&lang=' + lang + '">' +
+        cover +
+        '<span class="reader-side-copy">' +
+          '<span class="reader-side-cat">' + esc(catLabel(item.category, lang)) + '</span>' +
+          '<span class="reader-side-title">' + esc(item.title || '') + '</span>' +
+          '<span class="reader-side-date">' + esc(fmtDate(item.published_at, lang)) + '</span>' +
+        '</span>' +
+      '</a>';
+    }).join('');
+  };
+
+  if (!sb) {
+    const statics = lang === 'en' ? STATIC_CHANDRADWIP_EN : STATIC_CHANDRADWIP;
+    if (post?.category === 'chandradwip' && statics) {
+      const items = Object.entries(statics)
+        .filter(([key, item]) => item && item.slug !== currentSlug)
+        .slice(0, 6)
+        .map(([key, item]) => ({
+          slug: item.slug || key,
+          title: item.title,
+          category: item.category || 'chandradwip',
+          published_at: item.published_at,
+          cover_image: item.cover_image || item.cover_image_url || ''
+        }));
+      renderItems(items);
+    } else {
+      side.style.display = 'none';
+    }
+    return;
+  }
+
+  try {
+    const { data, error } = await sb.from('posts')
+      .select('slug,title,category,published_at,cover_image')
+      .eq('published', true)
+      .eq('language', lang)
+      .neq('slug', currentSlug)
+      .order('published_at', { ascending: false })
+      .limit(7);
+    if (error) throw error;
+    renderItems(data || []);
+  } catch (e) {
+    console.warn('Reader side list unavailable:', e?.message || e);
+    side.style.display = 'none';
   }
 }
 
