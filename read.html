@@ -2109,8 +2109,9 @@ async function setupReaderCount(post, sb, isEn) {
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  // Use the same post_views source as the author dashboard and Most Read list.
-  const { data: initialCount, error: countError } = await sb.rpc('get_post_view_count', {
+  // Use the public reader-count RPC already available in Supabase.
+  // The database migration will align this RPC with post_views.
+  const { data: initialCount, error: countError } = await sb.rpc('get_post_reader_count', {
     p_slug: post.slug
   });
   if (countError) {
@@ -2184,10 +2185,9 @@ async function loadPost() {
     // Count each public article view before rendering the counter, so the
     // number shown here is exactly the same post_views metric used by the dashboard.
     if (activePost.published) {
-      const { error: viewError } = await sb.rpc('record_post_view', { p_slug: activePost.slug });
-      if (viewError) {
-        console.warn('Post view count was not recorded:', viewError.message);
-      }
+      sb.rpc('record_post_view', { p_slug: activePost.slug }).then(({ error }) => {
+        if (error) console.warn('Post view count was not recorded:', error.message);
+      });
     }
     // Fetch sibling in other language by group_id for language toggle
     let sibling = null;
