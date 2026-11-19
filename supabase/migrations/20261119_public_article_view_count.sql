@@ -72,3 +72,15 @@ $$;
 
 revoke all on function public.get_post_reader_count(text) from public, anon, authenticated;
 grant execute on function public.get_post_reader_count(text) to anon, authenticated;
+
+
+-- Create database-backed rows for the three built-in Chandradwip feature pages.
+-- Their article text remains static in read.html, but the view rows live in
+-- public.post_views so the public counter and dashboard use the same metric.
+insert into public.posts
+  (title, slug, body, category, language, published, published_at)
+values
+  ('চন্দ্রদ্বীপ লেখার অভিজ্ঞতা', 'chandradwip-writing', 'Static Chandradwip feature page.', 'chandradwip', 'bn', true, now()),
+  ('চন্দ্রদ্বীপের চরিত্র', 'chandradwip-characters', 'Static Chandradwip feature page.', 'chandradwip', 'bn', true, now()),
+  ('চন্দ্রদ্বীপের জনপদ', 'chandradwip-settlement', 'Static Chandradwip feature page.', 'chandradwip', 'bn', true, now())
+on conflict (slug) do nothing;
