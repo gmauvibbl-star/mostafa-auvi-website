@@ -2257,7 +2257,7 @@ const STATIC_CHANDRADWIP = {
     language: 'bn',
     published_at: '2026-10-27',
     tags: ['চন্দ্রদ্বীপ','উপন্যাস','লেখার অভিজ্ঞতা','বরিশাল','গবেষণা','খতিয়ান','হিজরত','ইতিহাস'],
-    cover_image: 'assets/img/chandradwip-writing-cover.jpg',
+    cover_image: 'assets/img/chandradwip-portraits/keramat-majhi.jpg',
     excerpt: 'একটি ঐতিহাসিক উপন্যাসের পেছনের গল্প—গ্রাম, নদী, খাল, স্মৃতি ও গবেষণার সম্পর্ক নিয়ে আমার নিজস্ব অনুভব।',
     body:
         '<p class="article-subtitle">স্মৃতি, ইতিহাস ও হারিয়ে যাওয়া একটি জনপদের খোঁজে</p>'
@@ -2375,7 +2375,7 @@ const STATIC_CHANDRADWIP = {
 
       + '<h2>একই জনপদের নানা মুখ</h2><p>মানিকজান থেকে মেয়াসাব, হাচনদ্দি থেকে মারোয়ান, গোলাম আলী থেকে নির্মলকণ্ঠ রায়—প্রত্যেকের জীবন আলাদা পথে এগিয়েছে। কারও পৃথিবী নদীর ঘাটে, কারও উঠোনে, কারও দরবারে, কারও কাছারিতে। কেউ ভালোবাসার জন্য পথ পাড়ি দেয়, কেউ জীবিকার জন্য, কেউ জমির মালিকানা নিয়ে আসে, কেউ নতুন মাটিতে ঘর বাঁধে।</p>'
       + '<p>এই মানুষদের জীবন এক জায়গায় এসে মিশেছে বিঘাইয়ে। তাদের কথাবার্তা, কাজ, স্মৃতি, দ্বন্দ্ব ও আকাঙ্ক্ষার মধ্য দিয়েই চন্দ্রদ্বীপের জনপদ ধীরে ধীরে জীবন্ত হয়ে ওঠে।</p>'
-    cover_image: 'assets/img/chandradwip-characters-cover.jpg',
+    cover_image: 'assets/img/chandradwip-portraits/manikjan.jpg',
   },
   'chandradwip-settlement': {
     slug: 'chandradwip-settlement',
@@ -2421,7 +2421,7 @@ const STATIC_CHANDRADWIP_EN = {
   'chandradwip-writing': {
     slug:'chandradwip-writing', title:'Writing Chandradwip', category:'chandradwip', language:'en',
     published_at:'2026-10-27', tags:['Chandradwip','novel','writing','Barisal','research'],
-    cover_image:'assets/img/chandradwip-writing-cover.jpg',
+    cover_image:'assets/img/chandradwip-portraits/keramat-majhi.jpg',
     excerpt:'Notes on writing Chandradwip, and on the village, rivers, canals, memory and research behind the novel.',
     body:
       '<p class="article-subtitle">In search of memory, history and a vanished settlement</p>'+
@@ -2439,7 +2439,7 @@ const STATIC_CHANDRADWIP_EN = {
   'chandradwip-characters': {
     slug:'chandradwip-characters', title:'The Characters of Chandradwip', category:'chandradwip', language:'en',
     published_at:'2026-10-27', tags:['Chandradwip','characters','Bighai','fiction'],
-    cover_image:'assets/img/chandradwip-characters-cover.jpg',
+    cover_image:'assets/img/chandradwip-portraits/manikjan.jpg',
     excerpt:'The people of Chandradwip: Manikjan, Meya Sab, Keramat and the men and women who give the settlement its memory.',
     body:
       '<p class="article-subtitle">People who carry a village through time</p>'+
@@ -2457,7 +2457,7 @@ const STATIC_CHANDRADWIP_EN = {
   'chandradwip-settlement': {
     slug:'chandradwip-settlement', title:'The Settlement of Chandradwip', category:'chandradwip', language:'en',
     published_at:'2026-10-27', tags:['Chandradwip','Bighai','settlement','river','Barisal'],
-    cover_image:'assets/img/chandradwip-settlement-cover.jpg',
+    cover_image:'assets/img/chandradwip-portraits/meyasahab.jpg',
     excerpt:'How Bighai is imagined: thirteen families, boats, a vanished canal, riverine geography and the memory of a settlement.',
     body:
       '<p class="article-subtitle">A village built on water, memory and migration</p>'+
@@ -2739,7 +2739,7 @@ async function renderReaderSideColumn(post, sb, isEn) {
           title: item.title,
           category: item.category || 'chandradwip',
           published_at: item.published_at,
-          cover_image: item.cover_image || item.cover_image_url || 'assets/img/chandradwip-settlement-cover.jpg',
+          cover_image: item.cover_image || item.cover_image_url || 'assets/img/chandradwip-portraits/meyasahab.jpg',
           language: lang
         });
       }
