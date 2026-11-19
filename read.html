@@ -1964,9 +1964,9 @@ function renderStaticChandradwip(slugKey){
     const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
     const bodyHtml = String(post.body || '').trim();
     const safeBody = bodyHtml
-      .replace(/<script[\\s\\S]*?<\\/script>/gi, '')
-      .replace(/<style[\\s\\S]*?<\\/style>/gi, '')
-      .replace(/\\son[a-z]+\\s*=\\s*(['"]).*?\\1/gi, '');
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/<style[\s\S]*?<\/style>/gi, '')
+      .replace(/\son[a-z]+\s*=\s*(['"]).*?\1/gi, '');
 
     articleEl.innerHTML =
       '<div class="a4-page">' +
