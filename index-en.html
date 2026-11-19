@@ -1306,6 +1306,44 @@
 }
 </style>
 
+
+<style id="english-language-visibility-final-2026-11-19">
+/* Final fix: keep the language switch above every header layer on iPhone. */
+.page-wrap > .utility-bar {
+  position: relative !important;
+  z-index: 20000 !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+}
+.page-wrap > .utility-bar .lang {
+  position: relative !important;
+  z-index: 20001 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.page-wrap > .utility-bar .lang a {
+  position: relative !important;
+  z-index: 20002 !important;
+  pointer-events: auto !important;
+}
+@media (max-width:640px) {
+  .page-wrap > .utility-bar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 20000 !important;
+    height: 42px !important;
+    min-height: 42px !important;
+  }
+  .page-wrap > .v2 {
+    position: sticky !important;
+    top: 42px !important;
+    z-index: 10000 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
