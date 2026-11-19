@@ -1594,6 +1594,101 @@
     .reader-side-list{grid-template-columns:1fr;}
   }
 
+
+  /* ====== FINAL READER PALETTE ====== */
+  .read-main{
+    background:#77784a;
+    padding:28px 34px 60px;
+  }
+  .read-layout{
+    max-width:1120px;
+  }
+  .a4-page{
+    background:#f5eedc;
+    color:#2b241b;
+    box-shadow:0 8px 28px rgba(45,38,18,.20);
+    border-radius:1px;
+  }
+  .a4-page .a4-title,
+  .a4-page .a4-title.bn,
+  .a4-page .a4-title:not(.bn),
+  .a4-body h1,
+  .a4-body h2,
+  .a4-body h3,
+  .a4-body h4,
+  .a4-body h5,
+  .a4-body h6{
+    color:#a91920;
+  }
+  .a4-body h2{
+    border-bottom-color:rgba(169,25,32,.25);
+  }
+  .a4-header{
+    display:flex;
+    flex-direction:column;
+  }
+  .a4-header .reader-count-top{
+    order:-1;
+    align-self:flex-start;
+  }
+  .reader-count.reader-count-top{
+    margin:0 0 15px!important;
+    padding:0 0 8px;
+    width:auto;
+    max-width:none;
+    justify-content:flex-start;
+    border-top:0;
+    border-bottom:1px solid rgba(169,25,32,.20);
+    color:#756b5a;
+    font-size:12px;
+  }
+  .reader-count.reader-count-top svg{
+    color:#a91920;
+    width:16px;
+    height:16px;
+  }
+  .reader-count.reader-count-top strong{
+    color:#a91920;
+  }
+  .a4-cat-badge{
+    background:#a91920;
+  }
+  .a4-divider{
+    background:linear-gradient(90deg,rgba(169,25,32,.30),rgba(169,25,32,.16) 70%,transparent);
+  }
+  .a4-body{
+    color:#2b241b;
+  }
+  .reader-side-head{
+    color:#a91920;
+    border-bottom-color:#a91920;
+  }
+  .reader-side-head span{
+    color:#a91920;
+    background:#f5eedc;
+    border-left-color:#a91920;
+  }
+  .reader-side-card{
+    background:#f5eedc;
+    border-color:rgba(245,238,220,.75);
+  }
+  .reader-side-cat{
+    color:#a91920;
+  }
+  .reader-side-title{
+    color:#2b241b;
+  }
+  .reader-side-date{
+    color:#776f62;
+  }
+
+  @media(max-width:900px){
+    .read-main{padding:22px 18px 50px;}
+  }
+  @media(max-width:600px){
+    .read-main{padding:18px 12px 42px;}
+  }
+
 </style>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mostafa Auvi — প্রকাশিত লেখা">
@@ -2421,6 +2516,11 @@ function renderArticle(post, sibling, sb) {
   articleEl.innerHTML =
     '<div class="a4-page">' +
       '<header class="a4-header">' +
+        '<div class="reader-count reader-count-top" id="readerCount" hidden aria-live="polite">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
+          '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
+          '<strong class="reader-count-value">0</strong>' +
+        '</div>' +
         '<span class="a4-cat-badge">' + esc(catLabel(post.category, lang)) + '</span>' +
         '<h1 class="a4-title' + (isEn ? '' : ' bn') + '">' + esc(post.title || '') + '</h1>' +
         '<div class="a4-meta-row">' +
@@ -2435,11 +2535,6 @@ function renderArticle(post, sibling, sb) {
           langToggle +
         '</div>' +
         '<hr class="a4-divider">' +
-      '<div class="reader-count reader-count-top" id="readerCount" hidden aria-live="polite">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
-        '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
-        '<strong class="reader-count-value">0</strong>' +
-      '</div>' +
       '</header>' +
       coverHtml +
       '<div class="a4-body' + (isEn ? ' en' : '') + '" id="articleBody">' + bodyHtml + '</div>' +
