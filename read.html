@@ -1927,8 +1927,13 @@ function renderStaticChandradwip(slugKey){
   // Hide reader comments section (these are static curated pieces, not Supabase posts)
   const rc = document.getElementById('readerComments');
   if(rc) rc.style.display = 'none';
-  // Reuse the standard article renderer — pass null for sibling + sb
+  // Reuse the standard article renderer. Static Chandradwip pages use
+  // their own reader-count RPC because they are not rows in public.posts.
   renderArticle(post, null, null);
+  if (window.supabase && SUPABASE_URL.startsWith('https://') && !SUPABASE_ANON_KEY.includes('YOUR_')) {
+    const readerClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    setupStaticChandradwipReaderCount(post, readerClient, post.language === 'en');
+  }
   // Update the breadcrumb + back link to point to chandradwip category
   const crumb = document.getElementById('crumb');
   if(crumb) crumb.textContent = 'Mostafa Auvi · ' + (post.language === 'en' ? 'Chandradwip' : 'চন্দ্রদ্বীপ');
@@ -2133,6 +2138,60 @@ async function setupReaderCount(post, sb, isEn) {
       valueEl.textContent = formatCount(totalReaders);
     } catch (error) {
       console.warn('Reader count could not be updated:', error);
+      recording = false;
+      window.addEventListener('scroll', onArticleScroll, { passive: true });
+    }
+  };
+  window.addEventListener('scroll', onArticleScroll, { passive: true });
+}
+
+async function setupStaticChandradwipReaderCount(post, sb, isEn) {
+  const counter = document.getElementById('readerCount');
+  const valueEl = counter?.querySelector('.reader-count-value');
+  const body = document.getElementById('articleBody');
+  if (!counter || !valueEl || !body || !post?.slug || !sb) return;
+
+  const formatCount = value => {
+    const n = Math.max(0, Number(value) || 0);
+    return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
+  };
+
+  const { data: initialCount, error: countError } = await sb.rpc('get_static_article_reader_count', {
+    p_slug: post.slug
+  });
+  if (countError) {
+    console.warn('Chandradwip reader count is not available:', countError.message);
+    return;
+  }
+  valueEl.textContent = formatCount(initialCount);
+  counter.hidden = false;
+
+  let recording = false;
+  const onArticleScroll = async () => {
+    const rect = body.getBoundingClientRect();
+    const articleMidpoint = rect.top + window.scrollY + (rect.height * 0.5);
+    if (window.scrollY + window.innerHeight < articleMidpoint || recording) return;
+
+    recording = true;
+    window.removeEventListener('scroll', onArticleScroll);
+    try {
+      let visitorId = localStorage.getItem('mostafa_reader_id_v1');
+      if (!visitorId) {
+        visitorId = window.crypto?.randomUUID
+          ? window.crypto.randomUUID()
+          : Array.from(window.crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+        localStorage.setItem('mostafa_reader_id_v1', visitorId);
+      }
+      const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(visitorId));
+      const visitorHash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
+      const { data: totalReaders, error } = await sb.rpc('record_static_article_reader', {
+        p_slug: post.slug,
+        p_visitor_hash: visitorHash
+      });
+      if (error) throw error;
+      valueEl.textContent = formatCount(totalReaders);
+    } catch (error) {
+      console.warn('Chandradwip reader count could not be updated:', error);
       recording = false;
       window.addEventListener('scroll', onArticleScroll, { passive: true });
     }
