@@ -1937,31 +1937,72 @@ function renderStaticChandradwip(slugKey){
   const post = isEnglish
     ? (STATIC_CHANDRADWIP_EN[slugKey] || STATIC_CHANDRADWIP[slugKey])
     : (STATIC_CHANDRADWIP[slugKey] || STATIC_CHANDRADWIP_EN[slugKey]);
-  if(!post){ renderError(isEnglish ? 'Chandradwip article not found' : 'চন্দ্রদ্বীপের লেখা পাওয়া যায়নি', isEnglish ? 'No Chandradwip article exists at this address.' : 'এই ঠিকানায় চন্দ্রদ্বীপের কোনো লেখা নেই।'); return; }
-  // Hide loading state
+
+  if(!post){
+    renderError(
+      isEnglish ? 'Chandradwip article not found' : 'চন্দ্রদ্বীপের লেখা পাওয়া যায়নি',
+      isEnglish ? 'No Chandradwip article exists at this address.' : 'এই ঠিকানায় চন্দ্রদ্বীপের কোনো লেখা নেই।'
+    );
+    return;
+  }
+
+  // Static Chandradwip pages must never depend on Supabase to render.
+  // Render the article first; reader-count errors must never block the article.
   const loading = document.getElementById('loadingState');
   if(loading) loading.remove();
-  // Hide reader comments section (these are static curated pieces, not Supabase posts)
   const rc = document.getElementById('readerComments');
   if(rc) rc.style.display = 'none';
-  // Reuse the standard article renderer, then record/show the same
-  // post_views counter used by the dashboard for these Chandradwip pages.
-  renderArticle(post, null, null);
+
+  try {
+    renderArticle(post, null, null);
+  } catch (e) {
+    console.error('Static Chandradwip render failed:', e);
+
+    // Minimal fallback renderer: even if another reader-only helper fails,
+    // the actual Chandradwip article remains readable.
+    const dateStr = fmtDate(post.published_at, post.language || (isEnglish ? 'en' : 'bn'));
+    const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
+    const bodyHtml = String(post.body || '').trim();
+    const safeBody = bodyHtml
+      .replace(/<script[\\s\\S]*?<\\/script>/gi, '')
+      .replace(/<style[\\s\\S]*?<\\/style>/gi, '')
+      .replace(/\\son[a-z]+\\s*=\\s*(['"]).*?\\1/gi, '');
+
+    articleEl.innerHTML =
+      '<div class="a4-page">' +
+        '<header class="a4-header">' +
+          '<span class="a4-cat-badge">' + esc(catLabel(post.category, post.language || 'bn')) + '</span>' +
+          '<h1 class="a4-title' + (isEnglish ? '' : ' bn') + '">' + esc(post.title || '') + '</h1>' +
+          '<div class="a4-meta-row"><div class="a4-meta">' +
+            '<span>' + esc(dateStr) + '</span><span class="meta-sep">·</span>' +
+            '<span class="meta-author">✎ ' + (isEnglish ? 'Mostafa Auvi' : 'মোস্তফা অভি') + '</span><span class="meta-sep">·</span>' +
+            '<span class="meta-lang">' + (isEnglish ? 'English' : 'বাংলা') + '</span>' +
+          '</div></div><hr class="a4-divider">' +
+        '</header>' +
+        (post.cover_image ? '<img class="a4-cover" src="' + esc(post.cover_image) + '" alt="' + esc(post.title || '') + '">' : '') +
+        '<div class="a4-body' + (isEnglish ? ' en' : '') + '" id="articleBody">' + safeBody + '</div>' +
+        (tags.length ? '<div class="a4-tags"><span class="a4-tags-label">' + (isEnglish ? 'Tags' : 'ট্যাগ') + '</span>' +
+          tags.map(t => '<span class="tag-pill">' + esc(readTermLabel(t, isEnglish ? 'en' : 'bn')) + '</span>').join('') + '</div>' : '') +
+      '</div>';
+  }
+
+  // Reader count is optional for static content. It can never prevent rendering.
   try {
     const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     if (sb && post.published) {
-      const { error } = await sb.rpc('record_post_view', { p_slug: post.slug });
-      if (error) console.warn('Chandradwip view was not recorded:', error.message);
-      await setupReaderCount(post, sb, isEnglish);
+      sb.rpc('record_post_view', { p_slug: post.slug }).catch(e => console.warn('Chandradwip view was not recorded:', e?.message || e));
+      setupReaderCount(post, sb, isEnglish).catch(e => console.warn('Chandradwip reader count unavailable:', e?.message || e));
     }
   } catch (e) {
     console.warn('Chandradwip reader count unavailable:', e);
   }
-  // Update the breadcrumb + back link to point to chandradwip category
+
   const crumb = document.getElementById('crumb');
   if(crumb) crumb.textContent = 'Mostafa Auvi · ' + (post.language === 'en' ? 'Chandradwip' : 'চন্দ্রদ্বীপ');
+
   const backLink = document.querySelector('.back-link');
   if(backLink) backLink.setAttribute('href','posts.html?category=chandradwip' + (post.language === 'en' ? '&lang=en' : ''));
+
   const bottomBackBar = document.getElementById('bottomBackBar');
   if(bottomBackBar){
     bottomBackBar.innerHTML = '<a href="posts.html?category=chandradwip' + (post.language === 'en' ? '&lang=en' : '') + '" class="back-link" title="' + (post.language === 'en' ? 'Back to Chandradwip' : 'চন্দ্রদ্বীপ বিভাগে ফিরুন') + '">← ' + (post.language === 'en' ? 'Back to Chandradwip' : 'চন্দ্রদ্বীপ বিভাগে ফিরুন') + '</a>';
