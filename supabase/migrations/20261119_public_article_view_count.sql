@@ -53,3 +53,22 @@ $$;
 
 revoke all on function public.record_post_view(text) from public, anon, authenticated;
 grant execute on function public.record_post_view(text) to anon, authenticated;
+
+-- Keep the existing public reader-count RPC name, but make it use the
+-- same post_views rows that power the author dashboard.
+create or replace function public.get_post_reader_count(p_slug text)
+returns bigint
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select count(*)::bigint
+  from public.post_views v
+  join public.posts p on p.id = v.post_id
+  where p.slug = p_slug
+    and p.published = true;
+$$;
+
+revoke all on function public.get_post_reader_count(text) from public, anon, authenticated;
+grant execute on function public.get_post_reader_count(text) to anon, authenticated;
