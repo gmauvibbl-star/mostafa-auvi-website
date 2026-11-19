@@ -304,6 +304,7 @@
         .select("slug,title,excerpt,cover_image,category,published_at,language")
         .eq("published", true)
         .eq("language", "bn")
+        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
@@ -328,6 +329,66 @@
         })
         .catch(function () { /* leave section hidden */ });
     } catch (e) { /* leave section hidden */ }
+  }
+
+  /* ====================================================================
+   *  CHANDRADWIP WRITINGS ON HOMEPAGE
+   * ==================================================================== */
+  function initChandradwipWritings() {
+    var section = document.getElementById("chandradwipWritingSection");
+    var grid = document.getElementById("chandradwipWritingGrid");
+    if (!section || !grid || !window.supabase) return;
+
+    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
+    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+
+    function esc(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return "";
+      try {
+        return new Date(iso).toLocaleDateString("bn-BD", {
+          day: "numeric", month: "long", year: "numeric"
+        });
+      } catch (e) { return ""; }
+    }
+
+    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    sb.from("posts")
+      .select("slug,title,excerpt,cover_image,published_at,category")
+      .eq("published", true)
+      .eq("language", "bn")
+      .eq("category", "chandradwip")
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(12)
+      .then(function(res) {
+        var rows = (res && res.data) || [];
+        if (!rows.length) return;
+
+        grid.innerHTML = rows.map(function(p) {
+          var cover = p.cover_image
+            ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy">'
+            : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
+          var excerpt = String(p.excerpt || "").replace(/s+/g, " ").trim();
+          if (excerpt.length > 150) excerpt = excerpt.slice(0, 150) + "…";
+          return '<a class="latest-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=bn">' +
+            cover +
+            '<div class="lc-body">' +
+            '<span class="lc-badge">চন্দ্রদ্বীপ</span>' +
+            '<h3 class="lc-title">' + esc(p.title || "(শিরোনামহীন)") + '</h3>' +
+            (excerpt ? '<p class="lc-excerpt">' + esc(excerpt) + '</p>' : '') +
+            (p.published_at ? '<span class="lc-date">' + esc(fmtDate(p.published_at)) + '</span>' : '') +
+            '</div></a>';
+        }).join("");
+
+        section.hidden = false;
+      })
+      .catch(function() {});
   }
 
   /* ====================================================================
@@ -417,6 +478,7 @@
         .select("slug,title,excerpt,cover_image,category,published_at,language")
         .eq("published", true)
         .eq("language", "en")
+        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
@@ -455,6 +517,7 @@
     initModalFocusTrap();
     initChandradwipExtra();
     initLatestWritings();
+    initChandradwipWritings();
     initChandradwipPanels();
     initLatestWritingsEn();
   }
