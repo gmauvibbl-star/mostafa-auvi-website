@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mostafa-auvi-v25';
+const CACHE_NAME = 'mostafa-auvi-v26';
 const ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const ASSETS = [
   './assets/img/hero-banner.jpg',
   './assets/js/main.js',
   './assets/js/auth.js',
+  './assets/js/reader-modern.js',
   './assets/css/tokens.css',
   './assets/css/base.css',
   './assets/css/layout.css',
@@ -25,7 +26,8 @@ const ASSETS = [
   './assets/css/explore.css',
   './assets/css/header-new.css',
   './assets/css/hero.css',
-  './assets/css/auth.css'
+  './assets/css/auth.css',
+  './assets/css/reader-modern.css'
 ];
 
 self.addEventListener('install', e => {
