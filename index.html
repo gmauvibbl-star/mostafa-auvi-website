@@ -59,6 +59,23 @@
 <link rel="stylesheet" href="assets/css/header-new.css">
 <link rel="stylesheet" href="assets/css/hero.css">
 <link rel="stylesheet" href="assets/css/auth.css">
+<style id="chandradwip-home-writings-style">
+.chandradwip-home-writings{margin-top:1px;padding:28px 30px 32px;background:#fbf7ed;border-top:1px solid #d9cfbb}
+.chandradwip-home-writings-head{margin-bottom:18px}
+.chandradwip-home-writings-head span{display:block;color:#b58b4b;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.chandradwip-home-writings-head h3{margin:5px 0 0;color:#123f3d;font-size:25px;line-height:1.4}
+.chandradwip-home-writings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.chandradwip-home-writings .latest-card{display:flex;flex-direction:column;overflow:hidden;background:#fffdf8;border:1px solid #e6dece;text-decoration:none;color:inherit}
+.chandradwip-home-writings .lc-cover{width:100%;aspect-ratio:16/9;object-fit:cover}
+.chandradwip-home-writings .lc-cover-fallback{display:grid;place-items:center;aspect-ratio:16/9;background:#eae2d2;color:#b58b4b;font-size:38px}
+.chandradwip-home-writings .lc-body{padding:16px 18px}
+.chandradwip-home-writings .lc-badge{color:#8a6b36;font-size:12px}
+.chandradwip-home-writings .lc-title{margin:7px 0;color:#123f3d;font-size:18px;line-height:1.5}
+.chandradwip-home-writings .lc-excerpt{margin:0 0 10px;color:#6c7169;font-size:13px;line-height:1.7}
+.chandradwip-home-writings .lc-date{color:#8a887f;font-size:12px}
+@media(max-width:800px){.chandradwip-home-writings{padding:24px 20px 26px}.chandradwip-home-writings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.chandradwip-home-writings{padding:22px 16px 24px}.chandradwip-home-writings-grid{grid-template-columns:1fr}}
+</style>
 
 <!-- ====== Dropdown navigation CSS (inline — no external file needed) ====== -->
 <style>
@@ -1292,6 +1309,14 @@
         <span class="cwip-bn">জনপদের কথা</span>
         <span class="cwip-en">The Settlement</span>
       </a>
+    </div>
+
+    <div class="chandradwip-home-writings" id="chandradwipWritingSection" hidden>
+      <div class="chandradwip-home-writings-head">
+        <span>চন্দ্রদ্বীপ</span>
+        <h3>চন্দ্রদ্বীপের লেখা</h3>
+      </div>
+      <div class="chandradwip-home-writings-grid" id="chandradwipWritingGrid"></div>
     </div>
   </article>
   </section>
