@@ -431,6 +431,12 @@
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .hero { background-image: url('assets/img/hero-banner.jpg?v=20261115'); }
   }
+
+
+/* Align recent writings with the full-width content above */
+.recent-wrap{width:100%;max-width:none;margin:0;padding:0 50px}
+@media(max-width:900px){.recent-wrap{padding:0 30px}}
+@media(max-width:600px){.recent-wrap{padding:0 16px}}
 </style>
 
 <!-- Final iPhone Safari correction: keep the header in normal document flow
@@ -1303,7 +1309,7 @@
 
 </main>
 
-<div class="wrap">
+<div class="recent-wrap">
 
 
   <section class="recent latest-writings" aria-labelledby="recent-title" hidden>
