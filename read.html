@@ -1919,8 +1919,11 @@ const STATIC_CHANDRADWIP_EN = {
 
 /* Render a static Chandradwip article using the same A4 template as real posts */
 function renderStaticChandradwip(slugKey){
-  const post = (new URLSearchParams(location.search).get('lang') === 'en' ? STATIC_CHANDRADWIP_EN[slugKey] : STATIC_CHANDRADWIP[slugKey]);
-  if(!post){ renderError('Chandradwip article not found', 'No Chandradwip article exists at this address.'); return; }
+  const isEnglish = new URLSearchParams(location.search).get('lang') === 'en';
+  const post = isEnglish
+    ? (STATIC_CHANDRADWIP_EN[slugKey] || STATIC_CHANDRADWIP[slugKey])
+    : (STATIC_CHANDRADWIP[slugKey] || STATIC_CHANDRADWIP_EN[slugKey]);
+  if(!post){ renderError(isEnglish ? 'Chandradwip article not found' : 'চন্দ্রদ্বীপের লেখা পাওয়া যায়নি', isEnglish ? 'No Chandradwip article exists at this address.' : 'এই ঠিকানায় চন্দ্রদ্বীপের কোনো লেখা নেই।'); return; }
   // Hide loading state
   const loading = document.getElementById('loadingState');
   if(loading) loading.remove();
@@ -2141,8 +2144,13 @@ async function setupReaderCount(post, sb, isEn) {
 }
 
 async function loadPost() {
-  // Static Chandradwip sub-section articles — render before any Supabase call
-  if (slug && STATIC_CHANDRADWIP[slug]) {
+  // Chandradwip feature pages are local/static content. Render them directly,
+  // independently of Supabase, in both Bengali and English.
+  const isChandradwipPage = slug && (
+    Object.prototype.hasOwnProperty.call(STATIC_CHANDRADWIP, slug) ||
+    Object.prototype.hasOwnProperty.call(STATIC_CHANDRADWIP_EN, slug)
+  );
+  if (isChandradwipPage) {
     renderStaticChandradwip(slug);
     return;
   }
