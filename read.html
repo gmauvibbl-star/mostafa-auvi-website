@@ -1814,8 +1814,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Mostafa Auvi — Fiction Writer & Literary Critic">
-<link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
-<link rel="stylesheet" href="assets/css/site-chrome.css?v=20261119-2">
+<link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261120-1">
+<link rel="stylesheet" href="assets/css/site-chrome.css?v=20261120-1">
 <style id="reader-count-top-2026-11-19">
 .reader-count-top{
   margin:10px 0 0!important;
@@ -2048,7 +2048,10 @@
   txt('.modal-close','×');attr('.modal-close','aria-label','Close');txt('#loginModalTitle','Author Login');txt('.modal-sub','Sign in with your email and password');txt('label[for="modalEmail"]','Email');txt('label[for="modalPassword"]','Password');attr('#modalPassword','placeholder','Enter your password');txt('#modalLoginBtn','Sign in →');txt('.btn.secondary','Cancel');txt('#forgotPasswordLink','Forgot your password?');
 })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js"
+        integrity="sha384-A97u3Qnt9GZHURO9YJZRe7VQgGUeFzcv6I1oIGnUTxQrCxnpQMwR0/G8F2zt9abZ"
+        crossorigin="anonymous"></script>
+<script src="assets/js/config.js"></script>
 <script>
 /* ====== Date in utility bar ====== */
 (function(){
@@ -2061,8 +2064,8 @@
 })();
 
 /* ====== Supabase config ====== */
-const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+const SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
 const fmtDate = (iso, lang) => {
