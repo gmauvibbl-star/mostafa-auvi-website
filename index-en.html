@@ -166,11 +166,7 @@
 }
 
   /* ====== iPHONE / iOS SAFARI HEADER & NAV FIX ====== */
-  .utility-bar {
-    padding-top: max(10px, env(safe-area-inset-top, 0px));
-    padding-left: max(50px, env(safe-area-inset-left, 0px));
-    padding-right: max(50px, env(safe-area-inset-right, 0px));
-  }
+
   .hdr {
     padding-left: max(24px, env(safe-area-inset-left, 0px));
     padding-right: max(24px, env(safe-area-inset-right, 0px));
@@ -192,7 +188,6 @@
   html { scroll-padding-top: 80px; }
   body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
   @media (max-width: 380px) {
-    .utility-bar { padding: 8px 14px; gap: 6px; font-size: 11px; }
     .hdr { padding: 4px 14px; gap: 14px; }
     .v1 .bn span { font-size: 28px; }
     .menu { font-size: 13px; gap: 0 10px; }
@@ -450,21 +445,7 @@
     height: auto !important;
     overflow: visible !important;
   }
-  .utility-bar {
-    display: flex !important;
-    position: relative !important;
-    z-index: 101 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    flex-wrap: wrap !important;
-    gap: 6px 10px !important;
-    min-height: 40px;
-    padding: 8px max(14px, env(safe-area-inset-left, 0px)) !important;
-  }
-  .v2 .hdr {
+.v2 .hdr {
     display: grid !important;
     position: relative !important;
     z-index: 102 !important;
@@ -1175,22 +1156,8 @@
    3. Keep the navigation readable on iPhone by allowing a second line when needed.
 */
 @media (max-width: 640px) {
-  .page-wrap > .utility-bar {
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 10001 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    min-height: 42px !important;
-    height: 42px !important;
-    padding: 5px 14px !important;
-    gap: 0 !important;
-    background: #103f40 !important;
-  }
-  .page-wrap > .utility-bar .date {
+  .page-wrap >
+.page-wrap > .utility-bar .date {
     display: none !important;
   }
   .page-wrap > .utility-bar .lang {
@@ -1309,12 +1276,7 @@
 
 <style id="english-language-visibility-final-2026-11-19">
 /* Final fix: keep the language switch above every header layer on iPhone. */
-.page-wrap > .utility-bar {
-  position: relative !important;
-  z-index: 20000 !important;
-  isolation: isolate !important;
-  overflow: visible !important;
-}
+.page-wrap >
 .page-wrap > .utility-bar .lang {
   position: relative !important;
   z-index: 20001 !important;
@@ -1329,14 +1291,8 @@
   pointer-events: auto !important;
 }
 @media (max-width:640px) {
-  .page-wrap > .utility-bar {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 20000 !important;
-    height: 42px !important;
-    min-height: 42px !important;
-  }
-  .page-wrap > .v2 {
+  .page-wrap >
+.page-wrap > .v2 {
     position: sticky !important;
     top: 42px !important;
     z-index: 10000 !important;
