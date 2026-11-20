@@ -1157,32 +1157,11 @@
 */
 @media (max-width: 640px) {
   .page-wrap >
-.page-wrap > .utility-bar .date {
-    display: none !important;
-  }
-  .page-wrap > .utility-bar .lang {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    gap: 6px !important;
-    white-space: nowrap !important;
-  }
-  .page-wrap > .utility-bar .lang .lang-label {
-    display: inline !important;
-    font-size: 11px !important;
-  }
-  .page-wrap > .utility-bar .lang a {
-    display: inline-flex !important;
-    align-items: center !important;
-    min-height: 28px !important;
-    padding: 3px 9px !important;
-    font-size: 11px !important;
-  }
 
   .page-wrap > .v2 {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 42px !important;
+    top:0 !important;
     z-index: 10000 !important;
   }
 
@@ -1275,26 +1254,13 @@
 
 
 <style id="english-language-visibility-final-2026-11-19">
-/* Final fix: keep the language switch above every header layer on iPhone. */
+/* Final iPhone header stacking fix. Language switch is now inside the main header. */
 .page-wrap >
-.page-wrap > .utility-bar .lang {
-  position: relative !important;
-  z-index: 20001 !important;
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-.page-wrap > .utility-bar .lang a {
-  position: relative !important;
-  z-index: 20002 !important;
-  pointer-events: auto !important;
-}
 @media (max-width:640px) {
   .page-wrap >
 .page-wrap > .v2 {
     position: sticky !important;
-    top: 42px !important;
+    top:0 !important;
     z-index: 10000 !important;
   }
 }
