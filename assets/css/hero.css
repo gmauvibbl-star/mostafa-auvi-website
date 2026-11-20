@@ -201,3 +201,38 @@
  .hero.hero-final .hero-bn-divider{margin:10px auto !important;}
  .hero.hero-final .hero-bn-divider span{width:70px !important;}
 }
+
+/* FINAL UPLOADED HERO ARTWORK — preserve the complete image, including right-side text. */
+.hero.hero-final.hero-image-only{
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  display:block !important;
+  position:relative !important;
+  overflow:hidden !important;
+  background:none !important;
+}
+.hero.hero-final.hero-image-only::before,
+.hero.hero-final.hero-image-only::after{
+  display:none !important;
+  content:none !important;
+  background:none !important;
+}
+.hero.hero-final.hero-image-only img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:none !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+}
+@media(max-width:640px){
+  .hero.hero-final.hero-image-only img{
+    width:100% !important;
+    height:auto !important;
+    object-fit:contain !important;
+  }
+}
