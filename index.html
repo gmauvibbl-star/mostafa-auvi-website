@@ -166,11 +166,7 @@
 }
 
   /* ====== iPHONE / iOS SAFARI HEADER & NAV FIX ====== */
-  .utility-bar {
-    padding-top: max(10px, env(safe-area-inset-top, 0px));
-    padding-left: max(50px, env(safe-area-inset-left, 0px));
-    padding-right: max(50px, env(safe-area-inset-right, 0px));
-  }
+
   .hdr {
     padding-left: max(24px, env(safe-area-inset-left, 0px));
     padding-right: max(24px, env(safe-area-inset-right, 0px));
@@ -192,7 +188,6 @@
   html { scroll-padding-top: 80px; }
   body { overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
   @media (max-width: 380px) {
-    .utility-bar { padding: 8px 14px; gap: 6px; font-size: 11px; }
     .hdr { padding: 4px 14px; gap: 14px; }
     .v1 .bn span { font-size: 28px; }
     .menu { font-size: 13px; gap: 0 10px; }
@@ -438,21 +433,7 @@
     height: auto !important;
     overflow: visible !important;
   }
-  .utility-bar {
-    display: flex !important;
-    position: relative !important;
-    z-index: 101 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    flex-wrap: wrap !important;
-    gap: 6px 10px !important;
-    min-height: 40px;
-    padding: 8px max(14px, env(safe-area-inset-left, 0px)) !important;
-  }
-  .v2 .hdr {
+.v2 .hdr {
     display: grid !important;
     position: relative !important;
     z-index: 102 !important;
