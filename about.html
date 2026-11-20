@@ -868,8 +868,8 @@
 ]
 </script>
 
-<link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261104-1">
-<link rel="stylesheet" href="assets/css/site-chrome.css?v=20261113-3">
+<link rel="stylesheet" href="assets/css/site-wide-theme.css?v=20261120-1">
+<link rel="stylesheet" href="assets/css/site-chrome.css?v=20261120-1">
 </head>
 <body>
 <a class="skip-link" href="#main-content">মূল লেখায় যান</a>
@@ -1147,7 +1147,10 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js"
+        integrity="sha384-A97u3Qnt9GZHURO9YJZRe7VQgGUeFzcv6I1oIGnUTxQrCxnpQMwR0/G8F2zt9abZ"
+        crossorigin="anonymous"></script>
+<script src="assets/js/config.js"></script>
 <script>
 /* ====== Date in utility bar (Bengali) ====== */
 (function(){
@@ -1161,8 +1164,8 @@
 })();
 
 /* ====== Supabase config + author login ====== */
-const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+const SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
+const SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
 (function() {
   const loginBtn = document.getElementById('authorLoginBtn');
