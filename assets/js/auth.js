@@ -16,8 +16,13 @@
  * ============================================================ */
 
 (function() {
-  const SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-  const SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+  // Read from central config (assets/js/config.js). Fall back to
+  // hardcoded values only if SITE_CONFIG is missing — e.g. an
+  // older cached page that does not yet load config.js — so login
+  // does not silently break during the migration window.
+  var CFG = window.SITE_CONFIG || {};
+  const SUPABASE_URL = CFG.SUPABASE_URL || "https://voswrndbxrsaqfzwffhh.supabase.co";
+  const SUPABASE_ANON_KEY = CFG.SUPABASE_ANON_KEY || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
   const loginBtn = document.getElementById('authorLoginBtn');
   const loginLabel = document.getElementById('authorLoginLabel');
@@ -68,9 +73,9 @@
     if (e.key === 'Escape' && overlay.classList.contains('open')) window.closeLoginModal();
   });
 
-  // Enter key handlers
-  modalEmail.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalPassword.focus(); } });
-  modalPassword.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
+  // Enter key handlers — keydown (keypress ব্রাউজারে deprecated ও অনির্ভরযোগ্য)
+  modalEmail.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalPassword.focus(); } });
+  modalPassword.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); modalLoginBtn.click(); } });
 
   modalLoginBtn.onclick = async () => {
     if (!sb) { showStatus('সেটআপ সমস্যা — Supabase লোড হয়নি।', 'error'); return; }
@@ -164,8 +169,8 @@
     sendResetBtn.disabled = false;
   });
 
-  // Enter key on reset email
-  resetEmailInput.addEventListener('keypress', (e) => {
+  // Enter key on reset email — keydown
+  resetEmailInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') { e.preventDefault(); sendResetBtn.click(); }
   });
 
