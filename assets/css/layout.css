@@ -24,7 +24,7 @@
   align-items: center;
 }
 .utility-bar .date {
-  color: var(--gold-bright);
+  color: #4A5148;
   font-style: italic;
   letter-spacing: 0.08em;
   font-size: 14px;
@@ -39,7 +39,7 @@
 .utility-bar .lang .lang-label {
   font-family: 'EB Garamond', serif;
   font-style: italic;
-  color: rgba(250,244,232,0.55);
+  color: rgba(74,81,72,0.65);
   font-size: 12px;
   letter-spacing: 0.06em;
   margin-right: 4px;
@@ -49,9 +49,9 @@
   align-items: center;
   text-decoration: none;
   padding: 4px 12px;
-  border: 1px solid rgba(184,146,72,0.35);
+  border: 1px solid rgba(74,81,72,0.35);
   border-radius: 14px;
-  color: rgba(250,244,232,0.85);
+  color: #4A5148;
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.05em;
@@ -59,17 +59,17 @@
   cursor: pointer;
 }
 .utility-bar .lang a:hover {
-  background: rgba(184,146,72,0.18);
-  border-color: var(--gold-bright);
-  color: var(--gold-bright);
+  background: rgba(74,81,72,0.08);
+  border-color: #4A5148;
+  color: #4A5148;
 }
 .utility-bar .lang a.active {
-  background: var(--gold-bright);
-  color: var(--teal-deep);
-  border-color: var(--gold-bright);
+  background: #D8C9A6;
+  color: #39443D;
+  border-color: #4A5148;
   font-weight: 700;
 }
-.utility-bar .lang .sep { color: rgba(184,146,72,0.3); margin: 0 -8px; }
+.utility-bar .lang .sep { color: rgba(74,81,72,0.28); margin: 0 -8px; }
 
 /* ====== MAIN HEADER ====== */
 .header {
