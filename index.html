@@ -201,20 +201,6 @@
     .tools .share { padding: 2px 6px; }
     .tools .share em { display: none; }
   }
-
-  /* Final iPhone layout correction: keep the portrait visible and move text
-     into a full-width lower panel. Desktop composition remains unchanged. */
-  @media (max-width: 640px) {
-    .hero {
-      height: auto !important;
-      min-height: 570px;
-      align-items: flex-end;
-      background-color: #0F3D3E !important;
-      background-image: url('assets/img/hero-final.webp.png?v=20261120') !important;
-      background-size: auto 100% !important;
-      background-position: left top !important;
-      background-repeat: no-repeat !important;
-    }
     .hero-left {
       order: 0;
       width: 100%;
@@ -1416,3 +1402,101 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
+/* ============================================================
+   FINAL iPHONE HERO — ONE BANNER ONLY
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .hero {
+    height: 380px !important;
+    min-height: 0 !important;
+
+    background-image: url('assets/img/hero-final.webp.png?v=20261120') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+
+    display: flex !important;
+    align-items: flex-end !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Old portrait/photo layer must never appear */
+  .hero-right,
+  .hero-photo-wrap,
+  .hero-photo,
+  .hero-photo-frame,
+  .hero-ornament {
+    display: none !important;
+  }
+
+  /* One text panel only */
+  .hero-left {
+    order: initial !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 110px 20px 22px !important;
+    box-sizing: border-box !important;
+
+    text-align: left !important;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(8,31,31,0) 0%,
+      rgba(8,31,31,.72) 45%,
+      rgba(8,31,31,.96) 100%
+    ) !important;
+  }
+
+  .hero-title-bn {
+    font-size: clamp(28px, 8vw, 40px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-author-en {
+    font-size: clamp(12px, 3.5vw, 16px) !important;
+    line-height: 1.4 !important;
+  }
+
+  .hero-divider {
+    width: min(220px, 70%) !important;
+    margin: 8px 0 10px !important;
+  }
+
+  .hero-title-en {
+    font-size: clamp(15px, 4.3vw, 19px) !important;
+    line-height: 1.4 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Remove any pseudo-element duplication */
+  .hero::before,
+  .hero::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero {
+    height: 360px !important;
+  }
+
+  .hero-left {
+    padding: 95px 16px 18px !important;
+  }
+
+  .hero-title-bn {
+    font-size: 28px !important;
+  }
+
+  .hero-author-en {
+    font-size: 12px !important;
+  }
+}
