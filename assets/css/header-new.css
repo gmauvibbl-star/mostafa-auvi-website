@@ -202,12 +202,6 @@ html,body{
     max-width: calc(100vw - 32px);
     max-height: min(60vh, 380px);
   }
-  .utility-bar {
-    padding: 8px max(14px, env(safe-area-inset-left, 0px)) !important;
-    gap: 6px;
-    text-align: center;
-    align-items: center;
-  }
 }
 @media (max-width: 380px) {
   .v2 .hdr { padding-left: 14px; padding-right: 14px; }
@@ -222,13 +216,13 @@ html,body{
   align-items:center;
   gap:14px;
   flex:none;
-  color:rgba(255,255,255,.9);
+  color:#173F40;
 }
 .header-meta .date{
   font-family:'Noto Serif Bengali','EB Garamond',serif;
   font-size:13px;
   white-space:nowrap;
-  color:rgba(255,255,255,.88);
+  color:#173F40;
 }
 .header-meta .lang{
   display:flex;
@@ -237,20 +231,20 @@ html,body{
   white-space:nowrap;
   font-size:13px;
 }
-.header-meta .lang-label{opacity:.68}
+.header-meta .lang-label{opacity:.7;color:#173F40}
 .header-meta .lang a{
-  color:rgba(255,255,255,.88);
+  color:#173F40;
   text-decoration:none;
   font-weight:600;
   padding:2px 7px;
   border-radius:12px;
 }
-.header-meta .lang a:hover{color:#fff;background:rgba(255,255,255,.12)}
+.header-meta .lang a:hover{color:#173F40;background:rgba(23,63,64,.08)}
 .header-meta .lang a.active{
   background:#D8C9A6;
-  color:#243B3C;
+  color:#173F40;
 }
-.header-meta .lang .sep{opacity:.35}
+.header-meta .lang .sep{opacity:.35;color:#173F40}
 
 @media(max-width:680px){
   .header-meta{
