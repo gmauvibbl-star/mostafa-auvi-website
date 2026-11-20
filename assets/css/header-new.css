@@ -68,8 +68,7 @@ body{font-family:'Anek Bangla','Noto Sans Bengali','Hind Siliguri',sans-serif}
 
 /* ====== iPHONE / iOS SAFARI HEADER & NAVIGATION ENHANCEMENT (2026-11-04) ====== */
 /* Safe-area padding for header utility bar & bottom footer */
-.hdr,
-.utility-bar{
+.hdr{
   padding-left:max(24px,env(safe-area-inset-left,0px));
   padding-right:max(24px,env(safe-area-inset-right,0px));
   padding-top:max(4px,env(safe-area-inset-top,0px));
@@ -210,52 +209,46 @@ html,body{
 }
 
 
-/* ====== DATE + LANGUAGE MERGED INTO MAIN HEADER ====== */
+
+
+/* ====== DATE + LANGUAGE — MERGED INTO THE BLUE MAIN HEADER ====== */
 .header-meta{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  flex:none;
-  color:#173F40;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  flex:none!important;
+  color:var(--chrome-cream,#faf4e8)!important;
 }
 .header-meta .date{
-  font-family:'Noto Serif Bengali','EB Garamond',serif;
-  font-size:13px;
-  white-space:nowrap;
-  color:#173F40;
+  font-family:'Noto Serif Bengali','EB Garamond',serif!important;
+  font-size:12px!important;
+  white-space:nowrap!important;
+  color:var(--chrome-cream,#faf4e8)!important;
+  opacity:.9!important;
 }
 .header-meta .lang{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  white-space:nowrap;
-  font-size:13px;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  white-space:nowrap!important;
+  font-size:12px!important;
 }
-.header-meta .lang-label{opacity:.7;color:#173F40}
+.header-meta .lang-label{color:var(--chrome-cream,#faf4e8)!important;opacity:.68!important}
 .header-meta .lang a{
-  color:#173F40;
-  text-decoration:none;
-  font-weight:600;
-  padding:2px 7px;
-  border-radius:12px;
+  color:var(--chrome-cream,#faf4e8)!important;
+  text-decoration:none!important;
+  font-weight:600!important;
+  padding:2px 7px!important;
+  border-radius:12px!important;
+  background:transparent!important;
 }
-.header-meta .lang a:hover{color:#173F40;background:rgba(23,63,64,.08)}
-.header-meta .lang a.active{
-  background:#D8C9A6;
-  color:#173F40;
-}
-.header-meta .lang .sep{opacity:.35;color:#173F40}
-
+.header-meta .lang a:hover{color:var(--chrome-gold-light,#dfc27f)!important;background:rgba(223,194,127,.12)!important}
+.header-meta .lang a.active{background:var(--chrome-gold,#c5a15a)!important;color:#173f40!important}
+.header-meta .lang .sep{opacity:.4!important;color:var(--chrome-cream,#faf4e8)!important}
 @media(max-width:680px){
-  .header-meta{
-    width:100%;
-    flex-wrap:wrap;
-    gap:6px 12px;
-  }
-  .header-meta .date{font-size:12px}
-  .header-meta .lang{font-size:12px}
+  .header-meta{width:100%!important;flex-wrap:wrap!important;gap:5px 10px!important}
+  .header-meta .date,.header-meta .lang{font-size:11px!important}
 }
 @media(max-width:380px){
-  .header-meta .date{font-size:11px}
-  .header-meta .lang{font-size:11px}
+  .header-meta .date,.header-meta .lang{font-size:10px!important}
 }
