@@ -214,3 +214,54 @@ html,body{
   .v2 .menu { column-gap: 10px; row-gap: 5px; }
   .v2 .menu > a, .v2 .menu .dropdown summary { font-size: 13px; }
 }
+
+
+/* ====== DATE + LANGUAGE MERGED INTO MAIN HEADER ====== */
+.header-meta{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:none;
+  color:rgba(255,255,255,.9);
+}
+.header-meta .date{
+  font-family:'Noto Serif Bengali','EB Garamond',serif;
+  font-size:13px;
+  white-space:nowrap;
+  color:rgba(255,255,255,.88);
+}
+.header-meta .lang{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  white-space:nowrap;
+  font-size:13px;
+}
+.header-meta .lang-label{opacity:.68}
+.header-meta .lang a{
+  color:rgba(255,255,255,.88);
+  text-decoration:none;
+  font-weight:600;
+  padding:2px 7px;
+  border-radius:12px;
+}
+.header-meta .lang a:hover{color:#fff;background:rgba(255,255,255,.12)}
+.header-meta .lang a.active{
+  background:#D8C9A6;
+  color:#243B3C;
+}
+.header-meta .lang .sep{opacity:.35}
+
+@media(max-width:680px){
+  .header-meta{
+    width:100%;
+    flex-wrap:wrap;
+    gap:6px 12px;
+  }
+  .header-meta .date{font-size:12px}
+  .header-meta .lang{font-size:12px}
+}
+@media(max-width:380px){
+  .header-meta .date{font-size:11px}
+  .header-meta .lang{font-size:11px}
+}
