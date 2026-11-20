@@ -1138,6 +1138,56 @@
 </style>
 
 <link rel="stylesheet" href="assets/css/site-chrome.css?v=20261120-1">
+
+<style id="final-blue-header-ios-fix">
+/* Final iPhone correction: keep date + language inside the same blue header. */
+@media (max-width: 640px) {
+  .page-wrap > .v2,
+  .page-wrap > .v2 > .hdr {
+    background: linear-gradient(118deg,var(--chrome-teal,#0f3d3e) 0%,#164e53 58%,var(--chrome-teal-2,#245f61) 100%) !important;
+    color: var(--chrome-cream,#faf4e8) !important;
+    border-bottom: 3px solid var(--chrome-gold,#c5a15a) !important;
+    box-shadow: none !important;
+  }
+  .page-wrap > .v2 > .hdr {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) !important;
+    row-gap: 5px !important;
+    padding: 8px 14px 7px !important;
+  }
+  .page-wrap > .v2 > .hdr > .logo,
+  .page-wrap > .v2 > .hdr > .tools,
+  .page-wrap > .v2 > .hdr > .menu {
+    color: var(--chrome-cream,#faf4e8) !important;
+  }
+  .page-wrap > .v2 > .hdr > .tools {
+    display:flex !important;
+    align-items:center !important;
+    flex-wrap:wrap !important;
+    gap:7px !important;
+    min-width:0 !important;
+  }
+  .page-wrap > .v2 > .hdr .header-meta,
+  .page-wrap > .v2 > .hdr .header-meta .date,
+  .page-wrap > .v2 > .hdr .header-meta .lang,
+  .page-wrap > .v2 > .hdr .header-meta .lang-label,
+  .page-wrap > .v2 > .hdr .header-meta .sep {
+    color: var(--chrome-cream,#faf4e8) !important;
+  }
+  .page-wrap > .v2 > .hdr .header-meta .lang a {
+    color: var(--chrome-cream,#faf4e8) !important;
+  }
+  .page-wrap > .v2 > .hdr .header-meta .lang a.active {
+    background: var(--chrome-gold,#c5a15a) !important;
+    color: #173f40 !important;
+  }
+  .page-wrap > .v2 > .hdr .share,
+  .page-wrap > .v2 > .hdr .share a,
+  .page-wrap > .v2 > .hdr .share em {
+    color: var(--chrome-cream,#faf4e8) !important;
+  }
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">মূল কনটেন্টে যান</a>
@@ -1381,101 +1431,3 @@ if ('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-/* ============================================================
-   FINAL iPHONE HERO — ONE BANNER ONLY
-   ============================================================ */
-
-@media (max-width: 768px) {
-  .hero {
-    height: 380px !important;
-    min-height: 0 !important;
-
-    background-image: url('assets/img/hero-final.webp.png?v=20261120') !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-
-    display: flex !important;
-    align-items: flex-end !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-
-  /* Old portrait/photo layer must never appear */
-  .hero-right,
-  .hero-photo-wrap,
-  .hero-photo,
-  .hero-photo-frame,
-  .hero-ornament {
-    display: none !important;
-  }
-
-  /* One text panel only */
-  .hero-left {
-    order: initial !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 110px 20px 22px !important;
-    box-sizing: border-box !important;
-
-    text-align: left !important;
-
-    background: linear-gradient(
-      to bottom,
-      rgba(8,31,31,0) 0%,
-      rgba(8,31,31,.72) 45%,
-      rgba(8,31,31,.96) 100%
-    ) !important;
-  }
-
-  .hero-title-bn {
-    font-size: clamp(28px, 8vw, 40px) !important;
-    line-height: 1.2 !important;
-  }
-
-  .hero-author-en {
-    font-size: clamp(12px, 3.5vw, 16px) !important;
-    line-height: 1.4 !important;
-  }
-
-  .hero-divider {
-    width: min(220px, 70%) !important;
-    margin: 8px 0 10px !important;
-  }
-
-  .hero-title-en {
-    font-size: clamp(15px, 4.3vw, 19px) !important;
-    line-height: 1.4 !important;
-  }
-
-  .hero-subtitle {
-    font-size: 13px !important;
-    line-height: 1.55 !important;
-  }
-
-  /* Remove any pseudo-element duplication */
-  .hero::before,
-  .hero::after {
-    display: none !important;
-    content: none !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .hero {
-    height: 360px !important;
-  }
-
-  .hero-left {
-    padding: 95px 16px 18px !important;
-  }
-
-  .hero-title-bn {
-    font-size: 28px !important;
-  }
-
-  .hero-author-en {
-    font-size: 12px !important;
-  }
-}
