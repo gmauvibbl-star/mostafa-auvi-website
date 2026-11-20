@@ -268,8 +268,8 @@
     var grid = document.getElementById("latestGrid");
     if (!section || !grid) return;
     // Same publishable config as auth.js / posts.html (safe for client-side)
-    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+    var SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
+    var SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
     if (!window.supabase || !SUPABASE_URL.startsWith("https://")) return;
 
     function esc(s) {
@@ -339,8 +339,8 @@
     var grid = document.getElementById("chandradwipWritingGrid");
     if (!section || !grid || !window.supabase) return;
 
-    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+    var SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
+    var SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
 
     function esc(s) {
       return String(s == null ? "" : s)
@@ -374,7 +374,7 @@
           var cover = p.cover_image
             ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy">'
             : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
-          var excerpt = String(p.excerpt || "").replace(/s+/g, " ").trim();
+          var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
           if (excerpt.length > 150) excerpt = excerpt.slice(0, 150) + "…";
           return '<a class="latest-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=bn">' +
             cover +
@@ -442,8 +442,8 @@
     var section = document.querySelector(".latest-writings");
     var grid = document.getElementById("latestGridEn");
     if (!section || !grid) return;
-    var SUPABASE_URL = "https://voswrndbxrsaqfzwffhh.supabase.co";
-    var SUPABASE_ANON_KEY = "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
+    var SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
+    var SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
     if (!window.supabase || !SUPABASE_URL.startsWith("https://")) return;
 
     function esc(s) {
