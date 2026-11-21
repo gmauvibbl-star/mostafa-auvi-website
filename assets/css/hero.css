@@ -233,6 +233,77 @@
   .hero.hero-final.hero-image-only{
     height:330px !important;
   }
+
+/* Bengali homepage hero typography — English artwork text is covered by a subtle editorial panel. */
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-cover{
+  position:absolute !important;
+  inset:0 0 0 50% !important;
+  z-index:1 !important;
+  background:linear-gradient(90deg,rgba(14,35,36,.12) 0%,rgba(14,35,36,.66) 22%,rgba(14,35,36,.88) 58%,rgba(14,35,36,.92) 100%) !important;
+  pointer-events:none !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-copy{
+  position:absolute !important;
+  z-index:2 !important;
+  top:50% !important;
+  right:3.5% !important;
+  transform:translateY(-50%) !important;
+  width:min(48%,720px) !important;
+  box-sizing:border-box !important;
+  padding:22px 18px !important;
+  text-align:center !important;
+  color:#fffaf0 !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-copy h1{
+  margin:0 0 8px !important;
+  font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
+  font-size:clamp(38px,4.4vw,66px) !important;
+  line-height:1.15 !important;
+  font-weight:800 !important;
+  color:#fffaf0 !important;
+  text-shadow:0 3px 12px rgba(0,0,0,.55) !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-role{
+  font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
+  font-size:clamp(18px,2vw,29px) !important;
+  line-height:1.45 !important;
+  font-weight:700 !important;
+  color:#f0c34f !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.55) !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-divider{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  margin:14px auto !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-divider span{
+  width:90px !important;
+  height:1px !important;
+  background:rgba(255,255,255,.75) !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-divider b{
+  color:#f0c34f !important;
+  font-size:14px !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-tagline{
+  font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
+  font-size:clamp(18px,1.9vw,27px) !important;
+  line-height:1.5 !important;
+  font-weight:600 !important;
+  color:#fffaf0 !important;
+  text-shadow:0 2px 9px rgba(0,0,0,.65) !important;
+}
+.hero.hero-final.hero-image-only.hero-bn .hero-bn-copy p{
+  margin:10px 0 0 !important;
+  font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
+  font-size:clamp(14px,1.35vw,20px) !important;
+  line-height:1.55 !important;
+  color:#fffaf0 !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.65) !important;
+}
+
   .hero.hero-final.hero-image-only img{
     object-position:center top !important;
   }
