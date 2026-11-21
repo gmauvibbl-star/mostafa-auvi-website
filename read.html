@@ -2770,43 +2770,50 @@ async function renderReaderSideColumn(post, sb, isEn) {
 async function setupReaderCount(post, sb, isEn) {
   const counter = document.getElementById('readerCount');
   const valueEl = counter?.querySelector('.reader-count-value');
-  const body = document.getElementById('articleBody');
-  if (!counter || !valueEl || !body || !post?.published || !sb) return;
+  if (!counter || !valueEl || !post?.published || !sb) return;
 
   const formatCount = value => {
     const n = Math.max(0, Number(value) || 0);
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  // Record the view and use the returned total as the displayed count.
-  // Keeping these two operations together prevents the page from showing
-  // a stale value or recording the same page view twice.
-  const { data: recordedTotal, error: recordError } = await sb.rpc('record_post_view', {
+  // Always show the existing count first. A temporary recording/RPC problem
+  // must never hide the reader count from the article page.
+  const showCount = value => {
+    valueEl.textContent = formatCount(value);
+    counter.hidden = false;
+  };
+
+  const { data: beforeCount, error: beforeError } = await sb.rpc('get_post_reader_count', {
     p_slug: post.slug
   });
+
+  if (!beforeError) {
+    showCount(beforeCount);
+  } else {
+    console.warn('Could not read article view count:', beforeError.message);
+  }
+
+  // Record this public page view once. The count remains visible even if this
+  // write fails, and we refresh the displayed total when it succeeds.
+  const { error: recordError } = await sb.rpc('record_post_view', {
+    p_slug: post.slug
+  });
+
   if (recordError) {
     console.warn('Article view was not recorded:', recordError.message);
     return;
   }
 
-  if (recordedTotal !== null && recordedTotal !== undefined) {
-    valueEl.textContent = formatCount(recordedTotal);
-    counter.hidden = false;
-    return;
-  }
-
-  // Backward-compatible fallback for databases where record_post_view still
-  // returns void. The public count RPC remains the source of truth.
-  const { data: currentTotal, error: countError } = await sb.rpc('get_post_reader_count', {
+  const { data: afterCount, error: afterError } = await sb.rpc('get_post_reader_count', {
     p_slug: post.slug
   });
-  if (countError) {
-    console.warn('Article view count is not available yet:', countError.message);
-    return;
-  }
 
-  valueEl.textContent = formatCount(currentTotal);
-  counter.hidden = false;
+  if (!afterError) {
+    showCount(afterCount);
+  } else if (beforeError) {
+    console.warn('Could not refresh article view count:', afterError.message);
+  }
 }
 
 async function loadPost() {
