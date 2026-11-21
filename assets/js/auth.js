@@ -16,7 +16,7 @@
  * ============================================================ */
 
 (function() {
-  // Read from central config (assets/js/config.js). Fall back to
+  // Read from the page-level Supabase configuration. Fall back to
   // hardcoded values only if SITE_CONFIG is missing — e.g. an
   // older cached page that does not yet load config.js — so login
   // does not silently break during the migration window.
