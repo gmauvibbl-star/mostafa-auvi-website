@@ -92,7 +92,7 @@
 
   /* Chandradwip */
   .chandradwip-description { padding: 4px 14px 22px; font-size: 16px; }
-  .chandradwip-cover, .chandradwip-extra { max-width: 100%; }
+  .chandradwip-cover { max-width: 100%; }
 }
 
 /* ====== ≤ 480px : small phone ====== */
