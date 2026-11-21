@@ -9,7 +9,7 @@
       <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity=".55"/>
     </filter>
   </defs>
-  <image href="hero-final.webp.png" x="0" y="0" width="1600" height="600" preserveAspectRatio="xMidYMid slice"/>
+  <image href="hero-final.webp Bn.png" x="0" y="0" width="1600" height="600" preserveAspectRatio="xMidYMid slice"/>
   <rect x="770" y="0" width="830" height="600" fill="url(#cover)"/>
   <g text-anchor="middle" fill="#fffaf0" filter="url(#shadow)">
     <text x="1185" y="215" font-family="Noto Serif Bengali, Tiro Bangla, serif" font-size="78" font-weight="800">মোস্তফা অভি</text>
