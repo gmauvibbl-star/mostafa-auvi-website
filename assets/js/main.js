@@ -273,10 +273,9 @@
     try {
       var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       sb.from("posts")
-        .select("slug,title,excerpt,cover_image,category,published_at,language")
+        .select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language")
         .eq("published", true)
         .eq("language", "bn")
-        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
@@ -287,8 +286,9 @@
             return;
           }
           grid.innerHTML = rows.map(function (p) {
-            var cover = p.cover_image
-              ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
+            var coverUrl = p.cover_image || p.cover_image_url || "";
+            var cover = coverUrl
+              ? '<img class="lc-cover" src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
               : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
             var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
             if (excerpt.length > 140) excerpt = excerpt.slice(0, 140) + "…";
@@ -451,10 +451,9 @@
     try {
       var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       sb.from("posts")
-        .select("slug,title,excerpt,cover_image,category,published_at,language")
+        .select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language")
         .eq("published", true)
         .eq("language", "en")
-        .neq("category", "chandradwip")
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(3)
         .then(function (res) {
