@@ -31,10 +31,10 @@ body{font-family:'Anek Bangla','Noto Sans Bengali','Hind Siliguri',sans-serif}
 .menu a:hover{color:var(--bronze);text-decoration:underline}
 .menu a.j{font-family:'Oswald',sans-serif;font-size:16px;letter-spacing:.5px}
 .tools{display:flex;align-items:center;gap:10px;flex:none}
-.share{background:var(--box);padding:3px 8px;display:flex;align-items:center;gap:8px}
-.share em{font-family:'Oswald',sans-serif;font-style:normal;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--menu)}
-.share a{color:var(--bronze);display:grid;place-items:center;width:22px;height:22px}
-.share a:hover{color:var(--green)}
+.share{background:transparent;padding:0;display:flex;align-items:center;gap:8px}
+.share em{display:none}
+.share a{color:var(--chrome-cream,var(--bronze));display:grid;place-items:center;width:22px;height:22px;text-decoration:none}
+.share a:hover{color:var(--chrome-gold-light,var(--green))}
 .share svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sub{background:var(--bronze);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:6px 14px;white-space:nowrap}
 .sub:hover{background:var(--green)}
