@@ -320,54 +320,6 @@
   .novel-synopsis::before { top: 12px; right: 14px; font-size: 22px; }
 }
 
-/* ====== NEW: .chandradwip-extra figure ======
-   Requested by the site owner: an image placed directly beneath the
-   Chandradwip section. Drop the image file at:
-       assets/img/chandradwip-extra.jpg
-   The <figure> below references that path. Visual language mirrors
-   .chandradwip-cover (warm paper border, soft shadow) for cohesion. */
-.chandradwip-extra {
-  margin: 0 auto 28px;
-  max-width: 820px;
-  border: 8px solid var(--paper-warm);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  background: var(--paper-warm);
-}
-.chandradwip-extra img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-.chandradwip-extra figcaption {
-  padding: 12px 18px;
-  font-family: 'EB Garamond', 'Noto Serif Bengali', serif;
-  font-style: italic;
-  font-size: 13px;
-  color: var(--ink-soft);
-  text-align: center;
-  border-top: 1px solid var(--paper-dark);
-}
-/* Placeholder state shown until the image file is dropped in */
-.chandradwip-extra.is-placeholder {
-  border-style: dashed;
-  border-color: var(--paper-dark);
-  background: var(--cream);
-  padding: 48px 24px;
-  text-align: center;
-  box-shadow: none;
-}
-.chandradwip-extra.is-placeholder img { display: none; }
-.chandradwip-extra .placeholder-note {
-  display: none;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  color: var(--gold-dim);
-  font-size: 15px;
-  letter-spacing: 0.06em;
-}
-.chandradwip-extra.is-placeholder .placeholder-note { display: block; }
-
 /* ====== NEW: accordion (Chandradwip sub-sections) ======
    Wraps the Historical Setting / Publication Status / Characters blocks
    so the long description reads more easily. Progressive enhancement:
