@@ -640,3 +640,34 @@ body > footer{
 .page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"]:hover svg path{
   fill:#dfc27f!important;stroke:none!important;
 }
+
+
+/* 2026-11-21: larger header share icons */
+.page-wrap > .v2 > .hdr .tools .share-icons{
+  gap:10px!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a{
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  flex:0 0 30px!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a svg{
+  width:27px!important;
+  height:27px!important;
+}
+@media(max-width:640px){
+  .page-wrap > .v2 > .hdr .tools .share-icons{
+    gap:9px!important;
+  }
+  .page-wrap > .v2 > .hdr .tools .share-icons a{
+    width:29px!important;
+    height:29px!important;
+    min-width:29px!important;
+    flex-basis:29px!important;
+  }
+  .page-wrap > .v2 > .hdr .tools .share-icons a svg{
+    width:26px!important;
+    height:26px!important;
+  }
+}
