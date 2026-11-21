@@ -2754,7 +2754,8 @@ async function renderReaderSideColumn(post, sb, isEn) {
       .in('language', ['bn', 'en'])
       .neq('category', 'chandradwip')
       .neq('slug', currentSlug)
-      .order('published_at', { ascending: false });
+      .order('published_at', { ascending: false })
+      .limit(8);
 
     if (error) throw error;
 
@@ -2776,24 +2777,10 @@ async function setupReaderCount(post, sb, isEn) {
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  const showCount = value => {
-    valueEl.textContent = formatCount(value);
-    counter.hidden = false;
-  };
-
-  // The public counter now uses post_views, the same source used by the
-  // author's Most Read metrics. Historical post_readers are still included
-  // by get_post_reader_count, so older counts are not lost.
+  // record_post_view returns the current total after inserting this view.
+  // The database function uses the same post_views source as the dashboard,
+  // so a separate read-before/read-after pair is unnecessary.
   try {
-    const before = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
-    if (!before.error) {
-      showCount(before.data);
-    } else {
-      console.warn('Could not read article reader count:', before.error.message);
-    }
-
-    // Record one public view for this article. The database function returns
-    // the new total, so the number shown on screen is immediately current.
     const recorded = await sb.rpc('record_post_view', { p_slug: post.slug });
 
     if (recorded.error) {
@@ -2801,19 +2788,12 @@ async function setupReaderCount(post, sb, isEn) {
       return;
     }
 
-    // get_post_reader_count includes historical readers + current post views.
-    // Refresh the combined total after recording the new view.
-    const after = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
-    if (!after.error) {
-      showCount(after.data);
-    } else if (recorded.data != null) {
-      showCount(recorded.data);
-    }
+    valueEl.textContent = formatCount(recorded.data);
+    counter.hidden = false;
   } catch (e) {
     console.warn('Reader count unavailable:', e?.message || e);
   }
 }
-
 async function loadPost() {
   // Chandradwip feature pages are local/static content. Render them directly,
   // independently of Supabase, in both Bengali and English.
