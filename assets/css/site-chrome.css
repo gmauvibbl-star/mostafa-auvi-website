@@ -632,3 +632,56 @@ body > footer{
     font-size:16px!important;
   }
 }
+
+
+/* Legacy header share controls: icon-only, four controls, no pill/button. */
+.header .header-right .share-icons{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:10px!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  width:auto!important;
+}
+.header .header-right .share-icons a{
+  display:grid!important;
+  place-items:center!important;
+  width:29px!important;
+  height:29px!important;
+  min-width:29px!important;
+  flex:0 0 29px!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:var(--chrome-cream,#fffaf1)!important;
+  text-decoration:none!important;
+}
+.header .header-right .share-icons a svg{
+  display:block!important;
+  width:25px!important;
+  height:25px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:2.2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.header .header-right .share-icons a[aria-label="Facebook"] svg path{
+  fill:currentColor!important;
+  stroke:none!important;
+}
+.header .header-right .share-icons a:hover,
+.header .header-right .share-icons a:focus-visible{color:var(--chrome-gold-light,#dfc27f)!important}
+@media(max-width:640px){
+  .header .header-right .share-icons{gap:8px!important}
+  .header .header-right .share-icons a{width:27px!important;height:27px!important;min-width:27px!important;flex-basis:27px!important}
+  .header .header-right .share-icons a svg{width:23px!important;height:23px!important}
+}
