@@ -15,7 +15,6 @@ const ASSETS = [
   './chandradwip-landscape.webp',
   './assets/img/author-hero.jpg',
   './assets/img/hero-banner.jpg',
-  './assets/js/config.js',
   './assets/js/main.js',
   './assets/js/auth.js',
   './assets/css/tokens.css',
