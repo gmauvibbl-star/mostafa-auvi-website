@@ -177,12 +177,19 @@
   border:0 !important;
 }
 @media(max-width:640px){
+  /* iPhone/Safari: show the complete artwork at its natural aspect ratio. */
   .hero.hero-final.hero-image-only{
-    height:330px !important;
-  }
-  .hero.hero-final.hero-image-only img{
     width:100% !important;
     height:auto !important;
+    min-height:0 !important;
+    aspect-ratio:auto !important;
+    overflow:hidden !important;
+  }
+  .hero.hero-final.hero-image-only img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    max-width:100% !important;
     object-fit:contain !important;
     object-position:center top !important;
   }
