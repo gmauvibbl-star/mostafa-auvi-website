@@ -530,3 +530,67 @@ body > footer{
   fill:#dfc27f!important;
   stroke:none!important;
 }
+
+
+/* FINAL CLEAN SHARE ICONS — separate class so no legacy .share button styles can apply */
+.page-wrap > .v2 > .hdr .tools .share-icons{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a{
+  display:grid!important;
+  place-items:center!important;
+  width:22px!important;
+  height:22px!important;
+  min-width:22px!important;
+  flex:0 0 22px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  transform:none!important;
+  color:#fffaf1!important;
+  text-decoration:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a svg{
+  display:block!important;
+  width:18px!important;
+  height:18px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  fill:none!important;
+  stroke:#fffaf1!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"] svg path{
+  fill:#fffaf1!important;
+  stroke:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a:hover{
+  color:#dfc27f!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a:hover svg{
+  stroke:#dfc27f!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"]:hover svg path{
+  fill:#dfc27f!important;
+  stroke:none!important;
+}
+@media(max-width:480px){
+  .page-wrap > .v2 > .hdr .tools .share-icons{gap:7px!important}
+  .page-wrap > .v2 > .hdr .tools .share-icons a{
+    width:21px!important;height:21px!important;min-width:21px!important;flex-basis:21px!important;
+  }
+  .page-wrap > .v2 > .hdr .tools .share-icons a svg{width:17px!important;height:17px!important}
+}
