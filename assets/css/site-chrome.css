@@ -445,3 +445,45 @@ body > footer{
     flex-wrap:wrap!important;
   }
 }
+
+
+/* FINAL: header share = icons only, no pill, no button */
+.page-wrap > .v2 > .hdr .tools .share,
+.page-wrap > .v2 > .hdr .tools .share.share{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share em{
+  display:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a,
+.page-wrap > .v2 > .hdr .tools .share a:hover,
+.page-wrap > .v2 > .hdr .tools .share a:focus{
+  display:grid!important;
+  place-items:center!important;
+  width:22px!important;
+  height:22px!important;
+  min-width:22px!important;
+  flex:0 0 22px!important;
+  padding:0!important;
+  margin:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a svg{
+  display:block!important;
+  width:18px!important;
+  height:18px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
