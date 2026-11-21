@@ -206,3 +206,11 @@ html{
     transition-duration:.01ms!important;
   }
 }
+
+
+/* Site-wide title treatment: every content heading uses the site's blood-red. */
+h1,h2,h3,h4,.section-title,.page-title,
+.card h3,.post-card h3,.content-card h3,.work-card h3,
+.article-title,.post-title,.entry-title,.page-heading{
+  color:var(--blood,#8A1818)!important;
+}
