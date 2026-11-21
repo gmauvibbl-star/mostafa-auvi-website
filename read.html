@@ -2856,7 +2856,7 @@ async function loadPost() {
         if (adminError) throw adminError;
         if (admin) {
           const { data: draft, error: draftError } = await sb.from('posts')
-            .select('*')
+            .select('slug,title,excerpt,body,published,published_at,updated_at,tags,cover_image,category,language,group_id')
             .eq('slug', slug).maybeSingle();
           if (draftError) throw draftError;
           loadedPost = draft;
@@ -2878,7 +2878,11 @@ async function loadPost() {
     // Render the article as soon as its own record arrives. The language
     // sibling is fetched afterwards so it cannot delay the article opening.
     const wasCached = !!(cachedPost && cachedPost.slug === slug && cachedPost.body);
-    if (!wasCached) renderArticle(activePost, null, sb);
+    // Cached content is shown immediately; the fresh database result is still
+    // rendered when it arrives so edits made after the cache was created appear.
+    if (!wasCached || activePost.updated_at !== cachedPost?.updated_at) {
+      renderArticle(activePost, null, sb);
+    }
 
     if (activePost.group_id && activePost.published) {
       sb.from('posts')
