@@ -111,30 +111,29 @@
   .essay-hub-card:nth-child(5n+4){--accent:#7A3458}
   .essay-hub-card:nth-child(5n){--accent:#404E18}
   .essay-hub-card .hub-art{
-    width:78px;height:78px;flex:0 0 78px;margin-right:14px;
+    width:48px;height:48px;flex:0 0 48px;margin:0 13px 0 0;
     display:flex;align-items:center;justify-content:center;
-    border-radius:8px;background:rgba(255,250,240,.78);
-    border:1px solid rgba(184,146,72,.28);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);
+    background:transparent;border:0;box-shadow:none;
   }
   .essay-hub-card .hub-art svg{
-    width:58px;height:58px;display:block;
-    filter:drop-shadow(0 3px 3px rgba(45,32,18,.12));
+    width:38px;height:38px;display:block;
+    filter:drop-shadow(0 4px 4px rgba(45,32,18,.20));
+    transform:translateY(-2px);
   }
   .essay-hub-card .hub-card-content{min-width:0;display:flex;flex-direction:column;justify-content:center;flex:1}
   .essay-hub-card strong{
-    display:block;padding-right:34px;
+    display:block;padding-right:30px;
     font-family:'Noto Serif Bengali',serif;font-size:17px;font-weight:700;
     line-height:1.5;color:var(--teal-deep);
   }
-  .essay-hub-card span{
+  .essay-hub-card .hub-action{
     display:inline-flex;align-items:center;gap:7px;width:max-content;
-    margin-top:13px;padding:5px 11px 4px;
+    margin-top:10px;padding:4px 10px 3px;
     border:1px solid rgba(184,146,72,.42);border-radius:999px;
     background:rgba(250,244,232,.72);color:var(--accent);
     font:italic 12px 'EB Garamond',serif;letter-spacing:.05em;
   }
-  .essay-hub-card span::after{content:"→";font-style:normal;font-size:14px}
+  .essay-hub-card .hub-action::after{content:"→";font-style:normal;font-size:14px}
   .essay-hub-card:hover{
     transform:translateY(-4px);box-shadow:0 12px 26px rgba(15,61,62,.16);
     border-color:var(--accent);background:linear-gradient(145deg,#fffdf7 0%,#f7edd9 100%);
@@ -155,11 +154,11 @@
   @media(max-width:680px){
     .essay-hub{padding:16px 22px 8px}
     .essay-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-    .essay-hub-card{min-height:104px;padding:12px 10px 11px 13px}
-    .essay-hub-card .hub-art{width:58px;height:58px;flex-basis:58px;margin-right:9px}
-    .essay-hub-card .hub-art svg{width:44px;height:44px}
+    .essay-hub-card{min-height:104px;padding:13px 10px 11px 13px}
+    .essay-hub-card .hub-art{width:38px;height:38px;flex-basis:38px;margin-right:8px}
+    .essay-hub-card .hub-art svg{width:30px;height:30px}
     .essay-hub-card strong{font-size:14px;padding-right:24px}
-    .essay-hub-card span{font-size:10.5px;padding:3px 7px 2px;margin-top:8px}
+    .essay-hub-card .hub-action{font-size:10.5px;padding:3px 7px 2px;margin-top:7px}
     .essay-hub-card::after{right:8px;top:8px;width:20px;height:20px;font-size:13px}
   }
 
@@ -930,7 +929,7 @@ function renderSubcategoryPills(){
       'uponmas':'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 15c9-5 18-3 22 2v34c-5-5-14-6-22-2V15Z" fill="#EDE2C6" stroke="#2E4878" stroke-width="2"/><path d="M54 15c-9-5-18-3-22 2v34c5-5 14-6 22-2V15Z" fill="#F4ECD8" stroke="#2E4878" stroke-width="2"/><path d="M32 17v34" stroke="#B89248" stroke-width="2"/><path d="M17 23h10M17 29h10M37 23h10M37 29h10" stroke="#B89248" stroke-width="1.8" stroke-linecap="round"/></svg>',
       'dharabahik-uponmas':'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 13h50" stroke="#7A3458" stroke-width="2"/><path d="M11 10v6M26 10v6M41 10v6M54 10v6" stroke="#7A3458" stroke-width="2"/><path d="M10 17l8 5-3 26-9-5 4-26ZM25 17l8 5-3 26-9-5 4-26ZM40 17l8 5-3 26-9-5 4-26ZM53 17l6 4-2 22-7-4 3-22Z" fill="#F4ECD8" stroke="#B89248" stroke-width="1.6"/><path d="M19 24h5M34 24h5M49 24h5" stroke="#7A3458" stroke-width="1.5"/></svg>'
     };
-    return '<a class="essay-hub-card'+active+'" href="'+esc(url)+'"><span class="hub-art">'+(icons[item.slug]||'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="20" fill="#F4ECD8" stroke="#B89248" stroke-width="2"/><path d="M22 32h20M32 22v20" stroke="#0F3D3E" stroke-width="2"/></svg>')+'</span><span class="hub-card-content"><strong>'+esc(label)+'</strong><span>'+(language==='en'?'Browse writing':'লেখা দেখুন')+'</span></span></a>';
+    return '<a class="essay-hub-card'+active+'" href="'+esc(url)+'"><div class="hub-art">'+(icons[item.slug]||'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="20" fill="#F4ECD8" stroke="#B89248" stroke-width="2"/><path d="M22 32h20M32 22v20" stroke="#0F3D3E" stroke-width="2"/></svg>')+'</div><div class="hub-card-content"><strong>'+esc(label)+'</strong><span class="hub-action">'+(language==='en'?'Browse writing':'লেখা দেখুন')+'</span></div></a>';
   }).join('');
 }
 // Mark active filter (legacy nav-pill marking)
