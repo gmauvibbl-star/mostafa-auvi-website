@@ -2782,58 +2782,37 @@ async function setupReaderCount(post, sb, isEn) {
     counter.hidden = false;
   };
 
-  // "পাঠক" means unique anonymous readers, not raw page refreshes.
-  // Keep one random browser identifier in localStorage and hash it before
-  // sending it to Supabase. No IP address or personal data is stored.
-  let visitorId = '';
+  // The public counter now uses post_views, the same source used by the
+  // author's Most Read metrics. Historical post_readers are still included
+  // by get_post_reader_count, so older counts are not lost.
   try {
-    visitorId = localStorage.getItem('mostafa_auvi_reader_id') || '';
-    if (!visitorId) {
-      visitorId = (crypto.randomUUID ? crypto.randomUUID() : (
-        Date.now().toString(36) + Math.random().toString(36).slice(2)
-      ));
-      localStorage.setItem('mostafa_auvi_reader_id', visitorId);
+    const before = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
+    if (!before.error) {
+      showCount(before.data);
+    } else {
+      console.warn('Could not read article reader count:', before.error.message);
+    }
+
+    // Record one public view for this article. The database function returns
+    // the new total, so the number shown on screen is immediately current.
+    const recorded = await sb.rpc('record_post_view', { p_slug: post.slug });
+
+    if (recorded.error) {
+      console.warn('Article view was not recorded:', recorded.error.message);
+      return;
+    }
+
+    // get_post_reader_count includes historical readers + current post views.
+    // Refresh the combined total after recording the new view.
+    const after = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
+    if (!after.error) {
+      showCount(after.data);
+    } else if (recorded.data != null) {
+      showCount(recorded.data);
     }
   } catch (e) {
-    visitorId = 'session-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+    console.warn('Reader count unavailable:', e?.message || e);
   }
-
-  let visitorHash = '';
-  try {
-    const bytes = await crypto.subtle.digest(
-      'SHA-256',
-      new TextEncoder().encode(visitorId)
-    );
-    visitorHash = Array.from(new Uint8Array(bytes))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-  } catch (e) {
-    console.warn('Reader identity could not be created:', e?.message || e);
-    return;
-  }
-
-  // Read the existing historical reader total first.
-  const before = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
-  if (!before.error) {
-    showCount(before.data);
-  } else {
-    console.warn('Could not read article reader count:', before.error.message);
-  }
-
-  // Count this browser once per article. Refreshing the same article does not
-  // create another reader because post_readers has a unique constraint.
-  const recorded = await sb.rpc('record_post_reader', {
-    p_slug: post.slug,
-    p_visitor_hash: visitorHash
-  });
-
-  if (recorded.error) {
-    console.warn('Article reader was not recorded:', recorded.error.message);
-    return;
-  }
-
-  // record_post_reader returns the current unique-reader total.
-  showCount(recorded.data);
 }
 
 async function loadPost() {
