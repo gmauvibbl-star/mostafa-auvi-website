@@ -1,15 +1,12 @@
 /* Full-width author hero — portrait-led editorial layout
-   2026-11-04: New ultra-premium hero banner (portrait left + river delta +
-   negative space right) replaces old author-hero.jpg. Composition is
-   baked into the image, so we use it as background-cover and overlay
-   text on the right-side negative space. */
+   2026-11-22: The homepage uses the final bilingual hero image directly.
+   Keep this stylesheet limited to the shared hero presentation rules. */
 .hero{
   position:relative;
   isolation:isolate;
   display:flex;
   align-items:center;
   overflow:hidden;
-  background:#123f43 url('../img/hero-banner.jpg') center 35% / cover no-repeat;
   color:#fff;
 }
 .hero-bg{
