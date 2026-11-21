@@ -2910,13 +2910,23 @@ async function loadPost() {
         .maybeSingle()
         .then(({ data: sib }) => {
           if (!sib || !sib.slug || sib.slug === activePost.slug) return;
-          const toggle = document.getElementById('langToggle');
+          let toggle = document.getElementById('langToggle');
+          if (!toggle) {
+            const metaRow = document.querySelector('.a4-meta-row');
+            if (metaRow) {
+              toggle = document.createElement('button');
+              toggle.className = 'a4-lang-toggle';
+              toggle.id = 'langToggle';
+              toggle.type = 'button';
+              toggle.innerHTML = '<span class="dot"></span>' + (requestedLanguage === 'en' ? 'বাংলায় পড়ুন' : 'Read in English');
+              metaRow.appendChild(toggle);
+            }
+          }
           if (toggle) {
             toggle.onclick = () => {
               const newUrl = './read.html?slug=' + encodeURIComponent(sib.slug) + '&lang=' + (sib.language === 'en' ? 'en' : 'bn');
               location.href = newUrl;
             };
-            toggle.hidden = false;
           }
         })
         .catch(() => {});
