@@ -130,7 +130,7 @@ html,body{
   .menu a.j{font-size:13px}
   .sub{font-size:12px;padding:5px 11px}
   .tools .share svg{width:16px;height:16px}
-  .tools .share{padding:2px 6px;gap:6px}
+  .tools .share{padding:0!important;gap:6px!important;background:transparent!important;border:0!important;box-shadow:none!important}
 }
 @media(max-width:480px){
   .v1 .bn span{font-size:26px}
@@ -142,7 +142,7 @@ html,body{
   .sub{font-size:11px;padding:4px 9px}
   .tools .share em{display:none}
   .tools .share svg{width:15px;height:15px}
-  .tools .share a{width:20px;height:20px}
+  .tools .share a{width:20px!important;height:20px!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
 }
 /* iPhone SE / mini (<=380px) — final shrink, must come AFTER 480px so it wins */
 @media(max-width:380px){
@@ -154,9 +154,9 @@ html,body{
   .menu a{font-size:12px}
   .menu a.j{font-size:11px}
   .sub{font-size:10px;padding:4px 8px}
-  .tools .share{padding:2px 5px;gap:5px}
+  .tools .share{padding:0!important;gap:5px!important;background:transparent!important;border:0!important;box-shadow:none!important}
   .tools .share svg{width:14px;height:14px}
-  .tools .share a{width:18px;height:18px}
+  .tools .share a{width:18px!important;height:18px!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
 }
 
 
