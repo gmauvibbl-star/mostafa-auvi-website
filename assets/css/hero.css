@@ -149,56 +149,6 @@
   .hero-author-en{font-size:11px;letter-spacing:.07em}
 }
 
-/* FINAL HERO BANNER — uploaded final image, aspect ratio preserved */
-.hero.hero-final{
-  width:100% !important; min-height:560px !important; height:560px !important;
-  display:block !important; position:relative !important; overflow:hidden !important;
-  background:#123f43 url('../img/hero-final.webp.png') center center / cover no-repeat !important;
-}
-.hero.hero-final::before,.hero.hero-final::after{display:none !important;background:none !important;}
-.hero.hero-final .hero-bn-overlay{
-  position:absolute !important; top:50% !important; right:4% !important;
-  transform:translateY(-50%) !important; width:min(47%,720px) !important;
-  padding:30px 34px !important; box-sizing:border-box !important; text-align:center !important;
-  background:linear-gradient(90deg,rgba(10,18,22,0),rgba(10,18,22,.62) 22%,rgba(10,18,22,.72)) !important; color:#fff !important;
-}
-.hero.hero-final .hero-bn-overlay h1{
-  margin:0 0 10px !important; font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
-  font-size:clamp(38px,4.2vw,68px) !important; font-weight:800 !important; line-height:1.15 !important;
-  text-shadow:0 3px 12px rgba(0,0,0,.65) !important;
-}
-.hero.hero-final .hero-bn-role{
-  color:#f0d28b !important; font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
-  font-size:clamp(18px,1.8vw,29px) !important; font-weight:700 !important; line-height:1.5 !important;
-  text-shadow:0 2px 9px rgba(0,0,0,.65) !important;
-}
-.hero.hero-final .hero-bn-divider{display:flex !important;align-items:center !important;justify-content:center !important;gap:14px !important;margin:18px auto !important;}
-.hero.hero-final .hero-bn-divider span{display:block !important;width:110px !important;height:1px !important;background:rgba(255,255,255,.85) !important;}
-.hero.hero-final .hero-bn-divider b{color:#f0c34f !important;font-size:15px !important;}
-.hero.hero-final .hero-bn-tagline{
-  font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;font-size:clamp(19px,1.9vw,28px) !important;
-  font-weight:600 !important;line-height:1.5 !important;text-shadow:0 2px 10px rgba(0,0,0,.7) !important;
-}
-.hero.hero-final .hero-bn-overlay p{
-  margin:12px 0 0 !important;font-family:'Noto Serif Bengali','Tiro Bangla',serif !important;
-  font-size:clamp(15px,1.4vw,21px) !important;line-height:1.65 !important;text-shadow:0 2px 9px rgba(0,0,0,.7) !important;
-}
-@media(max-width:900px){
- .hero.hero-final{min-height:480px !important;height:480px !important;background-position:center center !important;}
- .hero.hero-final .hero-bn-overlay{width:58% !important;right:2% !important;padding:20px !important;}
-}
-@media(max-width:640px){
- .hero.hero-final{min-height:430px !important;height:430px !important;background-position:52% center !important;}
- .hero.hero-final .hero-bn-overlay{width:100% !important;right:0 !important;top:auto !important;bottom:0 !important;transform:none !important;
-   padding:22px 18px 24px !important;background:linear-gradient(180deg,rgba(10,18,22,0),rgba(10,18,22,.82) 28%,rgba(10,18,22,.9)) !important;}
- .hero.hero-final .hero-bn-overlay h1{font-size:38px !important;}
- .hero.hero-final .hero-bn-role{font-size:17px !important;}
- .hero.hero-final .hero-bn-tagline{font-size:18px !important;}
- .hero.hero-final .hero-bn-overlay p{font-size:14px !important;}
- .hero.hero-final .hero-bn-divider{margin:10px auto !important;}
- .hero.hero-final .hero-bn-divider span{width:70px !important;}
-}
-
 /* FINAL UPLOADED HERO ARTWORK — preserve the complete image, including right-side text. */
 .hero.hero-final.hero-image-only{
   width:100% !important;
