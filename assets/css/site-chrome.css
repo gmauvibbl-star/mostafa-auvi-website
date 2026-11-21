@@ -487,3 +487,46 @@ body > footer{
   background:transparent!important;
   box-shadow:none!important;
 }
+
+
+/* FINAL COLOR: share icons must remain clearly visible on the blue header */
+.page-wrap > .v2 > .hdr .tools .share a,
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Facebook"],
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"],
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="WhatsApp"],
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Email"]{
+  color:#fffaf1!important;
+  -webkit-text-fill-color:#fffaf1!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a svg{
+  color:#fffaf1!important;
+  fill:currentColor!important;
+  stroke:currentColor!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"] svg,
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="X"] svg path{
+  fill:none!important;
+  stroke:#fffaf1!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Facebook"] svg path{
+  fill:#fffaf1!important;
+  stroke:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="WhatsApp"] svg path,
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Email"] svg path,
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Email"] svg rect{
+  fill:none!important;
+  stroke:#fffaf1!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a:hover{
+  color:#dfc27f!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a:hover svg,
+.page-wrap > .v2 > .hdr .tools .share a:hover svg path,
+.page-wrap > .v2 > .hdr .tools .share a:hover svg rect{
+  stroke:#dfc27f!important;
+}
+.page-wrap > .v2 > .hdr .tools .share a[aria-label="Facebook"]:hover svg path{
+  fill:#dfc27f!important;
+  stroke:none!important;
+}
