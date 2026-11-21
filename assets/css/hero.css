@@ -233,6 +233,13 @@
   .hero.hero-final.hero-image-only{
     height:330px !important;
   }
+  .hero.hero-final.hero-image-only img{
+    width:100% !important;
+    height:auto !important;
+    object-fit:contain !important;
+    object-position:center top !important;
+  }
+}
 
 /* Bengali homepage hero typography — English artwork text is covered by a subtle editorial panel. */
 .hero.hero-final.hero-image-only.hero-bn .hero-bn-cover{
