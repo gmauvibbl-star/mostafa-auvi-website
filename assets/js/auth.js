@@ -16,10 +16,8 @@
  * ============================================================ */
 
 (function() {
-  // Read from the page-level Supabase configuration. Fall back to
-  // hardcoded values only if SITE_CONFIG is missing — e.g. an
-  // older cached page that does not yet load config.js — so login
-  // does not silently break during the migration window.
+  // Read from the page-level Supabase configuration. Keep a safe
+  // fallback so login remains available while cached pages update.
   var CFG = window.SITE_CONFIG || {};
   const SUPABASE_URL = CFG.SUPABASE_URL || "https://voswrndbxrsaqfzwffhh.supabase.co";
   const SUPABASE_ANON_KEY = CFG.SUPABASE_ANON_KEY || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
