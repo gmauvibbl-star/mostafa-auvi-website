@@ -948,6 +948,8 @@ function markFilter(){
 
 // Update intro + nav active state based on category
 function updateIntro(){
+  // Keep the document language in sync with ?lang=en for accessibility, fonts, and selectors.
+  document.documentElement.lang = language === 'en' ? 'en' : 'bn';
   // ── Search-aware heading (Part 2) ──
   if(searchQuery){
     const qHeadline=document.querySelector('.page-headline, h1');
@@ -1151,7 +1153,7 @@ async function loadPosts(){
   }catch(e){
     console.error(e);
     statusEl.innerHTML=(language==='en'?'Could not load the writing list.':'লেখার তালিকা লোড করা যায়নি।')+' '+retryButton();
-    grid.outerHTML='<div class="empty" id="grid"><div class="icon">❦</div><h3>'+(language==='en'?'Unable to load':'লোড করা যায়নি')+'</h3><p>'+(language==='en'?'A database connection error occurred. Please try again later.':'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।')+'</p></div>';
+    grid.innerHTML='<div class="empty"><div class="icon">❦</div><h3>'+(language==='en'?'Unable to load':'লোড করা যায়নি')+'</h3><p>'+(language==='en'?'A database connection error occurred. Please try again later.':'ডেটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।')+'</p></div>';
   }
 }
 
