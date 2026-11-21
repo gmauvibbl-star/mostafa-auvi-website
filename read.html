@@ -2619,6 +2619,12 @@ function renderArticle(post, sibling, sb) {
       if (!el.style.cssText.trim()) el.removeAttribute('style');
     }
   });
+  // Defer article-body images so a long article opens without waiting for
+  // every image below the fold. Keep the first body image eager when present.
+  bodyDoc.body.querySelectorAll('img').forEach((img, index) => {
+    if (!img.hasAttribute('loading')) img.setAttribute('loading', index === 0 ? 'eager' : 'lazy');
+    if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+  });
   const bodyHtml = bodyDoc.body.innerHTML;
   const coverField = post.cover_image || '';
   const coverHtml = coverField
