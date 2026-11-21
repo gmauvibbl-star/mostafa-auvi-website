@@ -2836,14 +2836,36 @@ async function loadPost() {
   }
   try {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    // Fetch the post by slug (try multiple cover image field names)
+    const cacheKey = 'auvi-read-post-v2:' + (requestedLanguage === 'en' ? 'en:' : 'bn:') + slug;
+    let cachedPost = null;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) cachedPost = JSON.parse(cached);
+    } catch (e) {}
+
+    // Render a previously opened article immediately. The network refresh below
+    // keeps the cache current without making the reader wait on Supabase again.
+    if (cachedPost && cachedPost.slug === slug && cachedPost.body) {
+      renderArticle(cachedPost, null, sb);
+    }
+
+    // Fetch only fields the reader actually needs. This keeps the first response
+    // much smaller than select('*').
     const { data: post, error: err1 } = await sb.from('posts')
-      .select('*')
+      .select('slug,title,excerpt,body,published,published_at,updated_at,tags,cover_image,cover_image_url,image_url,category,language,group_id')
       .eq('slug', slug)
       .eq('published', true)
       .maybeSingle();
     if (err1) throw err1;
     let loadedPost = post;
+
+    if (post) {
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(post)); } catch (e) {}
+    }
+
+    // If cached content was already rendered, keep the visible article in place.
+    // Fresh content is stored for the next visit; the reader is not made to wait
+    // for a second render or another loading screen.
 
     // Draft preview is available only to the signed-in, approved author.
     if (!loadedPost && previewRequested) {
@@ -2874,19 +2896,31 @@ async function loadPost() {
     }
     // Use the loaded post whether published or author-previewed.
     const activePost = loadedPost;
-    // The reader counter records the public view exactly once when the article renders.
-    // Fetch sibling in other language by group_id for language toggle
-    let sibling = null;
+    // Render the article as soon as its own record arrives. The language
+    // sibling is fetched afterwards so it cannot delay the article opening.
+    const wasCached = !!(cachedPost && cachedPost.slug === slug && cachedPost.body);
+    if (!wasCached) renderArticle(activePost, null, sb);
+
     if (activePost.group_id && activePost.published) {
-      const { data: sib } = await sb.from('posts')
+      sb.from('posts')
         .select('slug,language,title')
         .eq('group_id', activePost.group_id)
         .neq('language', activePost.language || 'bn')
         .eq('published', true)
-        .maybeSingle();
-      if (sib && sib.slug && sib.slug !== activePost.slug) sibling = sib;
+        .maybeSingle()
+        .then(({ data: sib }) => {
+          if (!sib || !sib.slug || sib.slug === activePost.slug) return;
+          const toggle = document.getElementById('langToggle');
+          if (toggle) {
+            toggle.onclick = () => {
+              const newUrl = './read.html?slug=' + encodeURIComponent(sib.slug) + '&lang=' + (sib.language === 'en' ? 'en' : 'bn');
+              location.href = newUrl;
+            };
+            toggle.hidden = false;
+          }
+        })
+        .catch(() => {});
     }
-    renderArticle(activePost, sibling, sb);
   } catch (e) {
     console.error('Article loading failed:', e);
     const detail = e && (e.message || e.details || e.hint || e.code);
