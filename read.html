@@ -2537,7 +2537,6 @@ function renderStaticChandradwip(slugKey){
   try {
     const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     if (sb && post.published) {
-      sb.rpc('record_post_view', { p_slug: post.slug }).catch(e => console.warn('Chandradwip view was not recorded:', e?.message || e));
       setupReaderCount(post, sb, isEnglish).catch(e => console.warn('Chandradwip reader count unavailable:', e?.message || e));
     }
   } catch (e) {
@@ -2779,9 +2778,26 @@ async function setupReaderCount(post, sb, isEn) {
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  // Use the public reader-count RPC already available in Supabase.
-  // The database migration will align this RPC with post_views.
-  const { data: initialCount, error: countError } = await sb.rpc('get_post_reader_count', {
+  // Record the view and use the returned total as the displayed count.
+  // Keeping these two operations together prevents the page from showing
+  // a stale value or recording the same page view twice.
+  const { data: recordedTotal, error: recordError } = await sb.rpc('record_post_view', {
+    p_slug: post.slug
+  });
+  if (recordError) {
+    console.warn('Article view was not recorded:', recordError.message);
+    return;
+  }
+
+  if (recordedTotal !== null && recordedTotal !== undefined) {
+    valueEl.textContent = formatCount(recordedTotal);
+    counter.hidden = false;
+    return;
+  }
+
+  // Backward-compatible fallback for databases where record_post_view still
+  // returns void. The public count RPC remains the source of truth.
+  const { data: currentTotal, error: countError } = await sb.rpc('get_post_reader_count', {
     p_slug: post.slug
   });
   if (countError) {
@@ -2789,7 +2805,7 @@ async function setupReaderCount(post, sb, isEn) {
     return;
   }
 
-  valueEl.textContent = formatCount(initialCount);
+  valueEl.textContent = formatCount(currentTotal);
   counter.hidden = false;
 }
 
@@ -2852,12 +2868,7 @@ async function loadPost() {
     }
     // Use the loaded post whether published or author-previewed.
     const activePost = loadedPost;
-    // Count each public article view before rendering the counter, so the
-    // number shown here is exactly the same post_views metric used by the dashboard.
-    if (activePost.published) {
-      const { error } = await sb.rpc('record_post_view', { p_slug: activePost.slug });
-      if (error) console.warn('Post view count was not recorded:', error.message);
-    }
+    // The reader counter records the public view exactly once when the article renders.
     // Fetch sibling in other language by group_id for language toggle
     let sibling = null;
     if (activePost.group_id && activePost.published) {
