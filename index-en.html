@@ -75,8 +75,14 @@
 .menu .dropdown[open]>.dropdown-panel{display:flex;flex-direction:column}
 .menu .dropdown-panel a{display:block;padding:10px 15px;line-height:1.5;white-space:normal;color:#103f40!important}
 .menu .dropdown-panel a:hover{background:#eadfc8;color:#7b4c18!important}
-#single-english-hero{display:block;width:100%;height:auto;margin:0;padding:0;overflow:hidden;background:none}
-#single-english-hero img{display:block;width:100%;height:auto;max-width:none;margin:0;padding:0;border:0;object-fit:contain}
+#single-english-hero{
+  display:block;width:100%;height:auto;min-height:0;margin:0;padding:0;
+  overflow:hidden;background:none;
+}
+#single-english-hero img{
+  display:block;width:100%;height:auto;max-width:100%;min-width:0;
+  margin:0;padding:0;border:0;object-fit:contain;object-position:center top;
+}
 .recent-wrap{width:100%;max-width:none;margin:0;padding:0 30px;box-sizing:border-box}
 .recent-wrap .latest-writings{padding-left:0;padding-right:0}
 @media(max-width:640px){
