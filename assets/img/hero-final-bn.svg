@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="cover" x1="0" x2="1">
+      <stop offset="0" stop-color="#123f43" stop-opacity=".08"/>
+      <stop offset=".25" stop-color="#123f43" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#123f43" stop-opacity=".94"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <image href="hero-final.webp.png" x="0" y="0" width="1600" height="600" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="770" y="0" width="830" height="600" fill="url(#cover)"/>
+  <g text-anchor="middle" fill="#fffaf0" filter="url(#shadow)">
+    <text x="1185" y="215" font-family="Noto Serif Bengali, Tiro Bangla, serif" font-size="78" font-weight="800">মোস্তফা অভি</text>
+    <text x="1185" y="285" font-family="Noto Serif Bengali, Tiro Bangla, serif" font-size="38" font-weight="700" fill="#f0c34f">কথাসাহিত্যিক</text>
+    <line x1="1010" y1="335" x2="1135" y2="335" stroke="#fffaf0" stroke-width="2" opacity=".8"/>
+    <text x="1185" y="345" font-family="serif" font-size="18" fill="#f0c34f">◆</text>
+    <line x1="1235" y1="335" x2="1360" y2="335" stroke="#fffaf0" stroke-width="2" opacity=".8"/>
+    <text x="1185" y="410" font-family="Noto Serif Bengali, Tiro Bangla, serif" font-size="32" font-weight="600">ইতিহাসের ভেতর জীবন, জীবনের ভেতর গল্প</text>
+    <text x="1185" y="465" font-family="Noto Serif Bengali, Tiro Bangla, serif" font-size="22">কথাসাহিত্যিক · ইতিহাস ও বিশ্বসাহিত্যের পাঠক</text>
+  </g>
+</svg>
