@@ -68,9 +68,10 @@
 .menu .dropdown[open] > .dropdown-panel{display:flex;flex-direction:column}
 .menu .dropdown-panel a{display:block;padding:10px 16px;white-space:normal;line-height:1.55}
 .menu .dropdown:last-of-type > .dropdown-panel{left:auto;right:0}
-.recent-wrap{width:100%;max-width:none;margin:0;padding:0 50px}
-@media(max-width:900px){.recent-wrap{padding:0 30px}}
-@media(max-width:600px){.recent-wrap{padding:0 16px}}
+.recent-wrap{width:100%;max-width:none;margin:0;padding:0!important}
+.recent-wrap .latest-writings{padding-left:0!important;padding-right:0!important}
+@media(max-width:900px){.recent-wrap{padding:0!important}}
+@media(max-width:600px){.recent-wrap{padding:0!important}}
 @media(max-width:640px){
   .page-wrap > .v2{background:linear-gradient(118deg,var(--chrome-teal,#0f3d3e),#164e53 58%,var(--chrome-teal-2,#245f61))!important}
   .page-wrap > .v2 > .hdr{
