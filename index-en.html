@@ -294,44 +294,13 @@
 })();
 </script>
 
-<!-- Service worker registration removed for standalone preview -->
 <script>
-/* Keep navigation dropdowns predictable on touch and desktop. */
-(function () {
-  var dropdowns = document.querySelectorAll('.menu details.dropdown');
-  if (!dropdowns.length) return;
-  dropdowns.forEach(function (item) {
-    item.addEventListener('toggle', function () {
-      if (!item.open) return;
-      dropdowns.forEach(function (other) {
-        if (other !== item) other.open = false;
-      });
-    });
-
-    /* Explicit click handler for iOS Safari/touch devices.
-       Native <details> is kept, but the menu is toggled explicitly so
-       the dropdown remains reliable when the header is heavily styled. */
-    var summary = item.querySelector('summary');
-    if (summary) {
-      summary.addEventListener('click', function (event) {
-        event.preventDefault();
-        var willOpen = !item.open;
-        dropdowns.forEach(function (other) { other.open = false; });
-        item.open = willOpen;
-      });
-    }
+/* Keep the English homepage on the same cache/update path as the Bengali site. */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function() {});
   });
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('.menu details.dropdown')) {
-      dropdowns.forEach(function (item) { item.open = false; });
-    }
-  });
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      dropdowns.forEach(function (item) { item.open = false; });
-    }
-  });
-})();
+}
 </script>
 </body>
 </html>
