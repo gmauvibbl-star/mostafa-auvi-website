@@ -2634,7 +2634,7 @@ function renderArticle(post, sibling, sb) {
   articleEl.innerHTML =
     '<div class="a4-page">' +
       '<header class="a4-header">' +
-        '<div class="reader-count reader-count-top" id="readerCount" hidden aria-live="polite">' +
+        '<div class="reader-count reader-count-top" id="readerCount" aria-live="polite">' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
           '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
           '<strong class="reader-count-value">0</strong>' +
@@ -2784,18 +2784,31 @@ async function setupReaderCount(post, sb, isEn) {
     counter.hidden = false;
   };
 
-  const { data: beforeCount, error: beforeError } = await sb.rpc('get_post_reader_count', {
-    p_slug: post.slug
-  });
+  // Use the view-count RPC first. Keep the older reader-count RPC as a
+  // compatibility fallback for databases that still have the old function.
+  let beforeCount = null;
+  let beforeError = null;
 
-  if (!beforeError) {
-    showCount(beforeCount);
+  const primary = await sb.rpc('get_post_view_count', { p_slug: post.slug });
+  if (!primary.error) {
+    beforeCount = primary.data;
   } else {
-    console.warn('Could not read article view count:', beforeError.message);
+    beforeError = primary.error;
+    const legacy = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
+    if (!legacy.error) {
+      beforeCount = legacy.data;
+      beforeError = null;
+    } else {
+      console.warn('Could not read article view count:', legacy.error.message);
+    }
   }
 
-  // Record this public page view once. The count remains visible even if this
-  // write fails, and we refresh the displayed total when it succeeds.
+  if (beforeError === null && beforeCount !== null) {
+    showCount(beforeCount);
+  }
+
+  // Record this public page view once. The counter stays visible even if the
+  // write fails, and we refresh the total after a successful insert.
   const { error: recordError } = await sb.rpc('record_post_view', {
     p_slug: post.slug
   });
@@ -2805,14 +2818,17 @@ async function setupReaderCount(post, sb, isEn) {
     return;
   }
 
-  const { data: afterCount, error: afterError } = await sb.rpc('get_post_reader_count', {
-    p_slug: post.slug
-  });
+  const refreshed = await sb.rpc('get_post_view_count', { p_slug: post.slug });
+  if (!refreshed.error) {
+    showCount(refreshed.data);
+    return;
+  }
 
-  if (!afterError) {
-    showCount(afterCount);
-  } else if (beforeError) {
-    console.warn('Could not refresh article view count:', afterError.message);
+  const legacyAfter = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
+  if (!legacyAfter.error) {
+    showCount(legacyAfter.data);
+  } else {
+    console.warn('Could not refresh article view count:', legacyAfter.error.message);
   }
 }
 
