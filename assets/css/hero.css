@@ -205,7 +205,7 @@
 /* FINAL UPLOADED HERO ARTWORK — preserve the complete image, including right-side text. */
 .hero.hero-final.hero-image-only{
   width:100% !important;
-  height:auto !important;
+  height:520px !important;
   min-height:0 !important;
   display:block !important;
   position:relative !important;
@@ -221,9 +221,9 @@
 .hero.hero-final.hero-image-only img{
   display:block !important;
   width:100% !important;
-  height:auto !important;
+  height:520px !important;
   max-width:none !important;
-  object-fit:contain !important;
+  object-fit:cover !important;
   object-position:center center !important;
   margin:0 !important;
   padding:0 !important;
