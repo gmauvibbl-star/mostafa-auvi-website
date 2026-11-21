@@ -532,129 +532,68 @@ body > footer{
 }
 
 
-/* FINAL CLEAN SHARE ICONS — separate class so no legacy .share button styles can apply */
+/* Header share icons: four icon-only controls, no button background. */
 .page-wrap > .v2 > .hdr .tools .share-icons{
   display:flex!important;
   align-items:center!important;
-  gap:8px!important;
-  padding:0!important;
+  gap:10px!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:30px!important;
   margin:0!important;
+  padding:0!important;
   background:transparent!important;
   border:0!important;
   border-radius:0!important;
   box-shadow:none!important;
+  visibility:visible!important;
+  opacity:1!important;
 }
 .page-wrap > .v2 > .hdr .tools .share-icons a{
   display:grid!important;
   place-items:center!important;
-  width:22px!important;
-  height:22px!important;
-  min-width:22px!important;
-  flex:0 0 22px!important;
-  padding:0!important;
-  margin:0!important;
-  background:transparent!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  transform:none!important;
-  color:#fffaf1!important;
-  text-decoration:none!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a svg{
-  display:block!important;
-  width:18px!important;
-  height:18px!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  fill:none!important;
-  stroke:#fffaf1!important;
-  stroke-width:2!important;
-  stroke-linecap:round!important;
-  stroke-linejoin:round!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"] svg path{
-  fill:#fffaf1!important;
-  stroke:none!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a:hover{
-  color:#dfc27f!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a:hover svg{
-  stroke:#dfc27f!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"]:hover svg path{
-  fill:#dfc27f!important;
-  stroke:none!important;
-}
-@media(max-width:480px){
-  .page-wrap > .v2 > .hdr .tools .share-icons{gap:7px!important}
-  .page-wrap > .v2 > .hdr .tools .share-icons a{
-    width:21px!important;height:21px!important;min-width:21px!important;flex-basis:21px!important;
-  }
-  .page-wrap > .v2 > .hdr .tools .share-icons a svg{width:17px!important;height:17px!important}
-}
-
-
-/* FINAL VISIBILITY: isolated share icons on blue header */
-.page-wrap > .v2 > .hdr .tools .share-icons{
-  display:flex!important;visibility:visible!important;opacity:1!important;
-  align-items:center!important;gap:8px!important;
-  width:auto!important;height:auto!important;min-height:22px!important;
-  padding:0!important;margin:0!important;
-  background:transparent!important;border:0!important;border-radius:0!important;
-  box-shadow:none!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a{
-  display:block!important;visibility:visible!important;opacity:1!important;
-  position:relative!important;width:24px!important;height:24px!important;
-  min-width:24px!important;flex:0 0 24px!important;
-  padding:0!important;margin:0!important;
-  background:transparent!important;border:0!important;
-  color:#ffffff!important;
-  overflow:visible!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a svg{
-  display:block!important;visibility:visible!important;opacity:1!important;
-  width:24px!important;height:24px!important;
-  fill:none!important;stroke:#ffffff!important;stroke-width:2.2!important;
-  overflow:visible!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"] svg path{
-  fill:#ffffff!important;stroke:none!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="X"] svg path{
-  fill:none!important;stroke:#ffffff!important;stroke-width:2.4!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="WhatsApp"] svg path,
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Email"] svg path,
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Email"] svg rect{
-  fill:none!important;stroke:#ffffff!important;stroke-width:2.2!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a:hover{
-  color:#dfc27f!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a:hover svg{
-  stroke:#dfc27f!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"]:hover svg path{
-  fill:#dfc27f!important;stroke:none!important;
-}
-
-
-/* 2026-11-21: larger header share icons */
-.page-wrap > .v2 > .hdr .tools .share-icons{
-  gap:10px!important;
-}
-.page-wrap > .v2 > .hdr .tools .share-icons a{
   width:30px!important;
   height:30px!important;
   min-width:30px!important;
   flex:0 0 30px!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  transform:none!important;
+  visibility:visible!important;
+  opacity:1!important;
 }
 .page-wrap > .v2 > .hdr .tools .share-icons a svg{
+  display:block!important;
   width:27px!important;
   height:27px!important;
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:2.2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"] svg path{
+  fill:#fff!important;
+  stroke:none!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a:hover,
+.page-wrap > .v2 > .hdr .tools .share-icons a:focus-visible{
+  color:#dfc27f!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a:hover svg,
+.page-wrap > .v2 > .hdr .tools .share-icons a:focus-visible svg{
+  stroke:#dfc27f!important;
+}
+.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"]:hover svg path,
+.page-wrap > .v2 > .hdr .tools .share-icons a[aria-label="Facebook"]:focus-visible svg path{
+  fill:#dfc27f!important;
+  stroke:none!important;
 }
 @media(max-width:640px){
   .page-wrap > .v2 > .hdr .tools .share-icons{
@@ -671,7 +610,6 @@ body > footer{
     height:26px!important;
   }
 }
-
 
 /* 2026-11-21: readable date and language controls */
 .page-wrap > .v2 > .hdr .header-meta .date{
