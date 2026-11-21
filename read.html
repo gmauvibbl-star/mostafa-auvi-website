@@ -2621,7 +2621,7 @@ function renderArticle(post, sibling, sb) {
     }
   });
   const bodyHtml = bodyDoc.body.innerHTML;
-  const coverField = post.cover_image || post.cover_image_url || post.image_url || '';
+  const coverField = post.cover_image || '';
   const coverHtml = coverField
     ? '<img class="a4-cover" src="' + esc(coverField) + '" alt="' + esc(post.title || '') + '">'
     : '';
@@ -2852,7 +2852,7 @@ async function loadPost() {
     // Fetch only fields the reader actually needs. This keeps the first response
     // much smaller than select('*').
     const { data: post, error: err1 } = await sb.from('posts')
-      .select('slug,title,excerpt,body,published,published_at,updated_at,tags,cover_image,cover_image_url,image_url,category,language,group_id')
+      .select('slug,title,excerpt,body,published,published_at,updated_at,tags,cover_image,category,language,group_id')
       .eq('slug', slug)
       .eq('published', true)
       .maybeSingle();
