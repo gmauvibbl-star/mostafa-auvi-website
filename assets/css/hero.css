@@ -224,7 +224,7 @@
   height:400px !important;
   max-width:none !important;
   object-fit:cover !important;
-  object-position:center center !important;
+  object-position:center top !important;
   margin:0 !important;
   padding:0 !important;
   border:0 !important;
@@ -232,6 +232,9 @@
 @media(max-width:640px){
   .hero.hero-final.hero-image-only{
     height:330px !important;
+  }
+  .hero.hero-final.hero-image-only img{
+    object-position:center top !important;
   }
   .hero.hero-final.hero-image-only img{
     width:100% !important;
