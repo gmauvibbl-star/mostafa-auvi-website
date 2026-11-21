@@ -311,12 +311,3 @@
   text-shadow:0 2px 8px rgba(0,0,0,.65) !important;
 }
 
-  .hero.hero-final.hero-image-only img{
-    object-position:center top !important;
-  }
-  .hero.hero-final.hero-image-only img{
-    width:100% !important;
-    height:auto !important;
-    object-fit:contain !important;
-  }
-}
