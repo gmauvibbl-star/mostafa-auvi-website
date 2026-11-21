@@ -2624,7 +2624,7 @@ function renderArticle(post, sibling, sb) {
   articleEl.innerHTML =
     '<div class="a4-page">' +
       '<header class="a4-header">' +
-        '<div class="reader-count reader-count-top" id="readerCount" aria-live="polite">' +
+        '<div class="reader-count reader-count-top" id="readerCount" aria-live="polite" hidden>' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
           '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
           '<strong class="reader-count-value">0</strong>' +
@@ -2768,22 +2768,39 @@ async function setupReaderCount(post, sb, isEn) {
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  // record_post_view returns the current total after inserting this view.
-  // The database function uses the same post_views source as the dashboard,
-  // so a separate read-before/read-after pair is unnecessary.
-  try {
-    const recorded = await sb.rpc('record_post_view', { p_slug: post.slug });
-
-    if (recorded.error) {
-      console.warn('Article view was not recorded:', recorded.error.message);
-      return;
+  // Count a reader after roughly half of the article has been read.
+  // The counter stays hidden until the database confirms the view.
+  let recordedOnce = false;
+  const record = async () => {
+    if (recordedOnce) return;
+    recordedOnce = true;
+    try {
+      const recorded = await sb.rpc('record_post_view', { p_slug: post.slug });
+      if (recorded.error) {
+        recordedOnce = false;
+        console.warn('Article view was not recorded:', recorded.error.message);
+        return;
+      }
+      valueEl.textContent = formatCount(recorded.data);
+      counter.hidden = false;
+      window.removeEventListener('scroll', checkProgress);
+      window.removeEventListener('resize', checkProgress);
+    } catch (e) {
+      recordedOnce = false;
+      console.warn('Reader count unavailable:', e?.message || e);
     }
-
-    valueEl.textContent = formatCount(recorded.data);
-    counter.hidden = false;
-  } catch (e) {
-    console.warn('Reader count unavailable:', e?.message || e);
-  }
+  };
+  const checkProgress = () => {
+    const article = document.querySelector('.a4-body, .article-body, article');
+    if (!article) return;
+    const rect = article.getBoundingClientRect();
+    const articleTop = window.scrollY + rect.top;
+    const threshold = articleTop + Math.max(0, article.offsetHeight * 0.5);
+    if (window.scrollY + window.innerHeight >= threshold) record();
+  };
+  checkProgress();
+  window.addEventListener('scroll', checkProgress, { passive: true });
+  window.addEventListener('resize', checkProgress);
 }
 async function loadPost() {
   // Chandradwip feature pages are local/static content. Render them directly,
