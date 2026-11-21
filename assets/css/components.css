@@ -583,7 +583,7 @@
   font-family: 'Noto Serif Bengali', serif;
   font-size: 17px;
   font-weight: 700;
-  color: var(--teal-deep);
+  color: var(--blood, #8A1818) !important;
   line-height: 1.3;
 }
 .latest-card .lc-excerpt {
