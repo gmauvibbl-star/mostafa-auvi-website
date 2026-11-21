@@ -110,6 +110,18 @@
   .essay-hub-card:nth-child(5n+3){--accent:#2E4878}
   .essay-hub-card:nth-child(5n+4){--accent:#7A3458}
   .essay-hub-card:nth-child(5n){--accent:#404E18}
+  .essay-hub-card .hub-art{
+    width:78px;height:78px;flex:0 0 78px;margin-right:14px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:8px;background:rgba(255,250,240,.78);
+    border:1px solid rgba(184,146,72,.28);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);
+  }
+  .essay-hub-card .hub-art svg{
+    width:58px;height:58px;display:block;
+    filter:drop-shadow(0 3px 3px rgba(45,32,18,.12));
+  }
+  .essay-hub-card .hub-card-content{min-width:0;display:flex;flex-direction:column;justify-content:center;flex:1}
   .essay-hub-card strong{
     display:block;padding-right:34px;
     font-family:'Noto Serif Bengali',serif;font-size:17px;font-weight:700;
@@ -143,10 +155,12 @@
   @media(max-width:680px){
     .essay-hub{padding:16px 22px 8px}
     .essay-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-    .essay-hub-card{min-height:104px;padding:15px 13px 13px 17px}
-    .essay-hub-card strong{font-size:15px}
-    .essay-hub-card span{font-size:11.5px;padding:4px 9px 3px}
-    .essay-hub-card::after{right:10px;top:10px;width:22px;height:22px;font-size:14px}
+    .essay-hub-card{min-height:104px;padding:12px 10px 11px 13px}
+    .essay-hub-card .hub-art{width:58px;height:58px;flex-basis:58px;margin-right:9px}
+    .essay-hub-card .hub-art svg{width:44px;height:44px}
+    .essay-hub-card strong{font-size:14px;padding-right:24px}
+    .essay-hub-card span{font-size:10.5px;padding:3px 7px 2px;margin-top:8px}
+    .essay-hub-card::after{right:8px;top:8px;width:20px;height:20px;font-size:13px}
   }
 
   /* Status */
@@ -910,7 +924,13 @@ function renderSubcategoryPills(){
     const label=language==='en'?item.en:item.bn;
     const url=category?subcategoryUrl(item.slug,category):languageUrl(language,item.slug,'');
     const active=subcategory===item.slug?' active':'';
-    return '<a class="essay-hub-card'+active+'" href="'+esc(url)+'"><strong>'+esc(label)+'</strong><span>'+(language==='en'?'Browse writing':'লেখা দেখুন')+'</span></a>';
+    const icons={
+      'chotogolpo':'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 9h31a7 7 0 0 1 7 7v31H20a8 8 0 0 1-8-8V9Z" fill="#F4ECD8" stroke="#7A3F22" stroke-width="2"/><path d="M18 17h25M18 24h22M18 31h19" stroke="#B89248" stroke-width="2" stroke-linecap="round"/><path d="M39 43l6-12 6 12-6-3-6 3Z" fill="#2D5F52" stroke="#2D5F52" stroke-width="1.5"/><path d="M10 47h40" stroke="#7A3F22" stroke-width="2" stroke-linecap="round"/></svg>',
+      'bodo-golpo':'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 45h40" stroke="#7A3F22" stroke-width="2.5" stroke-linecap="round"/><path d="M18 42h25V31H18zM22 29h21V18H22zM26 16h17V8H26z" fill="#F4ECD8" stroke="#7A3F22" stroke-width="2"/><path d="M32 14c-4-8 6-8 2-13 8 7 8 12 3 16" fill="none" stroke="#B89248" stroke-width="2.5" stroke-linecap="round"/><path d="M34 20v20" stroke="#D4B468" stroke-width="2"/></svg>',
+      'uponmas':'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 15c9-5 18-3 22 2v34c-5-5-14-6-22-2V15Z" fill="#EDE2C6" stroke="#2E4878" stroke-width="2"/><path d="M54 15c-9-5-18-3-22 2v34c5-5 14-6 22-2V15Z" fill="#F4ECD8" stroke="#2E4878" stroke-width="2"/><path d="M32 17v34" stroke="#B89248" stroke-width="2"/><path d="M17 23h10M17 29h10M37 23h10M37 29h10" stroke="#B89248" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      'dharabahik-uponmas':'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 13h50" stroke="#7A3458" stroke-width="2"/><path d="M11 10v6M26 10v6M41 10v6M54 10v6" stroke="#7A3458" stroke-width="2"/><path d="M10 17l8 5-3 26-9-5 4-26ZM25 17l8 5-3 26-9-5 4-26ZM40 17l8 5-3 26-9-5 4-26ZM53 17l6 4-2 22-7-4 3-22Z" fill="#F4ECD8" stroke="#B89248" stroke-width="1.6"/><path d="M19 24h5M34 24h5M49 24h5" stroke="#7A3458" stroke-width="1.5"/></svg>'
+    };
+    return '<a class="essay-hub-card'+active+'" href="'+esc(url)+'"><span class="hub-art">'+(icons[item.slug]||'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="20" fill="#F4ECD8" stroke="#B89248" stroke-width="2"/><path d="M22 32h20M32 22v20" stroke="#0F3D3E" stroke-width="2"/></svg>')+'</span><span class="hub-card-content"><strong>'+esc(label)+'</strong><span>'+(language==='en'?'Browse writing':'লেখা দেখুন')+'</span></span></a>';
   }).join('');
 }
 // Mark active filter (legacy nav-pill marking)
