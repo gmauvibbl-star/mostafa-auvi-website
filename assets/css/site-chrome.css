@@ -673,22 +673,24 @@ body > footer{
 }
 
 
-/* 2026-11-21: slightly larger date and language controls */
+/* 2026-11-21: readable date and language controls */
 .page-wrap > .v2 > .hdr .header-meta .date{
-  font-size:15px!important;
+  font-size:17px!important;
   line-height:1.35!important;
+  font-weight:600!important;
 }
 .page-wrap > .v2 > .hdr .header-meta .lang,
 .page-wrap > .v2 > .hdr .header-meta .lang-label,
 .page-wrap > .v2 > .hdr .header-meta .lang a{
-  font-size:15px!important;
+  font-size:17px!important;
   line-height:1.35!important;
+  font-weight:600!important;
 }
 @media(max-width:640px){
   .page-wrap > .v2 > .hdr .header-meta .date,
   .page-wrap > .v2 > .hdr .header-meta .lang,
   .page-wrap > .v2 > .hdr .header-meta .lang-label,
   .page-wrap > .v2 > .hdr .header-meta .lang a{
-    font-size:14px!important;
+    font-size:16px!important;
   }
 }
