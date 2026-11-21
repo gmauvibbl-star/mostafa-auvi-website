@@ -281,7 +281,7 @@
         .limit(3)
         .then(function (res) {
           var rows = (res && res.data) || [];
-          if (!rows.length) return; // leave section hidden
+          if (!rows.length) { grid.innerHTML = '<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>'; return;
           grid.innerHTML = rows.map(function (p) {
             var cover = p.cover_image
               ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
@@ -299,7 +299,7 @@
           }).join("");
           section.hidden = false;
         })
-        .catch(function () { /* leave section hidden */ });
+        .catch(function () { grid.innerHTML = '<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>'; });
     } catch (e) { /* leave section hidden */ }
   }
 
@@ -474,7 +474,7 @@
           }).join("");
           section.hidden = false;
         })
-        .catch(function () { /* leave section hidden on error */ });
+        .catch(function () { grid.innerHTML = '<div class="latest-loading">Recent writings could not be loaded right now. Please try again.</div>'; });
     } catch (e) { /* leave section hidden */ }
   }
 
