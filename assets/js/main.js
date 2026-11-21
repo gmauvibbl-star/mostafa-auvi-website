@@ -464,8 +464,9 @@
             return;
           }
           grid.innerHTML = rows.map(function (p) {
-            var cover = p.cover_image
-              ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
+            var coverUrl = p.cover_image || p.cover_image_url || "";
+            var cover = coverUrl
+              ? '<img class="lc-cover" src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
               : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
             var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
             if (excerpt.length > 140) excerpt = excerpt.slice(0, 140) + "…";
