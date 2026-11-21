@@ -228,34 +228,6 @@
   }
 
   /* ====================================================================
-   *  7. CHANDRADWIP EXTRA IMAGE — graceful placeholder
-   *     If assets/img/chandradwip-extra.jpg is missing, the <figure>
-   *     shows a placeholder note. When the owner drops the real image
-   *     at that path, it loads and the placeholder disappears.
-   * ==================================================================== */
-  function initChandradwipExtra() {
-    var fig = document.querySelector(".chandradwip-extra");
-    if (!fig) return;
-    var img = fig.querySelector("img");
-    if (!img) return;
-    function showPlaceholder() {
-      fig.classList.add("is-placeholder");
-    }
-    function hidePlaceholder() {
-      fig.classList.remove("is-placeholder");
-      var note = fig.querySelector(".placeholder-note");
-      if (note) note.hidden = true;
-    }
-    if (img.complete) {
-      if (img.naturalWidth === 0) showPlaceholder();
-    }
-    img.addEventListener("error", showPlaceholder);
-    img.addEventListener("load", function () {
-      if (img.naturalWidth > 0) hidePlaceholder();
-    });
-  }
-
-  /* ====================================================================
    *  8. LATEST WRITINGS — auto-display latest published articles
    *     Fetches the 3 most recent published posts (Bengali) from the same
    *     Supabase project used by auth.js / posts.html. Reveals the
