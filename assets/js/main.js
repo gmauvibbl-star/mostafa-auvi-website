@@ -193,6 +193,8 @@
       } catch (e) { return ""; }
     }
     function catLabel(c) {
+      var key = String(c == null ? "" : c).trim().toLowerCase();
+      if (key === "chandradwip" || key === "চন্দ্রদ্বীপ") return "সাম্প্রতিক লেখা";
       var map = {
         kothasahitya: "কথাসাহিত্য",
         "probandho-sahityasamalochona": "প্রবন্ধ ও সাহিত্যসমালোচনা",
@@ -200,9 +202,8 @@
         "banking-o-orthoniti": "ব্যাংকিং ও অর্থনীতি",
         "prokashona-o-pdf": "প্রকাশনা",
         bhromonkahini: "ভ্রমণ ও অনুবাদ সাহিত্য",
-        chandradwip: "সাম্প্রতিক লেখা",
       };
-      return map[c] || c || "";
+      return map[key] || c || "";
     }
 
     function render(rows) {
