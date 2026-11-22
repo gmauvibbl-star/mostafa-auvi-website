@@ -174,168 +174,51 @@
     var section = document.querySelector(".latest-writings");
     var grid = document.getElementById("latestGrid");
     if (!section || !grid) return;
-    // Same publishable config as auth.js / posts.html (safe for client-side)
     var SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
     var SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
     if (!SUPABASE_URL.startsWith("https://")) return;
 
     function esc(s) {
-      return String(s == null ? "" : s)
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+      return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
     }
     function fmtDate(iso) {
       if (!iso) return "";
-      try {
-        return new Date(iso).toLocaleDateString("bn-BD", {
-          day: "numeric", month: "long", year: "numeric",
-        });
-      } catch (e) { return ""; }
+      try { return new Date(iso).toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric"}); } catch(e){ return ""; }
     }
-    function catLabel(c) {
-      var key = String(c == null ? "" : c).trim().toLowerCase();
-      if (key === "chandradwip" || key === "চন্দ্রদ্বীপ") return "সাম্প্রতিক লেখা";
-      var map = {
-        kothasahitya: "কথাসাহিত্য",
-        "probandho-sahityasamalochona": "প্রবন্ধ ও সাহিত্যসমালোচনা",
-        "ain-oadalot": "আইন ও আদালত",
-        "banking-o-orthoniti": "ব্যাংকিং ও অর্থনীতি",
-        "prokashona-o-pdf": "প্রকাশনা",
-        bhromonkahini: "ভ্রমণ ও অনুবাদ সাহিত্য",
-      };
+    function catLabelBn(c) {
+      var map={kothasahitya:"কথাসাহিত্য","probandho-sahityasamalochona":"প্রবন্ধ ও সাহিত্যসমালোচনা","ain-oadalot":"আইন ও আদালত","banking-o-orthoniti":"ব্যাংকিং ও অর্থনীতি","prokashona-o-pdf":"প্রকাশনা",bhromonkahini:"ভ্রমণ ও অনুবাদ সাহিত্য",chandradwip:"চন্দ্রদ্বীপ"};
+      var key=String(c==null?"":c).trim().toLowerCase();
       return map[key] || c || "";
     }
-
     function render(rows) {
-      rows = Array.isArray(rows) ? rows : [];
-      if (!rows.length) {
-        grid.innerHTML = '<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>';
-        section.hidden = false;
-        return;
-      }
-      grid.innerHTML = rows.map(function (p) {
-        var coverUrl = p.cover_image || p.cover_image_url || "./assets/img/chandradwip-writing-cover.jpg";
-        var cover = '<img class="lc-cover" src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225" onerror="this.onerror=null;this.src=\'./assets/img/chandradwip-writing-cover.jpg\'">';
-        var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
-        if (excerpt.length > 140) excerpt = excerpt.slice(0, 140) + "…";
-        return '<a class="latest-card" href="./read.html?slug=' +
-          encodeURIComponent(p.slug) + '&lang=bn">' + cover +
-          '<div class="lc-body">' +
-          '<span class="lc-badge">' + esc(catLabel(p.category)) + '</span>' +
-          '<h3 class="lc-title">' + esc(p.title || "(শিরোনামহীন)") + '</h3>' +
-          (excerpt ? '<p class="lc-excerpt">' + esc(excerpt) + '</p>' : '') +
-          (p.published_at ? '<span class="lc-date">' + esc(fmtDate(p.published_at)) + '</span>' : '') +
-          '</div></a>';
+      rows=Array.isArray(rows)?rows:[];
+      if(!rows.length){grid.innerHTML='<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>';section.hidden=false;return;}
+      grid.innerHTML=rows.map(function(p){
+        var coverUrl=p.cover_image||p.cover_image_url||"./assets/img/chandradwip-writing-cover.jpg";
+        var cover='<img class="lc-cover" src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225" onerror="this.onerror=null;this.src=\'./assets/img/chandradwip-writing-cover.jpg\'">';
+        var excerpt=String(p.excerpt||"").replace(/\s+/g," ").trim();
+        if(excerpt.length>140) excerpt=excerpt.slice(0,140)+"…";
+        return '<a class="latest-card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang=bn">'+cover+
+          '<div class="lc-body"><span class="lc-cat">'+esc(catLabelBn(p.category))+'</span>'+
+          '<h3 class="lc-title">'+esc(p.title||"(শিরোনামহীন)")+'</h3>'+
+          (excerpt?'<p class="lc-excerpt">'+esc(excerpt)+'</p>':'')+
+          '<span class="lc-date">'+esc(fmtDate(p.published_at))+'</span></div></a>';
       }).join("");
-      section.hidden = false;
+      section.hidden=false;
     }
-
-    function restFallback() {
-      var url = SUPABASE_URL + "/rest/v1/posts?" +
-        "select=slug,title,excerpt,cover_image,cover_image_url,category,published_at,language" +
-        "&published=eq.true&language=eq.bn&order=published_at.desc.nullslast&limit=3";
-      return fetch(url, {
-        headers: {
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": "Bearer " + SUPABASE_ANON_KEY
-        },
-        cache: "no-store"
-      }).then(function (res) {
-        if (!res.ok) throw new Error("REST " + res.status);
-        return res.json();
-      });
+    function restFallback(){
+      var url=SUPABASE_URL+"/rest/v1/posts?select=slug,title,excerpt,cover_image,cover_image_url,category,published_at,language&published=eq.true&language=eq.bn&order=published_at.desc.nullslast&limit=3";
+      return fetch(url,{headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY},cache:"no-store"}).then(function(res){if(!res.ok)throw new Error("REST "+res.status);return res.json();});
     }
-
-    function showLoadError() {
-      grid.innerHTML = '<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';
-      section.hidden = false;
-    }
-
-    try {
-      if (window.supabase && window.supabase.createClient) {
-        var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        sb.from("posts")
-          .select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language")
-          .eq("published", true)
-          .eq("language", "bn")
-          .order("published_at", { ascending: false, nullsFirst: false })
-          .limit(3)
-          .then(function (res) {
-            if (res && !res.error) {
-              render(res.data);
-            } else {
-              restFallback().then(render).catch(showLoadError);
-            }
-          })
-          .catch(function () {
-            restFallback().then(render).catch(showLoadError);
-          });
-      } else {
-        restFallback().then(render).catch(showLoadError);
-      }
-    } catch (e) {
-      restFallback().then(render).catch(showLoadError);
-    }
-  }
-
-  /* ====================================================================
-   *  CHANDRADWIP WRITINGS ON HOMEPAGE
-   * ==================================================================== */
-  function initChandradwipWritings() {
-    var section = document.getElementById("chandradwipWritingSection");
-    var grid = document.getElementById("chandradwipWritingGrid");
-    if (!section || !grid || !window.supabase) return;
-
-    var SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
-    var SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
-
-    function esc(s) {
-      return String(s == null ? "" : s)
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
-    function fmtDate(iso) {
-      if (!iso) return "";
-      try {
-        return new Date(iso).toLocaleDateString("bn-BD", {
-          day: "numeric", month: "long", year: "numeric"
-        });
-      } catch (e) { return ""; }
-    }
-
-    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    sb.from("posts")
-      .select("slug,title,excerpt,cover_image,published_at,category")
-      .eq("published", true)
-      .eq("language", "bn")
-      .eq("category", "chandradwip")
-      .order("published_at", { ascending: false, nullsFirst: false })
-      .limit(12)
-      .then(function(res) {
-        var rows = (res && res.data) || [];
-        if (!rows.length) return;
-
-        grid.innerHTML = rows.map(function(p) {
-          var cover = p.cover_image
-            ? '<img class="lc-cover" src="' + esc(p.cover_image) + '" alt="' + esc(p.title || "") + '" loading="lazy">'
-            : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
-          var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
-          if (excerpt.length > 150) excerpt = excerpt.slice(0, 150) + "…";
-          return '<a class="latest-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=bn">' +
-            cover +
-            '<div class="lc-body">' +
-            '<span class="lc-badge">চন্দ্রদ্বীপ</span>' +
-            '<h3 class="lc-title">' + esc(p.title || "(শিরোনামহীন)") + '</h3>' +
-            (excerpt ? '<p class="lc-excerpt">' + esc(excerpt) + '</p>' : '') +
-            (p.published_at ? '<span class="lc-date">' + esc(fmtDate(p.published_at)) + '</span>' : '') +
-            '</div></a>';
-        }).join("");
-
-        section.hidden = false;
-      })
-      .catch(function() {});
+    function showLoadError(){grid.innerHTML='<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';section.hidden=false;}
+    try{
+      var sb=window.supabase&&window.supabase.createClient?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+      if(sb){
+        sb.from("posts").select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language").eq("published",true).eq("language","bn").order("published_at",{ascending:false,nullsFirst:false}).limit(3).then(function(res){
+          if(res&&!res.error)render(res.data);else restFallback().then(render).catch(showLoadError);
+        }).catch(function(){restFallback().then(render).catch(showLoadError);});
+      }else restFallback().then(render).catch(showLoadError);
+    }catch(e){restFallback().then(render).catch(showLoadError);}
   }
 
   /* ====================================================================
