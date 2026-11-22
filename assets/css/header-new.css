@@ -73,6 +73,11 @@ html,body{
   overscroll-behavior-y:none;
   -webkit-text-size-adjust:100%;
 }
+/* Desktop navigation: show the complete menu without an invisible horizontal scroll layer. */
+@media (min-width: 641px){
+  .v2 .menu{overflow-x:visible;overflow-y:visible;}
+}
+
 /* Mobile navigation uses native horizontal scrolling; no overlay/fade is placed over menu items. */
 /* Tagline / brand shrink on small screens */
 /* iPhone SE / mini (<=380px) — final shrink, must come AFTER 480px so it wins */
