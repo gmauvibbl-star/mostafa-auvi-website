@@ -181,3 +181,7 @@ html,body{
 @media(max-width:380px){
   .header-meta .date,.header-meta .lang{font-size:10px!important}
 }
+
+/* Final: navigation must never carry a white fade/overlay. */
+.menu::before,.menu::after{content:none!important;display:none!important;background:none!important;}
+.v2 .menu{background:transparent!important;}
