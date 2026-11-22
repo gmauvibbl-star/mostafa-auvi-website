@@ -277,7 +277,6 @@
     } catch (e) {
       restFallback().then(render).catch(showLoadError);
     }
-    } catch (e) { /* leave section hidden */ }
   }
 
   /* ====================================================================
