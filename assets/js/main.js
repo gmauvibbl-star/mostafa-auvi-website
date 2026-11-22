@@ -214,10 +214,8 @@
         return;
       }
       grid.innerHTML = rows.map(function (p) {
-        var coverUrl = p.cover_image || p.cover_image_url || "";
-        var cover = coverUrl
-          ? '<img class="lc-cover" src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
-          : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
+        var coverUrl = p.cover_image || p.cover_image_url || "./assets/img/chandradwip-writing-cover.jpg";
+        var cover = '<img class="lc-cover" src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225" onerror="this.onerror=null;this.src=\'./assets/img/chandradwip-writing-cover.jpg\'">';
         var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
         if (excerpt.length > 140) excerpt = excerpt.slice(0, 140) + "…";
         return '<a class="latest-card" href="./read.html?slug=' +
