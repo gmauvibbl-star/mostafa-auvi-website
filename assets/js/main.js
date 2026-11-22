@@ -238,7 +238,10 @@
           }).join("");
           section.hidden = false;
         })
-        .catch(function () { grid.innerHTML = '<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>'; });
+        .catch(function () {
+          grid.innerHTML = '<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';
+          section.hidden = false;
+        });
     } catch (e) { /* leave section hidden */ }
   }
 
