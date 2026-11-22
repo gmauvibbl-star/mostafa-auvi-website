@@ -2627,7 +2627,7 @@ function renderArticle(post, sibling, sb) {
         '<div class="reader-count reader-count-top" id="readerCount" aria-live="polite" hidden>' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>' +
           '<span>' + (isEn ? 'Readers:' : 'পাঠক:') + '</span>' +
-          '<strong class="reader-count-value">0</strong>' +
+          '<strong class="reader-count-value">—</strong>' +
         '</div>' +
         '<span class="a4-cat-badge">' + esc(catLabel(post.category, lang)) + '</span>' +
         '<h1 class="a4-title' + (isEn ? '' : ' bn') + '">' + esc(post.title || '') + '</h1>' +
@@ -2768,9 +2768,23 @@ async function setupReaderCount(post, sb, isEn) {
     return isEn ? n.toLocaleString('en-US') : n.toLocaleString('bn-BD');
   };
 
-  // Count a reader after roughly half of the article has been read.
-  // The counter stays hidden until the database confirms the view.
+  // Always show the existing count as soon as the article opens.
+  // Do not wait until 50% of the article has been read.
   let recordedOnce = false;
+  try {
+    const current = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
+    if (!current.error && current.data !== null && current.data !== undefined) {
+      valueEl.textContent = formatCount(current.data);
+      counter.hidden = false;
+    } else {
+      console.warn('Reader count lookup failed:', current?.error?.message || 'unknown error');
+    }
+  } catch (e) {
+    console.warn('Reader count lookup unavailable:', e?.message || e);
+  }
+
+  // Count this visit after roughly half of the article has been read.
+  // After recording, fetch the combined historical + current total again.
   const record = async () => {
     if (recordedOnce) return;
     recordedOnce = true;
@@ -2781,8 +2795,16 @@ async function setupReaderCount(post, sb, isEn) {
         console.warn('Article view was not recorded:', recorded.error.message);
         return;
       }
-      valueEl.textContent = formatCount(recorded.data);
-      counter.hidden = false;
+
+      const current = await sb.rpc('get_post_reader_count', { p_slug: post.slug });
+      if (!current.error && current.data !== null && current.data !== undefined) {
+        valueEl.textContent = formatCount(current.data);
+        counter.hidden = false;
+      } else if (recorded.data !== null && recorded.data !== undefined) {
+        valueEl.textContent = formatCount(recorded.data);
+        counter.hidden = false;
+      }
+
       window.removeEventListener('scroll', checkProgress);
       window.removeEventListener('resize', checkProgress);
     } catch (e) {
@@ -2790,6 +2812,7 @@ async function setupReaderCount(post, sb, isEn) {
       console.warn('Reader count unavailable:', e?.message || e);
     }
   };
+
   const checkProgress = () => {
     const article = document.querySelector('.a4-body, .article-body, article');
     if (!article) return;
@@ -2798,6 +2821,8 @@ async function setupReaderCount(post, sb, isEn) {
     const threshold = articleTop + Math.max(0, article.offsetHeight * 0.5);
     if (window.scrollY + window.innerHeight >= threshold) record();
   };
+
+  // Run once immediately so short articles can still show their count.
   checkProgress();
   window.addEventListener('scroll', checkProgress, { passive: true });
   window.addEventListener('resize', checkProgress);
