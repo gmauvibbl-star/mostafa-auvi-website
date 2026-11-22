@@ -498,7 +498,6 @@
     initDate();
     initActiveNav();
     initModalFocusTrap();
-    initChandradwipExtra();
     initLatestWritings();
     initChandradwipWritings();
     initChandradwipPanels();
