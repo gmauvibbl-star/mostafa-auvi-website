@@ -73,27 +73,7 @@ html,body{
   overscroll-behavior-y:none;
   -webkit-text-size-adjust:100%;
 }
-/* ====== MOBILE HEADER REFINEMENT (2026-11-04) ====== */
-/* Nav (.menu): right-edge fade hint that more items are scrollable */
-.menu::after{
-  content:"";
-  position:absolute;
-  top:0;right:0;bottom:0;
-  width:28px;
-  background:linear-gradient(to left,var(--bg) 35%,rgba(255,255,255,0));
-  pointer-events:none;
-  z-index:2;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .menu::after{
-    background:linear-gradient(to left,var(--bg) 35%,rgba(23,21,15,0));
-  }
-}
-:root[data-theme="dark"] .menu::after{
-  background:linear-gradient(to left,var(--bg) 35%,rgba(23,21,15,0));
-}
-@media(min-width:821px){ .menu::after{display:none} }
-
+/* Mobile navigation uses native horizontal scrolling; no overlay/fade is placed over menu items. */
 /* Tagline / brand shrink on small screens */
 /* iPhone SE / mini (<=380px) — final shrink, must come AFTER 480px so it wins */
 
