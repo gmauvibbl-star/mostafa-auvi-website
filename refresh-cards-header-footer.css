@@ -1,0 +1,305 @@
+/* ==========================================================================
+   refresh-cards-header-footer.css
+   Load this AFTER all existing stylesheets on every page:
+   <link rel="stylesheet" href="assets/css/refresh-cards-header-footer.css?v=1">
+   ========================================================================== */
+
+:root {
+  --rf-teal: #0f3d3e;
+  --rf-teal-2: #1d5558;
+  --rf-gold: #c5a15a;
+  --rf-cream: #faf4e8;
+  --rf-paper: #f4ead2;
+  --rf-ink: #1f2a2a;
+  --rf-muted: #6b6456;
+  --rf-blood: #8a1818;
+  --rf-shadow: 0 10px 30px rgba(15, 61, 62, 0.12);
+  --rf-shadow-hover: 0 18px 40px rgba(15, 61, 62, 0.22);
+}
+
+/* ---------- HEADER ---------- */
+.page-wrap > .v2 {
+  background: linear-gradient(118deg, var(--rf-teal) 0%, #164e53 58%, var(--rf-teal-2) 100%) !important;
+  border-bottom: 3px solid var(--rf-gold);
+  box-shadow: 0 6px 24px rgba(15, 61, 62, 0.25);
+}
+
+.page-wrap > .v2 > .hdr {
+  padding: 14px 28px 10px !important;
+  color: var(--rf-cream) !important;
+  background: transparent !important;
+}
+
+.hdr .logo {
+  font-family: "Playfair Display", "Noto Serif Bengali", serif;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--rf-cream);
+}
+
+.hdr .logo .a,
+.hdr .logo .b {
+  color: var(--rf-cream);
+}
+
+.hdr .logo .bar {
+  background: var(--rf-gold) !important;
+}
+
+.hdr .lang a.active {
+  background: var(--rf-gold) !important;
+  color: #173f40 !important;
+  border-radius: 999px;
+}
+
+.hdr .lang a {
+  border-radius: 999px;
+  padding: 2px 9px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.hdr .lang a:not(.active):hover {
+  background: rgba(197, 161, 90, 0.18);
+}
+
+.menu > a,
+.menu .dropdown > summary {
+  position: relative;
+  color: var(--rf-cream) !important;
+  text-decoration: none;
+  padding: 6px 2px;
+  font-family: "Noto Serif Bengali", "Hind Siliguri", serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.menu > a::after,
+.menu .dropdown > summary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--rf-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.menu > a:hover::after,
+.menu > a.active::after,
+.menu .dropdown[open] > summary::after {
+  transform: scaleX(1);
+}
+
+.share-icons a {
+  border: 1px solid rgba(197, 161, 90, 0.5);
+  border-radius: 50%;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.share-icons a:hover {
+  background: rgba(197, 161, 90, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ---------- CARDS (posts page + homepage latest writings) ---------- */
+.card,
+.latest-card {
+  background: linear-gradient(180deg, #fffdf7 0%, var(--rf-cream) 100%);
+  border: 1px solid #e3d6b8;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--rf-shadow);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover,
+.latest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--rf-shadow-hover);
+  border-color: var(--rf-gold);
+}
+
+.card-cover,
+.lc-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: var(--rf-paper);
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-cover,
+.latest-card:hover .lc-cover {
+  transform: scale(1.04);
+}
+
+.card-cover-fallback,
+.lc-cover-fallback {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(197, 161, 90, 0.35), transparent 55%),
+    linear-gradient(135deg, var(--rf-teal), var(--rf-teal-2));
+  color: var(--rf-gold);
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+}
+
+.card-body,
+.lc-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.card-badges,
+.lc-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--rf-cream);
+  background: var(--rf-teal);
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--rf-gold);
+}
+
+.card-title,
+.lc-title {
+  font-family: "Noto Serif Bengali", "Playfair Display", serif;
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--rf-blood) !important;
+  margin: 0;
+}
+
+.card-excerpt,
+.lc-excerpt {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--rf-muted);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta,
+.lc-date {
+  margin-top: auto;
+  font-size: 12.5px;
+  color: var(--rf-teal-2);
+  padding-top: 10px;
+  border-top: 1px dashed #e3d6b8;
+}
+
+/* Grid spacing for both card containers */
+#latestGrid,
+.cards {
+  gap: 26px;
+}
+
+@media (min-width: 900px) {
+  #latestGrid,
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  }
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: linear-gradient(180deg, var(--rf-teal) 0%, #0b2e2f 100%);
+  color: var(--rf-cream);
+  border-top: 4px solid var(--rf-gold);
+  margin-top: 60px;
+}
+
+footer .fbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px 28px;
+  padding: 36px 28px;
+  font-size: 14px;
+}
+
+footer .fbrand {
+  font-family: "Playfair Display", "Noto Serif Bengali", serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--rf-cream);
+}
+
+footer .fbrand em {
+  display: block;
+  font-family: "Noto Serif Bengali", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--rf-gold);
+  margin-top: 4px;
+}
+
+footer .contact a,
+footer .legal a {
+  color: var(--rf-gold);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(197, 161, 90, 0.6);
+}
+
+footer .contact a:hover,
+footer .legal a:hover {
+  color: var(--rf-cream);
+  border-bottom-color: var(--rf-cream);
+}
+
+footer .legal {
+  color: rgba(250, 244, 232, 0.8);
+}
+
+footer .dash {
+  margin-left: 8px;
+  padding: 4px 10px;
+  border: 1px solid rgba(197, 161, 90, 0.55);
+  border-radius: 999px;
+  color: var(--rf-cream) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+footer .dash:hover {
+  background: rgba(197, 161, 90, 0.18);
+}
+
+@media (max-width: 640px) {
+  .page-wrap > .v2 > .hdr {
+    padding: 10px 14px 8px !important;
+  }
+
+  footer .fbar {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 18px;
+  }
+}
