@@ -5,13 +5,10 @@
  *    1. Share / copy-link / toast  (carried over verbatim from the
  *       original share <script>, lines 2074-2165 — same public API:
  *       window.sharePage, window.copyLink)
- *    2. NEW: mobile nav toggle (accessible disclosure)
- *    3. NEW: back-to-top button
- *    4. NEW: dynamic utility-bar date (Bengali locale)
- *    5. NEW: aria-current on active nav link
- *    6. NEW: focus-trap wrapper for the login modal — does NOT touch
+ *    2. Back-to-top button
+ *    3. Focus-trap wrapper for the login modal — does NOT touch
  *       auth.js; it only observes the .open class on #loginModalOverlay
- *    7. NEW: graceful placeholder for the Chandradwip extra image
+ *    4. Latest-writing feeds and Chandradwip panels
  *
  *  This file does NOT modify the hero banner, the header border, or
  *  the author dashboard logic (auth.js handles all auth).
@@ -98,33 +95,6 @@
   }
 
   /* ====================================================================
-   *  2. MOBILE NAV TOGGLE  (accessible disclosure)
-   * ==================================================================== */
-  function initNavToggle() {
-    var toggle = document.querySelector(".nav-toggle");
-    var menu = document.querySelector(".nav ul");
-    if (!toggle || !menu) return;
-    toggle.addEventListener("click", function () {
-      var open = menu.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    // Close menu when a link is clicked (mobile)
-    menu.addEventListener("click", function (e) {
-      if (e.target.closest("a")) {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
-    // Reset on resize to desktop
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 900) {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  /* ====================================================================
    *  3. BACK-TO-TOP
    * ==================================================================== */
   function initBackToTop() {
@@ -142,41 +112,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
     onScroll();
-  }
-
-  /* ====================================================================
-   *  4. DYNAMIC UTILITY-BAR DATE (Bengali locale)
-   * ==================================================================== */
-  function initDate() {
-    var el = document.querySelector(".utility-bar .date");
-    if (!el) return;
-    try {
-      var now = new Date();
-      var formatted = now.toLocaleDateString("bn-BD", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
-      el.textContent = formatted;
-    } catch (e) {
-      // keep the static fallback already in the HTML
-    }
-  }
-
-  /* ====================================================================
-   *  5. aria-current on active nav link
-   * ==================================================================== */
-  function initActiveNav() {
-    var here = window.location.pathname.split("/").pop() || "index.html";
-    document.querySelectorAll(".nav ul li a").forEach(function (a) {
-      var href = a.getAttribute("href") || "";
-      if (href === here || (here === "index.html" && (href === "index.html" || href === "./"))) {
-        a.setAttribute("aria-current", "page");
-        var li = a.closest("li");
-        if (li) li.classList.add("active");
-      }
-    });
   }
 
   /* ====================================================================
@@ -493,10 +428,7 @@
    *  INIT
    * ==================================================================== */
   function init() {
-    initNavToggle();
     initBackToTop();
-    initDate();
-    initActiveNav();
     initModalFocusTrap();
     initLatestWritings();
     initChandradwipWritings();
