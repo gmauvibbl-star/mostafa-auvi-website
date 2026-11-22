@@ -116,7 +116,6 @@ html,body{
     flex: 0 0 auto;
     white-space: nowrap;
   }
-  .v2 .menu::after { display: none !important; }
   .v2 .menu > a, .v2 .menu .dropdown summary {
     min-height: 36px;
     display: inline-flex;
