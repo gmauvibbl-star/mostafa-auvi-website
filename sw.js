@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mostafa-auvi-v37';
+const CACHE_NAME = 'mostafa-auvi-v38';
 const ASSETS = [
   './',
   './index.html',
