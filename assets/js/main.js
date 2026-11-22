@@ -200,7 +200,7 @@
         "banking-o-orthoniti": "ব্যাংকিং ও অর্থনীতি",
         "prokashona-o-pdf": "প্রকাশনা",
         bhromonkahini: "ভ্রমণ ও অনুবাদ সাহিত্য",
-        chandradwip: "চন্দ্রদ্বীপ",
+        chandradwip: "সাম্প্রতিক লেখা",
       };
       return map[c] || c || "";
     }
