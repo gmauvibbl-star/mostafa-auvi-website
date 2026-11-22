@@ -95,6 +95,19 @@
   .page-wrap > .v2 > .hdr{padding-left:10px!important;padding-right:10px!important}
   .page-wrap > .v2 > .hdr > .menu{gap:0 13px!important}
 }
+  /* Homepage navigation: keep the option row visible on every viewport. */
+  .page-wrap > .v2 > .hdr > .menu{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    position:relative!important;
+    z-index:60!important;
+  }
+  .page-wrap > .v2 > .hdr > .menu > a{
+    visibility:visible!important;
+    opacity:1!important;
+  }
+
   /* Recent-writing titles use the site blood-red treatment. */
   .recent .head h2,.recent .card h3{color:var(--blood,#8A1818)!important}
 </style>
