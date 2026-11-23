@@ -111,6 +111,63 @@ html,body{background:#5A6B3F!important}
 .recent-wrap,.recent-wrap .latest-writings,#latestGrid,#latestGridEn{background:transparent!important;margin-bottom:0!important;padding-bottom:0!important}
 footer,.footer-strip,.site-footer{margin:0!important;width:100%!important;position:relative;display:block!important;clear:both}
 footer:last-of-type{margin-bottom:0!important}
+  /* ===== Round 5: unified header & footer across all pages ===== */
+:root{--hf-deep:#0F3D3E;--hf-mid:#1B5E6B;--hf-gold:#B89248;--hf-gold-soft:#E5C77A;--hf-cream:#FAF4E8}
+
+/* ---- Header: one teal band on every page ---- */
+.utility-bar,.v2 .hdr,.page-wrap>.v2>.hdr,.hdr,.site-header,header.header{
+  background:linear-gradient(118deg,var(--hf-deep) 0%,var(--hf-mid) 100%)!important;
+  color:var(--hf-cream)!important;
+  border-bottom:3px solid var(--hf-gold)!important;
+  box-shadow:0 8px 22px rgba(15,61,62,.18)!important;
+}
+.utility-bar{padding:8px 50px!important}
+.utility-bar .date,.utility-bar .lang-label,.header-meta .date,.header-meta .lang-label{color:var(--hf-gold-soft)!important;opacity:1!important}
+.utility-bar .lang a,.header-meta .lang a{color:var(--hf-cream)!important;border-color:rgba(184,146,72,.45)!important;background:transparent!important}
+.utility-bar .lang a.active,.header-meta .lang a.active{background:var(--hf-gold-soft)!important;color:var(--hf-deep)!important;border-color:var(--hf-gold-soft)!important}
+.logo .a,.logo .b,.logo .bn span,.brand .name,.brand .name .first,.brand .bn,.site-header .brand,.v2 .logo span{color:var(--hf-cream)!important}
+.logo .b,.brand .bn,.site-header .brand .bn{color:var(--hf-gold-soft)!important}
+.tagline,.site-header .tagline,.brand .tagline{color:var(--hf-gold-soft)!important}
+.share a,.share-icons a{color:var(--hf-cream)!important;border-color:rgba(250,244,232,.5)!important;background:transparent!important}
+.share a:hover,.share-icons a:hover{background:var(--hf-gold)!important;color:var(--hf-deep)!important;border-color:var(--hf-gold)!important}
+.subscribe-btn,.sub{background:var(--hf-gold)!important;color:var(--hf-deep)!important;border:1px solid var(--hf-gold-soft)!important}
+.subscribe-btn:hover,.sub:hover{background:var(--hf-gold-soft)!important;color:var(--hf-deep)!important}
+
+/* ---- Navigation bar under the header ---- */
+.nav,.site-header .nav,.v2 .menu,.menu{
+  background:rgba(8,43,44,.28)!important;
+  border-top:1px solid rgba(250,244,232,.18)!important;
+  border-bottom:none!important;
+}
+.nav a,.nav ul li a,.menu a,.menu summary,.site-header .nav a{
+  color:var(--hf-cream)!important;opacity:1!important;
+  font-family:'Noto Serif Bengali','EB Garamond',serif!important;
+}
+.nav a:hover,.nav ul li a:hover,.menu a:hover,.menu summary:hover,.site-header .nav a:hover,
+.nav a.current,.nav ul li.active a,.site-header .nav a.current{
+  color:var(--hf-gold-soft)!important;border-bottom-color:var(--hf-gold-soft)!important;
+}
+.nav ul li.active a{font-weight:700!important}
+
+/* ---- Footer: one dark-teal block on every page ---- */
+footer,.footer-strip,.site-footer{
+  background:linear-gradient(135deg,#0a2b2c 0%,var(--hf-deep) 58%,#174f4e 100%)!important;
+  color:#e9dfc6!important;
+  border-top:3px solid var(--hf-gold)!important;
+  padding:34px 22px 24px!important;
+  text-align:center!important;
+  font-family:'Noto Serif Bengali','EB Garamond',serif!important;
+}
+footer a,.footer-strip a,.site-footer a{color:#e9dfc6!important;text-decoration:none!important}
+footer a:hover,.footer-strip a:hover,.site-footer a:hover{color:var(--hf-gold-soft)!important}
+footer .fbrand,.footer-strip .left,.site-footer .footer-brand,.footer-brand{
+  color:var(--hf-gold-soft)!important;font-family:'Playfair Display',serif!important;
+}
+footer .fbrand em,.footer-strip .left .author,.footer-brand .bn{color:#cdbf98!important}
+.footer-strip .left .author{color:var(--hf-cream)!important}
+.footer-strip .right a,.footer-nav a{color:var(--hf-gold-soft)!important}
+footer .dash,.author-login-btn{border-color:rgba(229,199,122,.6)!important}
+footer .contact,footer .legal,.footer-copy{color:#cdbf98!important}
 }
 @media(max-width:900px){#latestGrid .lw-grid,#latestGridEn .lw-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){#latestGrid .lw-grid,#latestGridEn .lw-grid{grid-template-columns:1fr!important}}
