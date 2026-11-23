@@ -61,3 +61,34 @@ footer .dash{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padd
 /* 6. পাঠ পাতার "আরও পড়ুন" কার্ডের ছবি */
 .reader-side-card{box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .reader-side-card img{display:block!important;width:100px!important;height:76px!important;object-fit:cover;border-radius:4px;opacity:1!important}
+/* ===== Round 2: header dropdown, nav font, recent-writing grid ===== */
+
+.menu,.v2 .menu,.page-wrap>.v2>.hdr>.menu{overflow:visible!important}
+
+.menu,.menu a,.menu summary,.menu .dropdown-panel a,.nav a,.site-header .nav a{
+  font-family:'Noto Serif Bengali','EB Garamond',serif!important;
+}
+
+.menu details.dropdown>summary{display:inline-flex!important;list-style:none;cursor:pointer;align-items:center;gap:4px}
+.menu details.dropdown>summary::-webkit-details-marker{display:none!important}
+.menu details.dropdown:not([open])>.dropdown-panel{display:none!important}
+.menu details.dropdown[open]>.dropdown-panel{
+  display:flex!important;flex-direction:column;
+  position:absolute;top:calc(100% + 6px);left:0;
+  min-width:250px;max-width:min(320px,calc(100vw - 28px));max-height:60vh;overflow-y:auto;
+  background:#f3ead7;border:1px solid #c5a15a;border-radius:4px;
+  box-shadow:0 12px 30px rgba(15,61,62,.2);padding:6px 0;z-index:10050;
+}
+.menu .dropdown-panel a{display:block;padding:10px 15px;line-height:1.5;white-space:normal;color:#103f40!important}
+.menu .dropdown-panel a:hover{background:#eadfc8;color:#7b4c18!important}
+
+#latestGrid,#latestGridEn{width:100%}
+#latestGrid .lw-grid,#latestGridEn .lw-grid{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px;
+}
+#latestGrid .lw-card img,#latestGridEn .lw-card img,
+#latestGrid .lw-fallback,#latestGridEn .lw-fallback{
+  width:100%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover;display:block;
+}
+@media(max-width:900px){#latestGrid .lw-grid,#latestGridEn .lw-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:600px){#latestGrid .lw-grid,#latestGridEn .lw-grid{grid-template-columns:1fr!important}}
