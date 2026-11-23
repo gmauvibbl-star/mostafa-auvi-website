@@ -53,6 +53,7 @@
 <link rel="stylesheet" href="assets/css/hero.css?v=20261121-8">
 <link rel="stylesheet" href="assets/css/auth.css">
 <link rel="stylesheet" href="assets/css/site-chrome.css?v=20261121-3">
+<link rel="stylesheet" href="assets/css/polish.css?v=20261123-1">
 <style>
 /* Homepage-only navigation rules. Hero styling lives only in hero.css. */
 .page-wrap > .v2{position:relative;z-index:20!important}
@@ -71,8 +72,8 @@
 .menu .dropdown:last-of-type > .dropdown-panel{left:auto;right:0}
 .recent-wrap{width:100%;max-width:none;margin:0;padding:0 30px!important;box-sizing:border-box}
 .recent-wrap .latest-writings{padding-left:0!important;padding-right:0!important}
-@media(max-width:900px){.recent-wrap{padding:0!important}}
-@media(max-width:600px){.recent-wrap{padding:0!important}}
+@media(max-width:900px){.recent-wrap{padding:0 16px!important}}
+@media(max-width:600px){.recent-wrap{padding:0 12px!important}}
 @media(max-width:640px){
   .page-wrap > .v2{background:linear-gradient(118deg,var(--chrome-teal,#0f3d3e),#164e53 58%,var(--chrome-teal-2,#245f61))!important}
   .page-wrap > .v2 > .hdr{
@@ -132,11 +133,25 @@
     </div>
     <nav class="menu" aria-label="প্রধান নেভিগেশন">
       <a href="index.html">Home</a>
-      <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
-      <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
-      <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
+      <details class="dropdown">
+        <summary>বিভাগসমূহ ▾</summary>
+        <div class="dropdown-panel">
+          <a href="posts.html?category=kothasahitya">কথাসাহিত্য</a>
+          <a href="posts.html?category=probandho-sahityasamalochona">প্রবন্ধ ও সাহিত্যসমালোচনা</a>
+          <a href="posts.html?category=ain-oadalot">আইন ও আদালত</a>
+          <a href="posts.html?category=bhromonkahini">ভ্রমণ ও অনুবাদ সাহিত্য</a>
+          <a href="posts.html?category=banking-o-orthoniti">ব্যাংকিং ও অর্থনীতি</a>
+          <a href="posts.html">সব লেখা</a>
+        </div>
+      </details>
+      <details class="dropdown">
+        <summary>আসন্ন বই ▾</summary>
+        <div class="dropdown-panel">
+          <a href="posts.html?category=chandradwip">চন্দ্রদ্বীপ</a>
+        </div>
+      </details>
+      <a href="posts.html?category=prokashona-o-pdf">প্রকাশনা</a>
       <a href="about.html">লেখক পরিচিতি</a>
-      <a href="posts.html">সব লেখা</a>
     </nav>
   </header>
 </div>
@@ -148,14 +163,12 @@
   <img src="assets/img/hero-final.webp%20ban.png?v=20261122-3" alt="মোস্তফা অভি — কথাসাহিত্যিক">
 </section>
 
-
 <!-- Upcoming publication -->
 <div class="lower-grid" style="grid-template-columns:1fr">
 
   <section id="featured" aria-labelledby="cw-title">
     <div class="section-head">
       <h2 class="section-title" id="cw-title">Coming Soon <small>আসন্ন প্রকাশনা</small></h2>
-      
     </div>
     <article class="novel-card">
     <img src="assets/img/chandradwip-writing-cover.jpg"
@@ -187,18 +200,14 @@
         <span class="cwip-en">The Settlement</span>
       </a>
     </div>
-
   </article>
   </section>
 
-  
 </div>
 
 </main>
 
 <div class="recent-wrap">
-
-
   <section class="recent latest-writings" aria-labelledby="recent-title">
     <div class="head">
       <div>
@@ -211,7 +220,6 @@
       <div class="latest-loading" style="grid-column:1/-1;text-align:center;padding:30px;color:var(--gold-dim);font-style:italic;font-size:14px;">সাম্প্রতিক লেখা লোড হচ্ছে…</div>
     </div>
   </section>
-
 </div>
 
 <footer>
@@ -289,6 +297,61 @@
 </script>
 
 <script>
+/* Recent Bengali writing: loads directly from Supabase, independent of main.js. */
+(function () {
+  var grid = document.getElementById('latestGrid');
+  if (!grid || !window.supabase) return;
+  var sb = window.supabase.createClient(
+    "https://voswrndbxrsaqfzwffhh.supabase.co",
+    "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I"
+  );
+  var CAT = {
+    'kothasahitya':'কথাসাহিত্য',
+    'probandho-sahityasamalochona':'প্রবন্ধ ও সাহিত্যসমালোচনা',
+    'ain-oadalot':'আইন ও আদালত',
+    'bhromonkahini':'ভ্রমণ ও অনুবাদ সাহিত্য',
+    'banking-o-orthoniti':'ব্যাংকিং ও অর্থনীতি',
+    'chandradwip':'চন্দ্রদ্বীপ',
+    'prokashona-o-pdf':'প্রকাশনা'
+  };
+  function esc(s){return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fmt(iso){
+    var d = new Date(iso); if (isNaN(d)) return '';
+    return d.toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'});
+  }
+  function card(p){
+    var img = p.cover_image
+      ? '<img src="' + esc(p.cover_image) + '" alt="" loading="eager">'
+      : '<div class="lw-fallback">❦</div>';
+    return '<a class="lw-card" href="read.html?slug=' + encodeURIComponent(p.slug) + '&lang=bn">' +
+      img +
+      '<span class="lw-cat">' + esc(CAT[p.category] || p.category || 'লেখা') + '</span>' +
+      '<h3>' + esc(p.title) + '</h3>' +
+      '<span class="lw-date">' + esc(fmt(p.published_at)) + '</span>' +
+    '</a>';
+  }
+  sb.from('posts')
+    .select('slug,title,category,published_at,cover_image')
+    .eq('published', true)
+    .or('language.is.null,language.eq.bn')
+    .order('published_at', {ascending: false, nullsFirst: false})
+    .limit(6)
+    .then(function (r) {
+      if (r.error) throw r.error;
+      if (!r.data || !r.data.length) {
+        grid.innerHTML = '<div class="lw-empty">এখনো কোনো লেখা প্রকাশিত হয়নি।</div>';
+        return;
+      }
+      grid.innerHTML = '<div class="lw-grid">' + r.data.map(card).join('') + '</div>';
+    })
+    .catch(function (e) {
+      console.error('Recent writing failed:', e);
+      grid.innerHTML = '<div class="lw-empty">সাম্প্রতিক লেখা লোড করা যায়নি।</div>';
+    });
+})();
+</script>
+
+<script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('sw.js').catch(function() {});
@@ -321,3 +384,4 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 </body>
+</html>
