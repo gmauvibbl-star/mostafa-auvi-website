@@ -91,69 +91,46 @@
 }
 </style>
 <style id="english-footer-layout-fix-20261124">
-/* English homepage footer: restore full-height teal background and prevent clipped branding. */
+/* Compact English homepage footer; keep all footer text visible. */
 .page-wrap > footer{
-  display:block!important;
-  position:relative!important;
-  width:100%!important;
-  height:auto!important;
-  min-height:210px!important;
-  max-height:none!important;
-  box-sizing:border-box!important;
-  overflow:visible!important;
-  margin:0!important;
-  padding:30px 22px 26px!important;
+  display:block!important;position:relative!important;width:100%!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  box-sizing:border-box!important;overflow:visible!important;
+  margin:0!important;padding:16px 18px 14px!important;
   background:linear-gradient(135deg,#0a2b2c 0%,#0F3D3E 58%,#174f4e 100%)!important;
-  border:0!important;
-  box-shadow:none!important;
-  clear:both!important;
+  border:0!important;box-shadow:none!important;clear:both!important;
   text-align:center!important;
 }
 .page-wrap > footer .fbar{
-  display:flex!important;
-  position:relative!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:12px!important;
-  width:100%!important;
-  max-width:none!important;
-  height:auto!important;
-  min-height:0!important;
-  max-height:none!important;
-  margin:0 auto!important;
-  padding:0!important;
-  overflow:visible!important;
-  box-sizing:border-box!important;
+  display:flex!important;position:relative!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;gap:6px!important;
+  width:100%!important;max-width:none!important;height:auto!important;
+  min-height:0!important;max-height:none!important;margin:0 auto!important;
+  padding:0!important;overflow:visible!important;box-sizing:border-box!important;
 }
 .page-wrap > footer .fbrand{
-  display:block!important;
-  position:relative!important;
-  width:auto!important;
-  height:auto!important;
-  max-height:none!important;
-  overflow:visible!important;
-  margin:0!important;
-  padding:0!important;
-  line-height:1.5!important;
-  color:#E5C77A!important;
-  white-space:normal!important;
+  display:block!important;position:relative!important;width:auto!important;
+  height:auto!important;max-height:none!important;overflow:visible!important;
+  margin:0!important;padding:0!important;line-height:1.25!important;
+  font-size:20px!important;color:#E5C77A!important;white-space:normal!important;
 }
 .page-wrap > footer .fbrand em{
-  display:block!important;
-  margin-top:6px!important;
-  line-height:1.5!important;
-  color:#cdbf98!important;
+  display:block!important;margin-top:4px!important;line-height:1.25!important;
+  font-size:13px!important;color:#cdbf98!important;
 }
 .page-wrap > footer .contact,
 .page-wrap > footer .legal,
 .page-wrap > footer .fbar a,
-.page-wrap > footer .fbar span{
-  color:#FAF4E8!important;
-}
-.page-wrap > footer .legal{line-height:1.9!important}
+.page-wrap > footer .fbar span{color:#FAF4E8!important}
+.page-wrap > footer .contact,
+.page-wrap > footer .legal{font-size:12px!important;line-height:1.5!important}
+.page-wrap > footer .dash{padding:3px 10px!important;margin-left:5px!important}
 .page-wrap > footer::before,
 .page-wrap > footer::after{content:none!important;display:none!important}
+@media(max-width:600px){
+  .page-wrap > footer{padding:14px 12px 12px!important}
+  .page-wrap > footer .fbrand{font-size:18px!important}
+}
 </style>
 </head>
 <body>
