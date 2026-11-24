@@ -90,6 +90,19 @@
   .page-wrap>.v2>.hdr>.menu{gap:0 12px}
 }
 </style>
+<style id="english-footer-line-fix-20261124">
+/* Remove the stray light separator at the English homepage footer edge. */
+.page-wrap > footer,
+.page-wrap footer{
+  border-top:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+.page-wrap > footer::before,
+.page-wrap > footer::after,
+.page-wrap footer::before,
+.page-wrap footer::after{display:none!important;content:none!important}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
