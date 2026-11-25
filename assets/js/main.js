@@ -346,7 +346,7 @@
     initBackToTop();
     initModalFocusTrap();
     initLatestWritings();
-    initChandradwipWritings();
+    // Chandradwip panels are handled by initChandradwipPanels().
     initChandradwipPanels();
     initLatestWritingsEn();
   }
