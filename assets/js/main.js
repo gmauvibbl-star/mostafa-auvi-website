@@ -207,7 +207,7 @@
       section.hidden=false;
     }
     function restFallback(){
-      var url=SUPABASE_URL+"/rest/v1/posts?select=slug,title,excerpt,cover_image,cover_image_url,category,published_at,language&published=eq.true&language=eq.bn&order=published_at.desc.nullslast&limit=3";
+      var url=SUPABASE_URL+"/rest/v1/posts?select=slug,title,excerpt,cover_image,cover_image_url,category,published_at,language&published=eq.true&language=eq.bn&slug=not.in.(chandradwip-writing,chandradwip-characters,chandradwip-settlement)&order=published_at.desc.nullslast&limit=3";
       return fetch(url,{headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY},cache:"no-store"}).then(function(res){if(!res.ok)throw new Error("REST "+res.status);return res.json();});
     }
     function showLoadError(){grid.innerHTML='<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';section.hidden=false;}
