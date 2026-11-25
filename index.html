@@ -320,8 +320,9 @@
     return d.toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'});
   }
   function card(p){
-    var img = p.cover_image
-      ? '<img src="' + esc(p.cover_image) + '" alt="" loading="eager">'
+    var cover = p.cover_image || p.cover_image_url || '';
+    var img = cover
+      ? '<img src="' + esc(cover) + '" alt="' + esc(p.title || '') + '" loading="lazy" width="400" height="225">'
       : '<div class="lw-fallback">❦</div>';
     return '<a class="lw-card" href="read.html?slug=' + encodeURIComponent(p.slug) + '&lang=bn">' +
       img +
@@ -331,9 +332,9 @@
     '</a>';
   }
   sb.from('posts')
-    .select('slug,title,category,published_at,cover_image')
+     .select('slug,title,category,published_at,cover_image,cover_image_url')
     .eq('published', true)
-    .or('language.is.null,language.eq.bn')
+    .eq('language','bn')
     .order('published_at', {ascending: false, nullsFirst: false})
     .limit(6)
     .then(function (r) {
