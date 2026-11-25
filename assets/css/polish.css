@@ -173,3 +173,41 @@ footer .contact,footer .legal,.footer-copy{color:#cdbf98!important}
 }
 @media(max-width:900px){#latestGrid .lw-grid,#latestGridEn .lw-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){#latestGrid .lw-grid,#latestGridEn .lw-grid{grid-template-columns:1fr!important}}
+
+
+/* ===== FINAL SITE-WIDE FOOTER / READER CLEANUP 20261125 ===== */
+/* Prevent legacy explore.css 48px footer from clipping the real footer. */
+footer,.site-footer,.footer-strip{
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+}
+footer .fbar,.site-footer .fbar,.footer-strip .fbar{
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+}
+footer .fbrand,footer .fbrand em,
+footer .contact,footer .legal{position:relative!important;z-index:2!important;}
+
+/* Keep the footer background behind the complete footer content on every page. */
+footer,.site-footer,.footer-strip{
+  background:linear-gradient(135deg,#0a2b2c 0%,#0F3D3E 58%,#174f4e 100%)!important;
+  color:#FAF4E8!important;
+}
+
+/* ===== Reader / Chandradwip sub-pages: a little wider on desktop ===== */
+@media(min-width:1001px){
+  .page-wrap:has(.read-main){max-width:1320px!important;width:100%!important;}
+  .read-main{padding-left:24px!important;padding-right:24px!important;}
+  .back-bar,.read-layout{max-width:1320px!important;}
+  .read-layout{grid-template-columns:minmax(0,940px) 350px!important;gap:30px!important;}
+  .a4-body,.a4-body.en{max-width:880px!important;}
+}
+@media(max-width:1000px){
+  .page-wrap:has(.read-main){max-width:100%!important;}
+}
