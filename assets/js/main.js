@@ -193,17 +193,16 @@
     function render(rows) {
       rows=Array.isArray(rows)?rows:[];
       if(!rows.length){grid.innerHTML='<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>';section.hidden=false;return;}
-      grid.innerHTML=rows.map(function(p){
+      grid.innerHTML='<div class="lw-grid">'+rows.map(function(p){
         var coverUrl=p.cover_image||p.cover_image_url||"";
-        var cover=coverUrl?'<img class="lc-cover" src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225">':'<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
+        var cover=coverUrl?'<img src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225">':'<div class="lw-fallback" aria-hidden="true">❦</div>';
         var excerpt=String(p.excerpt||"").replace(/\s+/g," ").trim();
         if(excerpt.length>140) excerpt=excerpt.slice(0,140)+"…";
-        return '<a class="latest-card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang=bn">'+cover+
-          '<div class="lc-body"><span class="lc-cat">'+esc(catLabelBn(p.category))+'</span>'+
-          '<h3 class="lc-title">'+esc(p.title||"(শিরোনামহীন)")+'</h3>'+
-          (excerpt?'<p class="lc-excerpt">'+esc(excerpt)+'</p>':'')+
-          '<span class="lc-date">'+esc(fmtDate(p.published_at))+'</span></div></a>';
-      }).join("");
+        return '<a class="lw-card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang=bn">'+cover+
+          '<span class="lw-cat">'+esc(catLabelBn(p.category))+'</span>'+
+          '<h3>'+esc(p.title||"(শিরোনামহীন)")+'</h3>'+
+          '<span class="lw-date">'+esc(fmtDate(p.published_at))+'</span></a>';
+      }).join("")+'</div>';
       section.hidden=false;
     }
     function restFallback(){
@@ -317,23 +316,20 @@
             section.hidden = false;
             return;
           }
-          grid.innerHTML = rows.map(function (p) {
+          grid.innerHTML = '<div class="lw-grid">' + rows.map(function (p) {
             var coverUrl = p.cover_image || p.cover_image_url || "";
             var cover = coverUrl
-              ? '<img class="lc-cover" src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
-              : '<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
+              ? '<img src="' + esc(coverUrl) + '" alt="' + esc(p.title || "") + '" loading="lazy" width="400" height="225">'
+              : '<div class="lw-fallback" aria-hidden="true">❦</div>';
             var excerpt = String(p.excerpt || "").replace(/\s+/g, " ").trim();
             if (excerpt.length > 140) excerpt = excerpt.slice(0, 140) + "…";
-            return '<a class="latest-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=en">' +
+            return '<a class="lw-card" href="./read.html?slug=' + encodeURIComponent(p.slug) + '&lang=en">' +
               cover +
-              '<div class="lc-body">' +
-                '<span class="lc-cat">' + esc(catLabelEn(p.category)) + '</span>' +
-                '<h3 class="lc-title">' + esc(p.title || "") + '</h3>' +
-                (excerpt ? '<p class="lc-excerpt">' + esc(excerpt) + '</p>' : '') +
-                '<span class="lc-date">' + esc(fmtDate(p.published_at)) + '</span>' +
-              '</div>' +
+              '<span class="lw-cat">' + esc(catLabelEn(p.category)) + '</span>' +
+              '<h3>' + esc(p.title || "") + '</h3>' +
+              '<span class="lw-date">' + esc(fmtDate(p.published_at)) + '</span>' +
             '</a>';
-          }).join("");
+          }).join("") + '</div>';
           section.hidden = false;
         })
         .catch(function () {
