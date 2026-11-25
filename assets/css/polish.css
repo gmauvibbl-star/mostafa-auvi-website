@@ -105,7 +105,9 @@ footer .dash{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padd
   display:grid!important;
   grid-template-columns:repeat(3,minmax(0,1fr))!important;
   gap:22px;
-  /* ===== Round 4: remove white strip above footer (English + Bengali) ===== */
+}
+
+/* ===== Round 4: remove white strip above footer (English + Bengali) ===== */
 html,body{background:#5A6B3F!important}
 .page-wrap{padding-bottom:0!important;margin-bottom:0!important;background:#F4ECD8}
 .recent-wrap,.recent-wrap .latest-writings,#latestGrid,#latestGridEn{background:transparent!important;margin-bottom:0!important;padding-bottom:0!important}
