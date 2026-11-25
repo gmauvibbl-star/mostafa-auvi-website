@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 520" role="img" aria-labelledby="t d">
+<title id="t">মোস্তফা অভি — কথাসাহিত্যিক</title>
+<desc id="d">A literary landscape of river, lowland and evening sky.</desc>
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b2f35"/><stop offset=".55" stop-color="#355b59"/><stop offset="1" stop-color="#b9824b"/></linearGradient>
+ <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#234f55"/><stop offset="1" stop-color="#0a2c32"/></linearGradient>
+ <radialGradient id="sun"><stop stop-color="#f6d58b" stop-opacity=".95"/><stop offset="1" stop-color="#f6d58b" stop-opacity="0"/></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="1440" height="520" fill="url(#sky)"/>
+<circle cx="1060" cy="180" r="115" fill="url(#sun)" filter="url(#blur)"/>
+<circle cx="1060" cy="180" r="48" fill="#e9bd72" opacity=".82"/>
+<path d="M0 300 C190 245 300 330 475 285 S760 260 910 305 S1190 345 1440 270 L1440 520 L0 520Z" fill="#183f42" opacity=".9"/>
+<path d="M0 350 C210 305 350 385 545 335 S820 320 1010 370 S1250 390 1440 330 L1440 520 L0 520Z" fill="url(#water)"/>
+<path d="M0 405 C190 380 360 430 540 400 S820 390 1010 420 S1240 445 1440 400" fill="none" stroke="#d0ad70" stroke-opacity=".3" stroke-width="3"/>
+<path d="M0 455 C250 420 420 480 670 445 S1020 435 1440 470" fill="none" stroke="#d0ad70" stroke-opacity=".18" stroke-width="2"/>
+<g fill="#102f32" opacity=".95">
+ <path d="M0 335 l55 -65 16 64 32 -38 25 39 48 -75 26 75 42 -51 27 51z"/>
+ <path d="M1160 320 l38 -70 20 68 42 -48 24 49 46 -83 31 82 38 -44 41 45v35h-280z"/>
+</g>
+<g transform="translate(120 105)">
+ <text x="0" y="0" fill="#f9edcf" font-family="Georgia, 'Noto Serif Bengali', serif" font-size="58" font-weight="700">মোস্তফা অভি</text>
+ <rect x="2" y="28" width="105" height="3" fill="#d0ad70"/>
+ <text x="0" y="78" fill="#f1cf83" font-family="Georgia, 'Noto Serif Bengali', serif" font-size="25">কথাসাহিত্যিক • ঔপন্যাসিক</text>
+ <text x="0" y="132" fill="#fff8e9" opacity=".9" font-family="Georgia, 'Noto Serif Bengali', serif" font-size="19">গল্প, উপন্যাস আর সাহিত্যের দীর্ঘ পথচলা</text>
+</g>
+<g transform="translate(1160 405)" fill="none" stroke="#d6b87b" stroke-width="2" opacity=".65">
+ <path d="M0 20 Q70 -10 140 20 Q70 52 0 20Z"/><path d="M70 8v24"/><path d="M35 15v14M105 15v14"/>
+</g>
+</svg>
