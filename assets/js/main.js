@@ -194,8 +194,8 @@
       rows=Array.isArray(rows)?rows:[];
       if(!rows.length){grid.innerHTML='<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>';section.hidden=false;return;}
       grid.innerHTML=rows.map(function(p){
-        var coverUrl=p.cover_image||p.cover_image_url||"./assets/img/chandradwip-writing-cover.jpg";
-        var cover='<img class="lc-cover" src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225" onerror="this.onerror=null;this.src=\'./assets/img/chandradwip-writing-cover.jpg\'">';
+        var coverUrl=p.cover_image||p.cover_image_url||"";
+        var cover=coverUrl?'<img class="lc-cover" src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225">':'<div class="lc-cover-fallback" aria-hidden="true">❦</div>';
         var excerpt=String(p.excerpt||"").replace(/\s+/g," ").trim();
         if(excerpt.length>140) excerpt=excerpt.slice(0,140)+"…";
         return '<a class="latest-card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang=bn">'+cover+
@@ -214,7 +214,7 @@
     try{
       var sb=window.supabase&&window.supabase.createClient?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
       if(sb){
-        sb.from("posts").select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language").eq("published",true).eq("language","bn").order("published_at",{ascending:false,nullsFirst:false}).limit(3).then(function(res){
+        sb.from("posts").select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language").eq("published",true).eq("language","bn").not("slug","in","(chandradwip-writing,chandradwip-characters,chandradwip-settlement)").order("published_at",{ascending:false,nullsFirst:false}).limit(3).then(function(res){
           if(res&&!res.error)render(res.data);else restFallback().then(render).catch(showLoadError);
         }).catch(function(){restFallback().then(render).catch(showLoadError);});
       }else restFallback().then(render).catch(showLoadError);
