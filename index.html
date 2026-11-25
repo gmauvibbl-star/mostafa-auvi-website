@@ -296,61 +296,7 @@
 })();
 </script>
 
-<script>
-/* Recent Bengali writing: loads directly from Supabase, independent of main.js. */
-(function () {
-  var grid = document.getElementById('latestGrid');
-  if (!grid || !window.supabase) return;
-  var sb = window.supabase.createClient(
-    "https://voswrndbxrsaqfzwffhh.supabase.co",
-    "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I"
-  );
-  var CAT = {
-    'kothasahitya':'কথাসাহিত্য',
-    'probandho-sahityasamalochona':'প্রবন্ধ ও সাহিত্যসমালোচনা',
-    'ain-oadalot':'আইন ও আদালত',
-    'bhromonkahini':'ভ্রমণ ও অনুবাদ সাহিত্য',
-    'banking-o-orthoniti':'ব্যাংকিং ও অর্থনীতি',
-    'chandradwip':'চন্দ্রদ্বীপ',
-    'prokashona-o-pdf':'প্রকাশনা'
-  };
-  function esc(s){return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function fmt(iso){
-    var d = new Date(iso); if (isNaN(d)) return '';
-    return d.toLocaleDateString('bn-BD', {year:'numeric', month:'long', day:'numeric'});
-  }
-  function card(p){
-    var cover = p.cover_image || p.cover_image_url || '';
-    var img = cover
-      ? '<img src="' + esc(cover) + '" alt="' + esc(p.title || '') + '" loading="lazy" width="400" height="225">'
-      : '<div class="lw-fallback">❦</div>';
-    return '<a class="lw-card" href="read.html?slug=' + encodeURIComponent(p.slug) + '&lang=bn">' +
-      img +
-      '<span class="lw-cat">' + esc(CAT[p.category] || p.category || 'লেখা') + '</span>' +
-      '<h3>' + esc(p.title) + '</h3>' +
-      '<span class="lw-date">' + esc(fmt(p.published_at)) + '</span>' +
-    '</a>';
-  }
-  sb.from('posts')
-     .select('slug,title,category,published_at,cover_image,cover_image_url')
-    .eq('published', true)
-    .eq('language','bn')
-    .order('published_at', {ascending: false, nullsFirst: false})
-    .limit(6)
-    .then(function (r) {
-      if (r.error) throw r.error;
-      if (!r.data || !r.data.length) {
-        grid.innerHTML = '<div class="lw-empty">এখনো কোনো লেখা প্রকাশিত হয়নি।</div>';
-        return;
-      }
-      grid.innerHTML = '<div class="lw-grid">' + r.data.map(card).join('') + '</div>';
-    })
-    .catch(function (e) {
-      console.error('Recent writing failed:', e);
-      grid.innerHTML = '<div class="lw-empty">সাম্প্রতিক লেখা লোড করা যায়নি।</div>';
-    });
-})();
-</script>
+
 
 <script>
 if ('serviceWorker' in navigator) {
