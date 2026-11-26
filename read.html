@@ -1872,9 +1872,10 @@
   .reader-focus-mode .reader-side-column,
   .reader-focus-mode .share-section { display:none !important; }
   .reader-focus-mode .page-wrap { max-width:900px; }
-  .reader-focus-mode .read-main { padding-top:28px; }
+  /* Focus reading: keep the article close to the top instead of wasting the first screen on empty space. */
+  .reader-focus-mode .read-main { padding-top:10px; }
   .reader-focus-mode .read-layout { display:block; max-width:820px; }
-  .reader-focus-mode .a4-page { max-width:820px; margin:0 auto; padding:34px 30px 70px; }
+  .reader-focus-mode .a4-page { max-width:820px; margin:0 auto; padding:12px 30px 70px; }
   .reader-focus-mode .a4-body,.reader-focus-mode .a4-body.en { max-width:740px; }
   @media(max-width:1000px) {
     .read-layout { grid-template-columns:1fr; gap:30px; }
