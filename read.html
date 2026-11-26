@@ -1820,13 +1820,12 @@
   }
   .reader-tools {
     display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap;
-    gap:8px; margin:0 0 8px; padding:6px 0;
-    border-top:1px solid rgba(120,105,80,.18);
-    border-bottom:1px solid rgba(120,105,80,.18);
+    gap:6px; margin:0 0 2px; padding:2px 0;
+    border:0;
     color:#6b6254; font-family:'Noto Serif Bengali',serif;
     font-size:12px;
   }
-  .reader-tools-label { margin-right:auto; color:#786d5d; font-size:12px; }
+  .reader-tools-label, .reader-reading-note { display:none; }
   .reader-tool-btn {
     min-width:34px; min-height:34px; padding:6px 10px;
     border:1px solid #d9d0bf; border-radius:3px;
@@ -1856,8 +1855,8 @@
   .a4-page { padding-left:42px; padding-right:42px; }
   .a4-body,.a4-body.en { max-width:740px; }
   /* Keep the transition from article header to reading controls compact. */
-  .a4-header { margin-bottom:8px; }
-  .a4-cover { margin-top:4px; }
+  .a4-header { margin-bottom:2px; }
+  .a4-cover { margin-top:0; }
 
   .reader-side-column { opacity:.88; }
   .reader-side-head { font-size:15px; border-bottom-width:1px; }
@@ -1885,37 +1884,30 @@
     .reader-side-card img,.reader-side-fallback { width:84px; height:66px; }
   }
   @media(max-width:600px) {
-    /* Mobile: make the reading controls a compact single toolbar so the article image starts sooner. */
     .read-main { padding-top:8px; padding-bottom:32px; }
     .back-bar { margin-bottom:8px; }
     .a4-page { padding:18px 12px 28px; }
-    .a4-header { margin-bottom:4px; }
+    .a4-header { margin-bottom:2px; }
     .reader-tools {
-      justify-content:flex-start;
+      justify-content:flex-end;
       align-items:center;
-      gap:5px;
-      margin:2px 0 4px;
-      padding:4px 0;
+      gap:4px;
+      margin:0 0 1px;
+      padding:0;
+      min-height:0;
+      border:0;
     }
-    .reader-tools-label {
-      flex-basis:auto;
-      margin:0 2px 0 0;
-      font-size:11px;
-      white-space:nowrap;
-    }
-    .reader-reading-note { display:none; }
     .reader-tool-btn {
-      min-width:32px;
-      min-height:30px;
-      padding:4px 7px;
-      font-size:12px;
+      min-width:30px;
+      min-height:28px;
+      padding:3px 6px;
+      font-size:11px;
     }
     .reader-tool-btn[data-reader-action="focus"] {
-      margin-left:auto;
-      padding-left:9px;
-      padding-right:9px;
+      padding-left:8px;
+      padding-right:8px;
     }
-    .a4-cover { margin:2px 0 18px; }
+    .a4-cover { margin:0 0 18px; }
     .a4-body { font-size:calc(17px * var(--reader-font-scale)); line-height:1.95; }
     .a4-body.en { font-size:calc(18px * var(--reader-font-scale)); line-height:1.85; }
     .reader-side-list { grid-template-columns:1fr; }
