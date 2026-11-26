@@ -2275,6 +2275,9 @@ function applyReadShellLanguage(lang) {
     setAttr('.subscribe-btn','href','subscribe-en.html');
     setText('.back-link','← All Writing'); setAttr('.back-link','title','Back to all writing');
     setText('#loadingState h2','Loading article…'); setText('#loadingState p','Please wait a moment.');
+    setText('.reader-side-head span','Further Reading');
+    setAttr('#readerSideColumn','aria-label','Further reading');
+    setText('.reader-side-loading','Loading writing…');
     setText('#commentsTitle','Reader Responses');
     setText('.comments-kicker',"Readers' voices");
     const intro=document.querySelector('.comments-heading > p'); if(intro) intro.textContent='Share your thoughts on this piece. Enter your name; no sign-in is required.';
