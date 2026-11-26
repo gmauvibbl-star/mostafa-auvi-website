@@ -258,3 +258,38 @@ footer,.site-footer,.footer-strip{
   .cwip-bn{font-size:13px!important;line-height:1.35!important;margin-top:3px!important}
   .cwip-en{font-size:11px!important;line-height:1.2!important}
 }
+
+/* ===== FINAL: lock Chandradwip card height so images cannot expand after loading ===== */
+@media(min-width:701px){
+  .chandradwip-subs{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:10px!important;
+    padding:6px 0 2px!important;
+  }
+  .chandradwip-subs .cwip-sub{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    padding:0 0 7px!important;
+    box-sizing:border-box!important;
+  }
+  .chandradwip-subs .cwip-image{
+    width:100%!important;
+    height:118px!important;
+    min-height:118px!important;
+    max-height:118px!important;
+    aspect-ratio:auto!important;
+    object-fit:cover!important;
+    display:block!important;
+  }
+  .chandradwip-subs .cwip-bn{
+    margin:4px 9px 0!important;
+    font-size:13px!important;
+    line-height:1.3!important;
+  }
+  .chandradwip-subs .cwip-en{
+    margin:0 9px!important;
+    font-size:11px!important;
+    line-height:1.15!important;
+  }
+}
