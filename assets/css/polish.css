@@ -235,3 +235,26 @@ footer,.site-footer,.footer-strip{
   .cwip-image{aspect-ratio:2.6/1}
 }
 @media(prefers-reduced-motion:reduce){.cwip-image{transition:none}}
+
+/* ===== Chandradwip cards: compact 4-card single row ===== */
+@media(min-width:701px){
+  .chandradwip-subs{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:10px!important;
+    padding:6px 0 2px!important;
+  }
+  .cwip-sub{
+    padding-bottom:8px!important;
+    gap:3px!important;
+    border-radius:9px!important;
+  }
+  .cwip-image{
+    aspect-ratio:2.35/1!important;
+  }
+  .cwip-bn,.cwip-en{
+    margin-left:10px!important;
+    margin-right:10px!important;
+  }
+  .cwip-bn{font-size:13px!important;line-height:1.35!important;margin-top:3px!important}
+  .cwip-en{font-size:11px!important;line-height:1.2!important}
+}
