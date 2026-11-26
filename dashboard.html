@@ -3176,25 +3176,44 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
         renderConfigError();
         return;
       }
-      // Show loading
-      $('#app').innerHTML = '<div class="min-h-screen flex items-center justify-center"><div class="flex flex-col items-center gap-3"><div class="spinner"></div><p class="text-muted text-sm">লোড হচ্ছে...</p></div></div>';
-      const ok = await checkSession();
-      if (ok) {
-        await loadCategories();
-        await loadTags();
-      }
+
+      // Render the login screen immediately. Do not keep the whole page blank
+      // while Supabase is waiting for a session/network response.
       renderApp();
 
-      // Listen to auth state changes
-      supabase.auth.onAuthStateChange(async (event, session) => {
-        if (event === 'SIGNED_OUT') {
-          state.session = null; state.user = null;
+      // Restore an existing session in the background, with a hard timeout.
+      // A slow/unreachable Supabase request must never leave #app empty.
+      try {
+        const ok = await Promise.race([
+          checkSession(),
+          new Promise(resolve => setTimeout(() => resolve(false), 8000))
+        ]);
+        if (ok) {
+          await loadCategories();
+          await loadTags();
           renderApp();
-        } else if (event === 'SIGNED_IN' && session && !state.session) {
-          state.session = session; state.user = session.user; state.userEmail = session.user.email;
-          await afterAuth();
+        } else if (!state.session) {
+          renderApp();
         }
-      });
+      } catch (e) {
+        console.warn('Session restore failed:', e);
+        state.session = null;
+        state.user = null;
+        renderApp();
+      }
+
+      // Listen to auth state changes
+      if (supabase && supabase.auth) {
+        supabase.auth.onAuthStateChange(async (event, session) => {
+          if (event === 'SIGNED_OUT') {
+            state.session = null; state.user = null;
+            renderApp();
+          } else if (event === 'SIGNED_IN' && session && !state.session) {
+            state.session = session; state.user = session.user; state.userEmail = session.user.email;
+            await afterAuth();
+          }
+        });
+      }
     }
 
     // Boot
