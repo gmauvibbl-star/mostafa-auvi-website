@@ -3030,7 +3030,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
           el('option', { value: 'published' }, 'প্রকাশিত')
         )
       );
-      const listHost = el('div', { class: 'flex flex-col gap-2', id: 'list-host' });
+      const listHost = el('div', { class: 'flex flex-col', id: 'list-host', style: { gap: '4px' } });
       listHost.appendChild(el('div', { class: 'flex items-center justify-center', style: { padding: '40px' } }, el('div', { class: 'spinner' })));
       mount.append(filters, listHost);
 
