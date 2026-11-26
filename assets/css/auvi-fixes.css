@@ -163,10 +163,17 @@ body{ font-size: 17px !important; }
 .cwip-bn{ font-size: 17px !important; }
 /* English Chandradwip card labels: larger, darker, and heavier for clear reading. */
 .cwip-en{
-  font-size:16px !important;
-  line-height:1.2 !important;
+  display:block !important;
+  margin:0 9px !important;
+  padding:2px 0 5px !important;
+  font-family:'EB Garamond',Georgia,serif !important;
+  font-size:20px !important;
+  line-height:1.05 !important;
+  font-style:normal !important;
   font-weight:600 !important;
-  color:#4a3214 !important;
+  letter-spacing:0 !important;
+  color:#173f40 !important;
+  text-align:left !important;
   text-shadow:none !important;
 }
 
