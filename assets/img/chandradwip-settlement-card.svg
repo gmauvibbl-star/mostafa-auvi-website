@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">A river settlement in Chandradwip</title><desc id="desc">A Bengal delta village of thatched houses, palms, a winding river and small boats under a warm evening sky.</desc>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#d4b78a"/><stop offset="1" stop-color="#f2dfb9"/></linearGradient><linearGradient id="river" x2="0" y2="1"><stop stop-color="#78968a"/><stop offset="1" stop-color="#294d48"/></linearGradient></defs>
+<rect width="900" height="420" fill="url(#sky)"/><circle cx="730" cy="90" r="48" fill="#d89b52" opacity=".85"/>
+<path d="M0 215 Q150 170 310 214 T600 205 T900 210 V300 H0Z" fill="#66754f"/>
+<!-- distant huts --> <g fill="#9a6945" stroke="#63452f" stroke-width="4"><path d="M80 218 L142 163 L208 218Z"/><rect x="96" y="216" width="94" height="61" fill="#c9a477"/><path d="M260 220 L321 169 L385 220Z"/><rect x="276" y="218" width="92" height="61" fill="#b98d60"/><path d="M675 221 L735 166 L800 221Z"/><rect x="690" y="218" width="96" height="62" fill="#c8a174"/></g>
+<path d="M0 272 Q155 242 300 282 Q430 320 560 279 Q700 236 900 274 V420 H0Z" fill="url(#river)"/><path d="M0 335 Q190 304 350 344 T700 331 T900 340" fill="none" stroke="#d3c08d" stroke-width="5" opacity=".6"/>
+<!-- palms --> <g stroke="#554b32" stroke-width="9" fill="none"><path d="M220 220 Q210 120 235 50"/><path d="M555 225 Q565 120 540 48"/></g><g fill="#4e6546"><path d="M235 57 Q155 10 128 42 Q164 70 231 69 Q174 89 175 121 Q226 111 241 75 Q272 119 315 95 Q291 54 244 58 Q291 29 271 0 Q243 6 235 57Z"/><path d="M540 55 Q468 8 440 39 Q472 71 538 68 Q483 91 487 119 Q535 111 548 77 Q580 116 619 91 Q598 51 551 55 Q594 26 577 0 Q550 5 540 55Z"/></g>
+<!-- foreground boat --> <path d="M320 316 Q445 291 576 317 L540 350 Q414 363 347 343Z" fill="#6e482f" stroke="#d2b174" stroke-width="5"/><path d="M445 310 L445 225" stroke="#5b432f" stroke-width="6"/><path d="M451 231 Q515 262 451 303Z" fill="#eee0c1" stroke="#8d7450" stroke-width="4"/>
+<path d="M60 378 Q210 365 355 382 M615 385 Q745 367 875 380" stroke="#b8a77b" stroke-width="4" fill="none" opacity=".6"/>
+</svg>
