@@ -977,7 +977,17 @@ setInterval(updateSEOChecklist, 3000);
 </head>
 <body>
   <div id="toast-host"></div>
-  <div id="app"></div>
+  <div id="app">
+    <div class="login-wrap" id="boot-fallback">
+      <div class="login-card">
+        <div class="login-brand">
+          <div class="logo-big">✦</div>
+          <h1>মোস্তফা অভি — লেখক ড্যাশবোর্ড</h1>
+          <p>ড্যাশবোর্ড লোড হচ্ছে…</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <script>
     // ============================================================
     // 🔧 CONFIG
@@ -3171,6 +3181,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
     // INIT
     // ============================================================
     async function init() {
+      try {
       applyTheme(state.theme);
       if (!initSupabase()) {
         renderConfigError();
@@ -3213,6 +3224,13 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
             await afterAuth();
           }
         });
+      }
+      } catch (e) {
+        console.error('Dashboard boot failed:', e);
+        const app = document.getElementById('app');
+        if (app) {
+          app.innerHTML = '<div class="login-wrap"><div class="login-card"><div class="login-brand"><div class="logo-big">!</div><h1>ড্যাশবোর্ড লোড করা যাচ্ছে না</h1><p>পেজটি একবার Ctrl+F5 দিয়ে রিফ্রেশ করুন। যদি তবুও না আসে, ব্রাউজারের cache/site data পরিষ্কার করে আবার খুলুন।</p></div></div></div>';
+        }
       }
     }
 
