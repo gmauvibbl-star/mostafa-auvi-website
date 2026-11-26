@@ -1,0 +1,27 @@
+/* Final page harmonisation: home, archive, biography and subscription. */
+:root{--page-teal:#0F3D3E;--page-ivory:#FAF4E8;--page-gold:#B89248;--page-ink:#26312d;--page-muted:#706f66;--page-rule:rgba(15,61,62,.15)}
+.recent .head h2{color:var(--page-teal)!important}.recent .card h3{color:var(--page-ink)!important}.recent .head .all{color:var(--page-teal)}.recent .head .all:hover{color:#8a6c32}
+.author-hero{position:relative;overflow:hidden;background-color:var(--page-teal)}
+.author-photo-wrap{width:min(100%,300px);height:auto;max-height:none;aspect-ratio:2/3;padding:10px;box-sizing:border-box;align-self:center}
+.author-photo{display:block;width:100%;height:100%;object-fit:contain!important;object-position:center center!important;background:#eee7d9}
+.photo-credit{z-index:2}
+.bio-article{border:1px solid rgba(15,61,62,.09);border-radius:3px;background:#fffdf8}.bio-article h2{color:var(--page-teal)}.bio-divider{border-color:rgba(184,146,72,.35)}
+.essay-hub{border-color:var(--page-rule);background:rgba(250,244,232,.72)}.essay-hub-label{color:var(--page-teal)}
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.filter-pill{border:1px solid rgba(15,61,62,.19);border-radius:3px;background:#fffdf8;color:var(--page-teal);text-decoration:none;transition:background-color .16s ease,border-color .16s ease,color .16s ease}
+.filter-pill:hover,.filter-pill.active,.filter-pill[aria-current="page"]{background:var(--page-teal);border-color:var(--page-teal);color:var(--page-ivory)}
+#grid .card{overflow:hidden;border:1px solid rgba(15,61,62,.13);border-radius:3px;background:#fffdf8;box-shadow:0 3px 13px rgba(24,45,40,.055);transition:box-shadow .18s ease,border-color .18s ease}
+#grid .card:hover{transform:none!important;border-color:rgba(184,146,72,.62);box-shadow:0 8px 22px rgba(24,45,40,.09)}
+#grid .card-cover,#grid .card-cover-fallback{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:cover;background:#eee7d9;transform:none!important;transition:none!important}
+#grid .card-body{padding:17px 18px 16px}#grid .card-title{color:var(--page-teal);line-height:1.48}#grid .card-excerpt{color:#55584f;line-height:1.78}#grid .card-meta{color:var(--page-muted);border-top:1px solid rgba(15,61,62,.09);padding-top:10px}#grid .card-badges .badge.cat{background:rgba(184,146,72,.12);color:#80612b}
+.action-view{width:min(100%,760px);margin-inline:auto}.action-view .kicker{color:#8a6c32;letter-spacing:.12em}.action-view h1,.action-view h2{color:var(--page-teal);line-height:1.4}.action-view .intro{max-width:66ch;color:#565b53;line-height:1.85}
+.action-view>.card{border:1px solid rgba(15,61,62,.14);border-radius:4px;background:#fffdf8;box-shadow:0 5px 20px rgba(24,45,40,.055)}
+.action-view form label{display:block;margin-bottom:8px;color:var(--page-teal);font-weight:600}
+.action-view form input[type=email]{width:100%;min-height:48px;padding:11px 13px;border:1px solid #d8cfbd;border-radius:3px;background:#fffefa;color:var(--page-ink)}
+.action-view form input[type=email]:focus{border-color:var(--page-gold);outline:2px solid rgba(184,146,72,.2);outline-offset:1px}
+.action-view form button[type=submit]{min-height:44px;padding:10px 22px;border:1px solid var(--page-teal);border-radius:3px;background:var(--page-teal);color:var(--page-ivory);transition:background-color .16s ease,border-color .16s ease}
+.action-view form button[type=submit]:hover{background:#1b5e5b;border-color:#1b5e5b;transform:none}
+.subscription-details{max-width:70ch;margin:32px auto 0;padding:24px 26px;border-top:1px solid rgba(184,146,72,.5);color:#4d514b;line-height:1.9}
+.subscription-details h2{margin:1.4em 0 .55em;font-size:1.22rem}.subscription-details h2:first-child{margin-top:0}.subscription-details p{margin:0 0 1.05em}.subscription-details a{color:var(--page-teal);text-underline-offset:3px}
+@media(max-width:700px){.author-hero{gap:22px}.author-photo-wrap{width:min(76%,260px);padding:8px}#grid .card-body{padding:14px}.subscription-details{padding:20px 16px;margin-top:24px}}
+@media(prefers-reduced-motion:reduce){.filter-pill,#grid .card,.action-view form button[type=submit]{transition:none!important}}
