@@ -1,0 +1,151 @@
+/* Site-wide editorial refinement — additive layer, shared across public pages. */
+:root{
+  --editorial-ink:#202b28;
+  --editorial-muted:#6b7168;
+  --editorial-paper:#faf4e8;
+  --editorial-line:rgba(126,105,65,.24);
+  --editorial-shadow:0 8px 24px rgba(24,45,40,.07);
+  --editorial-radius:10px;
+  --editorial-measure:72ch;
+}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{
+  color:var(--editorial-ink);
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+p{ text-wrap:pretty; }
+h1,h2,h3{ text-wrap:balance; }
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid #b89248!important;outline-offset:3px;
+}
+img{height:auto;max-width:100%}
+
+/* Editorial reading rhythm */
+.a4-page,.read-main article,.article-body,.a4-body{
+  color:#252923;
+}
+.a4-title,.article-title,.a4-title.bn{
+  letter-spacing:-.018em;
+  text-wrap:balance;
+}
+.a4-body,.article-body{
+  font-size:clamp(17px,1.16vw,19px);
+  line-height:1.98;
+  letter-spacing:0;
+  overflow-wrap:anywhere;
+}
+.a4-body p,.article-body p{
+  margin:0 0 1.18em;
+  text-wrap:pretty;
+}
+.a4-body h2,.article-body h2{
+  margin:2.1em 0 .7em;
+  line-height:1.48;
+  text-wrap:balance;
+}
+.a4-body h3,.article-body h3{
+  margin:1.8em 0 .55em;
+  line-height:1.5;
+}
+.a4-body blockquote,.article-body blockquote{
+  margin:1.7em 0;
+  padding:.85em 1.2em;
+  border-left:3px solid #b89248;
+  background:rgba(184,146,72,.075);
+  color:#514737;
+  border-radius:0 6px 6px 0;
+}
+.a4-body img,.article-body img{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:1.8em auto;
+  border-radius:6px;
+}
+.a4-body figcaption,.article-body figcaption{
+  margin:-1.1em auto 1.8em;
+  max-width:62ch;
+  color:var(--editorial-muted);
+  font-size:.88em;
+  line-height:1.65;
+  text-align:center;
+}
+.a4-body ul,.a4-body ol,.article-body ul,.article-body ol{
+  padding-inline-start:1.5em;
+  margin:1em 0 1.3em;
+}
+.a4-body li,.article-body li{margin:.35em 0;line-height:1.85}
+
+/* Consistent, quieter surfaces on archive and feature cards */
+.cwip-sub,.lw-card,.essay-hub-card,.book-archive-card,
+#latestGrid .card,#latestGridEn .card,.reader-side-card{
+  border-color:var(--editorial-line);
+  box-shadow:0 3px 12px rgba(24,45,40,.055);
+}
+.cwip-sub:hover,.lw-card:hover,.essay-hub-card:hover,
+.book-archive-card:hover,#latestGrid .card:hover,#latestGridEn .card:hover,
+.reader-side-card:hover{
+  transform:none!important;
+  box-shadow:0 7px 18px rgba(24,45,40,.09);
+  border-color:rgba(184,146,72,.58);
+}
+/* Prevent thumbnail shimmer caused by hover scaling / compositing */
+.cwip-image,.lw-card img,.reader-side-card img,
+#latestGrid .card img,#latestGridEn .card img,
+.essay-hub-card img,.book-archive-card img,
+.card-cover,.thumb img{
+  transform:none!important;
+  transition:none!important;
+  backface-visibility:visible;
+  filter:none;
+}
+.cwip-sub:hover .cwip-image,.lw-card:hover img,
+.reader-side-card:hover img,#latestGrid .card:hover img,
+#latestGridEn .card:hover img,.essay-hub-card:hover img,
+.book-archive-card:hover img,.card:hover .thumb img{
+  transform:none!important;
+  filter:none!important;
+}
+.cwip-sub,.lw-card,.essay-hub-card,.book-archive-card,
+#latestGrid .card,#latestGridEn .card,.reader-side-card{
+  transition:box-shadow .18s ease,border-color .18s ease!important;
+}
+
+/* Archive hierarchy and breathing room */
+.intro,.archive-intro{max-width:var(--editorial-measure)}
+.page-title{line-height:1.35;letter-spacing:-.02em}
+.page-subtitle{line-height:1.8;color:var(--editorial-muted)}
+.filters{row-gap:9px}
+.filter-pill{line-height:1.55}
+.card-title,.card h3,.lw-card h3,.reader-side-title{
+  line-height:1.55;
+  text-wrap:pretty;
+}
+
+/* About and long-form informational pages */
+.author-hero-text,.bio-body,.subscription-details{
+  line-height:1.9;
+}
+.bio-body p,.subscription-details p{margin-bottom:1.15em}
+.bio-body h2,.subscription-details h2{margin-top:2em;line-height:1.5}
+main>h1,main>.intro h1{ text-wrap:balance; }
+
+/* Forms: clear labels, readable controls and calmer focus */
+input,textarea,select,button{font:inherit}
+input,textarea,select{max-width:100%}
+button,[type=submit]{cursor:pointer}
+.status{line-height:1.65}
+
+/* Small screens */
+@media(max-width:700px){
+  .a4-body,.article-body{font-size:17px;line-height:1.9}
+  .a4-body p,.article-body p{margin-bottom:1.05em}
+  .a4-body blockquote,.article-body blockquote{padding:.75em .95em;margin:1.35em 0}
+  .intro{padding-inline:18px}
+  .filters{padding-inline:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
