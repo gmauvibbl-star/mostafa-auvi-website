@@ -92,7 +92,8 @@
   .page-wrap>.v2>.hdr>.menu::-webkit-scrollbar{display:none}
   .page-wrap>.v2>.hdr>.menu>a,.page-wrap>.v2>.hdr>.menu>.dropdown{display:inline-flex;flex:0 0 auto;white-space:nowrap}
   .page-wrap>.v2>.hdr .header-meta,.page-wrap>.v2>.hdr .header-meta *{color:var(--chrome-cream,#faf4e8)!important}
-  .menu .dropdown-panel{position:absolute;top:calc(100% + 4px);left:0;max-width:calc(100vw - 28px)}
+  /* Keep the swipeable navigation row, but let its dropdown escape the horizontal scroll viewport. */
+  .menu .dropdown-panel{position:fixed;top:auto;left:auto;max-width:calc(100vw - 28px);max-height:min(60vh,420px);overflow-y:auto;z-index:10050}
 }
 @media(max-width:380px){
   .page-wrap>.v2>.hdr{padding-left:13px;padding-right:13px}
@@ -350,6 +351,18 @@ if ('serviceWorker' in navigator) {
       dropdowns.forEach(function (other) {
         if (other !== item) other.open = false;
       });
+      /* On narrow screens the menu itself scrolls horizontally. Position the
+         opened panel against the summary in the viewport so it is not clipped. */
+      if (window.matchMedia('(max-width: 1000px)').matches) {
+        var summary = item.querySelector('summary');
+        var panel = item.querySelector('.dropdown-panel');
+        if (summary && panel) {
+          var rect = summary.getBoundingClientRect();
+          var maxLeft = Math.max(8, window.innerWidth - panel.offsetWidth - 8);
+          panel.style.left = Math.max(8, Math.min(rect.left, maxLeft)) + 'px';
+          panel.style.top = Math.min(rect.bottom + 5, window.innerHeight - 90) + 'px';
+        }
+      }
     });
   });
   document.addEventListener('click', function (event) {
