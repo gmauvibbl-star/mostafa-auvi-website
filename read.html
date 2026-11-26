@@ -1809,8 +1809,9 @@
   /* ====== REFINED LITERARY READER (2026-11-26) ====== */
   :root { --reader-font-scale: 1; }
   .reader-progress {
-    position:fixed; inset:0 0 auto; height:3px; z-index:10000;
-    background:rgba(15,61,62,.10); pointer-events:none;
+    position:fixed; inset:0 0 auto; height:4px; z-index:10000;
+    background:#d9d0bf; box-shadow:0 1px 3px rgba(0,0,0,.12);
+    pointer-events:none; visibility:visible; opacity:1;
   }
   .reader-progress-bar {
     display:block; width:0; height:100%;
@@ -2664,9 +2665,13 @@ function setupReadingTools() {
 
   let scale = 1;
   const min = .9, max = 1.35, step = .05;
+  const baseFontSize = isEn
+    ? (window.innerWidth <= 600 ? 18 : 19)
+    : (window.innerWidth <= 600 ? 17 : 18);
   const applyScale = () => {
     body.style.setProperty('--reader-font-scale', scale.toFixed(2));
-    body.style.fontSize = 'calc(' + (isEn ? '19px' : '18px') + ' * ' + scale.toFixed(2) + ')';
+    // Set a concrete pixel value for consistent support across browsers.
+    body.style.fontSize = (baseFontSize * scale).toFixed(1) + 'px';
     tools.querySelector('[data-reader-action="smaller"]').disabled = scale <= min;
     tools.querySelector('[data-reader-action="larger"]').disabled = scale >= max;
   };
