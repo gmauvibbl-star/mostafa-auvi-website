@@ -1820,7 +1820,7 @@
   }
   .reader-tools {
     display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap;
-    gap:8px; margin:0 0 22px; padding:10px 0;
+    gap:8px; margin:0 0 8px; padding:6px 0;
     border-top:1px solid rgba(120,105,80,.18);
     border-bottom:1px solid rgba(120,105,80,.18);
     color:#6b6254; font-family:'Noto Serif Bengali',serif;
@@ -1855,6 +1855,10 @@
   .read-layout { grid-template-columns:minmax(0,800px) 250px; gap:30px; max-width:1120px; }
   .a4-page { padding-left:42px; padding-right:42px; }
   .a4-body,.a4-body.en { max-width:740px; }
+  /* Keep the transition from article header to reading controls compact. */
+  .a4-header { margin-bottom:8px; }
+  .a4-cover { margin-top:4px; }
+
   .reader-side-column { opacity:.88; }
   .reader-side-head { font-size:15px; border-bottom-width:1px; }
   .reader-side-card { grid-template-columns:78px minmax(0,1fr); padding:7px; gap:9px; background:#f8f3e7; border-color:#e7ddc9; }
@@ -1881,7 +1885,7 @@
     .reader-side-card img,.reader-side-fallback { width:84px; height:66px; }
   }
   @media(max-width:600px) {
-    .reader-tools { justify-content:flex-start; gap:6px; margin-bottom:16px; }
+    .reader-tools { justify-content:flex-start; gap:6px; margin-bottom:8px; }
     .reader-tools-label { flex-basis:100%; margin-bottom:2px; }
     .reader-tool-btn { min-height:36px; }
     .a4-page { padding-left:18px; padding-right:18px; }
