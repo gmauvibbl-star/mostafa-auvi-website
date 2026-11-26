@@ -999,6 +999,32 @@ html,body{min-height:100%!important;margin:0!important;padding:0!important;}
       <p style="margin:18px 0 0;color:#9ca3af;font-size:12px;">কিছুক্ষণ পরেও না এলে পেজটি রিফ্রেশ করুন।</p>
     </div>
   </div>
+  <script>
+    // Global startup diagnostics: never allow an uncaught boot error to produce a blank page.
+    window.addEventListener('error', function(e) {
+      var boot = document.getElementById('boot-fallback');
+      var msg = document.getElementById('boot-message');
+      if (boot) boot.style.display = 'flex';
+      if (msg) msg.textContent = 'ড্যাশবোর্ডে JavaScript ত্রুটি: ' + ((e && e.message) || 'অজানা ত্রুটি');
+      console.error('Dashboard global error:', e && e.error ? e.error : e);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      var boot = document.getElementById('boot-fallback');
+      var msg = document.getElementById('boot-message');
+      if (boot) boot.style.display = 'flex';
+      if (msg) msg.textContent = 'ড্যাশবোর্ড চালু হতে সমস্যা: ' + (e && e.reason && e.reason.message ? e.reason.message : String(e && e.reason || 'অজানা ত্রুটি'));
+      console.error('Dashboard unhandled rejection:', e && e.reason ? e.reason : e);
+    });
+    setTimeout(function() {
+      var boot = document.getElementById('boot-fallback');
+      if (boot && boot.style.display !== 'none') {
+        var msg = document.getElementById('boot-message');
+        if (msg && msg.textContent === 'ড্যাশবোর্ড লোড হচ্ছে…') {
+          msg.textContent = 'ড্যাশবোর্ডের শুরুতে সমস্যা হচ্ছে। JavaScript/Supabase লোড পরীক্ষা করুন।';
+        }
+      }
+    }, 12000);
+  </script>
   <div id="app"></div>
   <script>
     // ============================================================
