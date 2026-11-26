@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">People of Chandradwip</title><desc id="desc">Three figures from a nineteenth-century Bengal river village stand beside a wooden boat at dusk.</desc>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#b9b49a"/><stop offset="1" stop-color="#e7c99a"/></linearGradient><linearGradient id="river" x2="0" y2="1"><stop stop-color="#607c72"/><stop offset="1" stop-color="#203f3c"/></linearGradient></defs>
+<rect width="900" height="420" fill="url(#sky)"/><circle cx="180" cy="95" r="54" fill="#d8a65f" opacity=".8"/><path d="M0 195 Q160 160 330 194 T650 188 T900 192 V420 H0Z" fill="#657354"/><path d="M0 245 Q210 210 390 250 T700 242 T900 252 V420 H0Z" fill="url(#river)"/>
+<path d="M0 305 Q200 290 420 315 T900 304" stroke="#c6b17e" stroke-width="4" fill="none" opacity=".5"/>
+<path d="M580 0 Q565 100 590 220" stroke="#534a36" stroke-width="24" fill="none"/><path d="M590 72 Q505 18 470 65 Q500 120 588 112 Q520 132 520 177 Q584 190 615 128 Q665 174 710 132 Q684 75 615 89 Q670 37 640 12 Q606 15 590 72Z" fill="#46563e"/>
+<!-- boat --> <path d="M72 313 Q230 285 393 312 L352 353 Q192 373 105 343Z" fill="#6c452f" stroke="#d1ad72" stroke-width="5"/><path d="M225 307 L225 170" stroke="#5c4330" stroke-width="7"/><path d="M231 177 Q322 220 231 293Z" fill="#e8d8b7" stroke="#876c4b" stroke-width="4"/>
+<!-- figures --> <g stroke="#3e332a" stroke-width="5" stroke-linejoin="round">
+<path d="M430 220 Q455 192 480 220 L492 315 L418 315Z" fill="#8b4438"/><circle cx="455" cy="186" r="22" fill="#8b5b43"/><path d="M433 179 Q451 145 479 175" fill="#292c27"/>
+<path d="M510 236 Q537 207 562 236 L575 320 L495 320Z" fill="#d4c39d"/><circle cx="537" cy="204" r="21" fill="#9b694e"/><path d="M516 199 Q535 165 559 193" fill="#34312a"/>
+<path d="M620 230 Q647 204 671 232 L686 321 L604 321Z" fill="#4d5c50"/><circle cx="645" cy="201" r="21" fill="#80553f"/><path d="M624 194 Q645 164 667 191" fill="#292b25"/>
+</g><path d="M430 267 L398 296 M560 269 L590 294 M670 269 L700 293" stroke="#80553f" stroke-width="9" stroke-linecap="round"/>
+</svg>
