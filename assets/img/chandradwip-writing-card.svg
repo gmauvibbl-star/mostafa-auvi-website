@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">A writer's desk beside the river</title><desc id="desc">An open manuscript, ink bottle and pen on a wooden desk, with a river and banyan tree beyond the window.</desc>
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#d8c89f"/><stop offset="1" stop-color="#f2dfb8"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#668b83"/><stop offset="1" stop-color="#244e4b"/></linearGradient><linearGradient id="wood" x2="0" y2="1"><stop stop-color="#8a5d3e"/><stop offset="1" stop-color="#4d382b"/></linearGradient></defs>
+<rect width="900" height="420" fill="#e9d9b9"/><rect width="900" height="270" fill="url(#sky)"/>
+<circle cx="690" cy="92" r="48" fill="#d49a50" opacity=".8"/><path d="M0 210 Q160 160 310 207 T620 194 T900 210 V300 H0Z" fill="#8c9b70"/>
+<path d="M0 244 Q170 218 330 252 T640 239 T900 250 V330 H0Z" fill="url(#water)"/><path d="M0 280 Q170 264 340 282 T680 275 T900 284" fill="none" stroke="#d4c18e" stroke-width="5" opacity=".55"/>
+<path d="M780 0 Q760 95 785 196" fill="none" stroke="#4c4430" stroke-width="22"/><path d="M785 80 Q690 14 650 62 Q677 108 774 115 Q710 118 690 166 Q762 182 803 125 Q842 173 895 143 Q870 84 804 94 Q862 42 833 14 Q799 18 785 80Z" fill="#526447"/>
+<rect y="315" width="900" height="105" fill="url(#wood)"/><path d="M0 338 Q200 320 400 342 T900 333 M0 388 Q260 370 520 393 T900 382" fill="none" stroke="#b18154" stroke-width="4" opacity=".55"/>
+<path d="M155 280 L465 255 L610 330 L300 358Z" fill="#d9c69e" stroke="#6e5138" stroke-width="5"/><path d="M300 358 L300 278 L465 255 L465 337Z" fill="#f5e9ce"/><path d="M300 278 L465 255 L610 330 L465 337Z" fill="#fff5df"/><path d="M335 294 L445 278 M335 309 L445 293 M335 324 L445 308 M490 278 L570 316 M490 294 L570 332" stroke="#9a8061" stroke-width="3" opacity=".65"/>
+<path d="M540 238 L610 184 L626 197 L557 252Z" fill="#8a3028"/><path d="M606 187 L625 173 L633 183 L616 199Z" fill="#d6b36d"/><path d="M674 292 Q666 252 695 248 Q724 255 713 292Z" fill="#263f3a"/><ellipse cx="695" cy="293" rx="26" ry="7" fill="#b88c51"/><path d="M700 248 L700 227" stroke="#d7b66d" stroke-width="5"/>
+</svg>
