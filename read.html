@@ -1885,10 +1885,37 @@
     .reader-side-card img,.reader-side-fallback { width:84px; height:66px; }
   }
   @media(max-width:600px) {
-    .reader-tools { justify-content:flex-start; gap:6px; margin-bottom:8px; }
-    .reader-tools-label { flex-basis:100%; margin-bottom:2px; }
-    .reader-tool-btn { min-height:36px; }
-    .a4-page { padding-left:18px; padding-right:18px; }
+    /* Mobile: make the reading controls a compact single toolbar so the article image starts sooner. */
+    .read-main { padding-top:8px; padding-bottom:32px; }
+    .back-bar { margin-bottom:8px; }
+    .a4-page { padding:18px 12px 28px; }
+    .a4-header { margin-bottom:4px; }
+    .reader-tools {
+      justify-content:flex-start;
+      align-items:center;
+      gap:5px;
+      margin:2px 0 4px;
+      padding:4px 0;
+    }
+    .reader-tools-label {
+      flex-basis:auto;
+      margin:0 2px 0 0;
+      font-size:11px;
+      white-space:nowrap;
+    }
+    .reader-reading-note { display:none; }
+    .reader-tool-btn {
+      min-width:32px;
+      min-height:30px;
+      padding:4px 7px;
+      font-size:12px;
+    }
+    .reader-tool-btn[data-reader-action="focus"] {
+      margin-left:auto;
+      padding-left:9px;
+      padding-right:9px;
+    }
+    .a4-cover { margin:2px 0 18px; }
     .a4-body { font-size:calc(17px * var(--reader-font-scale)); line-height:1.95; }
     .a4-body.en { font-size:calc(18px * var(--reader-font-scale)); line-height:1.85; }
     .reader-side-list { grid-template-columns:1fr; }
