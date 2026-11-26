@@ -1,0 +1,277 @@
+/* ============================================================
+ *  auvi-fixes.css  —  2026-11-26 refinement pass
+ *  ------------------------------------------------------------
+ *  Loaded LAST (after every other stylesheet) so its rules win.
+ *  Five targeted fixes requested by the author:
+ *    1. Page wider on both left & right sides.
+ *    2. "সাম্প্রতিক লেখা" cards no longer look toy-like — taller
+ *       covers, bigger titles, real excerpt, more breathing room.
+ *    3. Bigger fonts across body, navigation, cards and article text.
+ *    4. Footer trimmed down and seated in its proper place.
+ *    5. Article (read.html) pages start higher up — less empty
+ *       space before the cover image and the first paragraph.
+ *  Safe to remove: delete this file and the matching <link> tags.
+ * ============================================================ */
+
+/* ---------- 1. PAGE WIDER (both sides) ---------- */
+:root{ --page-max: 1400px; }
+
+.page-wrap{
+  max-width: 1400px !important;
+}
+
+/* Tighten every horizontal gutter so the extra width is actually used. */
+.utility-bar,
+.page-wrap > .v2 > .hdr,
+.hdr, .header, .site-header, header.header{
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* Homepage content strips */
+.recent-wrap{ padding: 0 18px !important; }
+.recent-wrap .latest-writings,
+.latest-writings{ padding: 10px 18px 30px !important; }
+
+.lower-grid,
+#featured,
+#featured .section-head,
+.novel-card{ padding-left: 18px !important; padding-right: 18px !important; }
+
+/* Coming-soon novel cover sits a touch shorter, balanced with the wider column */
+.novel-card img[style]{ height: 230px !important; }
+
+
+/* ---------- 2. RECENT-WRITING CARDS — substantial, not toy-like ---------- */
+#latestGrid .lw-grid,
+#latestGridEn .lw-grid{
+  gap: 24px !important;
+}
+
+.lw-card{
+  border-radius: 12px !important;
+  border: 1px solid #d8c9a3 !important;
+  box-shadow: 0 6px 18px rgba(15, 61, 62, 0.10) !important;
+}
+.lw-card:hover{
+  transform: translateY(-5px) !important;
+  box-shadow: 0 16px 34px rgba(15, 61, 62, 0.20) !important;
+  border-color: var(--teal-mid, #2A7A7E) !important;
+}
+
+/* Taller, more photographic cover (3:2 instead of 16:9) */
+#latestGrid .lw-card img,
+#latestGridEn .lw-card img,
+#latestGrid .lw-fallback,
+#latestGridEn .lw-fallback,
+.lw-card img,
+.lw-fallback{
+  aspect-ratio: 3 / 2 !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover !important;
+}
+.lw-fallback{ font-size: 48px !important; }
+
+.lw-cat{
+  margin: 14px 18px 0 !important;
+  padding: 4px 11px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  border-radius: 4px !important;
+}
+
+.lw-card h3,
+#latestGrid .lw-card h3,
+#latestGridEn .lw-card h3{
+  margin: 0 !important;
+  padding: 10px 18px 4px !important;
+  font-size: 21px !important;
+  line-height: 1.38 !important;
+  font-weight: 700 !important;
+  color: #8A1818 !important;
+}
+
+/* Excerpt is now rendered by main.js — give it real body type */
+.lw-excerpt{
+  display: block;
+  padding: 2px 18px 8px !important;
+  margin: 0 !important;
+  font-family: 'Noto Serif Bengali', 'EB Garamond', serif !important;
+  font-size: 14.5px !important;
+  line-height: 1.62 !important;
+  color: #3D2E22 !important;
+  text-align: left;
+}
+
+.lw-date{
+  display: block;
+  padding: 6px 18px 16px !important;
+  margin-top: auto !important;
+  font-size: 13px !important;
+  color: #6b5d44 !important;
+  font-family: 'EB Garamond', 'Noto Serif Bengali', serif !important;
+}
+
+@media (max-width: 900px){
+  .lw-card h3{ font-size: 19px !important; }
+  .lw-excerpt{ font-size: 13.5px !important; }
+}
+@media (max-width: 600px){
+  .lw-card h3{ font-size: 20px !important; }
+  .lw-excerpt{ font-size: 14px !important; }
+}
+
+
+/* ---------- 3. BIGGER FONTS ---------- */
+body{ font-size: 17px !important; }
+
+/* Navigation — keep readable, do not shrink from the original size */
+.menu a, .menu summary,
+.nav a, .nav ul li a,
+.site-header .nav a{
+  font-size: 17px !important;
+}
+
+/* Homepage headings & body */
+.recent .head h2,
+.recent-title,
+.latest-header h2{
+  font-size: 30px !important;
+}
+.recent .head .eyebrow,
+.latest-header .eyebrow{
+  font-size: 12px !important;
+}
+.recent .head .all,
+.latest-header .latest-all{
+  font-size: 15px !important;
+}
+
+.section-title{ font-size: 27px !important; }
+.section-title small{ font-size: 14px !important; }
+
+.novel-title h3{ font-size: 25px !important; }
+.novel-body p{
+  font-size: 17.5px !important;
+  line-height: 1.92 !important;
+}
+.novel-body p.closing{
+  font-size: 18px !important;
+}
+
+.cwip-bn{ font-size: 17px !important; }
+.cwip-en{ font-size: 13.5px !important; }
+
+/* Article (read.html) body — bigger, easier to read */
+.a4-body{
+  font-size: 18.5px !important;
+  line-height: 2 !important;
+}
+.a4-body.en{
+  font-size: 20px !important;
+  line-height: 1.9 !important;
+}
+.a4-page .article-title,
+.a4-page .a4-title,
+.a4-page .a4-title.bn,
+.a4-page .a4-title:not(.bn){
+  font-size: 30px !important;
+  line-height: 1.25 !important;
+}
+.a4-body .article-subtitle{ font-size: 1.15em !important; }
+.a4-body h2{ font-size: 1.55em !important; }
+.a4-body h3{ font-size: 1.25em !important; }
+
+
+/* ---------- 4. FOOTER — smaller, in its proper place ---------- */
+footer, .site-footer, .footer-strip, body > footer{
+  padding: 14px 24px 12px !important;
+  margin-top: 0 !important;
+}
+
+footer .fbar,
+.site-footer .fbar,
+.footer-strip .fbar{
+  gap: 6px !important;
+  row-gap: 4px !important;
+}
+
+footer .fbrand,
+.site-footer .footer-brand,
+.footer-brand{
+  font-size: 17px !important;
+  letter-spacing: 0.08em !important;
+}
+footer .fbrand em{
+  font-size: 12px !important;
+  margin-top: 3px !important;
+  letter-spacing: 0 !important;
+}
+
+footer .contact,
+footer .legal,
+.footer-copy{
+  font-size: 12px !important;
+  line-height: 1.7 !important;
+}
+
+footer .dash,
+.author-login-btn{
+  padding: 4px 11px !important;
+  font-size: 12px !important;
+  border-radius: 999px !important;
+}
+
+footer .dash svg{ width: 12px !important; height: 12px !important; }
+
+@media (max-width: 640px){
+  footer, .site-footer, .footer-strip{ padding: 12px 16px 10px !important; }
+  footer .fbrand{ font-size: 15px !important; }
+  footer .contact, footer .legal{ font-size: 11.5px !important; }
+}
+
+
+/* ---------- 5. READ / ARTICLE PAGES — less top whitespace ---------- */
+.read-main{
+  padding: 14px 24px 46px !important;
+  margin-top: 0 !important;
+}
+
+.back-bar{
+  margin: 0 auto 10px !important;
+}
+.back-bar.bottom{ margin-top: 18px !important; }
+
+.read-layout{
+  margin-top: 0 !important;
+}
+
+.a4-page{
+  padding: 22px 34px 26px !important;
+  margin: 0 auto !important;
+}
+.a4-page::before{ height: 4px !important; }
+
+.a4-header{
+  margin-bottom: 10px !important;
+}
+
+.a4-cover{
+  margin: 4px 0 16px !important;
+  max-height: 380px !important;
+}
+
+/* Reader sidebar shouldn't push the article down */
+.reader-side-column{ margin-top: 0 !important; }
+
+@media (max-width: 768px){
+  .read-main{ padding: 12px 14px 36px !important; }
+  .a4-page{ padding: 18px 16px 20px !important; }
+  .a4-body{ font-size: 17.5px !important; line-height: 1.95 !important; }
+}
+@media (max-width: 480px){
+  .a4-page .article-title,
+  .a4-page .a4-title{ font-size: 24px !important; }
+  .a4-body{ font-size: 17px !important; }
+}
