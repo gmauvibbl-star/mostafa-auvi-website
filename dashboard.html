@@ -974,6 +974,20 @@ setInterval(updateSEOChecklist, 3000);
     }
 
 </style>
+
+<style id="dashboard-shell-final-fix-20261126">
+/* FINAL DASHBOARD SHELL FIX: keep the application chrome visible on desktop. */
+html,body{min-height:100%!important;margin:0!important;padding:0!important;}
+#app{min-height:100vh!important;display:flex!important;flex-direction:column!important;}
+#app>.topbar{display:flex!important;visibility:visible!important;flex:0 0 52px!important;height:52px!important;min-height:52px!important;position:relative!important;z-index:100!important;}
+#app>.layout{display:flex!important;visibility:visible!important;flex:1 1 auto!important;min-height:calc(100vh - 52px)!important;height:auto!important;}
+#app>.layout>.sidebar{display:flex!important;visibility:visible!important;flex:0 0 240px!important;width:240px!important;min-width:240px!important;}
+#app>.layout>.main{display:block!important;visibility:visible!important;flex:1 1 auto!important;min-width:0!important;}
+@media(max-width:768px){
+  #app>.layout>.sidebar{display:none!important;}
+  #app>.layout>.sidebar.open{display:flex!important;position:fixed!important;left:0!important;top:0!important;bottom:0!important;z-index:1000!important;}
+}
+</style>
 </head>
 <body>
   <div id="toast-host"></div>
