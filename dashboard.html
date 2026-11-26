@@ -991,16 +991,15 @@ html,body{min-height:100%!important;margin:0!important;padding:0!important;}
 </head>
 <body>
   <div id="toast-host"></div>
-  <div id="app">
-    <div id="boot-fallback" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;background:#f7f3ea;color:#173c3c;font-family:'Hind Siliguri','Noto Sans Bengali',system-ui,sans-serif;">
-      <div style="width:100%;max-width:440px;text-align:center;">
-        <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:16px;background:#c85a4c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;">✦</div>
-        <h1 style="margin:0 0 6px;font-size:23px;">মোস্তফা অভি — লেখক ড্যাশবোর্ড</h1>
-        <p style="margin:0;color:#6b7280;font-size:14px;">ড্যাশবোর্ড লোড হচ্ছে…</p>
-        <p style="margin:18px 0 0;color:#9ca3af;font-size:12px;">কিছুক্ষণ পরেও না এলে Ctrl+F5 দিন।</p>
-      </div>
+  <div id="boot-fallback" role="status" aria-live="polite" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;background:#f7f3ea;color:#173c3c;font-family:'Hind Siliguri','Noto Sans Bengali',system-ui,sans-serif;">
+    <div style="width:100%;max-width:440px;text-align:center;">
+      <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:16px;background:#c85a4c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;">✦</div>
+      <h1 style="margin:0 0 6px;font-size:23px;">মোস্তফা অভি — লেখক ড্যাশবোর্ড</h1>
+      <p id="boot-message" style="margin:0;color:#6b7280;font-size:14px;">ড্যাশবোর্ড লোড হচ্ছে…</p>
+      <p style="margin:18px 0 0;color:#9ca3af;font-size:12px;">কিছুক্ষণ পরেও না এলে পেজটি রিফ্রেশ করুন।</p>
     </div>
   </div>
+  <div id="app"></div>
   <script>
     // ============================================================
     // 🔧 CONFIG
@@ -1136,6 +1135,17 @@ html,body{min-height:100%!important;margin:0!important;padding:0!important;}
       Object.entries(props).forEach(([k, v]) => i.setAttribute(k, v));
       return i;
     }
+    function hideBootFallback() {
+      const boot = document.getElementById('boot-fallback');
+      if (boot) boot.style.display = 'none';
+    }
+    function showBootError(message) {
+      const boot = document.getElementById('boot-fallback');
+      const msg = document.getElementById('boot-message');
+      if (boot) boot.style.display = 'flex';
+      if (msg) msg.textContent = message || 'ড্যাশবোর্ড লোড করা যাচ্ছে না।';
+    }
+
     function refreshIcons() { if (window.lucide) lucide.createIcons(); }
 
     function slugify(text) {
@@ -2398,6 +2408,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       else if (state.view === 'stats') renderStatsView(inner);
 
       refreshIcons();
+      hideBootFallback();
     }
 
     // ============================================================
@@ -3198,6 +3209,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       applyTheme(state.theme);
       if (!initSupabase()) {
         renderConfigError();
+        hideBootFallback();
         return;
       }
 
@@ -3240,10 +3252,7 @@ const SUPABASE_KEY = 'YOUR_ANON_KEY';`
       }
       } catch (e) {
         console.error('Dashboard boot failed:', e);
-        const app = document.getElementById('app');
-        if (app) {
-          app.innerHTML = '<div class="login-wrap"><div class="login-card"><div class="login-brand"><div class="logo-big">!</div><h1>ড্যাশবোর্ড লোড করা যাচ্ছে না</h1><p>পেজটি একবার Ctrl+F5 দিয়ে রিফ্রেশ করুন। যদি তবুও না আসে, ব্রাউজারের cache/site data পরিষ্কার করে আবার খুলুন।</p></div></div></div>';
-        }
+        showBootError('ড্যাশবোর্ড চালু করতে একটি ত্রুটি হয়েছে: ' + (e && e.message ? e.message : 'অজানা ত্রুটি'));
       }
     }
 
