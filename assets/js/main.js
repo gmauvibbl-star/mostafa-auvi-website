@@ -174,59 +174,97 @@
     var section = document.querySelector(".latest-writings");
     var grid = document.getElementById("latestGrid");
     if (!section || !grid) return;
+
     var SUPABASE_URL = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_URL) || "https://voswrndbxrsaqfzwffhh.supabase.co";
     var SUPABASE_ANON_KEY = (window.SITE_CONFIG && window.SITE_CONFIG.SUPABASE_ANON_KEY) || "sb_publishable_lsz4V4nlZIbrFKi43YhOEg_m_pf0E5I";
     if (!SUPABASE_URL.startsWith("https://")) return;
+
+    var LIMIT = 3;
+    var FETCH_LIMIT = 12;
+    var SERIES_KEYS = ["chandradwip", "চন্দ্রদ্বীপ"];
+    var CATEGORY_LABELS = {
+      kothasahitya:"কথাসাহিত্য",
+      "probandho-sahityasamalochona":"প্রবন্ধ ও সাহিত্যসমালোচনা",
+      "ain-oadalot":"আইন ও আদালত",
+      "banking-o-orthoniti":"ব্যাংকিং ও অর্থনীতি",
+      "prokashona-o-pdf":"প্রকাশনা",
+      bhromonkahini:"ভ্রমণ ও অনুবাদ সাহিত্য"
+    };
 
     function esc(s) {
       return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
     }
     function fmtDate(iso) {
       if (!iso) return "";
-      try { return new Date(iso).toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric"}); } catch(e){ return ""; }
+      try { return new Date(iso).toLocaleDateString("bn-BD",{day:"numeric",month:"long",year:"numeric"}); }
+      catch(e){ return ""; }
     }
-    function catLabelBn(c) {
-      var map={kothasahitya:"কথাসাহিত্য","probandho-sahityasamalochona":"প্রবন্ধ ও সাহিত্যসমালোচনা","ain-oadalot":"আইন ও আদালত","banking-o-orthoniti":"ব্যাংকিং ও অর্থনীতি","prokashona-o-pdf":"প্রকাশনা",bhromonkahini:"ভ্রমণ ও অনুবাদ সাহিত্য",chandradwip:"চন্দ্রদ্বীপ"};
-      var key=String(c==null?"":c).trim().toLowerCase();
-      return map[key] || c || "";
+    function isSeries(category) {
+      var k = String(category == null ? "" : category).trim().toLowerCase();
+      return SERIES_KEYS.indexOf(k) !== -1;
+    }
+    function prepare(rows) {
+      var seenSlug = {}, seenTitle = {}, out = [];
+      (Array.isArray(rows) ? rows : []).forEach(function(p) {
+        if (!p || !p.slug || isSeries(p.category)) return;
+        var title = String(p.title || "").trim();
+        if (seenSlug[p.slug] || (title && seenTitle[title]) || out.length >= LIMIT) return;
+        seenSlug[p.slug] = true;
+        if (title) seenTitle[title] = true;
+        out.push(p);
+      });
+      return out;
     }
     function render(rows) {
-      rows=Array.isArray(rows)?rows:[];
-      if(!rows.length){grid.innerHTML='<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>';section.hidden=false;return;}
-      grid.innerHTML='<div class="lw-grid">'+rows.map(function(p){
-        var coverUrl=p.cover_image||p.cover_image_url||"";
-        var cover=coverUrl?'<img src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225">':'<div class="lw-fallback" aria-hidden="true">❦</div>';
-        var excerpt=String(p.excerpt||"").replace(/\s+/g," ").trim();
-        if(excerpt.length>140) excerpt=excerpt.slice(0,140)+"…";
-        return '<a class="lw-card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang=bn">'+cover+
-          '<span class="lw-cat">'+esc(catLabelBn(p.category))+'</span>'+
-          '<h3>'+esc(p.title||"(শিরোনামহীন)")+'</h3>'+
-          '<span class="lw-date">'+esc(fmtDate(p.published_at))+'</span></a>';
-      }).join("")+'</div>';
-      section.hidden=false;
+      var list = prepare(rows);
+      if (!list.length) {
+        grid.innerHTML = '<div class="latest-loading">কোনো সাম্প্রতিক লেখা পাওয়া যায়নি।</div>';
+        section.hidden = false;
+        return;
+      }
+      grid.innerHTML = '<div class="lw-grid">' + list.map(function(p) {
+        var coverUrl = p.cover_image || p.cover_image_url || "";
+        var cover = coverUrl
+          ? '<img src="'+esc(coverUrl)+'" alt="'+esc(p.title||"")+'" loading="lazy" width="400" height="225">'
+          : '<div class="lw-fallback" aria-hidden="true">❦</div>';
+        var excerpt = String(p.excerpt || "").replace(/\s+/g," ").trim();
+        if (excerpt.length > 140) excerpt = excerpt.slice(0,140) + "…";
+        var cat = CATEGORY_LABELS[String(p.category||"").trim().toLowerCase()] || p.category || "";
+        return '<a class="lw-card" href="./read.html?slug='+encodeURIComponent(p.slug)+'&lang=bn">'+
+          cover+
+          '<span class="lw-cat">'+esc(cat)+'</span>'+
+          '<h3>'+esc(p.title || "(শিরোনামহীন)")+'</h3>'+
+          (excerpt ? '<p class="lw-excerpt">'+esc(excerpt)+'</p>' : '')+
+          (p.published_at ? '<span class="lw-date">'+esc(fmtDate(p.published_at))+'</span>' : '')+
+          '</a>';
+      }).join("") + '</div>';
+      section.hidden = false;
     }
-    function restFallback(){
-      var url=SUPABASE_URL+"/rest/v1/posts?select=slug,title,excerpt,cover_image,cover_image_url,category,published_at,language&published=eq.true&language=eq.bn&slug=not.in.(chandradwip-writing,chandradwip-characters,chandradwip-settlement)&order=published_at.desc.nullslast&limit=3";
-      return fetch(url,{headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY},cache:"no-store"}).then(function(res){if(!res.ok)throw new Error("REST "+res.status);return res.json();});
+    function showLoadError() {
+      grid.innerHTML = '<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';
+      section.hidden = false;
     }
-    function showLoadError(){grid.innerHTML='<div class="latest-loading">সাম্প্রতিক লেখা এখন লোড করা যাচ্ছে না। আবার চেষ্টা করুন।</div>';section.hidden=false;}
-    try{
-      var sb=window.supabase&&window.supabase.createClient?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
-      if(sb){
-        sb.from("posts").select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language").eq("published",true).eq("language","bn").not("slug","in","(chandradwip-writing,chandradwip-characters,chandradwip-settlement)").order("published_at",{ascending:false,nullsFirst:false}).limit(3).then(function(res){
-          if(res&&!res.error)render(res.data);else restFallback().then(render).catch(showLoadError);
-        }).catch(function(){restFallback().then(render).catch(showLoadError);});
-      }else restFallback().then(render).catch(showLoadError);
-    }catch(e){restFallback().then(render).catch(showLoadError);}
+    function restFallback() {
+      var url = SUPABASE_URL + "/rest/v1/posts?select=slug,title,excerpt,cover_image,cover_image_url,category,published_at,language&published=eq.true&language=eq.bn&order=published_at.desc.nullslast&limit=" + FETCH_LIMIT;
+      return fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY},cache:"no-store"})
+        .then(function(res){ if(!res.ok) throw new Error("REST "+res.status); return res.json(); });
+    }
+    try {
+      var sb = window.supabase && window.supabase.createClient ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
+      if (sb) {
+        sb.from("posts").select("slug,title,excerpt,cover_image,cover_image_url,category,published_at,language")
+          .eq("published",true).eq("language","bn")
+          .order("published_at",{ascending:false,nullsFirst:false}).limit(FETCH_LIMIT)
+          .then(function(res){ if(res && !res.error) render(res.data); else restFallback().then(render).catch(showLoadError); })
+          .catch(function(){ restFallback().then(render).catch(showLoadError); });
+      } else {
+        restFallback().then(render).catch(showLoadError);
+      }
+    } catch(e) {
+      restFallback().then(render).catch(showLoadError);
+    }
   }
 
-  /* ====================================================================
-   *  9. CHANDRADWIP SUB-SECTION ACCORDIONS
-   *     #chandradwip-writing, #chandradwip-characters, #chandradwip-settlement
-   *     Each panel toggles open/closed when its header button is clicked.
-   *     When an anchor link (e.g. index.html#chandradwip-characters) is
-   *     followed, the matching panel is auto-opened and scrolled to.
-   * ==================================================================== */
   function initChandradwipPanels() {
     var panels = document.querySelectorAll(".cwip-panel");
     if (!panels.length) return;
