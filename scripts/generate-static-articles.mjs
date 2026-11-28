@@ -51,7 +51,7 @@ async function fetchPosts() {
   const rows = [];
   for (let offset = 0; ; offset += PAGE_SIZE) {
     const url = new URL("/rest/v1/posts", SUPABASE_URL);
-    url.searchParams.set("select", "id,title,subtitle,excerpt,category,slug,body,language,cover_image,cover_image_url,group_id,published,created_at,updated_at,published_at");
+    url.searchParams.set("select", "id,title,subtitle,excerpt,meta_description,canonical_url,category,slug,body,language,cover_image,cover_image_url,group_id,tags,published,created_at,updated_at,published_at");
     url.searchParams.set("published", "eq.true");
     url.searchParams.set("order", "published_at.asc.nullslast,slug.asc");
     url.searchParams.set("limit", String(PAGE_SIZE));
@@ -72,6 +72,8 @@ function render(post, alternates) {
   const title = String(post.title || "Mostafa Auvi");
   const description = text(post.meta_description || post.excerpt || post.subtitle || post.body).slice(0, 155) || "Mostafa Auvi-এর প্রকাশিত লেখা।";
   const url = articleUrl(post);
+  const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
+  const canonical = String(post.canonical_url || url);
   const published = dateOnly(post.published_at || post.created_at);
   const modified = dateOnly(post.updated_at || post.published_at || post.created_at);
   const cover = post.cover_image || post.cover_image_url || post.image_url || "";
@@ -88,7 +90,7 @@ function render(post, alternates) {
 <meta name="author" content="Mostafa Auvi (মোস্তফা অভি)">
 <meta name="description" content="${esc(description)}">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<link rel="canonical" href="${esc(url)}">
+<link rel="canonical" href="${esc(canonical)}">
 ${alternateBn ? `<link rel="alternate" hreflang="bn" href="${esc(alternateBn)}">` : ""}
 ${alternateEn ? `<link rel="alternate" hreflang="en" href="${esc(alternateEn)}">` : ""}
 ${alternateBn && alternateEn ? `<link rel="alternate" hreflang="x-default" href="${esc(alternateBn)}">` : ""}
@@ -109,8 +111,8 @@ ${JSON.stringify({
   "@type":"Article",
   "headline":title,
   "description":description,
-  "url":url,
-  "mainEntityOfPage":{"@type":"WebPage","@id":url},
+  "url":canonical,
+  "mainEntityOfPage":{"@type":"WebPage","@id":canonical},
   "author":{"@type":"Person","name":"Mostafa Auvi","alternateName":"মোস্তফা অভি"},
   "publisher":{"@type":"Person","name":"Mostafa Auvi"},
   "datePublished":published || undefined,
@@ -153,7 +155,7 @@ h1{font-size:clamp(28px,4vw,42px);line-height:1.35;margin:0 0 12px;color:var(--t
 <h1>${esc(title)}</h1>
 ${post.subtitle ? `<div class="subtitle">${esc(post.subtitle)}</div>` : ""}
 <div class="meta">Mostafa Auvi (মোস্তফা অভি)${published ? ` · ${esc(published)}` : ""}</div>
-${Array.isArray(post.tags) && post.tags.length ? `<div class="tags">${post.tags.map(tag => `<span>${esc(tag)}</span>`).join(" · ")}</div>` : ""}
+${tags.length ? `<div class="tags">${tags.map(tag => `<span>${esc(tag)}</span>`).join(" · ")}</div>` : ""}
 ${cover ? `<img class="cover" src="${esc(cover)}" alt="${esc(title)}" loading="eager">` : ""}
 <article class="article-body">${bodyHtml(post)}</article>
 <div class="back"><a href="../posts.html">← ${isBn ? "প্রকাশিত লেখায় ফিরুন" : "Back to published writing"}</a></div>
