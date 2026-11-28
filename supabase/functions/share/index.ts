@@ -2,7 +2,6 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const SITE_URL = (Deno.env.get("SITE_URL") || "https://gmauvibbl-star.github.io/mostafa-auvi-website").replace(/\/$/, "");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
-const SHARE_URL = `${SUPABASE_URL.replace(/\/$/, "")}/functions/v1/share`;
 const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 function esc(value: unknown): string {
