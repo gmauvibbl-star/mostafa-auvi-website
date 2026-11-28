@@ -60,7 +60,8 @@ function buildSitemap(posts) {
     SITE + "/about.html",
     SITE + "/about-en.html",
     SITE + "/privacy.html",
-    SITE + "/privacy-en.html"
+    SITE + "/privacy-en.html",
+    SITE + "/posts/"
   ];
   const staticEntries = staticUrls.map(loc => ({ loc }));
   const articleEntries = posts.map(post => ({
