@@ -52,7 +52,13 @@ jobs:
             }
             const count = (xml.match(/<url>/g) || []).length;
             if (count < 10) throw new Error('Unexpectedly small sitemap: ' + count + ' URLs');
+            if (!xml.includes('/posts/')) throw new Error('Sitemap contains no article URLs');
             console.log('Validated sitemap.xml:', count, 'URLs');
+            const index = fs.readFileSync('posts/index.html', 'utf8');
+            if (!index.includes('GENERATED-PUBLISHED-ARTICLE-INDEX')) {
+              throw new Error('Generated published-writing index is missing its marker');
+            }
+            console.log('Validated posts/index.html');
           "
 
       - name: Publish generated pages and sitemap
