@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: refresh-published-writing-sitemap
@@ -80,4 +81,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml posts/
           git commit -m "chore: refresh published article pages and sitemap"
-          git push origin HEAD:main
+          git push --force origin HEAD:generated/sitemap-refresh
+
+          if gh pr view generated/sitemap-refresh --json number,state >/dev/null 2>&1; then
+            echo "Updating existing sitemap refresh pull request."
+          else
+            gh pr create               --base main               --head generated/sitemap-refresh               --title "chore: refresh published article pages and sitemap"               --body "Automated refresh of crawlable published article pages and sitemap."
+          fi
