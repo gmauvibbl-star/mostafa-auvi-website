@@ -73,7 +73,7 @@ function render(post, alternates) {
   const description = text(post.meta_description || post.excerpt || post.subtitle || post.body).slice(0, 155) || "Mostafa Auvi-এর প্রকাশিত লেখা।";
   const url = articleUrl(post);
   const tags = Array.isArray(post.tags) ? post.tags.filter(Boolean) : [];
-  const canonical = String(post.canonical_url || url);
+  const canonical = url;
   const published = dateOnly(post.published_at || post.created_at);
   const modified = dateOnly(post.updated_at || post.published_at || post.created_at);
   const cover = post.cover_image || post.cover_image_url || post.image_url || "";
