@@ -174,6 +174,46 @@ for (const p of posts) {
   groups.get(p.group_id)[langOf(p)] = articleUrl(p);
 }
 const keep = new Set();
+
+const indexRows = posts.map(post => {
+  const lang = langOf(post);
+  const title = String(post.title || "Mostafa Auvi");
+  const description = text(post.excerpt || post.meta_description || post.subtitle || post.body).slice(0, 220);
+  const date = dateOnly(post.published_at || post.created_at);
+  return `<article class="entry">
+    <h2><a href="./${esc(post.slug)}.html">${esc(title)}</a></h2>
+    <div class="meta">${lang === "bn" ? "বাংলা" : "English"}${date ? ` · ${esc(date)}` : ""}</div>
+    ${description ? `<p>${esc(description)}</p>` : ""}
+  </article>`;
+}).join("\n");
+
+const indexHtml = `<!-- GENERATED-PUBLISHED-ARTICLE-INDEX: do not edit by hand -->
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>প্রকাশিত লেখা | Mostafa Auvi</title>
+<meta name="description" content="Mostafa Auvi (মোস্তফা অভি)-এর প্রকাশিত বাংলা ও ইংরেজি লেখা।">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="${SITE}/posts/">
+<link rel="stylesheet" href="../assets/css/site-wide-theme.css?v=20261110-1">
+<style>
+body{margin:0;background:#5A6B3F;color:#1A1410;font-family:"Noto Serif Bengali","EB Garamond",serif}
+.page{max-width:900px;margin:0 auto;background:#F4ECD8;min-height:100vh;padding:0 24px 60px}
+header{padding:26px 0 20px;border-bottom:2px solid #0F3D3E}
+.brand{font-family:"Playfair Display",serif;font-size:28px;font-weight:800;color:#0F3D3E;text-decoration:none}
+main{background:#FFFEF7;max-width:800px;margin:28px auto 0;padding:42px 48px}
+h1{color:#0F3D3E;line-height:1.35}.entry{padding:18px 0;border-bottom:1px solid #C8B898}.entry h2{margin:0 0 6px;font-size:25px}.entry h2 a{color:#0F3D3E;text-decoration:none}.meta{color:#6B5A48;font-size:14px}.entry p{line-height:1.8;color:#4B4035}
+@media(max-width:640px){.page{padding:0 12px 40px}main{padding:26px 20px}.entry h2{font-size:21px}}
+</style>
+</head>
+<body><div class="page"><header><a class="brand" href="../">MOSTAFA AUVI</a></header>
+<main><h1>প্রকাশিত লেখা</h1>${indexRows}</main></div></body></html>`;
+
+await fs.writeFile(path.join(OUT_DIR, "index.html"), indexHtml, "utf8");
+keep.add(path.resolve(path.join(OUT_DIR, "index.html")));
+
 for (const post of posts) {
   const filename = path.join(OUT_DIR, `${post.slug}.html`);
   const html = render(post, post.group_id ? groups.get(post.group_id) : null);
