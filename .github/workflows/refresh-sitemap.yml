@@ -13,7 +13,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
   group: refresh-published-writing-sitemap
@@ -53,7 +52,15 @@ jobs:
             const count = (xml.match(/<url>/g) || []).length;
             if (count < 10) throw new Error('Unexpectedly small sitemap: ' + count + ' URLs');
             if (!xml.includes('/posts/')) throw new Error('Sitemap contains no article URLs');
-            console.log('Validated sitemap.xml:', count, 'URLs');
+            const locs = [...xml.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(m => m[1]);
+            const articleLocs = locs.filter(loc => loc.includes('/posts/') && !loc.endsWith('/posts/'));
+            for (const loc of articleLocs) {
+              const pathname = new URL(loc).pathname;
+              const file = pathname.split('/').slice(-1)[0];
+              if (!file.endsWith('.html')) continue;
+              if (!fs.existsSync('posts/' + file)) throw new Error('Sitemap points to missing static article: ' + loc);
+            }
+            console.log('Validated sitemap.xml:', count, 'URLs and', articleLocs.length, 'article paths');
             const index = fs.readFileSync('posts/index.html', 'utf8');
             if (!index.includes('GENERATED-PUBLISHED-ARTICLE-INDEX')) {
               throw new Error('Generated published-writing index is missing its marker');
