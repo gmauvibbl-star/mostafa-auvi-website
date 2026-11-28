@@ -28,8 +28,13 @@ function dateOnly(value) {
   const d = new Date(value);
   return Number.isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
 }
+function safeSlug(value) {
+  const slug = String(value || "").trim().replace(/[^a-zA-Z0-9._-]/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "");
+  if (!slug) throw new Error(`Cannot generate a static filename from slug: ${value}`);
+  return slug;
+}
 function articleUrl(post) {
-  return `${SITE}/posts/${encodeURIComponent(post.slug)}.html`;
+  return `${SITE}/posts/${safeSlug(post.slug)}.html`;
 }
 function langOf(post) {
   return post.language === "en" ? "en" : "bn";
@@ -174,14 +179,16 @@ for (const p of posts) {
   groups.get(p.group_id)[langOf(p)] = articleUrl(p);
 }
 const keep = new Set();
+const filenameOwners = new Map();
 
 const indexRows = posts.map(post => {
   const lang = langOf(post);
   const title = String(post.title || "Mostafa Auvi");
   const description = text(post.excerpt || post.meta_description || post.subtitle || post.body).slice(0, 220);
   const date = dateOnly(post.published_at || post.created_at);
+  const filename = safeSlug(post.slug);
   return `<article class="entry">
-    <h2><a href="./${esc(post.slug)}.html">${esc(title)}</a></h2>
+    <h2><a href="./${esc(filename)}.html">${esc(title)}</a></h2>
     <div class="meta">${lang === "bn" ? "বাংলা" : "English"}${date ? ` · ${esc(date)}` : ""}</div>
     ${description ? `<p>${esc(description)}</p>` : ""}
   </article>`;
@@ -215,7 +222,13 @@ await fs.writeFile(path.join(OUT_DIR, "index.html"), indexHtml, "utf8");
 keep.add(path.resolve(path.join(OUT_DIR, "index.html")));
 
 for (const post of posts) {
-  const filename = path.join(OUT_DIR, `${String(post.slug).replace(/[^a-zA-Z0-9._-]/g, "-")}.html`);
+  const safeName = safeSlug(post.slug);
+  const previous = filenameOwners.get(safeName);
+  if (previous && previous !== post.slug) {
+    throw new Error(`Static filename collision: "${post.slug}" and "${previous}" both map to "${safeName}.html"`);
+  }
+  filenameOwners.set(safeName, post.slug);
+  const filename = path.join(OUT_DIR, `${safeName}.html`);
   const html = render(post, post.group_id ? groups.get(post.group_id) : null);
   await fs.writeFile(filename, html, "utf8");
   keep.add(path.resolve(filename));
