@@ -2746,10 +2746,10 @@ function renderArticle(post, sibling, sb) {
   applyReadShellLanguage(lang);
   const plainArticleText = String(post.excerpt || post.body || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
   const seoDescription = (plainArticleText || 'মোস্তফা অভির প্রকাশিত লেখা।').slice(0, 155);
-  const canonical = new URL(location.pathname, location.origin);
-  canonical.searchParams.set('slug', post.slug || slug);
-  if (isEn) canonical.searchParams.set('lang', 'en');
-  const canonicalUrl = canonical.toString();
+  // Published articles have a stable, crawlable static URL. Keep the
+  // interactive reader URL for reading, but use the static page for SEO/social.
+  const staticArticleUrl = new URL('./posts/' + encodeURIComponent(post.slug || slug) + '.html', location.href);
+  const canonicalUrl = staticArticleUrl.toString();
   const setSeoMeta = (selector, attr, key, value) => {
     let node = document.head.querySelector(selector);
     if (!node) { node = document.createElement('meta'); node.setAttribute(attr, key); document.head.appendChild(node); }
