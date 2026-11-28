@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0F3D3E">
 <meta name="description" content="Mostafa Auvi-এর লেখা — গল্প, উপন্যাস, প্রবন্ধ ও সাহিত্যসমালোচনা।">
+<meta name="robots" content="noindex,follow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mostafa Auvi | লেখা">
 <meta property="og:description" content="মোস্তফা অভির লেখা পড়ুন ও শেয়ার করুন।">
@@ -2748,7 +2749,8 @@ function renderArticle(post, sibling, sb) {
   const seoDescription = (plainArticleText || 'মোস্তফা অভির প্রকাশিত লেখা।').slice(0, 155);
   // Published articles have a stable, crawlable static URL. Keep the
   // interactive reader URL for reading, but use the static page for SEO/social.
-  const staticArticleUrl = new URL('./posts/' + encodeURIComponent(post.slug || slug) + '.html', location.href);
+  const safeStaticSlug = String(post.slug || slug || '').trim().replace(/[^a-zA-Z0-9._-]/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+  const staticArticleUrl = new URL('./posts/' + safeStaticSlug + '.html', location.href);
   const canonicalUrl = staticArticleUrl.toString();
   const setSeoMeta = (selector, attr, key, value) => {
     let node = document.head.querySelector(selector);
