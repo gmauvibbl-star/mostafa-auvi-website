@@ -1,4 +1,5 @@
 name: Refresh published-writing sitemap
+# Generates crawlable article pages and sitemap after site changes.
 
 on:
   push:
