@@ -16,8 +16,13 @@ function dateOnly(value) {
   const d = new Date(value);
   return Number.isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
 }
+function safeSlug(value) {
+  const slug = String(value || "").trim().replace(/[^a-zA-Z0-9._-]/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "");
+  if (!slug) throw new Error(`Cannot generate a sitemap URL from slug: ${value}`);
+  return slug;
+}
 function articleUrl(post) {
-  return `${SITE}/posts/${encodeURIComponent(post.slug)}.html`;
+  return `${SITE}/posts/${safeSlug(post.slug)}.html`;
 }
 
 async function fetchPublishedPosts() {
