@@ -143,7 +143,7 @@ h1{font-size:clamp(28px,4vw,42px);line-height:1.35;margin:0 0 12px;color:var(--t
 .cover{display:block;width:100%;height:auto;max-height:460px;object-fit:cover;margin:0 0 28px}
 .article-body{font-size:18px;line-height:2;text-align:justify}
 .article-body p{margin:0 0 1.1em}.article-body h2,.article-body h3{color:var(--teal);line-height:1.4;margin:1.6em 0 .7em}.article-body img{max-width:100%;height:auto}
-.tags{color:var(--muted);font-size:13px;margin:-16px 0 24px}.back{margin-top:36px;padding-top:18px;border-top:1px solid #C8B898}.back a{color:var(--teal)}
+.tags{color:var(--muted);font-size:13px;margin:-16px 0 24px}.reader-link{margin-top:30px;padding:14px 16px;background:#F4ECD8;border:1px solid #C8B898}.reader-link a{color:var(--teal);font-weight:700}.back{margin-top:24px;padding-top:18px;border-top:1px solid #C8B898}.back a{color:var(--teal)}
 @media(max-width:640px){.page{padding:0 12px 40px}main{padding:26px 20px}.article-body{font-size:16px;line-height:1.9}.subtitle{font-size:16px}}
 </style>
 </head>
@@ -163,6 +163,7 @@ ${post.subtitle ? `<div class="subtitle">${esc(post.subtitle)}</div>` : ""}
 ${tags.length ? `<div class="tags">${tags.map(tag => `<span>${esc(tag)}</span>`).join(" · ")}</div>` : ""}
 ${cover ? `<img class="cover" src="${esc(cover)}" alt="${esc(title)}" loading="eager">` : ""}
 <article class="article-body">${bodyHtml(post)}</article>
+<div class="reader-link"><a href="../read.html?slug=${encodeURIComponent(post.slug)}${isBn ? "" : "&amp;lang=en"}">${isBn ? "পাঠকসংখ্যা ও মন্তব্য দেখতে →" : "Open interactive reader →"}</a></div>
 <div class="back"><a href="../posts.html">← ${isBn ? "প্রকাশিত লেখায় ফিরুন" : "Back to published writing"}</a></div>
 </main>
 </div>
