@@ -215,7 +215,7 @@ await fs.writeFile(path.join(OUT_DIR, "index.html"), indexHtml, "utf8");
 keep.add(path.resolve(path.join(OUT_DIR, "index.html")));
 
 for (const post of posts) {
-  const filename = path.join(OUT_DIR, `${post.slug}.html`);
+  const filename = path.join(OUT_DIR, `${String(post.slug).replace(/[^a-zA-Z0-9._-]/g, "-")}.html`);
   const html = render(post, post.group_id ? groups.get(post.group_id) : null);
   await fs.writeFile(filename, html, "utf8");
   keep.add(path.resolve(filename));
