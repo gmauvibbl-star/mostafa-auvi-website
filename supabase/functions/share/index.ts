@@ -11,6 +11,12 @@ function esc(value: unknown): string {
   })[ch]!);
 }
 
+function safeSlug(value: unknown): string {
+  const slug = String(value ?? "").trim().replace(/[^a-zA-Z0-9._-]/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "");
+  if (!slug) throw new Error("Invalid article slug");
+  return slug;
+}
+
 function page(status: number, title: string, description: string): Response {
   const safeTitle = esc(title);
   const safeDescription = esc(description);
@@ -38,7 +44,7 @@ Deno.serve(async (req) => {
     if (error) throw error;
     if (!post) return page(404, "লেখাটি পাওয়া যায়নি", "এই লেখা প্রকাশিত নয় অথবা লিংকটি সঠিক নয়।");
 
-    const articleUrl = SITE_URL + "/read.html?slug=" + encodeURIComponent(post.slug) + (post.language === "en" ? "&lang=en" : "");
+    const articleUrl = SITE_URL + "/posts/" + safeSlug(post.slug) + ".html";
     const title = String(post.title || "মোস্তফা অভি");
     const plainBody = String(post.excerpt || post.body || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
     const description = plainBody.slice(0, 240) || "মোস্তফা অভির সাহিত্যকর্ম ও ভাবনা।";
@@ -70,7 +76,7 @@ Deno.serve(async (req) => {
 <meta property="og:site_name" content="Mostafa Auvi">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${esc(SHARE_URL + "?slug=" + encodeURIComponent(post.slug))}">
+<meta property="og:url" content="${esc(articleUrl)}">
 <meta property="og:locale" content="${post.language === "en" ? "en_US" : "bn_BD"}">
 ${imageTags}
 <meta name="twitter:card" content="${image ? "summary_large_image" : "summary"}">
